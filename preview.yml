@@ -6,8 +6,8 @@ site:
 content:
   sources:
   - url: ./
-    branches: ['HEAD']
-    edit_url: https://github.com/docs-getting-started/tree/{refname}/{path}
+    branches: ['4.3']
+    edit_url: https://github.com/neo-technology/docs-getting-started/tree/{refname}/{path}
     exclude:
     - '!**/_includes/*'
     - '!**/readme.adoc'
