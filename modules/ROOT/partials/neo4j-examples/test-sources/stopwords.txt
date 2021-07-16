@@ -1,7 +1,0 @@
-this
-file
-is
-used
-in
-the
-CustomAnalyzerProviderTest

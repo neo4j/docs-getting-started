@@ -1,4 +1,0 @@
-[source,cypher]
-----
-MATCH (person:Person) WHERE point({x: 1, y: 5}) < person.location < point({x: 2, y: 6}) RETURN person
-----

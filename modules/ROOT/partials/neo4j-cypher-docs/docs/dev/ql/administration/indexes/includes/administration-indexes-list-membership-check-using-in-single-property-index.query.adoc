@@ -1,4 +1,0 @@
-[source,cypher]
-----
-MATCH (person)-[r:KNOWS]->(friend) WHERE r.since IN [1992, 2017] RETURN person, friend
-----

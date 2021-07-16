@@ -1,4 +1,0 @@
-[source, java]
-----
-include::{import-neo4j-examples-test-sources}/org/neo4j/examples/RolesDocTest.java[tag=get-admins]
-----

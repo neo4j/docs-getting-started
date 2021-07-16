@@ -1,7 +1,0 @@
-[source]
-----
-Found: ABCTechnicians at depth: 0
-Found: Technicians at depth: 1
-Found: Users at depth: 2
-
-----

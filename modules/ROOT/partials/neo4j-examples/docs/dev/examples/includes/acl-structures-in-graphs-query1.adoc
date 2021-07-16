@@ -1,5 +1,0 @@
-[source,cypher]
-----
-MATCH ({ name: 'FileRoot' })-[:contains*0..]->(parentDir)-[:leaf]->(file)
-RETURN file
-----

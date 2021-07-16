@@ -1,5 +1,0 @@
-[source,cypher]
-----
-MATCH (person:Person) WHERE point({x: 1, y: 5}) < person.place < point({x: 2,
-  y: 6}) AND person.firstname IS NOT NULL RETURN person
-----

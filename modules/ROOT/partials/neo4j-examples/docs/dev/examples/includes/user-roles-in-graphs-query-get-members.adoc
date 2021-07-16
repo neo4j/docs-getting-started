@@ -1,6 +1,0 @@
-[source,cypher]
-----
-MATCH ({ name: 'Reference_Node' })<-[:ROOT]->(root), p=(root)<-[PART_OF*0..]-()<-[:MEMBER_OF]-(user)
-RETURN user.name, min(length(p))
-ORDER BY min(length(p)), user.name
-----

@@ -1,9 +1,0 @@
-[source,cypher]
-----
-CREATE INDEX FOR (n:Location) ON (n.name);
-CREATE INDEX FOR (n:Person) ON (n.name);
-CREATE INDEX FOR ()-[r:WORKS_IN]-() ON (r.duration);
-CREATE INDEX FOR ()-[r:WORKS_IN]-() ON (r.title);
-CREATE CONSTRAINT ON (team:Team) ASSERT team.name is UNIQUE;
-CREATE CONSTRAINT ON (team:Team) ASSERT team.id is UNIQUE;
-----

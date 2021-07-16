@@ -1,6 +1,0 @@
-[[examples-getorcreateusingcypher]]
-GetOrCreateUsingCypher
-======================
-
-
-

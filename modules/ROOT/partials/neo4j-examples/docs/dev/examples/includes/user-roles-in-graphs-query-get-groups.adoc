@@ -1,5 +1,0 @@
-[source,cypher]
-----
-MATCH ({ name: 'Reference_Node' })<-[:ROOT]->()<-[:PART_OF*0..]-(group)
-RETURN group.name
-----
