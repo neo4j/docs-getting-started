@@ -6,7 +6,7 @@ site:
 content:
   sources:
   - url: ./
-    branches: ['4.3']
+    branches: ['dev']
     edit_url: https://github.com/neo-technology/docs-getting-started/tree/{refname}/{path}
     exclude:
     - '!**/_includes/*'

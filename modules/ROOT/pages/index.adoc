@@ -17,10 +17,3 @@ This guide covers the following areas:
 _Who should read this?_
 
 This guide is written for anybody who is exploring Neo4j and Cypher.
-
-
-// include::get-started-with-neo4j.adoc[leveloffset=+1]
-
-// include::graphdb-concepts.adoc[leveloffset=+1]
-
-// include::cypher-intro/index.adoc[leveloffset=+1]

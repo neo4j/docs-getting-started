@@ -1,15 +1,16 @@
 name: getting-started
 title: Getting Started
-version: 4.3
+version: 4.4-preview
+prerelease: true
 start_page: ROOT:index.adoc
 nav:
 - modules/ROOT/content-nav.adoc
 asciidoc:
   attributes:
     # page-origin-private: false
-    neo4j-version: 4.3
-    neo4j-version-exact: 4.3.2
-    neo4j-buildnumber: 4.3
+    neo4j-version: 4.4
+    neo4j-version-exact: 4.4.0-dev
+    neo4j-buildnumber: 4.4
     offset: '{offset}'
     count: '{count}'
     
