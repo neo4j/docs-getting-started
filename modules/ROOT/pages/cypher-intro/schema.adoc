@@ -10,8 +10,8 @@ This section describes how to define and use indexes and constraints.
 This section includes:
 
 * xref::/cypher-intro/schema.adoc#cypher-intro-schema-example-graph[Example graph]
-* xref::/cypher-intro/schema.adoc#cypher-intro-indexes[Defining and using indexes]
-* xref::/cypher-intro/schema.adoc#cypher-intro-constraints[Defining and using constraints]
+* xref::/cypher-intro/schema.adoc#cypher-intro-schema-indexes[Defining and using indexes]
+* xref::/cypher-intro/schema.adoc#cypher-intro-schema-constraints[Defining and using constraints]
 
 
 [[cypher-intro-schema-example-graph]]
@@ -74,7 +74,7 @@ image::cypher-intro-schema01.svg[role="middle"]
 // ----
 
 
-[[cypher-intro-indexes]]
+[[cypher-intro-schema-indexes]]
 == Using indexes
 
 The main reason for using indexes in a graph database is to find the starting point of a graph traversal.
@@ -87,7 +87,7 @@ In this case we want to create an index to speed up finding actors by name in th
 
 [source,cypher, indent=0]
 ----
-CREATE INDEX FOR (a:Actor) ON (a.name)
+CREATE INDEX ON :Actor(name)
 ----
 
 In most cases it is not necessary to specify indexes when querying for data, as the appropriate indexes will be used automatically.
@@ -106,7 +106,7 @@ Therefore that node will not be added to the index.
 
 [source,cypher, indent=0]
 ----
-CREATE INDEX FOR (a:Actor) ON (a.name, a.born)
+CREATE INDEX ON :Actor(name, born)
 ----
 
 We can inspect our database to find out what indexes are defined.
@@ -130,16 +130,16 @@ YIELD description, tokenNames, properties, type;
 2 rows
 ----
 
-Learn more about indexes in xref:4.3@cypher-manual:ROOT:administration/indexes-for-full-text-search/index.adoc#administration-indexes-fulltext-search[Cypher Manual -> Indexes].
+Learn more about indexes in xref:3.5@cypher-manual:ROOT:schema/index.adoc#query-schema-index[Cypher manual -> Indexes].
 
 [NOTE]
 ====
 It is possible to specify which index to use in a particular query, using _index hints_.
-This is one of several options for query tuning, described in detail in xref:4.3@cypher-manual:ROOT:query-tuning/index.adoc#query-tuning[Cypher manual -> Query tuning].
+This is one of several options for query tuning, described in detail in xref:3.5@cypher-manual:ROOT:query-tuning/index.adoc#query-tuning[Cypher manual -> Query tuning].
 ====
 
 
-[[cypher-intro-constraints]]
+[[cypher-intro-schema-constraints]]
 == Using constraints
 
 Constraints are used to make sure that the data adheres to the rules of the domain.
@@ -183,4 +183,4 @@ The constraint described above is available for all editions of Neo4j.
 Additional constraints are available for Neo4j Enterprise Edition.
 ====
 
-Learn more about constraints in xref:4.3@cypher-manual:ROOT:constraints/index.adoc#administration-constraints[Cypher manual -> Constraints].
+Learn more about constraints in xref:3.5@cypher-manual:ROOT:schema/constraints/index.adoc#query-constraints[Cypher manual -> Constraints].

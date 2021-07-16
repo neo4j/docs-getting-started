@@ -36,10 +36,10 @@ This chapter includes:
 * xref::/cypher-intro/schema.adoc#cypher-intro-schema[Defining a schema]
 ** xref::/cypher-intro/schema.adoc#cypher-intro-schema[Using indexes]
 ** xref::/cypher-intro/schema.adoc#cypher-intro-schema[Using constraints]
-* xref::/cypher-intro/load-csv.adoc#cypher-intro-load-csv[Import data]
+* xref::/cypher-intro/load-csv.adoc[Import data]
 
 
-For a comprehensive guide to Cypher, see the xref:4.3@cypher-manual:ROOT:index.adoc#cypher-manual[Cypher manual].
+For a comprehensive guide to Cypher, see the xref:3.5@cypher-manual:ROOT:index.adoc#cypher-manual[Cypher manual].
 
 
 // include::patterns.adoc[leveloffset=+1]
