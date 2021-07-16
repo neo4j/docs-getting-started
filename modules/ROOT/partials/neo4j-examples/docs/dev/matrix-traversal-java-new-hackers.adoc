@@ -1,8 +1,0 @@
-[source]
-----
-Hackers:
-At depth 4 => The Architect
-Number of hackers found: 1
-
-----
-

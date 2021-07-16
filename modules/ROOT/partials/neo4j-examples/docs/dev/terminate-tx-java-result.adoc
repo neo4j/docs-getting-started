@@ -1,5 +1,0 @@
-[source]
-----
-Created tree up to depth 17 in 1 sec
-----
-

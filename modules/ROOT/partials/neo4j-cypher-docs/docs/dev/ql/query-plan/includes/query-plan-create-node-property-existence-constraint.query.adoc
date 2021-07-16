@@ -1,4 +1,0 @@
-[source,cypher]
-----
-CREATE CONSTRAINT existence ON (p:Person) ASSERT p.name IS NOT NULL
-----

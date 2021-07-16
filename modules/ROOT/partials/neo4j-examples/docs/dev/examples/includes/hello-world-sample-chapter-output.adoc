@@ -1,4 +1,0 @@
-[source]
-----
-Hello graphy world!
-----

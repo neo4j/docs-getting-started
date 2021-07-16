@@ -1,8 +1,0 @@
-[options="header", cols="<1m,<3,<1"]
-|===
-|Classification |Description |Effect on transaction 
-|ClientError |The Client sent a bad request - changing the request might yield a successful outcome. |Rollback 
-|ClientNotification |There are notifications about the request sent by the client. |None 
-|TransientError |The database cannot service the request right now, retrying later might yield a successful outcome.  |Rollback 
-|DatabaseError |The database failed to service the request.  |Rollback 
-|===
