@@ -1,0 +1,4 @@
+[source,cypher]
+----
+CREATE CONSTRAINT existence ON ()-[l:LIKED]-() ASSERT l.when IS NOT NULL
+----

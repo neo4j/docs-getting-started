@@ -1,0 +1,7 @@
+[source]
+----
+Unable to create Constraint( name='constraint_ca412c3d', type='UNIQUENESS',
+schema=(:Book {isbn}) ):
+Both Node(0) and Node(1) have the label `Book` and property `isbn` = '1449356265'
+----
+

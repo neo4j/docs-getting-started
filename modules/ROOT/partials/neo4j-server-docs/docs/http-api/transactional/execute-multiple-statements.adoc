@@ -1,0 +1,15 @@
+[[transactional-execute-multiple-statements]]
+=== Execute multiple statements
+
+You can send multiple Cypher statements in the same request.
+The response will contain the result of each statement.
+
+
+_Example request_
+
+include::includes/execute-multiple-statements.request.adoc[]
+
+_Example response_
+
+include::includes/execute-multiple-statements.response.adoc[]
+

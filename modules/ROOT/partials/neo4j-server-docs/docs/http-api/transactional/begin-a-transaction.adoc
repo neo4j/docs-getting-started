@@ -1,0 +1,16 @@
+[[transactional-begin-a-transaction]]
+=== Begin a transaction
+
+You begin a new transaction by posting zero or more Cypher statements
+to the transaction endpoint. The server will respond with the result of
+your statements, as well as the location of your open transaction.
+
+
+_Example request_
+
+include::includes/begin-a-transaction.request.adoc[]
+
+_Example response_
+
+include::includes/begin-a-transaction.response.adoc[]
+

@@ -1,0 +1,26 @@
+[[transactional-handling-errors]]
+=== Handling errors
+
+The result of any request against the transaction endpoint is streamed back to the client.
+Therefore the server does not know whether the request will be successful or not when it sends the HTTP status
+code.
+
+Because of this, all requests against the transactional endpoint will return 200 or 201 status code, regardless
+of whether statements were successfully executed. At the end of the response payload, the server includes a list
+of errors that occurred while executing statements. If this list is empty, the request completed successfully.
+
+If any errors occur while executing statements, the server will roll back the transaction.
+
+In this example, we send the server an invalid statement to demonstrate error handling.
+
+For more information on the status codes, see <<status-codes>>.
+
+
+_Example request_
+
+include::includes/handling-errors.request.adoc[]
+
+_Example response_
+
+include::includes/handling-errors.response.adoc[]
+

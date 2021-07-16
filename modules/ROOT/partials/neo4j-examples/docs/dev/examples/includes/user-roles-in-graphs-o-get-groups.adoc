@@ -1,0 +1,10 @@
+[source]
+----
+Found: Users at depth: 0
+Found: Admins at depth: 0
+Found: Managers at depth: 1
+Found: Technicians at depth: 1
+Found: HelpDesk at depth: 1
+Found: ABCTechnicians at depth: 2
+
+----

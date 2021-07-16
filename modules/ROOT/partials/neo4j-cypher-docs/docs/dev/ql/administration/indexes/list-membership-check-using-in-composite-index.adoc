@@ -1,0 +1,31 @@
+[[administration-indexes-list-membership-check-using-in-composite-index]]
+== List membership check using `IN` (composite index) ==
+The `IN` predicates on `r.since` and `r.lastMet` in the following query will use the composite index `KNOWS(since, lastMet)` if it exists. 
+
+.Query
+include::includes/administration-indexes-list-membership-check-using-in-composite-index.query.adoc[]
+
+
+
+.Query Plan
+[source]
+----
+Compiler CYPHER 4.3
+
+Planner COST
+
+Runtime INTERPRETED
+
+Runtime version 4.3
+
++--------------------------------+----------------------------------------------------------------------------------------------------+----------------+------+---------+------------------------+
+| Operator                       | Details                                                                                            | Estimated Rows | Rows | DB Hits | Page Cache Hits/Misses |
++--------------------------------+----------------------------------------------------------------------------------------------------+----------------+------+---------+------------------------+
+| +ProduceResults                | person, friend                                                                                     |              5 |    1 |       0 |                    0/0 |
+| |                              +----------------------------------------------------------------------------------------------------+----------------+------+---------+------------------------+
+| +DirectedRelationshipIndexSeek | (person)-[r:KNOWS(since, lastMet)]->(friend) WHERE since IN $autolist_0 AND lastMet IN $autolist_1 |              5 |    1 |       5 |                    0/0 |
++--------------------------------+----------------------------------------------------------------------------------------------------+----------------+------+---------+------------------------+
+
+Total database accesses: 5, total allocated memory: 64
+
+----

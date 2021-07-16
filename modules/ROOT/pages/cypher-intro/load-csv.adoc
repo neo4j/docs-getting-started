@@ -1,0 +1,426 @@
+:description: This tutorial demonstrates how to import data from CSV files using `LOAD CSV`.
+[[cypher-intro-load-csv]]
+= Import data
+
+[abstract]
+--
+This tutorial demonstrates how to import data from CSV files using `LOAD CSV`.
+--
+
+
+With the combination of the Cypher clauses `LOAD CSV`, `MERGE`, and `CREATE` you can conveniently import data into Neo4j.
+`LOAD CSV` allows you to access the data values and perform actions on them.
+
+[NOTE]
+====
+* For a full description of `LOAD CSV` , see xref:4.3@cypher-manual:ROOT:clauses/load-csv/index.adoc#query-load-csv[Cypher Manual -> `LOAD CSV`].
+* For a full list of Cypher clauses, see xref:4.3@cypher-manual:ROOT:clauses/index.adoc#query-clause[Cypher Manual -> Clauses].
+====
+
+
+== The data files
+
+In this tutorial, you import data from the following CSV files:
+
+* _persons.csv_
+* _movies.csv_
+* _roles.csv_
+
+
+The content of the _persons.csv_ file:
+
+.persons.csv
+[source]
+----
+id,name
+1,Charlie Sheen
+2,Michael Douglas
+3,Martin Sheen
+4,Morgan Freeman
+----
+
+The _persons.csv_ file contains two columns `id` and `name`.
+Each row represents one person that has a unique `id` and a `name`.
+
+
+The content of the _movies.csv_ file:
+
+.movies.csv
+[source]
+----
+id,title,country,year
+1,Wall Street,USA,1987
+2,The American President,USA,1995
+3,The Shawshank Redemption,USA,1994
+----
+
+The _movies.csv_ file contains the columns `id`, `title`, `country`, and `year`.
+Each row represents one movie that has a unique `id`, a `title`, a `country` of origin, and a release `year`.
+
+
+The content of the _roles.csv_ file:
+
+.roles.csv
+[source]
+----
+personId,movieId,role
+1,1,Bud Fox
+4,1,Carl Fox
+3,1,Gordon Gekko
+4,2,A.J. MacInerney
+3,2,President Andrew Shepherd
+5,3,Ellis Boyd 'Red' Redding
+----
+
+The _roles.csv_ file contains the columns `personId`, `movieId`, and `role`.
+Each row represents one role with relationship data about the person `id` (from the _persons.csv_ file) and the movie `id` (from the _movies.csv_ file).
+
+
+== The graph model
+
+The following simple data model shows what a graph model for this data set could look like:
+
+image::getting-started-load-csv01.svg[role="middle"]
+
+// ["dot", "getting-started-load-csv01.svg", "neoviz"]
+// ----
+//   N0 [
+//     label = "{Movie|title = \'movie title\'\lyear = \'year released\'\l}"
+//   ]
+//   N3 [
+//     label = "{Person|name = \'name of person\'\l}"
+//   ]
+//   N8 [
+//     label = "{Country|name = \'name of country\'\l}"
+//   ]
+//   N3 -> N0 [
+//     color = "#4e9a06"
+//     fontcolor = "#4e9a06"
+//     label = "ACTED_IN\nrole = \'name of role\'\l"
+//   ]
+//   N0 -> N8 [
+//     color = "#2e3436"
+//     fontcolor = "#2e3436"
+//     label = "ORIGIN"
+//   ]
+
+// ----
+
+This is the resulting graph, based on the data from the CSV files:
+
+image::getting-started-load-csv02.svg[role="middle"]
+
+// ["dot", "getting-started-load-csv02.svg", "neoviz"]
+// ----
+//   N0 [
+//     label = "{Movie|title = \'Wall Street\'\lyear = 1987\l}"
+//   ]
+//   N1 [
+//     label = "{Movie|title = \'The Shawshank Redemption\'\lyear = 1994\l}"
+//   ]
+//   N2 [
+//     label = "{Movie|title = \'The American President\'\lyear = 1995\l}"
+//   ]
+//   N3 [
+//     label = "{Person|name = \'Martin Sheen\'\l}"
+//   ]
+//   N4 [
+//     label = "{Person|name = \'Charlie Sheen\'\l}"
+//   ]
+//   N6 [
+//     label = "{Person|name = \'Morgan Freeman\'\l}"
+//   ]
+//   N7 [
+//     label = "{Person|name = \'Michael Douglas\'\l}"
+//   ]
+//   N8 [
+//     label = "{Country|name = \'USA\'\l}"
+//   ]
+//   N4 -> N0 [
+//     color = "#4e9a06"
+//     fontcolor = "#4e9a06"
+//     label = "ACTED_IN\nrole = \'Bud Fox\'\l"
+//   ]
+//   N3 -> N0 [
+//     color = "#4e9a06"
+//     fontcolor = "#4e9a06"
+//     label = "ACTED_IN\nrole = \'Carl Fox\'\l"
+//   ]
+//   N7 -> N0 [
+//     color = "#4e9a06"
+//     fontcolor = "#4e9a06"
+//     label = "ACTED_IN\nrole = \'Gordon Gekko\'\l"
+//   ]
+//   N7 -> N2 [
+//     color = "#4e9a06"
+//     fontcolor = "#4e9a06"
+//     label = "ACTED_IN\nrole = \'President Andrew Shepherd\'\l"
+//   ]
+//   N3 -> N2 [
+//     color = "#4e9a06"
+//     fontcolor = "#4e9a06"
+//     label = "ACTED_IN\nrole = \'A.J. MacInerney\'\l"
+//   ]
+//   N6 -> N1 [
+//     color = "#4e9a06"
+//     fontcolor = "#4e9a06"
+//     label = "ACTED_IN\nrole = \'Ellis Boyd \'Red\' Redding\'\l"
+//   ]
+//   N0 -> N8 [
+//     color = "#2e3436"
+//     fontcolor = "#2e3436"
+//     label = "ORIGIN"
+//   ]
+//   N1 -> N8 [
+//     color = "#2e3436"
+//     fontcolor = "#2e3436"
+//     label = "ORIGIN"
+//   ]
+//   N2 -> N8 [
+//     color = "#2e3436"
+//     fontcolor = "#2e3436"
+//     label = "ORIGIN"
+//   ]
+
+// ----
+
+== Prerequisites
+
+This tutorial uses the Linux or macOS tarball installation.
+
+It assumes that your current work directory is the _<neo4j-home>_ directory of the tarball installation, and the CSV files are placed in the default _import_ directory.
+
+
+[NOTE]
+====
+* For the default directory of other installations see, xref:4.3@operations-manual:ROOT:configuration/file-locations/index.adoc#file-locations[Operations Manual -> File locations].
+* The import location can be configured with xref:4.3@operations-manual:ROOT:reference/configuration-settings/index.adoc#config_dbms.directories.import[Operations Manual -> `dbms.directories.import`].
+====
+
+
+== Prepare the database
+
+Before importing the data, you should prepare the database you want to use by creating indexes and constraints.
+
+You should ensure that the `Person` and `Movie` nodes have unique `id` properties by creating constraints on them.
+
+Creating a unique constraint also implicitly creates an index.
+By indexing the `id` property, node lookup (e.g. by `MATCH`) will be much faster.
+
+Additionally, it is a good idea to index the country `name` for a fast lookup.
+
+
+**+1.+ Start neo4j.**
+
+Run the command:
+
+[source, shell, indent=0]
+----
+bin/neo4j start
+----
+
+[NOTE]
+====
+The default user name is `neo4j` and password `neo4j`.
+====
+
+
+**+2.+ Create a constraint so that each `Person` node has a unique `id` property.**
+
+You create a constraint on the `id` property of `Person` nodes to ensure that nodes with the `Person` label will have a unique `id` property.
+
+Using _Neo4j Browser_, run the following Cypher:
+
+[source, cypher, indent=0]
+----
+CREATE CONSTRAINT personIdConstraint ON (person:Person) ASSERT person.id IS UNIQUE
+----
+
+Or using xref:4.3@operations-manual:ROOT:tools/cypher-shell/index.adoc#cypher-shell[_Neo4j Cypher Shell_], run the command:
+
+[source, shell, indent=0]
+----
+bin/cypher-shell --database=neo4j "CREATE CONSTRAINT personIdConstraint ON (person:Person) ASSERT person.id IS UNIQUE"
+----
+
+**+3.+ Create a constraint so that each `Movie` node has a unique `id` propery.**
+
+You create a constraint on the `id` property of `Movie` nodes to ensure that nodes with the `Movie` label will have a unique `id` property.
+
+Using _Neo4j Browser_, run the following Cypher:
+
+[source, cypher, indent=0]
+----
+CREATE CONSTRAINT movieIdConstraint ON (movie:Movie) ASSERT movie.id IS UNIQUE
+----
+
+Or using xref:4.3@operations-manual:ROOT:tools/cypher-shell/index.adoc#cypher-shell[_Neo4j Cypher Shell_], run the command:
+
+[source, shell, indent=0]
+----
+bin/cypher-shell --database=neo4j "CREATE CONSTRAINT movieIdConstraint ON (movie:Movie) ASSERT movie.id IS UNIQUE"
+----
+
+**+4.+ Create an index for `Country` node for the `name` property.**
+
+Create an index on the `name` property of `Country` nodes to ensure fast lookups.
+
+[IMPORTANT]
+====
+When using `MERGE` or `MATCH` with `LOAD CSV`, make sure you have an xref::/cypher-intro/schema.adoc#cypher-intro-indexes[index] or a xref::/cypher-intro/schema.adoc#cypher-intro-constraints[unique constraint] on the property that you are merging on.
+This will ensure that the query executes in a performant way.
+====
+
+Using _Neo4j Browser_, run the following Cypher:
+
+[source, cypher, indent=0]
+----
+CREATE INDEX FOR (c:Country) ON (c.name)
+----
+
+Or using xref:4.3@operations-manual:ROOT:tools/cypher-shell/index.adoc#cypher-shell[_Neo4j Cypher Shell_], run the command:
+
+[source, shell, indent=0]
+----
+bin/cypher-shell --database=neo4j "CREATE INDEX FOR (c:Country) ON (c.name)"
+----
+
+
+== Import data using `LOAD CSV`
+
+
+**+1.+ Load the data from the _persons.csv_ file.**
+
+You create nodes with the `Person` label and the the the properties `id` and `name`.
+
+Using _Neo4j Browser_, run the following Cypher:
+
+[source, cypher, indent=0]
+----
+LOAD CSV WITH HEADERS FROM "file:///persons.csv" AS csvLine
+CREATE (p:Person {id: toInteger(csvLine.id), name: csvLine.name})
+----
+
+Or using xref:4.3@operations-manual:ROOT:tools/cypher-shell/index.adoc#cypher-shell[_Neo4j Cypher Shell_], run the command:
+
+[source, shell, indent=0]
+----
+bin/cypher-shell --database=neo4j 'LOAD CSV WITH HEADERS FROM "file:///persons.csv" AS csvLine CREATE (p:Person {id:toInteger(csvLine.id), name:csvLine.name})'
+----
+
+Output:
+
+[source]
+----
+Added 4 nodes, Set 8 properties, Added 4 labels
+----
+
+[TIP]
+====
+`LOAD CSV` also supports accessing CSV files via `HTTPS`, `HTTP`, and `FTP`, see xref:4.3@cypher-manual:ROOT:clauses/load-csv/index.adoc#query-load-csv[Cypher Manual -> `LOAD CSV`].
+====
+
+**+2.+ Load the data from the _movies.csv_ file.**
+
+You create nodes with the `Movie` label and the the the properties `id`, `title`, and `year`.
+
+Also you create nodes with the `Country` label.
+Using `MERGE` avoids creating duplicate `Country` nodes in the case where multiple movies have the same country of origin.
+
+The relationship with the type `ORIGIN` will connect the `Country` node and the `Movie` node.
+
+Using _Neo4j Browser_, run the following Cypher:
+
+[source, cypher, indent=0]
+----
+LOAD CSV WITH HEADERS FROM "file:///movies.csv" AS csvLine
+MERGE (country:Country {name: csvLine.country})
+CREATE (movie:Movie {id: toInteger(csvLine.id), title: csvLine.title, year:toInteger(csvLine.year)})
+CREATE (movie)-[:ORIGIN]->(country)
+----
+
+Or using xref:4.3@operations-manual:ROOT:tools/cypher-shell/index.adoc#cypher-shell[_Neo4j Cypher Shell_], run the command:
+
+[source, shell, indent=0]
+----
+bin/cypher-shell --database=neo4j 'LOAD CSV WITH HEADERS FROM "file:///movies.csv" AS csvLine MERGE (country:Country {name:csvLine.country}) CREATE (movie:Movie {id:toInteger(csvLine.id), title:csvLine.title, year:toInteger(csvLine.year)}) CREATE (movie)-[:ORIGIN]->(country)'
+----
+
+Output:
+
+[source]
+----
+Added 4 nodes, Created 3 relationships, Set 10 properties, Added 4 labels
+----
+
+**+3.+ Load the data from the _roles.csv_ file**
+
+Importing the data from the _roles.csv_ file is a matter of finding the `Person` node and `Movie` node and then creating relationships between them.
+
+[NOTE]
+====
+For larger data files, it is useful to use the hint `USING PERIODIC COMMIT` clause of `LOAD CSV`.
+This hint tells Neo4j that the query might build up inordinate amounts of transaction state, and thus needs to be periodically committed.
+For more information, see xref:4.3@cypher-manual:ROOT:query-tuning/using/index.adoc#query-using-periodic-commit-hint[].
+====
+
+Using _Neo4j Browser_, run the following Cypher:
+
+[source, cypher, indent=0]
+----
+USING PERIODIC COMMIT 500
+LOAD CSV WITH HEADERS FROM "file:///roles.csv" AS csvLine
+MATCH (person:Person {id: toInteger(csvLine.personId)}), (movie:Movie {id: toInteger(csvLine.movieId)})
+CREATE (person)-[:ACTED_IN {role: csvLine.role}]->(movie)
+----
+
+Or using xref:4.3@operations-manual:ROOT:tools/cypher-shell/index.adoc#cypher-shell[_Neo4j Cypher Shell_], run the command:
+
+[source, shell, indent=0]
+----
+bin/cypher-shell --database=neo4j 'USING PERIODIC COMMIT 500 LOAD CSV WITH HEADERS FROM "file:///roles.csv" AS csvLine MATCH (person:Person {id:toInteger(csvLine.personId)}), (movie:Movie {id:toInteger(csvLine.movieId)}) CREATE (person)-[:ACTED_IND {role:csvLine.role}]->(movie)'
+----
+
+Output:
+
+[source]
+----
+Created 5 relationships, Set 5 properties
+----
+
+
+== Validate the imported data
+
+Check the resulting data set by finding all the nodes that have a relationship.
+
+Using _Neo4j Browser_, run the following Cypher:
+
+[source, cypher, indent=0]
+----
+MATCH (n)-[r]->(m) RETURN n, r, m
+----
+
+Or using xref:4.3@operations-manual:ROOT:tools/cypher-shell/index.adoc#cypher-shell[_Neo4j Cypher Shell_], run the command:
+
+[source, shell, indent=0]
+----
+bin/cypher-shell --database=neo4j 'MATCH (n)-[r]->(m) RETURN n, r, m'
+----
+
+Output:
+
+[source]
+----
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| n                                                               | r                                               | m                                                             |
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| (:Movie {id: 3, title: "The Shawshank Redemption", year: 1994}) | [:ORIGIN]                                       | (:Country {name: "USA"})                                      |
+| (:Movie {id: 2, title: "The American President", year: 1995})   | [:ORIGIN]                                       | (:Country {name: "USA"})                                      |
+| (:Movie {id: 1, title: "Wall Street", year: 1987})              | [:ORIGIN]                                       | (:Country {name: "USA"})                                      |
+| (:Person {name: "Morgan Freeman", id: 4})                       | [:ACTED_IN {role: "Carl Fox"}]                  | (:Movie {id: 1, title: "Wall Street", year: 1987})            |
+| (:Person {name: "Charlie Sheen", id: 1})                        | [:ACTED_IN {role: "Bud Fox"}]                   | (:Movie {id: 1, title: "Wall Street", year: 1987})            |
+| (:Person {name: "Martin Sheen", id: 3})                         | [:ACTED_IN {role: "Gordon Gekko"}]              | (:Movie {id: 1, title: "Wall Street", year: 1987})            |
+| (:Person {name: "Martin Sheen", id: 3})                         | [:ACTED_IN {role: "President Andrew Shepherd"}] | (:Movie {id: 2, title: "The American President", year: 1995}) |
+| (:Person {name: "Morgan Freeman", id: 4})                       | [:ACTED_IN {role: "A.J. MacInerney"}]           | (:Movie {id: 2, title: "The American President", year: 1995}) |
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+----

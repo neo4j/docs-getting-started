@@ -1,0 +1,186 @@
+:description: This section describes how to define and use indexes and constraints.
+[[cypher-intro-schema]]
+= Defining a schema
+
+[abstract]
+--
+This section describes how to define and use indexes and constraints.
+--
+
+This section includes:
+
+* xref::/cypher-intro/schema.adoc#cypher-intro-schema-example-graph[Example graph]
+* xref::/cypher-intro/schema.adoc#cypher-intro-indexes[Defining and using indexes]
+* xref::/cypher-intro/schema.adoc#cypher-intro-constraints[Defining and using constraints]
+
+
+[[cypher-intro-schema-example-graph]]
+== Example graph
+
+First we create some data to use for our examples:
+
+[source,cypher, indent=0]
+----
+CREATE (matrix:Movie { title:"The Matrix",released:1997 })
+CREATE (cloudAtlas:Movie { title:"Cloud Atlas",released:2012 })
+CREATE (forrestGump:Movie { title:"Forrest Gump",released:1994 })
+CREATE (keanu:Person { name:"Keanu Reeves"})
+CREATE (robert:Person { name:"Robert Zemeckis", born:1951 })
+CREATE (tom:Person { name:"Tom Hanks", born:1956 })
+CREATE (tom)-[:ACTED_IN { roles: ["Forrest"]}]->(forrestGump)
+CREATE (tom)-[:ACTED_IN { roles: ['Zachry']}]->(cloudAtlas)
+CREATE (robert)-[:DIRECTED]->(forrestGump)
+----
+
+This is the resulting graph:
+
+image::cypher-intro-schema01.svg[role="middle"]
+
+// ["dot", "cypher-intro-schema01.svg", "neoviz"]
+// ----
+//   N0 [
+//     label = "{Movie|title = \'The Matrix\'\lreleased = 1997\l}"
+//   ]
+//   N1 [
+//     label = "{Movie|title = \'Cloud Atlas\'\lreleased = 2012\l}"
+//   ]
+//   N2 [
+//     label = "{Movie|title = \'Forrest Gump\'\lreleased = 1994\l}"
+//   ]
+//   N3 [
+//     label = "{Person|name = \'Keanu Reeves\'}"
+//   ]
+//   N4 [
+//     label = "{Person|name = \'Robert Zemeckis\'\lborn = 1951\l}"
+//   ]
+//   N4 -> N2 [
+//     color = "#2e3436"
+//     fontcolor = "#2e3436"
+//     label = "DIRECTED\n"
+//   ]
+//   N5 [
+//     label = "{Person|name = \'Tom Hanks\'\lborn = 1956\l}"
+//   ]
+//   N5 -> N1 [
+//     color = "#4e9a06"
+//     fontcolor = "#4e9a06"
+//     label = "ACTED_IN\nroles = \[\'Zachry\'\]\l"
+//   ]
+//   N5 -> N2 [
+//     color = "#4e9a06"
+//     fontcolor = "#4e9a06"
+//     label = "ACTED_IN\nroles = \[\'Forrest\'\]\l"
+//   ]
+// ----
+
+
+[[cypher-intro-indexes]]
+== Using indexes
+
+The main reason for using indexes in a graph database is to find the starting point of a graph traversal.
+Once that starting point is found, the traversal relies on in-graph structures to achieve high performance.
+
+Indexes can be added at any time.
+Note, however, that if there is existing data in the database, it will take some time for an index to come online.
+
+In this case we want to create an index to speed up finding actors by name in the database:
+
+[source,cypher, indent=0]
+----
+CREATE INDEX FOR (a:Actor) ON (a.name)
+----
+
+In most cases it is not necessary to specify indexes when querying for data, as the appropriate indexes will be used automatically.
+For example, the following query will automatically use the index defined above:
+
+[source,cypher, indent=0]
+----
+MATCH (actor:Actor { name: "Tom Hanks" })
+RETURN actor;
+----
+
+A _composite index_ is an index on multiple properties for all nodes that have a particular label.
+For example, the following statement will create a composite index on all nodes labeled with `Actor` and which have both a `name` and a `born` property.
+Note that since the node with the `Actor` label that has a `name` of "Keanu Reeves" does not have the `born` property.
+Therefore that node will not be added to the index.
+
+[source,cypher, indent=0]
+----
+CREATE INDEX FOR (a:Actor) ON (a.name, a.born)
+----
+
+We can inspect our database to find out what indexes are defined.
+We do this by calling the built-in procedure `db.indexes`:
+
+[source,cypher, indent=0]
+----
+CALL db.indexes
+YIELD description, tokenNames, properties, type;
+----
+
+[queryresult]
+----
++---------------------------------------------------------------------------------------+
+| description                   | tokenNames | properties       | type                  |
++---------------------------------------------------------------------------------------+
+| "INDEX ON :Actor(name)"       | ["Actor"]  | ["name"]         | "node_label_property" |
+| "INDEX ON :Actor(name, born)" | ["Actor"]  | ["name", "born"] | "node_label_property" |
++---------------------------------------------------------------------------------------+
+
+2 rows
+----
+
+Learn more about indexes in xref:4.3@cypher-manual:ROOT:administration/indexes-for-full-text-search/index.adoc#administration-indexes-fulltext-search[Cypher Manual -> Indexes].
+
+[NOTE]
+====
+It is possible to specify which index to use in a particular query, using _index hints_.
+This is one of several options for query tuning, described in detail in xref:4.3@cypher-manual:ROOT:query-tuning/index.adoc#query-tuning[Cypher manual -> Query tuning].
+====
+
+
+[[cypher-intro-constraints]]
+== Using constraints
+
+Constraints are used to make sure that the data adheres to the rules of the domain.
+For example: "If a node has a label of `Actor` and a property of `name`, then the value of `name` must be unique among all nodes that have the `Actor` label".
+
+To create a constraint that makes sure that our database will never contain more than one node with the label `Movie` and the property `title`, we use the IS UNIQUE syntax:
+
+[source,cypher, indent=0]
+----
+CREATE CONSTRAINT ON (movie:Movie) ASSERT movie.title IS UNIQUE
+----
+
+Adding the unique constraint will implicitly add an index on that property.
+If the constraint is dropped, but the index is still needed, the index will have to be created explicitly.
+
+Constraints can be added to database that already has data in it.
+This requires that the existing data complies with the constraint that is being added.
+
+We can inspect our database to find out what constraints are defined.
+We do this by calling the built-in procedure `db.constraints`:
+
+[source,cypher, indent=0]
+----
+CALL db.constraints
+----
+
+[queryresult]
+----
++--------------------------------------------------------------+
+| description                                                  |
++--------------------------------------------------------------+
+| "CONSTRAINT ON ( movie:Movie ) ASSERT movie.title IS UNIQUE" |
++--------------------------------------------------------------+
+
+1 row
+----
+
+[NOTE]
+====
+The constraint described above is available for all editions of Neo4j.
+Additional constraints are available for Neo4j Enterprise Edition.
+====
+
+Learn more about constraints in xref:4.3@cypher-manual:ROOT:constraints/index.adoc#administration-constraints[Cypher manual -> Constraints].

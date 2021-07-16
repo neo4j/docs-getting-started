@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.neo4j.doc</groupId>
+        <artifactId>neo4j-manual-parent</artifactId>
+        <version>4.3.0</version>
+        <relativePath>..</relativePath>
+    </parent>
+
+    <artifactId>neo4j-kernel-docs</artifactId>
+    <name>Neo4j - Kernel Docs</name>
+    <description>Documentation build for the Neo4j kernel.</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.neo4j.test</groupId>
+            <artifactId>neo4j-harness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.neo4j.doc</groupId>
+            <artifactId>test-framework</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+        </dependency>
+    </dependencies>
+</project>

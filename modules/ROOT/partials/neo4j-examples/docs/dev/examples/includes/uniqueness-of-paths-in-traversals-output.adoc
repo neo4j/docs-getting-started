@@ -1,0 +1,6 @@
+[source]
+----
+(2)-[descendant,2]->(0)<-[owns,5]-(1)
+(2)-[descendant,0]->(5)<-[owns,3]-(1)
+
+----

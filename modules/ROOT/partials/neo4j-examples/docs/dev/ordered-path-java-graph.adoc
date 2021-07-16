@@ -1,0 +1,37 @@
+.Ordered Path Graph
+["dot", "Ordered-Path-Graph-java.svg", "neoviz", ""]
+----
+  N0 [
+    label = "name = \'A\'\l"
+  ]
+  N0 -> N1 [
+    color = "#2e3436"
+    fontcolor = "#2e3436"
+    label = "REL1\n"
+  ]
+  N0 -> N2 [
+    color = "#4e9a06"
+    fontcolor = "#4e9a06"
+    label = "REL2\n"
+  ]
+  N1 [
+    label = "name = \'B\'\l"
+  ]
+  N1 -> N2 [
+    color = "#4e9a06"
+    fontcolor = "#4e9a06"
+    label = "REL2\n"
+  ]
+  N2 [
+    label = "name = \'C\'\l"
+  ]
+  N2 -> N3 [
+    color = "#a40000"
+    fontcolor = "#a40000"
+    label = "REL3\n"
+  ]
+  N3 [
+    label = "name = \'D\'\l"
+  ]
+----
+

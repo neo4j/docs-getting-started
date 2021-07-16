@@ -1,0 +1,11 @@
+[queryresult]
+----
++------------------+
+| group.name       |
++------------------+
+| "ABCTechnicians" |
+| "Technicians"    |
+| "Users"          |
++------------------+
+3 rows
+----

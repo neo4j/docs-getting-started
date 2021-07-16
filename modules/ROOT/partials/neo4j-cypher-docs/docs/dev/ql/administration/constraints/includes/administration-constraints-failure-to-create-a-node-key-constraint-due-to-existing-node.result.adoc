@@ -1,0 +1,7 @@
+[source]
+----
+Unable to create Constraint( type='NODE PROPERTY EXISTENCE', schema=(:Person
+{firstname, surname}) ):
+Node(0) with label `Person` must have the properties (firstname, surname)
+----
+

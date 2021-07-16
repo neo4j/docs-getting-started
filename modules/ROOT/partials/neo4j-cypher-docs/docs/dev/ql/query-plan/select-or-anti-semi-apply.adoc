@@ -1,0 +1,50 @@
+[[query-plan-select-or-anti-semi-apply]]
+== Select Or Anti Semi Apply ==
+The `SelectOrAntiSemiApply` operator is used to evaluate `OR` between a predicate and a negative pattern predicate
+(i.e. a pattern predicate preceded with `NOT`), and is a variation of the <<query-plan-apply, Apply>> operator.
+If the predicate returns `true`, the pattern predicate is not tested.
+If the predicate returns `false` or `null`, `SelectOrAntiSemiApply` will instead test the pattern predicate.
+
+.Query
+include::includes/query-plan-select-or-anti-semi-apply.query.adoc[]
+
+
+
+.Query Plan
+[source]
+----
+Compiler CYPHER 4.3
+
+Planner COST
+
+Runtime PIPELINED
+
+Runtime version 4.3
+
++------------------------+-------------------------------------------+----------------+------+---------+----------------+------------------------+-----------+---------------------+
+| Operator               | Details                                   | Estimated Rows | Rows | DB Hits | Memory (Bytes) | Page Cache Hits/Misses | Time (ms) | Other               |
++------------------------+-------------------------------------------+----------------+------+---------+----------------+------------------------+-----------+---------------------+
+| +ProduceResults        | `other.name`                              |              4 |   12 |       0 |                |                        |           | Fused in Pipeline 3 |
+| |                      +-------------------------------------------+----------------+------+---------+----------------+                        |           +---------------------+
+| +Projection            | other.name AS `other.name`                |              4 |   12 |      24 |                |                        |           | Fused in Pipeline 3 |
+| |                      +-------------------------------------------+----------------+------+---------+----------------+                        |           +---------------------+
+| +SelectOrAntiSemiApply | other.age > $autoint_0                    |             14 |   12 |       0 |            448 |                    0/0 |     0.275 | Fused in Pipeline 3 |
+| |\                     +-------------------------------------------+----------------+------+---------+----------------+------------------------+-----------+---------------------+
+| | +Anti                |                                           |             14 |   12 |       0 |           1256 |                    0/0 |     0.129 | In Pipeline 2       |
+| | |                    +-------------------------------------------+----------------+------+---------+----------------+------------------------+-----------+---------------------+
+| | +Limit               | 1                                         |             14 |    2 |       0 |            752 |                        |           | Fused in Pipeline 1 |
+| | |                    +-------------------------------------------+----------------+------+---------+----------------+                        |           +---------------------+
+| | +Filter              | anon_74:Person                            |              2 |    2 |       2 |                |                        |           | Fused in Pipeline 1 |
+| | |                    +-------------------------------------------+----------------+------+---------+----------------+                        |           +---------------------+
+| | +Expand(All)         | (other)-[anon_56:FRIENDS_WITH]->(anon_74) |              2 |    2 |      32 |                |                        |           | Fused in Pipeline 1 |
+| | |                    +-------------------------------------------+----------------+------+---------+----------------+                        |           +---------------------+
+| | +Argument            | other                                     |             14 |   14 |       0 |            296 |                    2/0 |     0.856 | Fused in Pipeline 1 |
+| |                      +-------------------------------------------+----------------+------+---------+----------------+------------------------+-----------+---------------------+
+| +Filter                | other:Person                              |             14 |   14 |       0 |                |                        |           | Fused in Pipeline 0 |
+| |                      +-------------------------------------------+----------------+------+---------+----------------+                        |           +---------------------+
+| +AllNodesScan          | other                                     |             35 |   35 |      36 |             72 |                    1/0 |     0.209 | Fused in Pipeline 0 |
++------------------------+-------------------------------------------+----------------+------+---------+----------------+------------------------+-----------+---------------------+
+
+Total database accesses: 94, total allocated memory: 2336
+
+----

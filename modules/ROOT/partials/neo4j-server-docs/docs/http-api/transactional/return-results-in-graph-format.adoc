@@ -1,0 +1,17 @@
+[[transactional-return-results-in-graph-format]]
+=== Return results in graph format
+
+If you want to understand the graph structure of nodes and relationships returned by your query,
+you can specify the "graph" results data format. For example, this is useful when you want to visualise the
+graph structure. The format collates all the nodes and relationships from all columns of the result,
+and also flattens collections of nodes and relationships, including paths.
+
+
+_Example request_
+
+include::includes/return-results-in-graph-format.request.adoc[]
+
+_Example response_
+
+include::includes/return-results-in-graph-format.response.adoc[]
+

@@ -1,0 +1,5 @@
+[source,cypher]
+----
+MATCH ({ name: 'Admins' })<-[:PART_OF*0..]-(group)<-[:MEMBER_OF]-(user)
+RETURN user.name, group.name
+----

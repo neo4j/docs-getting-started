@@ -1,0 +1,14 @@
+["dot", "Hello-World-Graph-hello-world-Sample-Chapter.svg", "neoviz", ""]
+----
+  N0 [
+    label = "{Node\[0\]|name = \'I\'\l}"
+  ]
+  N0 -> N1 [
+    color = "#2e3436"
+    fontcolor = "#2e3436"
+    label = "know\n"
+  ]
+  N1 [
+    label = "{Node\[1\]|name = \'you\'\l}"
+  ]
+----

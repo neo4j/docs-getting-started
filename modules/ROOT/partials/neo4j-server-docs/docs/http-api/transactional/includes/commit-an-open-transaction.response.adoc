@@ -1,0 +1,21 @@
+* *+200:+* +OK+
+* *+Content-Type:+* +application/json;charset=utf-8+
+
+[source,javascript]
+----
+{
+  "results" : [ {
+    "columns" : [ "n" ],
+    "data" : [ {
+      "row" : [ { } ],
+      "meta" : [ {
+        "id" : 6,
+        "type" : "node",
+        "deleted" : false
+      } ]
+    } ]
+  } ],
+  "errors" : [ ]
+}
+----
+

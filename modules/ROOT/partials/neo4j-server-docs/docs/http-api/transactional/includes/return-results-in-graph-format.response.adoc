@@ -1,0 +1,97 @@
+* *+200:+* +OK+
+* *+Content-Type:+* +application/json;charset=utf-8+
+
+[source,javascript]
+----
+{
+  "results" : [ {
+    "columns" : [ "bike", "p1", "p2" ],
+    "data" : [ {
+      "row" : [ {
+        "weight" : 10
+      }, [ {
+        "weight" : 10
+      }, {
+        "position" : 1
+      }, {
+        "spokes" : 3
+      } ], [ {
+        "weight" : 10
+      }, {
+        "position" : 2
+      }, {
+        "spokes" : 32
+      } ] ],
+      "meta" : [ {
+        "id" : 8,
+        "type" : "node",
+        "deleted" : false
+      }, [ {
+        "id" : 8,
+        "type" : "node",
+        "deleted" : false
+      }, {
+        "id" : 0,
+        "type" : "relationship",
+        "deleted" : false
+      }, {
+        "id" : 9,
+        "type" : "node",
+        "deleted" : false
+      } ], [ {
+        "id" : 8,
+        "type" : "node",
+        "deleted" : false
+      }, {
+        "id" : 1,
+        "type" : "relationship",
+        "deleted" : false
+      }, {
+        "id" : 10,
+        "type" : "node",
+        "deleted" : false
+      } ] ],
+      "graph" : {
+        "nodes" : [ {
+          "id" : "8",
+          "labels" : [ "Bike" ],
+          "properties" : {
+            "weight" : 10
+          }
+        }, {
+          "id" : "9",
+          "labels" : [ "Wheel" ],
+          "properties" : {
+            "spokes" : 3
+          }
+        }, {
+          "id" : "10",
+          "labels" : [ "Wheel" ],
+          "properties" : {
+            "spokes" : 32
+          }
+        } ],
+        "relationships" : [ {
+          "id" : "0",
+          "type" : "HAS",
+          "startNode" : "8",
+          "endNode" : "9",
+          "properties" : {
+            "position" : 1
+          }
+        }, {
+          "id" : "1",
+          "type" : "HAS",
+          "startNode" : "8",
+          "endNode" : "10",
+          "properties" : {
+            "position" : 2
+          }
+        } ]
+      }
+    } ]
+  } ],
+  "errors" : [ ]
+}
+----
+

@@ -1,0 +1,15 @@
+[[transactional-rollback-an-open-transaction]]
+=== Rollback an open transaction
+
+Given that you have an open transaction, you can send a rollback request. The server will rollback the
+transaction. Any further statements trying to run in this transaction will fail immediately.
+
+
+_Example request_
+
+include::includes/rollback-an-open-transaction.request.adoc[]
+
+_Example response_
+
+include::includes/rollback-an-open-transaction.response.adoc[]
+

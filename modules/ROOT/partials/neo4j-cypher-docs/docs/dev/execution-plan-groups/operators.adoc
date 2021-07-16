@@ -1,0 +1,327 @@
+[[execution-plans-operators]]
+= Execution plan operators in detail
+:page-toclevels: -1
+
+[abstract]
+All operators are listed here, grouped by the similarity of their characteristics.
+
+Certain operators are only used by a subset of the <<cypher-runtime,runtimes>> that Cypher can choose from.
+If that is the case, the example queries will be prefixed with an option to choose one of these runtimes.
+
+//Commented the toc, in case we later decide that we want it.
+// * <<query-plan-all-nodes-scan, AllNodesScan>>
+// * <<query-plan-directed-relationship-by-id-seek, DirectedRelationshipByIdSeek>>
+// * <<query-plan-node-by-id-seek, NodeByIdSeek>>
+// * <<query-plan-node-by-label-scan, NodeByLabelScan>>
+// * <<query-plan-node-index-seek, NodeIndexSeek>>
+// * <<query-plan-node-unique-index-seek, NodeUniqueIndexSeek>>
+// * <<query-plan-multi-node-index-seek, MultiNodeIndexSeek>>
+// * <<query-plan-node-unique-index-seek-by-range, NodeUniqueIndexSeekByRange>>
+// * <<query-plan-node-index-contains-scan, NodeIndexContainsScan>>
+// * <<query-plan-node-index-ends-with-scan, NodeIndexEndsWithScan>>
+// * <<query-plan-node-index-scan, NodeIndexScan>>
+// * <<query-plan-undirected-relationship-by-id-seek, UndirectedRelationshipByIdSeek>>
+// * <<query-plan-apply, Apply>>
+// * <<query-plan-semi-apply, SemiApply>>
+// * <<query-plan-anti-semi-apply, AntiSemiApply>>
+// * <<query-plan-anti, Anti>>
+// * <<query-plan-let-semi-apply, LetSemiApply>>
+// * <<query-plan-let-anti-semi-apply, LetAntiSemiApply>>
+// * <<query-plan-select-or-semi-apply, SelectOrSemiApply>>
+// * <<query-plan-select-or-anti-semi-apply, SelectOrAntiSemiApply>>
+// * <<query-plan-let-select-or-semi-apply, LetSelectOrSemiApply>>
+// * <<query-plan-let-select-or-anti-semi-apply, LetSelectOrAntiSemiApply>>
+// * <<query-plan-merge,Merge>>
+// * <<query-plan-roll-up-apply, RollUpApply>>
+// * <<query-plan-argument, Argument>>
+// * <<query-plan-expand-all, Expand(All)>>
+// * <<query-plan-expand-into, Expand(Into)>>
+// * <<query-plan-optional-expand-all, OptionalExpand(All)>>
+// * <<query-plan-optional-expand-into, OptionalExpand(Into)>>
+// * <<query-plan-varlength-expand-all, VarLengthExpand(All)>>
+// * <<query-plan-varlength-expand-into, VarLengthExpand(Into)>>
+// * <<query-plan-varlength-expand-pruning, VarLengthExpand(Pruning)>>
+// * <<query-plan-assert-same-node, AssertSameNode>>
+// * <<query-plan-empty-result, EmptyResult>>
+// * <<query-plan-produce-results, ProduceResults>>
+// * <<query-plan-load-csv, LoadCSV>>
+// * <<query-plan-node-hash-join, NodeHashJoin>>
+// * <<query-plan-value-hash-join, ValueHashJoin>>
+// * <<query-plan-node-left-right-outer-hash-join, NodeLeftOuterHashJoin>>
+// * <<query-plan-node-left-right-outer-hash-join, NodeRightOuterHashJoin>>
+// * <<query-plan-triadic-selection, TriadicSelection>>
+// * <<query-plan-cartesian-product, CartesianProduct>>
+// * <<query-plan-foreach, Foreach>>
+// * <<query-plan-eager, Eager>>
+// * <<query-plan-eager-aggregation, EagerAggregation>>
+// * <<query-plan-ordered-aggregation, OrderedAggregation>>
+// * <<query-plan-node-count-from-count-store, NodeCountFromCountStore>>
+// * <<query-plan-relationship-count-from-count-store, RelationshipCountFromCountStore>>
+// * <<query-plan-distinct, Distinct>>
+// * <<query-plan-ordered-distinct, OrderedDistinct>>
+// * <<query-plan-filter, Filter>>
+// * <<query-plan-limit, Limit>>
+// * <<query-plan-skip, Skip>>
+// * <<query-plan-sort, Sort>>
+// * <<query-plan-partial-sort, PartialSort>>
+// * <<query-plan-top, Top>>
+// * <<query-plan-partial-top, PartialTop>>
+// * <<query-plan-union, Union>>
+// * <<query-plan-unwind, Unwind>>
+// * <<query-plan-exhaustive-limit,ExhaustiveLimit>>
+// * <<query-plan-optional, Optional>>
+// * <<query-plan-project-endpoints, ProjectEndpoints>>
+// * <<query-plan-projection, Projection>>
+// * <<query-plan-empty-row, EmptyRow>>
+// * <<query-plan-procedure-call, ProcedureCall>>
+// * <<query-plan-cache-properties, CacheProperties>>
+// * <<query-plan-create-nodes---relationships, Create>>
+// * <<query-plan-delete, Delete>>
+// * <<query-plan-detach-delete, DetachDelete>>
+// * <<query-plan-set-labels, SetLabels>>
+// * <<query-plan-remove-labels, RemoveLabels>>
+// * <<query-plan-set-node-properties-from-map, SetNodePropertiesFromMap>>
+// * <<query-plan-set-relationship-properties-from-map, SetRelationshipPropertiesFromMap>>
+// * <<query-plan-set-property, SetProperty>>
+// * <<query-plan-create-unique-constraint, CreateUniqueConstraint>>
+// * <<query-plan-drop-unique-constraint, DropUniqueConstraint (deprecated)>>
+// * <<query-plan-create-node-property-existence-constraint, CreateNodePropertyExistenceConstraint>>
+// * <<query-plan-drop-node-property-existence-constraint, DropNodePropertyExistenceConstraint (deprecated)>>
+// * <<query-plan-create-node-key-constraint, CreateNodeKeyConstraint>>
+// * <<query-plan-drop-node-key-constraint, DropNodeKeyConstraint (deprecated)>>
+// * <<query-plan-create-relationship-property-existence-constraint, CreateRelationshipPropertyExistenceConstraint>>
+// * <<query-plan-drop-relationship-property-existence-constraint, DropRelationshipPropertyExistenceConstraint (deprecated)>>
+// * <<query-plan-drop-constraint-by-name, DropConstraint>>
+// * <<query-plan-create-index, CreateIndex>>
+// * <<query-plan-drop-index, DropIndex (deprecated)>>
+// * <<query-plan-drop-index-by-name, DropIndex>>
+
+include::../ql/query-plan/all-nodes-scan.adoc[]
+
+include::../ql/query-plan/directed-relationship-by-id-seek.adoc[]
+
+include::../ql/query-plan/node-by-id-seek.adoc[]
+
+include::../ql/query-plan/node-by-label-scan.adoc[]
+
+include::../ql/query-plan/node-index-seek.adoc[]
+
+include::../ql/query-plan/node-unique-index-seek.adoc[]
+
+include::../ql/query-plan/multi-node-index-seek.adoc[]
+
+include::../ql/query-plan/node-index-seek-by-range.adoc[]
+
+include::../ql/query-plan/node-unique-index-seek-by-range.adoc[]
+
+include::../ql/query-plan/node-index-contains-scan.adoc[]
+
+include::../ql/query-plan/node-index-ends-with-scan.adoc[]
+
+include::../ql/query-plan/node-index-scan.adoc[]
+
+include::../ql/query-plan/undirected-relationship-by-id-seek.adoc[]
+
+include::../ql/query-plan/apply.adoc[]
+
+include::../ql/query-plan/semi-apply.adoc[]
+
+include::../ql/query-plan/anti-semi-apply.adoc[]
+
+include::../ql/query-plan/anti.adoc[]
+
+include::../ql/query-plan/let-semi-apply.adoc[]
+
+include::../ql/query-plan/let-anti-semi-apply.adoc[]
+
+include::../ql/query-plan/select-or-semi-apply.adoc[]
+
+include::../ql/query-plan/select-or-anti-semi-apply.adoc[]
+
+include::../ql/query-plan/let-select-or-semi-apply.adoc[]
+
+include::../ql/query-plan/let-select-or-anti-semi-apply.adoc[]
+
+//include::../ql/query-plan/conditional-apply.adoc[]
+//Changed in 4.3 to merge
+include::../ql/query-plan/merge.adoc[]
+
+//include::../ql/query-plan/anti-conditional-apply.adoc[]
+//Removed in 4.3 (by merge)
+
+include::../ql/query-plan/roll-up-apply.adoc[]
+
+include::../ql/query-plan/argument.adoc[]
+
+include::../ql/query-plan/expand-all.adoc[]
+
+include::../ql/query-plan/expand-into.adoc[]
+
+include::../ql/query-plan/optional-expand-all.adoc[]
+
+include::../ql/query-plan/optional-expand-into.adoc[]
+
+include::../ql/query-plan/varlength-expand-all.adoc[]
+
+include::../ql/query-plan/varlength-expand-into.adoc[]
+
+include::../ql/query-plan/varlength-expand-pruning.adoc[]
+
+include::../ql/query-plan/assert-same-node.adoc[]
+
+//include::../ql/query-plan/drop-result.adoc[]
+//Removed in 4.3
+
+include::../ql/query-plan/empty-result.adoc[]
+
+include::../ql/query-plan/produce-results.adoc[]
+
+include::../ql/query-plan/load-csv.adoc[]
+
+
+[[execution-plans-operators-hash-join-general]]
+== Hash joins in general
+
+Hash joins have two inputs: the build input and probe input.
+The query planner assigns these roles so that the smaller of the two inputs is the build input.
+The build input is pulled in eagerly, and is used to build a probe table.
+Once this is complete, the probe table is checked for each row coming from the probe input side.
+
+
+In query plans, the build input is always the left operator, and the probe input the right operator.
+
+There are four hash join operators:
+
+* <<query-plan-node-hash-join, NodeHashJoin>>
+* <<query-plan-value-hash-join, ValueHashJoin>>
+* <<query-plan-node-left-right-outer-hash-join, NodeLeftOuterHashJoin>>
+* <<query-plan-node-left-right-outer-hash-join, NodeRightOuterHashJoin>>
+
+include::../ql/query-plan/node-hash-join.adoc[]
+
+include::../ql/query-plan/value-hash-join.adoc[]
+
+include::../ql/query-plan/node-left-right-outer-hash-join.adoc[]
+
+include::../ql/query-plan/triadic-selection.adoc[]
+
+include::../ql/query-plan/triadic-build.adoc[]
+
+include::../ql/query-plan/triadic-filter.adoc[]
+
+include::../ql/query-plan/cartesian-product.adoc[]
+
+include::../ql/query-plan/foreach.adoc[]
+
+include::../ql/query-plan/eager.adoc[]
+
+include::../ql/query-plan/eager-aggregation.adoc[]
+
+include::../ql/query-plan/ordered-aggregation.adoc[]
+
+include::../ql/query-plan/node-count-from-count-store.adoc[]
+
+include::../ql/query-plan/relationship-count-from-count-store.adoc[]
+
+include::../ql/query-plan/distinct.adoc[]
+
+include::../ql/query-plan/ordered-distinct.adoc[]
+
+include::../ql/query-plan/filter.adoc[]
+
+include::../ql/query-plan/limit.adoc[]
+
+include::../ql/query-plan/skip.adoc[]
+
+include::../ql/query-plan/sort.adoc[]
+
+include::../ql/query-plan/partial-sort.adoc[]
+
+include::../ql/query-plan/top.adoc[]
+
+include::../ql/query-plan/partial-top.adoc[]
+
+include::../ql/query-plan/union.adoc[]
+
+include::../ql/query-plan/unwind.adoc[]
+
+//include::../ql/query-plan/lock-nodes.adoc[]
+//Changed in 4.3
+include::../ql/query-plan/exhaustive-limit.adoc[]
+
+include::../ql/query-plan/optional.adoc[]
+
+include::../ql/query-plan/project-endpoints.adoc[]
+
+include::../ql/query-plan/projection.adoc[]
+
+include::../ql/query-plan/shortest-path.adoc[]
+
+include::../ql/query-plan/empty-row.adoc[]
+
+include::../ql/query-plan/procedure-call.adoc[]
+
+include::../ql/query-plan/cache-properties.adoc[]
+
+include::../ql/query-plan/create-nodes---relationships.adoc[]
+
+include::../ql/query-plan/delete.adoc[]
+
+include::../ql/query-plan/detach-delete.adoc[]
+
+//include::../ql/query-plan/merge-create-node.adoc[]
+//Removed in 4.3
+
+//include::../ql/query-plan/merge-create-relationship.adoc[]
+//Removed in 4.3
+
+include::../ql/query-plan/set-labels.adoc[]
+
+include::../ql/query-plan/remove-labels.adoc[]
+
+include::../ql/query-plan/set-node-properties-from-map.adoc[]
+
+include::../ql/query-plan/set-relationship-properties-from-map.adoc[]
+
+include::../ql/query-plan/set-property.adoc[]
+
+include::../ql/query-plan/create-unique-constraint.adoc[]
+
+[role=deprecated]
+include::../ql/query-plan/drop-unique-constraint.adoc[]
+
+include::../ql/query-plan/create-constraint-only-if-it-does-not-already-exist.adoc[]
+
+include::../ql/query-plan/create-node-property-existence-constraint.adoc[]
+
+[role=deprecated]
+include::../ql/query-plan/drop-node-property-existence-constraint.adoc[]
+
+include::../ql/query-plan/create-node-key-constraint.adoc[]
+
+[role=deprecated]
+include::../ql/query-plan/drop-node-key-constraint.adoc[]
+
+include::../ql/query-plan/create-relationship-property-existence-constraint.adoc[]
+
+[role=deprecated]
+include::../ql/query-plan/drop-relationship-property-existence-constraint.adoc[]
+
+include::../ql/query-plan/drop-constraint-by-name.adoc[]
+
+include::../ql/query-plan/listing-constraints.adoc[]
+
+include::../ql/query-plan/create-index.adoc[]
+
+include::../ql/query-plan/create-index-only-if-it-does-not-already-exist.adoc[]
+
+[role=deprecated]
+include::../ql/query-plan/drop-index-by-schema.adoc[]
+
+include::../ql/query-plan/drop-index-by-name.adoc[]
+
+include::../ql/query-plan/listing-indexes.adoc[]
+
+include::../ql/query-plan/listing-functions.adoc[]
+
+include::../ql/query-plan/listing-procedures.adoc[]

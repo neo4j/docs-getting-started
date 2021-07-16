@@ -1,0 +1,31 @@
+[[administration-indexes-existence-check-using-is-not-null-single-property-index]]
+== Existence check using `IS NOT NULL` (single-property index) ==
+The `r.since IS NOT NULL` predicate in the following query uses the `KNOWS(since)` index, if it exists. 
+
+.Query
+include::includes/administration-indexes-existence-check-using-is-not-null-single-property-index.query.adoc[]
+
+
+
+.Query Plan
+[source]
+----
+Compiler CYPHER 4.3
+
+Planner COST
+
+Runtime INTERPRETED
+
+Runtime version 4.3
+
++--------------------------------+-------------------------------------------------------------+----------------+------+---------+------------------------+
+| Operator                       | Details                                                     | Estimated Rows | Rows | DB Hits | Page Cache Hits/Misses |
++--------------------------------+-------------------------------------------------------------+----------------+------+---------+------------------------+
+| +ProduceResults                | person, friend                                              |              1 |    1 |       0 |                    0/0 |
+| |                              +-------------------------------------------------------------+----------------+------+---------+------------------------+
+| +DirectedRelationshipIndexScan | (person)-[r:KNOWS(since)]->(friend) WHERE since IS NOT NULL |              1 |    1 |       2 |                    0/0 |
++--------------------------------+-------------------------------------------------------------+----------------+------+---------+------------------------+
+
+Total database accesses: 2, total allocated memory: 64
+
+----

@@ -1,0 +1,31 @@
+[[administration-indexes-multiple-range-comparisons-using-where-single-property-index]]
+== Multiple range comparisons using `WHERE` (single-property index) ==
+When the `WHERE` clause contains multiple inequality (range) comparisons for the same property, these can be combined in a single index range seek.
+
+.Query
+include::includes/administration-indexes-multiple-range-comparisons-using-where-single-property-index.query.adoc[]
+
+
+
+.Query Plan
+[source]
+----
+Compiler CYPHER 4.3
+
+Planner COST
+
+Runtime INTERPRETED
+
+Runtime version 4.3
+
++-----------------------+----------------------------------------------------------------------------------+----------------+------+---------+------------------------+
+| Operator              | Details                                                                          | Estimated Rows | Rows | DB Hits | Page Cache Hits/Misses |
++-----------------------+----------------------------------------------------------------------------------+----------------+------+---------+------------------------+
+| +ProduceResults       | person                                                                           |              1 |    1 |       0 |                    0/0 |
+| |                     +----------------------------------------------------------------------------------+----------------+------+---------+------------------------+
+| +NodeIndexSeekByRange | person:Person(highScore) WHERE highScore > $autoint_0 AND highScore < $autoint_1 |              1 |    1 |       2 |                    0/0 |
++-----------------------+----------------------------------------------------------------------------------+----------------+------+---------+------------------------+
+
+Total database accesses: 2, total allocated memory: 64
+
+----

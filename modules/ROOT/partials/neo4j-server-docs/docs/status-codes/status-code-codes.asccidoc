@@ -1,0 +1,128 @@
+[options="header", cols="<1m,<1"]
+|===
+|Status Code |Description 
+|Neo.ClientError.Cluster.NotALeader |The request cannot be processed by this server. Write requests can only be processed by the leader. 
+|Neo.ClientError.Database.DatabaseNotFound |The request referred to a database that does not exist. 
+|Neo.ClientError.Database.ExistingDatabaseFound |The request referred to a database that already exists. 
+|Neo.ClientError.Fabric.AccessMode |The request could not be completed due to access mode violation 
+|Neo.ClientError.General.ForbiddenOnReadOnlyDatabase |This is a read only database, writing or modifying the database is not allowed. 
+|Neo.ClientError.General.InvalidArguments |The request contained fields that were empty or are not allowed. 
+|Neo.ClientError.General.TransactionOutOfMemoryError |The transaction used more memory than was allowed. The maximum allowed size for a transaction can be configured with 'dbms.memory.transaction.max_size' in the neo4j configuration (normally in 'conf/neo4j.conf' or, if you are using Neo4j Desktop, found through the user interface). 
+|Neo.ClientError.General.UpgradeRequired |This transaction required database to be of a higher kernel version than it is. Make sure that dbms has been correctly upgraded before retrying this operation. 
+|Neo.ClientError.Procedure.ProcedureCallFailed |Failed to invoke a procedure. See the detailed error description for exact cause. 
+|Neo.ClientError.Procedure.ProcedureNotFound |A request referred to a procedure that is not registered with this database instance. If you are deploying custom procedures in a cluster setup, ensure all instances in the cluster have the procedure jar file deployed. 
+|Neo.ClientError.Procedure.ProcedureRegistrationFailed |The database failed to register a procedure, refer to the associated error message for details. 
+|Neo.ClientError.Procedure.ProcedureTimedOut |The procedure has not completed within the specified timeout. You may want to retry with a longer timeout. 
+|Neo.ClientError.Procedure.TypeError |A procedure is using or receiving a value of an invalid type. 
+|Neo.ClientError.Request.Invalid |The client provided an invalid request. 
+|Neo.ClientError.Request.InvalidFormat |The client provided a request that was missing required fields, or had values that are not allowed. 
+|Neo.ClientError.Request.InvalidUsage |The client made a request but did not consume outgoing buffers in a timely fashion. 
+|Neo.ClientError.Schema.ConstraintAlreadyExists |Unable to perform operation because it would clash with a pre-existing constraint. 
+|Neo.ClientError.Schema.ConstraintNotFound |The request (directly or indirectly) referred to a constraint that does not exist. 
+|Neo.ClientError.Schema.ConstraintValidationFailed |A constraint imposed by the database was violated. 
+|Neo.ClientError.Schema.ConstraintViolation |Added or changed index entry would violate constraint 
+|Neo.ClientError.Schema.ConstraintWithNameAlreadyExists |Unable to perform operation because constraint with given name already exists. 
+|Neo.ClientError.Schema.EquivalentSchemaRuleAlreadyExists |Unable to perform operation because an equivalent schema rule already exists. 
+|Neo.ClientError.Schema.ForbiddenOnConstraintIndex |A requested operation can not be performed on the specified index because the index is part of a constraint. If you want to drop the index, for instance, you must drop the constraint. 
+|Neo.ClientError.Schema.IndexAlreadyExists |Unable to perform operation because it would clash with a pre-existing index. 
+|Neo.ClientError.Schema.IndexMultipleFound |The request referenced an index by its schema, and multiple matching indexes were found. 
+|Neo.ClientError.Schema.IndexNotApplicable |The request did not contain the properties required by the index. 
+|Neo.ClientError.Schema.IndexNotFound |The request (directly or indirectly) referred to an index that does not exist. 
+|Neo.ClientError.Schema.IndexWithNameAlreadyExists |Unable to perform operation because index with given name already exists. 
+|Neo.ClientError.Schema.RepeatedLabelInSchema |Unable to create index or constraint because schema had a repeated label. 
+|Neo.ClientError.Schema.RepeatedPropertyInCompositeSchema |Unable to create index or constraint because schema had a repeated property. 
+|Neo.ClientError.Schema.RepeatedRelationshipTypeInSchema |Unable to create index or constraint because schema had a repeated relationship type. 
+|Neo.ClientError.Schema.TokenNameError |A token name, such as a label, relationship type or property key, used is not valid. Tokens cannot be empty strings and cannot be null. 
+|Neo.ClientError.Security.AuthenticationRateLimit |The client has provided incorrect authentication details too many times in a row. 
+|Neo.ClientError.Security.AuthorizationExpired |The stored authorization info has expired. Please reconnect. 
+|Neo.ClientError.Security.CredentialsExpired |The credentials have expired and need to be updated. 
+|Neo.ClientError.Security.Forbidden |An attempt was made to perform an unauthorized action. 
+|Neo.ClientError.Security.Unauthorized |The client is unauthorized due to authentication failure. 
+|Neo.ClientError.Statement.AccessMode |The request could not be completed due to access mode violation 
+|Neo.ClientError.Statement.ArgumentError |The statement is attempting to perform operations using invalid arguments 
+|Neo.ClientError.Statement.ArithmeticError |Invalid use of arithmetic, such as dividing by zero. 
+|Neo.ClientError.Statement.ConstraintVerificationFailed |A constraint imposed by the statement is violated by the data in the database. 
+|Neo.ClientError.Statement.EntityNotFound |The statement refers to a non-existent entity. 
+|Neo.ClientError.Statement.ExternalResourceFailed |Access to an external resource failed 
+|Neo.ClientError.Statement.NotSystemDatabaseError |This is an administration command and it should be executed against the system database. 
+|Neo.ClientError.Statement.ParameterMissing |The statement refers to a parameter that was not provided in the request. 
+|Neo.ClientError.Statement.PropertyNotFound |The statement refers to a non-existent property. 
+|Neo.ClientError.Statement.RuntimeUnsupportedError |This query is not supported by the chosen runtime. 
+|Neo.ClientError.Statement.SemanticError |The statement is syntactically valid, but expresses something that the database cannot do. 
+|Neo.ClientError.Statement.SyntaxError |The statement contains invalid or unsupported syntax. 
+|Neo.ClientError.Statement.TypeError |The statement is attempting to perform operations on values with types that are not supported by the operation. 
+|Neo.ClientError.Transaction.ForbiddenDueToTransactionType |The transaction is of the wrong type to service the request. For instance, a transaction that has had schema modifications performed in it cannot be used to subsequently perform data operations, and vice versa. 
+|Neo.ClientError.Transaction.InvalidBookmark |Supplied bookmark cannot be interpreted. You should only supply a bookmark that was previously generated by Neo4j. Maybe you have generated your own bookmark, or modified a bookmark since it was generated by Neo4j. 
+|Neo.ClientError.Transaction.InvalidBookmarkMixture |Mixing bookmarks generated by different databases is forbidden.You should only chain bookmarks that are generated from the same database. You may however chain bookmarks generated from system database with bookmarks from another database. 
+|Neo.ClientError.Transaction.TransactionAccessedConcurrently |There were concurrent requests accessing the same transaction, which is not allowed. 
+|Neo.ClientError.Transaction.TransactionHookFailed |Transaction hook failure. 
+|Neo.ClientError.Transaction.TransactionMarkedAsFailed |Transaction was marked as both successful and failed. Failure takes precedence and so this transaction was rolled back although it may have looked like it was going to be committed 
+|Neo.ClientError.Transaction.TransactionNotFound |The request referred to a transaction that does not exist. 
+|Neo.ClientError.Transaction.TransactionTimedOut |The transaction has not completed within the specified timeout (dbms.transaction.timeout). You may want to retry with a longer timeout. 
+|Neo.ClientError.Transaction.TransactionValidationFailed |Transaction changes did not pass validation checks 
+|Neo.ClientNotification.Procedure.ProcedureWarning |The query used a procedure that generated a warning. 
+|Neo.ClientNotification.Statement.CartesianProductWarning |This query builds a cartesian product between disconnected patterns. 
+|Neo.ClientNotification.Statement.DynamicPropertyWarning |Queries using dynamic properties will use neither index seeks nor index scans for those properties 
+|Neo.ClientNotification.Statement.EagerOperatorWarning |The execution plan for this query contains the Eager operator, which forces all dependent data to be materialized in main memory before proceeding 
+|Neo.ClientNotification.Statement.ExhaustiveShortestPathWarning |Exhaustive shortest path has been planned for your query that means that shortest path graph algorithm might not be used to find the shortest path. Hence an exhaustive enumeration of all paths might be used in order to find the requested shortest path. 
+|Neo.ClientNotification.Statement.ExperimentalFeature |This feature is experimental and should not be used in production systems. 
+|Neo.ClientNotification.Statement.FeatureDeprecationWarning |This feature is deprecated and will be removed in future versions. 
+|Neo.ClientNotification.Statement.JoinHintUnfulfillableWarning |The database was unable to plan a hinted join. 
+|Neo.ClientNotification.Statement.MissingAlias |Missing alias in a RETURN clause in a CALL subquery. 
+|Neo.ClientNotification.Statement.NoApplicableIndexWarning |Adding a schema index may speed up this query. 
+|Neo.ClientNotification.Statement.RuntimeUnsupportedWarning |This query is not supported by the chosen runtime. 
+|Neo.ClientNotification.Statement.SuboptimalIndexForWildcardQuery |Index cannot execute wildcard query efficiently 
+|Neo.ClientNotification.Statement.SubqueryVariableShadowingWarning |Variable in subquery is shadowing a variable with the same name from the outer scope. 
+|Neo.ClientNotification.Statement.UnboundedVariableLengthPatternWarning |The provided pattern is unbounded, consider adding an upper limit to the number of node hops. 
+|Neo.ClientNotification.Statement.UnknownLabelWarning |The provided label is not in the database. 
+|Neo.ClientNotification.Statement.UnknownPropertyKeyWarning |The provided property key is not in the database 
+|Neo.ClientNotification.Statement.UnknownRelationshipTypeWarning |The provided relationship type is not in the database. 
+|Neo.DatabaseError.Database.DatabaseLimitReached |The limit to number of databases has been reached. 
+|Neo.DatabaseError.Database.UnableToStartDatabase |Unable to start database. 
+|Neo.DatabaseError.Database.Unknown |Unknown database management error 
+|Neo.DatabaseError.Fabric.RemoteExecutionFailed |The database was unable to execute a remote part of the statement. 
+|Neo.DatabaseError.General.IndexCorruptionDetected |The request (directly or indirectly) referred to an index that is in a failed state. The index needs to be dropped and recreated manually. 
+|Neo.DatabaseError.General.SchemaCorruptionDetected |A malformed schema rule was encountered. Please contact your support representative. 
+|Neo.DatabaseError.General.StorageDamageDetected |Expected set of files not found on disk. Please restore from backup. 
+|Neo.DatabaseError.General.UnknownError |An unknown error occurred. 
+|Neo.DatabaseError.Schema.ConstraintCreationFailed |Creating a requested constraint failed. 
+|Neo.DatabaseError.Schema.ConstraintDropFailed |The database failed to drop a requested constraint. 
+|Neo.DatabaseError.Schema.IndexCreationFailed |Failed to create an index. 
+|Neo.DatabaseError.Schema.IndexDropFailed |The database failed to drop a requested index. 
+|Neo.DatabaseError.Schema.LabelAccessFailed |The request accessed a label that did not exist. 
+|Neo.DatabaseError.Schema.PropertyKeyAccessFailed |The request accessed a property that does not exist. 
+|Neo.DatabaseError.Schema.RelationshipTypeAccessFailed |The request accessed a relationship type that does not exist. 
+|Neo.DatabaseError.Schema.SchemaRuleAccessFailed |The request referred to a schema rule that does not exist. 
+|Neo.DatabaseError.Schema.SchemaRuleDuplicateFound |The request referred to a schema rule that is defined multiple times. 
+|Neo.DatabaseError.Schema.TokenLimitReached |The maximum number of tokens of this type has been reached, no more tokens of this type can be created. 
+|Neo.DatabaseError.Statement.CodeGenerationFailed |The database was unable to generate code for the query. A stacktrace can be found in the debug.log. 
+|Neo.DatabaseError.Statement.ExecutionFailed |The database was unable to execute the statement. 
+|Neo.DatabaseError.Statement.RemoteExecutionFailed |The database was unable to execute a remote part of the statement. 
+|Neo.DatabaseError.Transaction.TransactionCommitFailed |The database was unable to commit the transaction. 
+|Neo.DatabaseError.Transaction.TransactionLogError |The database was unable to write transaction to log. 
+|Neo.DatabaseError.Transaction.TransactionRollbackFailed |The database was unable to roll back the transaction. 
+|Neo.DatabaseError.Transaction.TransactionStartFailed |The database was unable to start the transaction. 
+|Neo.TransientError.Cluster.ReplicationFailure |Replication failure. 
+|Neo.TransientError.Cluster.Routing |Unable to route the request to the appropriate server 
+|Neo.TransientError.Database.DatabaseUnavailable |The database is not currently available to serve your request, refer to the database logs for more details. Retrying your request at a later time may succeed. 
+|Neo.TransientError.General.MemoryPoolOutOfMemoryError |The memory pool limit was exceeded. The corresponding setting can be found in the error message 
+|Neo.TransientError.General.OutOfMemoryError |There is not enough memory to perform the current task. Please try increasing 'dbms.memory.heap.max_size' in the neo4j configuration (normally in 'conf/neo4j.conf' or, if you are using Neo4j Desktop, found through the user interface) or if you are running an embedded installation increase the heap by using '-Xmx' command line flag, and then restart the database. 
+|Neo.TransientError.General.StackOverFlowError |There is not enough stack size to perform the current task. This is generally considered to be a database error, so please contact Neo4j support. You could try increasing the stack size: for example to set the stack size to 2M, add `dbms.jvm.additional=-Xss2M' to in the neo4j configuration (normally in 'conf/neo4j.conf' or, if you are using Neo4j Desktop, found through the user interface) or if you are running an embedded installation just add -Xss2M as command line flag. 
+|Neo.TransientError.General.TransactionMemoryLimit |There is not enough memory to perform the current task. Please try increasing 'dbms.memory.off_heap.max_size' in the neo4j configuration (normally in 'conf/neo4j.conf' or, if you are using Neo4j Desktop, found through the user interface), and then restart the database. 
+|Neo.TransientError.Request.NoThreadsAvailable |There are no available threads to serve this request at the moment. You can retry at a later time or consider increasing max thread pool size for bolt connector(s). 
+|Neo.TransientError.Security.AuthProviderFailed |An auth provider request failed. 
+|Neo.TransientError.Security.AuthProviderTimeout |An auth provider request timed out. 
+|Neo.TransientError.Security.ModifiedConcurrently |The user was modified concurrently to this request. 
+|Neo.TransientError.Statement.ExecutionTimeout |The database was unable to execute the statement in a timely fashion. 
+|Neo.TransientError.Transaction.BookmarkTimeout |Bookmark wait timed out. Database has not reached the specified version 
+|Neo.TransientError.Transaction.ConstraintsChanged |Database constraints changed since the start of this transaction 
+|Neo.TransientError.Transaction.DeadlockDetected |This transaction, and at least one more transaction, has acquired locks in a way that it will wait indefinitely, and the database has aborted it. Retrying this transaction will most likely be successful. 
+|Neo.TransientError.Transaction.Interrupted |Interrupted while waiting. 
+|Neo.TransientError.Transaction.LeaseExpired |The lease under which this transaction was started is no longer valid. 
+|Neo.TransientError.Transaction.LockAcquisitionTimeout |Unable to acquire lock within configured timeout (dbms.lock.acquisition.timeout). 
+|Neo.TransientError.Transaction.LockClientStopped |The transaction has been terminated, so no more locks can be acquired. This can occur because the transaction ran longer than the configured transaction timeout, or because a human operator manually terminated the transaction, or because the database is shutting down. 
+|Neo.TransientError.Transaction.MaximumTransactionLimitReached |Unable to start new transaction since the maximum number of concurrently executing transactions is reached (dbms.transaction.concurrent.maximum). You can retry at a later time or consider increasing allowed maximum of concurrent transactions. 
+|Neo.TransientError.Transaction.Outdated |Transaction has seen state which has been invalidated by applied updates while transaction was active. Transaction may succeed if retried. 
+|Neo.TransientError.Transaction.Terminated |Explicitly terminated by the user. 
+|Neo.TransientError.Transaction.TransientTransactionFailure |Unable to complete transaction. 
+|===

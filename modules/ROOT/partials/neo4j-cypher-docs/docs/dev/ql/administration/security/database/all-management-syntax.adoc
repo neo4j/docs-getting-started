@@ -1,0 +1,7 @@
+.Command syntax
+[source, cypher, role=noplay]
+-----
+GRANT ALL [[DATABASE] PRIVILEGES]
+    ON {HOME DATABASE | DATABASE[S] {* | name[, ...]}}
+    TO role[, ...]
+-----

@@ -1,0 +1,12 @@
+.Command syntax
+[source, cypher, role=noplay]
+-----
+GRANT MERGE "{" { * | property[, ...] } "}"
+    ON {HOME GRAPH | GRAPH[S] { * | name[, ...] }}
+        [
+            ELEMENT[S] { * | label-or-rel-type[, ...] }
+            | NODE[S] { * | label[, ...] }
+            | RELATIONSHIP[S] { * | rel-type[, ...] }
+        ]
+    TO role[, ...]
+-----

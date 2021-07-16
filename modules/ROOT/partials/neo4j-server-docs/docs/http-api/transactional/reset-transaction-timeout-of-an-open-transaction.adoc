@@ -1,0 +1,19 @@
+[[transactional-reset-transaction-timeout-of-an-open-transaction]]
+=== Reset transaction timeout of an open transaction
+
+Every orphaned transaction is automatically expired after a period of inactivity.  This may be prevented
+by resetting the transaction timeout.
+
+The timeout may be reset by sending a keep-alive request to the server that executes an empty list of statements.
+This request will reset the transaction timeout and return the new time at which the transaction will
+expire as an RFC1123 formatted timestamp value in the ``transaction'' section of the response.
+
+
+_Example request_
+
+include::includes/reset-transaction-timeout-of-an-open-transaction.request.adoc[]
+
+_Example response_
+
+include::includes/reset-transaction-timeout-of-an-open-transaction.response.adoc[]
+

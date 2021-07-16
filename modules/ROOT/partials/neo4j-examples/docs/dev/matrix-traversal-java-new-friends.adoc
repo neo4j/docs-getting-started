@@ -1,0 +1,11 @@
+[source]
+----
+Thomas Anderson's friends:
+At depth 1 => Morpheus
+At depth 1 => Trinity
+At depth 2 => Cypher
+At depth 3 => Agent Smith
+Number of friends found: 4
+
+----
+

@@ -1,0 +1,4 @@
+[source,cypher]
+----
+CREATE CONSTRAINT node_key ON (e:Employee) ASSERT (e.firstname, e.surname) IS NODE KEY
+----

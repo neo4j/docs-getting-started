@@ -1,0 +1,55 @@
+:description: This chapter gives a high-level overview of the graph query language Cypher.
+[[cypher-intro]]
+= Introduction to Cypher
+
+[abstract]
+--
+This chapter gives a high-level overview of the graph query language Cypher.
+--
+
+
+This chapter will introduce you to the graph query language Cypher.
+It will help you start thinking about graphs and patterns, apply this knowledge to simple problems, and learn how to write Cypher statements
+
+This chapter includes:
+
+* xref::/cypher-intro/patterns.adoc#cypher-intro-patterns[Patterns]
+** xref::/cypher-intro/patterns.adoc#cypher-intro-patterns-node-syntax[Node syntax]
+** xref::/cypher-intro/patterns.adoc#cypher-intro-patterns-relationship-syntax[Relationship syntax]
+** xref::/cypher-intro/patterns.adoc#cypher-intro-patterns-pattern-syntax[Pattern syntax]
+** xref::/cypher-intro/patterns.adoc#cypher-intro-patterns-pattern-variables[Pattern variables]
+** xref::/cypher-intro/patterns.adoc#cypher-intro-patterns-clauses[Clauses]
+* xref::/cypher-intro/patterns-in-practice.adoc#cypher-intro-patterns-in-practice[Patterns in practice]
+** xref::/cypher-intro/patterns-in-practice.adoc#cypher-intro-patterns-in-practice-creating-data[Creating data]
+** xref::/cypher-intro/patterns-in-practice.adoc#cypher-intro-patterns-in-practice-matching-patterns[Matching patterns]
+** xref::/cypher-intro/patterns-in-practice.adoc#cypher-intro-patterns-in-practice-attaching-structures[Attaching structures]
+** xref::/cypher-intro/patterns-in-practice.adoc#cypher-intro-patterns-in-practice-completing-patterns[Completing patterns]
+* xref::/cypher-intro/results.adoc#cypher-intro-results[Getting the correct results]
+** xref::/cypher-intro/results.adoc#cypher-intro-results-filtering[Filtering results]
+** xref::/cypher-intro/results.adoc#cypher-intro-results-returning[Returning results]
+** xref::/cypher-intro/results.adoc#cypher-intro-results-aggregating[Aggregating information]
+** xref::/cypher-intro/results.adoc#cypher-intro-results-ordering-and-pagination[Ordering and pagination]
+** xref::/cypher-intro/results.adoc#cypher-intro-results-collecting-aggregation[Collecting aggregation]
+* xref::/cypher-intro/large-statements.adoc#cypher-intro-large-statements[Composing large statements]
+** xref::/cypher-intro/large-statements.adoc#cypher-intro-large-statements-union[UNION]
+** xref::/cypher-intro/large-statements.adoc#cypher-intro-large-statements-with[WITH]
+* xref::/cypher-intro/schema.adoc#cypher-intro-schema[Defining a schema]
+** xref::/cypher-intro/schema.adoc#cypher-intro-schema[Using indexes]
+** xref::/cypher-intro/schema.adoc#cypher-intro-schema[Using constraints]
+* xref::/cypher-intro/load-csv.adoc#cypher-intro-load-csv[Import data]
+
+
+For a comprehensive guide to Cypher, see the xref:4.3@cypher-manual:ROOT:index.adoc#cypher-manual[Cypher manual].
+
+
+// include::patterns.adoc[leveloffset=+1]
+
+// include::patterns-in-practice.adoc[leveloffset=+1]
+
+// include::results.adoc[leveloffset=+1]
+
+// include::compose-statements.adoc[leveloffset=+1]
+
+// include::schema.adoc[leveloffset=+1]
+
+// include::load-csv.adoc[leveloffset=+1]

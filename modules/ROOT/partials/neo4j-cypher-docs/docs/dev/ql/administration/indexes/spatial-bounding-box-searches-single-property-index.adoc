@@ -1,0 +1,32 @@
+[[administration-indexes-spatial-bounding-box-searches-single-property-index]]
+== Spatial bounding box searches (single-property index) ==
+The ability to do index seeks on bounded ranges works even with the 2D and 3D spatial `Point` types.
+
+.Query
+include::includes/administration-indexes-spatial-bounding-box-searches-single-property-index.query.adoc[]
+
+
+
+.Query Plan
+[source]
+----
+Compiler CYPHER 4.3
+
+Planner COST
+
+Runtime INTERPRETED
+
+Runtime version 4.3
+
++-----------------------+------------------------------------------------------------------------------------------------------+----------------+------+---------+------------------------+
+| Operator              | Details                                                                                              | Estimated Rows | Rows | DB Hits | Page Cache Hits/Misses |
++-----------------------+------------------------------------------------------------------------------------------------------+----------------+------+---------+------------------------+
+| +ProduceResults       | person                                                                                               |              0 |    1 |       0 |                    0/0 |
+| |                     +------------------------------------------------------------------------------------------------------+----------------+------+---------+------------------------+
+| +NodeIndexSeekByRange | person:Person(location) WHERE location > point({x: $autoint_0, y: $autoint_1}) AND location < point( |              0 |    1 |       2 |                    0/0 |
+|                       | {x: $autoint_2, y: $autoint_3})                                                                      |                |      |         |                        |
++-----------------------+------------------------------------------------------------------------------------------------------+----------------+------+---------+------------------------+
+
+Total database accesses: 2, total allocated memory: 64
+
+----

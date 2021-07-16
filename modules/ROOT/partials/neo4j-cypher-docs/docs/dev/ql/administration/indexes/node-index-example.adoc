@@ -1,0 +1,31 @@
+[[administration-indexes-node-index-example]]
+== Node index example ==
+In the example below, the query uses a `Person(firstname)` node index, if it exists. 
+
+.Query
+include::includes/administration-indexes-node-index-example.query.adoc[]
+
+
+
+.Query Plan
+[source]
+----
+Compiler CYPHER 4.3
+
+Planner COST
+
+Runtime INTERPRETED
+
+Runtime version 4.3
+
++-----------------+----------------------------------------------------------+----------------+------+---------+------------------------+
+| Operator        | Details                                                  | Estimated Rows | Rows | DB Hits | Page Cache Hits/Misses |
++-----------------+----------------------------------------------------------+----------------+------+---------+------------------------+
+| +ProduceResults | person                                                   |              1 |    1 |       0 |                    0/0 |
+| |               +----------------------------------------------------------+----------------+------+---------+------------------------+
+| +NodeIndexSeek  | person:Person(firstname) WHERE firstname = $autostring_0 |              1 |    1 |       2 |                    0/0 |
++-----------------+----------------------------------------------------------+----------------+------+---------+------------------------+
+
+Total database accesses: 2, total allocated memory: 64
+
+----

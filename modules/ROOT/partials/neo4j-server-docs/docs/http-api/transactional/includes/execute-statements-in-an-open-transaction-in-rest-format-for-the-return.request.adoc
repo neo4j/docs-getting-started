@@ -1,0 +1,14 @@
+* *+POST+*  +http://localhost:33947/db/neo4j/tx/1+
+* *+Accept:+* +application/json;charset=UTF-8+
+* *+Content-Type:+* +application/json+
+
+[source,javascript]
+----
+{
+  "statements" : [ {
+    "statement" : "CREATE (n) RETURN n",
+    "resultDataContents" : [ "REST" ]
+  } ]
+}
+----
+

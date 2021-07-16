@@ -1,0 +1,4 @@
+[source,cypher]
+----
+MATCH ()-[r:KNOWS]->() WHERE distance(r.lastMetPoint, point({x: 1, y: 2})) < 2 RETURN r.lastMetPoint
+----

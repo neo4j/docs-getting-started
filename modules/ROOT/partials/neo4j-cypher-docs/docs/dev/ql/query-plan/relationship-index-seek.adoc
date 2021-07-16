@@ -1,0 +1,32 @@
+[[query-plan-relationship-index-seek]]
+== Relationship Index Seek ==
+The `UndirectedRelationshipIndexSeek` operator finds relationships and their start and end nodes using an index seek.
+The relationship variable and the index used are shown in the arguments of the operator.
+
+.Query
+include::includes/query-plan-relationship-index-seek.query.adoc[]
+
+
+
+.Query Plan
+[source]
+----
+Compiler CYPHER 4.3
+
+Planner COST
+
+Runtime PIPELINED
+
+Runtime version 4.3
+
++----------------------------------+-----------------------------------------------------------------------+----------------+------+---------+----------------+------------------------+-----------+---------------------+
+| Operator                         | Details                                                               | Estimated Rows | Rows | DB Hits | Memory (Bytes) | Page Cache Hits/Misses | Time (ms) | Other               |
++----------------------------------+-----------------------------------------------------------------------+----------------+------+---------+----------------+------------------------+-----------+---------------------+
+| +ProduceResults                  | candidate                                                             |              4 |    2 |       0 |                |                        |           | Fused in Pipeline 0 |
+| |                                +-----------------------------------------------------------------------+----------------+------+---------+----------------+                        |           +---------------------+
+| +UndirectedRelationshipIndexSeek | (candidate)-[r:WORKS_IN(title)]-(anon_31) WHERE title = $autostring_0 |              4 |    2 |       3 |             72 |                    3/1 |     0.513 | Fused in Pipeline 0 |
++----------------------------------+-----------------------------------------------------------------------+----------------+------+---------+----------------+------------------------+-----------+---------------------+
+
+Total database accesses: 3, total allocated memory: 136
+
+----

@@ -1,0 +1,5 @@
+[source,cypher]
+----
+MATCH ({ name: 'FileRoot' })-[:contains*0..]->()-[:leaf]->(file)<-[:owns]-(user)
+RETURN file, user
+----

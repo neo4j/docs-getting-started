@@ -1,0 +1,4 @@
+[source, java]
+----
+include::{import-neo4j-examples-test-sources}/org/neo4j/examples/UniquenessOfPathsDocTest.java[tag=traverseNodeGlobal]
+----

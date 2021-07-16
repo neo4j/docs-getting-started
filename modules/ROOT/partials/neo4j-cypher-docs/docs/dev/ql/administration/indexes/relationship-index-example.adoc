@@ -1,0 +1,31 @@
+[[administration-indexes-relationship-index-example]]
+== Relationship index example ==
+In this example, the query uses a `KNOWS(since)` relationship index, if it exists. 
+
+.Query
+include::includes/administration-indexes-relationship-index-example.query.adoc[]
+
+
+
+.Query Plan
+[source]
+----
+Compiler CYPHER 4.3
+
+Planner COST
+
+Runtime INTERPRETED
+
+Runtime version 4.3
+
++--------------------------------+-------------------------------------------------------------------------+----------------+------+---------+------------------------+
+| Operator                       | Details                                                                 | Estimated Rows | Rows | DB Hits | Page Cache Hits/Misses |
++--------------------------------+-------------------------------------------------------------------------+----------------+------+---------+------------------------+
+| +ProduceResults                | person, friend                                                          |              1 |    1 |       0 |                    0/0 |
+| |                              +-------------------------------------------------------------------------+----------------+------+---------+------------------------+
+| +DirectedRelationshipIndexSeek | (person)-[relationship:KNOWS(since)]->(friend) WHERE since = $autoint_0 |              1 |    1 |       2 |                    0/0 |
++--------------------------------+-------------------------------------------------------------------------+----------------+------+---------+------------------------+
+
+Total database accesses: 2, total allocated memory: 64
+
+----

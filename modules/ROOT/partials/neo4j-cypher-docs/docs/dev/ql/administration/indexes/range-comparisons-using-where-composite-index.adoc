@@ -1,0 +1,36 @@
+[[administration-indexes-range-comparisons-using-where-composite-index]]
+== Range comparisons using `WHERE` (composite index) ==
+Composite indexes are also automatically used for inequality (range) comparisons of indexed properties in the `WHERE` clause. Equality or list membership check predicates may precede the range predicate. However, predicates after the range predicate may be rewritten as an existence check predicate and a filter as described in <<administration-indexes-single-vs-composite-index, composite index limitations>>.
+
+.Query
+include::includes/administration-indexes-range-comparisons-using-where-composite-index.query.adoc[]
+
+
+
+.Query Plan
+[source]
+----
+Compiler CYPHER 4.3
+
+Planner COST
+
+Runtime INTERPRETED
+
+Runtime version 4.3
+
++----------------------------------+------------------------------------------------------------------------------------------------------+----------------+------+---------+------------------------+
+| Operator                         | Details                                                                                              | Estimated Rows | Rows | DB Hits | Page Cache Hits/Misses |
++----------------------------------+------------------------------------------------------------------------------------------------------+----------------+------+---------+------------------------+
+| +ProduceResults                  | `r.since`                                                                                            |              4 |    2 |       0 |                    0/0 |
+| |                                +------------------------------------------------------------------------------------------------------+----------------+------+---------+------------------------+
+| +Projection                      | cache[r.since] AS `r.since`                                                                          |              4 |    2 |       0 |                    0/0 |
+| |                                +------------------------------------------------------------------------------------------------------+----------------+------+---------+------------------------+
+| +Filter                          | cache[r.lastMet] > $autoint_1                                                                        |              4 |    2 |       0 |                    0/0 |
+| |                                +------------------------------------------------------------------------------------------------------+----------------+------+---------+------------------------+
+| +UndirectedRelationshipIndexSeek | (anon_6)-[r:KNOWS(since, lastMet)]-(anon_19) WHERE since < $autoint_0 AND lastMet IS NOT NULL, cache |              7 |    2 |       2 |                    0/0 |
+|                                  | [r.since], cache[r.lastMet]                                                                          |                |      |         |                        |
++----------------------------------+------------------------------------------------------------------------------------------------------+----------------+------+---------+------------------------+
+
+Total database accesses: 2, total allocated memory: 64
+
+----

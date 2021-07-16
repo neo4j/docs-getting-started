@@ -1,0 +1,14 @@
+[[authentication-incorrect-authentication]]
+=== Incorrect authentication
+
+If an incorrect username or password is provided, the server replies with an error.
+
+
+_Example request_
+
+include::includes/incorrect-authentication.request.adoc[]
+
+_Example response_
+
+include::includes/incorrect-authentication.response.adoc[]
+

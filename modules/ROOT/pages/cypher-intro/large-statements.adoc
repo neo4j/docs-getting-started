@@ -1,0 +1,151 @@
+:description: This section describes how to compose large statements using the `UNION` and `WITH` keywords.
+[[cypher-intro-large-statements]]
+= Composing large statements
+
+[abstract]
+--
+This section describes how to compose large statements using the `UNION` and `WITH` keywords.
+--
+
+This section includes:
+
+* xref::/cypher-intro/large-statements.adoc#cypher-intro-large-statements-example-graph[Example graph]
+* xref::/cypher-intro/large-statements.adoc#cypher-intro-large-statements-union[UNION]
+* xref::/cypher-intro/large-statements.adoc#cypher-intro-large-statements-with[WITH]
+
+
+[[cypher-intro-large-statements-example-graph]]
+== Example graph
+
+We continue using the same example data as before:
+
+[source,cypher, indent=0]
+----
+CREATE (matrix:Movie { title:"The Matrix",released:1997 })
+CREATE (cloudAtlas:Movie { title:"Cloud Atlas",released:2012 })
+CREATE (forrestGump:Movie { title:"Forrest Gump",released:1994 })
+CREATE (keanu:Person { name:"Keanu Reeves", born:1964 })
+CREATE (robert:Person { name:"Robert Zemeckis", born:1951 })
+CREATE (tom:Person { name:"Tom Hanks", born:1956 })
+CREATE (tom)-[:ACTED_IN { roles: ["Forrest"]}]->(forrestGump)
+CREATE (tom)-[:ACTED_IN { roles: ['Zachry']}]->(cloudAtlas)
+CREATE (robert)-[:DIRECTED]->(forrestGump)
+----
+
+This is the resulting graph:
+
+image::cypher-intro-large-statements01.svg[role="middle"]
+
+// ["dot", "cypher-intro-large-statements01.svg", "neoviz"]
+// ----
+//   N0 [
+//     label = "{Movie|title = \'The Matrix\'\lreleased = 1997\l}"
+//   ]
+//   N1 [
+//     label = "{Movie|title = \'Cloud Atlas\'\lreleased = 2012\l}"
+//   ]
+//   N2 [
+//     label = "{Movie|title = \'Forrest Gump\'\lreleased = 1994\l}"
+//   ]
+//   N3 [
+//     label = "{Person|name = \'Keanu Reeves\'\lborn = 1964\l}"
+//   ]
+//   N4 [
+//     label = "{Person|name = \'Robert Zemeckis\'\lborn = 1951\l}"
+//   ]
+//   N4 -> N2 [
+//     color = "#2e3436"
+//     fontcolor = "#2e3436"
+//     label = "DIRECTED\n"
+//   ]
+//   N5 [
+//     label = "{Person|name = \'Tom Hanks\'\lborn = 1956\l}"
+//   ]
+//   N5 -> N1 [
+//     color = "#4e9a06"
+//     fontcolor = "#4e9a06"
+//     label = "ACTED_IN\nroles = \[\'Zachry\'\]\l"
+//   ]
+//   N5 -> N2 [
+//     color = "#4e9a06"
+//     fontcolor = "#4e9a06"
+//     label = "ACTED_IN\nroles = \[\'Forrest\'\]\l"
+//   ]
+// ----
+
+[[cypher-intro-large-statements-union]]
+== UNION
+
+If you want to combine the results of two statements that have the same result structure, you can use `UNION [ALL]`.
+
+For example, the following statement lists both actors and directors:
+
+[source,cypher, indent=0]
+----
+MATCH (actor:Person)-[r:ACTED_IN]->(movie:Movie)
+RETURN actor.name AS name, type(r) AS type, movie.title AS title
+UNION
+MATCH (director:Person)-[r:DIRECTED]->(movie:Movie)
+RETURN director.name AS name, type(r) AS type, movie.title AS title
+----
+
+[queryresult]
+----
++-------------------------------------------------+
+| name              | type       | title          |
++-------------------------------------------------+
+| "Tom Hanks"       | "ACTED_IN" | "Cloud Atlas"  |
+| "Tom Hanks"       | "ACTED_IN" | "Forrest Gump" |
+| "Robert Zemeckis" | "DIRECTED" | "Forrest Gump" |
++-------------------------------------------------+
+
+3 rows
+----
+
+Note that the returned columns must be aliased in the same way in all the sub-clauses.
+
+[TIP]
+====
+The query above is equivalent to this more compact query:
+
+[source,cypher, indent=0]
+----
+MATCH (actor:Person)-[r:ACTED_IN|DIRECTED]->(movie:Movie)
+RETURN actor.name AS name, type(r) AS type, movie.title AS title
+----
+====
+
+
+[[cypher-intro-large-statements-with]]
+== WITH
+
+In Cypher it is possible to chain fragments of statements together, similar to how it is done within a data-flow pipeline.
+Each fragment works on the output from the previous one, and its results can feed into the next one.
+_Only_ columns declared in the `WITH` clause are available in subsequent query parts.
+
+The `WITH` clause is used to combine the individual parts and declare which data flows from one to the other.
+`WITH` is similar to the `RETURN` clause.
+The difference is that the `WITH` clause does not finish the query, but prepares the input for the next part.
+Expressions, aggregations, ordering and pagination can be used in the same way as in the `RETURN` clause.
+The only difference is all columns must be aliased.
+
+In the example below, we collect the movies someone appeared in, and then filter out those which appear in only one movie:
+
+[source,cypher, indent=0]
+----
+MATCH (person:Person)-[:ACTED_IN]->(m:Movie)
+WITH person, count(*) AS appearances, collect(m.title) AS movies
+WHERE appearances > 1
+RETURN person.name, appearances, movies
+----
+
+[queryresult]
+----
++-------------------------------------------------------------+
+| person.name | appearances | movies                          |
++-------------------------------------------------------------+
+| "Tom Hanks" | 2           | ["Cloud Atlas", "Forrest Gump"] |
++-------------------------------------------------------------+
+
+1 row
+----

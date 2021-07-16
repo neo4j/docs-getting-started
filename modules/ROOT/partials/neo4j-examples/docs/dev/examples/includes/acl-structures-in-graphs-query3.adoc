@@ -1,0 +1,7 @@
+[source,cypher]
+----
+MATCH (file)<-[:leaf]-()<-[:contains*0..]-(dir)
+OPTIONAL MATCH (dir)<-[:canRead]-(role)-[:member]->(readUser)
+WHERE file.name =~ 'File.*'
+RETURN file.name, dir.name, role.name, readUser.name
+----

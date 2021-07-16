@@ -1,0 +1,35 @@
+[[query-plan-ordered-aggregation]]
+== Ordered Aggregation ==
+The `OrderedAggregation` operator is an optimization of the `EagerAggregation` operator that takes advantage of the ordering of the incoming rows.
+This operator uses lazy evaluation and has a lower memory pressure in the system than the `EagerAggregation` operator.
+        
+
+.Query
+include::includes/query-plan-ordered-aggregation.query.adoc[]
+
+
+
+.Query Plan
+[source]
+----
+Compiler CYPHER 4.3
+
+Planner COST
+
+Runtime PIPELINED
+
+Runtime version 4.3
+
++-----------------------+--------------------------------------------------------------------+----------------+------+---------+----------------+------------------------+-----------+------------+---------------+
+| Operator              | Details                                                            | Estimated Rows | Rows | DB Hits | Memory (Bytes) | Page Cache Hits/Misses | Time (ms) | Ordered by | Other         |
++-----------------------+--------------------------------------------------------------------+----------------+------+---------+----------------+------------------------+-----------+------------+---------------+
+| +ProduceResults       | `p.name`, count                                                    |              0 |    2 |       0 |                |                    0/0 |     0.072 | p.name ASC | In Pipeline 1 |
+| |                     +--------------------------------------------------------------------+----------------+------+---------+----------------+------------------------+-----------+------------+---------------+
+| +OrderedAggregation   | cache[p.name] AS `p.name`, count(*) AS count                       |              0 |    2 |       0 |            280 |                    0/0 |     0.178 | p.name ASC | In Pipeline 1 |
+| |                     +--------------------------------------------------------------------+----------------+------+---------+----------------+------------------------+-----------+------------+---------------+
+| +NodeIndexSeekByRange | p:Person(name) WHERE name STARTS WITH $autostring_0, cache[p.name] |              0 |    2 |       3 |             72 |                    0/1 |     0.364 | p.name ASC | In Pipeline 0 |
++-----------------------+--------------------------------------------------------------------+----------------+------+---------+----------------+------------------------+-----------+------------+---------------+
+
+Total database accesses: 3, total allocated memory: 344
+
+----

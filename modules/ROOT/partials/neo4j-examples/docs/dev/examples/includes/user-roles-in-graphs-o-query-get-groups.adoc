@@ -1,0 +1,14 @@
+[queryresult]
+----
++------------------+
+| group.name       |
++------------------+
+| "Users"          |
+| "Technicians"    |
+| "ABCTechnicians" |
+| "Managers"       |
+| "Admins"         |
+| "HelpDesk"       |
++------------------+
+6 rows
+----

@@ -1,0 +1,17 @@
+[queryresult]
+----
++----------------------------------------------------+
+| file.name | dir.name   | role.name | readUser.name |
++----------------------------------------------------+
+| "File2"   | "Desktop"  | <null>    | <null>        |
+| "File2"   | "HomeU2"   | <null>    | <null>        |
+| "File2"   | "Home"     | <null>    | <null>        |
+| "File2"   | "FileRoot" | "SUDOers" | "Admin2"      |
+| "File2"   | "FileRoot" | "SUDOers" | "Admin1"      |
+| "File1"   | "HomeU1"   | <null>    | <null>        |
+| "File1"   | "Home"     | <null>    | <null>        |
+| "File1"   | "FileRoot" | "SUDOers" | "Admin2"      |
+| "File1"   | "FileRoot" | "SUDOers" | "Admin1"      |
++----------------------------------------------------+
+9 rows
+----

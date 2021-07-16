@@ -1,0 +1,13 @@
+[queryresult]
+----
++----------------------------------------------------------------------------------------------------------------------------------------------------+
+| entityType     | id | indexProvider      | labelsOrTypes | name             | populationPercent | properties    | state    | type    | uniqueness  |
++----------------------------------------------------------------------------------------------------------------------------------------------------+
+| "NODE"         | 4  | "native-btree-1.0" | ["Person"]    | "index_58a1c03e" | 100.0             | ["location"]  | "ONLINE" | "BTREE" | "NONUNIQUE" |
+| "RELATIONSHIP" | 6  | "native-btree-1.0" | ["KNOWS"]     | "index_c207e3e6" | 100.0             | ["since"]     | "ONLINE" | "BTREE" | "NONUNIQUE" |
+| "NODE"         | 5  | "native-btree-1.0" | ["Person"]    | "index_d7c12ba3" | 100.0             | ["highScore"] | "ONLINE" | "BTREE" | "NONUNIQUE" |
+| "NODE"         | 3  | "native-btree-1.0" | ["Person"]    | "index_deeafdb2" | 100.0             | ["firstname"] | "ONLINE" | "BTREE" | "NONUNIQUE" |
++----------------------------------------------------------------------------------------------------------------------------------------------------+
+4 rows
+----
+

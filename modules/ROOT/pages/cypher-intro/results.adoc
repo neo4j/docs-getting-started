@@ -1,0 +1,349 @@
+:description: This section describes how to manipulate the output of Cypher queries in order to get the results you are looking for.
+[[cypher-intro-results]]
+= Getting the correct results
+
+[abstract]
+--
+This section describes how to manipulate the output of Cypher queries in order to get the results you are looking for.
+--
+
+This section includes:
+
+* xref::/cypher-intro/results.adoc#cypher-intro-results-example-graph[Example graph]
+* xref::/cypher-intro/results.adoc#cypher-intro-results-filtering[Filtering results]
+* xref::/cypher-intro/results.adoc#cypher-intro-results-returning[Returning results]
+* xref::/cypher-intro/results.adoc#cypher-intro-results-aggregating[Aggregating information]
+* xref::/cypher-intro/results.adoc#cypher-intro-results-ordering-and-pagination[Ordering and pagination]
+* xref::/cypher-intro/results.adoc#cypher-intro-results-collecting-aggregation[Collecting aggregation]
+
+
+[[cypher-intro-results-example-graph]]
+== Example graph
+
+First we create some data to use for our examples:
+
+[source,cypher, indent=0]
+----
+CREATE (matrix:Movie { title:"The Matrix",released:1997 })
+CREATE (cloudAtlas:Movie { title:"Cloud Atlas",released:2012 })
+CREATE (forrestGump:Movie { title:"Forrest Gump",released:1994 })
+CREATE (keanu:Person { name:"Keanu Reeves", born:1964 })
+CREATE (robert:Person { name:"Robert Zemeckis", born:1951 })
+CREATE (tom:Person { name:"Tom Hanks", born:1956 })
+CREATE (tom)-[:ACTED_IN { roles: ["Forrest"]}]->(forrestGump)
+CREATE (tom)-[:ACTED_IN { roles: ['Zachry']}]->(cloudAtlas)
+CREATE (robert)-[:DIRECTED]->(forrestGump)
+----
+
+This is the resulting graph:
+
+image::cypher-intro-results01.svg[role="middle"]
+
+// ["dot", "cypher-intro-results01.svg", "neoviz"]
+// ----
+//   N0 [
+//     label = "{Movie|title = \'The Matrix\'\lreleased = 1997\l}"
+//   ]
+//   N1 [
+//     label = "{Movie|title = \'Cloud Atlas\'\lreleased = 2012\l}"
+//   ]
+//   N2 [
+//     label = "{Movie|title = \'Forrest Gump\'\lreleased = 1994\l}"
+//   ]
+//   N3 [
+//     label = "{Person|name = \'Keanu Reeves\'\lborn = 1964\l}"
+//   ]
+//   N4 [
+//     label = "{Person|name = \'Robert Zemeckis\'\lborn = 1951\l}"
+//   ]
+//   N4 -> N2 [
+//     color = "#2e3436"
+//     fontcolor = "#2e3436"
+//     label = "DIRECTED\n"
+//   ]
+//   N5 [
+//     label = "{Person|name = \'Tom Hanks\'\lborn = 1956\l}"
+//   ]
+//   N5 -> N1 [
+//     color = "#4e9a06"
+//     fontcolor = "#4e9a06"
+//     label = "ACTED_IN\nroles = \[\'Zachry\'\]\l"
+//   ]
+//   N5 -> N2 [
+//     color = "#4e9a06"
+//     fontcolor = "#4e9a06"
+//     label = "ACTED_IN\nroles = \[\'Forrest\'\]\l"
+//   ]
+// ----
+
+[[cypher-intro-results-filtering]]
+== Filtering results
+
+So far we have matched patterns in the graph and always returned all results we found.
+Now we will look into options for filtering the results and only return the subset of data that we are interested in.
+Those filter conditions are expressed using the `WHERE` clause.
+This clause allows to use any number of boolean expressions, _predicates_, combined with `AND`, `OR`, `XOR` and `NOT`.
+The simplest predicates are comparisons; especially equality.
+
+[source,cypher, indent=0]
+----
+MATCH (m:Movie)
+WHERE m.title = "The Matrix"
+RETURN m
+----
+
+[queryresult]
+----
++------------------------------------------------+
+| m                                              |
++------------------------------------------------+
+| (:Movie {title: "The Matrix", released: 1997}) |
++------------------------------------------------+
+
+1 row
+----
+
+[TIP]
+====
+The query above, using the `WHERE` clause, is equivalent to this query which includes the condition in the pattern matching:
+
+[source,cypher, indent=0]
+----
+MATCH (m:Movie { title: "The Matrix" })
+RETURN m
+----
+====
+
+Other options are numeric comparisons, matching regular expressions, and checking the existence of values within a list.
+
+The `WHERE` clause in the following example includes a regular expression match, a greater-than comparison, and a test to see if a value exists in a list:
+
+[source,cypher, indent=0]
+----
+MATCH (p:Person)-[r:ACTED_IN]->(m:Movie)
+WHERE p.name =~ "K.+" OR m.released > 2000 OR "Neo" IN r.roles
+RETURN p,r,m
+----
+
+[queryresult]
+----
++-------------------------------------------------------------------------------------------------------------------------------+
+| p                                         | r                               | m                                               |
++-------------------------------------------------------------------------------------------------------------------------------+
+| (:Person {name: "Tom Hanks", born: 1956}) | [:ACTED_IN {roles: ["Zachry"]}] | (:Movie {title: "Cloud Atlas", released: 2012}) |
++-------------------------------------------------------------------------------------------------------------------------------+
+
+1 row
+----
+
+An advanced aspect is that patterns can be used as predicates.
+Where `MATCH` expands the number and shape of patterns matched, a pattern predicate restricts the current result set.
+It only allows the paths to pass that satisfy the specified pattern.
+As we can expect, the use of `NOT` only allows the paths to pass that do _not_ satisfy the specified pattern.
+
+[source,cypher, indent=0]
+----
+MATCH (p:Person)-[:ACTED_IN]->(m)
+WHERE NOT (p)-[:DIRECTED]->()
+RETURN p,m
+----
+
+[queryresult]
+----
++----------------------------------------------------------------------------------------------+
+| p                                         | m                                                |
++----------------------------------------------------------------------------------------------+
+| (:Person {name: "Tom Hanks", born: 1956}) | (:Movie {title: "Cloud Atlas", released: 2012})  |
+| (:Person {name: "Tom Hanks", born: 1956}) | (:Movie {title: "Forrest Gump", released: 1994}) |
++----------------------------------------------------------------------------------------------+
+
+2 rows
+----
+
+Here we find actors, because they sport an `ACTED_IN` relationship but then skip those that ever `DIRECTED` any movie.
+
+There are more advanced ways of filtering, for example _list predicates_, which we will discuss later in this section.
+
+
+[[cypher-intro-results-returning]]
+== Returning results
+
+So far, we have returned nodes, relationships and paths directly via their variables.
+However, the `RETURN` clause can return any number of expressions.
+But what are expressions in Cypher?
+
+The simplest expressions are literal values.
+Examples of literal values are: numbers, strings, arrays (for example: `[1,2,3]`), and maps (for example: `{name:"Tom Hanks", born:1964, movies:["Forrest Gump", ...], count:13}`).
+Individual properties of any node, relationship or map can be accessed using the _dot syntax_, for example: `n.name`.
+Individual elements or slices of arrays can be retrieved with subscripts, for example: `names[0]` and `movies[1..-1]`.
+Each function evaluation, for example: `length(array)`, `toInteger("12")`, `substring("2014-07-01",0,4)` and `coalesce(p.nickname,"n/a")`, is also an expression.
+
+Predicates used in `WHERE` clauses count as _boolean expressions_.
+
+Simple expressions can be composed and concatenated to form more complex expressions.
+
+By default the expression itself will be used as label for the column, in many cases you want to alias that with a more understandable name using `expression AS alias`.
+The alias can be used subsequently to refer to that column.
+
+[source,cypher, indent=0]
+----
+MATCH (p:Person)
+RETURN p, p.name AS name, toUpper(p.name), coalesce(p.nickname,"n/a") AS nickname,
+  { name: p.name, label:head(labels(p))} AS person
+----
+
+[queryresult]
+----
++-------------------------------------------------------------------------------------------------------------------------------------------------+
+| p                                               | name              | toUpper(p.name)   | nickname | person                                     |
++-------------------------------------------------------------------------------------------------------------------------------------------------+
+| (:Person {name: "Keanu Reeves", born: 1964})    | "Keanu Reeves"    | "KEANU REEVES"    | "n/a"    | {name: "Keanu Reeves", label: "Person"}    |
+| (:Person {name: "Robert Zemeckis", born: 1951}) | "Robert Zemeckis" | "ROBERT ZEMECKIS" | "n/a"    | {name: "Robert Zemeckis", label: "Person"} |
+| (:Person {name: "Tom Hanks", born: 1956})       | "Tom Hanks"       | "TOM HANKS"       | "n/a"    | {name: "Tom Hanks", label: "Person"}       |
++-------------------------------------------------------------------------------------------------------------------------------------------------+
+
+3 rows
+----
+
+If we wish to display only unique results we can use the `DISTINCT` keyword after `RETURN`:
+
+[source,cypher, indent=0]
+----
+MATCH (n)
+RETURN DISTINCT labels(n) AS Labels
+----
+
+[queryresult]
+----
++------------+
+| Labels     |
++------------+
+| ["Movie"]  |
+| ["Person"] |
++------------+
+
+2 rows
+----
+
+
+[[cypher-intro-results-aggregating]]
+== Aggregating information
+
+In many cases we wish to aggregate or group the data encountered while traversing patterns in our graph.
+In Cypher, aggregation happens in the `RETURN` clause while computing the final results.
+Many common aggregation functions are supported, e.g. `count`, `sum`, `avg`, `min`, and `max`, but there are several more.
+
+Counting the number of people in your database could be achieved by this:
+
+[source,cypher, indent=0]
+----
+MATCH (:Person)
+RETURN count(*) AS people
+----
+
+[queryresult]
+----
++--------+
+| people |
++--------+
+| 3      |
++--------+
+1 row
+----
+
+Note that `NULL` values are skipped during aggregation.
+For aggregating only unique values use `DISTINCT`, for example: `count(DISTINCT role)`.
+
+Aggregation works implicitly in Cypher.
+We specify which result columns we wish to aggregate.
+Cypher will use all non-aggregated columns as grouping keys.
+
+Aggregation affects which data is still visible in ordering or later query parts.
+
+The following statement finds out how often an actor and director have worked together:
+
+[source,cypher, indent=0]
+----
+MATCH (actor:Person)-[:ACTED_IN]->(movie:Movie)<-[:DIRECTED]-(director:Person)
+RETURN actor, director, count(*) AS collaborations
+----
+
+[queryresult]
+----
++--------------------------------------------------------------------------------------------------------------+
+| actor                                     | director                                        | collaborations |
++--------------------------------------------------------------------------------------------------------------+
+| (:Person {name: "Tom Hanks", born: 1956}) | (:Person {name: "Robert Zemeckis", born: 1951}) | 1              |
++--------------------------------------------------------------------------------------------------------------+
+
+1 row
+----
+
+
+[[cypher-intro-results-ordering-and-pagination]]
+== Ordering and pagination
+
+It is common to sort and paginate after aggregating using `count(x)`.
+
+Ordering is done using the `ORDER BY expression [ASC|DESC]` clause.
+The expression can be any expression, as long as it is computable from the returned information.
+
+For instance, if we return `person.name` we can still `ORDER BY person.age` since both are accessible from the `person` reference.
+We cannot order by things that are not returned.
+This is especially important with aggregation and `DISTINCT` return values, since both remove the visibility of data that is aggregated.
+
+Pagination is done using the `SKIP +{offset}+`and `LIMIT +{count}+` clauses.
+
+A common pattern is to aggregate for a count (_score_ or _frequency_), order by it, and only return the top-n entries.
+
+For instance to find the most prolific actors we could do:
+
+[source,cypher, indent=0]
+----
+MATCH (a:Person)-[:ACTED_IN]->(m:Movie)
+RETURN a, count(*) AS appearances
+ORDER BY appearances DESC LIMIT 10;
+----
+
+[queryresult]
+----
++---------------------------------------------------------+
+| a                                         | appearances |
++---------------------------------------------------------+
+| (:Person {name: "Tom Hanks", born: 1956}) | 2           |
++---------------------------------------------------------+
+
+1 row
+----
+
+
+[[cypher-intro-results-collecting-aggregation]]
+== Collecting aggregation
+
+A very helpful aggregation function is `collect()`, which collects all the aggregated values into a list.
+This is very useful in many situations, since no information of details is lost while aggregating.
+
+`collect()` is well-suited for retrieving typical parent-child structures, where one core entity (_parent_, _root_ or _head_) is returned per row with all its dependent information in associated lists created with `collect()`.
+This means that there is no need to repeat the parent information for each child row, or running `n+1` statements to retrieve the parent and its children individually.
+
+The following statement could be used to retrieve the cast of each movie in our database:
+
+[source,cypher, indent=0]
+----
+MATCH (m:Movie)<-[:ACTED_IN]-(a:Person)
+RETURN m.title AS movie, collect(a.name) AS cast, count(*) AS actors
+----
+
+[queryresult]
+----
++-----------------------------------------+
+| movie          | cast          | actors |
++-----------------------------------------+
+| "Forrest Gump" | ["Tom Hanks"] | 1      |
+| "Cloud Atlas"  | ["Tom Hanks"] | 1      |
++-----------------------------------------+
+
+2 rows
+----
+
+The lists created by `collect()` can either be used from the client consuming the Cypher results, or directly within a statement with any of the list functions or predicates.

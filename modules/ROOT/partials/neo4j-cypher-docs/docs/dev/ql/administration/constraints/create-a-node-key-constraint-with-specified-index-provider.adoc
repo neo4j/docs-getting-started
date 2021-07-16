@@ -1,0 +1,17 @@
+[[administration-constraints-create-a-node-key-constraint-with-specified-index-provider]]
+== Create a node key constraint with specified index provider ==
+To create a node key constraint with a specific index provider for the backing index, the `OPTIONS` clause is used.
+Valid values for the index provider is `native-btree-1.0` and `lucene+native-3.0`, default if nothing is specified is `native-btree-1.0`.
+
+.Query
+include::includes/administration-constraints-create-a-node-key-constraint-with-specified-index-provider.query.adoc[]
+
+
+Can be combined with specifying index configuration.
+
+.Result
+include::includes/administration-constraints-create-a-node-key-constraint-with-specified-index-provider.result.adoc[]
+
+.Try this query live
+include::includes/administration-constraints-create-a-node-key-constraint-with-specified-index-provider.console.adoc[]
+

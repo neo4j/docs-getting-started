@@ -1,0 +1,23 @@
+[[administration-security-limitations]]
+= Known limitations of security
+
+[abstract]
+--
+This section explains known limitations and implications of Neo4js role-based access control security.
+--
+
+[[administration-security-limitations-indexes]]
+== Security and indexes
+
+include::security-and-indexes-intro.adoc[]
+
+[[administration-security-limitations-labels]]
+== Security and labels
+
+include::security-and-labels.adoc[]
+
+[[administration-security-limitations-db-operations]]
+== Security and count store operations
+
+include::security-and-db-operations.adoc[]
+

@@ -1,0 +1,311 @@
+:description: This chapter presents an introduction to graph database concepts.
+[[graphdb-concepts]]
+= Graph database concepts
+
+[abstract]
+--
+This chapter presents an introduction to graph database concepts.
+--
+
+This chapter includes the following sections:
+
+* xref::/graphdb-concepts.adoc#graphdb-example-graph[Example graph]
+* xref::/graphdb-concepts.adoc#graphdb-nodes[Nodes]
+* xref::/graphdb-concepts.adoc#graphdb-labels[Labels]
+* xref::/graphdb-concepts.adoc#graphdb-relationships[Relationships]
+* xref::/graphdb-concepts.adoc#graphdb-relationship-types[Relationship types]
+* xref::/graphdb-concepts.adoc#graphdb-properties[Properties]
+* xref::/graphdb-concepts.adoc#graphdb-traversal[Traversals and paths]
+* xref::/graphdb-concepts.adoc#graphdb-schema[Schema]
+* xref::/graphdb-concepts.adoc#graphdb-naming-rules-and-recommendations[Naming rules and recommendations]
+
+
+[[graphdb-example-graph]]
+== Example graph
+
+We will use the example graph below to introduce the basic concepts of the property graph:
+
+image::graphdb-simple-labels.svg[role="middle"]
+
+// ["dot", "graphdb-simple-labels.svg", "neoviz"]
+// ----
+// N2 [
+// label = "{Person|name = \'Tom Hanks\'\lborn = 1956\l}"
+// ]
+// N2 -> N3 [
+// label = "ACTED_IN\nroles = \[\'Forrest\'\]\l"
+// ]
+// N3 [
+// label = "{Movie|title = \'Forrest Gump\'\lreleased = 1994\l}"
+// ]
+// N4 -> N3 [
+// label = "DIRECTED\n"
+// ]
+// N4 [
+// label = "{Person|name = \'Robert Zemeckis\'\lborn = 1951\l}"
+// ]
+// ----
+
+[[graphdb-nodes]]
+== Nodes
+
+Nodes are often used to represent _entities_.
+The simplest possible graph is a single node.
+
+Consider the graph below, consisting of a single node.
+
+image::graphdb-simple-nodes.svg[role="middle"]
+
+// ["dot", "graphdb-simple-nodes.svg", "neoviz"]
+// ----
+// N2 [
+// label = "{Person|name = \'Tom Hanks\'\lborn = 1956\l}"
+// ]
+// ----
+
+[[graphdb-labels]]
+== Labels
+
+Labels are used to shape the domain by grouping nodes into sets where all nodes that have a certain label belongs to the same set.
+
+//Labels are used when defining constraints and adding indexes for properties (see <<graphdb-schema>>).
+
+For example, all nodes representing users could be labeled with the label `:User`.
+With that in place, you can ask Neo4j to perform operations only on your user nodes, such as finding all users with a given name.
+
+Since labels can be added and removed during runtime, they can also be used to mark temporary states for nodes.
+A `:Suspended` label could be used to denote bank accounts that are suspended, and a `:Seasonal` label can denote vegetables that are currently in season.
+
+A node can have zero to many labels.
+
+In the example above, the nodes have the labels `Person` and `Movie`, which is one possible way of describing the data.
+But assume that we want to express different dimensions of the data.
+One way of doing that is to add more labels.
+
+Below is an example showing the use of multiple labels:
+
+image::graphdb-simple-labels-multi.svg[role="middle"]
+
+// ["dot", "graphdb-simple-labels-multi.svg", "neoviz"]
+// ----
+// N2 [
+// label = "{Person\nActor|name = \'Tom Hanks\'\lborn = 1956\l}"
+// ]
+// N3 [
+// label = "{Movie|title = \'Forrest Gump\'\lreleased = 1994\l}"
+// ]
+// N4 [
+// label = "{Person\nDirector|name = \'Robert Zemeckis\'\lborn = 1951\l}"
+// ]
+
+// ----
+
+[[graphdb-relationships]]
+== Relationships
+
+A relationship connects two nodes.
+Relationships organize nodes into structures, allowing a graph to resemble a list, a tree, a map, or a compound entity -- any of which may be combined into yet more complex, richly inter-connected structures.
+
+Our example graph will make a lot more sense once we add relationships to it:
+
+image::graphdb-simple-rels.svg[role="middle"]
+
+// ["dot", "graphdb-simple-rels.svg", "neoviz"]
+// ----
+// N2 [
+// label = "{name = \'Tom Hanks\'\lborn = 1956\l}"
+// ]
+// N2 -> N3 [
+// label = "ACTED_IN\nroles = \[\'Forrest\'\]\l"
+// ]
+// N3 [
+// label = "{title = \'Forrest Gump\'\lreleased = 1994\l}"
+// ]
+// N4 -> N3 [
+// label = "DIRECTED\n"
+// ]
+// N4 [
+// label = "{name = \'Robert Zemeckis\'\lborn = 1951\l}"
+// ]
+// ----
+
+[[graphdb-relationship-types]]
+== Relationship types
+
+A relationship must have exactly one relationship type.
+
+Our example uses `ACTED_IN` and `DIRECTED` as relationship types.
+The `roles` property on the `ACTED_IN` relationship has an array value with a single item in it.
+
+Below is an `ACTED_IN` relationship, with the `Tom Hanks` node as the _source node_ and `Forrest Gump` as the _target node_.
+
+image::graphdb-nodes-and-rel.svg[role="middle"]
+
+// ["dot", "graphdb-nodes-and-rel.svg", "neoviz"]
+// ----
+// graph [rankdir="LR"]
+// N2 [
+// label = "{name = \'Tom Hanks\'\lborn = 1956\l}"
+// ]
+// N2 -> N3 [
+// label = "ACTED_IN\nroles = \[\'Forrest\'\]\l"
+// ]
+// N3 [
+// label = "{title = \'Forrest Gump\'\lreleased = 1994\l}"
+// ]
+// ----
+
+We observe that the `Tom Hanks` node has an _outgoing_ relationship, while the `Forrest Gump` node has an _incoming_ relationship.
+
+Relationships always have a direction.
+However, you only have to pay attention to the direction where it is useful.
+This means that there is no need to add duplicate relationships in the opposite direction unless it is needed in order to properly describe your use case.
+
+Note that a node can have relationships to itself.
+If we want to express that `Tom Hanks` `KNOWS` himself, that would be expressed as:
+
+image::graphdb-nodes-and-rel-self.svg[role="middle"]
+
+// ["dot", "graphdb-nodes-and-rel-self.svg", "neoviz"]
+// ----
+// N2 [
+// label = "{name = \'Tom Hanks\'\lborn = 1956\l}"
+// ]
+// N2 -> N2 [
+// label = "KNOWS"
+// ]
+// ----
+
+[[graphdb-properties]]
+== Properties
+
+Properties are name-value pairs that are used to add qualities to nodes and relationships.
+
+In our example graphs, we have used the properties `name` and `born` on `Person` nodes, `title` and `released` on `Movie` nodes, and the property `roles` on the `:ACTED_IN` relationship.
+
+The value part of the property can hold different data types such as `number`, `string` and `boolean`.
+For a thorough description of the available data types, refer to the xref:4.3@cypher-manual:ROOT:syntax/values/index.adoc#cypher-values[Cypher manual].
+
+[[graphdb-traversal]]
+== Traversals and paths
+
+A traversal is how you query a graph in order to find answers to questions, for example: "What music do my friends like that I don't yet own?", or "What web services are affected if this power supply goes down?".
+
+Traversing a graph means visiting nodes by following relationships according to some rules.
+In most cases only a subset of the graph is visited.
+
+If we want to find out which movies Tom Hanks acted in according to our tiny example database, the traversal would start from the `Tom Hanks` node, follow any `:ACTED_IN` relationships connected to the node, and end up with `Forrest Gump` as the result (see the dashed lines):
+
+image::graphdb-traversal.svg[role="middle"]
+
+// ["dot", "graphdb-traversal.svg", "neoviz"]
+// ----
+// N2 [
+// label = "{Person|name = \'Tom Hanks\'\lborn = 1956\l}"
+// style = "dashed"
+// ]
+// N2 -> N3 [
+// label = "ACTED_IN\nroles = \[\'Forrest\'\]\l"
+// style = "dashed"
+// ]
+// N3 [
+// label = "{Movie|title = \'Forrest Gump\'\lreleased = 1994\l}"
+// style = "dashed"
+// ]
+// N4 -> N3 [
+// label = "DIRECTED\n"
+// ]
+// N4 [
+// label = "{Person|name = \'Robert Zemeckis\'\lborn = 1951\l}"
+// ]
+// ----
+
+The traversal result could be returned as a path with the length one:
+
+image::graphdb-path.svg[role="middle"]
+
+// ["dot", "graphdb-path.svg", "neoviz"]
+// ----
+// graph [rankdir="LR"]
+// N2 [
+// label = "{Person|name = \'Tom Hanks\'\lborn = 1956\l}"
+// ]
+// N2 -> N3 [
+// label = "ACTED_IN\nroles = \[\'Forrest\'\]\l"
+// ]
+// N3 [
+// label = "{Movie|title = \'Forrest Gump\'\lreleased = 1994\l}"
+// ]
+// ----
+
+The path above has length one.
+
+The shortest possible path has length zero.
+It contains a single node and no relationships.
+For example:
+
+image::graphdb-path-zero.svg[role="middle"]
+
+// ["dot", "graphdb-path-zero.svg", "neoviz"]
+// ----
+// N2 [
+// label = "{Person|name = \'Tom Hanks\'\lborn = 1956\l}"
+// ]
+// ----
+
+This path has length one:
+
+image::graphdb-path-example-loop.svg[role="middle"]
+
+// ["dot", "graphdb-path-example-loop.svg", "neoviz"]
+// ----
+// N2 [
+// label = "{Person|name = \'Tom Hanks\'\lborn = 1956\l}"
+// ]
+// N2 -> N2 [
+// label = "KNOWS"
+// ]
+// ----
+
+[[graphdb-schema]]
+== Schema
+
+A _schema_ in Neo4j refers to indexes and constraints.
+
+Neo4j is often described as _schema optional_, meaning that it is not necessary to create indexes and constraints.
+You can create data -- nodes, relationships and properties -- without defining a schema up front.
+Indexes and constraints can be introduced when desired, in order to gain performance or modeling benefits.
+
+
+[[graphdb-indexes]]
+=== Indexes
+
+Indexes are used to increase performance.
+To see examples of how to work with indexes, see xref::/cypher-intro/schema.adoc#cypher-intro-indexes[Using indexes].
+For detailed descriptions of how to work with indexes in Cypher, see xref:4.3@cypher-manual:ROOT:administration/indexes-for-full-text-search/index.adoc#administration-indexes-fulltext-search[Cypher Manual -> Indexes].
+
+[[graphdb-constraints]]
+=== Constraints
+
+Constraints are used to make sure that the data adheres to the rules of the domain.
+To see examples of how to work with indexes, see xref::/cypher-intro/schema.adoc#cypher-intro-constraints[Using constraints].
+For detailed descriptions of how to work with constraints in Cypher, see the xref:4.3@cypher-manual:ROOT:constraints/index.adoc#administration-constraints[Cypher manual -> Constraints].
+
+
+[[graphdb-naming-rules-and-recommendations]]
+== Naming rules and recommendations
+
+Node labels, relationship types and properties are case sensitive, meaning for example that the property `name` means something different than the property `Name`.
+It is recommended to follow the naming conventions described in the following table:
+
+.Naming conventions
+[options="header"]
+|===
+| Graph entity      | Recommended style                                       | Example
+| Node label        | Camel case, beginning with an upper-case character      | `:VehicleOwner` rather than `:vehice_owner`
+| Relationship type | Upper case, using underscore to separate words          | `:OWNS_VEHICLE` rather than `:ownsVehicle`
+| Property          | Lower camel case, beginning with a lower-case character | `firstName` rather than `first_name`
+|===
+
+
+For the precise naming rules, refer to the xref:4.3@cypher-manual:ROOT:syntax/naming/index.adoc#cypher-naming[Cypher manual -> Naming rules and recommendations].

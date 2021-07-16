@@ -1,0 +1,51 @@
+["dot", "Descendants-example-graph-Uniqueness-of-Paths-in-traversals.svg", "neoviz", ""]
+----
+  N0 [
+    label = "{Node\[0\]|name = \'Pet3\'\l}"
+  ]
+  N1 [
+    label = "{Node\[1\]|name = \'Principal1\'\l}"
+  ]
+  N1 -> N5 [
+    color = "#2e3436"
+    fontcolor = "#2e3436"
+    label = "owns\n"
+  ]
+  N1 -> N0 [
+    color = "#2e3436"
+    fontcolor = "#2e3436"
+    label = "owns\n"
+  ]
+  N2 [
+    label = "{Node\[2\]|name = \'Pet0\'\l}"
+  ]
+  N2 -> N0 [
+    color = "#4e9a06"
+    fontcolor = "#4e9a06"
+    label = "descendant\n"
+  ]
+  N2 -> N4 [
+    color = "#4e9a06"
+    fontcolor = "#4e9a06"
+    label = "descendant\n"
+  ]
+  N2 -> N5 [
+    color = "#4e9a06"
+    fontcolor = "#4e9a06"
+    label = "descendant\n"
+  ]
+  N3 [
+    label = "{Node\[3\]|name = \'Principal2\'\l}"
+  ]
+  N3 -> N4 [
+    color = "#2e3436"
+    fontcolor = "#2e3436"
+    label = "owns\n"
+  ]
+  N4 [
+    label = "{Node\[4\]|name = \'Pet2\'\l}"
+  ]
+  N5 [
+    label = "{Node\[5\]|name = \'Pet1\'\l}"
+  ]
+----

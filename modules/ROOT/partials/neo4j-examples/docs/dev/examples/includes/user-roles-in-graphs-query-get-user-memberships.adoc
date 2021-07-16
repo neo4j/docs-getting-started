@@ -1,0 +1,5 @@
+[source,cypher]
+----
+MATCH ({ name: 'Jale' })-[:MEMBER_OF]->()-[:PART_OF*0..]->(group)
+RETURN group.name
+----
