@@ -18,9 +18,9 @@ Download Neo4j Desktop from https://neo4j.com/download/ and follow the installat
 All the official documentation is available at https://neo4j.com/docs/.
 That is where you find the full manuals such as:
 
-* xref:4.3@cypher-manual:ROOT:index.adoc#cypher-manual[The Cypher manual] -- This is the comprehensive manual for Cypher.
-// * link:{docs-base-uri}[Neo4j Driver manuals] -- These manuals describe the officially supported drivers for Neo4j.
-* xref:4.3@operations-manual:ROOT:index.adoc#operations-manual[The Operations manual] -- This manual describes how to deploy and maintain Neo4j.
+* xref:4.1@cypher-manual:ROOT:index.adoc#cypher-manual[The Cypher manual] -- This is the comprehensive manual for Cypher.
+* xref:4.1@driver-manual:ROOT:index.adoc#driver-manual[The Driver manual] -- This manual describes the officially supported drivers for Neo4j.
+* xref:4.1@operations-manual:ROOT:index.adoc#operations-manual[The Operations manual] -- This manual describes how to deploy and maintain Neo4j.
 
 The https://neo4j.com/docs/cypher-refcard/current[Cypher Refcard] is a valuable asset when learning and writing Cypher.
 

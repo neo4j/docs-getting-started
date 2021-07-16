@@ -184,7 +184,7 @@ Properties are name-value pairs that are used to add qualities to nodes and rela
 In our example graphs, we have used the properties `name` and `born` on `Person` nodes, `title` and `released` on `Movie` nodes, and the property `roles` on the `:ACTED_IN` relationship.
 
 The value part of the property can hold different data types such as `number`, `string` and `boolean`.
-For a thorough description of the available data types, refer to the xref:4.3@cypher-manual:ROOT:syntax/values/index.adoc#cypher-values[Cypher manual].
+For a thorough description of the available data types, refer to the xref:4.1@cypher-manual:ROOT:syntax/values/index.adoc#cypher-values[Cypher manual].
 
 [[graphdb-traversal]]
 == Traversals and paths
@@ -282,14 +282,14 @@ Indexes and constraints can be introduced when desired, in order to gain perform
 
 Indexes are used to increase performance.
 To see examples of how to work with indexes, see xref::/cypher-intro/schema.adoc#cypher-intro-indexes[Using indexes].
-For detailed descriptions of how to work with indexes in Cypher, see xref:4.3@cypher-manual:ROOT:administration/indexes-for-full-text-search/index.adoc#administration-indexes-fulltext-search[Cypher Manual -> Indexes].
+For detailed descriptions of how to work with indexes in Cypher, see xref:4.1@cypher-manual:ROOT:administration/indexes-for-full-text-search/index.adoc#administration-indexes-fulltext-search[Cypher Manual -> Indexes].
 
 [[graphdb-constraints]]
 === Constraints
 
 Constraints are used to make sure that the data adheres to the rules of the domain.
 To see examples of how to work with indexes, see xref::/cypher-intro/schema.adoc#cypher-intro-constraints[Using constraints].
-For detailed descriptions of how to work with constraints in Cypher, see the xref:4.3@cypher-manual:ROOT:constraints/index.adoc#administration-constraints[Cypher manual -> Constraints].
+For detailed descriptions of how to work with constraints in Cypher, see the xref:4.1@cypher-manual:ROOT:administration/constraints/index.adoc#administration-constraints[Cypher manual -> Constraints].
 
 
 [[graphdb-naming-rules-and-recommendations]]
@@ -308,4 +308,4 @@ It is recommended to follow the naming conventions described in the following ta
 |===
 
 
-For the precise naming rules, refer to the xref:4.3@cypher-manual:ROOT:syntax/naming/index.adoc#cypher-naming[Cypher manual -> Naming rules and recommendations].
+For the precise naming rules, refer to the xref:4.1@cypher-manual:ROOT:syntax/naming/index.adoc#cypher-naming[Cypher manual -> Naming rules and recommendations].
