@@ -7,7 +7,7 @@ content:
   sources:
   - url: ./
     branches: ['HEAD']
-    edit_url: https://github.com/neo-technology/neo4j-manual-modeling-antora/tree/{refname}/gettingStarted/asciidoc/{path}
+    edit_url: https://github.com/docs-getting-started/tree/{refname}/{path}
     exclude:
     - '!**/_includes/*'
     - '!**/readme.adoc'
