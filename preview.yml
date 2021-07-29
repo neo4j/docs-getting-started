@@ -6,7 +6,7 @@ site:
 content:
   sources:
   - url: ./
-    branches: ['4.1']
+    branches: ['HEAD']
     edit_url: https://github.com/neo4j/docs-getting-started/tree/{refname}/{path}
     exclude:
     - '!**/_includes/*'
