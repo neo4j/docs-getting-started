@@ -292,7 +292,7 @@ For instance, if we return `person.name` we can still `ORDER BY person.age` sinc
 We cannot order by things that are not returned.
 This is especially important with aggregation and `DISTINCT` return values, since both remove the visibility of data that is aggregated.
 
-Pagination is done using the `SKIP +{offset}+`and `LIMIT +{count}+` clauses.
+Pagination is done using the `SKIP +{offset}+` and `LIMIT +{count}+` clauses.
 
 A common pattern is to aggregate for a count (_score_ or _frequency_), order by it, and only return the top-n entries.
 
