@@ -6,8 +6,8 @@ site:
 content:
   sources:
   - url: ./
-    branches: ['4.2']
-    edit_url: https://github.com/neo3j/docs-getting-started/tree/{refname}/{path}
+    branches: ['HEAD']
+    edit_url: https://github.com/neo4j/docs-getting-started/tree/{refname}/{path}
     exclude:
     - '!**/_includes/*'
     - '!**/readme.adoc'
