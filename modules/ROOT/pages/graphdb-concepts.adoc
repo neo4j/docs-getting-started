@@ -289,7 +289,7 @@ For detailed descriptions of how to work with indexes in Cypher, see xref:4.2@cy
 
 Constraints are used to make sure that the data adheres to the rules of the domain.
 To see examples of how to work with indexes, see xref::/cypher-intro/schema.adoc#cypher-intro-constraints[Using constraints].
-For detailed descriptions of how to work with constraints in Cypher, see the xref:4.2@cypher-manual:ROOT:administration/constraints/index.adoc#administration-constraints[Cypher manual -> Constraints].
+For detailed descriptions of how to work with constraints in Cypher, see the xref:4.2@cypher-manual:ROOT:constraints/index.adoc[Cypher manual -> Constraints].
 
 
 [[graphdb-naming-rules-and-recommendations]]
