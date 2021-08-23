@@ -282,7 +282,7 @@ Indexes and constraints can be introduced when desired, in order to gain perform
 
 Indexes are used to increase performance.
 To see examples of how to work with indexes, see xref::/cypher-intro/schema.adoc#cypher-intro-indexes[Using indexes].
-For detailed descriptions of how to work with indexes in Cypher, see xref:4.3@cypher-manual:ROOT:administration/indexes-for-full-text-search/index.adoc#administration-indexes-fulltext-search[Cypher Manual -> Indexes].
+For detailed descriptions of how to work with indexes in Cypher, see xref:4.3@cypher-manual:ROOT:indexes-for-full-text-search/index.adoc#administration-indexes-fulltext-search[Cypher Manual -> Indexes].
 
 [[graphdb-constraints]]
 === Constraints
