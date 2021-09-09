@@ -10,8 +10,8 @@ ifndef::backend-pdf[]
 License: link:{common-license-page-uri}[Creative Commons 4.0]
 endif::[]
 
+//License page should be added at the end when generating pdf. (neo4j-manual-modeling-antora)
 ifdef::backend-pdf[]
-//License page is added with neo4j-manual-modeling-antora
 License: Creative Commons 4.0
 endif::[]
 
