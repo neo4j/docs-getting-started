@@ -43,4 +43,4 @@ The Neo4j Getting Started Guide covers the following areas:
 
 _Who should read this?_
 
-This guide is written for anybody who is exploring Neo4j and Cypher.
+This guide is written for anyone who is exploring Neo4j and Cypher.
