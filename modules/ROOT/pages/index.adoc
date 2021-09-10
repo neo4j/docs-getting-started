@@ -1,19 +1,46 @@
-:description: This is the Getting Started Guide for Neo4j version {neo4j-version}, authored by the Neo4j Team.
+:description: Getting Started Guide for Neo4j version {neo4j-version}.
+
 [[getting-started]]
-= The Neo4j Getting Started Guide v{neo4j-version}
+= Getting Started Guide
 
-[abstract]
---
-This is the Getting Started Guide for Neo4j version {neo4j-version}, authored by the Neo4j Team.
---
+[discrete]
+== Neo4j v{neo4j-version}
+
+ifndef::backend-pdf[]
+License: link:{common-license-page-uri}[Creative Commons 4.0]
+endif::[]
+
+//License page should be added at the end when generating pdf. (neo4j-manual-modeling-antora)
+ifdef::backend-pdf[]
+License: Creative Commons 4.0
+endif::[]
+
+[.lead]
+*Neo4j*
+
+Neo4j is the world’s leading graph database.
+The architecture is designed for optimal management, storage, and traversal of nodes and relationships.
+The graph database takes a property graph approach, which is beneficial for both traversal performance and operations runtime.
 
 
-This guide covers the following areas:
+[.lead]
+*Cypher*
 
-* xref::/get-started-with-neo4j.adoc#get-started-with-neo4j[Get started with Neo4j] -- How to get started with Neo4j
+Cypher is Neo4j’s graph query language that allows users to store and retrieve data from the graph database.
+It is a declarative, SQL-inspired language for describing visual patterns in graphs using ASCII-art syntax.
+The syntax provides a visual and logical way to match patterns of nodes and relationships in the graph.
+Cypher has been designed to be easy to learn, understand, and use for everyone, but also incorporate the power and functionality of other standard data access languages.
+
+
+[.lead]
+*Contents of this guide*
+
+The Neo4j Getting Started Guide covers the following areas:
+
+* xref::/get-started-with-neo4j.adoc#get-started-with-neo4j[Get started with Neo4j] -- How to get started with Neo4j.
 * xref::/graphdb-concepts.adoc#graphdb-concepts[Graph database concepts] -- Introduction to graph database concepts.
 * xref::/cypher-intro/index.adoc#cypher-intro[Introduction to Cypher] -- Introduction to the graph query language Cypher.
 
 _Who should read this?_
 
-This guide is written for anybody who is exploring Neo4j and Cypher.
+This guide is written for anyone who is exploring Neo4j and Cypher.
