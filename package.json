@@ -30,6 +30,7 @@
     "@neo4j-antora/antora-listing-roles": "^0.1.0",
     "@neo4j-documentation/macros": "^1.0.0",
     "@neo4j-documentation/remote-include": "^1.0.0",
+    "edge": "^7.10.1",
     "express": "^4.17.1",
     "js-yaml": "^4.1.0",
     "npm-watch": "^0.10.0",
