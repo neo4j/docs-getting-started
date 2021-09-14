@@ -13,7 +13,7 @@ Download Neo4j Desktop from link:https://neo4j.com/download/[] and follow the in
 
 [TIP]
 ====
-For other options how to get started with Neo4j and Cypher see link:https://neo4j.com/try-neo4j/[].
+For more options on how to get started with Neo4j and Cypher see link:https://neo4j.com/try-neo4j/[].
 ====
 
 
