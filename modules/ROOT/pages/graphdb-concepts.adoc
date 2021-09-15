@@ -261,7 +261,7 @@ For detailed descriptions of how to work with indexes in Cypher, see xref:4.4-pr
 == Constraints
 
 Constraints are used to make sure that the data adheres to the rules of the domain.
-To see examples of how to work with indexes, see xref::/cypher-intro/schema.adoc#cypher-intro-constraints[Using constraints].
+To see examples of how to work with constraints, see xref::/cypher-intro/schema.adoc#cypher-intro-constraints[Using constraints].
 For detailed descriptions of how to work with constraints in Cypher, see the xref:4.4-preview@cypher-manual:ROOT:constraints/index.adoc[Cypher manual -> Constraints].
 
 
