@@ -103,7 +103,7 @@ CREATE (:Person:Actor {name: 'Tom Hanks', born: 1956})
 [[graphdb-labels]]
 == Node labels
 
-Labels are used to shape the domain by grouping (classify) nodes into sets where all nodes with a certain label belong to the same set.
+Labels shape the domain by grouping (classifying) nodes into sets where all nodes with a certain label belong to the same set.
 
 For example, all nodes representing users could be labeled with the label `User`.
 With that in place, you can ask Neo4j to perform operations only on your user nodes, such as finding all users with a given name.
@@ -200,7 +200,7 @@ Properties are key-value pairs that are used for storing data on nodes and relat
 The value part of a property:
 
 * Can hold different data types, such as `number`, `string`, or `boolean`.
-* Can hold a homogeneous list (array) containing for example strings, numbers, or boolean values.
+* Can hold a homogeneous list (array) containing, for example, strings, numbers, or boolean values.
 
 .Number
 =====
