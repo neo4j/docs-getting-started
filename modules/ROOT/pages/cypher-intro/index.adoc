@@ -1,17 +1,15 @@
-:description: This chapter gives a high-level overview of the graph query language Cypher.
+:description: A high-level overview of the graph query language Cypher.
+
 [[cypher-intro]]
 = Introduction to Cypher
-
-[abstract]
---
-This chapter gives a high-level overview of the graph query language Cypher.
---
-
-
-This chapter will introduce you to the graph query language Cypher.
-It will help you start thinking about graphs and patterns, apply this knowledge to simple problems, and learn how to write Cypher statements
-
-This chapter includes:
+ 
+This section will introduce you to the graph query language Cypher.
+It will help you start thinking about graphs and patterns, apply this knowledge to simple problems, and learn how to write Cypher statements.
+ 
+[TIP]
+====
+For the full reference of Cypher, see the xref:4.2@cypher-manual:ROOT:index.adoc#cypher-manual[Cypher manual].
+====
 
 * xref::/cypher-intro/patterns.adoc#cypher-intro-patterns[Patterns]
 ** xref::/cypher-intro/patterns.adoc#cypher-intro-patterns-node-syntax[Node syntax]
@@ -37,19 +35,3 @@ This chapter includes:
 ** xref::/cypher-intro/schema.adoc#cypher-intro-schema[Using indexes]
 ** xref::/cypher-intro/schema.adoc#cypher-intro-schema[Using constraints]
 * xref::/cypher-intro/load-csv.adoc#cypher-intro-load-csv[Import data]
-
-
-For a comprehensive guide to Cypher, see the xref:4.2@cypher-manual:ROOT:index.adoc#cypher-manual[Cypher manual].
-
-
-// include::patterns.adoc[leveloffset=+1]
-
-// include::patterns-in-practice.adoc[leveloffset=+1]
-
-// include::results.adoc[leveloffset=+1]
-
-// include::compose-statements.adoc[leveloffset=+1]
-
-// include::schema.adoc[leveloffset=+1]
-
-// include::load-csv.adoc[leveloffset=+1]
