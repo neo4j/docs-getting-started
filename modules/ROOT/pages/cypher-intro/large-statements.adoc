@@ -1,17 +1,7 @@
 :description: This section describes how to compose large statements using the `UNION` and `WITH` keywords.
+
 [[cypher-intro-large-statements]]
 = Composing large statements
-
-[abstract]
---
-This section describes how to compose large statements using the `UNION` and `WITH` keywords.
---
-
-This section includes:
-
-* xref::/cypher-intro/large-statements.adoc#cypher-intro-large-statements-example-graph[Example graph]
-* xref::/cypher-intro/large-statements.adoc#cypher-intro-large-statements-union[UNION]
-* xref::/cypher-intro/large-statements.adoc#cypher-intro-large-statements-with[WITH]
 
 
 [[cypher-intro-large-statements-example-graph]]
@@ -21,14 +11,14 @@ We continue using the same example data as before:
 
 [source,cypher, indent=0]
 ----
-CREATE (matrix:Movie { title:"The Matrix",released:1997 })
-CREATE (cloudAtlas:Movie { title:"Cloud Atlas",released:2012 })
-CREATE (forrestGump:Movie { title:"Forrest Gump",released:1994 })
-CREATE (keanu:Person { name:"Keanu Reeves", born:1964 })
-CREATE (robert:Person { name:"Robert Zemeckis", born:1951 })
-CREATE (tom:Person { name:"Tom Hanks", born:1956 })
-CREATE (tom)-[:ACTED_IN { roles: ["Forrest"]}]->(forrestGump)
-CREATE (tom)-[:ACTED_IN { roles: ['Zachry']}]->(cloudAtlas)
+CREATE (matrix:Movie {title: 'The Matrix', released: 1997})
+CREATE (cloudAtlas:Movie {title: 'Cloud Atlas', released: 2012})
+CREATE (forrestGump:Movie {title: 'Forrest Gump', released: 1994})
+CREATE (keanu:Person {name: 'Keanu Reeves', born: 1964})
+CREATE (robert:Person {name: 'Robert Zemeckis', born: 1951})
+CREATE (tom:Person {name: 'Tom Hanks', born: 1956})
+CREATE (tom)-[:ACTED_IN {roles: ['Forrest']}]->(forrestGump)
+CREATE (tom)-[:ACTED_IN {roles: ['Zachry']}]->(cloudAtlas)
 CREATE (robert)-[:DIRECTED]->(forrestGump)
 ----
 
@@ -36,42 +26,6 @@ This is the resulting graph:
 
 image::cypher-intro-large-statements01.svg[role="middle"]
 
-// ["dot", "cypher-intro-large-statements01.svg", "neoviz"]
-// ----
-//   N0 [
-//     label = "{Movie|title = \'The Matrix\'\lreleased = 1997\l}"
-//   ]
-//   N1 [
-//     label = "{Movie|title = \'Cloud Atlas\'\lreleased = 2012\l}"
-//   ]
-//   N2 [
-//     label = "{Movie|title = \'Forrest Gump\'\lreleased = 1994\l}"
-//   ]
-//   N3 [
-//     label = "{Person|name = \'Keanu Reeves\'\lborn = 1964\l}"
-//   ]
-//   N4 [
-//     label = "{Person|name = \'Robert Zemeckis\'\lborn = 1951\l}"
-//   ]
-//   N4 -> N2 [
-//     color = "#2e3436"
-//     fontcolor = "#2e3436"
-//     label = "DIRECTED\n"
-//   ]
-//   N5 [
-//     label = "{Person|name = \'Tom Hanks\'\lborn = 1956\l}"
-//   ]
-//   N5 -> N1 [
-//     color = "#4e9a06"
-//     fontcolor = "#4e9a06"
-//     label = "ACTED_IN\nroles = \[\'Zachry\'\]\l"
-//   ]
-//   N5 -> N2 [
-//     color = "#4e9a06"
-//     fontcolor = "#4e9a06"
-//     label = "ACTED_IN\nroles = \[\'Forrest\'\]\l"
-//   ]
-// ----
 
 [[cypher-intro-large-statements-union]]
 == UNION
@@ -80,7 +34,7 @@ If you want to combine the results of two statements that have the same result s
 
 For example, the following statement lists both actors and directors:
 
-[source,cypher, indent=0]
+[source, cypher, role="noplay"]
 ----
 MATCH (actor:Person)-[r:ACTED_IN]->(movie:Movie)
 RETURN actor.name AS name, type(r) AS type, movie.title AS title
@@ -91,15 +45,15 @@ RETURN director.name AS name, type(r) AS type, movie.title AS title
 
 [queryresult]
 ----
+Rows: 3
+
 +-------------------------------------------------+
 | name              | type       | title          |
 +-------------------------------------------------+
-| "Tom Hanks"       | "ACTED_IN" | "Cloud Atlas"  |
-| "Tom Hanks"       | "ACTED_IN" | "Forrest Gump" |
-| "Robert Zemeckis" | "DIRECTED" | "Forrest Gump" |
+| 'Tom Hanks'       | 'ACTED_IN' | 'Cloud Atlas'  |
+| 'Tom Hanks'       | 'ACTED_IN' | 'Forrest Gump' |
+| 'Robert Zemeckis' | 'DIRECTED' | 'Forrest Gump' |
 +-------------------------------------------------+
-
-3 rows
 ----
 
 Note that the returned columns must be aliased in the same way in all the sub-clauses.
@@ -108,7 +62,7 @@ Note that the returned columns must be aliased in the same way in all the sub-cl
 ====
 The query above is equivalent to this more compact query:
 
-[source,cypher, indent=0]
+[source, cypher, role="noplay"]
 ----
 MATCH (actor:Person)-[r:ACTED_IN|DIRECTED]->(movie:Movie)
 RETURN actor.name AS name, type(r) AS type, movie.title AS title
@@ -131,7 +85,7 @@ The only difference is all columns must be aliased.
 
 In the example below, we collect the movies someone appeared in, and then filter out those which appear in only one movie:
 
-[source,cypher, indent=0]
+[source, cypher, role="noplay"]
 ----
 MATCH (person:Person)-[:ACTED_IN]->(m:Movie)
 WITH person, count(*) AS appearances, collect(m.title) AS movies
@@ -141,11 +95,11 @@ RETURN person.name, appearances, movies
 
 [queryresult]
 ----
+Rows: 1
+
 +-------------------------------------------------------------+
 | person.name | appearances | movies                          |
 +-------------------------------------------------------------+
-| "Tom Hanks" | 2           | ["Cloud Atlas", "Forrest Gump"] |
+| 'Tom Hanks' | 2           | ['Cloud Atlas', 'Forrest Gump'] |
 +-------------------------------------------------------------+
-
-1 row
 ----
