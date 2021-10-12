@@ -194,7 +194,7 @@ It assumes that your current work directory is the _<neo4j-home>_ directory of t
 [NOTE]
 ====
 * For the default directory of other installations see, xref:4.4-preview@operations-manual:ROOT:configuration/file-locations/index.adoc#file-locations[Operations Manual -> File locations].
-* The import location can be configured with <<operations-manual#config_dbms.directories.import, Operations Manual -> `dbms.directories.import`>>.
+* The import location can be configured with xref:4.4-preview@operations-manual:ROOT:reference/configuration-settings/index.adoc#config_dbms.directories.import[Operations Manual -> `dbms.directories.import`].
 ====
 
 
