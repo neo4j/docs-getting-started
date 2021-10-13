@@ -83,7 +83,7 @@ Rows: 2
 +---------------------------------------------------------------------------------------+
 ----
 
-Learn more about indexes in xref:4.4-preview@cypher-manual:ROOT:administration/indexes-for-full-text-search/index.adoc#administration-indexes-fulltext-search[Cypher Manual -> Indexes].
+Learn more about indexes in xref:4.4-preview@cypher-manual:ROOT:indexes-for-full-text-search/index.adoc#administration-indexes-fulltext-search[Cypher Manual -> Indexes].
 
 [NOTE]
 ====
