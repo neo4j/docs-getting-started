@@ -122,22 +122,23 @@ Constraints can be added to database that already has data in it.
 This requires that the existing data complies with the constraint that is being added.
 
 You can inspect a database to find out what constraints are defined.
-Check the defined constraints by calling the built-in procedure `db.constraints`:
+
+Check the defined constraints with:
 
 [source, cypher, role="noplay"]
 ----
-CALL db.constraints
+SHOW CONSTRAINTS
 ----
 
-[queryresult]
+[source, output, role="noheader"]
 ----
 Rows: 1
 
-+------------------------------------------------------------+
-| description                                                |
-+------------------------------------------------------------+
-| 'CONSTRAINT ON (movie:Movie) ASSERT movie.title IS UNIQUE' |
-+------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------+
+| id | name                  | type         | entityType | labelsOrTypes | properties | ownedIndexId |
++----------------------------------------------------------------------------------------------------+
+| 4  | "constraint_751eb8ab" | "UNIQUENESS" | "NODE"     | ["Movie"]     | ["title"]  | 3            |
++----------------------------------------------------------------------------------------------------+
 ----
 
 [NOTE]
