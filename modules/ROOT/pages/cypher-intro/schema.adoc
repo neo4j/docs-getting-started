@@ -100,10 +100,20 @@ For example: "If a node has a label of `Actor` and a property of `name`, then th
 
 To create a constraint that makes sure that our database will never contain more than one node with the label `Movie` and the property `title`, we use the IS UNIQUE syntax:
 
-[source, cypher, role="noplay"]
+[source, cypher, role="norun"]
 ----
-CREATE CONSTRAINT ON (movie:Movie) ASSERT movie.title IS UNIQUE
+CREATE CONSTRAINT FOR (movie:Movie) REQUIRE movie.title IS UNIQUE
 ----
+
+
+[NOTE]
+====
+The syntax was changed in Neo4j 4.4, the old syntax is:
+[source, cypher, role="noheader", subs="macros"]
+----
++CREATE CONSTRAINT ON (movie:Movie) ASSERT movie.title IS UNIQUE+ label:deprecated[]
+----
+====
 
 Adding the unique constraint will implicitly add an index on that property.
 If the constraint is dropped, but the index is still needed, the index will have to be created explicitly.
@@ -111,23 +121,24 @@ If the constraint is dropped, but the index is still needed, the index will have
 Constraints can be added to database that already has data in it.
 This requires that the existing data complies with the constraint that is being added.
 
-We can inspect our database to find out what constraints are defined.
-We do this by calling the built-in procedure `db.constraints`:
+You can inspect a database to find out what constraints are defined.
+
+Check the defined constraints with:
 
 [source, cypher, role="noplay"]
 ----
-CALL db.constraints
+SHOW CONSTRAINTS
 ----
 
-[queryresult]
+[source, output, role="noheader"]
 ----
 Rows: 1
 
-+------------------------------------------------------------+
-| description                                                |
-+------------------------------------------------------------+
-| 'CONSTRAINT ON (movie:Movie) ASSERT movie.title IS UNIQUE' |
-+------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------+
+| id | name                  | type         | entityType | labelsOrTypes | properties | ownedIndexId |
++----------------------------------------------------------------------------------------------------+
+| 4  | "constraint_751eb8ab" | "UNIQUENESS" | "NODE"     | ["Movie"]     | ["title"]  | 3            |
++----------------------------------------------------------------------------------------------------+
 ----
 
 [NOTE]
