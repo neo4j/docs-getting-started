@@ -233,14 +233,14 @@ Using _Neo4j Browser_, run the following Cypher:
 
 [source, cypher, indent=0]
 ----
-CREATE CONSTRAINT personIdConstraint ON (person:Person) ASSERT person.id IS UNIQUE
+CREATE CONSTRAINT personIdConstraint FOR (person:Person) REQUIRE person.id IS UNIQUE
 ----
 
 Or using xref:4.4-preview@operations-manual:ROOT:tools/cypher-shell/index.adoc#cypher-shell[_Neo4j Cypher Shell_], run the command:
 
 [source, shell, indent=0]
 ----
-bin/cypher-shell --database=neo4j "CREATE CONSTRAINT personIdConstraint ON (person:Person) ASSERT person.id IS UNIQUE"
+bin/cypher-shell --database=neo4j "CREATE CONSTRAINT personIdConstraint FOR (person:Person) REQUIRE person.id IS UNIQUE"
 ----
 
 **+3.+ Create a constraint so that each `Movie` node has a unique `id` propery.**
@@ -251,14 +251,14 @@ Using _Neo4j Browser_, run the following Cypher:
 
 [source, cypher, indent=0]
 ----
-CREATE CONSTRAINT movieIdConstraint ON (movie:Movie) ASSERT movie.id IS UNIQUE
+CREATE CONSTRAINT movieIdConstraint FOR (movie:Movie) REQUIRE movie.id IS UNIQUE
 ----
 
 Or using xref:4.4-preview@operations-manual:ROOT:tools/cypher-shell/index.adoc#cypher-shell[_Neo4j Cypher Shell_], run the command:
 
 [source, shell, indent=0]
 ----
-bin/cypher-shell --database=neo4j "CREATE CONSTRAINT movieIdConstraint ON (movie:Movie) ASSERT movie.id IS UNIQUE"
+bin/cypher-shell --database=neo4j "CREATE CONSTRAINT movieIdConstraint FOR (movie:Movie) REQUIRE movie.id IS UNIQUE"
 ----
 
 **+4.+ Create an index for `Country` node for the `name` property.**
