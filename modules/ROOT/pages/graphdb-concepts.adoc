@@ -240,7 +240,7 @@ CREATE (:Example {f: [1, 2, 3], g: [2.71, 3.14], h: ['abc', 'example'], i: [true
 
 [TIP]
 ====
-For a thorough description of the available data types, refer to the xref:4.4-preview@cypher-manual:ROOT:syntax/values/index.adoc#cypher-values[Cypher manual -> Values and types].
+For a thorough description of the available data types, refer to the xref:4.4@cypher-manual:ROOT:syntax/values/index.adoc#cypher-values[Cypher manual -> Values and types].
 ====
 
 
@@ -296,7 +296,7 @@ Indexes and constraints can be introduced when desired, in order to gain perform
 
 Indexes are used to increase performance.
 To see examples of how to work with indexes, see xref::/cypher-intro/schema.adoc#cypher-intro-indexes[Using indexes].
-For detailed descriptions of how to work with indexes in Cypher, see xref:4.4-preview@cypher-manual:ROOT:indexes-for-full-text-search/index.adoc#administration-indexes-fulltext-search[Cypher Manual -> Indexes].
+For detailed descriptions of how to work with indexes in Cypher, see xref:4.4@cypher-manual:ROOT:indexes-for-full-text-search/index.adoc#administration-indexes-fulltext-search[Cypher Manual -> Indexes].
 
 
 [[graphdb-constraints]]
@@ -304,7 +304,7 @@ For detailed descriptions of how to work with indexes in Cypher, see xref:4.4-pr
 
 Constraints are used to make sure that the data adheres to the rules of the domain.
 To see examples of how to work with constraints, see xref::/cypher-intro/schema.adoc#cypher-intro-constraints[Using constraints].
-For detailed descriptions of how to work with constraints in Cypher, see the xref:4.4-preview@cypher-manual:ROOT:constraints/index.adoc[Cypher manual -> Constraints].
+For detailed descriptions of how to work with constraints in Cypher, see the xref:4.4@cypher-manual:ROOT:constraints/index.adoc[Cypher manual -> Constraints].
 
 
 [[graphdb-naming-conventions]]
@@ -324,4 +324,4 @@ The following naming conventions are recommended:
 |===
 
 
-For the precise naming rules, refer to the xref:4.4-preview@cypher-manual:ROOT:syntax/naming/index.adoc#cypher-naming[Cypher manual -> Naming rules and recommendations].
+For the precise naming rules, refer to the xref:4.4@cypher-manual:ROOT:syntax/naming/index.adoc#cypher-naming[Cypher manual -> Naming rules and recommendations].
