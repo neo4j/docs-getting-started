@@ -1,4 +1,4 @@
-:description: This section describes how to define and use indexes and constraints.
+:description: This topic explains how to define and use indexes and constraints.
 
 [[cypher-intro-schema]]
 = Defining a schema
@@ -7,24 +7,20 @@
 [[cypher-intro-schema-example-graph]]
 == Example graph
 
-First we create some data to use for our examples:
+First create some data to use for our examples:
 
-[source,cypher, indent=0]
+[source, cypher, indent=0]
 ----
-CREATE (matrix:Movie {title: 'The Matrix', released: 1997})
-CREATE (cloudAtlas:Movie {title: 'Cloud Atlas', released: 2012})
 CREATE (forrestGump:Movie {title: 'Forrest Gump', released: 1994})
-CREATE (keanu:Person {name: 'Keanu Reeves'})
-CREATE (robert:Person {name: 'Robert Zemeckis', born: 1951})
-CREATE (tom:Person {name: 'Tom Hanks', born: 1956})
+CREATE (robert:Person:Director {name: 'Robert Zemeckis', born: 1951})
+CREATE (tom:Person:Actor {name: 'Tom Hanks', born: 1956})
 CREATE (tom)-[:ACTED_IN {roles: ['Forrest']}]->(forrestGump)
-CREATE (tom)-[:ACTED_IN {roles: ['Zachry']}]->(cloudAtlas)
 CREATE (robert)-[:DIRECTED]->(forrestGump)
 ----
 
 This is the resulting graph:
 
-image::cypher-intro-schema01.svg[role="middle"]
+image::cypher-intro-schema-data.svg[role="middle"]
 
 
 [[cypher-intro-indexes]]
@@ -34,17 +30,28 @@ The main reason for using indexes in a graph database is to find the starting po
 Once that starting point is found, the traversal relies on in-graph structures to achieve high performance.
 
 Indexes can be added at any time.
-Note, however, that if there is existing data in the database, it will take some time for an index to come online.
 
-In this case we want to create an index to speed up finding actors by name in the database:
+[NOTE]
+====
+If there is existing data in the database, it will take some time for an index to come online.
+====
 
-[source, cypher, role="noheader"]
+The following query creates an index to speed up finding actors by name in the database:
+
+[source, cypher, role="noplay"]
 ----
-CREATE INDEX FOR (a:Actor) ON (a.name)
+CREATE INDEX example_index_1 FOR (a:Actor) ON (a.name)
 ----
 
 In most cases it is not necessary to specify indexes when querying for data, as the appropriate indexes will be used automatically.
-For example, the following query will automatically use the index defined above:
+
+[NOTE]
+====
+It is possible to specify which index to use in a particular query, using _index hints_.
+This is one of several options for query tuning, described in detail in xref:4.4@cypher-manual:ROOT:query-tuning/index.adoc#query-tuning[Cypher manual -> Query tuning].
+====
+
+For example, the following query will automatically use the `example_index_1`:
 
 [source, cypher, role="noplay"]
 ----
@@ -59,36 +66,31 @@ Therefore that node will not be added to the index.
 
 [source, cypher, role="noplay"]
 ----
-CREATE INDEX FOR (a:Actor) ON (a.name, a.born)
+CREATE INDEX example_index_2 FOR (a:Actor) ON (a.name, a.born)
 ----
 
-We can inspect our database to find out what indexes are defined.
-We do this by calling the built-in procedure `db.indexes`:
+You can query a database with `SHOW INDEXES` to find out what indexes are defined.
 
 [source, cypher, role="noplay"]
 ----
-CALL db.indexes
-YIELD description, tokenNames, properties, type;
+SHOW INDEXES YIELD name, labelsOrTypes, properties, type
 ----
 
-[queryresult]
+[source, output, role="noheader"]
 ----
 Rows: 2
 
-+---------------------------------------------------------------------------------------+
-| description                   | tokenNames | properties       | type                  |
-+---------------------------------------------------------------------------------------+
-| 'INDEX ON :Actor(name)'       | ['Actor']  | ['name']         | 'node_label_property' |
-| 'INDEX ON :Actor(name, born)' | ['Actor']  | ['name', 'born'] | 'node_label_property' |
-+---------------------------------------------------------------------------------------+
++----------------------------------------------------------------+
+| name              | labelsOrTypes | properties       | type    |
++----------------------------------------------------------------+
+| "example_index_1" | ["Actor"]     | ["name"]         | "BTREE" |
+| "example_index_2" | ["Actor"]     | ["name", "born"] | "BTREE" |
++----------------------------------------------------------------+
 ----
 
-Learn more about indexes in xref:4.4@cypher-manual:ROOT:indexes-for-full-text-search/index.adoc#administration-indexes-fulltext-search[Cypher Manual -> Indexes].
-
-[NOTE]
+[TIP]
 ====
-It is possible to specify which index to use in a particular query, using _index hints_.
-This is one of several options for query tuning, described in detail in xref:4.4@cypher-manual:ROOT:query-tuning/index.adoc#query-tuning[Cypher manual -> Query tuning].
+Learn more about indexes in xref:4.4@cypher-manual:ROOT:indexes-for-full-text-search/index.adoc#administration-indexes-fulltext-search[Cypher Manual -> Indexes].
 ====
 
 
@@ -96,50 +98,63 @@ This is one of several options for query tuning, described in detail in xref:4.4
 == Using constraints
 
 Constraints are used to make sure that the data adheres to the rules of the domain.
-For example: "If a node has a label of `Actor` and a property of `name`, then the value of `name` must be unique among all nodes that have the `Actor` label".
+For example:
 
-To create a constraint that makes sure that our database will never contain more than one node with the label `Movie` and the property `title`, we use the IS UNIQUE syntax:
+[quote]
+_____
+"If a node has a label of `Actor` and a property of `name`, then the value of `name` must be unique among all nodes that have the `Actor` label".
+_____
+
+.Uniqueness constraint
+======
+This example shows how to create a constraint for nodes that have the label `Movie` and the property `title`.
+The constraint specifies that the `title` property must be unique.
+
+Adding the unique constraint will implicitly add an index on that property.
+If the constraint is dropped, but the index is still needed, the index will have to be created explicitly.
 
 [source, cypher, role="norun"]
 ----
-CREATE CONSTRAINT FOR (movie:Movie) REQUIRE movie.title IS UNIQUE
+CREATE CONSTRAINT constraint_example_1 FOR (movie:Movie) REQUIRE movie.title IS UNIQUE
 ----
-
 
 [NOTE]
 ====
 The syntax was changed in Neo4j 4.4, the old syntax is:
 [source, cypher, role="noheader", subs="macros"]
 ----
-+CREATE CONSTRAINT ON (movie:Movie) ASSERT movie.title IS UNIQUE+ label:deprecated[]
++CREATE CONSTRAINT constraint_example_1 ON (movie:Movie) ASSERT movie.title IS UNIQUE+ label:deprecated[]
 ----
 ====
+======
 
-Adding the unique constraint will implicitly add an index on that property.
-If the constraint is dropped, but the index is still needed, the index will have to be created explicitly.
 
 Constraints can be added to database that already has data in it.
 This requires that the existing data complies with the constraint that is being added.
 
-You can inspect a database to find out what constraints are defined.
+You can query a database to find out what constraints are defined with the `SHOW CONSTRAINTS` Cypher syntax.
 
-Check the defined constraints with:
+
+.Constraints query
+======
+This example shows a Cypher query that returns the constraints that has been defined for the database.
 
 [source, cypher, role="noplay"]
 ----
-SHOW CONSTRAINTS
+SHOW CONSTRAINTS YIELD id, name, type, entityType, labelsOrTypes, properties, ownedIndexId
 ----
 
 [source, output, role="noheader"]
 ----
 Rows: 1
 
-+----------------------------------------------------------------------------------------------------+
-| id | name                  | type         | entityType | labelsOrTypes | properties | ownedIndexId |
-+----------------------------------------------------------------------------------------------------+
-| 4  | "constraint_751eb8ab" | "UNIQUENESS" | "NODE"     | ["Movie"]     | ["title"]  | 3            |
-+----------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------+
+| id | name                   | type         | entityType | labelsOrTypes | properties | ownedIndexId |
++-----------------------------------------------------------------------------------------------------+
+| 4  | "constraint_example_1" | "UNIQUENESS" | "NODE"     | ["Movie"]     | ["title"]  | 3            |
++-----------------------------------------------------------------------------------------------------+
 ----
+======
 
 [NOTE]
 ====
@@ -147,4 +162,7 @@ The constraint described above is available for all editions of Neo4j.
 Additional constraints are available for Neo4j Enterprise Edition.
 ====
 
+[TIP]
+====
 Learn more about constraints in xref:4.4@cypher-manual:ROOT:constraints/index.adoc#administration-constraints[Cypher manual -> Constraints].
+====
