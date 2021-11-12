@@ -117,15 +117,6 @@ If the constraint is dropped, but the index is still needed, the index will have
 ----
 CREATE CONSTRAINT constraint_example_1 FOR (movie:Movie) REQUIRE movie.title IS UNIQUE
 ----
-
-[NOTE]
-====
-The syntax was changed in Neo4j 4.4, the old syntax is:
-[source, cypher, role="noheader", subs="macros"]
-----
-+CREATE CONSTRAINT constraint_example_1 ON (movie:Movie) ASSERT movie.title IS UNIQUE+ label:deprecated[]
-----
-====
 ======
 
 
