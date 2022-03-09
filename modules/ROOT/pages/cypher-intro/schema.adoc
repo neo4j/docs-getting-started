@@ -48,7 +48,7 @@ In most cases it is not necessary to specify indexes when querying for data, as 
 [NOTE]
 ====
 It is possible to specify which index to use in a particular query, using _index hints_.
-This is one of several options for query tuning, described in detail in xref:5.0@cypher-manual:ROOT:query-tuning/index.adoc#query-tuning[Cypher manual -> Query tuning].
+This is one of several options for query tuning, described in detail in link:/cypher-manual/{page-version}/query-tuning#query-tuning[Cypher manual -> Query tuning].
 ====
 
 For example, the following query will automatically use the `example_index_1`:
@@ -90,7 +90,7 @@ Rows: 2
 
 [TIP]
 ====
-Learn more about indexes in xref:5.0@cypher-manual:ROOT:indexes-for-full-text-search/index.adoc#administration-indexes-fulltext-search[Cypher Manual -> Indexes].
+Learn more about indexes in link:/cypher-manual/{page-version}/indexes-for-full-text-search#administration-indexes-fulltext-search[Cypher Manual -> Indexes].
 ====
 
 
@@ -155,5 +155,5 @@ Additional constraints are available for Neo4j Enterprise Edition.
 
 [TIP]
 ====
-Learn more about constraints in xref:5.0@cypher-manual:ROOT:constraints/index.adoc#administration-constraints[Cypher manual -> Constraints].
+Learn more about constraints in link:/cypher-manual/{page-version}/constraints#administration-constraints[Cypher manual -> Constraints].
 ====
