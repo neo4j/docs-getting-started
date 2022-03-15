@@ -25,7 +25,9 @@ asciidoc:
   extensions:
   - "@neo4j-documentation/remote-include"
   - "@neo4j-documentation/macros"
+  - "@neo4j-antora/antora-add-notes"
   - "@neo4j-antora/antora-listing-roles"
+  - "@neo4j-antora/antora-table-footnotes"
   attributes:
     page-theme: docs
     page-type: Docs
