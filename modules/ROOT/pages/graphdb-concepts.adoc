@@ -142,7 +142,7 @@ Relationships organize nodes into structures, allowing a graph to resemble a lis
 =====
 image::graph_example_relationship.svg[]
 
-The node type: `ACTED_IN`
+The relationship type: `ACTED_IN`
 
 The properties are:
 
@@ -275,7 +275,7 @@ image::graphdb-path-zero.svg[role="middle"]
 
 .Path of length one.
 =====
-A path containing one relationship has the lenght of `1`.
+A path containing one relationship has the length of `1`.
 
 image::graphdb-path-example-loop.svg[role="middle"]
 =====
