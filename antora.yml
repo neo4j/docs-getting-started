@@ -1,6 +1,6 @@
 name: getting-started
 title: Getting Started
-version: 3.5
+version: '3.5'
 start_page: ROOT:index.adoc
 nav:
 - modules/ROOT/content-nav.adoc
