@@ -1,22 +1,5 @@
 [[what-is-graphdb]]
 = What is a graph database?
-// :level: Beginner
-// :page-level: Beginner
-// :author: Jennifer Reif
-// :category: documentation
-// :tags: get-started, introduction, graph, database, property-graph, use-cases, cypher
-// :page-pagination: next
-// :page-newsletter: true
-// :page-ad-overline-link: https://neo4j.com/cloud/aura/?ref=developer-guides
-// :page-ad-overline: Neo4j Aura
-// :page-ad-title: Experience Graph Databases
-// :page-ad-description: Free forever, no credit card required.
-// :page-ad-link: https://neo4j.com/cloud/aura/?ref=developer-guides
-// :page-ad-underline-role: button
-// :page-ad-underline: Start on AuraDB
-
-// [role=expertise {level}]
-// {level}
 
 A graph database stores nodes and relationships instead of tables, or documents.
 Data is stored just like you might sketch ideas on a whiteboard.
