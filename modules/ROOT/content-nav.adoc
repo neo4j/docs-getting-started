@@ -1,6 +1,7 @@
 * xref:index.adoc[]
 * xref:graph-database.adoc[]
 * xref:get-started-with-neo4j.adoc[]
+* xref:graph-platform.adoc[]
 * xref:graphdb-concepts.adoc[]
 * xref:graphdb-vs-rdbms.adoc[]
 * xref:graphdb-vs-nosql.adoc[]
