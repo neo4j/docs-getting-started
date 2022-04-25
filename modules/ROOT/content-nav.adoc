@@ -9,6 +9,7 @@
 ** xref:cypher-intro/patterns.adoc[]
 ** xref:cypher-intro/patterns-in-practice.adoc[]
 ** xref:cypher-intro/results.adoc[]
+** xref:cypher-intro/updating.adoc[]
 ** xref:cypher-intro/large-statements.adoc[]
 ** xref:cypher-intro/schema.adoc[]
 ** xref:cypher-intro/load-csv.adoc[]
