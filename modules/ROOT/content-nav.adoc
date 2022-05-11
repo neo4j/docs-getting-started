@@ -10,3 +10,6 @@
 ** xref:cypher-intro/large-statements.adoc[]
 ** xref:cypher-intro/schema.adoc[]
 ** xref:cypher-intro/load-csv.adoc[]
+* xref:appendix/index.adoc[]
+** xref:guide-cypher-basics.adoc[]
+** xref:guide-build-a-recommendation-engine.adoc[]
