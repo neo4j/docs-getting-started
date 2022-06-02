@@ -1,0 +1,91 @@
+
+[[getting-started-resources]]
+= Getting started resources
+:tags: get-started, introduction, resources, neo4j-help, cypher, graph, nosql-graph, neo4j-training
+:page-pagination:
+
+[#getting-started-resources]
+To help you along your path of learning more about Neo4j, we want to provide you with the resources which may encourage you to dive deeper into Neo4j products and graph technology.
+
+[#graphdb-resources]
+== Graph database concepts
+* https://www.youtube.com/watch?v=5Tl8WcaqZoc&list=PL9Hl4pk2FsvWM9GWaguRhlCQ-pa-ERd4U[Video Series: Intro to Graph Databases^]
+* https://neo4j.com/graph-databases-book/[Free eBook: O'Reilly Graph Databases^]
+* https://dzone.com/articles/graph-databases-for-beginners-native-vs-non-native[DZone: Graph Databases for Beginners^]
+
+[#rdbms-graph-resources]
+== Graph for relational developers
+* https://neo4j.com/resources/rdbms-developer-graph-white-paper/[Free eBook: Relational to Graph^]
+* https://dzone.com/refcardz/from-relational-to-graph-a-developers-guide[DZone Refcard: From Relational to Graph^]
+* https://neo4j.com/developer/data-modeling/[Relational to Graph Data Modeling^]
+* https://medium.com/neo4j/tap-into-hidden-connections-translating-your-relational-data-to-graph-d3a2591d4026[Neo4j ETL Tool^]
+* https://neo4j.com/developer-blog/neo4j-devtools-happy-new-year-new-data-importer-and-neo4j-browser-updates/[New Data Importer and Neo4j Browser Updates^]
+
+[#cypher-resources]
+== Cypher Query Language
+* https://neo4j.com/product/cypher-graph-query-language/[Cypher Query Language^]
+* https://neo4j.com/docs/cypher-refcard/current/[Cypher Refcard^]
+* https://neo4j.com/developer/guide-sql-to-cypher/[From SQL to Cypher^]
+
+[#nosql-graph-resources]
+== Graph for NoSQL developers
+* https://dzone.com/articles/nosql-database-types-1[DZone: NoSQL Database Types^]
+
+[#sandbox-resources]
+== Graph data models
+* link:https://neo4j.com/graphgists/[Featured GraphGists^]
+* link:http://sandbox.neo4j.com/[Start a Sandbox online^]
+
+[#training-resources]
+== Training, courses, and webinars
+
+Free, self-paced courses at link:https://graphacademy.neo4j.com/[GraphAcademy Online Training^]:
+
+* link:https://graphacademy.neo4j.com/categories/beginners[Hands-on Neo4j Courses for Beginners^]
+** link:https://graphacademy.neo4j.com/courses/neo4j-fundamentals/[Neo4j Fundamentals^]
+Learn the basics of Neo4j and the property graph model (1 hour)
+** link:https://graphacademy.neo4j.com/courses/cypher-fundamentals/[Cypher Fundamentals^]
+Learn Cypher in 60 minutes (1 hour)
+** link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/[Graph Data Modeling Fundamentals^]
+Learn how to design a Neo4j graph using best practices (2 hours)
+** link:https://graphacademy.neo4j.com/courses/importing-data/[Importing CSV Data into Neo4j^]
+Learn the basics of importing data into Neo4j (2 hours)
+
+* link:https://graphacademy.neo4j.com/categories/beginners[Neo4j Courses for Developers^]
+** link:https://graphacademy.neo4j.com/courses/app-go/[Building Neo4j Applications with Go^]
+Learn how to interact with Neo4j from your Go application using the Neo4j Go Driver
+** link:https://graphacademy.neo4j.com/courses/app-nodejs/[Building Neo4j Applications with Node.js^]
+Learn how to interact with Neo4j from Node.js using the Neo4j JavaScript Driver
+** link:https://graphacademy.neo4j.com/courses/app-python/[Building Neo4j Applications with Python^]
+Learn how to interact with Neo4j from Python using the Neo4j Python Driver
+
+* link:https://graphacademy.neo4j.com/categories/certification[Neo4j Certifications^]
+** link:https://graphacademy.neo4j.com/courses/neo4j-certification/[Neo4j 4.0 Certified Professional^] 
+** link:https://graphacademy.neo4j.com/courses/gds-certification/[Neo4j Graph Data Science Certification^] 
+
+Classroom and virtual training classes, webinars:
+
+* link:https://neo4j.com/events/world/training/[Register for public virtual and classroom training^]
+* link:https://neo4j.com/webinars/[Neo4j webinars: upcoming live and on-demand^]
+
+Companies can also choose the instuctor-led training courses and mailto:training@neo4j.com[request] private, custom training events for internal staff to solve specific problems or understand concepts and architecture specific to their use case.
+
+[#neo4j-events]
+== Neo4j events
+* Check https://neo4j.com/events/world/all/[Neo4j Events calendar^] for upcoming live online events, trainings, and demos. You can select an event by its category, country, city, or language. 
+
+[#neo4j-community]
+== Neo4j Community resources
+* link:https://community.neo4j.com[Neo4j Community Forums^] are designed for learning and seeking guidance.   
+* link:https://discord.com/invite/neo4j[Neo4j Discord Chat^] is a live chat environment (requires signup) for conversations with other Neo4j users.
+
+When to use which? Read more about the differences between link:https://community.neo4j.com/t/discourse-vs-discord/42345[our forums and Discord^].
+
+[#other-neo4j-resources]
+== Other resources
+* https://neo4j.com/developer-blog/[Developer Blog^]
+* https://twitch.tv/neo4j/[Weekly Twitch stream sessions^]
+* http://www.opencypher.org/[openCypher project^]
+* https://neo4j.com/customers/[Neo4j Customers^]
+* xref:graph-database.adoc[Neo4j Features^]
+* https://neo4j.com/licensing/[Neo4j Editions^]
