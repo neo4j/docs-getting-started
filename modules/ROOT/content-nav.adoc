@@ -3,6 +3,7 @@
 * xref:get-started-with-neo4j.adoc[]
 * xref:graphdb-concepts.adoc[]
 * xref:graphdb-vs-rdbms.adoc[]
+* xref:graphdb-vs-nosql.adoc[]
 * xref:cypher-intro/index.adoc[]
 ** xref:cypher-intro/patterns.adoc[]
 ** xref:cypher-intro/patterns-in-practice.adoc[]
