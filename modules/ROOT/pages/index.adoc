@@ -1,4 +1,6 @@
-:description: Getting Started Guide for Neo4j version {neo4j-version}.
+:page-ogdescription: The Neo4j Getting Started Guide covers: How to get started with Neo4j. Introduction to graph database concepts and introduction to the graph query language Cypher.
+
+:page-ogtitle: Getting Started Guide for Neo4j version {neo4j-version}
 
 [[getting-started]]
 = Getting Started Guide
