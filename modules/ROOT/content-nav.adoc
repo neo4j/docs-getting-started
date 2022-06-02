@@ -11,3 +11,4 @@
 ** xref:cypher-intro/large-statements.adoc[]
 ** xref:cypher-intro/schema.adoc[]
 ** xref:cypher-intro/load-csv.adoc[]
+* xref:getting-started-resources.adoc[]
