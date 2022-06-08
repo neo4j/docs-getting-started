@@ -1,12 +1,14 @@
 [[appendix]]
 = Appendix
-:description: Cypher tutorials, 
+:description: Cypher tutorials, example datasets, resources 
 
 In this section you can find useful additional information. +
-The appendix contains tutorials that explain how to create and explore graphs using Cypher - Neo4j graph query language.
+The appendix contains tutorials that explain how to create and explore graphs using Cypher - Neo4j graph query language. +
+Also here you can find a list of all available example datasets used across doc sets and learning courses. +
+In the corresponding section links to the example datasets are provided, and ways of data import are explained. +
+ 
 // Here we can place: 
 // the Getting Started resources, 
 // links to the GraphAcademy courses, 
 // links to the Developer blog posts, 
-// links to the Knowledge Base articles or description of it. 
-
+// links to the Knowledge Base articles or description of them. 
