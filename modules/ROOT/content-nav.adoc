@@ -11,6 +11,8 @@
 ** xref:cypher-intro/results.adoc[]
 ** xref:cypher-intro/updating.adoc[]
 ** xref:cypher-intro/large-statements.adoc[]
+** xref:cypher-intro/subqueries.adoc[]
 ** xref:cypher-intro/schema.adoc[]
 ** xref:cypher-intro/load-csv.adoc[]
+** xref:cypher-intro/dates-datetimes-durations.adoc[]
 * xref:getting-started-resources.adoc[]
