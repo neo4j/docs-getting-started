@@ -7,7 +7,6 @@ The appendix contains tutorials that explain how to create and explore graphs us
 Also here you can find a list of all available example datasets used across doc sets and learning courses. +
 In the corresponding section links to the example datasets are provided, and ways of data import are explained. +
  
-
 // Here we can place: 
 // the Getting Started resources, 
 // links to the GraphAcademy courses, 
