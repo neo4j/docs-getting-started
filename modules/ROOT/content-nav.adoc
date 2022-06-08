@@ -15,6 +15,8 @@
 ** xref:cypher-intro/schema.adoc[]
 ** xref:cypher-intro/load-csv.adoc[]
 ** xref:cypher-intro/dates-datetimes-durations.adoc[]
+** xref:cypher-intro/procedures-functions.adoc[]
+** xref:cypher-intro/resources.adoc[]
 * xref:appendix/index.adoc[]
 ** xref:guide-cypher-basics.adoc[]
 ** xref:guide-build-a-recommendation-engine.adoc[]
