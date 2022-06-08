@@ -1,0 +1,12 @@
+[[appendix]]
+= Appendix
+:description: Cypher tutorials, 
+
+In this section you can find useful additional information. +
+The appendix contains tutorials that explain how to create and explore graphs using Cypher - Neo4j graph query language.
+// Here we can place: 
+// the Getting Started resources, 
+// links to the GraphAcademy courses, 
+// links to the Developer blog posts, 
+// links to the Knowledge Base articles or description of it. 
+
