@@ -1,0 +1,60 @@
+[[data-modeling]]
+= Graph data modeling
+:description: graph-modeling, data-model, schema, create-model, translate-model, model-performance, model-example
+
+[#graph-modeling]
+This section is designed to give you the tools you need to design and implement an efficient and flexible graph database technology through a good graph data model. +
+Best practices and tips gathered from Neo4j's tenure of building and recommending graph technologies provide you with the confidence to build graph-based solutions with rich data models.
+The focus of this section is to provide you with the necessary guidelines and tools to help you model your domain as a graph. +
+Here you find brief descriptions of the following  
+
+// image::graph_data_modeling.jpg[role="popup-link"]
+
+// We should add a new section about tools for modeling:
+// * Arrows - application (use Labs docs and videos)
+// * Data Importer - right now as a part of Aura
+// * Cypher Workbench (???)
+
+[#create-graph-model]
+== How to create a graph data model
+
+To start, _Graph Modeling Guidelines_ introduces the basic process of designing a graph data model and walks you through the first steps to create a graph data model, building upon the foundations of the property graph data model.
+
+It helps you determine the questions you need to ask and share design considerations, best practices learned from experts through the years, and tips for building a more flexible and clean data model to structure your data model for the best results.
+
+xref:guide-data-modeling.adoc[Graph modeling guidelines] +
+xref:modeling-designs.adoc[Modeling designs]
+
+[#rdbms-graph-schema]
+== Translating an RDBMS schema to graph
+
+If you want to relate your existing knowledge of relational data models to the graph data model or to convert an existing relational model to graph, next section helps you translate that existing ERD skill and design to a graph data model.
+
+From typical process steps to conversion mappings, we will walk through how the process can differ and what tables and columns look like as a graph.
+
+xref:relational-to-graph-modeling.adoc[Modeling: relational to graph]
+
+[#optimize-graph-model]
+== Optimizing graph data models
+
+Finally, your data model may be working, but you find that query performance or other aspects are not giving you the quality you desired.
+The data model can affect queries and performance of your use case.
+
+Learn how to improve your graph solution and maximize the capabilities of what is existing with recommendations for optimization techniques and ideas.
+
+xref:modeling-tips.adoc[Graph modeling tips]
+
+[#graphgist-models]
+== Live graph models - GraphGists
+
+If you look for graph data model examples or ideas, go to our Neo4j GraphGists, where the Neo4j Community share examples of their solutions.
+Based on your use case or industry, you can find some projects that could aid your design process.
+
+Visit our link:https://neo4j.com/graphgists/[GraphGists page^] and explore a rich variety of examples the Neo4j user community created! They are valuable and help developers and others by showing real-life solutions.
+
+
+[#Online-training]
+== Online training
+
+Learn everything you need to know about data modeling in Neo4j with the link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/[free Graph Data Modeling Fundamentals course^] on link:https://graphacademy.neo4j.com/courses/[Neo4j GraphAcademy^]. +
+This course is part of the link:https://graphacademy.neo4j.com/categories/beginners/[Beginners learning path^] which features four courses designed to teach you everything you need to know to feel confident working with Neo4j.
