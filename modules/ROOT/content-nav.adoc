@@ -24,6 +24,8 @@
 ** xref:data-modeling/modeling-tips.adoc[]
 ** xref:data-modeling/graph-model-refactoring.adoc[]
 ** xref:data-modeling/data-modeling-tools.adoc[]
+* xref:graph-visualization/graph-visualization.adoc[]
+** xref:graph-visualization/graph-visualization-tools.adoc[]
 * xref:appendix/index.adoc[]
 ** xref:guide-cypher-basics.adoc[]
 ** xref:guide-build-a-recommendation-engine.adoc[]
