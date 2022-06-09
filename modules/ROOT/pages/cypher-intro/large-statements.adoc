@@ -103,3 +103,59 @@ Rows: 1
 | 'Tom Hanks' | 2           | ['Cloud Atlas', 'Forrest Gump'] |
 +-------------------------------------------------------------+
 ----
+
+Using the `WITH` clause you can pass values from one section of a query to another.
+This allows you to execute some intermediate calculations or operations within your query to use later.
+
+You must specify the variables in the `WITH` clause that you want to use later.
+Only those variables will be passed to the next part of the query.
+There are a variety of ways to use this functionality (e.g. count, collect, filter, limit results), but we will show a couple, including a cleaner version of our `size()` query from above (see xref:results.adoc#aggregate-size[Counting values in a list]).
+For more information and ways to use `WITH`, check out the link:https://neo4j.com/docs/cypher-manual/current/clauses/with/[Cypher Manual section^].
+
+[source, cypher]
+----
+//Query7: find and list the technologies people like
+MATCH (a:Person)-[r:LIKES]-(t:Technology)
+WITH a.name AS name, collect(t.type) AS technologies
+RETURN name, technologies;
+----
+
+.Query7 Results:
+image:cypher_results_with.jpg[role="popup-link"]
+
+[source, cypher]
+----
+//Query8: find number of friends who have other friends - cleaner Query6
+MATCH (p:Person)-[:IS_FRIENDS_WITH]->(friend:Person)
+WITH p, collect(friend.name) AS friendsList, size((friend)-[:IS_FRIENDS_WITH]-(:Person)) AS numberOfFoFs
+WHERE numberOfFoFs > 1
+RETURN p.name, friendsList, numberOfFoFs;
+----
+
+.Query8 Results:
+image:cypher_results_with_filter.jpg[role="popup-link"]
+
+In the first query, we pass the `Person` name, and a collected list of the `Technology` types.
+Only these items can be referenced in the `RETURN` clause.
+We cannot use the relationship (`r`) or even the `Person` birthdate because we did not pass those values along.
+
+In the second query, we can only reference `p` and any of its properties (name, birthdate, yrsExperience, twitter), the collection of friends (as a whole, not each value), and the number of friend-of-friends.
+Since we passed those values in the `WITH` clause, we can use those in our `WHERE` or `RETURN` clauses.
+
+`WITH` requires all values passed to have a variable (if they do not already have one).
+Our `Person` nodes were given a variable (`p`) in the `MATCH` clause, so we do not need to assign a variable there.
+
+[NOTE]
+--
+`WITH` is also very helpful for setting up parameters before the query.
+Often useful for parameter keys, url strings, and other query variables when importing data.
+
+[source,cypher]
+----
+//find people with 2-6 years of experience
+WITH 2 AS experienceMin, 6 AS experienceMax
+MATCH (p:Person)
+WHERE experienceMin <= p.yrsExperience <= experienceMax
+RETURN p
+----
+--
