@@ -27,6 +27,5 @@
 * xref:appendix/index.adoc[]
 ** xref:guide-cypher-basics.adoc[]
 ** xref:guide-build-a-recommendation-engine.adoc[]
-* xref:getting-started-resources.adoc[]
-* xref:appendix/index.adoc[]
 ** xref:appendix/example-data.adoc[]
+* xref:getting-started-resources.adoc[]
