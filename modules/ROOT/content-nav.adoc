@@ -10,3 +10,5 @@
 ** xref:cypher-intro/large-statements.adoc[]
 ** xref:cypher-intro/schema.adoc[]
 ** xref:cypher-intro/load-csv.adoc[]
+* xref:graph-visualization/graph-visualization.adoc[]
+** xref:graph-visualization/graph-visualization-tools.adoc[]
