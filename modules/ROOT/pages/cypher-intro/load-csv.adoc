@@ -1,6 +1,6 @@
 :description: This tutorial demonstrates how to import data from CSV files using `LOAD CSV`.
 [[cypher-intro-load-csv]]
-= Import data
+= Tutorial: Import data
 
 [abstract]
 --
