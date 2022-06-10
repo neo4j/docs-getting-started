@@ -24,6 +24,7 @@
 ** xref:data-modeling/modeling-tips.adoc[]
 ** xref:data-modeling/graph-model-refactoring.adoc[]
 ** xref:data-modeling/data-modeling-tools.adoc[]
+* xref:integration-tools/integration.adoc[]
 * xref:graph-visualization/graph-visualization.adoc[]
 ** xref:graph-visualization/graph-visualization-tools.adoc[]
 * xref:appendix/index.adoc[]
