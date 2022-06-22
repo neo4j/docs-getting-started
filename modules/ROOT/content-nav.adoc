@@ -3,6 +3,10 @@
 * xref:get-started-with-neo4j.adoc[]
 * xref:graphdb-concepts.adoc[]
 * xref:graphdb-vs-rdbms.adoc[]
+* xref:data-import/data-import.adoc[]
+** xref:data-import/csv-import.adoc[]
+** xref:data-import/json-rest-api-import.adoc[]
+** xref:data-import/relational-to-graph-import.adoc[]
 * xref:cypher-intro/index.adoc[]
 ** xref:cypher-intro/patterns.adoc[]
 ** xref:cypher-intro/patterns-in-practice.adoc[]
@@ -10,3 +14,6 @@
 ** xref:cypher-intro/large-statements.adoc[]
 ** xref:cypher-intro/schema.adoc[]
 ** xref:cypher-intro/load-csv.adoc[]
+* Appendix
+** xref:appendix/guide-import-relational-and-etl.adoc[]
+** xref:appendix/guide-import-desktop-csv.adoc[]
