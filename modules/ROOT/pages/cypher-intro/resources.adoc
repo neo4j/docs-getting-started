@@ -1,0 +1,47 @@
+[[resources]]
+= Cypher resources
+:author: Jennifer Reif
+:category: cypher
+:tags: cypher, queries, graph-queries, resources, documentation, cypher-training, cypher-help
+:page-pagination: previous
+:page-aliases: ROOT:cypher-resources.adoc
+:page-newsletter: true
+
+== Cypher resources
+
+To help you along your path of learning more about Cypher and how to use it, we want to provide you with the resources we used throughout this section, as well as a few additional links for further knowledge and development.
+
+[#cypher-docs]
+== Cypher basics and documentation
+* https://graphacademy.neo4j.com/courses/cypher-fundamentals/[GraphAcademy - Cypher Fundamentals].  Learn Cypher in 60 minutes.
+* https://neo4j.com/docs/cypher-manual/current/[Documentation: Cypher Manual^]
+* https://neo4j.com/docs/cypher-refcard/current/[Cypher Refcard^]
+* https://community.neo4j.com/c/neo4j-graph-platform/cypher[Neo4j Community Site: Ask Questions, Get Answers on Cypher^]
+
+[#cypher-sql-dev]
+== Cypher for SQL developers
+* https://youtu.be/NO3C-CWykkY[Video: SQL to Cypher^]
+* https://neo4j.com/whitepapers/rdbms-developers-graph-databases-ebook/[Free eBook: Graphs for RDBMS Developers^]
+
+[#other-cypher-resources]
+== Other resources
+* https://medium.com/neo4j/cypher-query-optimisations-fe0539ce2e5c[Medium Blog: Cypher Optimization^]
+* Blog series, Handling Dates and Temporals in Cypher: https://neo4j.com/developer-blog/cypher-sleuthing-dealing-with-dates-part-1/[Part 1^], https://neo4j.com/developer-blog/cypher-sleuthing-dealing-with-dates-part-2/[Part 2^], https://neo4j.com/developer-blog/cypher-sleuthing-dealing-with-dates-part-3/[Part 3^]
+* https://markhneedham.com/blog/tag/cypher/[Blog: Mark Needham on Cypher^]
+* https://maxdemarzi.com/category/cypher/[Blog: Max De Marzi on Cypher^]
+* https://www.airpair.com/neo4j/posts/getting-started-with-neo4j-and-cypher[Tutorial by Eve Freeman: Building an ACL with Cypher^]
+* https://medium.com/neo4j[Neo4j Medium Blog Channel^]
+
+
+[.discrete.ad]
+== link:https://graphacademy.neo4j.com/?ref=guides[Learn with GraphAcademy^]
+
+image::https://graphacademy.neo4j.com/courses/cypher-fundamentals/badge/[float=left, width=100]
+
+[.discrete]
+=== link:https://graphacademy.neo4j.com/courses/cypher-fundamentals/?ref=guides[Cypher Fundamentals^]
+
+This course teaches you the essentials of using Cypher, Neo4j’s powerful query language, in as little time as possible, with videos, quizzes and hands-on exercises.
+
+
+link:https://graphacademy.neo4j.com/courses/cypher-fundamentals/?ref=guides[Learn Cypher with GraphAcademy^,role=button]

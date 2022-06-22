@@ -1,0 +1,19 @@
+[[integration-tools]]
+= Neo4j integration tools
+:category: integrations
+:tags: integrations, tools, libraries, connectors, kafka, spark, bi-connector
+
+[#neo4j-integration]
+Neo4j is supported by a rich ecosystem of libraries, tools, drivers, and guides provided by partners, users, and community contributors.
+We want to give an overview about what's available and link to the original sources.
+
+Neo4j Connectors are integrations provided by Neo4j and are supported for existing Enterprise customers.
+
+* link:https://neo4j.com/docs/spark/current/[Neo4j Connector for Apache Spark]
+* link:https://neo4j.com/labs/kafka/4.0/[Neo4j Connector for Apache Kafka] (also known as Neo4j-Streams)
+* link:https://neo4j.com/bi-connector/[Neo4j Connector for Business Intelligence]
+
+
+////
+we have blogs on data connectors. Consult with David Allen, Richard Macaskill, the connectors team. What are the perspectives of this project? The concept? Right now I can see only few (three) different tools with their own functionalities. How to represent them?
+////
