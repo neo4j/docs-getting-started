@@ -51,7 +51,12 @@ Other example datasets that you can run within your own Neo4j Browser are:
 
 == AuraDB Free example datasets
 
-When creating a new database in Neo4j AuraDB, besides the default empty you can also select one with the built-in Movie Graph and explore it following the Browser guide instructions.
+When creating a new database in Neo4j AuraDB, besides the default empty you can also select one of the starting datasets:
+
+* The Movie Graph
+* Graphs for Cybersecurity
+
+You can explore them following the Browser guides instructions and test data with suggested Cypher queries.
 
 In addition, you have few options to download graph data into Aura from other Neo4j instances:
 
