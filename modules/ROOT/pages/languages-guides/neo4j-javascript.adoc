@@ -1,0 +1,191 @@
+[[neo4j-javascript]]
+= Neo4j from JavaScript
+:level: Intermediate
+:page-level: Intermediate
+:author: Neo4j
+:programming-language: javascript
+:category: drivers
+:tags: javascript, official-driver, app-development, applications
+:description: If you are a JavaScript developer, this guide provides an overview of options for connecting to Neo4j.
+// :page-ad-overline-link: https://graphacademy.neo4j.com/
+// :page-ad-overline: Neo4j GraphAcademy
+// :page-ad-title: Building Neo4j Applications with Node.js
+// :page-ad-description: Learn how to interact with Neo4j from your Node.js app using the Neo4j Python Driver
+// :page-ad-link: https://graphacademy.neo4j.com/courses/app-nodejs/
+// :page-ad-underline: Learn more
+
+[abstract]
+{description}
+While this guide is not comprehensive it will introduce the different Drivers and link to the relevant resources.
+
+[abstract]
+You should be familiar with link:https://neo4j.com/docs/getting-started/current/graphdb-concepts/[graph database concepts] and the property graph model.
+You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or link:/download/[installed Neo4j locally].
+
+[#neo4j-javascript]
+== Neo4j for JavaScript Developers
+
+// image::{img}nodejs.png[float=right,width=300]
+
+Neo4j provides drivers which allow you to make a connection to the database and develop applications
+which create, read, update, and delete information from the graph.
+
+You can use the official driver for JavaScript (neo4j-driver) or connect via HTTP using the `request` module or any of our community drivers.
+
+[.discrete.ad]
+== link:https://graphacademy.neo4j.com/?ref=guides[Learn with GraphAcademy^]
+
+image::https://graphacademy.neo4j.com/courses/app-nodejs/badge/[width=100, float=left]
+
+[.discrete]
+=== link:https://graphacademy.neo4j.com/courses/app-nodejs/?ref=guides[Building Neo4j Applications with Node.js^]
+
+In this free course, we walk through the steps to integrate Neo4j into your Node.js projects.
+You will learn about the Neo4j JavaScript Driver, how sessions and transactions work and how to query Neo4j from an existing application.
+
+link:https://graphacademy.neo4j.com/courses/app-nodejs/?ref=guides[Learn more^,role=button]
+
+
+[#javascript-driver]
+== Neo4j Javascript Driver
+
+
+The Neo4j JavaScript driver is *officially supported* by Neo4j and connects to the database using the binary protocol.
+It aims to be minimal, while being idiomatic to JavaScript, allowing you to subscribe to a stream of responses, errors and completion events.
+
+[source, shell, subs=attributes,specialcharacters]
+----
+npm install neo4j-driver
+----
+
+
+[source, javascript, subs=attributes]
+----
+include::https://raw.githubusercontent.com/neo4j/neo4j-javascript-driver/4.0/test/examples.test.js[tag=language-guide-page,indent=0]
+----
+
+
+[#driver-configuration]
+=== Driver Configuration
+
+From Neo4j version **4.0** and onwards, the default encryption setting is *off* by default and Neo4j will no longer generate self-signed certificates.
+This applies to default installations, installations through Neo4j Desktop and Docker images.
+You can https://neo4j.com/docs/migration-guide/current/upgrade-driver/#_configure_ssl_policy_for_bolt_server_and_https_server[verify the encryption level of your server^] by checking the `dbms.connector.bolt.enabled` key in `neo4j.conf`.
+
+// tag::table[]
+.Table Scheme Usage
+|===
+| Certificate Type | Neo4j Causal Cluster | Neo4j Standalone Server  | Direct Connection to Cluster Member
+
+| *Unencrypted*
+| `neo4j`
+| `neo4j`
+| `bolt`
+
+| *Encrypted with Full Certificate*
+| `neo4j+s`
+| `neo4j+s`
+| `bolt+s`
+
+
+| *Encrypted with Self-Signed Certificate*
+| `neo4j+ssc`
+| `neo4j+ssc`
+| `bolt+ssc`
+
+| *https://neo4j.com/aura/[Neo4j AuraDB^]*
+| `neo4j+s`
+| N/A
+| N/A
+
+|===
+
+
+Please review your https://neo4j.com/docs/operations-manual/current/security/ssl-framework/[SSL Framework settings^] when going into production.
+If necessary, you can also https://medium.com/neo4j/getting-certificates-for-neo4j-with-letsencrypt-a8d05c415bbd[generate certificates for Neo4j with Letsencrypt^]
+// end::table[]
+
+[cols="3*"]
+|===
+| Name
+| icon:tag[] Version
+| icon:user[] Authors
+
+| neo4j-driver
+| {javascript-driver-version}
+| The Neo4j Team
+
+| https://www.npmjs.com/package/neo4j-driver[icon:gift[] Package]
+|
+| https://community.neo4j.com/c/drivers-stacks/javascript[Neo4j Online Community^]
+
+| https://neo4j.com/docs/javascript-manual/current/[icon:book[] Docs^]
+| link:/docs/api/javascript-driver/current/[icon:code[] API]
+| http://github.com/neo4j/neo4j-javascript-driver[icon:github[] Source]
+|===
+
+=== The Example Project
+
+The Neo4j example project is a small, one page webapp for the movies database built into the Neo4j tutorial.
+The front-end page is the same for all drivers: movie search, movie details, and a graph visualization of actors and movies.
+Each backend implementation shows you how to connect to Neo4j from each of the different languages and drivers.
+
+You can learn more about our small, consistent example project across many different language drivers link:/developer/example-project[here^].
+You will find the implementations for all drivers as https://github.com/neo4j-examples?q=movies[individual GitHub repositories^], which you can clone and deploy directly.
+
+[#community-drivers]
+== Neo4j Community Drivers
+
+Members of the each programming language community have invested a lot of time and love to develop each one of the community drivers for Neo4j, so if you use any one of them, please provide feedback to the authors.
+
+====
+[NOTE]
+icon:users[size=2x]
+The community drivers have been graciously contributed by the Neo4j community.
+Many of them are fully featured and well-maintained, but some may not be.
+Neo4j does not take any responsibility for their usability.
+====
+
+[#js2neo-lib]
+=== js2neo
+
+As a demonstration of a minimal JavaScript based bolt driver, Nigel Small put together https://js2neo.org/[js2neo^].
+
+[#js-http-endpoint]
+== Using the HTTP-Endpoint directly
+
+You can use something as simple as the `request` node-module to send queries to and receive responses from Neo4j.
+The endpoint protocol and formats are explained in detail in the link:/docs/http-api/current/introduction/[Neo4j Manual^].
+It enables you do to much more, e.g. sending many statements per request or keeping transactions open across multiple requests.
+
+Here is a very simple example:
+
+.Simple Function Accessing the Remote Endpoint
+[source, javascript]
+----
+var r=require("request");
+var txUrl = "http://localhost:7474/db/data/transaction/commit";
+function cypher(query,params,cb) {
+  r.post({uri:txUrl,
+          json:{statements:[{statement:query,parameters:params}]}},
+         function(err,res) { cb(err,res.body)})
+}
+----
+
+.Running the Function
+[source, javascript]
+----
+var query="MATCH (n:User) RETURN n, labels(n) as l LIMIT {limit}"
+var params={limit: 10}
+var cb=function(err,data) { console.log(JSON.stringify(data)) }
+
+cypher(query,params,cb)
+
+{"results":[
+  {"columns":["n","l"],
+   "data":[
+     {"row":[{"name":"Aran"},["User"]]}
+    ]
+  }],
+ "errors":[]}
+----

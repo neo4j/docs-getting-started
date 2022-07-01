@@ -1,0 +1,138 @@
+[[neo4j-go]]
+= Using Neo4j from Go
+:go-driver-version: 4.4.3
+:tags: golang, go, app-development, applications
+:description: If you are a Go developer, this guide provides an overview of options for connecting to Neo4j. While this guide is not comprehensive it will introduce the different drivers and link to the relevant resources.
+
+[abstract]
+{description}
+
+You should be familiar with link:https://neo4j.com/docs/getting-started/current/graphdb-concepts/[graph database concepts] and the property graph model.
+You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or link:/download/[installed Neo4j locally].
+
+
+[#neo4j-go]
+== Neo4j for Go Developers
+
+// image::{img}GO.jpg[width=150,float=right]
+
+Neo4j provides drivers which allow you to make a connection to the database and develop applications
+which create, read, update, and delete information from the graph.
+
+[#go-driver]
+== Neo4j Go Driver
+
+
+The Neo4j Go driver is *officially supported* by Neo4j and connects to the database using the binary bolt protocol.
+It aims to be minimal, while being idiomatic to Go.
+
+=== Module version
+Make sure your application has been set up to use go modules (there should be a go.mod file in your application root). Add the driver with:
+
+[source, shell, subs="attributes, specialcharacters"]
+----
+go get github.com/neo4j/neo4j-go-driver/v4
+----
+
+If you need to pin a specific https://github.com/neo4j/neo4j-go-driver/tags[*4.x* version], you can run this instead:
+----
+go get github.com/neo4j/neo4j-go-driver/v4@<4.x tag>
+----
+
+where `<4.x tag>` is one of the available tag (e.g.: `v4.2.4`).
+
+[source, go, subs="attributes"]
+----
+include::https://raw.githubusercontent.com/neo4j/neo4j-go-driver/v{go-driver-version}/neo4j/test-integration/examples_test.go[tag=hello-world,indent=0]
+----
+
+[#driver-configuration]
+=== Driver Configuration
+
+From Neo4j version **4.0** and onwards, the default encryption setting is *off* by default and Neo4j will no longer generate self-signed certificates.
+This applies to default installations, installations through Neo4j Desktop and Docker images.
+You can https://neo4j.com/docs/migration-guide/current/upgrade-driver/#_configure_ssl_policy_for_bolt_server_and_https_server[verify the encryption level of your server^] by checking the `dbms.connector.bolt.enabled` key in `neo4j.conf`.
+
+// tag::table[]
+.Table Scheme Usage
+|===
+| Certificate Type | Neo4j Causal Cluster | Neo4j Standalone Server  | Direct Connection to Cluster Member
+
+| *Unencrypted*
+| `neo4j`
+| `neo4j`
+| `bolt`
+
+| *Encrypted with Full Certificate*
+| `neo4j+s`
+| `neo4j+s`
+| `bolt+s`
+
+
+| *Encrypted with Self-Signed Certificate*
+| `neo4j+ssc`
+| `neo4j+ssc`
+| `bolt+ssc`
+
+| *https://neo4j.com/aura/[Neo4j AuraDB^]*
+| `neo4j+s`
+| N/A
+| N/A
+
+|===
+
+
+Please review your https://neo4j.com/docs/operations-manual/current/security/ssl-framework/[SSL Framework settings^] when going into production.
+If necessary, you can also https://medium.com/neo4j/getting-certificates-for-neo4j-with-letsencrypt-a8d05c415bbd[generate certificates for Neo4j with Letsencrypt^]
+// end::table[]
+
+
+[cols="3*"]
+|===
+| Name
+| icon:tag[] Version
+| icon:user[] Authors
+
+| neo4j-driver
+| {go-driver-version}
+| The Neo4j Team
+
+| https://community.neo4j.com/c/drivers-stacks/go[Neo4j Online Community^]
+
+| https://neo4j.com/docs/go-manual/current/[icon:book[] Docs^]
+| https://godoc.org/github.com/neo4j/neo4j-go-driver/neo4j[icon:code[] API]
+| https://github.com/neo4j/neo4j-go-driver[icon:github[] Source]
+|===
+
+=== The Example Project
+
+The Neo4j example project is a small, one page webapp for the Movies database built into the Neo4j tutorial.
+The front-end page is the same for all drivers: movie search, movie details, and a graph visualization of actors and movies.
+Each backend implementation shows you how to connect to Neo4j from each of the different languages and drivers.
+
+You can learn more about our small, consistent example project across many different language drivers xref:appendix/example-data.adoc[here].
+You can find the implementations for all drivers as https://github.com/neo4j-examples?q=movies[individual GitHub repositories^], which you can clone and deploy directly.
+
+[#community-drivers]
+== Neo4j Community Drivers
+
+Members of the each programming language community have invested a lot of time and love to develop each one of the community drivers for Neo4j, so if you use any one of them, please provide feedback to the authors.
+
+====
+[NOTE]
+icon:users[size=2x]
+The community drivers have been graciously contributed by the Neo4j community.
+Many of them are fully featured and well-maintained, but some may not be.
+Neo4j does not take any responsibility for their usability.
+====
+
+[#golang-bolt]
+=== GoGM: Golang Object Graph Mapper
+
+[cols="1,4"]
+|===
+| icon:user[] Author | https://github.com/erictg[Eric Solender^], CTO and co-founder of https://mindstand.com/about-us/[Mindstand^]
+// | icon:gift[] Package |
+| icon:github[] Source | https://github.com/mindstand/gogm
+| icon:book[] Docs | https://github.com/mindstand/gogm/blob/master/README.md
+|===

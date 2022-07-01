@@ -1,0 +1,141 @@
+[[java]]
+= Using Neo4j from Java
+:aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
+:java-driver-version: 4.4.5
+:maven-artifact-info: https://search.maven.org/artifact/org.neo4j.driver/neo4j-java-driver/{java-driver-version}/jar
+:examples: https://github.com/neo4j-examples
+:programming-language: java
+:tags: java, project, official-driver, app-development, applications
+:description: If you are a Java developer, this guide provides an overview of options for connecting to Neo4j.
+
+[abstract]
+{description}
+While this guide is not comprehensive, it introduces the different APIs and links to the relevant resources.
+
+[abstract]
+You should be familiar with link:https://neo4j.com/docs/getting-started/current/graphdb-concepts/[graph database concepts] and the property graph model.
+You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or link:/download/[installed Neo4j locally].
+When developing with Neo4j, please use Java 8 or 11 and your favorite IDE.
+
+
+[#neo4j-java]
+== Neo4j for Java developers
+
+// image::{img}java.jpg[float=right,width=200]
+
+Neo4j provides drivers which allow you to make a connection to the database and develop applications
+which create, read, update, and delete information from the graph.
+
+For Community Edition and Enterprise Edition, you can also extend Neo4j by implementing *user defined procedures for Cypher* in Java or other JVM languages.
+
+// ****
+// [NOTE]
+// Please note the minimum version compatibilities: +
+// Neo4j Server 3.x - Java 8 +
+// Neo4j Server 4.x - Java 11
+// ****
+
+=== The Example Project
+
+The Neo4j example project is a small, one page webapp for the movies database built into the Neo4j tutorial.
+The front-end page is the same for all drivers: movie search, movie details, and a graph visualization of actors and movies.
+Each backend implementation shows you how to connect to Neo4j from each of the different languages and drivers.
+
+You can learn more about our small, consistent example project across many different language drivers link:/developer/example-project[here^].
+You will find the implementations for all drivers as https://github.com/neo4j-examples?q=movies[individual GitHub repositories^], which you can clone and deploy directly.
+
+
+[#java-driver]
+== Neo4j Java Driver
+
+
+The Neo4j Java driver is *officially supported* by Neo4j and connects to the database using the binary protocol.
+It aims to be minimal, while being idiomatic to Java.
+We support Java 8 and 11 for the driver.
+
+When using Maven, add this to your _pom.xml_ file:
+
+[source, xml, subs="attributes, specialcharacters"]
+----
+<groupId>org.neo4j.driver</groupId>
+<artifactId>neo4j-java-driver</artifactId>
+<version>{java-driver-version}</version>
+----
+
+For Gradle or Grails, this is how to add the dependency:
+
+[source, groovy, subs="attributes, specialcharacters"]
+----
+compile 'org.neo4j.driver:neo4j-java-driver:{java-driver-version}'
+----
+
+For other build systems, see {maven-artifact-info}[information available at Maven Central].
+
+[source,java, subs="attributes, specialcharacters"]
+----
+include::https://github.com/neo4j/neo4j-java-driver/raw/{java-driver-version}/examples/src/main/java/org/neo4j/docs/driver/HelloWorldExample.java[tag=hello-world-import]
+
+include::https://github.com/neo4j/neo4j-java-driver/raw/{java-driver-version}/examples/src/main/java/org/neo4j/docs/driver/HelloWorldExample.java[tag=hello-world]
+----
+
+
+[#driver-configuration]
+=== Driver configuration
+
+From Neo4j version **4.0** and onwards, the default encryption setting is *off* and Neo4j no longer generates self-signed certificates.
+This applies to default installations, installations through Neo4j Desktop and Docker images.
+You can https://neo4j.com/docs/migration-guide/current/upgrade-driver/#_configure_ssl_policy_for_bolt_server_and_https_server[verify the encryption level of your server^] by checking the `dbms.connector.bolt.enabled` key in `neo4j.conf`.
+
+// tag::table[]
+.Table Scheme Usage
+|===
+| Certificate Type | Neo4j Causal Cluster | Neo4j Standalone Server  | Direct Connection to Cluster Member
+
+| *Unencrypted*
+| `neo4j`
+| `neo4j`
+| `bolt`
+
+| *Encrypted with Full Certificate*
+| `neo4j+s`
+| `neo4j+s`
+| `bolt+s`
+
+
+| *Encrypted with Self-Signed Certificate*
+| `neo4j+ssc`
+| `neo4j+ssc`
+| `bolt+ssc`
+
+| *https://neo4j.com/aura/[Neo4j AuraDB^]*
+| `neo4j+s`
+| N/A
+| N/A
+
+|===
+
+
+Review your https://neo4j.com/docs/operations-manual/current/security/ssl-framework/[SSL Framework settings^] when going into production.
+If necessary, you can also https://medium.com/neo4j/getting-certificates-for-neo4j-with-letsencrypt-a8d05c415bbd[generate certificates for Neo4j with Letsencrypt^]
+// end::table[]
+
+[cols="3*"]
+|===
+| Name
+| icon:tag[] Version
+| icon:user[] Authors
+
+| neo4j-java-driver
+| {java-driver-version}
+| The Neo4j Team
+
+| {maven-artifact-info}[icon:gift[] Package]
+| {examples}/movies-java-bolt[icon:play-circle[] Example]
+| https://community.neo4j.com/c/drivers-stacks/java[Neo4j Online Community^]
+
+| https://neo4j.com/docs/java-manual/current/[icon:book[] Docs^]
+| https://neo4j.com/docs/api/java-driver/current/[icon:code[] API]
+| https://github.com/neo4j/neo4j-java-driver[icon:github[] Source]
+
+
+|===

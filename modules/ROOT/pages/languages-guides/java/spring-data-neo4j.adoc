@@ -1,0 +1,480 @@
+[[spring-data-neo4j]]
+= Spring Data Neo4j
+:aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
+:spring-boot-version: 2.5.0
+:spring-data-neo4j-version: 6.1.1
+:testcontainers-version: 1.15.3
+:examples: https://github.com/neo4j-examples
+:tags: spring, spring-data, SDN, reactive, app-development, applications
+:description: For Java developers who use the Spring Framework or Spring Boot and want to take advantage of reactive development principles, this guide introduces Spring integration through the Spring Data Neo4j project.
+
+
+[abstract]
+{description}
+The library provides convenient access to Neo4j including object mapping, Spring Data repositories, conversion, transaction handling, reactive support, and more.
+
+[abstract]
+* Familiarity with xref:graph-database.adoc[graph database] concepts and the xref:graph-database.adoc#property-graph[property graph model].
+* link:{aura_signup}[Create an AuraDB Free instance] and familiarity with the link:/developer/cypher-query-language[Cypher query language]
+* Some knowledge/experience with Spring.
+Knowing https://spring.io/projects/spring-data/[Spring Data^] and https://spring.io/projects/spring-boot/[Spring Boot^] are both great additions to your toolbox, as well.
+* For this library, please use JDK 11 or later and your favorite IDE.
+
+
+[#reactive-development]
+== Reactive Development
+
+Neo4j (version 4.0+) incorporated the principles of the https://www.reactivemanifesto.org/[reactive manifesto^] for passing data between the database and client with the drivers.
+Developers can take advantage of the reactive approach to process queries and return results.
+This means that communication between the driver, and the database can be managed and adjusted dynamically according to data needs of the client.
+
+Reactive programming principles allow the consuming side (applications and other systems) to specify the amount of data received within a certain window of time.
+Neo4j's database driver will also maintain rate limits for requesting data from the server, providing flow control throughout the entire Neo4j stack.
+
+No matter the volume of transactions or data (even during times of high activity), the system can maintain limits on how much it can send and receive at once based on available resources.
+This prevents overloads and collapses or failures, as well as lost transmissions or later catch up loads during the downtime.
+
+https://projectreactor.io/[Project Reactor^] is the core foundation of many implementations of reactive development, including https://spring.io/reactive[Spring's^].
+Neo4j uses the Spring implementation of Project Reactor components to provide reactive support in related applications with the graph database.
+
+[#spring-data]
+== Spring Data Neo4j
+
+The Spring Data Neo4j 6 is the new major version of the Spring Data Neo4j project.
+One of its feature benefit is the capability and support for reactive transactions, though there are other improvements and additions
+such as fully immutable entity and https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/Record.html[Java record]-based mapping support.
+
+While SDN provides both imperative and reactive application development, this guide will focus on the reactive implementation.
+Imperative application code and documentation in SDN is available on the https://github.com/spring-projects/spring-data-neo4j[Github project^].
+
+We can see some of the most prominent features and changes in the SDN library listed below.
+
+=== Features
+
+* Support for both imperative and reactive application development
+* Lightweight mapping with built-in OGM (object graph mapping) library
+* Immutable entities (for both Java and Kotlin languages)
+* New Neo4j client and reactive client feature for template-over-driver architecture
+
+SDN has full support for the well-known and understood imperative programming model (much like Spring Data JDBC or JPA).
+It also provides full support for the newer reactive programming based on http://www.reactive-streams.org[Reactive Streams^], including https://spring.io/blog/2019/05/16/reactive-transactions-with-spring[reactive transactions^].
+Both functionalities are included in the same binary.
+
+[NOTE]
+--
+The reactive programming model requires a 4.0+ Neo4j instance (previous versions do not support reactive drivers) and reactive Spring on the application side.
+--
+
+One key difference of SDN 6 from the previous version of Spring Data Neo4j is that the OGM (object-graph mapping) layer is no longer a separate library.
+Instead, the Spring Data infrastructure now handles OGM's functionality.
+
+[#getting-started]
+== Getting started
+
+Over the next few sections, we will walk through all of the steps for creating a reactive application.
+
+[#prepare-db]
+== Prepare the database
+
+For this example, we will use the Neo4j-standard movie graph data set because it comes for free with every Neo4j instance and is a small size.
+
+If you haven't already, link:/download/[download Neo4j Desktop^] and xref:neo4j-desktop.adoc#desktop-create-DBMS[create/start a database].
+
+You can interact with the database and load the data in a web browser with the URL http://localhost:7474/browser/?cmd=play&arg=movies[http://localhost:7474^].
+Note the command ready to run in the prompt (`:play movies`).
+Execute that command, and an interactive slidedeck will appear just below the command line.
+On the second slide of that guide, execute the long Cypher statement to fill your database with our movie test data.
+
+[#create-project]
+== Create a new Spring Boot project
+
+The easiest way to set up a Spring Boot project is with the Spring Initializr at https://start.spring.io[start.spring.io^].
+It is also integrated in the major IDEs, in case you prefer not to use the website.
+
+Then, you can change the default group, artifact, name, and description for the project.
+Next, we can choose our project dependencies.
+We can search for and add the `Neo4j` and `Spring Reactive Web` starter to get what we need to create a reactive, Spring-based web application.
+
+Once those steps are complete, we can click the `Generate` button at the bottom to create the skeleton for our project and download it.
+The Spring Initializr will take care of creating the project structure for you, with the basic files and settings in place for the selected build tool.
+
+=== Other dependencies
+
+If you are looking at the project in Github, you might notice that there are some other dependencies in the `pom.xml`.
+A couple are for adding tests to the project, then one dependency for developer tools, and a couple more for test containers.
+
+More information on the testing functionality can be found in the https://docs.spring.io/spring-data/neo4j/docs/current/reference/html/#sdn.testing[documentation^].
+
+.Testing and dev tools dependencies
+[source,xml,subs="verbatim,attributes"]
+----
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>io.projectreactor</groupId>
+    <artifactId>reactor-test</artifactId>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>org.testcontainers</groupId>
+    <artifactId>junit-jupiter</artifactId>
+    <version>{testcontainers-version}</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>org.testcontainers</groupId>
+    <artifactId>neo4j</artifactId>
+    <version>{testcontainers-version}</version>
+    <scope>test</scope>
+</dependency>
+----
+
+[#adding-config]
+== Adding configurations
+
+Now, we need to add a few configurations to connect to the database.
+We can find the `application.properties` file and configure what we need.
+
+[source,properties]
+----
+spring.neo4j.uri=neo4j+s://abcd.databases.neo4j.io
+spring.neo4j.authentication.username=neo4j
+spring.neo4j.authentication.password=secret
+----
+
+[NOTE]
+--
+You need to adjust the password to whatever you set when you created your instance of Neo4j.
+--
+
+The first three lines are our Neo4j database URI and credentials.
+The username and password you enter here should match for your individual database.
+This is the bare minimum of what you need to connect to a Neo4j instance.
+
+We do not need to add any other configuration for the driver, thanks to the Spring Boot Driver autoconfiguration provided out of the box with SDN 6.
+
+=== Other configurations
+
+==== Logging
+
+There is also one additional property we could define.
+It is not a required property, but does allow us to see the Cypher statements and see better insight into what is running behind our application.
+
+[source,properties]
+----
+logging.level.org.springframework.data.neo4j=DEBUG
+----
+
+==== Database selection
+
+Since version 4.0, Neo4j is https://neo4j.com/developer/multi-tenancy-worked-example/[multi-tenant].
+We can statically select the database by providing a property:
+
+[source,properties]
+----
+spring.data.neo4j.database = my-database
+----
+
+For more advanced use cases, it is possible to perform a dynamic selection, as documented https://docs.spring.io/spring-data/neo4j/docs/current/reference/html/#faq.multidatabase.dynamically[here].
+
+[#create-domain]
+== Create the domain
+
+With our project dependencies defined and configurations set, we are ready to start defining our entities for our data domain!
+The domain layer should accomplish two things: 
+
+1. Map the graph to objects. 
+2. Provide access to those objects.
+
+Our data contains movie and person entities that show how people were involved in various films, such as who acted in, directed, wrote, produced, etc.
+We will need to define a domain class for each of our entities - `Movie` and `Person`.
+
+[NOTE]
+--
+SDN supports all data types that the Neo4j Java Driver supports.
+To find out how to map Neo4j types to native language types, see link:/docs/java-manual/current/cypher-workflow/#driver-type-mapping[this section^] in the documentation.
+--
+
+[#movie-entity]
+=== Movie entity
+
+[source,java]
+----
+@Node("Movie")
+public class MovieEntity {
+	@Id
+	private final String title;
+	@Property("tagline")
+	private final String description;
+	@Relationship(type = "ACTED_IN", direction = INCOMING)
+	private Set<PersonEntity> actors = new HashSet<>();
+	@Relationship(type = "DIRECTED", direction = INCOMING)
+	private Set<PersonEntity> directors = new HashSet<>();
+	public MovieEntity(String title, String description) {
+		this.title = title;
+		this.description = description;
+	}
+	//Getters omitted for brevity
+}
+----
+
+In the first line, the `@Node` annotation is used to mark the class as a managed entity.
+It also configures the Neo4j label, which defaults to the name of the class, but you can define a custom one, as well.
+
+The first couple of lines inside the class definition sets up the id field of the entity as the `title` attribute.
+The title is a unique business key in this domain, but if you don't have a unique key in another domain, you can use the combination of `@Id` and `@GeneratedValue` annotations on a field to generate a unique technical key.
+There are also generators provided for UUIDs.
+
+The two lines below those set up the `tagline` (or `description`) property.
+The `@Property` annotation is used as a way for mapping a different name for the field than for the graph property.
+This way, you can map differences between application entities and database domains.
+
+At the next annotation, the `@Relationship` defines a relationship between the movie and person entities with an `ACTED_IN` type for showing which persons acted in a particular movie.
+The two lines below that define another relationship between `MovieEntity` and `PersonEntity` for those who directed movies.
+
+Then, the next code block defines a constructor for the entity with the properties of the node (`title` and `description`).
+
+As mentioned above, you can use SDN with https://kotlinlang.org/[Kotlin^] and model your domain with Kotlin's data classes.
+https://projectlombok.org/[Project Lombok^] is also available to shortcut definitions and boilerplate, if you want or need to stay purely within Java.
+
+[#person-entity]
+=== Person entity
+
+[source,java]
+----
+@Node("Person")
+public class PersonEntity {
+	@Id
+	private final String name;
+	private final Integer born;
+	public PersonEntity(Integer born, String name) {
+		this.born = born;
+		this.name = name;
+	}
+    //Getters omitted
+}
+----
+
+This class for person entities looks very similar to our `MovieEntity` class above.
+The `@Node` annotation defines that it is a database domain entity.
+A unique key field is identified (in this case, the `name` property), and a `born` property is defined as another attribute on this class.
+The constructor for the class follows the properties.
+
+Notice that we have not defined the relationships from a person back to a movie.
+In our use case, we only want to retrieve movies and the people involved in them.
+Our application does not need us to pull information for person entities separately, so we do not need to define the relationships back in the other direction.
+
+[NOTE]
+--
+If a domain needs to pull related entities on both sides, we would need to add the annotations and attributes from both sides.
+--
+
+[#define-repository]
+== Define a Spring Data repository
+
+Our repositories in the application will extend a repository provided out-of-the-box called the `ReactiveNeo4jRepository`.
+
+[NOTE]
+--
+If building an imperative application, you can extend the `Neo4jRepository`.
+Also, while technically not prohibited, it is not recommended or supported to mix imperative and reactive database access in the same application.
+--
+
+Because our repositories are implementing reactive capabilities, we have access to the https://projectreactor.io/docs/core/release/reference/#mono[Mono^] and https://projectreactor.io/docs/core/release/reference/#flux[Flux^] reactive types from https://projectreactor.io/[Project Reactor^] for method returns.
+The `Mono` type returns 0 or 1 results, while the `Flux` returns 0 or n results.
+We would use a return type of `Mono` if we were expecting a single object back from the query and use a `Flux` type if we were expecting potentially multiple objects back from the query.
+
+[#movie-repository]
+=== Movie repository
+
+[source,java]
+----
+public interface MovieRepository extends ReactiveNeo4jRepository<MovieEntity, String> {
+	Mono<MovieEntity> findOneByTitle(String title);
+}
+----
+
+For our application, we need to interact with a Neo4j graph database, so we will create an interface that extends the repository for Neo4j.
+
+Since we want to use the reactive features for the application, we will extend the `ReactiveNeo4jRepository`, which provides reactive, Neo4j-specific implementation details on top of several extended Spring repositories.
+The ReactiveNeo4jRepository requires two types to be specified — our class type and its id type.
+Once we add our `MovieEntity` and `String` (our movie id field is the `title`) values here, we can start defining methods we want to use.
+
+Inside the interface definition, there is one method we will define for `findOneByTitle()`.
+This method will let us search the database based on a movie title, and we expect to see a single movie return or none at all for the movie we are interested in.
+
+To get that 0 or 1 return result, we can use the reactive return type of `Mono<MovieEntity>`.
+We will also pass a title (a String) to the method because we want to allow the user to enter any movie title as the search value.
+
+[#person-repository]
+=== Person repository
+
+While there is a `PersonRepository` interface in the Github code, it serves testing purposes for that application, so we will not go into detail on it here.
+More information on testing in SDN with this application is in the https://docs.spring.io/spring-data/neo4j/docs/current/reference/html/#sdn.testing[documentation^].
+
+However, it does demonstrate using a custom query and the `Flux` return type, so it may be of interest as an example or for a template for other applications.
+
+[#controller-setup]
+== Setting up the controllers
+
+With the repository, we have our methods for accessing movie data in our database.
+Let us now define endpoints allowing users to access those methods and query the database.
+
+The controller acts as the messenger between the data layer and the user interface to accept requests from the user and return responses.
+This is where the code logic and data manipulation is typically placed, coordinating different responses based on the kind of input it receives.
+
+Because our use case scope is interested in movies, we only need to create a controller to access movie data.
+
+[#movie-controller]
+=== MovieController.java
+
+[source,java]
+----
+@RestController
+@RequestMapping("/movies")
+public class MovieController {
+	private final MovieRepository movieRepository;
+	public MovieController(MovieRepository movieRepository) {
+		this.movieRepository = movieRepository;
+	}
+	//method implementations with walkthroughs below
+}
+----
+
+First, we need to have a couple of annotations to declare this as a controller for REST requests (`@RestController`) and map requests to controller methods for a certain path (`@RequestMapping` with an endpoint of `/movies`).
+
+Within our class definition, we start by injecting our repository interface and creating a constructor for it.
+This gives us access to the data layer from our repository interface and domain class.
+
+Now we need to add more code to define endpoints and implement our data methods.
+
+[source,java]
+----
+@PutMapping
+Mono<MovieEntity> createOrUpdateMovie(@RequestBody MovieEntity newMovie) {
+	return movieRepository.save(newMovie);
+}
+----
+
+Up first is the implementation for `createOrUpdateMovie()`.
+We start with a `@PutMapping` annotation to specify a put request (overwrite or replace an object).
+We want to specify a single movie to overwrite or create, so we use the return type of `Mono` and pass in the movie object with all of its expected fields.
+Within the method, we will save that new or updated movie by calling the movie repository's `save()` method.
+
+Now, if you scroll back up to our defined link:#movie-repository[`MovieRepository`] interface above, you may notice that we did not define a save method there.
+This is because Spring Data repositories provide a few default methods for us out-of-the-box.
+Methods for `save()`, `findAll()`, etc are methods that nearly every application wants or needs, so Spring provides them, and we do not have to implement those basic methods each time we create data access.
+
+Let us add another method to our controller for `getMovies()`.
+
+[source,java]
+----
+@GetMapping(value = { "", "/" }, produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+Flux<MovieEntity> getMovies() {
+	return movieRepository.findAll();
+}
+----
+
+The `@GetMapping` annotation tells us we are only retrieving data from the database and not modifying or inserting.
+We have two parameters for the annotation, where we pass any additional depth on the url path (in this case, no additional depth - just `/movies`) and that we want to return a text event stream.
+This is our media type because we are expecting a `Flux` of results (0 to n amount), and we want to return those as they come in (reactive stream), rather than aggregating and returning all the results at once (imperative json object).
+Just like our previous method, we call the movie repository and access an out-of-the-box `findAll()` method to return all of the movies in our database.
+
+The next method is the one we defined in our `MovieRepository` interface.
+
+[source,java]
+----
+@GetMapping("/by-title")
+Mono<MovieEntity> byTitle(@RequestParam String title) {
+	return movieRepository.findOneByTitle(title);
+}
+----
+
+The starting `@GetMapping` specifies a subpath of `/by-title`.
+Since we are searching for a single movie where the user will input a title as the search string, we expect 0 or 1 result back with the type `Mono` and pass the user-defined parameter of the movie's title into the method.
+In the return, we call the movie repository again and access our defined `findOneByTitle()` method, passing in the search title.
+
+For the last method definition, we want to allow users to delete a movie from our database.
+
+[source,java]
+----
+@DeleteMapping("/\{id\}")
+Mono<Void> delete(@PathVariable String id) {
+	return movieRepository.deleteById(id);
+}
+----
+
+We use the `@DeleteMapping` annotation and specify the subpath endpoint as `/movies/\{id\}` (where id stands for the id of the movie we want to delete).
+We only want one movie to be deleted at a time, and we don't expect an object to return (since it will be deleted and no longer in the database), so we specify the `Mono<Void>` as the return type.
+The method is defined and passes in a path variable (where user input defines the url path) for the id of the movie to delete, then calls the movie repository with the out-of-the-box `deleteById()` method and the movie id.
+
+[#run-application]
+== Running the application
+
+With all of our code in place, we should be ready to build and run our application and try out the endpoints we set up!
+We can run the application (from a menu option in our IDE or from the command line) and then either open a web browser or command line to interact with the endpoints.
+For this example, we will show how to interact from the command line perspective.
+
+Either way you connect, we will use the `localhost:8080/movies` path to access the `findAll()` method and retrieve all movies in our database, and then add any defined subpaths to drill down into other methods.
+We can hit each of these endpoints shown below and verify everything is working as expected.
+
+=== Interacting from a command line
+
+Here is the syntax for each of the endpoints from a command line:
+
+* `localhost:8080/movies` for getMovies() method
+
+[source,bash]
+----
+curl http://localhost:8080/movies
+----
+
+Results: retrieve all movies in our database
+
+* `localhost:8080/movies <movieToUpdateOrCreate>` for createOrUpdateMovie() method
+
+[source,bash]
+----
+curl -X "PUT" "http://localhost:8080/movies" \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d $'{
+  "title": "Aeon Flux",
+  "description": "Reactive is the new cool"
+}'
+----
+
+Results: create new movie `Aeon Flux` in our database
+
+* `localhost:8080/movies/by-title` for byTitle() method
+
+[source,bash]
+----
+curl http://localhost:8080/movies/by-title\?title\=Aeon%20Flux
+----
+
+Results: retrieve information about the specific movie (in this query, `Aeon Flux`)
+
+* `localhost:8080/movies/\{id\}` for delete() method
+
+[source,bash]
+----
+curl -X DELETE http://localhost:8080/movies/847
+----
+
+Results: delete the movie using its id (in this case, the `Aeon Flux` movie)
+
+[#sdn-resources]
+== Resources
+
+[cols="1,4"]
+|===
+| icon:code-fork[] Projects | https://spring.io/projects/spring-data-neo4j/[Spring Data Neo4j^]
+| icon:github[] Source | https://github.com/spring-projects/spring-data-neo4j
+| icon:medkit[] Issues | https://github.com/spring-projects/spring-data-neo4j/issues[GitHub Issues^]
+| icon:book[] Docs | https://docs.spring.io/spring-data/neo4j/docs/current/reference/html/[Reference^], http://docs.spring.io/spring-data/data-neo4j/docs/current/api/[JavaDoc^], https://docs.spring.io/spring-data/data-neo4j/docs/current/changelog.txt[ChangeLog^]
+| icon:book[] Articles | https://medium.com/neo4j/spring-data-neo4j-6-0-8b92164fff32[Introducing SDN 6^]
+| icon:play-circle[] Examples | https://github.com/spring-projects/spring-data-neo4j[SDN Example from Spring^], {examples}/movies-java-spring-data-neo4j[Movies Application with SDN^], {examples}/sdn-migration[Migration Example from SDN 5/OGM to SDN 6^]
+|===

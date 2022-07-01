@@ -1,0 +1,165 @@
+[[neo4j-dotnet]]
+= Using Neo4j from .NET
+:examples: https://github.com/neo4j-examples
+:aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
+:dotnet-driver-version: 4.4.0
+:programming-language: dotnet
+:category: drivers
+:tags: dotnet, project, official-driver, app-development, applications
+:description: If you are a .NET developer, this guide provides an overview of options for connecting to Neo4j. While this guide is not comprehensive it will introduce the different drivers and link to the relevant resources.
+
+[abstract]
+{description}
+
+.Prerequisites
+[abstract]
+You should be familiar with link:https://neo4j.com/docs/getting-started/current/graphdb-concepts/[graph database concepts] and the property graph model.
+You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or link:/download/[installed Neo4j locally].
+
+[#neo4j-dotnet]
+== Neo4j for .NET Developers
+
+// image::{img}dotnet-logo.png[float=right,width=300]
+
+Neo4j provides drivers which allow you to make a connection to the database and develop applications
+which create, read, update, and delete information from the graph.
+
+[#dotnet-driver]
+== Neo4jDotNetDriver
+
+The Neo4j .NET driver is *officially supported* by Neo4j and connects to the database using the binary protocol.
+It aims to be minimal, while being idiomatic to .NET.
+
+Please note that the following example makes use of the `Neo4j.Driver.Simple` package that implements a blocking interface
+around the 'main' driver.
+This is to aid in clarity and simplicity for those just starting out with the Neo4j .Net driver.
+
+[source, subs=attributes]
+----
+PM> Install-Package Neo4j.Driver.Simple-{dotnet-driver-version}
+----
+
+For real projects, the `Neo4j.Driver` package should be used instead.
+
+[source, subs=attributes]
+----
+PM> Install-Package Neo4j.Driver-{dotnet-driver-version}
+----
+
+
+[source, c]
+----
+include::https://raw.githubusercontent.com/neo4j/neo4j-dotnet-driver/{dotnet-driver-version}/Neo4j.Driver/Neo4j.Driver.Tests.Integration/Examples.cs[tag=hello-world,indent=0]
+----
+
+
+[#driver-configuration]
+=== Driver Configuration
+
+From Neo4j version **4.0** and onwards, the default encryption setting is *off* by default and Neo4j will no longer generate self-signed certificates.
+This applies to default installations, installations through Neo4j Desktop and Docker images.
+You can https://neo4j.com/docs/migration-guide/current/upgrade-driver/#_configure_ssl_policy_for_bolt_server_and_https_server[verify the encryption level of your server^] by checking the `dbms.connector.bolt.enabled` key in `neo4j.conf`.
+
+// tag::table[]
+.Table Scheme Usage
+|===
+| Certificate Type | Neo4j Causal Cluster | Neo4j Standalone Server  | Direct Connection to Cluster Member
+
+| *Unencrypted*
+| `neo4j`
+| `neo4j`
+| `bolt`
+
+| *Encrypted with Full Certificate*
+| `neo4j+s`
+| `neo4j+s`
+| `bolt+s`
+
+
+| *Encrypted with Self-Signed Certificate*
+| `neo4j+ssc`
+| `neo4j+ssc`
+| `bolt+ssc`
+
+| *https://neo4j.com/aura/[Neo4j AuraDB^]*
+| `neo4j+s`
+| N/A
+| N/A
+
+|===
+
+
+Review your https://neo4j.com/docs/operations-manual/current/security/ssl-framework/[SSL Framework settings^] when going into production.
+If necessary, you can also https://medium.com/neo4j/getting-certificates-for-neo4j-with-letsencrypt-a8d05c415bbd[generate certificates for Neo4j with Letsencrypt^]
+// end::table[]
+
+[cols="3*"]
+|===
+| Name
+| icon:tag[] Version
+| icon:user[] Authors
+
+| Neo4jDotNetDriver
+| {dotnet-driver-version}
+| The Neo4j Team, http://twitter.com/cskardon[Charlotte Skardon], https://twitter.com/IngvarKofoed[Martin Jensen]
+
+| http://www.nuget.org/packages/Neo4j.Driver[icon:gift[] NuGet Package]
+| {examples}/movies-dotnet-bolt[icon:play-circle[] .NET Example], {examples}/movies-dotnetcore-bolt[icon:play-circle[] .NET core example]
+| https://community.neo4j.com/c/drivers-stacks/NET[Neo4j Online Community^]
+
+| https://neo4j.com/docs/dotnet-manual/current/[icon:book[] Docs^]
+| link:/docs/api/dotnet-driver/current/[icon:code[] API]
+| http://github.com/neo4j/neo4j-dotnet-driver[icon:github[] Source]
+|===
+
+
+=== The Example Project
+
+The Neo4j example project is a small, one page webapp for the movies database built into the Neo4j tutorial.
+The front-end page is the same for all drivers: movie search, movie details, and a graph visualization of actors and movies.
+Each backend implementation shows you how to connect to Neo4j from each of the different languages and drivers.
+
+You can learn more about our small, consistent example project across many different language drivers link:/developer/example-project[here^].
+You will find the implementations for all drivers as https://github.com/neo4j-examples?q=movies[individual GitHub repositories^], which you can clone and deploy directly.
+
+[#community-drivers]
+== Neo4j Community Drivers
+
+Members of the each programming language community have invested a lot of time and love to develop each one of the community drivers for Neo4j, so if you use any one of them, please provide feedback to the authors.
+
+====
+[NOTE]
+icon:users[size=2x]
+The community drivers have been graciously contributed by the Neo4j community.
+Many of them are fully featured and well-maintained, but some may not be.
+Neo4j does not take any responsibility for their usability.
+====
+
+[#neo4jclient-lib]
+=== Neo4jClient
+
+A .NET client for Neo4j, which makes it easy to write Cypher queries in C# with IntelliSense.
+It also supports basic CRUD and legacy indexing.
+
+[cols="1,5"]
+|===
+| icon:github[] Source       | https://github.com/DotNet4Neo4j/neo4jclient
+| icon:gift[] NuGet Package  | https://nuget.org/packages/neo4jclient
+| icon:user[] Authors        | http://twitter.com/cskardon[Charlotte Skardon^] http://twitter.com/tathamoddie[Tatham Oddie^]
+| icon:book[] Docs           | https://github.com/DotNet4Neo4j/Neo4jClient/wiki[]
+| icon:play-circle[] Example | {examples}/movies-dotnet-neo4jclient
+| Protocol                   | Bolt, Http
+|===
+
+[#neo4j-driver-extensions]
+=== Neo4j.Driver.Extensions
+
+`Neo4j.Driver.Extensions` provides a set of extension methods to the official driver API, aiming at reducing boilerplate and easing mapping to entity classes.
+
+[cols="1,5"]
+|===
+| icon:github[] Source       | https://github.com/DotNet4Neo4j/Neo4j.Driver.Extensions
+| icon:gift[] NuGet Package  | https://nuget.org/packages/neo4j.driver.extensions
+| icon:user[] Authors        | http://twitter.com/cskardon[Charlotte Skardon^]
+| icon:book[] Docs           | https://xclave.co.uk/2020/10/06/using-neo4j-driver-now-you-can-extend-it/[Introduction blogpost]
+|===
