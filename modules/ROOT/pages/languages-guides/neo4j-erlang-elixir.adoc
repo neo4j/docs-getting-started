@@ -1,0 +1,78 @@
+= Erlang and Elixir: Neo4j Community Driver
+:aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
+:examples: https://github.com/neo4j-examples
+:programming-language: erlang-elixir
+:category: drivers
+:tags: erlang, elixir, app-development, applications
+:description: If you are an Erlang, or today an Elixir developer, this guide provides an overview of options for connecting to Neo4j. While this guide is not comprehensive it will introduce the different drivers and link to the relevant resources.
+
+[abstract]
+{description}
+
+You should be familiar with link:https://neo4j.com/docs/getting-started/current/graphdb-concepts/[graph database concepts] and the property graph model.
+You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or link:/download/[installed Neo4j locally].
+
+[#community-drivers]
+== Neo4j Community Drivers
+
+Members of the each programming language community have invested a lot of time and love to develop each one of the community drivers for Neo4j, so if you use any one of them, please provide feedback to the authors.
+
+====
+[NOTE]
+icon:users[size=2x]
+The community drivers have been graciously contributed by the Neo4j community.
+Many of them are fully featured and well-maintained, but some may not be.
+Neo4j does not take any responsibility for their usability.
+====
+
+[[neo4j-erlang-elixir]]
+== Neo4j for Erlang/Elixir Developers
+
+// image::{img}erlang.png[float=right,width=150]
+// image::{img}elixir.png[float=left,width=150]
+
+Members of the Erlang and Elixir community have invested a lot of time and love to develop these drivers, so if you use them, please provide feedback to the authors.
+
+=== The Example Project
+
+The Neo4j example project is a small, one page webapp for the movies database built into the Neo4j tutorial.
+The front-end page is the same for all drivers: movie search, movie details, and a graph visualization of actors and movies.
+Each backend implementation shows you how to connect to Neo4j from each of the different languages and drivers.
+
+You can learn more about our small, consistent example project across many different language drivers link:/developer/example-project[here^].
+You will find the implementations for all drivers as https://github.com/neo4j-examples?q=movies[individual GitHub repositories^], which you can clone and deploy directly.
+
+[#elixir-bolt]
+== Elixir Bolt.Sips Driver
+
+Neo4j driver for Elixir wrapped around the Bolt protocol.
+
+.Features:
+* It uses Bolt, Neo4j's standard network protocol, designed for high-performance
+* Supports transactions, as well as simple and complex Cypher queries with or without parameters
+* Connection pool implementation using "A hunky Erlang worker pool factory", aka: http://github.com/devinus/poolboy[Poolboy^] :)
+* Supports Neo4j 3.0.x and forward
+
+|===
+| icon:user[] Author | http://twitter.com/florin[Florin Patrascu]
+| icon:play-circle[] Example Project | {examples}/bolt_movies_elixir_phoenix
+| icon:gift[] Package | https://hex.pm/packages/bolt_sips
+| icon:github[] Source | https://github.com/florinpatrascu/bolt_sips
+| icon:book[] Docs | http://hexdocs.pm/bolt_sips/
+|===
+
+[#elixir-rest-wrapper]
+== Neo4j.Sips
+
+A simple Elixir wrapper around the Neo4j graph database REST API.
+It aims to help Elixir developers to play with Neo4j and to eventually become the main support for a future https://github.com/elixir-lang/ecto[Ecto^] adapter.
+
+[cols="1,4"]
+|===
+| icon:user[] Author | http://twitter.com/florin[Florin Patrascu]
+| icon:play-circle[] Example Project | {examples}/movies-elixir-phoenix
+| icon:gift[] Package | https://hex.pm/packages/neo4j_sips
+| icon:github[] Source | https://github.com/florinpatrascu/neo4j_sips
+| icon:book[] Docs | https://github.com/florinpatrascu/neo4j_sips/blob/master/README.md
+|===
+

@@ -1,0 +1,195 @@
+[[neo4j-ruby]]
+= Using Neo4j from Ruby
+:aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
+:tags: ruby, gem, app-development, applications
+
+[abstract]
+This section provides an overview of options for connecting to Neo4j using Ruby.
+It introduces the different drivers and links to relevant resources.
+
+
+[#community-drivers]
+== Neo4j Community Drivers
+
+Members of the each programming language community have invested a lot of time and love to develop each one of the community drivers for Neo4j, so if you use any one of them, please provide feedback to the authors.
+
+====
+[NOTE]
+icon:users[size=2x]
+The community drivers have been graciously contributed by the Neo4j community.
+Many of them are fully featured and well-maintained, but some may not be.
+Neo4j does not take any responsibility for their usability.
+====
+
+[#neo4j-ruby]
+== Neo4j for Rubyists
+
+Neo4j has been accessible from Ruby long before version 1.0, first using JRuby on the JVM and then on MRI via the HTTP and now Bolt protocols.
+
+// tag::neo4.rb-lib[]
+[#neo4jrb-lib]
+=== Neo4j.rb
+
+The link:http://neo4jrb.io/[Neo4j.rb project^] is made up of the following Ruby gems:
+
+neo4j-ruby-driver::
+A neo4j driver for ruby with an api consistent with the official drivers. It is based on seabolt and ffi. Available on all rubies
+(including jruby) and all platforms supported by seabolt.
+neo4j-java-driver::
+A neo4j driver for ruby based on the official java implementation. It provides a thin wrapper over the java driver (only
+in jruby).
+activegraph::
+A Object-Graph-Mapper (OGM) for the Neo4j graph database. It tries to follow API conventions established by ActiveRecord
+but with a Neo4j flavor. It requires one of the above drivers.
+neo4j-rake_tasks::
+A set of rake tasks for installing and managing a Neo4j database within your project.
+// end::neo4.rb-lib[]
+
+[cols="1,4"]
+|===
+| icon:browser[] Website                     | http://neo4jrb.io/
+| icon:users[] Authors         | https://twitter.com/klobuczek[Heinrich^], https://twitter.com/klobuczek[Amit^], http://twitter.com/cheerfulstoic[Brian^], http://twitter.com/subvertallchris[Chris^], http://twitter.com/ronge[Andreas^]
+| icon:gift[] Package        | https://rubygems.org/gems/neo4j-ruby-driver[neo4j-ruby-driver^], https://rubygems.org/gems/neo4j-java-driver[neo4j-java-driver^], https://rubygems.org/gems/activegraph[activegraph^]
+| icon:github[] Source       | https://github.com/neo4jrb
+
+| icon:play-circle[] Example | https://github.com/neo4j-examples?q=movies-ruby
+| icon:book[] Docs           | http://neo4jrb.readthedocs.org/en/latest/
+| icon:route[] Tutorial      | link:/developer/ruby-course/[Ruby Tutorial]
+| icon:rss[] Blog            | http://blog.brian-underwood.codes/
+| Protocols | bolt
+|===
+
+History:
+
+1. https://github.com/andreasronge[Andreas Ronge^], one of our Swedish friends from Malmö, started writing his canonical Neo4j Ruby driver since before we hit 1.0.
+
+2. https://github.com/cheerfulstoic[Brian Underwood^] and https://github.com/subvertallchris[Chris Grigg^] joined the project and together released http://neo4j.com/blog/neo4j-rb-3-0-released/[version 3.0^] in September 2014.
+
+3. Starting in 2017, the team around https://github.com/klobuczek[Heinrich Klobuczek] contributed to the project and from *fall 2018 Heinrich took over the Neo4j.rb project as the primary maintainer*.
+
+=== Gem: neo4j-ruby-driver
+
+A ruby driver for neo4j based on seabolt protocol. It provides database connection, manages sessions and transactions.
+
+[source,ruby]
+----
+Neo4j::Driver::GraphDatabase.driver('bolt://localhost:7687',
+                                    Neo4j::Driver::AuthTokens.basic('neo4j', 'password')) do |driver|
+  driver.session do |session|
+    greeting = session.write_transaction do |tx|
+      result = tx.run("CREATE (a:Greeting) SET a.message = $message RETURN a.message + ', from node ' + id(a)",
+                      message: 'hello, world')
+      result.single.first
+    end # session auto closed at the end of the block if one given
+    puts greeting
+  end
+end # driver auto closed at the end of the block if one given
+----
+
+Check https://github.com/neo4jrb/neo4j-ruby-driver/blob/master/docs/dev_manual_examples.rb[Examples^] for more usage.
+
+=== Gem: activegraph
+
+The activegraph gem uses  as an API to connect to the server and provides an ActiveRecord-like experience for use in frameworks.
+It adds modules allowing the creation of models that look and feel very similar to those found in vanilla Ruby on Rails.
+The gem builds on neo4j-ruby-driver's foundation to streamline all aspects of node and relationship CRUD and provides an extremely advanced, intuitive, flexible DSL for generating Cypher.
+
+How to get running:
+
+[source,ruby]
+----
+# See the documentation for setup instructions
+
+class Person
+  include ActiveGraph::Node
+
+  property :name
+
+  has_many :out, :books, type: :OWNS_BOOK
+  has_many :both, :friends, type: :HAS_FRIEND
+end
+
+person = Person.find_by(name: 'Jim')
+
+# Get the books owned by Jim's friends:
+person.friends.books.to_a
+----
+
+[#ruby-deploy]
+== Deployment considerations
+
+Very often, your gem choice may come down to how you want to deploy:
+
+server::
+  Using Ruby with a separate Neo4j Server over the http or bolt
+
+embedded::
+  Connecting directly to the Neo4j database files from within your Ruby process (this requires JRuby)
+
+A separate Neo4j server is go-to choice for most developers, especially if they are used to other relational or NoSQL databases in frameworks such as Ruby on Rails.
+
+It allows you to have separate web and database servers and allows compatibility with popular PaaSes such as Heroku.
+If this sounds good to you, any of the popular gems are solid choices and you are free to consider whether you want a thin wrapper or the full framework experience.
+
+Neo4j Embedded and JRuby is less common but offers blazing fast performance and access to our core Java API.
+The downside is that JRuby has its own configuration and compatibility demands and hosting a Java app can be difficult.
+Thankfully, modern app servers such as Torquebox and a strong community provide far more options and resources now than ever before.
+If this is right for you, the neo4j-ruby and activegraph will equally offer support via the bolt protocol.
+
+[#gem-integrations]
+== ActiveGraph gem integrations
+
+There are many common gems that you'll want to use with your Neo4j database.
+Many are supported for the Neo4j.rb project:
+
+Authentication
+
+ * link:https://github.com/neo4jrb/devise-activegraph[devise-activegraph^]
+
+Authorization
+
+ * link:https://github.com/CanCanCommunity/cancancan-activegraph[cancancan-activegraph^]
+
+File Attachment
+
+ * link:https://github.com/neo4jrb/neo4jrb-paperclip[neo4jrb-paperclip^] (*)
+ * link:https://github.com/neo4jrb/carrierwave-neo4j[carrierwave-neo4j^] (*)
+
+Pagination
+
+ * link:https://github.com/neo4jrb/neo4j-will_paginate_redux[neo4j-will_paginate_redux^] (*)
+ * link:https://github.com/megorei/kaminari-neo4j[kaminari-neo4j^] (*)
+
+ElasticSearch Integration
+
+ * link:https://github.com/neo4jrb/neo4j-searchkick[neo4j-searchkick^] (*)
+
+
+Admin User Interface
+
+ * link:https://github.com/cheerfulstoic/rails_admin[rails_admin^] (*)
+
+Integration With the link:https://github.com/neo4j-contrib/spatial[Neo4j Spatial Plugin^]
+
+ * link:https://github.com/neo4jrb/neo4jrb_spatial[neo4jrb_spatial^] (*)
+
+Ruby Object Manager
+
+ * link:https://github.com/rom-rb/rom-neo4j[rom-neo4j^]
+
+Misc.
+
+ * link:https://github.com/subvertallchris/neo4j-even_easier_id[neo4j-even_easier_id^] (BSON UUIDs)
+
+Note: (*) not (yet) compatible with activegraph
+
+[#ruby-example]
+=== The Example Project
+
+The Neo4j example project is a small, one page webapp for the movies database built into the Neo4j tutorial.
+The front-end page is the same for all drivers: movie search, movie details, and a graph visualization of actors and movies.
+Each backend implementation shows you how to connect to Neo4j from each of the different languages and drivers.
+
+You can learn more about our small, consistent example project across many different language drivers link:https://neo4j.com/developer/example-project/[here].
+You will find the implementations for all drivers as https://github.com/neo4j-examples?q=movies[individual GitHub repositories^], which you can clone and deploy directly.
+
