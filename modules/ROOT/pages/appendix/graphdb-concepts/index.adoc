@@ -1,7 +1,6 @@
-:description: An introduction to graph database concepts.
-
 [[graphdb-concepts]]
 = Graph database concepts
+:description: An introduction to graph database concepts.
 
 Neo4j uses a _property graph_ database model.
 
