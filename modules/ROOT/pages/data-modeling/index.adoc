@@ -1,12 +1,12 @@
 [[data-modeling]]
-= Graph data modeling
+= Data modeling
 :description: graph-modeling, data-model, schema, create-model, translate-model, model-performance, model-example
 
 [#graph-modeling]
 This section is designed to give you the tools you need to design and implement an efficient and flexible graph database technology through a good graph data model. +
 Best practices and tips gathered from Neo4j's tenure of building and recommending graph technologies provide you with the confidence to build graph-based solutions with rich data models.
 The focus of this section is to provide you with the necessary guidelines and tools to help you model your domain as a graph. +
-Here you find brief descriptions of the following  
+ 
 
 // image::graph_data_modeling.jpg[role="popup-link"]
 

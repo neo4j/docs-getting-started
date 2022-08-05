@@ -1,0 +1,121 @@
+[[get-started-with-neo4j]]
+= Get started with Neo4j
+:description: This section gives an orientation on how to get started with Neo4j.
+
+There are a number of options on how to get started with Neo4j, and your choice depends upon your needs and aims. Each option allows you to explore different possibilities of the Neo4j ecosystem. 
+
+[[neo4j-first-steps]]
+== First steps with Neo4j
+
+1. If you want to learn Neo4j graph database features, how to write Cypher queries and use developer tools like xref:get-started-with-neo4j/graph-platform.adoc#neo4j-tools[Neo4j Browser and Bloom], and get an overview on how to connect to Neo4j via drivers, connectors, go to the link:https://neo4j.com/cloud/platform/aura-graph-database/[AuraDB page] where you can create a new Neo4j instance free forever. +
+AuraDB is the best choice for the cloud developers who are interested in graph technologies. +
+Besides the free option, you can select the plan which suits you best. +
+At the moment, you can choose one of the example datasets on Aura to learn more about Neo4j and Cypher queries:
+* Movies
+* Movies Recommendations
+* Graphs for Cybersecurity
+* StackOverflow Data
++
+If you are a data scientist, you might be interested in link:https://neo4j.com/cloud/platform/aura-graph-data-science/[AuraDS] -- graph data science platform as a fully managed cloud service.
+You get access to more than 65 pretuned link:https://neo4j.com/docs/graph-data-science/current/algorithms/[graph algorithms].
+
++
+2. If you want to learn more about Neo4j graph database and Cypher queries applied to a specific use case, visit link:https://login.neo4j.com/u/login?state=hKFo2SBRRWZOaW5tSXI4OFFqdk53YjJ5QmhMV2VmdV9PMFBMY6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIG4yX3lVYVhObFNzdjFrYVNOVEtzVk16alp4Y2ZudThKo2NpZNkgRHhobWlGOFRDZXpuSTdYb2kwOFV5WVNjTEdabms0a2U[Neo4j Sandbox], where you find a number of example datasets based on different use cases.
++
+All databases are grouped into two categories:
++
+* for developers
+* for data scientists
++
+You can also select a blank sandbox and populate it with your own data.
++
+3. One of the ways to set up an environment for developing an application with Neo4j and Cypher is to use Neo4j Desktop.
+Download Neo4j Desktop from link:https://neo4j.com/download/[] and follow the installation instructions for your operating system. +
+You get the opportunity to try all the graph applications which are available in our link:https://install.graphapp.io/[**Graph Apps Gallery**]. +
++
+4. If you need an Enterprise Edition, visit link:https://neo4j.com/pricing/#graph-database/[the Neo4j Pricing page] where you can get all necessary instructions and contacts.
+
+[TIP]
+====
+For all options on how to get started with Neo4j see link:https://neo4j.com/try-neo4j/[].
+====
+
+
+[[neo4j-docs]]
+== Neo4j documentation page
+
+All the official documentation is available at link:https://neo4j.com/docs/[].
+
+Documentation homepage is designed to make your journey across all Neo4j products comfortable and pleasant. 
+
+That is where you find reference documentation to all components of the xref:get-started-with-neo4j/graph-platform.adoc#platform-components[Neo4j Graph Data Platform]. 
+Guides are grouped by categories. 
+In the leftside navigation bar you see:
+
+* **Neo4j DBMS** -- Documentation for the Neo4j graph database, a core product:
+** link:https://neo4j.com/docs/getting-started/current/[Getting Started Guide] -- you are here. The starting point to enter the Neo4j world.
+** link:https://neo4j.com/docs/operations-manual/current/[The Neo4j Operations Manual] -- the docset tells you how to deploy, configure, support, and maintain Neo4j. You find comprehensive descriptions of Neo4j Causal Clustering here. 
+** link:https://neo4j.com/docs/upgrade-migration-guide/current/[Neo4j Upgrade and Migration Guide] -- the guide describes how to keep your Neo4j deployment up-to-date.
+** link:https://neo4j.com/docs/status-codes/current/[Status Code] -- overview of Neo4j status codes classifications, version changes, and also a complete list of all status codes Neo4j may return, and what they mean.
+** link:https://neo4j.com/docs/java-reference/current/[Java Reference] tells you about advanced Java-centric usage of Neo4j, how to embed Neo4j in your own software and write extensions.
+** link:https://neo4j.com/docs/kerberos-add-on/current/[The Neo4j Kerberos Add-on] -- Neo4j supports the use of Kerberos -- a network authentication protocol, here you find description of using the _Neo4j Kerberos Add-on_.
+* **Neo4j Aura** -- Docsets for a fully automated graph platform offered as a cloud service:
+** link:https://neo4j.com/docs/aura/auradb/[Neo4j AuraDB] -- graph database as a fully managed service.
+** link:https://neo4j.com/docs/aura/aurads/[Neo4j AuraDS] -- link:https://neo4j.com/product/graph-data-science/[Neo4j Graph Data Science platform] as a fully managed service.
+* link:https://neo4j.com/docs/developer-tools/[**Neo4j Tools**] -- Docsets for developer tools designed to make it easier to develop graph applications and to interact with Neo4j database:
+** link:https://neo4j.com/docs/bloom-user-guide/current/[Neo4j Bloom] -- the guide for a graph visualization tool designed for interactive exploration of graph data.
+** link:https://neo4j.com/docs/browser-manual/current/[Neo4j Browser] -- the guide for a developer-focused tool that allows to run Cypher queries and visualize the results. 
+** link:https://neo4j.com/docs/desktop-manual/current/[Neo4j Desktop] -- the guide introduces a client application for working with Neo4j, whether using local database instances or databases located on remote servers. 
+** link:https://neo4j.com/docs/ops-manager/[Neo4j Ops Manager] -- the docset for a UI-based tool that enables any administrator to monitor, administer, and operate all of the Neo4j database management systems in an Enterprise Edition.
+* **Neo4j Graph Data Science Library** provides extensive analytical capabilities centered around graph algorithms:
+** link:https://neo4j.com/docs/graph-data-science/current/[The Neo4j Graph Data Science Library Manual] tells you how graph algorithms are implemented into Neo4j and how to use them as they are exposed as Cypher procedures. 
+* **Cypher Query Language** -- Docsets for Neo4j graph query language:
+** link:https://neo4j.com/docs/cypher-manual/current/[The Neo4j Cypher Manual] -- the comprehensive manual for Cypher for the developers of a Neo4j client application.
+** link:https://neo4j.com/docs/cypher-cheat-sheet/current/[Cypher Cheat Sheet] -- a printable set of notes for a quick overview of Cypher syntax basics.
+** link:https://neo4j.com/docs/cypher-refcard/current/[Neo4j Cypher Refcard] -- a quick reference guide for Cypher language. 
+* link:https://neo4j.com/docs/drivers-apis/[**Neo4j Drivers and APIs**] -- Docsets for officially supported drivers, connectors, and APIs.
+** link:https://neo4j.com/docs/go-manual/current/[The Neo4j Go Driver Manual]
+** link:https://neo4j.com/docs/java-manual/current/[The Neo4j Java Driver Manual] 
+** link:https://neo4j.com/docs/javascript-manual/current/[The Neo4j JavaScript Driver Manual]
+** link:https://neo4j.com/docs/dotnet-manual/current/[The Neo4j .NET Driver Manual]
+** link:https://neo4j.com/docs/python-manual/current/[The Neo4j Python Driver Manual]
+** link:https://neo4j.com/docs/graphql-manual/current/[Neo4j GraphQL Library]
+** link:https://neo4j.com/docs/http-api/current/[HTTP API]
+** link:https://neo4j.com/docs/ogm-manual/current/[Neo4j-OGM -- An Object Graph Mapping Library for Neo4j]
+** link:https://docs.spring.io/spring-data/neo4j/docs/current/reference/html/[Spring Data Neo4j]
+** link:https://neo4j.com/docs/spark/current/[Neo4j Connector for Apache Spark]
+** link:https://dist.neo4j.org/Neo4j-BI-Connector-JDBC-1.0.10-docs.pdf?_ga=2.205183254.709535527.1659343086-1345513218.1655306577&_gac=1.20913226.1659095710.Cj0KCQjwio6XBhCMARIsAC0u9aFZR-LU0FpO99ubpMUHLPysxMuwbCJtBb3dfvbgi8FEnagR96nCxnYaAkNZEALw_wcB[Neo4j Connector for BI (JDBC)]
+* **Resources**
+
+If the officical documentation is not enough, you can refer to the aforementioned *Resources*:
+
+* link:https://neo4j.com/docs/resources/docs-archive/[Documentation Archive] -- docsets for earlier releases are available here.
+* link:https://neo4j.com/docs/resources/pdf-library/[PDF library] -- if you need, you can download PDF-versions of our documentation. Follow the link for a full list of all available PDFs.
+
+link:https://neo4j.com/labs/[Labs] menu at the top contains the list of all Neo4j Labs projects, which are designed and developed as a way to extend and test functionality of the Neo4j Graph Data Platform.
+The Labs projects are supported via the Neo4j Community, and we cannot provide any commercial support for them or guarantee backwards compatibility.   
+
+At the top on the right side, you find the drop-down menu _Get Help_ with the following choices:  
+
+* link:https://community.neo4j.com/[Community Forum] -- for learning and guidance.
+* link:https://discord.com/invite/neo4j[Discord Chat] -- a live chat environment for communicating with other Neo4j users (requires signup). 
+* link:https://neo4j.com/developer/kb/[Knowledge Base] -- troubleshooting articles written by developers for developers on how to solve issues both for Community ans Enterprise Editions.
+* link:https://medium.com/neo4j[Neo4j Developer Blog] -- Neo4j channel on Medium platform for deep dives into technical topics and announcements of new products, releases.
+* link:https://www.youtube.com/neo4j[Neo4j Videos] -- a link to the Neo4j channel on YouTube.
+
+
+The blue button _Get Started_ in the upper right hand corner allows you to access:
+
+* Neo4j AuraDB page, where you can choose AuraDB plan that best suits your needs.   
+* Neo4j Sandbox.
+* Neo4j Desktop download page. 
+
+If you click the button link:https://neo4j.com/cloud/platform/aura-graph-database/?ref=docs-nav-get-started/[Get Started^, role=button], you are redirected to the AuraDB page.
+
+
+////
+* xref:4.4@cypher-manual:ROOT:index.adoc#cypher-manual[The Cypher manual] -- This is the comprehensive manual for Cypher.
+* xref:4.4@operations-manual:ROOT:index.adoc#operations-manual[The Operations manual] -- This manual describes how to deploy and maintain Neo4j.
+The https://neo4j.com/docs/cypher-refcard/current[Cypher Refcard] is a valuable asset when learning and writing Cypher.
+Additionally, you can find more specialized documentation along with API documentation and documentation for older Neo4j releases.
+////
