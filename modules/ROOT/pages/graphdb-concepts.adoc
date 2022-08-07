@@ -318,7 +318,7 @@ The following naming conventions are recommended:
 [options="header"]
 |===
 | Graph entity      | Recommended style                                       | Example
-| Node label        | Camel case, beginning with an upper-case character      | `:VehicleOwner` rather than `:vehice_owner`
+| Node label        | Camel case, beginning with an upper-case character      | `:VehicleOwner` rather than `:vehicle_owner`
 | Relationship type | Upper case, using underscore to separate words          | `:OWNS_VEHICLE` rather than `:ownsVehicle`
 | Property          | Lower camel case, beginning with a lower-case character | `firstName` rather than `first_name`
 |===
