@@ -29,7 +29,7 @@ Below you also find links to the homepages of the Neo4j products.
 
 link:https://neo4j.com/product/neo4j-graph-database/?ref=product/[Neo4j Graph Database^] -- our core product, native graph database that is built to store and retrieve connected data. + 
 link:https://neo4j.com/licensing/[Two editions^] -- a Community Edition and an Enterprise Edition -- are available. +
-There are many ways to deploy Neo4j today: on-premise server installation, self-hosted in the cloud with pre-built images, or by simply using *Neo4j Aura* -- the zero-admin, always-on graph database for cloud developers. +
+There are many ways to deploy Neo4j today: on-premises server installation, self-hosted in the cloud with pre-built images, or by simply using *Neo4j Aura* -- the zero-admin, always-on graph database for cloud developers. +
 All necessary documentation on how to install and maintain Neo4j can be found on the link:https://neo4j.com/docs/[docs page]. 
 
 [[neo4j-aura]]
