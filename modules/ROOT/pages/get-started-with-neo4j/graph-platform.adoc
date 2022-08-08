@@ -111,8 +111,8 @@ Some of these projects have been adopted by our link:https://neo4j.com/labs/[Neo
 You can find tutorials and other specific information for some of these on this page.
 
 
-link:https://neo4j.com/labs/arrows/[Arrows] -- a web-based data modeling tool. +
-link:https://neo4j.com/developer/neo4j-apoc/[APOC^] -- the standard utility library of procedures and functions for Neo4j. +
-link:https://neo4j.com/labs/etl-tool/[ETL Tool^] -- migrate data from a relational database to Neo4j using an application and simple user interface. +
-link:https://neo4j.com/labs/neodash/[NeoDash] -- an open-source, low-code dashboard builder for Neo4j. It lets you build an interactive dashboard with tables, graphs, bar charts, line charts, maps, and more.
+* link:https://neo4j.com/labs/arrows/[Arrows] -- a web-based data modeling tool. 
+* link:https://neo4j.com/developer/neo4j-apoc/[APOC^] -- the standard utility library of procedures and functions for Neo4j. 
+* link:https://neo4j.com/labs/etl-tool/[ETL Tool^] -- migrate data from a relational database to Neo4j using an application and simple user interface. 
+* link:https://neo4j.com/labs/neodash/[NeoDash] -- an open-source, low-code dashboard builder for Neo4j. It lets you build an interactive dashboard with tables, graphs, bar charts, line charts, maps, and more.
 
