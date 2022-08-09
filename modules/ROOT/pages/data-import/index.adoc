@@ -1,4 +1,5 @@
-= Data import
+[[data-import]]
+= Data importing
 :tags: data-import, graph-import, import-csv, json-api, northwind-graph, example-data
 :page-pagination: next
 

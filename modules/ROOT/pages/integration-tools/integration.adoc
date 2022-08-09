@@ -1,7 +1,6 @@
 [[integration-tools]]
-= Neo4j integration tools
-:category: integrations
-:tags: integrations, tools, libraries, connectors, kafka, spark, bi-connector
+= Neo4j Connectors
+:description: integrations, tools, libraries, connectors, kafka, spark, bi-connector
 
 [#neo4j-integration]
 Neo4j is supported by a rich ecosystem of libraries, tools, drivers, and guides provided by partners, users, and community contributors.

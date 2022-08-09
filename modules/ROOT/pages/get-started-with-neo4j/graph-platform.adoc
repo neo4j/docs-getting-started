@@ -1,0 +1,118 @@
+[[graph-platform]]
+= Neo4j Graph Data Platform
+
+:tags: graph-platform, graph, database, desktop, browser, bloom, labs, integrations
+:page-pagination:
+
+[[neo4j-platform]]
+There are a variety of ways to interact with and use graph data in Neo4j.
+This section introduces the different products we provide at Neo4j to suit your diverse business and technology needs and shows you how to get started using them.
+
+From our core product (the graph database) to visualization for business users, we provide a variety of opportunities to maximize your business and simplify your data.
+
+[[platform-components]]
+== Components of the Neo4j Graph Data Platform
+
+image:neo4j_graph_platform.png[role="popup-link"]
+
+Each of the elements listed below is designed to fill a business or technical need.
+We continue to improve the different perspectives from which to work with data, as well as capabilities of the products themselves.
+
+More information about each of the components can be found on the link:https://neo4j.com/product/[Product page^]. +
+Reference documentation is at https://neo4j.com/docs/[]. +
+If you have any questions or issues, don't hesitate to reach out through the https://community.neo4j.com[Online Community^]!
+
+Below you also find links to the homepages of the Neo4j products.   
+
+[[graph-database]]
+=== Neo4j Graph Database
+
+link:https://neo4j.com/product/neo4j-graph-database/?ref=product/[Neo4j Graph Database^] -- our core product, native graph database that is built to store and retrieve connected data. + 
+link:https://neo4j.com/licensing/[Two editions^] -- a Community Edition and an Enterprise Edition -- are available. +
+There are many ways to deploy Neo4j today: on-premises server installation, self-hosted in the cloud with pre-built images, or by simply using *Neo4j Aura* -- the zero-admin, always-on graph database for cloud developers. +
+All necessary documentation on how to install and maintain Neo4j can be found on the link:https://neo4j.com/docs/[docs page]. 
+
+[[neo4j-aura]]
+=== Neo4j Aura
+
+Neo4j is a link:https://neo4j.com/cloud/[cloud-friendly] database, with a variety of cloud deployment options readily available.
+You are able to run Neo4j on public clouds like AWS, Azure and Google Cloud Platform (GCP). +
+Neo4j Aura is a fully managed, cloud-native graph service, giving developers and data scientists the most advanced graph tech tools.
+Neo4j Aura includes *AuraDB* and *AuraDS*.
+
+link:https://neo4j.com/cloud/aura/?ref=product[Neo4j AuraDB^] is the fully automated, always-on, and scalable graph database as a service for developers building modern applications. +
+Find out more information in the link:https://neo4j.com/docs/aura/current/[official documentation^]. +
+
+link:https://neo4j.com/cloud/platform/aura-graph-data-science/[Neo4j AuraDS] makes it easy to run graph algorithms on Neo4j by integrating two main components:
+
+* **Neo4j Database**, where graph data are loaded and stored, and Cypher queries and all database operations (for example user management, query termination, etc.) are executed;
+* **Graph Data Science**, a software component installed in the Neo4j Database, whose main purpose is to run graph algorithms on in-memory projections of Neo4j Database data.
+
+Neo4j AuraDS is available on GCP. 
+See link:https://neo4j.com/pricing/#graph-data-science[pricing] page for details.
+You can find more details in the https://neo4j.com/docs/aura/aurads/[official documentation] for AuraDS. 
+
+[[neo4j-gds]]
+=== Neo4j Graph Data Science 
+
+link:https://neo4j.com/product/graph-data-science/?ref=product[Neo4j Graph Data Science^] (GDS) gives you access to more than 65 graph algorithms, which can be executed with Neo4j and optimized for enterprise workloads and pipelines.
+GDS helps you to get insights from big data in order to answer critical questions and improve predictions.
+GDS is the only connected data analysis platform that unifies the ML surface and graph database into a single workspace.
+This way, data scientists run algorithms and ML models without jumping between tools for ETL.
+
+See link:https://neo4j.com/docs/graph-data-science/current/[documentation^] for the library for more details.
+
+[[neo4j-tools]]
+=== Neo4j Tools
+
+Neo4j provides a variety of tools that aim to make learning and development of graph applications easier. 
+
+The link:https://neo4j.com/product/developer-tools/[Neo4j Developer Tools^] page introduces the most important of them.
+
+* link:https://neo4j.com/docs/desktop-manual/current/[Neo4j Desktop] -- a local development environment for working with Neo4j, whether using local database instances or databases located on remote servers. Free download includes Neo4j Enterprise Edition license.
+* link:https://neo4j.com/docs/browser-manual/current/[Neo4j Browser] -- online browser interface to query and view the data in the database. Basic visualization capabilities using Cypher query language.
+* link:https://neo4j.com/docs/ops-manager/[Neo4j Operations Manager] (NOM) -- a UI-based tool that enables a database administrator to monitor, administer, and operate all of the Neo4j database management systems in an Enterprise Edition. +
+link:https://neo4j.com/videos/nom-bytes-1-are-we-good-get-an-estate-wide-view-of-managed-dbmss-with-neo4j-ops-manager/[Video series: _NOM Bytes_] introduces the product and provides some practical tips. +
+link:https://neo4j.com/docs/ops-manager/[Documentation] for Neo4j Ops Manager gives all information you may need for using it.    
+* link:https://neo4j.com/docs/aura/current/getting-started/access-database/#_neo4j_data_importer/[Data Importer^] -- a no-code tool that allows you to load data from flat files (`.csv` and `.tsv`) into your Neo4j databases, define a graph model, and map your data to it.
+* link:https://neo4j.com/product/bloom/?ref=product[Neo4j Bloom^] -- visualization tool for business users that does not require any code or programming skills to view and analyze data. link:https://neo4j.com/docs/bloom-user-guide/current/[Documentation^] is also available on our Docs page.
+
+
+[[cypher]]
+=== Cypher Query Language
+
+link:https://neo4j.com/product/cypher-graph-query-language/?ref=product[Cypher] is an open data query language, based on the https://opencypher.org/?ref=cypher-web-page/[openCypher initiative].
+It is the most established and intuitive query language to learn with property graphs.
+Cypher can be characterized by following:
+
+* easy to learn
+* visual and logical
+* secure, reliable, and data-rich
+* open and flexible
+
+Cypher is one of the graph query languages that are being used as the base for a new *standard* language -- link:https://www.gqlstandards.org/home[Graph Query Language].
+
+[[connect-to-neo4j]]
+=== Connecting to Neo4j
+
+It is important for us to provide a wide range of opportunities for integrating Neo4j with any working environment. 
+
+* xref::languages-guides/index.adoc[] -- Officially supported drivers and Community drivers.
+* link:https://neo4j.com/product/[Neo4j Connectors] -- A set of connectors to integrate your regular working environment with Neo4j.
+* link:https://neo4j.com/product/graphql-library/[GraphQL Library] is a flexible, low-code, open source JavaScript library that enables rapid API development for cross-platform and mobile applications by tapping into the power of connected data. 
+* link:https://neo4j.com/docs/ogm-manual/current/[OGM] -- An Object Graph Mapping Library for Neo4j.
+
+
+[[labs-projects]]
+== Neo4j Labs projects
+
+Neo4j also has a variety of extension libraries and developer tools that can be added to existing products to enhance functionality.
+Some of these projects have been adopted by our link:https://neo4j.com/labs/[Neo4j Labs^] team to help developers integrate with other innovative tools and libraries.
+You can find tutorials and other specific information for some of these on this page.
+
+
+* link:https://neo4j.com/labs/arrows/[Arrows] -- a web-based data modeling tool. 
+* link:https://neo4j.com/developer/neo4j-apoc/[APOC^] -- the standard utility library of procedures and functions for Neo4j. 
+* link:https://neo4j.com/labs/etl-tool/[ETL Tool^] -- migrate data from a relational database to Neo4j using an application and simple user interface. 
+* link:https://neo4j.com/labs/neodash/[NeoDash] -- an open-source, low-code dashboard builder for Neo4j. It lets you build an interactive dashboard with tables, graphs, bar charts, line charts, maps, and more.
+

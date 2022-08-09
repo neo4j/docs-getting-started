@@ -18,18 +18,56 @@ License: Creative Commons 4.0
 endif::[]
 
 [.lead]
-*Neo4j*
+*Welcome to Neo4j*
 
-Neo4j is the world’s leading graph database.
-The architecture is designed for optimal management, storage, and traversal of nodes and relationships.
+++++
+<div class="responsive-embed">
+<iframe width="680" height="425" src="https://www.youtube.com/embed/urO5FyP9PoI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+++++
+
+As the inventor of the labeled-property graphs Neo4j is the first and dominant mover in the graph market.
+With a native graph database at the core, Neo4j stores and manages data in its more natural, connected state.
+As time shows, the importance of connected data only increases.
+Neo4j defines its mission as to help world to make sense of data providing insights through data relationships. +
+
+Neo4j is dedicated to kind and open communication and aims to create developer-friendly environment for everybody. 
+Developers' productivity is one of our priorities, and our goal is to help them to build applications in a fast and secure mode. 
+Neo4j is open-source and has the largest and most vibrant community of graph database enthusiasts. 
+You can reach out to our link:https://community.neo4j.com/[Community Forum] or link:https://discord.com/invite/neo4j[Discord Chat] for any help or advice you may need. +
+
+To help you to get more information about Neo4j, we would like to provide you with the xref::appendix/getting-started-resources.adoc[Getting started resources], which may inspire you to explore different possibilities of graph technologies. +
+
+If you want learn how to build, optimize, and launch your Neo4j project, visit our link:https://graphacademy.neo4j.com/[GraphAcademy page].
+GraphAcademy courses are free, interactive, and hands-on. +
+All of them have been developed by Neo4j professionals with years of experience.
+Our set of courses aims a wide range of job role: data scientists, developers, and database administrators.
+
+
+
+[.lead]
+*Neo4j Graph Data Platform*
+
+Starting as a graph database Neo4j has evolved into a rich ecosystem with many tools, applications, and libraries, which give you opportunity to integrate graph technologies with your working environment. +
+
+Let's take a look at the three pillars of the xref:get-started-with-neo4j/graph-platform.adoc#platform-components[Neo4j ecosystem]:
+
+* First, **Neo4j** is the world’s leading **graph database**.
+The architecture is designed for optimal management, storage, and traversal of _nodes_ and _relationships_.
 The graph database takes a property graph approach, which is beneficial for both traversal performance and operations runtime.
+
+* Second, **Neo4j Aura** is the fully managed graph data platform service in the cloud. 
+Aura empowers developers and data scientists to quickly build scalable, AI-driven applications and analyze big data with algorithms without the hassle of managing infrastructure.
+Neo4j Aura includes AuraDB for applications and AuraDS for data science.
+
+* Third, **Neo4j Graph Data Science** is a connected data analytics and machine learning platform that helps you understand the connections in big data.
 
 
 [.lead]
 *Cypher*
 
 Cypher is Neo4j’s graph query language that allows users to store and retrieve data from the graph database.
-It is a declarative, SQL-inspired language for describing visual patterns in graphs using ASCII-art syntax.
+It is a declarative, SQL-inspired language for describing patterns in graphs.
 The syntax provides a visual and logical way to match patterns of nodes and relationships in the graph.
 Cypher has been designed to be easy to learn, understand, and use for everyone, but also incorporate the power and functionality of other standard data access languages.
 
@@ -37,12 +75,15 @@ Cypher has been designed to be easy to learn, understand, and use for everyone, 
 [.lead]
 *Contents of this guide*
 
-The Neo4j Getting Started Guide covers the following areas:
+The Neo4j Getting Started Guide provides you with links to the relevant information resources and covers the following areas:
 
-* xref::/get-started-with-neo4j.adoc#get-started-with-neo4j[Get started with Neo4j] -- How to get started with Neo4j.
-* xref::/graphdb-concepts.adoc#graphdb-concepts[Graph database concepts] -- Introduction to graph database concepts.
-* xref::/cypher-intro/index.adoc#cypher-intro[Introduction to Cypher] -- Introduction to the graph query language Cypher.
+* xref::/get-started-with-neo4j/index.adoc[Get started with Neo4j] -- Introduction to the Neo4j Graph Data Platform components.
+* xref::/cypher-intro/index.adoc#cypher-intro[Introduction to Cypher] -- Overview of the graph query language Cypher.
+* xref::/data-modeling/index.adoc[Data modeling guidelines] -- Basic principles of graph data modeling, guidelines on how to convert an RDBMS schema to graph, and introduction to data modeling tools.
+* xref::/data-import/index.adoc[Data importing] -- Articles on how to import data into a Neo4j instance, representing different methods and tools.
+* xref::/languages-guides/index.adoc[Neo4j Drivers] -- Overview of the officially supported Neo4j drivers and Neo4j Community drivers. 
+* xref::/integration-tools/integration.adoc[Neo4j Connectors] -- Overview of the Neo4j connectors which help you to integrate with familiar technologies and minimize pain associated with a rip-and-replace approach to solutions.
+* xref::/graph-visualization/graph-visualization.adoc[Visualization tools] -- Overview of different visualization tools provided by Neo4j and its Community.
 
-_Who should read this?_
 
-This guide is written for anyone who is exploring Neo4j and Cypher.
+This guide is written for anyone who is exploring Neo4j ecosystem.

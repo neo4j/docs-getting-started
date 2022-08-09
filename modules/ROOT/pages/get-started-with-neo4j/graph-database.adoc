@@ -59,7 +59,7 @@ image:sample-cypher.png[role="popup-link"]
 * Nodes can have any number or type of relationships without sacrificing performance.
 * Although relationships are always _directed_, they can be navigated efficiently in any direction.
 
-If you'd like to learn more about any of these, you can read more about link:/developer/data-modeling/[Graph Data Modeling].
+If you'd like to learn more about any of these, you can read more about xref:data-modeling/index.adoc[Graph Data Modeling].
 
 
 [[neo4j-overview]]
@@ -89,7 +89,7 @@ Enables scale-up to billions of nodes on moderate hardware.
 
 
 [[neo4j-uses]]
-== Where and How is Neo4j Used?
+== Where and how is Neo4j used?
 
 Neo4j is used today by thousands of https://neo4j.com/customers/[startups, educational institutions, and large enterprises^] in all sectors including  financial services, government, energy, technology, retail, and manufacturing.
 From innovative new technology to driving businesses, users are generating insights with graph, generating new revenue, and improving their overall efficiency.
