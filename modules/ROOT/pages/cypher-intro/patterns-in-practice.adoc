@@ -10,13 +10,13 @@
 [[cypher-intro-patterns-in-practice-creating-data]]
 == Creating and returning data
 
-We start by looking into the clauses that allow us to create data.
+Let's start by looking into the clauses that allow you to create data.
 
-To add data, we just use the patterns we already know.
-By providing patterns we can specify what graph structures, labels and properties we would like to make part of our graph.
+To add data, you just use the patterns you already know.
+By providing patterns, you can specify what graph structures, labels and properties you would like to make part of your graph.
 
 Obviously the simplest clause is called `CREATE`.
-It will just go ahead and directly create the patterns that you specify.
+It creates the patterns that you specify.
 
 For the patterns we have looked at so far this could look like the following:
 
