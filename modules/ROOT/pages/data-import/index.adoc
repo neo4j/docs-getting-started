@@ -13,11 +13,10 @@ Look at the GraphAcademy course "Import CSV data". It's announced that you learn
 * LOAD CSV
 * APOC
 * neo4j-admin tool
-* using an application for loading data
+* using an application for loading data / loading data via drivers
 * Neo4j ETL Tool to load data from RDBMS
 
 It makes sense, logic is clear. My idea is to redesign this section according to the aforementioned GraphAcademy course. 
-One moment - not to forget about loading the data via drivers. Is that heavy on use? If so, we need to cover this topic as well.
 
 Important! To make a section on Data Importer!
 
