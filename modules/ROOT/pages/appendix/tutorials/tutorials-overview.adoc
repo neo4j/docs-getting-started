@@ -2,10 +2,6 @@
 = Tutorials
 
 In this section, you find how-to guides and tutorials on different topics.
-At the time, tutorials could be grouped in two categories: 
-
-* First steps with Cypher
-* How to import data into Neo4j
 
 == Overview
 
