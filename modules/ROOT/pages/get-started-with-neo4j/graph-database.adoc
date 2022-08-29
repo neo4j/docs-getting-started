@@ -47,7 +47,7 @@ And when we want to ask questions about the real world, many questions are _abou
 In Neo4j, information is organized as nodes, relationships, and properties.
 
 .Building blocks of the property graph model
-image:sample-cypher.png[role="popup-link"]
+image:sample-cypher.svg[role="popup-link"]
 
 *_Nodes_* are the entities in the graph.
 
