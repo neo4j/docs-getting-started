@@ -7,12 +7,12 @@ There are a number of options on how to get started with Neo4j, and your choice 
 [[neo4j-first-steps]]
 == First steps with Neo4j
 
-1. If you want to learn Neo4j graph database features, how to write Cypher queries and use developer tools like xref:get-started-with-neo4j/graph-platform.adoc#neo4j-tools[Neo4j Browser and Bloom], and get an overview on how to connect to Neo4j via drivers, connectors, go to the link:https://neo4j.com/cloud/platform/aura-graph-database/[AuraDB page] where you can create a new Neo4j instance free forever. +
-AuraDB is the best choice for the cloud developers who are interested in graph technologies. +
-Besides the free option, you can select the plan which suits you best. +
+1. If you want to learn Neo4j graph database features, how to write Cypher queries, use developer tools like xref:get-started-with-neo4j/graph-platform.adoc#neo4j-tools[Neo4j Browser and Bloom], and get an overview on how to connect to Neo4j via drivers and connectors, go to the link:https://neo4j.com/cloud/platform/aura-graph-database/[AuraDB page], where you can create a new Neo4j instance free forever. +
+AuraDB is the best choice for cloud developers who are interested in graph technologies. +
+Besides the free option, you can select the subscription plan which suits you best. +
 At the moment, you can choose one of the example datasets on Aura to learn more about Neo4j and Cypher queries:
 * Movies
-* Movies Recommendations
+* Graph based Recommendations
 * Graphs for Cybersecurity
 * StackOverflow Data
 +
@@ -31,7 +31,7 @@ You can also select a blank sandbox and populate it with your own data.
 +
 3. One of the ways to set up an environment for developing an application with Neo4j and Cypher is to use Neo4j Desktop.
 Download Neo4j Desktop from link:https://neo4j.com/download/[] and follow the installation instructions for your operating system. +
-You get the opportunity to try all the graph applications which are available in our link:https://install.graphapp.io/[**Graph Apps Gallery**]. +
+You get the opportunity to try all the graph applications, which are available in our link:https://install.graphapp.io/[**Graph Apps Gallery**]. +
 +
 4. If you need an Enterprise Edition, visit link:https://neo4j.com/pricing/#graph-database/[the Neo4j Pricing page] where you can get all necessary instructions and contacts.
 

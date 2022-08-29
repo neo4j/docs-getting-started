@@ -1,9 +1,12 @@
 [[what-is-graphdb]]
 = What is a graph database?
+:aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
 
 A graph database stores nodes and relationships instead of tables, or documents.
 Data is stored just like you might sketch ideas on a whiteboard.
 Your data is stored without restricting it to a pre-defined model, allowing a very flexible way of thinking about and using it.
+
+See xref:appendix/graphdb-concepts/index.adoc[Graph database concepts] if you want to learn more about graph theory basics. 
 
 ifndef::backend-pdf[]
 ++++
@@ -27,7 +30,6 @@ In a graph database, there are no JOINs or lookups.
 Relationships are stored natively alongside the data elements (the nodes) in a much more flexible format.
 Everything about the system is optimized for traversing through data quickly; millions of connections per second, per core.
 
-// TODO: not ready yet but this point here is where we would introduce the "graph problem problem" of the key technical challenges graphs solve, and link to the main developer page when it's ready.
 Graph databases address big challenges many of us tackle daily.
 Modern data problems often involve many-to-many relationships with heterogeneous data that sets up needs to:
 
@@ -53,7 +55,7 @@ image:sample-cypher.png[role="popup-link"]
 * Nodes can hold any number of key-value pairs, or  _properties_. (For example, `name`)
 * Node labels may also attach metadata (such as index or constraint information) to certain nodes.
 
-*_Relationships_* provide directed, named, connections between two node entities (e.g. Person `LOVES` Person).
+*_Relationships_* provide directed, named, connections between two node entities (for example, Person `LOVES` Person).
 
 * Relationships always have a direction, a type, a start node, and an end node, and they can have properties, just like nodes.
 * Nodes can have any number or type of relationships without sacrificing performance.
@@ -71,7 +73,9 @@ Neo4j is offered as a managed service via link:{aura_signup}[AuraDB].
 But you can also run Neo4j yourself with either Community Edition or Enterprise Edition.
 The Enterprise Edition includes all that Community Edition has to offer, plus extra enterprise requirements such as backups, clustering, and failover abilities.  Neo4j is written in Java and Scala, and the source code is available on https://github.com/neo4j/neo4j[GitHub^].
 
-image:colored-tile-graph.png[role="popup-link"]
+// image:colored-tile-graph.png[role="popup-link"]
+
+image:colored-tile-graph-arr.svg[role="popup-link"]
 
 Neo4j is a _native graph database_, which means that it implements a true graph model all the way down to the storage level.
 The data isn't stored as a "graph abstraction" on top of another technology, it's stored just as you whiteboard it.
@@ -93,5 +97,7 @@ Enables scale-up to billions of nodes on moderate hardware.
 
 Neo4j is used today by thousands of https://neo4j.com/customers/[startups, educational institutions, and large enterprises^] in all sectors including  financial services, government, energy, technology, retail, and manufacturing.
 From innovative new technology to driving businesses, users are generating insights with graph, generating new revenue, and improving their overall efficiency.
+
+You can find more information about numerous use cases when connected data matters most on our link:https://neo4j.com/use-cases/[website].
 
 image::use-case-summary.png[role="popup-link"]

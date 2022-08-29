@@ -53,8 +53,10 @@ Other example datasets that you can run within your own Neo4j Browser are:
 
 When creating a new database in Neo4j AuraDB, besides the default empty you can also select one of the starting datasets:
 
-* The Movie Graph
+* Movies
+* Graph based Recommendations
 * Graphs for Cybersecurity
+* StackOverflow Data
 
 You can explore them following the Browser guides instructions and test data with suggested Cypher queries.
 

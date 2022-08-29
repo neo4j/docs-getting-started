@@ -36,6 +36,7 @@ Once you have an AuraDB database, you can use the `:play cypher` command inside 
 
 Getting Started manual covers the basics of the language, which you can explore by topic area below, starting with basic material, and building up towards more complex material.
 
+////
 In this section you are going to find the following subsections:
 
 * xref::/cypher-intro/patterns.adoc#cypher-intro-patterns[Patterns]
@@ -62,6 +63,7 @@ In this section you are going to find the following subsections:
 ** xref::/cypher-intro/schema.adoc#cypher-intro-schema[Using indexes]
 ** xref::/cypher-intro/schema.adoc#cypher-intro-schema[Using constraints]
 * xref::/cypher-intro/load-csv.adoc#cypher-intro-load-csv[Import data]
+////
 
 
 = Getting started with Cypher

@@ -20,7 +20,7 @@ We continue to improve the different perspectives from which to work with data, 
 
 More information about each of the components can be found on the link:https://neo4j.com/product/[Product page^]. +
 Reference documentation is at https://neo4j.com/docs/[]. +
-If you have any questions or issues, don't hesitate to reach out through the https://community.neo4j.com[Online Community^]!
+If you have any questions or issues, don't hesitate to reach out to the https://community.neo4j.com[Online Community^]!
 
 Below you also find links to the homepages of the Neo4j products.   
 
