@@ -11,7 +11,7 @@ At the time, tutorials could be grouped in two categories:
 
 * xref:appendix/tutorials/guide-cypher-basics.adoc[Tutorial: Getting Started with Cypher] explains the basic concepts of Cypher, Neo4j’s query language, including how to create and query graphs.
 This tutorial is based on _the Movie Graph_.
-You find out how to create, query, and delete data in Neo4j.
+You'll find out how to create, query, and delete data in Neo4j.
 
 * xref:appendix/tutorials/guide-build-a-recommendation-engine.adoc[Tutorial: Build a Cypher Recommendation Engine] uses examples from _the Movie Graph_ and shows how to create recommendation algorithms with Cypher statements. 
 
