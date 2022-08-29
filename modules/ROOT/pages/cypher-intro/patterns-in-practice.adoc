@@ -13,19 +13,19 @@
 Let's start by looking into the clauses that allow you to create data.
 
 To add data, you just use the patterns you already know.
-By providing patterns, you can specify what graph structures, labels and properties you would like to make part of your graph.
+By providing patterns, you can specify what graph structures, labels, and properties you would like to make part of your graph.
 
 Obviously the simplest clause is called `CREATE`.
 It creates the patterns that you specify.
 
-For the patterns we have looked at so far this could look like the following:
+For the patterns you have looked at so far this could look like the following:
 
 [source, cypher, role="noplay"]
 ----
 CREATE (:Movie {title: 'The Matrix', released: 1997})
 ----
 
-If we execute this statement, Cypher returns the number of changes, in this case adding one node, one label and two properties.
+If you run this statement, Cypher returns the number of changes: in this case adding one node, one label, and two properties.
 
 [queryresult]
 ----
@@ -35,15 +35,15 @@ Set Properties: 2
 Rows: 0
 ----
 
-As we started out with an empty database, we now have a database with a single node in it:
+As you started out with an empty database, you now have a database with a single node in it:
 
-image::cypher-intro-patterns-in-practice01.svg[role="middle"]
+image::cypher-intro-patterns-in-practice01-arr.svg[role="middle"]
 
-If we also want to return the created data, we can add a `RETURN` clause, which refers to the variable we have assigned to our pattern elements. + 
+If you also want to return the created data, you can add a `RETURN` clause, which refers to the variable you have assigned to your pattern elements. + 
 The `RETURN` keyword in Cypher specifies what values or results you might want to return from a Cypher query. +
 You can tell Cypher to return nodes, relationships, node and relationship properties, or patterns in your query results. +
 `RETURN` is not required when doing write procedures, but is needed for reads. +
-The node and relationship variables we discussed earlier become important when using `RETURN`.
+The node and relationship variables, which are discussed xref:cypher-intro/patterns.adoc#cypher-intro-patterns-node-syntax[earlier], become important when using `RETURN`.
 
 [source, cypher, role="noplay"]
 ----
@@ -67,9 +67,10 @@ Rows: 1
 +----------------------------------------------+
 ----
 
-If we want to create more than one element, we can separate the elements with commas or use multiple `CREATE` statements.
 
-We can of course also create more complex structures, like an `ACTED_IN` relationship with information about the character, or `DIRECTED` ones for the director.
+If you want to create more than one element, you can separate the elements with commas or use multiple `CREATE` statements.
+
+You can, of course, also create more complex structures, like an `ACTED_IN` relationship with information about the character, or `DIRECTED` ones for the director.
 
 [source, cypher, role="noplay"]
 ----
@@ -78,27 +79,27 @@ CREATE (d:Person {name: 'Robert Zemeckis', born: 1951})-[:DIRECTED]->(m)
 RETURN a, d, r, m
 ----
 
-This is the part of the graph we just updated:
+This is the part of the updated graph:
 
-image::cypher-intro-patterns-in-practice02.svg[role="middle"]
+image::cypher-intro-patterns-in-practice02-arr.svg[role="middle"]
 
-In most cases, we want to connect new data to existing structures.
-This requires that we know how to find existing patterns in our graph data, which we will look at next.
+In most cases, you want to add new data to existing structures.
+This requires knowing how to find existing patterns in your graph data, which is covered in the next section.
 
 [[cypher-intro-patterns-in-practice-matching-patterns]]
 == Matching patterns
 
 Matching patterns is a task for the `MATCH` statement.
-We pass the same kind of patterns we've used so far to `MATCH` to describe what we're looking for.
-It is similar to _query by example_, only that our examples also include the structures.
-In order to bring back nodes, relationships, properties, or patterns, you need to have variables specified in your `MATCH` clause for the data you want to return.
+You pass the same kind of patterns you have used so far to `MATCH` to describe what you are looking for.
+It is similar to _query by example_, only that your examples also include the structures.
+To bring back nodes, relationships, properties, or patterns, you need to have variables specified in your `MATCH` clause for the data you want to return.
 
 [NOTE]
 ====
-A `MATCH` statement searches for the patterns we specify and return _one row per successful pattern match_.
+A `MATCH` statement searches for the patterns you specify and return _one row per successful pattern match_.
 ====
 
-To find the data we have created so far, we can start looking for all nodes labeled with the `Movie` label.
+To find the data you have created so far, you can start looking for all nodes labeled with the `Movie` label.
 
 [source, cypher, role="noplay"]
 ----
@@ -108,11 +109,11 @@ RETURN m
 
 Here's the result:
 
-image::cypher-intro-patterns-in-practice03.svg[role="middle"]
+image::cypher-intro-patterns-in-practice03-arr.svg[role="middle"]
 
 This should show both _The Matrix_ and _Forrest Gump_.
 
-We can also look for a specific person, like _Keanu Reeves_.
+You can also look for a specific person, like _Keanu Reeves_.
 
 [source, cypher, role="noplay"]
 ----
@@ -122,12 +123,12 @@ RETURN p
 
 This query returns the matching node:
 
-image::cypher-intro-patterns-in-practice04.svg[role="middle"]
+image::cypher-intro-patterns-in-practice04-arr.svg[role="middle"]
 
-Note that we only provide enough information to find the nodes, not all properties are required.
-In most cases, you have key-properties like SSN, ISBN, emails, logins, geolocation or product codes to look for.
+Note that you only provide enough information to find the nodes, not all properties are required.
+In most cases, you have key-properties like SSN, ISBN, emails, logins, geolocation, or product codes to look for.
 
-We can also find more interesting connections, like for instance the movies titles that _Tom Hanks_ acted in and the roles he played.
+You can also find more interesting connections, like, for instance, the movies' titles that _Tom Hanks_ acted in and roles he played.
 
 [source, cypher, role="noplay"]
 ----
@@ -146,12 +147,12 @@ Rows: 1
 +------------------------------+
 ----
 
-In this case we only returned the properties of the nodes and relationships that we were interested in.
+In this case, you only returned the properties of the nodes and relationships that you are interested in.
 You can access them everywhere via a dot notation `identifer.property`.
 
-Of course this only lists his role as _Forrest_ in _Forrest Gump_ because that's all data that we have added.
+Of course, this only lists T. Hank's role as _Forrest_ in _Forrest Gump_ because that's all data that you have added.
 
-Now we know enough to connect new nodes to existing ones and can combine `MATCH` and `CREATE` to attach structures to the graph.
+Now you know enough to add new nodes to existing ones and can combine `MATCH` and `CREATE` to attach structures to the graph.
 
 [#cypher-examples]
 === Cypher examples
@@ -160,7 +161,7 @@ Let us look at some examples of using `MATCH` and `RETURN` keywords.
 Each subsequent example is more complicated than the previous one. The two last examples start with explanations of what we are trying to achieve. If you click the **Run Query** button below each Cypher code snippet, you can see the results in the format of a graph or table.
 
 * *Example 1:* Find the labeled `Person` nodes in the graph.
-Note that we must use a variable like `p` for the `Person` node if we want retrieve the node in the `RETURN` clause.
+Note that you must use a variable like `p` for the `Person` node if you want to retrieve the node in the `RETURN` clause.
 
 [source, cypher, role=runnable editable graph]
 ----
@@ -169,11 +170,9 @@ RETURN p
 LIMIT 1
 ----
 
-// image::cypher_example1_labelvar.jpg[role="popup-link"]
-
 
 * *Example 2:* Find `Person` nodes in the graph that have a name of 'Tom Hanks'.
-Remember that we can name our variable anything we want, as long as we reference that same name later.
+Remember that you can name your variable anything you want, as long as you reference that same name later.
 
 [source, cypher, role=runnable editable graph]
 ----
@@ -181,15 +180,13 @@ MATCH (tom:Person {name: 'Tom Hanks'})
 RETURN tom
 ----
 
-// image::{img}cypher_example2_labelprop.jpg[role="popup-link"]
-
 
 * *Example 3:* Find which `Movie` Tom Hanks has directed.
 
-Explanation: we know we need to find Tom Hanks' `Person` node, and we need to find the `Movie` nodes he is connected to.
-To do that, we need to follow the `DIRECTED` relationship from Tom Hanks' `Person` node to the `Movie` node.
-We have also specified a label of `Movie` so that the query will only look at nodes with that label.
-Since we only care about returning the movie in this query, we need to give that node a variable (`movie`) but do not need to give variables for the `Person` node or `DIRECTED` relationship.
+Explanation: at first you should find Tom Hanks' `Person` node and after that the `Movie` nodes he is connected to.
+To do that, you have to follow the `DIRECTED` relationship from Tom Hanks' `Person` node to the `Movie` node.
+You have also specified a label of `Movie` so that the query only looks at nodes with that label.
+Since you only care about returning the movie in this query, you need to give that node a variable (`movie`) but do not need to give variables for the `Person` node or `DIRECTED` relationship.
 
 [source, cypher, role=runnable editable graph]
 ----
@@ -197,15 +194,13 @@ MATCH (:Person {name: 'Tom Hanks'})-[:DIRECTED]->(movie:Movie)
 RETURN movie
 ----
 
-// image::{img}cypher_example3_returnnode.jpg[role="popup-link"]
-
 
 * *Example 4:* Find which `Movie` Tom Hanks has directed, but this time, return only the title of the movie.
 
-Explanation: this query is very similar to the previous one.
+Explanation: this query is similar to the previous one.
 Example 3 returned the entire `Movie` node with all its properties.
-For this example, we still need to find Tom's movies, but now we only care about their titles.
-We will need to access the node's `title` property using the syntax `variable.property` to return the name value.
+For this example, you still need to find Tom's movies, but now you only care about their titles.
+You should access the node's `title` property using the syntax `variable.property` to return the name value.
 
 [source, cypher, role=runnable editable]
 ----
@@ -213,16 +208,15 @@ MATCH (:Person {name: 'Tom Hanks'})-[:DIRECTED]->(movie:Movie)
 RETURN movie.title
 ----
 
-// image::{img}cypher_example4_returnprop.jpg[role="popup-link"]
 
 [#cypher-aliases]
-== Aliasing return values
+=== Aliasing return values
 
-Not all properties are simple like our `movie.title` example above.
+Not all properties are simple like `movie.title` in the example above.
 Some properties have poor names due to property length, multi-word descriptions, developer jargon, and other shortcuts.
 These naming conventions can be difficult to read, especially if they end up on reports and other user-facing interfaces.
 
-.Poorly-named Properties
+.Poorly-named properties
 [source,cypher,role=runnable]
 ----
 //poorly-named property
@@ -231,7 +225,6 @@ RETURN tom.name, tom.born, movie.title, movie.released
 ----
 
 Just like with SQL, you can rename return results by using the `AS` keyword and aliasing the property with a cleaner name.
-We can look at a mocked-up example to list a customer's orders and the number of items in the order.
 
 .Cleaner Results with aliasing
 [source,cypher,role=runnable editable]
@@ -256,7 +249,7 @@ If you do not have an alias that contains spaces, then you do not need to use ba
 [[cypher-intro-patterns-in-practice-attaching-structures]]
 == Attaching structures
 
-To extend the graph with new information, we first match the existing connection points and then attach the newly created nodes to them with relationships.
+To extend the graph with new information, you first match the existing connection points and then attach the newly created nodes to them with relationships.
 Adding _Cloud Atlas_ as a new movie for _Tom Hanks_ could be achieved like this:
 
 [source, cypher, role="noplay"]
@@ -269,37 +262,37 @@ RETURN p, r, m
 
 Here's what the structure looks like in the database:
 
-image::cypher-intro-patterns-in-practice05.svg[role="middle"]
+image::cypher-intro-patterns-in-practice05-arr.svg[role="middle"]
 
 [TIP]
 ====
-It is important to remember that we can assign variables to both nodes and relationships and use them later on, no matter if they were created or matched.
+It is important to remember that you can assign variables to both nodes and relationships and use them later on, no matter if they were created or matched.
 ====
 
 It is possible to attach both node and relationship in a single `CREATE` clause.
-For readability it helps to split them up though.
+For readability, it helps to split them up though.
 
 
 [IMPORTANT]
 ====
-A tricky aspect of the combination of `MATCH` and `CREATE` is that we get _one row per matched pattern_.
+A tricky aspect of the combination of `MATCH` and `CREATE` is that you get _one row per matched pattern_.
 This causes subsequent `CREATE` statements to be executed once for each row.
-In many cases this is what you want.
-If that's not intended, please move the `CREATE` statement before the `MATCH`, or change the cardinality of the query with means discussed later or use the _get or create_ semantics of the next clause: `MERGE`.
+In many cases, this is what you want.
+If that's not intended, move the `CREATE` statement before the `MATCH`, or change the cardinality of the query with means discussed later or use the _get or create_ semantics of the next clause: *`MERGE`*.
 ====
 
 
 [[cypher-intro-patterns-in-practice-completing-patterns]]
 == Completing patterns
 
-Whenever we get data from external systems or are not sure if certain information already exists in the graph, we want to be able to express a repeatable (idempotent) update operation.
-In Cypher `MERGE` has this function.
-It acts like a combination of `MATCH` _or_ `CREATE`, which checks for the existence of data first before creating it.
-With `MERGE` you define a pattern to be found or created.
-Usually, as with `MATCH` you only want to include the key property to look for in your core pattern.
+Whenever you get data from external systems or are not sure if certain information already exists in the graph, you want to be able to express a repeatable (idempotent) update operation.
+In Cypher *`MERGE`* clause has this function.
+It acts like a combination of `MATCH` _or_ `CREATE`, which checks for the existence of data before creating it.
+With `MERGE`, you define a pattern to be found or created.
+Usually, as with `MATCH`, you only want to include the key property to look for in your core pattern.
 `MERGE` allows you to provide additional properties you want to set `ON CREATE`.
 
-If we would not know if our graph already contained _Cloud Atlas_ we could merge it in again.
+If you do not know whether your graph already contained _Cloud Atlas_, you could merge it again.
 
 [source, cypher, role="noplay"]
 ----
@@ -322,7 +315,7 @@ Rows: 1
 +-------------------------------------------------+
 ----
 
-We get a result in any both cases: either the data (potentially more than one row) that was already in the graph or a single, newly created `Movie` node.
+You get a result in both cases: either the data (potentially more than one row) that was already in the graph or a single, newly created `Movie` node.
 
 [NOTE]
 ====
@@ -332,8 +325,8 @@ To achieve a partial match/create, make sure to use already defined variables fo
 ====
 
 So foremost `MERGE` makes sure that you can't create duplicate information or structures, but it comes with the cost of needing to check for existing matches first.
-Especially on large graphs it can be costly to scan a large set of labeled nodes for a certain property.
-You can alleviate some of that by creating supporting indexes or constraints, which we will discuss later.
+Especially on large graphs, it can be costly to scan a large set of labeled nodes for a specific property.
+You can alleviate some of that by creating supporting indexes or constraints, which are discussed in the upcoming sections.
 But it's still not for free, so whenever you're sure to not create duplicate data use `CREATE` over `MERGE`.
 
 [TIP]
@@ -351,14 +344,14 @@ ON CREATE SET r.roles =['Zachry']
 RETURN p, r, m
 ----
 
-image::cypher-intro-patterns-in-practice06.svg[role="middle"]
+image::cypher-intro-patterns-in-practice06-arr.svg[role="middle"]
 
-In case the direction of a relationship is arbitrary, you can leave off the arrowhead.
-`MERGE` will then check for the relationship in either direction, and create a new directed relationship if no matching relationship was found.
+If the direction of a relationship is arbitrary, you can leave off the arrowhead.
+`MERGE` checks for the relationship in either direction and creates a new directed relationship if there is no matching relationship.
 
 If you choose to pass in only one node from a preceding clause, `MERGE` offers an interesting functionality.
-It will then only match within the direct neighborhood of the provided node for the given pattern, and, if not found create it.
-This can come in very handy for creating for example tree structures.
+It only matches within the direct neighborhood of the provided node for the given pattern, and if the pattern is not found creates it.
+This can come in very handy for creating, for example, tree structures.
 
 [source,cypher, indent=0]
 ----
@@ -370,15 +363,14 @@ RETURN y, m10, m11
 
 This is the graph structure that gets created:
 
-image::cypher-intro-patterns-in-practice07.svg[role="middle"]
+image::cypher-intro-patterns-in-practice07-arr.svg[role="middle"]
 
-
-Here there is no global search for the two `Month` nodes; they are only searched for in the context of the _2014_ `Year` node.
+Here is no global search for the two `Month` nodes; they are only searched for in the context of the _2014_ `Year` node.
 
 [.arrange]
 == Code challenge
 
-Now that you know the basics, use the parts below to build a Cypher statement to to find the `title` and year of `release` for every `:Movie` that Tom Hanks has `:DIRECTED`.
+Now knowing the basics, use the parts below to build a Cypher statement to find the `title` and year of `release` for every `:Movie` that Tom Hanks has `:DIRECTED`.
 Click the parts to add them in order and once you are done, click **Run Query** to see whether you have got it right.
 You can click any part of the query inside the code block to remove it.
 
