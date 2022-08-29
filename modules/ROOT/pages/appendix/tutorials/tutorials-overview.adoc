@@ -17,6 +17,6 @@ You'll find out how to create, query, and delete data in Neo4j.
 
 * xref:appendix/tutorials/guide-import-relational-and-etl.adoc[Tutorial: Import data from a relational database into Neo4j] shows the process for moving the data from a relational database into a graph database by translating the schema and using import tools.  
 
-* xref:appendix/tutorials/guide-import-desktop-csv.adoc[How-To: Import CSV data with Neo4j Desktop] tells how to import the data into a graph with *Neo4j Desktop* -- one of the most important developer tools which provides a user-friendly interface for starting and creating Neo4j instances, adding or removing plugins, changing configurations, and other functionality.
+* xref:appendix/tutorials/guide-import-desktop-csv.adoc[How-To: Import CSV data with Neo4j Desktop] walks through how to import the data into a graph with *Neo4j Desktop* -- a user-friendly interface for starting and creating Neo4j instances, adding or removing plugins, changing configurations, and other functionality.
 
 
