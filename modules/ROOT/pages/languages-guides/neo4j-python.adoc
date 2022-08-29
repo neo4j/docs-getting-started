@@ -1,7 +1,8 @@
 [[neo4j-python]]
 = Using Neo4j from Python
-:python-driver-version: 4.4.4
+:python-driver-version: 4.4.5
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
+:examples: https://github.com/neo4j-examples
 :programming-language: python
 :category: drivers
 :tags: python, official-driver, app-development, applications

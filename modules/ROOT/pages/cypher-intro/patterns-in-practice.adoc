@@ -12,11 +12,11 @@
 
 Let's start by looking into the clauses that allow you to create data.
 
-To add data, just use the patterns you already know.
+To add data, you just use the patterns you already know.
 By providing patterns, you can specify what graph structures, labels, and properties you would like to make part of your graph.
 
 Obviously the simplest clause is called `CREATE`.
-It just goes ahead and directly creates the patterns that you specify.
+It creates the patterns that you specify.
 
 For the patterns you have looked at so far this could look like the following:
 

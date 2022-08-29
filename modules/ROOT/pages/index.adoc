@@ -26,12 +26,12 @@ endif::[]
 </div>
 ++++
 
-As the inventor of the labeled-property graphs Neo4j is the first and dominant mover in the graph market.
+As the inventor of the labeled-property graphs, Neo4j is the first and dominant mover in the graph market.
 With a native graph database at the core, Neo4j stores and manages data in its more natural, connected state.
 As time shows, the importance of connected data only increases.
-Neo4j defines its mission as to help world to make sense of data providing insights through data relationships. +
+Neo4j defines its mission as to help the world to make sense of data by providing insights through data relationships. +
 
-Neo4j is dedicated to kind and open communication and aims to create developer-friendly environment for everybody. 
+Neo4j is dedicated to kind and open communication and aims to create a developer-friendly environment for everybody. 
 Developers' productivity is one of our priorities, and our goal is to help them to build applications in a fast and secure mode. 
 Neo4j is open-source and has the largest and most vibrant community of graph database enthusiasts. 
 You can reach out to our link:https://community.neo4j.com/[Community Forum] or link:https://discord.com/invite/neo4j[Discord Chat] for any help or advice you may need. +

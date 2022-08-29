@@ -1,8 +1,7 @@
 [[neo4j-javascript]]
 = Neo4j from JavaScript
-:level: Intermediate
-:page-level: Intermediate
-:author: Neo4j
+:javascript-driver-version: 4.4.7
+:aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
 :programming-language: javascript
 :category: drivers
 :tags: javascript, official-driver, app-development, applications
@@ -16,7 +15,7 @@
 
 [abstract]
 {description}
-While this guide is not comprehensive it will introduce the different Drivers and link to the relevant resources.
+While this guide is not comprehensive it introduces the different drivers and links to the relevant resources.
 
 [abstract]
 You should be familiar with link:https://neo4j.com/docs/getting-started/current/graphdb-concepts/[graph database concepts] and the property graph model.

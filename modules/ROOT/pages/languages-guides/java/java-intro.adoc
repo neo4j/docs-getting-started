@@ -1,7 +1,7 @@
 [[java]]
 = Using Neo4j from Java
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
-:java-driver-version: 4.4.5
+:java-driver-version: 4.4.9
 :maven-artifact-info: https://search.maven.org/artifact/org.neo4j.driver/neo4j-java-driver/{java-driver-version}/jar
 :examples: https://github.com/neo4j-examples
 :programming-language: java
