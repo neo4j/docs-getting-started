@@ -90,7 +90,7 @@ Cypher can be characterized by following:
 * secure, reliable, and data-rich
 * open and flexible
 
-Cypher is one of the graph query languages that are being used as the base for a new *standard* language -- link:https://www.gqlstandards.org/home[Graph Query Language].
+// Cypher is one of the graph query languages that are being used as the base for a new *standard* language -- link:https://www.gqlstandards.org/home[Graph Query Language].
 
 [[connect-to-neo4j]]
 === Connecting to Neo4j

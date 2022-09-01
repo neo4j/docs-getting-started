@@ -19,7 +19,7 @@ endif::[]
 We live in a connected world, and understanding most domains requires processing rich sets of connections to understand what's really happening.
 Often, we find that the connections between items are as important as the items themselves.
 
-image:graph-example.png[role="popup-link"]
+// image:graph-example.png[role="popup-link"]
 
 How else do people do this today?  While existing relational databases can store these relationships, they navigate them with expensive `JOIN` operations or cross-lookups, often tied to a rigid schema.
 It turns out that "relational" databases handle relationships poorly.
@@ -94,4 +94,4 @@ Enables scale-up to billions of nodes on moderate hardware.
 Neo4j is used today by thousands of https://neo4j.com/customers/[startups, educational institutions, and large enterprises^] in all sectors including  financial services, government, energy, technology, retail, and manufacturing.
 From innovative new technology to driving businesses, users are generating insights with graph, generating new revenue, and improving their overall efficiency.
 
-image::use-case-summary.png[role="popup-link"]
+image::use-case-summary.svg[role="popup-link"]
