@@ -1,9 +1,8 @@
 
 [[graphdb-vs-rdbms]]
-= Concepts: Relational to Graph
+= Transition from relational to graph database
 :description: This chapter explores the concepts of graph databases from a relational developer's point of view.
 
-.Goals
 [abstract]
 {description}
 It aims to explain the conceptual differences between relational and graph database structures and data models.

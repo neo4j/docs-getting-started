@@ -26,6 +26,7 @@ endif::[]
 </div>
 ++++
 
+
 With a native graph database at the core, Neo4j stores and manages data in its more natural, connected state.
 The graph database takes a property graph approach, which is beneficial for both traversal performance and operations runtime. +
 
