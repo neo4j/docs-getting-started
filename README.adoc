@@ -1,7 +1,7 @@
 = Neo4j Getting Started Guide
-:docs-uri: https://neo4j.com/docs
+:neo4j-docs-base-uri: https://neo4j.com/docs
 
-This repository contains the AsciiDoc and other sources to build the link:{docs-uri}/getting-started[Neo4j Getting Started Guide].
+This repository contains the AsciiDoc and other sources to build the link:{neo4j-docs-base-uri}/getting-started[Neo4j Getting Started Guide].
 
 == Installation
 

@@ -8,7 +8,7 @@ It will help you start thinking about graphs and patterns, apply this knowledge 
  
 [TIP]
 ====
-For the full reference of Cypher, see the link:/cypher-manual/{page-version}/[Cypher manual].
+For the full reference of Cypher, see the link:{neo4j-docs-base-uri}/cypher-manual/{page-version}/[Cypher manual].
 ====
 
 * xref::/cypher-intro/patterns.adoc#cypher-intro-patterns[Patterns]
