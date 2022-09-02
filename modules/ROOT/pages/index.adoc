@@ -26,17 +26,15 @@ endif::[]
 </div>
 ++++
 
-As the inventor of the labeled-property graphs, Neo4j is the first and dominant mover in the graph market.
-With a native graph database at the core, Neo4j stores and manages data in its more natural, connected state.
-As time shows, the importance of connected data only increases.
-Neo4j defines its mission as to help the world to make sense of data by providing insights through data relationships. +
 
-Neo4j is dedicated to kind and open communication and aims to create a developer-friendly environment for everybody. 
-Developers' productivity is one of our priorities, and our goal is to help them to build applications in a fast and secure mode. 
+With a native graph database at the core, Neo4j stores and manages data in its more natural, connected state.
+The graph database takes a property graph approach, which is beneficial for both traversal performance and operations runtime. +
+
+Neo4j is dedicated to kind and open communication and aims to create developer-friendly environment for everybody. +
 Neo4j is open-source and has the largest and most vibrant community of graph database enthusiasts. 
 You can reach out to our link:https://community.neo4j.com/[Community Forum] or link:https://discord.com/invite/neo4j[Discord Chat] for any help or advice you may need. +
 
-To help you to get more information about Neo4j, we would like to provide you with the xref::appendix/getting-started-resources.adoc[Getting started resources], which may inspire you to explore different possibilities of graph technologies. +
+To help you to get more information about Neo4j products and projects, we would like to provide you with the xref::appendix/getting-started-resources.adoc[Getting started resources], which may inspire you to explore different possibilities of graph technologies. +
 
 If you want learn how to build, optimize, and launch your Neo4j project, visit our link:https://graphacademy.neo4j.com/[GraphAcademy page].
 GraphAcademy courses are free, interactive, and hands-on. +
@@ -54,7 +52,6 @@ Let's take a look at the three pillars of the xref:get-started-with-neo4j/graph-
 
 * First, **Neo4j** is the world’s leading **graph database**.
 The architecture is designed for optimal management, storage, and traversal of _nodes_ and _relationships_.
-The graph database takes a property graph approach, which is beneficial for both traversal performance and operations runtime.
 
 * Second, **Neo4j Aura** is the fully managed graph data platform service in the cloud. 
 Aura empowers developers and data scientists to quickly build scalable, AI-driven applications and analyze big data with algorithms without the hassle of managing infrastructure.
@@ -79,7 +76,7 @@ The Neo4j Getting Started Guide provides you with links to the relevant informat
 
 * xref::/get-started-with-neo4j/index.adoc[Get started with Neo4j] -- Introduction to the Neo4j Graph Data Platform components.
 * xref::/cypher-intro/index.adoc#cypher-intro[Introduction to Cypher] -- Overview of the graph query language Cypher.
-* xref::/data-modeling/index.adoc[Data modeling guidelines] -- Basic principles of graph data modeling, guidelines on how to convert an RDBMS schema to graph, and introduction to data modeling tools.
+* xref::/data-modeling/index.adoc[Data modeling] -- Basic principles of graph data modeling, guidelines on how to convert an RDBMS schema to graph, and introduction to data modeling tools.
 * xref::/data-import/index.adoc[Data importing] -- Articles on how to import data into a Neo4j instance, representing different methods and tools.
 * xref::/languages-guides/index.adoc[Neo4j Drivers] -- Overview of the officially supported Neo4j drivers and Neo4j Community drivers. 
 * xref::/integration-tools/integration.adoc[Neo4j Connectors] -- Overview of the Neo4j connectors which help you to integrate with familiar technologies and minimize pain associated with a rip-and-replace approach to solutions.

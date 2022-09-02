@@ -1,16 +1,89 @@
 [[data-modeling-tools]]
 = Data modeling tools
-:description: arrows.app, data importer
+:description: arrows.app, data importer, visualization tools, schema
 
-Data modeling could be a challenging task. To make data modeling easier you can use one of our tools:
+To help you with designing a new graph database structure, the following tools were created:
 
-* link:https://neo4j.com/labs/arrows/[arrows.app^]
-* link:https://neo4j.com/docs/aura/auradb/importing/importing-data/#_neo4j_data_importer[Data Importer^]
+* link:https://neo4j.com/docs/aura/auradb/importing/importing-data/#_neo4j_data_importer[Neo4j Data Importer^]
+* link:https://neo4j.com/labs/arrows/[Arrows.app^]
+
+If you have data stored in a flat file format, use *Neo4j Data Importer* -- no-code tool for importing flat file data (`.csv`, `.tsv`) into Neo4j databases.
+Today Data Importer is available on *AuraDB* instances.
+
+*Arrows.app* is ideal for making a sketch of a graph, therefore if your aim is to design a domain model that your data will follow, go to the link:https://arrows.app/#/googledrive/ids=1osmv0pzcbyF8TEtvOEAMeXpONCWPn-e_[Arrows.app page].
 
 == Projects overview
 
-== Tips and tricks
+[[data-importer]]
+=== Neo4j Data Importer
 
+If you are new to Neo4j or completely new to graph, it could be hard to know where to start when it comes to loading data.
+
+Neo4j has many data import options: 
+
+* `LOAD CSV` Cypher command for online import 
+
+* APOC procedures for other formats 
+
+* `neo4j-admin import` command to load a full database 
+
+These tools are capable, but you have to spend some time on learning them that can get in the way when you are just starting out.
+
+To address this need, *Neo4j Data Importer* was created, a small but capable no-code user-friendly interface for loading flat file data into Neo4j databases.
+
+image::data-importer-1.png[role="middle"]
+
+Today Neo4j Data Importer provides:
+
+* Support for flat-file inputs (`.csv`, `.tsv`) in the region of 1 million total rows equivalent (no upper limit is enforced, but larger loads take longer and rely on a reliable network connection to your database).
+
+* The ability to sketch out a graph model and map your input data to its structure and properties.
+
+* Loads into any Neo4j database which are reachable from your machine.
+
+
+Data is only kept in your web browser; the tool does not use a server side component.
+
+[IMPORTANT]
+Today Neo4j Data Importer is available on Neo4j AuraDB instances only.
+
+
+[[arrows-app]]
+=== Arrows.app
+
+*Arrows.app* is a web-based tool from link:https://neo4j.com/labs/[Neo4j Labs] for drawing graphs.
+
+While designing a graph data model, you may need to visualize different versions. 
+Remember, there is no right or wrong way to structure your data for a graph database!
+Your domain model depends on your business needs and aims to solve your specific problems.
+Its flexibility allows you to refactor data model to improve performance and maximize capabilities of your graph database. 
+
+image::northwind-graph-model.png[role=middle]
+
+Graphs are easy and intuitive to sketch on a whiteboard (we say whiteboard-friendly), and Arrows.app tries to be just as easy and intuitive as using a whiteboard.
+You are able to create a visual layout of the organization's data entities, relationships, and properties. 
+Graph data model stays exactly as it was drawn on the whiteboard/Arrows.app canvas.
+
+With the help of Arrows.app: 
+
+. You can create, modify, and delete essential parts of the Neo4j graph database: nodes and relationships with their labels and properties.
+
+. You can convert your table into a graph by using Arrows.app import functions.
+
+. You are able to export images from Arrows.app as Cypher statements and load data into Neo4j database.
+
+Arrows.app features:
+
+* quick intuitive drawing with a mouse
+
+* fine-grained styling control: sizes, layouts, and colors
+
+* several options for exporting images
+
+* functionality for importing JSON files or tables
+
+
+[[data-modeling-tools-resources]]
 == Resources
 
 * link:https://neo4j.com/developer-blog/week-17-discover-auradb-free-analysing-nft-trades/[Blog Post. Aura Series: Discover AuraDB Free and Learn More about New Data Importer^]
