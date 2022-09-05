@@ -83,7 +83,7 @@ That's all we need - a single hop with no lookups involved.
 
 [TIP]
 ====
-More information on this topic can be found in link:/developer/data-modeling/[Graph Data Modeling].
+More information on this topic can be found in the https://neo4j.com/docs/getting-started/current/data-modeling/[Data Modeling section].
 ====
 
 
