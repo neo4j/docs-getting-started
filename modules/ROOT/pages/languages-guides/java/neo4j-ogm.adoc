@@ -1,4 +1,3 @@
-[[neo4j-ogm]]
 = Neo4j - OGM Object Graph Mapper
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
 :neo4j-ogm-version: 3.2.23
@@ -22,8 +21,8 @@ While using the Cypher query language alongside the Java driver works well for s
 That's where object graph mappers come in; they take your existing domain objects (POJOs) and map them to Neo4j.
 The great benefit with this approach is that with graph databases, there is no data-model impedence mismatch like there is with relational databases.
 
-Besides the Neo4j-OGM, there is also xref:java-third-party.adoc#ogm-hibernate[Hibernate-OGM] and others.
-If you want more abstraction xref:spring-data-neo4j.adoc[Spring Data Neo4j] can give you a Domain Driver Design (DDD) approach.
+Besides the Neo4j-OGM, there is also xref:languages-guides/java/java-third-party.adoc#ogm-hibernate[Hibernate-OGM] and others.
+If you want more abstraction xref:languages-guides/java/spring-data-neo4j.adoc[Spring Data Neo4j] can give you a Domain Driver Design (DDD) approach.
 
 We created the Neo4j-OGM as a standalone, simple object graph mapper for Java which also acts as the base for Spring Data Neo4j.
 

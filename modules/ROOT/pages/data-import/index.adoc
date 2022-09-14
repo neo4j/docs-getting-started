@@ -66,7 +66,7 @@ xref:data-import/relational-to-graph-import.adoc[Import: RDBMS to graph]
 In the Appendix, you can find two tutorials on how to import data from the relational database and how to import CSV data with Neo4j Desktop. +
 The first guide uses a common relational data set (Northwind) and walks you through how to transform and import data from a relational database to Neo4j graph database. You will learn what steps are needed to retrieve the data from the relational data store and import the same data as a graph in Neo4j, as well as how to take the relational data model and convert it to graph in the process.
 
-* xref:appendix/guide-import-relational-and-etl.adoc[Tutorial: Import data from a relational database into Neo4j]
-* xref:appendix/guide-import-desktop-csv.adoc[How-To: Import CSV data with Neo4j Desktop]
+* xref:appendix/tutorials/guide-import-relational-and-etl.adoc[Tutorial: Import data from a relational database into Neo4j]
+* xref:appendix/tutorials/guide-import-desktop-csv.adoc[How-To: Import CSV data with Neo4j Desktop]
 
 

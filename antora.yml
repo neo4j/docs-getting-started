@@ -10,6 +10,7 @@ asciidoc:
     neo4j-version: 4.4
     neo4j-version-exact: 4.4.0
     neo4j-buildnumber: 4.4
-    offset: '{offset}'
-    count: '{count}'
-    
+    offset: '\\{offset}'
+    count: '\\{count}'
+    aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
+    neo4j-img-base-uri: https://dist.neo4j.com/wp-content/uploads/

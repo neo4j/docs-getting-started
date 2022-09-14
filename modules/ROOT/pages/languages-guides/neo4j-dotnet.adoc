@@ -1,4 +1,3 @@
-[[neo4j-dotnet]]
 = Using Neo4j from .NET
 :examples: https://github.com/neo4j-examples
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
@@ -19,7 +18,7 @@ You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or l
 [#neo4j-dotnet]
 == Neo4j for .NET Developers
 
-// image::{img}dotnet-logo.png[float=right,width=300]
+// image::{neo4j-img-base-uri}dotnet-logo.png[float=right,width=300]
 
 Neo4j provides drivers which allow you to make a connection to the database and develop applications
 which create, read, update, and delete information from the graph.
