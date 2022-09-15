@@ -286,9 +286,9 @@ To help handle larger volumes of transactions, you can increase some configurati
 * `dbms.memory.pagecache.size`: ideally, value large enough to keep the whole database in memory.
 
 ==== *LOAD CSV* resources
-* xref:appendix/guide-import-desktop-csv.adoc[How-To: Import CSV data with Neo4j Desktop]
+* xref:appendix/tutorials/guide-import-desktop-csv.adoc[How-To: Import CSV data with Neo4j Desktop]
 * link:https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[Cypher Manual: LOAD CSV^]
-* xref:appendix/guide-import-relational-and-etl.adoc[Tutorial: Import relational data into Neo4j]
+* xref:appendix/tutorials/guide-import-relational-and-etl.adoc[Tutorial: Import relational data into Neo4j]
 * link:https://graphacademy.neo4j.com/courses/importing-data[Importing CSV Data into Neo4j]
 
 [#batch-importer]
@@ -396,7 +396,7 @@ There is specific markup on specific columns, which we will explain.
 * All other columns are treated as properties but skipped if empty or annotated with `:IGNORE`.
 * Type conversion is possible by suffixing the name with indicators like `:INT`, `:BOOLEAN`, etc.
 
-For more details on this header format and the tool, see the documentation in the {opsmanual}/tools/neo4j-admin-import/[Neo4j Manual^] and the accompanying {opsmanual}/tutorial/neo4j-admin-import/[tutorial^].
+For more details on this header format and the tool, see the documentation in the link:{neo4j-docs-base-uri}/operations-manual/tools/neo4j-admin-import/[Neo4j Operations Manual^] and the accompanying link:{neo4j-docs-base-uri}/operations-manual/tutorial/neo4j-admin-import/[tutorial^].
 
 There is also a lesson in the link:https://neo4j.com/graphacademy/training-importing-data-40/enrollment/[mporting Data with Neo4j 4.x: Using neo4j-admin] that covers using the neo4j-admin import tool.
 
@@ -469,10 +469,10 @@ LIMIT 5;
 [#import-csv-resources]
 == CSV import resources
 
-* {opsmanual}/tools/neo4j-admin-import/[Manual: Import Tool^]
-* {opsmanual}/tutorial/neo4j-admin-import/#tutorial-neo4j-admin-import[Manual: Import Tool Tutorial^]
+* link:{neo4j-docs-base-uri}/operations-manual/current/tools/neo4j-admin-import/[Manual: Import Tool^]
+* link:{neo4j-docs-base-uri}/operations-manual/current/tutorial/neo4j-admin-import/#tutorial-neo4j-admin-import[Manual: Import Tool Tutorial^]
 * link:/developer/kb/?tag=load-csv[Knowledgebase Articles: LOAD CSV^]
 * link:https://github.com/neo4j-contrib/northwind-neo4j[GitHub project: Northwind CSV files^]
-* {opsmanual}/configuration/file-locations[Manual: Neo4j File Locations^]
+* link:{neo4j-docs-base-uri}/operations-manual/current/configuration/file-locations[Manual: Neo4j File Locations^]
 * link:/developer/kb/import-csv-locations/[Knowledgebase: Default Import Folder Path^].
 ////

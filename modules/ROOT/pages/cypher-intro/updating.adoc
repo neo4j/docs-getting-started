@@ -27,7 +27,7 @@ You will probably recognize some of the similarities and differences as we go al
 // Let us look at an example that we used in our last guide.
 // To review, we had a `Person` node (Jennifer) who liked graphs, was friends with Michael, and worked at Neo4j.
 
-// image::{img}cypher_graph_v1.jpg[role="popup-link"]
+// image::{neo4j-img-base-uri}cypher_graph_v1.jpg[role="popup-link"]
 
 // What if we wanted to add another of Jennifer's friends to the graph?
 // We can add Jennifer's friend Mark using the Cypher statement below.
@@ -45,7 +45,7 @@ If you do not want to return any results, simply run this statement instead:
 `CREATE (friend:Person {name: 'Mark'})`
 ////
 
-// image::{img}cypher_graph_createFriend.jpg[role="popup-link"]
+// image::{neo4j-img-base-uri}cypher_graph_createFriend.jpg[role="popup-link"]
 
 // Great! Now we added Mark to the database.
 // However, Mark is all alone with no relationships because we just created his node and did not specify any connections.
@@ -59,7 +59,7 @@ MATCH (mark:Person {name: 'Mark'})
 CREATE (jennifer)-[rel:IS_FRIENDS_WITH]->(mark)
 ////
 
-// image::{img}cypher_graph_createFriendRel.jpg[role="popup-link"]
+// image::{neo4j-img-base-uri}cypher_graph_createFriendRel.jpg[role="popup-link"]
 
 // Notice that we run two `MATCH` queries before we create a relationship between the nodes.
 // Why is that?

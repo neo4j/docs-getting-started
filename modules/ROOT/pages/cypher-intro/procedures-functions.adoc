@@ -1,4 +1,3 @@
-[[procedures-functions]]
 = User defined procedures and functions
 :tags: cypher, queries, extend-cypher, procedures, functions, custom-development
 :description: This guide explains how to use, create and deploy user defined procedures and functions, the extension mechanism of Cypher, Neo4j's query language. It also covers existing, widely used procedure libraries

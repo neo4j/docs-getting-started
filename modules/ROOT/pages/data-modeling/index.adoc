@@ -22,8 +22,8 @@ To start, _Graph Modeling Guidelines_ introduces the basic process of designing 
 
 It helps you determine the questions you need to ask and share design considerations, best practices learned from experts through the years, and tips for building a more flexible and clean data model to structure your data model for the best results.
 
-xref:guide-data-modeling.adoc[Graph modeling guidelines] +
-xref:modeling-designs.adoc[Modeling designs]
+xref:data-modeling/guide-data-modeling.adoc[Graph modeling guidelines] +
+xref:data-modeling/modeling-designs.adoc[Modeling designs]
 
 [#rdbms-graph-schema]
 == Translating an RDBMS schema to graph
@@ -32,7 +32,7 @@ If you want to relate your existing knowledge of relational data models to the g
 
 From typical process steps to conversion mappings, we will walk through how the process can differ and what tables and columns look like as a graph.
 
-xref:relational-to-graph-modeling.adoc[Modeling: relational to graph]
+xref:data-modeling/relational-to-graph-modeling.adoc[Modeling: relational to graph]
 
 [#optimize-graph-model]
 == Optimizing graph data models
@@ -42,7 +42,7 @@ The data model can affect queries and performance of your use case.
 
 Learn how to improve your graph solution and maximize the capabilities of what is existing with recommendations for optimization techniques and ideas.
 
-xref:modeling-tips.adoc[Graph modeling tips]
+xref:data-modeling/modeling-tips.adoc[Graph modeling tips]
 
 [#graphgist-models]
 == Live graph models - GraphGists

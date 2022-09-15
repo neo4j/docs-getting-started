@@ -1,4 +1,3 @@
-[[neo4j-php]]
 = Using Neo4j from PHP
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
 :tags: php, ogm, app-development, applications, driver, client, bolt
@@ -22,7 +21,7 @@ When developing with Neo4j, please use Java 8 or 11 and your favorite IDE.
 [#neo4j-php]
 == Neo4j for PHP Developers
 
-// image::{img}php_logo.png[float=right,width=300]
+// image::{neo4j-img-base-uri}php_logo.png[float=right,width=300]
 
 
 Alternatively, Neo4j can be installed on any system and then accessed via its bolt and HTTP APIs. We recommend the https://github.com/laudis-technologies/neo4j-php-client#roadmap[PHP Client^] for easiest development over bolt and HTTP APIs. You can also directly access the bolt protocol via the https://github.com/stefanak-michal/Bolt[PHP Bolt] library.
