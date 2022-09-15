@@ -252,9 +252,9 @@ This is simply a shortest path query called the "Bacon Path".
 To perform this type of query, you need to specify:
 
 * Variable length patterns:
-{cyphermanual}/syntax/patterns/#cypher-pattern-varlength[variable length relationships^]
+link:{neo4j-docs-base-uri}/cypher-manual/current/syntax/patterns/#cypher-pattern-varlength[variable length relationships^]
 * Built-in shortestPath() algorithm:
-{cyphermanual}/execution-plans/shortestpath-planning/[shortestPath^]
+link:{neo4j-docs-base-uri}/cypher-manual/current/execution-plans/shortestpath-planning/[shortestPath^]
 
 
 === Movies and actors up to three hops away from Kevin Bacon

@@ -5,6 +5,7 @@
 :tags: visualization, graph, tools, browser, bloom, introduction, tools, charts, maps, heatmaps, 3d
 :description: This section explains graph visualization tool options, and how to get insights from your data using visualization tools.
 
+
 [abstract]
 {description}
 
@@ -17,12 +18,12 @@ Neo4j is designed to be very visual in nature.
 Native graph databases like Neo4j focus on relationships.  Visualizing these relationships can give a unique
 "big picture" to your data that is difficult or impossible to get with traditional tables and business intelligence packages.
 
-// image:{img}bloom-movies-view-1.png[role="popup-link"]
+// image:{neo4j-img-base-uri}bloom-movies-view-1.png[role="popup-link"]
 
 Graph visualization takes these capabilities one step further by drawing the graph in various formats so users can interact with the data in a more user-friendly way.
 With visualization tools, a full or partial graph can come to life and allow the user to explore it, setting various rules or views in order to analyze it from different perspectives.
 
-// image:{img}bloom-movies-view-2.png[role="popup-link"]
+// image:{neo4j-img-base-uri}bloom-movies-view-2.png[role="popup-link"]
 
 This section is designed to help you understand how to export your graph data in Neo4j for display as a visualization, and list options so you can choose what suits your needs.
 
@@ -37,13 +38,13 @@ As you can imagine, this can provide insight where other types of data formats c
 Visualizations help make anomalies or relevant patterns stand out to help human eyes and brains detect them, where other types of data formats might not highlight hidden structures as well.
 
 .Graph
-// image:{img}vis_movies_graph_format.jpg[role="popup-link"]
+// image:{neo4j-img-base-uri}vis_movies_graph_format.jpg[role="popup-link"]
 
 Let us look at a very rudimentary example of this using our Movie data from the earlier data modeling section guides.
 In the graph view above, we can easily pick out that `Lana Wachowski` directed both `Cloud Atlas` and `The Matrix` movies, where in the tabular representation, that information is not as clear or easy-to-find.
 
 .Table
-// image:{img}vis_movies_tabular_format.jpg[role="popup-link"]
+// image:{neo4j-img-base-uri}vis_movies_tabular_format.jpg[role="popup-link"]
 
 Even if you feel that the relationship is not hard to find in the tabular format, imagine if we were looking at a graph that contained these individuals' entire filmography careers, as well as hundreds of other actors, directors, and film crew members.
 The connections could easily be lost in a non-visual presentation.
@@ -59,7 +60,7 @@ We will briefly discuss the key details of each here.
 Bloom is a standalone product focused on visualization that comes with every link:{aura_signup}[AuraDB Instance], and is available with a Neo4j Desktop.  
 It was designed for business analysts annd nother non-developers to interact with graph data without writing any code.
 
-// image:{img}bloom_vis_yelp.jpg[role="popup-link"]
+// image:{neo4j-img-base-uri}bloom_vis_yelp.jpg[role="popup-link"]
 
 Users can use natural language to query the database and explore patterns, clusters, and traversals in their graph data.
 It is also possible to create different dissections of the graph (called perspectives) that allow users to view different aspects and slices of graph data for further analysis.
@@ -68,7 +69,7 @@ It is also possible to create different dissections of the graph (called perspec
 
 Neo4j Browser is an interactive cypher command shell for developers that allows you to interact with your graph and visualize the information in it. Neo4j Browser is bundled with Neo4j and is available in all editions and versions of Neo4j.
 
-// image:{img}neo4j-browser-oneshot.png[role="popup-link"]
+// image:{neo4j-img-base-uri}neo4j-browser-oneshot.png[role="popup-link"]
 
 Its visualization functionality is designed to display a node-graph representation of the underlying data stored in the database in response to a given Cypher query, showing circles for nodes and lines for relationships.
 Neo4j Browser also provides some functionality for styling with color and size based on node labels and relationship types, or you can customize your own styles by importing a GRASS (graph-stylesheet) file for Neo4j Browser to reference.
@@ -91,9 +92,9 @@ Feel free to explore others!
 
 ==== Tableau
 
-// image:{img}tableau.png[,width=200]
+// image:{neo4j-img-base-uri}tableau.png[,width=200]
 
-// image::{img}tableau-neo4j.jpg[role="popup-link",float="right",width=350]
+// image::{neo4j-img-base-uri}tableau-neo4j.jpg[role="popup-link",float="right",width=350]
 
 Tableau is a data analysis tool that can take data from a variety of sources and blend or split the data based on user specification.
 Using the link:https://neo4j.com/bi-connector/[Neo4j Connector for BI] you can make a connection between
@@ -105,25 +106,25 @@ Once the data is in Tableau, the user can interact with a drag-and-drop Tableau 
 
 Blog post: https://medium.com/neo4j/showing-charts-for-neo4j-query-results-using-amcharts-and-structr-efae0b7a04f0[Charts for Neo4j query results with amCharts+Structr^]
 
-// image::{img}amcharts_structr.jpg[role="popup-link"]
+// image::{neo4j-img-base-uri}amcharts_structr.jpg[role="popup-link"]
 
 ==== *Chart.js*
 
 Blog post: https://neo4j.com/blog/charting-neo4j-3-0/[Charting Neo4j^]
 
-// image::{img}chart_js_visualization.jpg[role="popup-link"]
+// image::{neo4j-img-base-uri}chart_js_visualization.jpg[role="popup-link"]
 
 ==== *Nivo*
 
 Blog post: https://medium.com/neo4j/working-with-neo4j-date-and-spatial-types-in-a-react-js-app-5475b5042b50[Neo4j Spatial with Nivo charts^]
 
-// image::{img}nivo_charts_bar.jpg[role="popup-link"]
-// image::{img}nivo_charts_circle.jpg[role="popup-link"]
+// image::{neo4j-img-base-uri}nivo_charts_bar.jpg[role="popup-link"]
+// image::{neo4j-img-base-uri}nivo_charts_circle.jpg[role="popup-link"]
 
 [#graph-vis-map]
 === *Map-based visualizations*
 
-// image::{img}mapbox_visualization.jpg[role="popup-link",float="right",width=350]
+// image::{neo4j-img-base-uri}mapbox_visualization.jpg[role="popup-link",float="right",width=350]
 
 Graph data is an excellent fit for mapping and representing geographic data, as it is laid out by entities and connections (locations/points and routes to get to those locations).
 Neo4j can help plot latitude and longitude, polygon geometries, routes, as well as distances, so a tool to overlay a map visualization on the front-end of this data provides a great deal of value for interacting and exploring an area.
@@ -148,7 +149,7 @@ Mapbox also gives you the capability to add an interactive map.
 [#graph-vis-heatmap]
 === *Heatmap visualizations*
 
-// image::{img}heatmap_visualization.jpg[role="popup-link",float="right",width=350]
+// image::{neo4j-img-base-uri}heatmap_visualization.jpg[role="popup-link",float="right",width=350]
 
 A heatmap is a data visualization where colors are used to represent data values.
 It is often imposed on a map, but could also be on a matrix as well.
@@ -162,7 +163,7 @@ We will list the tool(s) we have encountered so far, but we will add to this as 
 [#graph-vis-3d]
 === *3D visualizations*
 
-image::{img}graph_vis_3d.jpg[role="popup-link",float="right",width=350]
+image::{neo4j-img-base-uri}graph_vis_3d.jpg[role="popup-link",float="right",width=350]
 
 Adding a third dimension may increase some complexity in the visualization, but also adds value.
 Exploring your data in 3D can help navigate through large amounts of data better and more clearly.
@@ -190,9 +191,9 @@ Instead, they expand the current boundaries and find uniquely powerful ways to u
 Thinking outside the box increases the possibilities of graph even further!
 
 .*Graphileon*
-// image:{img}graphileon-logo.png[width=200]
+// image:{neo4j-img-base-uri}graphileon-logo.png[width=200]
 
-// image::{img}graphileon_visualization.jpg[role="popup-link",float="right",width=350]
+// image::{neo4j-img-base-uri}graphileon_visualization.jpg[role="popup-link",float="right",width=350]
 
 Graphileon is a platform for building graphy applications by composing functions and UI elements.
 It can be harnessed by users such as consultants and designers for styling and dashboards.

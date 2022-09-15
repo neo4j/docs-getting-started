@@ -21,7 +21,7 @@ When developing with Neo4j, please use Java 8 or 11 and your favorite IDE.
 [#neo4j-java]
 == Neo4j for Java developers
 
-// image::{img}java.jpg[float=right,width=200]
+// image::{neo4j-img-base-uri}java.jpg[float=right,width=200]
 
 Neo4j provides drivers which allow you to make a connection to the database and develop applications
 which create, read, update, and delete information from the graph.

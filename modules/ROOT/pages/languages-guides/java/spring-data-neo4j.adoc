@@ -14,17 +14,17 @@
 The library provides convenient access to Neo4j including object mapping, Spring Data repositories, conversion, transaction handling, reactive support, and more.
 
 [abstract]
-* Familiarity with xref:graph-database.adoc[graph database] concepts and the xref:graph-database.adoc#property-graph[property graph model].
+* Familiarity with xref:get-started-with-neo4j/graph-database.adoc[graph database] concepts and the xref:get-started-with-neo4j/graph-database.adoc#property-graph[property graph model].
 * link:{aura_signup}[Create an AuraDB Free instance] and familiarity with the link:/developer/cypher-query-language[Cypher query language]
 * Some knowledge/experience with Spring.
-Knowing https://spring.io/projects/spring-data/[Spring Data^] and https://spring.io/projects/spring-boot/[Spring Boot^] are both great additions to your toolbox, as well.
+Knowing link:https://spring.io/projects/spring-data/[Spring Data^] and link:https://spring.io/projects/spring-boot/[Spring Boot^] are both great additions to your toolbox, as well.
 * For this library, please use JDK 11 or later and your favorite IDE.
 
 
 [#reactive-development]
 == Reactive Development
 
-Neo4j (version 4.0+) incorporated the principles of the https://www.reactivemanifesto.org/[reactive manifesto^] for passing data between the database and client with the drivers.
+Neo4j (version 4.0+) incorporated the principles of the link:https://www.reactivemanifesto.org/[reactive manifesto^] for passing data between the database and client with the drivers.
 Developers can take advantage of the reactive approach to process queries and return results.
 This means that communication between the driver, and the database can be managed and adjusted dynamically according to data needs of the client.
 
@@ -34,7 +34,7 @@ Neo4j's database driver will also maintain rate limits for requesting data from 
 No matter the volume of transactions or data (even during times of high activity), the system can maintain limits on how much it can send and receive at once based on available resources.
 This prevents overloads and collapses or failures, as well as lost transmissions or later catch up loads during the downtime.
 
-https://projectreactor.io/[Project Reactor^] is the core foundation of many implementations of reactive development, including https://spring.io/reactive[Spring's^].
+link:https://projectreactor.io/[Project Reactor^] is the core foundation of many implementations of reactive development, including link:https://spring.io/reactive[Spring's^].
 Neo4j uses the Spring implementation of Project Reactor components to provide reactive support in related applications with the graph database.
 
 [#spring-data]
@@ -42,10 +42,10 @@ Neo4j uses the Spring implementation of Project Reactor components to provide re
 
 The Spring Data Neo4j 6 is the new major version of the Spring Data Neo4j project.
 One of its feature benefit is the capability and support for reactive transactions, though there are other improvements and additions
-such as fully immutable entity and https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/Record.html[Java record]-based mapping support.
+such as fully immutable entity and link:https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/Record.html[Java record]-based mapping support.
 
 While SDN provides both imperative and reactive application development, this guide will focus on the reactive implementation.
-Imperative application code and documentation in SDN is available on the https://github.com/spring-projects/spring-data-neo4j[Github project^].
+Imperative application code and documentation in SDN is available on the link:https://github.com/spring-projects/spring-data-neo4j[Github project^].
 
 We can see some of the most prominent features and changes in the SDN library listed below.
 
@@ -78,7 +78,7 @@ Over the next few sections, we will walk through all of the steps for creating a
 
 For this example, we will use the Neo4j-standard movie graph data set because it comes for free with every Neo4j instance and is a small size.
 
-If you haven't already, link:/download/[download Neo4j Desktop^] and xref:neo4j-desktop.adoc#desktop-create-DBMS[create/start a database].
+If you haven't already, link:/download/[download Neo4j Desktop^] and link:{neo4j-docs-base-uri}/desktop-manual/current/operations/create-dbms/[create/start a database].
 
 You can interact with the database and load the data in a web browser with the URL http://localhost:7474/browser/?cmd=play&arg=movies[http://localhost:7474^].
 Note the command ready to run in the prompt (`:play movies`).
@@ -88,7 +88,7 @@ On the second slide of that guide, execute the long Cypher statement to fill you
 [#create-project]
 == Create a new Spring Boot project
 
-The easiest way to set up a Spring Boot project is with the Spring Initializr at https://start.spring.io[start.spring.io^].
+The easiest way to set up a Spring Boot project is with the Spring Initializr at link:https://start.spring.io[start.spring.io^].
 It is also integrated in the major IDEs, in case you prefer not to use the website.
 
 Then, you can change the default group, artifact, name, and description for the project.
@@ -103,7 +103,7 @@ The Spring Initializr will take care of creating the project structure for you, 
 If you are looking at the project in Github, you might notice that there are some other dependencies in the `pom.xml`.
 A couple are for adding tests to the project, then one dependency for developer tools, and a couple more for test containers.
 
-More information on the testing functionality can be found in the https://docs.spring.io/spring-data/neo4j/docs/current/reference/html/#sdn.testing[documentation^].
+More information on the testing functionality can be found in the link:https://docs.spring.io/spring-data/neo4j/docs/current/reference/html/#sdn.testing[documentation^].
 
 .Testing and dev tools dependencies
 [source,xml,subs="verbatim,attributes"]

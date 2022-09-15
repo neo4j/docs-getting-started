@@ -1,7 +1,7 @@
 name: getting-started
 title: Getting Started
 version: '5.0'
-display_version: '5.0-preview' 
+display_version: '5.0-preview'
 start_page: ROOT:index.adoc
 nav:
 - modules/ROOT/content-nav.adoc
@@ -11,6 +11,7 @@ asciidoc:
     neo4j-version: 5.0
     neo4j-version-exact: 5.0.0
     neo4j-buildnumber: 5.0
-    offset: '{offset}'
-    count: '{count}'
-    
+    offset: '\\{offset}'
+    count: '\\{count}'
+    aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
+    neo4j-img-base-uri: https://dist.neo4j.com/wp-content/uploads/

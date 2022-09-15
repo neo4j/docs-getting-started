@@ -1,4 +1,3 @@
-[[neo4j-ruby]]
 = Using Neo4j from Ruby
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
 :tags: ruby, gem, app-development, applications
