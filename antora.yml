@@ -10,6 +10,6 @@ asciidoc:
     neo4j-version: 3.5
     neo4j-version-exact: 3.5.29
     neo4j-buildnumber: 3.5
-    offset: '{offset}'
-    count: '{count}'
+    offset: '\\{offset}'
+    count: '\\{count}'
     

@@ -130,12 +130,12 @@ YIELD description, tokenNames, properties, type;
 2 rows
 ----
 
-Learn more about indexes in xref:3.5@cypher-manual:ROOT:schema/index.adoc#query-schema-index[Cypher manual -> Indexes].
+Learn more about indexes in link:{neo4j-docs-base-uri}/cypher-manual/3.5/schema/#query-schema-index[Cypher manual -> Indexes].
 
 [NOTE]
 ====
 It is possible to specify which index to use in a particular query, using _index hints_.
-This is one of several options for query tuning, described in detail in xref:3.5@cypher-manual:ROOT:query-tuning/index.adoc#query-tuning[Cypher manual -> Query tuning].
+This is one of several options for query tuning, described in detail in link:{neo4j-docs-base-uri}/cypher-manual/3.5/query-tuning/#query-tuning[Cypher manual -> Query tuning].
 ====
 
 
@@ -183,4 +183,4 @@ The constraint described above is available for all editions of Neo4j.
 Additional constraints are available for Neo4j Enterprise Edition.
 ====
 
-Learn more about constraints in xref:3.5@cypher-manual:ROOT:schema/constraints/index.adoc#query-constraints[Cypher manual -> Constraints].
+Learn more about constraints in link:{neo4j-docs-base-uri}/cypher-manual/3.5/schema/constraints/#query-constraints[Cypher manual -> Constraints].
