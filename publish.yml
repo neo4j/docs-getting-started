@@ -51,3 +51,5 @@ asciidoc:
     experimental: ''
     copyright: 2021
     common-license-page-uri: https://neo4j.com/docs/license/
+    neo4j-base-uri: '' # this attribute is empty for publish playbooks
+    neo4j-docs-base-uri: 'docs/'  # this attribute does not contain the full neo4j.com path for publish playbooks
