@@ -76,7 +76,7 @@ To explore a wide variety of datasets in an *online setup* without a local insta
 
 Each sandbox is available for at least three days after creation and can also be remotely accessed from applications using any Neo4j driver.
 
-// image::{img}neo4j-sandboxes.png[link=https://neo4j.com/sandbox/?ref=developer-ex-data-img]
+// image::{neo4j-img-base-uri}neo4j-sandboxes.png[link=https://neo4j.com/sandbox/?ref=developer-ex-data-img]
 
 Except for the "blank" sandbox, all other sandboxes come prepopulated with the domain data and focus on use case specific queries.
 
@@ -152,7 +152,7 @@ That's why we provided raw data (CSV, JSON, XML) for several of the datasets, ac
 
 You could run the Cypher script using a command-line client like `cypher-shell`.
 
-// image::{img}cypher-import-shell.png[]
+// image::{neo4j-img-base-uri}cypher-import-shell.png[]
 
 .Run Cypher Shell from the "Terminal" of your Graph Database in Neo4j Desktop
 [source, shell]
@@ -162,7 +162,7 @@ You could run the Cypher script using a command-line client like `cypher-shell`.
 
 You can also drag and drop or paste the script into Neo4j Browser (check that `multi-statement editor` is enabled in the settings) and run it from there.
 
-// image::{img}cypher-import-browser.png[]
+// image::{neo4j-img-base-uri}cypher-import-browser.png[]
 
 CSV data can be imported using either link:https://neo4j.com/developer/guide-import-csv/#import-load-csv[`LOAD CSV` clause in Cypher^] or https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/[`neo4j-admin import` for initial bulk imports^] of large datasets.
 
@@ -285,7 +285,7 @@ NOTE: Disclaimer: These examples are not curated and might not always represent 
 
 You can find a featured selection grouped by industry and use case at https://neo4j.com/graphgists
 
-// image::{img}neo4j-graphgists.png[link=https://neo4j.com/graphgists]
+// image::{neo4j-img-base-uri}neo4j-graphgists.png[link=https://neo4j.com/graphgists]
 
 Those examples are presented in a more long-form style that also discusses data modeling and use an temporary Neo4j store in the background.
 
@@ -293,7 +293,7 @@ To execute these examples within your Neo4j Desktop, install the *"Graph Gallery
 
 Then you can search and browse all available examples locally and run them against your *local* databases.
 
-// image::{img}graph-examples.png[link=https://install.graphapp.io]
+// image::{neo4j-img-base-uri}graph-examples.png[link=https://install.graphapp.io]
 
 If you want to submit your own graph data model example, please head to https://portal.graphgist.org to have a look at even more (non-featured) examples and create your own entries.
 

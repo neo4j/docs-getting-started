@@ -1,4 +1,3 @@
-[[neo4j-python]]
 = Using Neo4j from Python
 :python-driver-version: 4.4.5
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
@@ -17,7 +16,7 @@ You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or l
 [#neo4j-python]
 == Neo4j and Python
 
-// image::{img}python-logo.png[width=300,float="right"]
+// image::{neo4j-img-base-uri}python-logo.png[width=300,float="right"]
 
 Neo4j provides drivers which allow you to make a connection to the database and develop applications
 which create, read, update, and delete information from the graph.
@@ -148,7 +147,7 @@ While we do not provide a specific web framework recommendation, both the lightw
 [#py2neo-lib]
 === Py2neo
 
-// image::{img}py2neo.200x200.png[float="right",width=100]
+// image::{neo4j-img-base-uri}py2neo.200x200.png[float="right",width=100]
 
 Py2neo is a client library and comprehensive toolkit for working with Neo4j from within Python applications and from the command line.
 It has been carefully designed to be easy and intuitive to use.
@@ -186,7 +185,7 @@ alice, bob, carol = [result.one for result in tx.commit()]
 [#neomodel-lib]
 === Neomodel
 
-image::{img}neomodel.200x80.png[float="right",width=100]
+image::{neo4j-img-base-uri}neomodel.200x80.png[float="right",width=100]
 
 An Object Graph Mapper built on top of the Neo4j python driver.
 Familiar Django style node definitions with a powerful query API, thread safe and full transaction support.

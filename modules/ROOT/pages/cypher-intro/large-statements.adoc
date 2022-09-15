@@ -109,7 +109,7 @@ This allows you to execute some intermediate calculations or operations within y
 
 You must specify the variables in the `WITH` clause that you want to use later.
 Only those variables will be passed to the next part of the query.
-There are a variety of ways to use this functionality (e.g. count, collect, filter, limit results), but we will show a couple, including a cleaner version of our `size()` query from above (see xref:results.adoc#aggregate-size[Counting values in a list]).
+There are a variety of ways to use this functionality (e.g. count, collect, filter, limit results), but we will show a couple, including a cleaner version of our `size()` query from above (see xref:cypher-intro/results.adoc#aggregate-size[Counting values in a list]).
 For more information and ways to use `WITH`, check out the link:https://neo4j.com/docs/cypher-manual/current/clauses/with/[Cypher Manual section^].
 
 [source, cypher]

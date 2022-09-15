@@ -1,4 +1,3 @@
-[[neo4j-perl]]
 = Perl: Neo4j Community Drivers
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
 :examples: https://github.com/neo4j-examples
@@ -19,8 +18,8 @@ You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or l
 
 Members of the each programming language community have invested a lot of time and love to develop each one of the community drivers for Neo4j, so if you use any one of them, please provide feedback to the authors.
 
-====
 [NOTE]
+====
 icon:users[size=2x]
 The community drivers have been graciously contributed by the Neo4j community.
 Many of them are fully featured and well-maintained, but some may not be.
@@ -30,7 +29,7 @@ Neo4j does not take any responsibility for their usability.
 [#neo4j-perl]
 == Neo4j for Perl developers
 
-// image::{img}perl.png[float=right]
+// image::{neo4j-img-base-uri}perl.png[float=right]
 
 Members of the Perl community have invested a lot of time and love to develop drivers for Neo4j, so if you use them, please provide feedback to the authors.
 
