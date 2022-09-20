@@ -44,3 +44,5 @@ asciidoc:
     experimental: ''
     copyright: 2022
     common-license-page-uri: https://neo4j.com/docs/license/
+    neo4j-base-uri: https://neo4j.com # this attribute should be an empty string in publish.yml
+    neo4j-docs-base-uri: https://neo4j.com/docs # this attribute should be an empty string in publish.yml
