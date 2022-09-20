@@ -39,7 +39,7 @@ This chapter includes:
 * xref::/cypher-intro/load-csv.adoc[Import data]
 
 
-For a comprehensive guide to Cypher, see the link:{neo4j-docs-base-uri}/cypher-manual/3.5/#cypher-manual[Cypher manual].
+For a comprehensive guide to Cypher, see the link:{neo4j-docs-base-uri}/cypher-manual/{neo4j-version}/#cypher-manual[Cypher manual].
 
 
 // include::patterns.adoc[leveloffset=+1]

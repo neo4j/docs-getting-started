@@ -6,7 +6,7 @@ This tutorial will demonstrate how to import data from CSV files using `LOAD CSV
 
 [NOTE]
 ====
-For a full description of `LOAD CSV` , see link:{neo4j-docs-base-uri}/cypher-manual/3.5/clauses/load-csv/#query-load-csv[Cypher Manual -> `LOAD CSV`].
+For a full description of `LOAD CSV` , see link:{neo4j-docs-base-uri}/cypher-manual/{neo4j-version}/clauses/load-csv/#query-load-csv[Cypher Manual -> `LOAD CSV`].
 ====
 
 With `LOAD CSV` we can conveniently import data into Neo4j and have access to Cypher to perform actions on the data as desired.
@@ -101,7 +101,7 @@ This will ensure that the query executes in a performant way.
 
 In this example, the CSV files are stored in the default import directory on the database server, and we can access them using a `file:///` URL.
 Other locations are configurable, and additionally, `LOAD CSV` supports accessing CSV files via `HTTPS`, `HTTP`, and `FTP`.
-For complete instructions, see link:{neo4j-docs-base-uri}/cypher-manual/3.5/clauses/load-csv/#query-load-csv[Cypher Manual -> `LOAD CSV`].
+For complete instructions, see link:{neo4j-docs-base-uri}/cypher-manual/{neo4j-version}/clauses/load-csv/#query-load-csv[Cypher Manual -> `LOAD CSV`].
 
 Using the following Cypher queries, we will create a node for each person, a node for each movie and a relationship between the two with a property denoting the role.
 We are also keeping track of the country in which each movie was made.
@@ -143,7 +143,7 @@ CREATE (person)-[:ACTED_IN {role: csvLine.role}]->(movie)
 [NOTE]
 For larger data files, it is useful to use the hint `USING PERIODIC COMMIT` clause of `LOAD CSV`.
 This hint tells Neo4j that the query might build up inordinate amounts of transaction state, and so needs to be periodically committed.
-For more information, see link:{neo4j-docs-base-uri}/cypher-manual/3.5/query-tuning/using/#query-using-periodic-commit-hint[].
+For more information, see link:{neo4j-docs-base-uri}/cypher-manual/{neo4j-version}/query-tuning/using/#query-using-periodic-commit-hint[].
 
 
 Finally, since the `id` property was only necessary to import the relationships, we can drop the constraints and the `id` property from all movie and person nodes.
