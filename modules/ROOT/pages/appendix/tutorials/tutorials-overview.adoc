@@ -1,0 +1,18 @@
+[[tutorials]]
+= Tutorials
+
+In this section, you find how-to guides and tutorials on different topics.
+
+== Overview
+
+* xref:appendix/tutorials/guide-cypher-basics.adoc[Tutorial: Getting Started with Cypher] explains the basic concepts of Cypher, Neo4j’s query language, including how to create and query graphs.
+This tutorial is based on _the Movie Graph_.
+You'll find out how to create, query, and delete data in Neo4j.
+
+* xref:appendix/tutorials/guide-build-a-recommendation-engine.adoc[Tutorial: Build a Cypher Recommendation Engine] uses examples from _the Movie Graph_ and shows how to create recommendation algorithms with Cypher statements. 
+
+* xref:appendix/tutorials/guide-import-relational-and-etl.adoc[Tutorial: Import data from a relational database into Neo4j] shows the process for moving the data from a relational database into a graph database by translating the schema and using import tools.  
+
+* xref:appendix/tutorials/guide-import-desktop-csv.adoc[How-To: Import CSV data with Neo4j Desktop] walks through how to import the data into a graph with *Neo4j Desktop* -- a user-friendly interface for starting and creating Neo4j instances, adding or removing plugins, changing configurations, and other functionality.
+
+
