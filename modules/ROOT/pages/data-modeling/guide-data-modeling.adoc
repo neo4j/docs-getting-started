@@ -231,7 +231,7 @@ We have gone through the process of creating a basic graph data model for the in
 We can take this data model further by defining attributes of these entities as key-value properties.
 
 Properties are name-value pairs of data that you can store on nodes or on relationships.
-Most standard data types are supported as properties, and you can find information on that in the section https://neo4j.com/docs/getting-started/current/graphdb-concepts/#graphdb-properties[_Graph database concepts_^].
+Most standard data types are supported as properties, and you can find information on that in the section link:/docs/getting-started/{neo4j-version}/appendix/graphdb-concepts/#graphdb-properties[_Graph database concepts_^].
 
 Properties allow you to store relevant data about the node or relationship with the entity it describes.
 They can often be found by knowing what kinds of questions your use case needs to ask of your data.

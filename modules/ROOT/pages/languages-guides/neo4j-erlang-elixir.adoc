@@ -9,7 +9,7 @@
 [abstract]
 {description}
 
-You should be familiar with link:https://neo4j.com/docs/getting-started/current/graphdb-concepts/[graph database concepts] and the property graph model.
+You should be familiar with link:/docs/getting-started/{neo4j-version}/appendix/graphdb-concepts/[graph database concepts] and the property graph model.
 You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or link:/download/[installed Neo4j locally].
 
 [#community-drivers]
@@ -75,4 +75,3 @@ It aims to help Elixir developers to play with Neo4j and to eventually become th
 | icon:github[] Source | https://github.com/florinpatrascu/neo4j_sips
 | icon:book[] Docs | https://github.com/florinpatrascu/neo4j_sips/blob/master/README.md
 |===
-
