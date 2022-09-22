@@ -13,7 +13,7 @@
 While this guide is not comprehensive, it introduces the different APIs and links to the relevant resources.
 
 [abstract]
-You should be familiar with link:https://neo4j.com/docs/getting-started/current/graphdb-concepts/[graph database concepts] and the property graph model.
+You should be familiar with xref:appendix/graphdb-concepts/index.adoc[graph database concepts] and the property graph model.
 You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or link:/download/[installed Neo4j locally].
 When developing with Neo4j, please use Java 8 or 11 and your favorite IDE.
 
