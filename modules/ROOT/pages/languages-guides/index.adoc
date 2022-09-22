@@ -17,7 +17,7 @@ Neo4j *officially supports the drivers for .Net, Java, JavaScript, Go, and Pytho
 Our community contributors provide drivers for all major programming languages for all protocols and APIs.
 In this section, we provide an introduction and a consistent example application for several languages and Neo4j drivers.
 
-You should be familiar with link:https://neo4j.com/docs/getting-started/current/graphdb-concepts/[graph database concepts] and the property graph model.
+You should be familiar with xref:appendix/graphdb-concepts/index.adoc[graph database concepts] and the property graph model.
 You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or link:/download/[installed Neo4j locally].
 
 
@@ -39,12 +39,12 @@ For Neo4j Clusters, Bolt provides smart client routing with load balancing and f
 
 The binary protocol is enabled in Neo4j by default, so you can use any language driver that supports it.
 
-Neo4j officially provides drivers for 
+Neo4j officially provides drivers for
 
 * link:https://neo4j.com/docs/dotnet-manual/current/[.NET]
-* link:https://neo4j.com/docs/java-manual/current/[Java] 
-* link:https://docs.spring.io/spring-data/neo4j/docs/current/reference/html/[Spring] 
-* link:https://neo4j.com/docs/javascript-manual/current/[JavaScript] 
+* link:https://neo4j.com/docs/java-manual/current/[Java]
+* link:https://docs.spring.io/spring-data/neo4j/docs/current/reference/html/[Spring]
+* link:https://neo4j.com/docs/javascript-manual/current/[JavaScript]
 * link:https://neo4j.com/docs/go-manual/current/[Go]
 * link:https://neo4j.com/docs/python-manual/current/[Python]
 
