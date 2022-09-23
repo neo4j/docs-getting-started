@@ -10,9 +10,9 @@ This is the Getting Started Guide for Neo4j version {neo4j-version}, authored by
 
 This guide covers the following areas:
 
-* xref::/get-started-with-neo4j.adoc#get-started-with-neo4j[Get started with Neo4j] -- How to get started with Neo4j
-* xref::/graphdb-concepts.adoc#graphdb-concepts[Graph database concepts] -- Introduction to graph database concepts.
-* xref::/cypher-intro/index.adoc#cypher-intro[Introduction to Cypher] -- Introduction to the graph query language Cypher.
+* xref::get-started-with-neo4j.adoc[Get started with Neo4j] -- How to get started with Neo4j
+* xref::graphdb-concepts.adoc[Graph database concepts] -- Introduction to graph database concepts.
+* xref::cypher-intro/index.adoc[Introduction to Cypher] -- Introduction to the graph query language Cypher.
 
 _Who should read this?_
 
