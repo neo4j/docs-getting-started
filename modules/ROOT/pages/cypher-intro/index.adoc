@@ -31,7 +31,7 @@ For the full reference of Cypher, see the link:{neo4j-docs-base-uri}/cypher-manu
 * xref::/cypher-intro/large-statements.adoc[Composing large statements]
 ** xref::/cypher-intro/large-statements.adoc#cypher-intro-large-statements-union[UNION]
 ** xref::/cypher-intro/large-statements.adoc#cypher-intro-large-statements-with[WITH]
-* xref::/cypher-intro/schema.adoc#cypher-intro-schema[Defining a schema]
+* xref::/cypher-intro/schema.adoc[Defining a schema]
 ** xref::/cypher-intro/schema.adoc#cypher-intro-indexes[Using indexes]
 ** xref::/cypher-intro/schema.adoc#cypher-intro-constraints[Using constraints]
 * xref::/cypher-intro/load-csv.adoc[Import data]
