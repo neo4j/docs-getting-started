@@ -165,7 +165,7 @@ To run the statement, you should know a node's internal ID.
 ==== 
 
 
-=== Delete a node and a relationship
+=== Delete a node and its relationship
 
 Instead of running the last two queries to delete the `IS_FRIENDS_WITH` relationship and the `Person` node for Mark, you can actually run a single statement to delete the node and its relationship at the same time.
 As it was mentioned above, Neo4j is ACID-compliant so it doesn't allow to delete a node if it still has relationships.
