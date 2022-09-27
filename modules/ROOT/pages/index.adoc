@@ -75,7 +75,7 @@ Cypher has been designed to be easy to learn, understand, and use for everyone, 
 The Neo4j Getting Started Guide provides you with links to the relevant information resources and covers the following areas:
 
 * xref::/get-started-with-neo4j/index.adoc[Get started with Neo4j] -- Introduction to the Neo4j Graph Data Platform components.
-* xref::/cypher-intro/index.adoc#cypher-intro[Introduction to Cypher] -- Overview of the graph query language Cypher.
+* xref::/cypher-intro/index.adoc[Introduction to Cypher] -- Overview of the graph query language Cypher.
 * xref::/data-modeling/index.adoc[Data modeling] -- Basic principles of graph data modeling, guidelines on how to convert an RDBMS schema to graph, and introduction to data modeling tools.
 * xref::/data-import/index.adoc[Data importing] -- Articles on how to import data into a Neo4j instance, representing different methods and tools.
 * xref::/languages-guides/index.adoc[Neo4j Drivers] -- Overview of the officially supported Neo4j drivers and Neo4j Community drivers. 
