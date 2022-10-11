@@ -8,15 +8,6 @@
 [discrete]
 == Neo4j v{neo4j-version}
 
-ifndef::backend-pdf[]
-License: link:{common-license-page-uri}[Creative Commons 4.0]
-endif::[]
-
-//License page should be added at the end when generating pdf. (neo4j-manual-modeling-antora)
-ifdef::backend-pdf[]
-License: Creative Commons 4.0
-endif::[]
-
 [.lead]
 *Welcome to Neo4j*
 
@@ -84,3 +75,14 @@ The Neo4j Getting Started Guide provides you with links to the relevant informat
 
 
 This guide is written for anyone who is exploring Neo4j ecosystem.
+
+ifndef::backend-pdf[]
+License: link:{common-license-page-uri}[Creative Commons 4.0]
+endif::[]
+
+//License page should be added at the end when generating pdf. (neo4j-manual-modeling-antora)
+ifdef::backend-pdf[]
+License: Creative Commons 4.0
+endif::[]
+
+
