@@ -147,7 +147,7 @@ Rows: 4
 +--------------------------------+
 ----
 
-[#filter-exists]
+[[filter-exists]]
 === Testing if a property exists
 
 You may only be interested if a property exists on a node or relationship.
@@ -158,19 +158,19 @@ Remember: in Neo4j, a property only exists (is stored) if it has a value.
 A null property is not stored.
 This ensures that only valuable, necessary information is retained for your nodes and relationships.
 
-To write this type of existence check, you simply need to use the `WHERE` clause and the `exists()` method for that property.
+To write this type of existence check in *Neo4j 5*, you need to use the `IS NOT NULL` predicate to only include nodes or relationships in which a property exists.
 The Cypher code is written in the block below.
 
 [source, cypher]
 ----
 //Query1: find all users who have a birthdate property
 MATCH (p:Person)
-WHERE exists(p.birthdate)
+WHERE p.birthdate IS NOT NULL
 RETURN p.name;
 
 //Query2: find all WORKS_FOR relationships that have a startYear property
 MATCH (p:Person)-[rel:WORKS_FOR]->(c:Company)
-WHERE exists(rel.startYear)
+WHERE rel.startYear IS NOT NULL
 RETURN p, rel, c;
 ----
 
