@@ -1,7 +1,6 @@
-:description: An introduction to graph database concepts.
-
 [[graphdb-concepts]]
 = Graph database concepts
+:description: An introduction to graph database concepts.
 
 Neo4j uses a _property graph_ database model.
 
@@ -184,7 +183,7 @@ A relationship must have exactly one relationship type.
 
 Below is an `ACTED_IN` relationship, with the `Tom Hanks` node as the _source node_ and `Forrest Gump` as the _target node_.
 
-.Relationsip type.
+.Relationship type.
 =====
 image::graphdb-nodes-and-rel.svg[role="middle"]
 
@@ -240,7 +239,7 @@ CREATE (:Example {f: [1, 2, 3], g: [2.71, 3.14], h: ['abc', 'example'], i: [true
 
 [TIP]
 ====
-For a thorough description of the available data types, refer to the xref:5.0@cypher-manual:ROOT:syntax/values/index.adoc#cypher-values[Cypher manual -> Values and types].
+For a thorough description of the available data types, refer to the link:{neo4j-docs-base-uri}/cypher-manual/{page-version}/syntax/values#cypher-values[Cypher manual -> Values and types].
 ====
 
 
@@ -296,7 +295,7 @@ Indexes and constraints can be introduced when desired, in order to gain perform
 
 Indexes are used to increase performance.
 To see examples of how to work with indexes, see xref::/cypher-intro/schema.adoc#cypher-intro-indexes[Using indexes].
-For detailed descriptions of how to work with indexes in Cypher, see xref:5.0@cypher-manual:ROOT:indexes-for-full-text-search/index.adoc#administration-indexes-fulltext-search[Cypher Manual -> Indexes].
+For detailed descriptions of how to work with indexes in Cypher, see link:{neo4j-docs-base-uri}/cypher-manual/{page-version}/indexes-for-full-text-search#administration-indexes-fulltext-search[Cypher Manual -> Indexes].
 
 
 [[graphdb-constraints]]
@@ -304,7 +303,7 @@ For detailed descriptions of how to work with indexes in Cypher, see xref:5.0@cy
 
 Constraints are used to make sure that the data adheres to the rules of the domain.
 To see examples of how to work with constraints, see xref::/cypher-intro/schema.adoc#cypher-intro-constraints[Using constraints].
-For detailed descriptions of how to work with constraints in Cypher, see the xref:5.0@cypher-manual:ROOT:constraints/index.adoc[Cypher manual -> Constraints].
+For detailed descriptions of how to work with constraints in Cypher, see the link:{neo4j-docs-base-uri}/cypher-manual/{page-version}/constraints[Cypher manual -> Constraints].
 
 
 [[graphdb-naming-conventions]]
@@ -318,10 +317,10 @@ The following naming conventions are recommended:
 [options="header"]
 |===
 | Graph entity      | Recommended style                                       | Example
-| Node label        | Camel case, beginning with an upper-case character      | `:VehicleOwner` rather than `:vehice_owner`
+| Node label        | Camel case, beginning with an upper-case character      | `:VehicleOwner` rather than `:vehicle_owner`
 | Relationship type | Upper case, using underscore to separate words          | `:OWNS_VEHICLE` rather than `:ownsVehicle`
 | Property          | Lower camel case, beginning with a lower-case character | `firstName` rather than `first_name`
 |===
 
 
-For the precise naming rules, refer to the xref:5.0@cypher-manual:ROOT:syntax/naming/index.adoc#cypher-naming[Cypher manual -> Naming rules and recommendations].
+For the precise naming rules, refer to the link:{neo4j-docs-base-uri}/cypher-manual/{page-version}/syntax/naming#cypher-naming[Cypher manual -> Naming rules and recommendations].

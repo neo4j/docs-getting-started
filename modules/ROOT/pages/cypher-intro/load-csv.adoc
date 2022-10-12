@@ -1,6 +1,6 @@
 :description: This tutorial demonstrates how to import data from CSV files using `LOAD CSV`.
 [[cypher-intro-load-csv]]
-= Import data
+= Tutorial: Import data
 
 [abstract]
 --
@@ -13,8 +13,8 @@ With the combination of the Cypher clauses `LOAD CSV`, `MERGE`, and `CREATE` you
 
 [NOTE]
 ====
-* For a full description of `LOAD CSV` , see xref:5.0@cypher-manual:ROOT:clauses/load-csv/index.adoc#query-load-csv[Cypher Manual -> `LOAD CSV`].
-* For a full list of Cypher clauses, see xref:5.0@cypher-manual:ROOT:clauses/index.adoc#query-clause[Cypher Manual -> Clauses].
+* For a full description of `LOAD CSV` , see link:{neo4j-docs-base-uri}/cypher-manual/{page-version}/clauses/load-csv#query-load-csv[Cypher Manual -> `LOAD CSV`].
+* For a full list of Cypher clauses, see link:{neo4j-docs-base-uri}/cypher-manual/{page-version}/clauses#query-clause[Cypher Manual -> Clauses].
 ====
 
 
@@ -193,8 +193,8 @@ It assumes that your current work directory is the _<neo4j-home>_ directory of t
 
 [NOTE]
 ====
-* For the default directory of other installations see, xref:5.0@operations-manual:ROOT:configuration/file-locations/index.adoc#file-locations[Operations Manual -> File locations].
-* The import location can be configured with xref:5.0@operations-manual:ROOT:reference/configuration-settings/index.adoc#config_dbms.directories.import[Operations Manual -> `dbms.directories.import`].
+* For the default directory of other installations see, link:{neo4j-docs-base-uri}/operations-manual/{page-version}/configuration/file-locations#file-locations[Operations Manual -> File locations].
+* The import location can be configured with link:{neo4j-docs-base-uri}/operations-manual/{page-version}/reference/configuration-settings#config_dbms.directories.import[Operations Manual -> `dbms.directories.import`].
 ====
 
 
@@ -236,7 +236,7 @@ Using _Neo4j Browser_, run the following Cypher:
 CREATE CONSTRAINT personIdConstraint FOR (person:Person) REQUIRE person.id IS UNIQUE
 ----
 
-Or using xref:5.0@operations-manual:ROOT:tools/cypher-shell/index.adoc#cypher-shell[_Neo4j Cypher Shell_], run the command:
+Or using link:{neo4j-docs-base-uri}/operations-manual/{page-version}/tools/cypher-shell#cypher-shell[_Neo4j Cypher Shell_], run the command:
 
 [source, shell, indent=0]
 ----
@@ -254,7 +254,7 @@ Using _Neo4j Browser_, run the following Cypher:
 CREATE CONSTRAINT movieIdConstraint FOR (movie:Movie) REQUIRE movie.id IS UNIQUE
 ----
 
-Or using xref:5.0@operations-manual:ROOT:tools/cypher-shell/index.adoc#cypher-shell[_Neo4j Cypher Shell_], run the command:
+Or using link:{neo4j-docs-base-uri}/operations-manual/{page-version}/tools/cypher-shell#cypher-shell[_Neo4j Cypher Shell_], run the command:
 
 [source, shell, indent=0]
 ----
@@ -278,7 +278,7 @@ Using _Neo4j Browser_, run the following Cypher:
 CREATE INDEX FOR (c:Country) ON (c.name)
 ----
 
-Or using xref:5.0@operations-manual:ROOT:tools/cypher-shell/index.adoc#cypher-shell[_Neo4j Cypher Shell_], run the command:
+Or using link:{neo4j-docs-base-uri}/operations-manual/{page-version}/tools/cypher-shell#cypher-shell[_Neo4j Cypher Shell_], run the command:
 
 [source, shell, indent=0]
 ----
@@ -301,7 +301,7 @@ LOAD CSV WITH HEADERS FROM "file:///persons.csv" AS csvLine
 CREATE (p:Person {id: toInteger(csvLine.id), name: csvLine.name})
 ----
 
-Or using xref:5.0@operations-manual:ROOT:tools/cypher-shell/index.adoc#cypher-shell[_Neo4j Cypher Shell_], run the command:
+Or using link:{neo4j-docs-base-uri}/operations-manual/{page-version}/tools/cypher-shell#cypher-shell[_Neo4j Cypher Shell_], run the command:
 
 [source, shell, indent=0]
 ----
@@ -317,7 +317,7 @@ Added 4 nodes, Set 8 properties, Added 4 labels
 
 [TIP]
 ====
-`LOAD CSV` also supports accessing CSV files via `HTTPS`, `HTTP`, and `FTP`, see xref:5.0@cypher-manual:ROOT:clauses/load-csv/index.adoc#query-load-csv[Cypher Manual -> `LOAD CSV`].
+`LOAD CSV` also supports accessing CSV files via `HTTPS`, `HTTP`, and `FTP`, see link:{neo4j-docs-base-uri}/cypher-manual/{page-version}/clauses/load-csv#query-load-csv[Cypher Manual -> `LOAD CSV`].
 ====
 
 **+2.+ Load the data from the _movies.csv_ file.**
@@ -339,7 +339,7 @@ CREATE (movie:Movie {id: toInteger(csvLine.id), title: csvLine.title, year:toInt
 CREATE (movie)-[:ORIGIN]->(country)
 ----
 
-Or using xref:5.0@operations-manual:ROOT:tools/cypher-shell/index.adoc#cypher-shell[_Neo4j Cypher Shell_], run the command:
+Or using link:{neo4j-docs-base-uri}/operations-manual/{page-version}/tools/cypher-shell#cypher-shell[_Neo4j Cypher Shell_], run the command:
 
 [source, shell, indent=0]
 ----
@@ -361,7 +361,7 @@ Importing the data from the _roles.csv_ file is a matter of finding the `Person`
 ====
 For larger data files, it is useful to use the hint `USING PERIODIC COMMIT` clause of `LOAD CSV`.
 This hint tells Neo4j that the query might build up inordinate amounts of transaction state, and thus needs to be periodically committed.
-For more information, see xref:5.0@cypher-manual:ROOT:query-tuning/using/index.adoc#query-using-periodic-commit-hint[].
+For more information, see link:{neo4j-docs-base-uri}/cypher-manual/{page-version}/query-tuning/using#query-using-periodic-commit-hint[].
 ====
 
 Using _Neo4j Browser_, run the following Cypher:
@@ -374,7 +374,7 @@ MATCH (person:Person {id: toInteger(csvLine.personId)}), (movie:Movie {id: toInt
 CREATE (person)-[:ACTED_IN {role: csvLine.role}]->(movie)
 ----
 
-Or using xref:5.0@operations-manual:ROOT:tools/cypher-shell/index.adoc#cypher-shell[_Neo4j Cypher Shell_], run the command:
+Or using link:{neo4j-docs-base-uri}/operations-manual/{page-version}/tools/cypher-shell#cypher-shell[_Neo4j Cypher Shell_], run the command:
 
 [source, shell, indent=0]
 ----
@@ -400,7 +400,7 @@ Using _Neo4j Browser_, run the following Cypher:
 MATCH (n)-[r]->(m) RETURN n, r, m
 ----
 
-Or using xref:5.0@operations-manual:ROOT:tools/cypher-shell/index.adoc#cypher-shell[_Neo4j Cypher Shell_], run the command:
+Or using link:{neo4j-docs-base-uri}/operations-manual/{page-version}/tools/cypher-shell#cypher-shell[_Neo4j Cypher Shell_], run the command:
 
 [source, shell, indent=0]
 ----
