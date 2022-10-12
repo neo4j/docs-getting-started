@@ -76,6 +76,7 @@ The Neo4j Getting Started Guide provides you with links to the relevant informat
 
 This guide is written for anyone who is exploring Neo4j ecosystem.
 
+(C){copyright}
 ifndef::backend-pdf[]
 License: link:{common-license-page-uri}[Creative Commons 4.0]
 endif::[]
