@@ -8,8 +8,8 @@ asciidoc:
   attributes:
     page-origin-private: false
     neo4j-version: '5'
-    neo4j-version-exact: '5.0.0'
-    neo4j-buildnumber: '5.0'
+    neo4j-version-exact: '5.1.0'
+    neo4j-buildnumber: '5.1'
     offset: '\\{offset}'
     count: '\\{count}'
     aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
