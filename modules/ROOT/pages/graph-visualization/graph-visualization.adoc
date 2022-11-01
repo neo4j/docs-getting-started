@@ -28,7 +28,7 @@ With visualization tools, a full or partial graph can come to life and allow the
 This section is designed to help you understand how to export your graph data in Neo4j for display as a visualization, and list options so you can choose what suits your needs.
 
 [#why-vis-graph]
-== Why to visualize a graph?
+== Why visualize a graph?
 
 You have many options for working with data; JSON, XML, tabular, and others. 
 Why represent it visually?
