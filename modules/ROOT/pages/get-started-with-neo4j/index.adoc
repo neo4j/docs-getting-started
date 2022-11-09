@@ -7,7 +7,7 @@ There are a number of options on how to get started with Neo4j, and your choice 
 [[neo4j-first-steps]]
 == First steps with Neo4j
 
-1. If you want to learn Neo4j graph database features, how to write Cypher queries, use developer tools like xref:get-started-with-neo4j/graph-platform.adoc#neo4j-tools[Neo4j Browser and Bloom], and get an overview on how to connect to Neo4j via drivers and connectors, go to the link:https://neo4j.com/cloud/platform/aura-graph-database/[AuraDB page], where you can create a new Neo4j instance free forever. +
+1. If your purpose is to learn Neo4j graph database features, how to write Cypher queries, use developer tools like xref:get-started-with-neo4j/graph-platform.adoc#neo4j-tools[Neo4j Browser and Bloom] and get an overview on how to connect to Neo4j via drivers and connectors, go to the link:https://neo4j.com/cloud/platform/aura-graph-database/[AuraDB page], where you can create a Neo4j instance free forever. +
 AuraDB is the best choice for cloud developers who are interested in graph technologies. +
 Besides the free option, you can select the subscription plan which suits you best. +
 At the moment, you can choose one of the example datasets on Aura to learn more about Neo4j and Cypher queries:
@@ -54,7 +54,7 @@ In the leftside navigation bar you see:
 
 * **Neo4j DBMS** -- Documentation for the Neo4j graph database, a core product:
 ** link:https://neo4j.com/docs/getting-started/current/[Getting Started Guide] -- you are here. The starting point to enter the Neo4j world.
-** link:https://neo4j.com/docs/operations-manual/current/[The Neo4j Operations Manual] -- the docset tells you how to deploy, configure, support, and maintain Neo4j. You find comprehensive descriptions of Neo4j Causal Clustering here. 
+** link:https://neo4j.com/docs/operations-manual/current/[The Neo4j Operations Manual] -- the docset tells you how to deploy, configure, support, and maintain Neo4j. You find comprehensive descriptions of Neo4j Clustering here. 
 ** link:https://neo4j.com/docs/upgrade-migration-guide/current/[Neo4j Upgrade and Migration Guide] -- the guide describes how to keep your Neo4j deployment up-to-date.
 ** link:https://neo4j.com/docs/status-codes/current/[Status Code] -- overview of Neo4j status codes classifications, version changes, and also a complete list of all status codes Neo4j may return, and what they mean.
 ** link:https://neo4j.com/docs/java-reference/current/[Java Reference] tells you about advanced Java-centric usage of Neo4j, how to embed Neo4j in your own software and write extensions.
