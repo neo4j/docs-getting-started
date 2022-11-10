@@ -32,7 +32,7 @@ This is straightforward to do using a driver which connects to Neo4j via Bolt or
 [#bolt-protocol]
 == The binary Bolt Protocol
 
-Starting with Neo4j v3.0, we support a binary protocol called Bolt.
+Starting with Neo4j v3.0, we support a binary protocol called link:https://neo4j.com/docs/bolt/current/[Bolt].
 It is based on the PackStream serialization and supports the Cypher type system, protocol versioning, authentication, and TLS via certificates.
 For Neo4j Clusters, Bolt provides smart client routing with load balancing and failover.
 
