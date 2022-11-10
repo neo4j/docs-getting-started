@@ -53,7 +53,7 @@ _For more details on the protocol implementation, see the https://github.com/neo
 [#neo4j-drivers]
 == All Neo4j Drivers
 
-Thanks to the Neo4j contributor community, there are additionally drivers for almost every popular programming language,
+Thanks to the Neo4j contributor community, there are additional drivers for almost every popular programming language,
 most of which mimic existing database driver idioms and approaches.
 Get started with your stack now, see the dedicated page for more detail.
 
