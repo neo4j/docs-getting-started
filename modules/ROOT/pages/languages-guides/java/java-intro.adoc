@@ -15,10 +15,10 @@ While this guide is not comprehensive, it introduces the different APIs and link
 [abstract]
 You should be familiar with xref:appendix/graphdb-concepts/index.adoc[graph database concepts] and the property graph model.
 You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or link:/download/[installed Neo4j locally].
-When developing with Neo4j, please use Java 8 or 11 and your favorite IDE.
+When developing with Neo4j, use Java 8 or 11 and your preferred IDE.
 
 
-[#neo4j-java]
+[[neo4j-java]]
 == Neo4j for Java developers
 
 // image::{neo4j-img-base-uri}java.jpg[float=right,width=200]
@@ -45,7 +45,7 @@ You can learn more about our small, consistent example project across many diffe
 You will find the implementations for all drivers as https://github.com/neo4j-examples?q=movies[individual GitHub repositories^], which you can clone and deploy directly.
 
 
-[#java-driver]
+[[java-driver]]
 == Neo4j Java Driver
 
 
@@ -89,7 +89,7 @@ You can https://neo4j.com/docs/migration-guide/current/upgrade-driver/#_configur
 // tag::table[]
 .Table Scheme Usage
 |===
-| Certificate Type | Neo4j Causal Cluster | Neo4j Standalone Server  | Direct Connection to Cluster Member
+| Certificate Type | Neo4j Cluster | Neo4j Standalone Server  | Direct Connection to Cluster Member
 
 | *Unencrypted*
 | `neo4j`

@@ -24,17 +24,16 @@ You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or l
 [#connect-neo4j]
 == How to connect to Neo4j?
 
-If you've created an link:{aura_signup}[AuraDB instance^], or link:/download/[installed] and started Neo4j as a server on your system,
-you can already work interactively with the database via the built-in Neo4j Browser, which you find in the AuraDB console, or if you're running locally, on http://localhost:7474[localhost:7474].
+If you've created an link:{aura_signup}[AuraDB instance^], or link:/download/[installed] and started Neo4j as a server on your system, you can already work interactively with the database via the built-in Neo4j Browser, which you find in the AuraDB console, or if you're running locally, on http://localhost:7474[localhost:7474].
 
 To build an application, you want to connect to Neo4j from your technology stack.
-Fortunately it is very easy using a driver which connects to Neo4j via Bolt or HTTP.
+This is straightforward to do using a driver which connects to Neo4j via Bolt or HTTP.
 
 [#bolt-protocol]
 == The binary Bolt Protocol
 
-Starting with Neo4j 3.0 we support a binary protocol called Bolt.
-It is based on the PackStream serialization and supports the Cypher type system, protocol versioning, authentication and TLS via certificates.
+Starting with Neo4j v3.0, we support a binary protocol called link:https://neo4j.com/docs/bolt/current/[Bolt].
+It is based on the PackStream serialization and supports the Cypher type system, protocol versioning, authentication, and TLS via certificates.
 For Neo4j Clusters, Bolt provides smart client routing with load balancing and failover.
 
 The binary protocol is enabled in Neo4j by default, so you can use any language driver that supports it.
@@ -54,27 +53,27 @@ _For more details on the protocol implementation, see the https://github.com/neo
 [#neo4j-drivers]
 == All Neo4j Drivers
 
-Thanks to the Neo4j contributor community, there are additionally drivers for almost every popular programming language,
+Thanks to the Neo4j contributor community, there are additional drivers for almost every popular programming language,
 most of which mimic existing database driver idioms and approaches.
 Get started with your stack now, see the dedicated page for more detail.
 
 [cols="5*",width=100]
 |===
-| link:/developer/java/[icon:check-circle-o[] Java]
-| link:/developer/spring-data-neo4j/[icon:check-circle-o[] Spring]
-| link:/developer/neo4j-ogm/[icon:check-circle-o[] Neo4j-OGM]
-| link:/developer/dotnet/[icon:check-circle-o[] .NET]
-| link:/developer/javascript/[icon:check-circle-o[] JavaScript]
-| link:/developer/python/[icon:check-circle-o[] Python]
-| link:/developer/go/[icon:check-circle-o[] Go]
-| link:/developer/ruby/[Ruby]
-| link:/developer/php/[PHP]
-| link:/developer/erlang-elixir/[Erlang/Elixir]
-| link:/developer/perl/[Perl]
-| link:/developer/c/[C/C++]
-| link:/developer/clojure/[Clojure]
-| link:/developer/haskell/[Haskell]
-| link:/developer/r/[R]
+| link:https://neo4j.com/developer/java/[icon:check-circle-o[] Java]
+| link:https://neo4j.com/developer/spring-data-neo4j/[icon:check-circle-o[] Spring]
+| link:https://neo4j.com/developer/neo4j-ogm/[icon:check-circle-o[] Neo4j-OGM]
+| link:https://neo4j.com/developer/dotnet/[icon:check-circle-o[] .NET]
+| link:https://neo4j.com/developer/javascript/[icon:check-circle-o[] JavaScript]
+| link:https://neo4j.com/developer/python/[icon:check-circle-o[] Python]
+| link:https://neo4j.com/developer/go/[icon:check-circle-o[] Go]
+| link:https://neo4j.com/developer/ruby/[Ruby]
+| link:https://neo4j.com/developer/php/[PHP]
+| link:https://neo4j.com/developer/erlang-elixir/[Erlang/Elixir]
+| link:https://neo4j.com/developer/perl/[Perl]
+| link:https://neo4j.com/developer/c/[C/C++]
+| link:https://neo4j.com/developer/clojure/[Clojure]
+| link:https://neo4j.com/developer/haskell/[Haskell]
+| link:https://neo4j.com/developer/r/[R]
 |===
 
 If you are new to development, we recommend the https://www.jetbrains.com/products.html[Jetbrains IDE^] for a good developer experience, which also comes with a link:/blog/jetbrains-ide-plugin-graph-database/[Neo4j Database plugin^].

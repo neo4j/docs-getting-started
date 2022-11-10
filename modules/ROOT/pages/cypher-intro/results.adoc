@@ -732,7 +732,7 @@ RETURN p.name, size(collect(friend.name)) AS numberOfFriends;
 .Query5 Results:
 image:cypher_agg_size.jpg[role="popup-link"]
 
-In Neo4j 5.0, if you need to find a number of relationship patterns, you should use the `COUNT {}` expression.
+In Neo4j v5, if you need to find a number of relationship patterns, use the `COUNT {}` expression.
 Take a look at the following example of the Cypher query.
 
 [source, cypher]
