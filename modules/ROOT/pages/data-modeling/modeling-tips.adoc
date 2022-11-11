@@ -1,4 +1,3 @@
-[[modeling-tips]]
 = Graph modeling tips
 :tags: graph-modeling, data-model, schema, model-tips, model-queries
 :description: In this guide, you find some helpful information to designing a data model for your domain.  Optimizing the model helps developers to maximize performance of the system and queries.
@@ -29,7 +28,7 @@ Even if you do not know the exact query syntax just yet, understanding the inten
 == Prioritize queries
 
 It is very difficult (if not impossible) to find the perfect model for every query or functionality.
-As we talked about in the xref:modeling-designs.adoc[modeling designs guide], there are tradeoffs with choosing one particular model over another (or using multiple).
+As we talked about in the xref:data-modeling/modeling-designs.adoc[modeling designs guide], there are tradeoffs with choosing one particular model over another (or using multiple).
 While you may improve certain things, there is no way to get a one-size-fits-all solution.
 
 Instead, you should determine which model _best_ suits your needs.

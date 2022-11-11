@@ -22,7 +22,7 @@ endif::[]
 We live in a connected world, and understanding most domains requires processing rich sets of connections to understand what's really happening.
 Often, we find that the connections between items are as important as the items themselves.
 
-image:graph-example.png[role="popup-link"]
+// image:graph-example.png[role="popup-link"]
 
 How else do people do this today?  While existing relational databases can store these relationships, they navigate them with expensive `JOIN` operations or cross-lookups, often tied to a rigid schema.
 It turns out that "relational" databases handle relationships poorly.
@@ -100,4 +100,5 @@ From innovative new technology to driving businesses, users are generating insig
 
 You can find more information about numerous use cases when connected data matters most on our link:https://neo4j.com/use-cases/[website].
 
-image::use-case-summary.png[role="popup-link"]
+image::use-case-summary.svg[role="popup-link"]
+

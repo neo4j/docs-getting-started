@@ -235,10 +235,10 @@ RETURN tom.name AS name, tom.born AS `Year Born`, movie.title AS title, movie.re
 ----
 
 // .Results Without Aliases:
-// image:{img}cypher_without_aliases.jpg[role="popup-link"]
+// image:{neo4j-img-base-uri}cypher_without_aliases.jpg[role="popup-link"]
 
 // .Results With Aliases:
-// image:{img}cypher_with_aliases.jpg[role="popup-link"]
+// image:{neo4j-img-base-uri}cypher_with_aliases.jpg[role="popup-link"]
 
 [NOTE]
 --

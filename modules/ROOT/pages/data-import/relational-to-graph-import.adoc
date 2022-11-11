@@ -26,25 +26,25 @@ We will briefly cover how each operates on this page, but more detailed walkthro
 *1)* xref:data-import/csv-import.adoc[LOAD CSV]: possibly the simplest way to import data from your relational database.
 Requires a dump of individual entity-tables and join-tables formatted as CSV files.
 
-*2)* https://neo4j.com/labs/apoc/4.4/[APOC^]: Awesome Procedures on Cypher.
+*2)* link:https://neo4j.com/labs/apoc/4.4/[APOC^]: Awesome Procedures on Cypher.
 Created as an extension library to provide common procedures and functions to developers.
 This library is especially helpful for complex transformations and data manipulations.
 Useful procedures include apoc.load.jdbc, apoc.load.json, and others.
 
-*3)* https://neo4j.com/labs/etl-tool/[ETL Tool^]: Neo4j Labs UI tool that translates relational to graph from a JDBC connection.
+*3)* link:https://neo4j.com/labs/etl-tool/[ETL Tool^]: Neo4j Labs UI tool that translates relational to graph from a JDBC connection.
 Allows bulk data import for large data sets with a fast performance and simple user experience.
 
-*4)* https://medium.com/neo4j/getting-started-with-kettle-and-neo4j-32ff15b991f9[Kettle^]: open-source tool for enterprise-scale data export and import.
+*4)* link:https://medium.com/neo4j/getting-started-with-kettle-and-neo4j-32ff15b991f9[Kettle^]: open-source tool for enterprise-scale data export and import.
 Handles a variety of data sources and large data sets easily and organizes the data flow process.
 
 *5)* Other ETL tools: there are also a few vendor and community tools available for similar etl processes and GUI interaction for getting data in various formats into and out of Neo4j.
 Some of these tools also can map out the flow and transformation of data through the system.
 
-*6)* xref:language-guides/language-guides.adoc[Programmatic via drivers]: ability to retrieve data from a relational database (or other tabular structure) and use the bolt protocol to write it to Neo4j through one of the drivers with your programming language of choice.
+*6)* xref:languages-guides/index.adoc[Programmatic via drivers]: ability to retrieve data from a relational database (or other tabular structure) and use the bolt protocol to write it to Neo4j through one of the drivers with your programming language of choice.
 
 [NOTE]
 --
-You should create and understand your xref:data-modeling/data-modeling.adoc[graph data model] before transferring the data from an existing relational structure to a graph.
+You should create and understand your xref:data-modeling/index.adoc[graph data model] before transferring the data from an existing relational structure to a graph.
 If you do not have a good data model, then jumping into the import can cause frustration on data cleanup later.
 --
 

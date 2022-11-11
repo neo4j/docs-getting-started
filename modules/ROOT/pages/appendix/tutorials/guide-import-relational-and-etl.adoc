@@ -3,6 +3,7 @@
 :tags: data-import, graph-import, northwind-graph, relational-graph, load-csv
 :description: This tutorial shows the process for exporting data from a relational database (PostgreSQL) and importing into a graph database (Neo4j). You will learn how to take data from the relational system and to the graph by translating the schema and using import tools.
 :page-pagination:
+:github: 'https://github.com/neo4j-contrib/developer-resources/tree/gh-pages'
 
 [abstract]
 {description}
@@ -17,7 +18,7 @@ Alternatively, you can:
 This guide uses a specific dataset, but its principles can be applied and reused with any data domain.
 
 You should have a basic understanding of the property graph model and know how to model data as a graph.
-endif::[]
+
 
 [#about-domain]
 == About the data domain
@@ -122,7 +123,7 @@ When you use `LOAD CSV` to create nodes and relationships in the database, you h
 * From a publicly-available location such as an S3 bucket or a github location. You must use this option if you are using Neo4j AuraDB or Neo4j Sandbox.
 
 If you want to use the CSV files for your Neo4j instance that you manage, you can copy the CSV files from
-link:{github}/data/northwind//northwind.zip[Northwind zip from github]
+link:{github}/data/northwind/northwind.zip[Northwind zip from github]
 and place them in the *import* folder for your Neo4j DBMS.
 
 We have already placed these CSV files in Gihub for your access to them.

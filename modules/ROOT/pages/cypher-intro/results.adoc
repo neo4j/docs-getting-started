@@ -726,7 +726,7 @@ Rows: 1
 // RETURN p.name, collect(friend.name) AS friend
 // ----
 
-// image::{img}cypher_agg_collect.jpg[role="popup-link"]
+// image::{neo4j-img-base-uri}cypher_agg_collect.jpg[role="popup-link"]
 
 [[cypher-intro-results-collecting-aggregation]]
 == Collecting aggregation
