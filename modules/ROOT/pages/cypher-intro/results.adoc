@@ -157,12 +157,8 @@ Remember: in Neo4j, a property only exists (is stored) if it has a value.
 A `null` property is not stored.
 This ensures that only valuable, necessary information is retained for your nodes and relationships.
 
-<<<<<<< HEAD
-To write this type of existence check in *Neo4j 5*, you need to use the `IS NOT NULL` predicate to only include nodes or relationships in which a property exists.
-=======
+To write this type of existence check in *Neo4j v5*, you need to use the `IS NOT NULL` predicate to only include nodes or relationships in which a property exists.
 
-To write this type of existence check, you need to use the `WHERE` clause and the `exists()` method for that property.
->>>>>>> 6ead7c8 (Update Getting the correct results and other images (#124))
 The Cypher code is written in the block below.
 
 [source, cypher]
