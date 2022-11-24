@@ -73,7 +73,7 @@ RETURN actor.name AS name, type(r) AS type, movie.title AS title
 [[cypher-intro-large-statements-with]]
 == WITH
 
-In Cypher, you are able to chain fragments of statements together, similar to how it is done within a data-flow pipeline.
+In Cypher, you can chain fragments of statements together, similar to how it is done within a data-flow pipeline.
 Each fragment works on the output from the previous one, and its results can feed into the next one.
 _Only_ columns declared in the `WITH` clause are available in subsequent query parts.
 
