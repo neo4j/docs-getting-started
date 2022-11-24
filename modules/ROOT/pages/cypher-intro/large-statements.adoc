@@ -83,7 +83,7 @@ The difference is that the `WITH` clause does not finish the query, but prepares
 Expressions, aggregations, ordering, and pagination can be used in the same way as in the `RETURN` clause.
 The only difference is all columns must be aliased.
 
-In the example below, we collect the movies someone appeared in and then filter out those which appear in only one movie.
+In the example below, collect the movies someone appeared in and then filter out those which appear in only one movie.
 
 [source, cypher, role="noplay"]
 ----
@@ -107,12 +107,13 @@ Rows: 1
 Using the `WITH` clause, you can pass values from one section of a query to another.
 This allows you to perform some intermediate calculations or operations within your query to use later.
 
-Take a look at the following examples based on this dataset:
+The following examples are based on this dataset:
 
 image:people-technologies-graph-arr.svg[role='popup-link']
 
-Specifying in the `WITH` clause variables you want to use later, you can apply this functionality in various ways (for example, count, collect, filter, or limit results).
-Here you can find a couple of examples, including a cleaner version of the `size()` query from above (see xref:cypher-intro/results.adoc#aggregate-size[Counting values in a list]).
+In the `WITH` clause, specify the variables you want to use later.
+This functionality can be applied in various ways (for example, count, collect, filter, or limit results).
+A few examples of this follows, including a cleaner version of the `size()` query from above (see xref:cypher-intro/results.adoc#aggregate-size[Counting values in a list]).
 
 For more information and ways to use `WITH`, check out the link:https://neo4j.com/docs/cypher-manual/current/clauses/with/[Cypher Manual section^].
 
@@ -173,13 +174,13 @@ Rows: 3
 
 In the first query, the `Person` name and a collected list of the `Technology` types are declared.
 Only those items can be referenced in the `RETURN` clause.
-You cannot use the relationship (`r`) or the `Person` twitter because those values were not passed along.
+The relationship (`r`) or the `Person` twitter cannot be used because those values were not passed along.
 
-In the second query, you can reference `p` and any of its properties (`name`, `yearsExperience`, `twitter`), the collection of friends (as a whole, not each value), and the number of friend-of-friends.
-Since you passed those values in the `WITH` clause, you can use those in the `WHERE` or `RETURN` clauses.
+In the second query, only `p` and any of its properties (`name`, `yearsExperience`, `twitter`), the collection of friends (as a whole, not each value), and the number of friend-of-friends can be referenced.
+Since those values were passed along in the `WITH` clause, they can be used in the `WHERE` or `RETURN` clauses.
 
 `WITH` requires all values passed to have a variable (if they do not already have one).
-The `Person` nodes were given a variable (`p`) in the `MATCH` clause, so you do not need to assign a variable there.
+The `Person` nodes were given a variable (`p`) in the `MATCH` clause, so no variable needs to be assigned there.
 
 [NOTE]
 --
