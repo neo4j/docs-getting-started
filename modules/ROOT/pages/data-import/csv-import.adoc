@@ -4,7 +4,7 @@
 :description: This article demonstrates different approaches to importing CSV data into Neo4j and solutions to potential issues that might arise during the process.
 :page-pagination:
 
-This article demonstrates different approaches to importing CSV data into Neo4j and solutions to potential issues that might arise during the process.
+This article demonstrates different approaches to importing CSV data into Neo4j, and provides solutions to potential issues that might arise during the process.
 
 CSV is a file of comma-separated values, often viewed in Excel or some other spreadsheet tool.
 There can be other types of values as the delimiter, but the most standard is the comma.
@@ -26,43 +26,44 @@ _Works with Neo4j Desktop, Neo4j EE Docker image and local installations._
 For more details and documentation, visit link:https://neo4j.com/labs/etl-tool/[Neo4j ETL Tool page].
 4. Kettle import tool: maps and executes steps for the data process flow and works well for very large datasets, especially if you are already familiar with using this tool. _Works with any setup, including AuraDB._
 
-We provide a brief oview of the `LOAD CSV` Cypher command and `neo4j-admin import` command, how they operate, and how to get started with a general use case.
-Data quality can also be an issue for any type of data import to any system, so a few of these potential difficulties and ways to overcome them will be covered in this section.
+In the below section, you will find a brief overview of the `LOAD CSV` Cypher command and `neo4j-admin import` command, how they operate, and how to get started with a general use case.
+Data quality can be an issue for any type of data import to any system. 
+A few of these potential difficulties and ways to overcome them will, therefore, be covered in this section.
 
 [[import-load-csv]]
 == *LOAD CSV* command with Cypher
 
 The `LOAD CSV` clause is a part of the Cypher query language.
-Our link:https://neo4j.com/docs/cypher-manual/4.4/[Cypher manual^] contains a page devoted to its usage.
+For more information about the `LOAD CSV` clause, see the link:https://neo4j.com/docs/cypher-manual/4.4/clauses/load-csv/[Cypher Manual -> LOAD CSV^].
 It is widely applicable.
-`LOAD CSV` is not just the basic data ingestion mechanism.
+`LOAD CSV` is not simply a basic data ingestion mechanism.
 It performs multiple actions in a single operation:
 
 * supports loading/ingesting CSV data from a URI
-* directly maps input data into complex graph/domain structure
+* directly maps input data into complex graph/domain structures
 * handles data conversion
 * supports complex computations
-* creates or merges entities, relationships, and structure
+* creates or merges entities, relationships, and structures
 
 --
 [NOTE]
 For better control, you can run `LOAD CSV` command with `cypher-shell` instead of in Neo4j Browser.
-More information is in the Operations Manual on link:https://neo4j.com/docs/operations-manual/4.4/tools/cypher-shell/[Cypher shell^].
+For more information about Cypher Shell, see link:https://neo4j.com/docs/operations-manual/4.4/tools/cypher-shell/[Operations Manual -> Cypher shell^].
 --
 
 === Reading CSV files
 
 `LOAD CSV` can handle local and remote files, and there is some syntax associated with each.
-This can be an easy thing to miss and end up with an access error, so the rules are clarified here.
+This can be an easy thing to miss and result in an access error, so the rules are clarified here.
 
 *Local files* may be loaded using a `file:///` prefix before the file name.  +
 Since link:https://neo4j.com/cloud/platform/aura-graph-database/[AuraDB] is cloud based, this local file approach does not work with AuraDB.
 
-Due to security reasons, local files, by default, can only be read from the Neo4j import directory, which is different based on your operating system.
-File locations for each OS are listed in our link:https://neo4j.com/docs/operations-manual/4.4/configuration/file-locations[Neo4j Operations Manual^].
+Due to security reasons, local files, by default, can only be read from the Neo4j import directory, which differs depending on your operating system.
+File locations for each OS are listed in the link:https://neo4j.com/docs/operations-manual/4.4/configuration/file-locations[Operations Manual -> File locations^].
 It is recommended to put files in Neo4j's _import_ directory, as it keeps the environment secure.
-However, if you need to access files in other locations, you can find out which setting to alter in our link:https://neo4j.com/docs/cypher-manual/4.4/clauses/load-csv/#query-load-csv-introduction[Cypher manual^].
-Default import folder paths are shown in link:https://neo4j.com/developer/kb/import-csv-locations/[the Knowledge Base article^].
+However, if you need to access files in other locations, you can find out which setting to alter in the link:https://neo4j.com/docs/cypher-manual/4.4/clauses/load-csv/#query-load-csv-introduction[Cypher Manual -> LOAD CSV introduction^].
+Default import folder paths are shown in this link:https://neo4j.com/developer/kb/import-csv-locations/[Knowledge Base article^].
 
 .Examples
 [source, cypher, role= nocopy noplay]
@@ -205,7 +206,7 @@ To improve inserting or updating unique entities into your graph (using `MERGE` 
 For best performance, always `MATCH` and `MERGE` on a single label with the indexed primary-key property.
 --
 
-Suppose you use the preceding *companies.csv* file, and now you have a file that contains people and which companies they work for:
+Suppose you use the preceding *companies.csv* file, and now you have a file that contains people and the companies they work for:
 
 .people.csv
 [source]
@@ -266,7 +267,7 @@ When the amount of data being loaded is too much to fit into memory, there are a
 1. Batch the import into sections with `PERIODIC COMMIT`.
 +
 This clause can be added before the `LOAD CSV` clause to tell Cypher to only process so many rows of the file before clearing memory and transaction state.
-For more information, see the link:https://neo4j.com/docs/cypher-manual/4.4/query-tuning/using/#query-using-periodic-commit-hint/[manual page^] on `PERIODIC COMMIT`.
+For more information, see the link:https://neo4j.com/docs/cypher-manual/4.4/query-tuning/using/#query-using-periodic-commit-hint/[Cypher Manual -> PERIODIC COMMIT query hints^].
 +
 .Example
 [source,cypher, role= nocopy noplay]
@@ -281,20 +282,20 @@ LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row
 
 `PERIODIC COMMIT` was deprecated in *Neo4j v4.4*.
 It is recommended to use `CALL { … } IN TRANSACTIONS` instead.
-For more information, see link:https://neo4j.com/docs/cypher-manual/4.4/clauses/call-subquery/#subquery-call-in-transactions/[Cypher Manual on subqueries]. 
+For more information, see the link:https://neo4j.com/docs/cypher-manual/4.4/clauses/call-subquery/#subquery-call-in-transactions/[Cypher Manual -> Subqueries]. 
 --
 
 2. Avoid the `Eager` operator.
 +
 Some statements pull in more rows than it is necessary, adding extra processing up front.
 To avoid this, you can run link:https://neo4j.com/docs/cypher-manual/4.4/query-tuning/#how-do-i-profile-a-query[`PROFILE`] on your queries to see if they use `Eager` loading and either modify queries or run multiple passes on the same file, so it does not do this.
-For more information about the `Eager` operator, see the link:https://neo4j.com/docs/cypher-manual/4.4/execution-plans/operators/#query-plan-eager[Cypher manual].
+For more information about the `Eager` operator, see the link:https://neo4j.com/docs/cypher-manual/4.4/execution-plans/operators/#query-plan-eager[Cypher Manual -> Eager operator].
 // To learn how to avoid loading EAGER, see https://markhneedham.com/blog/2014/10/23/neo4j-cypher-avoiding-the-eager/[Mark's blog post^].
 
 3. Adjust configuration for the database on heap and memory to avoid page-faults.
 +
 To help handle larger volumes of transactions, you can increase some configuration settings for the database and restart the instance for them to take effect.
-Usually, you can create or update 1M records in a single transaction per 2 GB of heap.
+Usually, you can create or update 1 million records in a single transaction per 2 GB of heap.
 In `neo4j.conf`:
 +
 * `dbms.memory.heap.initial_size` and `dbms.memory.heap.max_size`: set to at least 4G.
@@ -309,11 +310,11 @@ In `neo4j.conf`:
 [[batch-importer]]
 == The `neo4j-admin import` command for large datasets
 
-`LOAD CSV` is great for importing small- or medium-sized data (up to 10M records).
+`LOAD CSV` is great for importing small- or medium-sized data (up to 10 million records).
 For datasets larger than this, you can use the `neo4j-admin import` command.
 This allows you to import CSV data to an empty database by specifying node files and relationship files.
 
-Suppose you want to import order data via `neo4j-admin import` into a Neo4j instance.
+Suppose you want to import the below order data via `neo4j-admin import` into a Neo4j instance.
 Here are the CSV files.
 Notice that some of them include headers and some have separate header files.
 If you want to perform the import, you place them in the *import* folder for your Neo4j instance.
@@ -403,7 +404,7 @@ Compressed files are also supported.
 * Orders are connected to customers by using the order CSV files again, but this time with a different header, which :IGNORE's the non-relevant columns.
 
 The column names are used for property-names of your nodes and relationships.
-There is specific markup on specific columns, which will be explained.
+There is specific markup on specific columns:
 
 * `name:ID` - global id column used to look up the node later reconnecting.
 ** if the property name is left off, it will be not stored (temporary), which is what the `--id-type` refers to.
@@ -415,7 +416,7 @@ There is specific markup on specific columns, which will be explained.
 * All other columns are treated as properties but skipped if empty or annotated with `:IGNORE`.
 * Type conversion is possible by suffixing the name with indicators like `:INT`, `:BOOLEAN`, etc.
 
-For more details on this header format and the tool, see the section in the link:https://neo4j.com/docs/operations-manual/4.4/tools/neo4j-admin/neo4j-admin-import/[Neo4j Operations Manual^] and the accompanying link:https://neo4j.com/docs/operations-manual/4.4/tutorial/neo4j-admin-import/[tutorial^].
+For more details on this header format and the tool, see the link:https://neo4j.com/docs/operations-manual/4.4/tools/neo4j-admin/neo4j-admin-import/[Operations Manual -> Neo4j admin import^] and the accompanying link:https://neo4j.com/docs/operations-manual/4.4/tutorial/neo4j-admin-import/[tutorial^].
 
 
 [[data-load-quality]]
@@ -438,7 +439,7 @@ Adjusting formatting, delimiters, columns, etc. at this stage will save a great 
 +
 Standalone double or single quotes in the middle of non-quoted text or non-escaped quotes in quoted text can cause issues reading the file for loading.
 It is best to either escape or remove stray quotes.
-Documentation for proper escaping is in the link:https://neo4j.com/docs/cypher-manual/4.4/styleguide/#cypher-styleguide-meta-characters[Cypher style guide] and a link:https://neo4j.com/developer/kb/parsing-of-quotes-for-load-csv-and-or-import/[Knowledge Base article^].
+Documentation for proper escaping can be found in the link:https://neo4j.com/docs/cypher-manual/4.4/styleguide/#cypher-styleguide-meta-characters[Cypher Manual -> style guide], and in this link:https://neo4j.com/developer/kb/parsing-of-quotes-for-load-csv-and-or-import/[Knowledge Base article^].
 
 * *Special or Newline characters in file*.
 +
@@ -467,7 +468,7 @@ Basic tools, such as hexdump, vi, emacs, UltraEdit, and Notepad++ work well for 
 However, there are also other more efficient or user-friendly options available that assist in data cleanup and formatting.
 
 * xref:/appendix/tutorials/guide-import-desktop-csv.adoc#inspect-files[Cypher] - what Cypher sees is what will be imported, so you can use that to your advantage.
-Using `LOAD CSV` without creating graph structure just outputs samples, counts, or distributions to make it possible to detect incorrect header column counts, delimiters, quotes, escapes, or header name spellings.
+Using `LOAD CSV` without creating a graph structure only outputs samples, counts, or distributions to make it possible to detect incorrect header column counts, delimiters, quotes, escapes, or header name spellings.
 
 * link:https://csvkit.readthedocs.io/en/latest/[CSVKit^] - a set of Python tools that provides statistics (csvstat), search (csvgrep), and more for your CSV files.
 
