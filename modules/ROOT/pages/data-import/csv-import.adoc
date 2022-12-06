@@ -47,7 +47,7 @@ It performs multiple actions in a single operation:
 
 --
 [NOTE]
-For better control, you can run `LOAD CSV` command with `cypher-shell` instead of in Neo4j Browser.
+For better control, you can run the `LOAD CSV` command with Cypher Shell instead of in Neo4j Browser.
 For more information about Cypher Shell, see link:https://neo4j.com/docs/operations-manual/4.4/tools/cypher-shell/[Operations Manual -> Cypher shell^].
 --
 
@@ -452,7 +452,7 @@ One thing that computers do not handle well is inconsistent data.
 Ensure line breaks are consistent throughout.
 We recommend choosing the Unix style for compatibility with Linux systems (common format for import tools).
 
-* *Binary zeros, BOM byte order mark (2 UTF-8 bytes) at beginning of file, or other non-text characters*.
+* *Binary zeros, BOM byte order mark (2 UTF-8 bytes) at beginning of the file, or other non-text characters*.
 +
 Any unusual characters or tool-specific formatting are sometimes hidden in application tools, but become easily apparent in basic editors.
 If you come across these types of characters in your file, it is best to remove them entirely.
