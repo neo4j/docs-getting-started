@@ -7,9 +7,9 @@ nav:
 asciidoc:
   attributes:
     # page-origin-private: false
-    neo4j-version: 4.0
-    neo4j-version-exact: 4.0.12
-    neo4j-buildnumber: 4.0
+    neo4j-version: '4.0'
+    neo4j-version-exact: '4.0.12'
+    neo4j-buildnumber: '4.0'
     offset: '\\{offset}'
     count: '\\{count}'
     
