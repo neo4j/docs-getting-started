@@ -20,7 +20,7 @@ Let us see some of the ways Neo4j can read and import CSV files.
 
 1. `LOAD CSV` Cypher command: this command is a great starting point and handles small- to medium-sized datasets (up to 10 million records).
 _Works with any setup, including AuraDB._
-2. The `neo4j-admin import` tool: command-line tool useful for straightforward loading of large datasets.
+2. The `neo4j-admin database import` command: command-line tool useful for straightforward loading of large datasets.
 _Works with Neo4j Desktop, Neo4j EE Docker image and local installations._
 3. Neo4j ETL tool: Neo4j Labs project.
 For more details and documentation, visit link:https://neo4j.com/labs/etl-tool/[Neo4j ETL Tool page].
@@ -76,7 +76,9 @@ LOAD CSV FROM "file:///northwind/customers.csv"
 
 *Web-hosted files* can be referenced directly with their URL, like `+https://host/path/data.csv+`.
 However, permissions must be set so that an external source can read the file.
+To read files from your local file system you need to check that the configuration setting `dbms.security.allow_csv_import_from_file_urls` is set to `true`.
 For more information about access related to online file imports, see this link:https://neo4j.com/developer/kb/import-csv-locations/[Knowledge Base article^].
+But keep in mind that in Neo4j v5 configuration settings have been renamed, and `dbms.directories.import` was changed to `server.directories.import`.
 
 .Examples
 [source, cypher, role= nocopy noplay]
@@ -265,7 +267,7 @@ This way, the load is only doing one piece of the import at a time and can move 
 
 When the amount of data being loaded is too much to fit into memory, there are a couple of different approaches you can use to combat running out of memory during the data load.
 
-1. Batch the import into sections with `CALL { ... } IN TRANSACTIONS`.
+. Batch the import into sections with `CALL { ... } IN TRANSACTIONS`.
 +
 This suquery can be added after the `LOAD CSV` clause to tell Cypher to only process so many rows of the file before clearing memory and transaction state.
 For more information, see https://neo4j.com/docs/cypher-manual/current/clauses/call-subquery/#subquery-call-in-transactions[Cypher Manual -> Subqueries^].
@@ -275,20 +277,20 @@ For more information, see https://neo4j.com/docs/cypher-manual/current/clauses/c
 ----
 LOAD CSV FROM 'file:///people.csv' AS line
 CALL {
- WITH number
- MATCH (e:Employee {id: number})
- CREATE (e)-[:REL {prop: number}]->(e)
+ WITH line
+ MATCH (e:Employee {id: line[0]})
+ CREATE (e)-[:REL {prop: line[1]}]->(e)
 } IN TRANSACTIONS OF 100000 ROWS;
 ----
 
-2. Avoid the `Eager` operator.
+. Avoid the `Eager` operator.
 +
 Some statements pull in more rows than it is necessary, adding extra processing up front.
 To avoid this, you can run link:https://neo4j.com/docs/cypher-manual/current/query-tuning/#how-do-i-profile-a-query[`PROFILE`] on your queries to see if they use `Eager` loading and either modify queries or run multiple passes on the same file, so it does not do this.
 For more information about the `Eager` operator, see the link:https://neo4j.com/docs/cypher-manual/current/execution-plans/operators/#query-plan-eager[Cypher manual -> Execution plan operators in detail^].
 // To learn how to avoid loading EAGER, see https://markhneedham.com/blog/2014/10/23/neo4j-cypher-avoiding-the-eager/[Mark's blog post^].
 
-3. Adjust configuration for the database on heap and memory to avoid page-faults.
+. Adjust configuration for the database on heap and memory to avoid page-faults.
 +
 To help handle larger volumes of transactions, you can increase some configuration settings for the database and restart the instance for them to take effect.
 Usually, you can create or update 1 million records in a single transaction per 2 GB of heap.
@@ -296,11 +298,6 @@ In `neo4j.conf`:
 +
 * `server.memory.heap.initial_size` and `server.memory.heap.max_size`: set to at least 4G.
 * `server.memory.pagecache.size`: ideally, value large enough to keep the whole database in memory.
-
-[TIP]
-====
-Configuration settings have been renamed in *Neo4j v5*. In previous versions, these were `dbms.memory.heap.initial_size`, `dbms.memory.heap.max_size`, and `dbms.memory.pagecache.size`.
-====
 
 ==== *LOAD CSV* resources
 * xref:appendix/tutorials/guide-import-desktop-csv.adoc[How-To: Import CSV data with Neo4j Desktop]
