@@ -300,6 +300,7 @@ In `neo4j.conf`:
 * `server.memory.pagecache.size`: ideally, value large enough to keep the whole database in memory.
 
 ==== *LOAD CSV* resources
+
 * xref:appendix/tutorials/guide-import-desktop-csv.adoc[How-To: Import CSV data with Neo4j Desktop]
 * link:https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[Cypher Manual: LOAD CSV^]
 * xref:appendix/tutorials/guide-import-relational-and-etl.adoc[Tutorial: Import relational data into Neo4j]
