@@ -1,5 +1,5 @@
 = Using Neo4j from Go
-:go-driver-version: 4.4.3
+:go-driver-version: 5.3.0
 :tags: golang, go, app-development, applications
 :description: If you are a Go developer, this guide provides an overview of options for connecting to Neo4j. While this guide is not comprehensive it will introduce the different drivers and link to the relevant resources.
 
@@ -26,19 +26,19 @@ The Neo4j Go driver is *officially supported* by Neo4j and connects to the datab
 It aims to be minimal, while being idiomatic to Go.
 
 === Module version
-Make sure your application has been set up to use go modules (there should be a go.mod file in your application root). Add the driver with:
+Make sure your application has been set up to use go modules (there should be a `go.mod` file in your application root). Add the driver with:
 
 [source, shell, subs="attributes, specialcharacters"]
 ----
-go get github.com/neo4j/neo4j-go-driver/v4
+go get github.com/neo4j/neo4j-go-driver/v5
 ----
 
-If you need to pin a specific https://github.com/neo4j/neo4j-go-driver/tags[*4.x* version], you can run this instead:
+If you need to pin a specific https://github.com/neo4j/neo4j-go-driver/tags[*5.x* version], you can run this instead:
 ----
-go get github.com/neo4j/neo4j-go-driver/v4@<4.x tag>
+go get github.com/neo4j/neo4j-go-driver/v5@<5.x tag>
 ----
 
-where `<4.x tag>` is one of the available tag (e.g.: `v4.2.4`).
+where `<5.x tag>` is one of the available tag (e.g.: `v5.3.0`).
 
 [source, go, subs="attributes"]
 ----
@@ -55,7 +55,7 @@ You can https://neo4j.com/docs/migration-guide/current/upgrade-driver/#_configur
 // tag::table[]
 .Table Scheme Usage
 |===
-| Certificate Type | Neo4j Causal Cluster | Neo4j Standalone Server  | Direct Connection to Cluster Member
+| Certificate Type | Neo4j Cluster | Neo4j Standalone Server  | Direct Connection to Cluster Member
 
 | *Unencrypted*
 | `neo4j`

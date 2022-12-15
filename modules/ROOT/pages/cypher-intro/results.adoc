@@ -145,7 +145,7 @@ RETURN p
 image::cypher-filter-ranges-arr.svg[width=600, role="popup-link"]
 
 
-[#filter-exists]
+[[filter-exists]]
 === Testing if a property exists
 
 You may only be interested if a property exists on a node or relationship.
@@ -157,20 +157,20 @@ Remember: in Neo4j, a property only exists (is stored) if it has a value.
 A `null` property is not stored.
 This ensures that only valuable, necessary information is retained for your nodes and relationships.
 
+To write this type of existence check in *Neo4j v5*, you need to use the `IS NOT NULL` predicate to only include nodes or relationships in which a property exists.
 
-To write this type of existence check, you need to use the `WHERE` clause and the `exists()` method for that property.
 The Cypher code is written in the block below.
 
 [source, cypher]
 ----
 //Query1: find all users who have a birthdate property
 MATCH (p:Person)
-WHERE exists(p.birthdate)
+WHERE p.birthdate IS NOT NULL
 RETURN p.name;
 
 //Query2: find all WORKS_FOR relationships that have a startYear property
 MATCH (p:Person)-[rel:WORKS_FOR]->(c:Company)
-WHERE exists(rel.startYear)
+WHERE rel.startYear IS NOT NULL
 RETURN p, rel, c;
 ----
 
@@ -963,7 +963,7 @@ RETURN technology, personName;
 == Counting values in a list
 
 If you have a list of values, you can also find the number of items in that list or calculate the size of an expression using the `size()` function.
-The examples below return the number of items or patterns found.
+The example below return the number of items found.
 
 [source, cypher]
 ----
@@ -989,12 +989,15 @@ Rows: 4
 ----
 
 
+In Neo4j v5, if you need to find a number of relationship patterns, use the `COUNT {}` expression.
+Take a look at the following example of the Cypher query.
+
 [source, cypher]
 ----
 //Query2: find number of friends who have other friends
 MATCH (p:Person)-[:IS_FRIENDS_WITH]->(friend:Person)
-WHERE size((friend)-[:IS_FRIENDS_WITH]-(:Person)) > 1
-RETURN p.name, collect(friend.name) AS friends, size((friend)-[:IS_FRIENDS_WITH]-(:Person)) AS numberOfFoFs;
+WHERE count{(friend)-[:IS_FRIENDS_WITH]-(:Person)} > 1
+RETURN p.name, collect(friend.name) AS friends, count{(friend)-[:IS_FRIENDS_WITH]-(:Person)} AS numberOfFoFs;
 ----
 
 *Query2 results:*
