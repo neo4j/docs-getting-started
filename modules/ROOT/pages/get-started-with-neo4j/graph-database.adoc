@@ -52,7 +52,7 @@ But you can also run Neo4j yourself with either Community Edition or Enterprise 
 The Enterprise Edition includes all the features of Community Edition, plus extra enterprise requirements such as backups, clustering, and failover abilities.
 Neo4j is written in Java and Scala, and the source code is available on https://github.com/neo4j/neo4j[GitHub^].
 
-image:colored-tile-graph-arr.svg[role="popup-link"]
+image:colored-tile-graph-arr.svg[role="popup-link", width=600, float="right"]
 
 What makes Neo4j the easiest graph to work with?
 
