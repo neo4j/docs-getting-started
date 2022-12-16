@@ -7,17 +7,17 @@ Each option allows you to explore different possibilities of the Neo4j ecosystem
 
 [TIP]
 ====
-For all options on how to get started with Neo4j, see link:https://neo4j.com/try-neo4j/[].
+For all available options on how to get started with Neo4j, see link:https://neo4j.com/try-neo4j/[].
 ====
 
 [[neo4j-first-steps]]
 == First steps with Neo4j
 
-* link:https://neo4j.com/cloud/platform/aura-graph-database/[Neo4j AuraDB] is a fully managed cloud service, good start for everyone who is interested in graph technologies. +
+* link:https://neo4j.com/cloud/platform/aura-graph-database/[Neo4j AuraDB] is a fully managed cloud service and a good place to start for anyone interested in graph technologies. +
 Besides the free option, you can select the subscription plan which suits you best. +
-At the moment, a few example datasets are provided on AuraDB to help you learn more about graph databases and graph query language -- Cypher.
+At the moment, AuraDB provides a few example datasets to help you learn more about graph databases and graph query language, _Cypher_.
 +
-If you are a data scientist, you might be interested in link:https://neo4j.com/cloud/platform/aura-graph-data-science/[Neo4j AuraDS] -- graph data science platform as a fully managed cloud service.
+If you are a data scientist, you might be interested in link:https://neo4j.com/cloud/platform/aura-graph-data-science/[Neo4j AuraDS], a graph data science platform as a fully managed cloud service.
 You get access to more than 65 pretuned link:https://neo4j.com/docs/graph-data-science/current/algorithms/[graph algorithms].
 +
 * If you want to learn more about Neo4j graph database and Cypher queries applied to a specific use case, launch link:https://login.neo4j.com/u/login?state=hKFo2SBtblVTM0tSUjFTbGRzS05xN250dXVYVk15VkNtc2drU6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIGJiaHFuSllVTTR1VERpelV6ZEg2cUxEeU0xQ3dwVVo3o2NpZNkgRHhobWlGOFRDZXpuSTdYb2kwOFV5WVNjTEdabms0a2U[Neo4j Sandbox], where you find a number of example datasets based on different use cases.

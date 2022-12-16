@@ -2,7 +2,7 @@
 = What is a graph database?
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
 
-Neo4j stores nodes and relationships instead of tables or documents.
+A Neo4j graph database stores nodes and relationships instead of tables or documents.
 Data is stored just like you might sketch ideas on a whiteboard.
 Your data is stored without restricting it to a pre-defined model, allowing a very flexible way of thinking about and using it.
 
@@ -46,11 +46,10 @@ Neo4j is a _native graph database_, which means that it implements a true graph 
 The data isn't stored as a "graph abstraction" on top of another technology, it's stored just as you whiteboard it.
 This is important because it's the reason why Neo4j outperforms other graphs and stays so flexible.
 Beyond the core graph, Neo4j provides what you'd expect out of a database; ACID transactions, cluster support, and runtime failover.
-This stability and maturity is why it's been used in production scenarios for large enterprise workloads for years.
 
 Neo4j is offered as a managed cloud service via link:{aura_signup}[AuraDB].
 But you can also run Neo4j yourself with either Community Edition or Enterprise Edition.
-The Enterprise Edition includes all that Community Edition has to offer, plus extra enterprise requirements such as backups, clustering, and failover abilities.
+The Enterprise Edition includes all the features of Community Edition, plus extra enterprise requirements such as backups, clustering, and failover abilities.
 Neo4j is written in Java and Scala, and the source code is available on https://github.com/neo4j/neo4j[GitHub^].
 
 image:colored-tile-graph-arr.svg[role="popup-link"]
@@ -84,7 +83,7 @@ Modern data problems often involve many-to-many relationships with heterogeneous
 * Discover inter-relationships between items.
 
 Whether it's a social network, payment networks, or road network you'll find that everything is an interconnected graph of relationships.
-And when we want to ask questions about the real world, many questions are _about the relationships_ rather than about the individual data elements.
+And when you want to ask questions about the real world, many questions are _about the relationships_ rather than about the individual data elements.
 
 
 [[neo4j-uses]]
