@@ -22,7 +22,7 @@ The graph database takes a property graph approach, which is beneficial for both
 .Components of the Neo4j Graph Data Platform
 image::neo4j-architecture-diagram.svg[role="popup-link"]
 
-Starting as a graph database xref:get-started-with-neo4j/graph-platform.adoc#platform-components[Neo4j] has evolved into a rich ecosystem with many tools, applications, and libraries, which give you an opportunity to integrate graph technologies with your working environment. +
+Neo4j started as a graph database and has evolved into a rich ecosystem with many tools, applications, and libraries, which allows you to integrate graph technologies with your working environment. +
 
 For more information about each of the components, go to the link:https://neo4j.com/product/[Product page^]. +
 For more details about reference documentation, see xref:get-started-with-neo4j/index.adoc#[]. +
@@ -44,7 +44,7 @@ You can run Neo4j on public clouds like AWS, Azure, and Google Cloud Platform (G
 *Neo4j Aura* is a fully managed, cloud-native graph service, that gives developers and data scientists advanced graph tech tools.
 Neo4j Aura includes *AuraDB* and *AuraDS*.
 
-link:https://neo4j.com/cloud/aura/?ref=product[Neo4j AuraDB^] is the fully automated, always-on, and scalable graph database as a service. +
+link:https://neo4j.com/cloud/aura/?ref=product[Neo4j AuraDB^] is a graph database as a service. +
 For more information, see the link:https://neo4j.com/docs/aura/current/[official documentation^]. +
 
 link:https://neo4j.com/cloud/platform/aura-graph-data-science/[Neo4j AuraDS] makes it easy to run graph algorithms on Neo4j by integrating two main components:
@@ -128,8 +128,8 @@ Neo4j Aura includes AuraDB for applications and AuraDS for data science.
 
 == Neo4j Community Forum
 
-Neo4j is dedicated to kind and open communication and aims to create developer-friendly environment for everybody. +
-Neo4j is open-source and has the largest and most vibrant community of graph database enthusiasts. 
+Neo4j is dedicated to kind and open communication and aims to create a developer-friendly environment. +
+Neo4j is open-source and has a large and vibrant community of graph database enthusiasts. 
 You can reach out to our link:https://community.neo4j.com/[Community Forum] or link:https://discord.com/invite/neo4j[Discord Chat] for any help or advice you may need. +
 
 == Neo4j GraphAcademy

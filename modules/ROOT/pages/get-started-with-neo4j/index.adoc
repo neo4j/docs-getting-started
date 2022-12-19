@@ -14,7 +14,7 @@ For all available options on how to get started with Neo4j, see link:https://neo
 == First steps with Neo4j
 
 * link:https://neo4j.com/cloud/platform/aura-graph-database/[Neo4j AuraDB] is a fully managed cloud service and a good place to start for anyone interested in graph technologies. +
-Besides the free option, you can select the subscription plan which suits you best. +
+Besides the free option, you can select the subscription plan that suits you best. +
 At the moment, AuraDB provides a few example datasets to help you learn more about graph databases and graph query language, _Cypher_.
 +
 If you are a data scientist, you might be interested in link:https://neo4j.com/cloud/platform/aura-graph-data-science/[Neo4j AuraDS], a graph data science platform as a fully managed cloud service.
