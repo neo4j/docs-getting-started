@@ -45,8 +45,8 @@ If you'd like to learn more about any of these, you can read more about xref:dat
 image:colored-tile-graph-arr.svg[role="popup-link", width=600, float="right"]
 
 Neo4j is a _native graph database_, which means that it implements a true graph model all the way down to the storage level.
-The data isn't stored as a "graph abstraction" on top of another technology, it's stored just as you whiteboard it.
-Beyond the core graph, Neo4j provides what you'd expect out of a database; ACID transactions, cluster support, and runtime failover.
+The data is stored as you whiteboard it, instead of as a "graph abstraction" on top of another technology.
+Beyond the core graph, Neo4j also provides: ACID transactions, cluster support, and runtime failover.
 
 Neo4j is offered as a managed cloud service via link:{aura_signup}[AuraDB].
 But you can also run Neo4j yourself with either Community Edition or Enterprise Edition.

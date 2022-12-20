@@ -61,8 +61,7 @@ You can find more details in the https://neo4j.com/docs/aura/aurads/[official do
 
 link:https://neo4j.com/product/graph-data-science/?ref=product[Neo4j Graph Data Science^] (GDS) gives you access to more than 65 graph algorithms, which can be executed with Neo4j and optimized for enterprise workloads and pipelines.
 GDS helps you to get insights from big data in order to answer critical questions and improve predictions.
-GDS is the only connected data analysis platform that unifies the ML surface and graph database into a single workspace.
-This way, data scientists run algorithms and ML models without jumping between tools for ETL.
+GDS is the connected data analysis platform that unifies the ML surface and graph database into a single workspace.
 
 See link:https://neo4j.com/docs/graph-data-science/current/[documentation^] for the library for more details.
 
