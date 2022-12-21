@@ -2,10 +2,8 @@
 [[cypher-intro-load-csv]]
 = Tutorial: Import data
 
-[abstract]
---
+
 This tutorial demonstrates how to import data from CSV files using `LOAD CSV`.
---
 
 
 With the combination of the Cypher clauses `LOAD CSV`, `MERGE`, and `CREATE` you can conveniently import data into Neo4j.
@@ -78,111 +76,14 @@ Each row represents one role with relationship data about the person `id` (from 
 
 == The graph model
 
-The following simple data model shows what a graph model for this data set could look like:
+The following data model shows what a graph model for this dataset could look like:
 
-image::getting-started-load-csv01.svg[role="middle"]
+image::getting-started-load-csv01-arr.svg[role="middle"]
 
-// ["dot", "getting-started-load-csv01.svg", "neoviz"]
-// ----
-//   N0 [
-//     label = "{Movie|title = \'movie title\'\lyear = \'year released\'\l}"
-//   ]
-//   N3 [
-//     label = "{Person|name = \'name of person\'\l}"
-//   ]
-//   N8 [
-//     label = "{Country|name = \'name of country\'\l}"
-//   ]
-//   N3 -> N0 [
-//     color = "#4e9a06"
-//     fontcolor = "#4e9a06"
-//     label = "ACTED_IN\nrole = \'name of role\'\l"
-//   ]
-//   N0 -> N8 [
-//     color = "#2e3436"
-//     fontcolor = "#2e3436"
-//     label = "ORIGIN"
-//   ]
-
-// ----
 
 This is the resulting graph, based on the data from the CSV files:
 
-image::getting-started-load-csv02.svg[role="middle"]
-
-// ["dot", "getting-started-load-csv02.svg", "neoviz"]
-// ----
-//   N0 [
-//     label = "{Movie|title = \'Wall Street\'\lyear = 1987\l}"
-//   ]
-//   N1 [
-//     label = "{Movie|title = \'The Shawshank Redemption\'\lyear = 1994\l}"
-//   ]
-//   N2 [
-//     label = "{Movie|title = \'The American President\'\lyear = 1995\l}"
-//   ]
-//   N3 [
-//     label = "{Person|name = \'Martin Sheen\'\l}"
-//   ]
-//   N4 [
-//     label = "{Person|name = \'Charlie Sheen\'\l}"
-//   ]
-//   N6 [
-//     label = "{Person|name = \'Morgan Freeman\'\l}"
-//   ]
-//   N7 [
-//     label = "{Person|name = \'Michael Douglas\'\l}"
-//   ]
-//   N8 [
-//     label = "{Country|name = \'USA\'\l}"
-//   ]
-//   N4 -> N0 [
-//     color = "#4e9a06"
-//     fontcolor = "#4e9a06"
-//     label = "ACTED_IN\nrole = \'Bud Fox\'\l"
-//   ]
-//   N3 -> N0 [
-//     color = "#4e9a06"
-//     fontcolor = "#4e9a06"
-//     label = "ACTED_IN\nrole = \'Carl Fox\'\l"
-//   ]
-//   N7 -> N0 [
-//     color = "#4e9a06"
-//     fontcolor = "#4e9a06"
-//     label = "ACTED_IN\nrole = \'Gordon Gekko\'\l"
-//   ]
-//   N7 -> N2 [
-//     color = "#4e9a06"
-//     fontcolor = "#4e9a06"
-//     label = "ACTED_IN\nrole = \'President Andrew Shepherd\'\l"
-//   ]
-//   N3 -> N2 [
-//     color = "#4e9a06"
-//     fontcolor = "#4e9a06"
-//     label = "ACTED_IN\nrole = \'A.J. MacInerney\'\l"
-//   ]
-//   N6 -> N1 [
-//     color = "#4e9a06"
-//     fontcolor = "#4e9a06"
-//     label = "ACTED_IN\nrole = \'Ellis Boyd \'Red\' Redding\'\l"
-//   ]
-//   N0 -> N8 [
-//     color = "#2e3436"
-//     fontcolor = "#2e3436"
-//     label = "ORIGIN"
-//   ]
-//   N1 -> N8 [
-//     color = "#2e3436"
-//     fontcolor = "#2e3436"
-//     label = "ORIGIN"
-//   ]
-//   N2 -> N8 [
-//     color = "#2e3436"
-//     fontcolor = "#2e3436"
-//     label = "ORIGIN"
-//   ]
-
-// ----
+image::getting-started-load-csv02-arr.svg[role="middle"]
 
 == Prerequisites
 
@@ -191,10 +92,10 @@ This tutorial uses the Linux or macOS tarball installation.
 It assumes that your current work directory is the _<neo4j-home>_ directory of the tarball installation, and the CSV files are placed in the default _import_ directory.
 
 
-[NOTE]
+[TIP]
 ====
 * For the default directory of other installations see, link:{neo4j-docs-base-uri}/operations-manual/{page-version}/configuration/file-locations#file-locations[Operations Manual -> File locations].
-* The import location can be configured with link:{neo4j-docs-base-uri}/operations-manual/{page-version}/reference/configuration-settings#config_dbms.directories.import[Operations Manual -> `dbms.directories.import`].
+* The import location can be configured with link:{neo4j-docs-base-uri}/operations-manual/{page-version}/reference/configuration-settings#config_dbms.directories.import[Operations Manual -> `server.directories.import`].
 ====
 
 
@@ -357,28 +258,30 @@ Added 4 nodes, Created 3 relationships, Set 10 properties, Added 4 labels
 
 Importing the data from the _roles.csv_ file is a matter of finding the `Person` node and `Movie` node and then creating relationships between them.
 
-[NOTE]
+[TIP]
 ====
-For larger data files, it is useful to use the hint `USING PERIODIC COMMIT` clause of `LOAD CSV`.
-This hint tells Neo4j that the query might build up inordinate amounts of transaction state, and thus needs to be periodically committed.
-For more information, see link:{neo4j-docs-base-uri}/cypher-manual/{page-version}/query-tuning/using#query-using-periodic-commit-hint[].
+For larger data files, good practice is to use the subquery `CALL {...} IN TRANSACTIONS`.
+This subquery tells Neo4j that the query might build up inordinate amounts of transaction state, and thus needs to be committed in batches.
+For more information, see link:{neo4j-docs-base-uri}/cypher-manual/{page-version}/clauses/call-subquery/[Cypher Manual -> CALL {} (subquery)].
 ====
 
 Using _Neo4j Browser_, run the following Cypher:
 
 [source, cypher, indent=0]
 ----
-USING PERIODIC COMMIT 500
-LOAD CSV WITH HEADERS FROM "file:///roles.csv" AS csvLine
-MATCH (person:Person {id: toInteger(csvLine.personId)}), (movie:Movie {id: toInteger(csvLine.movieId)})
-CREATE (person)-[:ACTED_IN {role: csvLine.role}]->(movie)
+LOAD CSV WITH HEADERS FROM 'file:///roles.csv' AS csvLine
+CALL {
+ WITH csvLine
+ MATCH (person:Person {id: toInteger(csvLine[0])}), (movie:Movie {id: toInteger(csvLine[1])})
+CREATE (person)-[:ACTED_IN {role: csvLine[2]}]->(movie)
+} IN TRANSACTIONS OF 2 ROWS
 ----
 
-Or using link:{neo4j-docs-base-uri}/operations-manual/{page-version}/tools/cypher-shell#cypher-shell[_Neo4j Cypher Shell_], run the command:
+Using link:{neo4j-docs-base-uri}/operations-manual/{page-version}/tools/cypher-shell#cypher-shell[_Cypher Shell_], you can run the command:
 
 [source, shell, indent=0]
 ----
-bin/cypher-shell --database=neo4j 'USING PERIODIC COMMIT 500 LOAD CSV WITH HEADERS FROM "file:///roles.csv" AS csvLine MATCH (person:Person {id:toInteger(csvLine.personId)}), (movie:Movie {id:toInteger(csvLine.movieId)}) CREATE (person)-[:ACTED_IND {role:csvLine.role}]->(movie)'
+bin/cypher-shell --database=neo4j 'LOAD CSV WITH HEADERS FROM "file:///roles.csv" AS csvLine MATCH (person:Person {id:toInteger(csvLine.personId)}), (movie:Movie {id:toInteger(csvLine.movieId)}) CREATE (person)-[:ACTED_IND {role:csvLine.role}]->(movie)'
 ----
 
 Output:
@@ -388,6 +291,11 @@ Output:
 Created 5 relationships, Set 5 properties
 ----
 
+[IMPORTANT]
+====
+Pay attention, `CALL {...} IN TRANSACTIONS` is only allowed in _implicit_ transactions.
+But Cypher Shell supports _explicit_ transactions.
+====
 
 == Validate the imported data
 

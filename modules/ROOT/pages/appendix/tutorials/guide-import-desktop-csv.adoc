@@ -145,7 +145,7 @@ image::generic-open_terminal.png[role="popup-link",float=center,width=500]
 .. Enter `bin/cypher-shell`.
 .. Enter *neo4j* for the user.
 .. Enter the password you specified for the DBMS.
-.. All Cypher statements must end with ";"
+.. All Cypher statements must end with ";" in Cypher Shell.
 .. Use `:exit` to quit.
 
 In Step 2, you downloaded the *.zip* file and copied its CSV files to the *import* folder for the DBMS.
@@ -481,9 +481,9 @@ productId:orderId:quantityOrdered
 |===
 
 [#loading-data]
-== Loading the data!
+== Loading the data
 
-Now that you have determined that the CSV file data looks OK, and you have verified how `LOAD CSV` sees the data and converted any non-string values, you are almost ready to create the data in our graph database!
+Now that you have determined that the CSV file data looks good, and you have verified how `LOAD CSV` sees the data and converted any non-string values, you are almost ready to create the data in our graph database!
 To do that, you will use Cypher statements alongside the `LOAD CSV` commands you used above.
 The `LOAD CSV` will read the files, and the Cypher statements will create the data in your database.
 
@@ -495,14 +495,14 @@ To utilize the graph database fully, you need a graph data model.
 
 Though there are a variety ways to organize the products and orders in your files, we will save that for another guide and use the below version of the model for this exercise.
 
-image::developer-desktop-csv-import-data_model.png[role="popup-link",width=700]
+image::developer-desktop-csv-import-data_model-arr.svg[role="popup-link",width=700]
 
 We have two nodes - one for a product and one for an order.
 Each of those nodes have properties from the CSV files.
 For the `Product`, we have ID, name, and unit cost.
 For the `Order`, we have ID, date/time, and country where it is going.
 
-The order-details.csv file defines the relationship between those two nodes.
+The _order-details.csv_ file defines the relationship between those two nodes.
 That file has the product ID, the order ID it belongs to, and the quantity of the product on the order.
 So, in the data model, this becomes the `CONTAINS` relationship between `Product` and `Order` nodes.
 We also include a property of `quantityOrdered` on the relationship because the product quantity value only exists when a product is related to an order.
@@ -527,22 +527,22 @@ CREATE CONSTRAINT UniqueProduct ON (p:Product) ASSERT p.id IS UNIQUE;
 CREATE CONSTRAINT UniqueOrder ON (o:Order) ASSERT o.id IS UNIQUE;
 ----
 
-[#write-statements]
-== Cypher
+[[write-statements]]
+== Cypher queries
 
-Now you are ready to write the Cypher for creating the data in the graph!
+Now you are ready to write the Cypher for creating the data in the graph.
 You could use `CREATE` statements where you are sure that you will not have duplicate rows in your CSV file and use `MATCH` to find existing data for updates.
 However, since it is hard to completely scrub all data and import perfectly clean data from any source, you will use `MERGE` statements to check if the data exists before inserting.
 If the node or relationship exists, Cypher will match and return (without any writes), but if it does not exist, Cypher will insert it.
 Using `MERGE` can have some performance overhead, but often it is the better approach to maintain high data integrity.
 
 [NOTE]
---
+====
 *Why both constraints and MERGE?*
 Using constraints is different from using MERGE.
 Statements that create data in violation of the constraint will error, while statements that use `MERGE` will simply return existing values (no errors).
 If you use both, you avoid terminating your load statements due to constraint violations, and you also ensure you don't accidentally create duplicates in adhoc queries.
---
+====
 
 .Products
 To start, you will load the products into the graph.
@@ -606,21 +606,24 @@ Last, but not least, you will create the relationship between the products and t
 Since you expect all of your products and all of your orders to already exist in the graph (that data should have been loaded with the last two files), then you start with `MATCH` to find the existing `Product` and `Order` nodes.
 Then, the `MERGE` statement will add the new relationship or match an existing one.
 
-As you found when you ran a count on the order-details file above, there are 2,155 rows in the CSV.
-While this is not a huge number for file imports, you will have Cypher periodically commit the data to the database to reduce the memory overhead of the transaction state.
-For this, you can add the `:auto USING PERIODIC COMMIT` clause before the `LOAD CSV` command.
-The default value for periodic commit is 1,000, but for this exercise, you will ask Cypher to commit every *500 rows*.
+As you found when you ran a count on the _order-details_ file above, there are 2,155 rows in the CSV.
+While this is not a huge number for file imports, you will have Cypher commit the data to the database in batches to reduce the memory overhead of the transaction state.
+For this, you can use the subquery `CALL {} IN TRANSACTIONS` after the `LOAD CSV` clause.
+The number of input rows is set with the modifier `OF n ROWS` (or `ROW`).
+If omitted, the default batch size is 1000 rows.
+For this exercise, you will ask Cypher to commit every *500 rows*.
 You could decrease this number if you have a lot of memory already allocated to other tasks, or if it is limited.
 
 [source, cypher]
 ----
-:auto USING PERIODIC COMMIT 500
 LOAD CSV WITH HEADERS FROM 'file:///order-details.csv' AS row
-WITH toInteger(row.productID) AS productId, toInteger(row.orderID) AS orderId, toInteger(row.quantity) AS quantityOrdered
-MATCH (p:Product {productId: productId})
-MATCH (o:Order {orderId: orderId})
-MERGE (o)-[rel:CONTAINS {quantityOrdered: quantityOrdered}]->(p)
-RETURN count(rel);
+CALL {
+ WITH row
+ MATCH (p:Product {productId: toInteger(row[0]})
+ MATCH (o:Order {orderId: toInteger(row[1]})
+ MERGE (o)-[rel:CONTAINS {quantityOrdered: toInteger(row[2]}]->(p)
+ RETURN count(rel)
+} IN TRANSACTIONS OF 500 ROWS
 ----
 
 Just as you did above, you can validate the data with the query below.
@@ -638,7 +641,6 @@ image::developer-desktop-csv-import-verify_details.png[role="popup-link"]
 [#import-wrapup]
 == Wrapping up
 
-Congratulations!
 You have successfully loaded three CSV files into a Neo4j graph database using Neo4j Desktop!
 
 The `LOAD CSV` functionality, coupled with Cypher, is exceptionally useful for getting data from files into a graph structure.
