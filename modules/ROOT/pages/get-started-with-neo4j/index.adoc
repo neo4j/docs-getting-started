@@ -20,7 +20,7 @@ At the moment, AuraDB provides a few example datasets to help you learn more abo
 If you are a data scientist, you might be interested in link:https://neo4j.com/cloud/platform/aura-graph-data-science/[Neo4j AuraDS], a graph data science platform as a fully managed cloud service.
 You get access to more than 65 pretuned link:https://neo4j.com/docs/graph-data-science/current/algorithms/[graph algorithms].
 +
-* link:https://login.neo4j.com/u/login?state=hKFo2SBtblVTM0tSUjFTbGRzS05xN250dXVYVk15VkNtc2drU6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIGJiaHFuSllVTTR1VERpelV6ZEg2cUxEeU0xQ3dwVVo3o2NpZNkgRHhobWlGOFRDZXpuSTdYb2kwOFV5WVNjTEdabms0a2U[*Neo4j Sandbox*] provides a number of example databases that can help you to learn more about Neo4j graph database and Cypher queries applied to a specific use case.
+* link:https://login.neo4j.com/u/login?state=hKFo2SBtblVTM0tSUjFTbGRzS05xN250dXVYVk15VkNtc2drU6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIGJiaHFuSllVTTR1VERpelV6ZEg2cUxEeU0xQ3dwVVo3o2NpZNkgRHhobWlGOFRDZXpuSTdYb2kwOFV5WVNjTEdabms0a2U[*Neo4j Sandbox*] provides a number of example datasets that can help you to learn more about Neo4j graph database and Cypher queries applied to a specific use case.
 +
 All databases are grouped into two categories:
 +

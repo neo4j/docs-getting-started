@@ -135,7 +135,7 @@ You can reach out to our link:https://community.neo4j.com/[Community Forum] or l
 
 If you want learn how to build, optimize, and launch your Neo4j project, visit the link:https://graphacademy.neo4j.com/[GraphAcademy page].
 GraphAcademy courses are free, interactive, and hands-on. +
-All of them have been developed by Neo4j professionals with years of experience.
+All of them have been developed by experienced Neo4j professionals.
 The set of courses targets a wide range of job roles: data scientists, developers, and database administrators.
 
 For more information about Neo4j products and projects, see the xref::appendix/getting-started-resources.adoc[Getting started resources]. +
