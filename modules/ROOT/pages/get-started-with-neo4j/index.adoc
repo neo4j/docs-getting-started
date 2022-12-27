@@ -40,7 +40,7 @@ If you need an Enterprise Edition, visit link:https://neo4j.com/pricing/#graph-d
 ====
 
 [[neo4j-docs]]
-== Neo4j documentation page
+== Neo4j documentation
 
 All the official documentation is available at link:https://neo4j.com/docs/[].
 
