@@ -25,7 +25,7 @@ image::neo4j-architecture-diagram.svg[role="popup-link"]
 Neo4j started as a graph database and has evolved into a rich ecosystem with many tools, applications, and libraries, which allows you to integrate graph technologies with your working environment. +
 
 For more information about each of the components, go to the link:https://neo4j.com/product/[Product page^]. +
-For more details about reference documentation, see xref:get-started-with-neo4j/index.adoc#[]. +
+For more details about reference documentation, see xref:get-started-with-neo4j/index.adoc#neo4j-docs[Neo4j documentation]. +
 *The latest version of Neo4j is {neo4j-version-minor}.*
 
 [[graph-database]]
@@ -95,6 +95,9 @@ Cypher can be characterized by following:
 * secure, reliable, and data-rich
 * open and flexible
 
+See xref:cypher-intro/index.adoc[Introduction to Cypher] to get acquainted with Cypher basics. 
+
+For more detailed information, see the link:https://neo4j.com/docs/cypher-manual/current/[Cypher manual].
 // Cypher is one of the graph query languages that are being used as the base for a new *standard* language -- link:https://www.gqlstandards.org/home[Graph Query Language].
 
 [[connect-to-neo4j]]
@@ -102,7 +105,7 @@ Cypher can be characterized by following:
 
 Neo4j provides a wide range of opportunities for integrating Neo4j with any working environment. 
 
-* xref::languages-guides/index.adoc[] -- Officially supported drivers and Community drivers.
+* xref:languages-guides/index.adoc[Neo4j Drivers] -- Officially supported drivers and Community drivers.
 * link:https://neo4j.com/product/[Neo4j Connectors] -- A set of connectors to integrate your regular working environment with Neo4j.
 * link:https://neo4j.com/product/graphql-library/[GraphQL Library] is a flexible, low-code, open source JavaScript library that enables rapid API development for cross-platform and mobile applications by tapping into the power of connected data. 
 * link:https://neo4j.com/docs/ogm-manual/current/[OGM] -- An Object Graph Mapping Library for Neo4j.
@@ -122,7 +125,6 @@ Neo4j Aura includes AuraDB for applications and AuraDS for data science.
 <iframe width="680" height="425" src="https://www.youtube.com/embed/urO5FyP9PoI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 ++++
-
 ////
 
 == Neo4j Community Forum
