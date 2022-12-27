@@ -2,47 +2,45 @@
 = Get started with Neo4j
 :description: This section gives an orientation on how to get started with Neo4j.
 
-There are a number of options on how to get started with Neo4j, and your choice depends upon your needs and aims. Each option allows you to explore different possibilities of the Neo4j ecosystem. 
+There are a number of options on how to get started with Neo4j, and your choice depends upon your needs and goals.
+Each option allows you to explore different possibilities of the Neo4j ecosystem.
+
+[TIP]
+====
+For all available options on how to get started with Neo4j, see link:https://neo4j.com/try-neo4j/[].
+====
 
 [[neo4j-first-steps]]
 == First steps with Neo4j
 
-1. If your purpose is to learn Neo4j graph database features, how to write Cypher queries, use developer tools like xref:get-started-with-neo4j/graph-platform.adoc#neo4j-tools[Neo4j Browser and Bloom], and get an overview on how to connect to Neo4j via drivers and connectors, go to the link:https://neo4j.com/cloud/platform/aura-graph-database/[AuraDB page], where you can create a Neo4j instance at no cost. +
-AuraDB is a good choice for cloud developers who are interested in graph technologies. +
-Besides the free option, you can select the subscription plan which suits you best. +
-At the moment, you can choose one of the example datasets on Aura to learn more about Neo4j and Cypher queries:
-* Movies
-* Graph based Recommendations
-* Graphs for Cybersecurity
-* StackOverflow Data
+* link:https://neo4j.com/cloud/platform/aura-graph-database/[*Neo4j AuraDB*] is a fully managed cloud service and a good place to start for anyone interested in graph technologies. +
+Besides the free option, you can select the subscription plan that suits you best. +
+At the moment, AuraDB provides a few example datasets to help you learn more about graph databases and graph query language, _Cypher_.
 +
-If you are a data scientist, you might be interested in link:https://neo4j.com/cloud/platform/aura-graph-data-science/[AuraDS] -- graph data science platform as a fully managed cloud service.
+If you are a data scientist, you might be interested in link:https://neo4j.com/cloud/platform/aura-graph-data-science/[Neo4j AuraDS], a graph data science platform as a fully managed cloud service.
 You get access to more than 65 pretuned link:https://neo4j.com/docs/graph-data-science/current/algorithms/[graph algorithms].
-
 +
-2. If you want to learn more about Neo4j graph database and Cypher queries applied to a specific use case, visit link:https://login.neo4j.com/u/login?state=hKFo2SBRRWZOaW5tSXI4OFFqdk53YjJ5QmhMV2VmdV9PMFBMY6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIG4yX3lVYVhObFNzdjFrYVNOVEtzVk16alp4Y2ZudThKo2NpZNkgRHhobWlGOFRDZXpuSTdYb2kwOFV5WVNjTEdabms0a2U[Neo4j Sandbox], where you find a number of example datasets based on different use cases.
+* link:https://neo4j.com/sandbox/[*Neo4j Sandbox*] provides a number of example datasets that can help you to learn more about Neo4j graph database and Cypher queries applied to a specific use case.
 +
 All databases are grouped into two categories:
 +
-* for developers
-* for data scientists
+** for developers
+** for data scientists
+
 +
 You can also select a blank sandbox and populate it with your own data.
 +
-3. One of the ways to set up an environment for developing an application with Neo4j and Cypher is to use Neo4j Desktop.
+* link:https://neo4j.com/product/developer-tools/[*Neo4j Desktop*] is one of the ways to set up an environment for developing an application with Neo4j and Cypher.
 Download Neo4j Desktop from link:https://neo4j.com/download/[] and follow the installation instructions for your operating system. +
 You get the opportunity to try all the graph applications, which are available in our link:https://install.graphapp.io/[**Graph Apps Gallery**]. +
-+
-4. If you need an Enterprise Edition, visit link:https://neo4j.com/pricing/#graph-database/[the Neo4j Pricing page] where you can get all necessary instructions and contacts.
 
 [TIP]
 ====
-For all options on how to get started with Neo4j see link:https://neo4j.com/try-neo4j/[].
+If you need an Enterprise Edition, visit link:https://neo4j.com/pricing/#graph-database/[the Neo4j Pricing page] where you can get all necessary instructions and contacts.
 ====
 
-
 [[neo4j-docs]]
-== Neo4j documentation page
+== Neo4j documentation
 
 All the official documentation is available at link:https://neo4j.com/docs/[].
 

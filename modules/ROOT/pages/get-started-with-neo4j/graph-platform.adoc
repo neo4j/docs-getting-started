@@ -13,7 +13,7 @@ From our core product (the graph database) to visualization for business users, 
 [[platform-components]]
 == Components of the Neo4j Graph Data Platform
 
-image:neo4j_graph_platform.png[role="popup-link"]
+image:neo4j-architecture-diagram.svg[role="popup-link"]
 
 Each of the elements listed below is designed to fill a business or technical need.
 We continue to improve the different perspectives from which to work with data, as well as capabilities of the products themselves.

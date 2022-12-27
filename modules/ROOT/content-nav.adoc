@@ -1,7 +1,7 @@
 * xref:index.adoc[]
 * xref:get-started-with-neo4j/index.adoc[]
 ** xref:get-started-with-neo4j/graph-database.adoc[]
-** xref:get-started-with-neo4j/graph-platform.adoc[]
+// ** xref:get-started-with-neo4j/graph-platform.adoc[]
 * xref:cypher-intro/index.adoc[]
 ** xref:cypher-intro/patterns.adoc[]
 ** xref:cypher-intro/patterns-in-practice.adoc[]
