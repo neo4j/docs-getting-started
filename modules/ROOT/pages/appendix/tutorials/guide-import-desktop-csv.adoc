@@ -619,9 +619,9 @@ You could decrease this number if you have a lot of memory already allocated to 
 LOAD CSV WITH HEADERS FROM 'file:///order-details.csv' AS row
 CALL {
  WITH row
- MATCH (p:Product {productId: toInteger(row[0]})
- MATCH (o:Order {orderId: toInteger(row[1]})
- MERGE (o)-[rel:CONTAINS {quantityOrdered: toInteger(row[2]}]->(p)
+ MATCH (p:Product {productId: toInteger(row.productID})
+ MATCH (o:Order {orderId: toInteger(row.orderID})
+ MERGE (o)-[rel:CONTAINS {quantityOrdered: toInteger(row.quantity}]->(p)
  RETURN count(rel)
 } IN TRANSACTIONS OF 500 ROWS
 ----

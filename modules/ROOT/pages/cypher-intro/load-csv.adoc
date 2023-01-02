@@ -272,8 +272,8 @@ Using _Neo4j Browser_, run the following Cypher:
 LOAD CSV WITH HEADERS FROM 'file:///roles.csv' AS csvLine
 CALL {
  WITH csvLine
- MATCH (person:Person {id: toInteger(csvLine[0])}), (movie:Movie {id: toInteger(csvLine[1])})
-CREATE (person)-[:ACTED_IN {role: csvLine[2]}]->(movie)
+ MATCH (person:Person {id: toInteger(csvLine.personId)}), (movie:Movie {id: toInteger(csvLine.movieId)})
+CREATE (person)-[:ACTED_IN {role: csvLine.role}]->(movie)
 } IN TRANSACTIONS OF 2 ROWS
 ----
 
