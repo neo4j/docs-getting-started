@@ -20,7 +20,7 @@ With a native graph database at the core, Neo4j stores and manages data in a nat
 The graph database takes a property graph approach, which is beneficial for both traversal performance and operations runtime. +
 
 .Components of the Neo4j Graph Data Platform
-image::neo4j-architecture-diagram.svg[role="popup-link"]
+image::neo4j-architecture-diagram.svg[role="popup-link", width=600]
 
 Neo4j started as a graph database and has evolved into a rich ecosystem with many tools, applications, and libraries, which allows you to integrate graph technologies with your working environment. +
 
