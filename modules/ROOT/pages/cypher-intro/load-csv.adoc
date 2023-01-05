@@ -296,6 +296,7 @@ Created 5 relationships, Set 5 properties
 Pay attention, `CALL {...} IN TRANSACTIONS` is only allowed in _implicit_ transactions.
 Cypher Shell supports both explicit and implicit transactions.
 However in Browser you need to prepend `CALL {...} IN TRANSACTIONS` with `:auto`.
+For more details, see link:https://neo4j.com/docs/cypher-manual/current/introduction/transactions/[Cypher manual -> Transactions].
 ====
 
 == Validate the imported data
