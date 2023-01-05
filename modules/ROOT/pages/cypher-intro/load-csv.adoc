@@ -294,7 +294,8 @@ Created 5 relationships, Set 5 properties
 [IMPORTANT]
 ====
 Pay attention, `CALL {...} IN TRANSACTIONS` is only allowed in _implicit_ transactions.
-But Cypher Shell supports _explicit_ transactions.
+Cypher Shell supports both explicit and implicit transactions.
+However in Browser you need to prepend `CALL {...} IN TRANSACTIONS` with `:auto`.
 ====
 
 == Validate the imported data
