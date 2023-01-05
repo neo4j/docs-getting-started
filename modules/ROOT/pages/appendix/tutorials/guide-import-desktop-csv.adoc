@@ -619,12 +619,16 @@ You could decrease this number if you have a lot of memory already allocated to 
 LOAD CSV WITH HEADERS FROM 'file:///order-details.csv' AS row
 CALL {
  WITH row
- MATCH (p:Product {productId: toInteger(row.productID})
- MATCH (o:Order {orderId: toInteger(row.orderID})
- MERGE (o)-[rel:CONTAINS {quantityOrdered: toInteger(row.quantity}]->(p)
- RETURN count(rel)
+ MATCH (p:Product {productId: toInteger(row.productID)})
+ MATCH (o:Order {orderId: toInteger(row.orderID)})
+ MERGE (o)-[rel:CONTAINS {quantityOrdered: toInteger(row.quantity)}]->(p)
 } IN TRANSACTIONS OF 500 ROWS
 ----
+
+[NOTE]
+====
+In Neo4j Browser, don't forget to prepend the preceding Cypher statement with `:auto`.
+====
 
 Just as you did above, you can validate the data with the query below.
 
