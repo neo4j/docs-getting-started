@@ -47,7 +47,7 @@ image::matrix_whiteboard_model1.png[600,600,role="popup-link"]
 Next, we formalize our entities a bit and match expected syntax for relationship types to create the node/relationship view for the property graph model.
 
 .Matrix - match node and relationship format of property graph model
-image::matrix_whiteboard_model2.png[600,600,role="popup-link"]
+image::matrix_whiteboard_model2.svg[600,600,role="popup-link"]
 
 For our next step, we add labels and determine properties of our nodes and relationships for the property graph model.
 
