@@ -80,8 +80,8 @@ We can use the information in this statement to build our model by identifying t
 Let us take the scenario into pieces and define them as parts of our property graph model.
 However, for a start, we simplify the model.
 
-.Review - Property Graph Elements (click to zoom)
-image::property_graph_elements-arr.svg[role="popup-link"]
+.Review - property graph elements
+image::property_graph_elements-arr.svg[700,700,role="popup-link"]
 
 You can see that:
 
@@ -127,7 +127,7 @@ Remember that a graph database takes each instance of an entity as a separate no
 ====
 
 .Graph model - Nodes
-image::modeling_johnsally_nodes-arr.svg[500,500,role="popup-link"]
+image::modeling_johnsally_nodes-arr.svg[400,400,role="popup-link"]
 
 [[add-labels]]
 == Labels
@@ -165,7 +165,7 @@ For *John* and *Sally*, we apply the label _Person_.
 For *Graph Databases*, we apply the label _Book_.
 
 .Graph model - Labels
-image::modeling_johnsally_labels-arr.svg[500,500,role="popup-link"]
+image::modeling_johnsally_labels-arr.svg[450,450,role="popup-link"]
 
 [[define-rels]]
 == Relationships
@@ -204,7 +204,7 @@ To sum up our findings, our John and Sally nodes (labeled _Person_) can be conne
 John and Sally have both read the Graph Databases book, so we can connect each of their nodes (each labeled _Person_) to the Graph Databases node (labeled _Book_) with a +++<u>has read</u>+++ relationship.
 
 .Graph model - Relationships
-image::modeling_johnsally_relationships-arr.svg[500,500,role="popup-link"]
+image::modeling_johnsally_relationships-arr.svg[450,450,role="popup-link"]
 
 [[fillin-properties]]
 == Properties
