@@ -77,7 +77,7 @@ We might try to answer this question with the following query:
 MATCH (person:Person)-[:WORKS_FOR]->(company)
 WHERE company.name STARTS WITH "Company"
 AND (person)-[:LIKES]->(t:Technology)
-AND size((t)<-[:LIKES]-()) >= 3
+AND count{ (t)<-[:LIKES]-() } >= 3
 RETURN person.name as person, company.name AS company;
 ----
 
@@ -100,7 +100,7 @@ MATCH (person:Person)-[:WORKS_FOR]->(company)
 WHERE company.name STARTS WITH "Company"
 AND EXISTS {
   MATCH (person)-[:LIKES]->(t:Technology)
-  WHERE size((t)<-[:LIKES]-()) >= 3
+  WHERE count{ (t)<-[:LIKES]-() } >= 3
 }
 RETURN person.name as person, company.name AS company;
 ----
@@ -136,7 +136,7 @@ ORDER BY dob DESC
 UNION
 
 MATCH (p:Person)
-WHERE size((p)-[:IS_FRIENDS_WITH]->()) > 1
+WHERE count{ (p)-[:IS_FRIENDS_WITH]->() } > 1
 RETURN p.name AS person, p.birthdate AS dob
 ORDER BY dob DESC;
 ----
@@ -164,7 +164,7 @@ WITH collect(p) AS peopleWhoLikeJava
 
 // Find people with more than one friend
 MATCH (p:Person)
-WHERE size((p)-[:IS_FRIENDS_WITH]->()) > 1
+WHERE count{ (p)-[:IS_FRIENDS_WITH]->() } > 1
 WITH collect(p) AS popularPeople, peopleWhoLikeJava
 
 // Filter duplicate people
@@ -204,7 +204,7 @@ CALL {
 	UNION
 
 	MATCH (p:Person)
-	WHERE size((p)-[:IS_FRIENDS_WITH]->()) > 1
+	WHERE count{ (p)-[:IS_FRIENDS_WITH]->() } > 1
 	RETURN p
 }
 RETURN p.name AS person, p.birthdate AS dob
@@ -233,7 +233,7 @@ CALL {
 	UNION
 
 	MATCH (p:Person)
-	WHERE size((p)-[:IS_FRIENDS_WITH]->()) > 1
+	WHERE count{ (p)-[:IS_FRIENDS_WITH]->() } > 1
 	RETURN p
 }
 WITH p,
@@ -264,7 +264,7 @@ CALL {
 	UNION
 
 	MATCH (p:Person)
-	WHERE size((p)-[:IS_FRIENDS_WITH]->()) > 1
+	WHERE count{ (p)-[:IS_FRIENDS_WITH]->() } > 1
 	RETURN p
 }
 RETURN min(p.birthdate) AS oldest, max(p.birthdate) AS youngest
