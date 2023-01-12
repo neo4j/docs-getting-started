@@ -1,6 +1,5 @@
 = Neo4j - OGM Object Graph Mapper
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
-:testcontainers-version: 1.17.6
 :tags: ogm, object-graph-map, app-development, applications
 :description: For Java developers that require a mechanism to manage their domain objects with Neo4j, this guide introduces the Neo4j Object Graph Mapping (OGM) library.
 

@@ -3,7 +3,6 @@
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
 :spring-boot-version: 2.5.0
 :spring-data-neo4j-version: 6.1.1
-:testcontainers-version: 1.15.3
 :examples: https://github.com/neo4j-examples
 :tags: spring, spring-data, SDN, reactive, app-development, applications
 :description: For Java developers who use the Spring Framework or Spring Boot and want to take advantage of reactive development principles, this guide introduces Spring integration through the Spring Data Neo4j project.
