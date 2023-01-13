@@ -166,13 +166,11 @@ WITH collect(p) AS peopleWhoLikeJava
 MATCH (p:Person)
 WHERE count{ (p)-[:IS_FRIENDS_WITH]->() } > 1
 WITH collect(p) AS popularPeople, peopleWhoLikeJava
-
-// Filter duplicate people
-WITH apoc.coll.toSet(popularPeople + peopleWhoLikeJava) AS people
+WITH popularPeople + peopleWhoLikeJava AS people
 
 // Unpack the collection of people and order by birthdate
 UNWIND people AS p
-RETURN p.name AS person, p.birthdate AS dob
+RETURN distinct p.name AS person, p.birthdate AS dob
 ORDER BY dob DESC
 ----
 
