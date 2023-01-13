@@ -28,6 +28,7 @@
 * xref:languages-guides/index.adoc[]
 ** xref:languages-guides/java/java-intro.adoc[]
 *** xref:languages-guides/java/spring-data-neo4j.adoc[]
+*** xref:languages-guides/java/quarkus.adoc[]
 *** xref:languages-guides/java/java-frameworks.adoc[]
 *** xref:languages-guides/java/neo4j-ogm.adoc[]
 *** xref:languages-guides/java/java-procedures.adoc[]

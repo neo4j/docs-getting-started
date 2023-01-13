@@ -1,7 +1,7 @@
 [[java-frameworks]]
-= Quarkus, Helidon, Micronaut
-:tags: quarkus, helidon, micronaut, app-development, applications
-:description: For Java developers who use Quarkus, Helidon or Micronaut and want to take advantage of a pre-configured Java driver instance. This page should give an overview of the existing support for the driver in other Java frameworks. Please consult the linked documentations for more information.
+= Helidon, Micronaut
+:tags: helidon, micronaut, app-development, applications
+:description: For Java developers who use Helidon or Micronaut and want to take advantage of a pre-configured Java driver instance. This page should give an overview of the existing support for the driver in other Java frameworks. Please consult the linked documentations for more information.
 
 
 [abstract]
@@ -10,7 +10,7 @@
 
 [#qhm-summary]
 == Driver integration
-The goal with all three integrations is to provide support for getting a managed instances of the Neo4j driver.
+The goal with both integrations is to provide support for getting a managed instances of the Neo4j driver.
 Like in the link:/developer/spring-data-neo4j/#adding-config[Spring Framework], you can provide the driver properties to an _application.properties_ file (or yaml) to configure your application.
 In the end you will have an injectable driver instance that can be used with 
 
@@ -23,57 +23,6 @@ Driver driver;
 in the business operation code base.
 
 Additional to the managed driver bean creation, the integrations also expose health metrics for the driver and connection to your Neo4j instance.
-
-[#quarkus-integration]
-== Quarkus
-
-In an existing Quarkus application you need to add the `quarkus-neo4j` dependency to your project.
-
-[source,xml]
-----
-<dependency>
-    <groupId>io.quarkus</groupId>
-    <artifactId>quarkus-neo4j</artifactId>
-</dependency>
-----
-
-Additionally configure the basic connection parameters as needed.
-
-[source,properties]
-.Quarkus application.properties
-----
-quarkus.neo4j.uri = bolt://localhost:7687
-quarkus.neo4j.authentication.username = neo4j
-quarkus.neo4j.authentication.password = secret
-----
-
-If you want to make use of the health check, the additional `quarkus-smallrye-health` dependency is needed.
-
-[source,xml]
-----
-<dependency>
-    <groupId>io.quarkus</groupId>
-    <artifactId>quarkus-smallrye-health</artifactId>
-</dependency>
-----
-
-For metrics support, you would either need _MicroMeter_ (recommended by Quarkus) or _SmallRye Metrics_ (only if you really need MicroProfile specification) dependencies declared.
-
-[source,xml]
-.MicroMeter (Prometheus) dependency
-----
-<dependency>
-    <groupId>io.quarkus</groupId>
-    <artifactId>quarkus-micrometer-registry-prometheus</artifactId>
-</dependency>
-----
-
-The metrics for Neo4j have to be manually enabled in the _application.properties_.
-
-[source,properties]
-----
-quarkus.neo4j.pool.metrics-enabled = true
-----
 
 [#helion-integration]
 == Helidon
@@ -169,9 +118,8 @@ The module will automatically add its information to the built-in _/health_ endp
 
 [cols="1,4"]
 |===
-| icon:book[] Quarkus Documentation | https://quarkus.io/guides/neo4j[Neo4j integration^], https://quarkus.io/guides/neo4j#configuration-reference[Configuration properties], https://quarkus.io/guides/[Guide^]
 | icon:book[] Helidon Documentation | https://helidon.io/docs/v2/[Reference^], https://blogs.oracle.com/javamagazine/fast-flexible-data-access-in-java-using-the-helidon-microservices-platform#anchor_7[Helidon Neo4j^]
 | icon:book[] Micronaut Documentation | https://micronaut-projects.github.io/micronaut-neo4j/latest/guide/[Neo4j integration^], https://docs.micronaut.io/latest/guide/[Guide^]
-| icon:play-circle[] Examples | https://github.com/michael-simons/neo4j-from-the-jvm-ecosystem[Quarkus, Helidon, Micronaut examples^]
+| icon:play-circle[] Examples | https://github.com/michael-simons/neo4j-from-the-jvm-ecosystem[Helidon, Micronaut and more examples^]
 |===
 
