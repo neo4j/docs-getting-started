@@ -1,5 +1,10 @@
 :description: This section describes how patterns are used in practice, explains the basic concepts of Cypher.
 :page-includedriver: true
+:page-ad-overline-link: https://graphacademy.neo4j.com/?ref=guides
+:page-ad-overline: Neo4j GraphAcademy
+:page-ad-title: Cypher Fundamentals
+:page-ad-description: Learn Cypher in this free, hands-on course
+:page-ad-link: https://graphacademy.neo4j.com/?ref=guides
 :page-ad-underline-role: button
 :page-ad-underline: Learn more
 
