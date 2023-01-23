@@ -13,7 +13,7 @@
 [[recap]]
 == Recap our example graph
 
-All of our code examples will continue with the graph example we have been using before, but include some more data for our later queries.
+All of our code examples will continue with the graph example we have been using before, but include some more data for the queries on this page.
 Below is an image of the new graph, a network of people, the companies they work for, and the technologies they like.
 
 We have added one more `Person` node (blue) who `WORKS_FOR` a `Company` node (red) and `LIKES` a `Technology` (green) node.
@@ -28,15 +28,15 @@ image::people-technologies-graph-arr1.svg[role="popup-link"]
 
 Subqueries were introduced in Neo4j v4.0.
 
-At the time Neo4j offers the following types of subqueries:
+The following types of subqueries are possible in Neo4j:
 
 * link:https://neo4j.com/docs/cypher-manual/current/syntax/expressions/#existential-subqueries[`EXISTS` subquery expression]
 * link:https://neo4j.com/docs/cypher-manual/current/syntax/expressions/#count-subqueries[`COUNT` subquery expression]
 * link:https://neo4j.com/docs/cypher-manual/5/clauses/call-subquery/[`CALL {...}` subquery clause]
 * link:https://neo4j.com/docs/cypher-manual/5/clauses/call-subquery/#subquery-call-in-transactions[`CALL {...} IN TRANSACTIONS` subquery clause]
 
-In this section, `EXISTS`, `COUNT`, and `CALL {...}` subqueries are covered.
-To learn more about using `CALL {...} IN TRANSACTIONS`, see code examples in the following tutorials on how to import CSV data into Neo4j instance:
+The `EXISTS`, `COUNT`, and `CALL {...}` subqueries are covered in this section.
+To learn more about using `CALL {...} IN TRANSACTIONS`, see the code examples in the following tutorials on how to import CSV data into a Neo4j instance:
 
 * xref:cypher-intro/load-csv.adoc#call-in-transactions[_Tutorial: Import data_]
 * xref:data-import/csv-import.adoc#optimizing-load-csv[_Importing CSV data into Neo4j_]
@@ -55,7 +55,7 @@ Here are some important things to know about a subquery:
 
 * You must explicitly pass in variables from the enclosing query to a subquery.
 
-As you see, subqueries are demarcated by the braces.
+Subqueries are demarcated by braces (`{ }`).
 
 In the xref:cypher-intro/results.adoc#filter-patterns[_Filtering on patterns_] section of the *_Getting the correct results_* chapter, you learnt how to filter based on patterns.
 For example, you can write the following query to find the friends of someone who works for Neo4j:
@@ -67,7 +67,7 @@ WHERE exists((p)-[:WORKS_FOR]->(:Company {name: 'Neo4j'}))
 RETURN p, r, friend
 ----
 
-If you run this query in the Neo4j Browser, the following graph is returned:
+If you run this query in Neo4j Browser, the following graph is returned:
 
 .Output in the graph format
 image::friends-of-neo4j.png[width=750,role="popup-link"]
@@ -88,11 +88,11 @@ RETURN p, r, friend
 
 You will get the same result, which is nice, but so far all you've achieved is the same thing with more code!
 
-Let's next write a subquery that does more powerful filtering than what you can achieve with the `WHERE` clause or `exists` function alone.
+Next, let's write a subquery that filters more powerfully than what can be achieved with the `WHERE` clause or the `exists` function alone.
 
 Assume that: 
 
-* You want to find people who work for a company which name starts with 'Company' and like at least one technology that's liked by three or more people.
+* You want to find people who work for a company whose name starts with 'Company' and who like at least one technology that's liked by three or more people.
 * You aren't interested in knowing what those technologies are.
 
 You might try to answer this question with the following query:
@@ -116,7 +116,7 @@ Variable `t` not defined (line 4, column 25 (offset: 112))
                          ^
 ----
 
-You can find people that like a technology, but you cannot check that at least three people like that technology as well, because the variable `t` isn't in the scope of the `WHERE` clause.
+You can find people that like a technology, but you cannot check that at least three other people like that technology as well, because the variable `t` isn't in the scope of the `WHERE` clause.
 Let's instead move the two `AND` statements into an `EXISTS` subquery block, resulting in the following query:
 
 [source,cypher]
@@ -140,7 +140,7 @@ Now you can successfully run the query, which returns the following results:
 |===
 
 If you recall the graph visualisation from the start of this guide, *Ryan* is the only other person who works for a company which name starts with 'Company'.
-He's been filtered out in this query because the only `Technology` that he likes is *Python*, and there aren't three people who like Python.
+He's been filtered out in this query because the only `Technology` that he likes is *Python*, and there aren't three other people who like Python.
 
 [[result-returning-subqueries]]
 == Result returning subqueries
@@ -149,8 +149,8 @@ So far you have learnt how to use subqueries to filter out results, but this doe
 You can also use subqueries to return results as well.
 
 Let's say you want to write a query that finds people who like Java or have more than one friend.
-Apart from that you want to return the results ordered by date of birth in descending order.
-You can get some of the way there using the `UNION` clause and `COUNT` subquery expression:
+Apart from that, you want to return the results ordered by date of birth in descending order.
+This can be partially achieved using the `UNION` clause and `COUNT` subquery expression:
 
 [source,cypher]
 ----
@@ -245,7 +245,7 @@ If you run that query, you will get the following output:
 | "John"     | 1985-04-04
 |===
 
-You could extend our query further to return the technologies that these people like, and the friends that they have.
+You could extend the query further to return the technologies that these people like, and the friends that they have.
 The following query shows how to do this:
 
 [source,cypher]
@@ -302,7 +302,7 @@ RETURN min(p.birthdate) AS oldest, max(p.birthdate) AS youngest
 
 == Summary
 
-You have seen how to use the `EXISTS {}` subquery expression to write complex filtering patterns and the `CALL {}` clause to execute result returning subqueries.
+You have seen how to use the `EXISTS {}` subquery expression to write complex filtering patterns and the `CALL {}` clause to execute result-returning subqueries.
 
 
 
