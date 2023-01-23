@@ -1,40 +1,64 @@
+[[neo4j-subqueries]]
 = Subqueries
-:neo4j-version: 4.0
 :tags: cypher, queries, graph-queries, subqueries, compare-queries
 :description: Building on the previous Cypher guides, this guide shows how to write subqueries.
-:page-pagination:
-:page-aliases: ROOT:subqueries.adoc
-:page-newsletter: true
+:page-ad-overline-link: https://graphacademy.neo4j.com/?ref=guides
+:page-ad-overline: Neo4j GraphAcademy
+:page-ad-title: Cypher Fundamentals
+:page-ad-description: Learn Cypher in this free, hands-on course
+:page-ad-link: https://graphacademy.neo4j.com/?ref=guides
+:page-ad-underline-role: button
+:page-ad-underline: Learn more
 
-
-[#recap]
+[[recap]]
 == Recap our example graph
 
-All of our examples will continue with the graph example we have been using before, but include some more data for some of our later queries.
-Below is an image of the new graph.
+All of our code examples will continue with the graph example we have been using before, but include some more data for our later queries.
+Below is an image of the new graph, a network of people, the companies they work for, and the technologies they like.
 
-We have added more `Person` nodes (blue) who `WORK_FOR` different `Company` nodes (red) and `LIKE` different `Technology` (green) nodes.
+We have added one more `Person` node (blue) who `WORKS_FOR` a `Company` node (red) and `LIKES` a `Technology` (green) node.
 
 To recap, each person could also have multiple `IS_FRIENDS_WITH` relationships to other people.
-This gives us a network of people, the companies they work for, and the technologies they like.
 
-image::cypher_graph_v3.png[role="popup-link"]
+.Network of people, companies they work for, and technologies they like
+image::people-technologies-graph-arr1.svg[role="popup-link"]
 
-[#cypher-filtering]
+[[cypher-filtering]]
 == An introduction to subqueries
 
-Neo4j 4.0 introduced support for two different types of subqueries:
+Subqueries were introduced in Neo4j v4.0.
 
-* Existential subqueries in a `WHERE` clause
-* Result returning subqueries using the `CALL {}` syntax
+At the time Neo4j offers the following types of subqueries:
 
-In this section we're going to learn how to write queries that use both these approaches.
+* link:https://neo4j.com/docs/cypher-manual/current/syntax/expressions/#existential-subqueries[`EXISTS` subquery expression]
+* link:https://neo4j.com/docs/cypher-manual/current/syntax/expressions/#count-subqueries[`COUNT` subquery expression]
+* link:https://neo4j.com/docs/cypher-manual/5/clauses/call-subquery/[`CALL {...}` subquery clause]
+* link:https://neo4j.com/docs/cypher-manual/5/clauses/call-subquery/#subquery-call-in-transactions[`CALL {...} IN TRANSACTIONS` subquery clause]
 
-[#existential-subqueries]
-== Existential subqueries
+In this section, `EXISTS`, `COUNT`, and `CALL {...}` subqueries are covered.
+To learn more about using `CALL {...} IN TRANSACTIONS`, see code examples in the following tutorials on how to import CSV data into Neo4j instance:
 
-In the filtering on patterns section of the getting the correct results chapter, we learnt how to filter based on patterns.
-For example, we wrote the following query to find the friends of someone who works for Neo4j:
+* xref:cypher-intro/load-csv.adoc#call-in-transactions[_Tutorial: Import data_]
+* xref:data-import/csv-import.adoc#optimizing-load-csv[_Importing CSV data into Neo4j_]
+
+[[cypher-subqueries]]
+== Cypher subqueries
+
+A subquery is a set of Cypher statements that execute within their own scope.
+A subquery is typically called from an outer enclosing query.
+
+Here are some important things to know about a subquery:
+
+* A subquery returns values referred to by the variables in the `RETURN` clause.
+
+* A subquery cannot return variables with the same name used in the enclosing query.
+
+* You must explicitly pass in variables from the enclosing query to a subquery.
+
+As you see, subqueries are demarcated by the braces.
+
+In the xref:cypher-intro/results.adoc#filter-patterns[_Filtering on patterns_] section of the *_Getting the correct results_* chapter, you learnt how to filter based on patterns.
+For example, you can write the following query to find the friends of someone who works for Neo4j:
 
 [source,cypher]
 ----
@@ -43,13 +67,15 @@ WHERE exists((p)-[:WORKS_FOR]->(:Company {name: 'Neo4j'}))
 RETURN p, r, friend
 ----
 
-If we run this query in the Neo4j Browser, the following graph is returned:
+If you run this query in the Neo4j Browser, the following graph is returned:
 
-image::friends-of-neo4j.png[role="popup-link"]
+.Output in the graph format
+image::friends-of-neo4j.png[width=750,role="popup-link"]
 
-https://neo4j.com/docs/cypher-manual/current/clauses/where/#existential-subqueries[Existential subqueries^] enable more powerful pattern filtering.
-Instead of using the `exists` function in our `WHERE` clause, we use the `EXISTS {}` clause.
-We can reproduce the previous example with the following query:
+
+https://neo4j.com/docs/cypher-manual/current/syntax/expressions/#cypher-subquery-expressions[Cypher subqueries^] enable more powerful pattern filtering.
+Instead of using the `exists` function in the `WHERE` clause, you can use the `EXISTS` subquery.
+You can reproduce the previous example with the following query:
 
 [source,cypher]
 ----
@@ -60,28 +86,27 @@ WHERE EXISTS {
 RETURN p, r, friend
 ----
 
-We'll get the same results, which is nice, but so far all we've achieved is the same thing with more code!
+You will get the same result, which is nice, but so far all you've achieved is the same thing with more code!
 
-Let's next write a subquery that does more powerful filtering than what we can achieve with the `WHERE` clause or `exists` function alone.
+Let's next write a subquery that does more powerful filtering than what you can achieve with the `WHERE` clause or `exists` function alone.
 
-Imagine that we want to find the people who:
+Assume that: 
 
-* work for a company whose name starts with 'Company' and
-* like at least one technology that's liked by three or more people
+* You want to find people who work for a company which name starts with 'Company' and like at least one technology that's liked by three or more people.
+* You aren't interested in knowing what those technologies are.
 
-We aren't interested in knowing what those technologies are.
-We might try to answer this question with the following query:
+You might try to answer this question with the following query:
 
 [source,cypher]
 ----
 MATCH (person:Person)-[:WORKS_FOR]->(company)
 WHERE company.name STARTS WITH "Company"
 AND (person)-[:LIKES]->(t:Technology)
-AND count{ (t)<-[:LIKES]-() } >= 3
+AND COUNT { (t)<-[:LIKES]-() } >= 3
 RETURN person.name as person, company.name AS company;
 ----
 
-If we run this query, we'll see the following output:
+If you run this query, you'll see the following output:
 
 
 [source,text]
@@ -91,8 +116,8 @@ Variable `t` not defined (line 4, column 25 (offset: 112))
                          ^
 ----
 
-We can find people that like a technology, but we can't check that at least 3 people like that technology as well, because the variable `t` isn't in the scope of the `WHERE` clause.
-Let's instead move the two `AND` statements into an `EXISTS {}` block, resulting in the following query:
+You can find people that like a technology, but you cannot check that at least three people like that technology as well, because the variable `t` isn't in the scope of the `WHERE` clause.
+Let's instead move the two `AND` statements into an `EXISTS` subquery block, resulting in the following query:
 
 [source,cypher]
 ----
@@ -100,12 +125,12 @@ MATCH (person:Person)-[:WORKS_FOR]->(company)
 WHERE company.name STARTS WITH "Company"
 AND EXISTS {
   MATCH (person)-[:LIKES]->(t:Technology)
-  WHERE count{ (t)<-[:LIKES]-() } >= 3
+  WHERE COUNT { (t)<-[:LIKES]-() } >= 3
 }
 RETURN person.name as person, company.name AS company;
 ----
 
-Now we're able to successfully execute the query, which returns the following results:
+Now you can successfully run the query, which returns the following results:
 
 [options="header"]
 |===
@@ -114,18 +139,18 @@ Now we're able to successfully execute the query, which returns the following re
 | "Diana"   | "CompanyX"
 |===
 
-If we recall the graph visualisation from the start of this guide, Ryan is the only other person who works for a company whose name starts with "Company".
-He's been filtered out in this query because the only `Technology` that he likes is Python, and there aren't 3 people who like Python.
+If you recall the graph visualisation from the start of this guide, *Ryan* is the only other person who works for a company which name starts with 'Company'.
+He's been filtered out in this query because the only `Technology` that he likes is *Python*, and there aren't three people who like Python.
 
-[#result-returning-subqueries]
+[[result-returning-subqueries]]
 == Result returning subqueries
 
-So far we've learnt how to use subqueries to filter out results, but this doesn't fully show case their power.
-We can also use subqueries to return results as well.
+So far you have learnt how to use subqueries to filter out results, but this doesn't fully show their power.
+You can also use subqueries to return results as well.
 
-Let's say we want to write a query that finds people who like Java or have more than one friend.
-And we want to return the results ordered by date of birth in descending order.
-We can get some of the way there using the `UNION` clause:
+Let's say you want to write a query that finds people who like Java or have more than one friend.
+Apart from that you want to return the results ordered by date of birth in descending order.
+You can get some of the way there using the `UNION` clause and `COUNT` subquery expression:
 
 [source,cypher]
 ----
@@ -136,12 +161,12 @@ ORDER BY dob DESC
 UNION
 
 MATCH (p:Person)
-WHERE count{ (p)-[:IS_FRIENDS_WITH]->() } > 1
+WHERE COUNT { (p)-[:IS_FRIENDS_WITH]->() } > 1
 RETURN p.name AS person, p.birthdate AS dob
 ORDER BY dob DESC;
 ----
 
-If we run that query, we'll see the following output:
+If you run that query, you see the following output:
 
 [options="header"]
 |===
@@ -151,10 +176,11 @@ If we run that query, we'll see the following output:
 | "Joe"      | 1988-08-08
 |===
 
-We've got the correct people, but the `UNION` approach only lets us sort results per `UNION` clause, not for all rows.
+You've got the correct people.
+But the `UNION` approach only lets us sort results per `UNION` clause, not for all rows.
 
-We can try another approach, where we execute each of our subqueries separately and collect the people from each part using the `COLLECT` function.
-There are some people who like Java and have more than one friend, so we'll also need to use a function from the APOC Library to remove those duplicates:
+You can try another approach, where you execute each of the subqueries separately and collect the people from each part using the `collect()` function.
+There are some people who like Java and have more than one friend, so you need to use `DISTINCT` operator in the `RETURN` clause to remove the duplicates:
 
 [source,cypher]
 ----
@@ -164,17 +190,17 @@ WITH collect(p) AS peopleWhoLikeJava
 
 // Find people with more than one friend
 MATCH (p:Person)
-WHERE count{ (p)-[:IS_FRIENDS_WITH]->() } > 1
+WHERE COUNT { (p)-[:IS_FRIENDS_WITH]->() } > 1
 WITH collect(p) AS popularPeople, peopleWhoLikeJava
 WITH popularPeople + peopleWhoLikeJava AS people
 
 // Unpack the collection of people and order by birthdate
 UNWIND people AS p
-RETURN distinct p.name AS person, p.birthdate AS dob
+RETURN DISTINCT p.name AS person, p.birthdate AS dob
 ORDER BY dob DESC
 ----
 
-If we run that query, we'll get the following output:
+If you run that query, you will get the following output:
 
 [options="header"]
 |===
@@ -184,14 +210,14 @@ If we run that query, we'll get the following output:
 | "John"     | 1985-04-04
 |===
 
-This approach works, but it's more difficult to write, and we have to keep passing through parts of state to the next part of the query.
+This approach works, but it's more difficult to write, and you have to keep passing through parts of state to the next part of the query.
 
-The https://neo4j.com/docs/cypher-manual/current/clauses/call-subquery/index.html[`CALL {}`^] clause gives us the best of both worlds:
+The https://neo4j.com/docs/cypher-manual/current/clauses/call-subquery/index.html[`CALL {...}`^] clause gives you the best of both worlds:
 
-* We can use the UNION approach to run the individual queries and remove duplicates
-* We can sort the results afterwards
+* You can use the UNION approach to run the individual queries and remove duplicates.
+* You can sort the results afterwards.
 
-Our query using the `CALL {}` clause looks like this:
+Our query using the `CALL {...}` clause looks like this:
 
 [source,cypher]
 ----
@@ -202,14 +228,14 @@ CALL {
 	UNION
 
 	MATCH (p:Person)
-	WHERE count{ (p)-[:IS_FRIENDS_WITH]->() } > 1
+	WHERE COUNT { (p)-[:IS_FRIENDS_WITH]->() } > 1
 	RETURN p
 }
 RETURN p.name AS person, p.birthdate AS dob
 ORDER BY dob DESC;
 ----
 
-If we run that query, we'll get the following output:
+If you run that query, you will get the following output:
 
 [options="header"]
 |===
@@ -219,7 +245,7 @@ If we run that query, we'll get the following output:
 | "John"     | 1985-04-04
 |===
 
-We could extend our query further to return the technologies that these people like, and the  friends that they have.
+You could extend our query further to return the technologies that these people like, and the friends that they have.
 The following query shows how to do this:
 
 [source,cypher]
@@ -231,7 +257,7 @@ CALL {
 	UNION
 
 	MATCH (p:Person)
-	WHERE count{ (p)-[:IS_FRIENDS_WITH]->() } > 1
+	WHERE COUNT { (p)-[:IS_FRIENDS_WITH]->() } > 1
 	RETURN p
 }
 WITH p,
@@ -250,8 +276,8 @@ ORDER BY dob DESC;
 | "John"     | 1985-04-04 | ["Java", "Application Development"] | ["Sally"]
 |===
 
-We can also apply aggregation functions to the results of our subquery.
-The following query returns the youngest and oldest of the people who like Java or have more than one friend
+You can also apply aggregation functions to the results of the subquery.
+The following query returns the youngest and oldest of the people who like Java or have more than one friend.
 
 [source,cypher]
 ----
@@ -262,7 +288,7 @@ CALL {
 	UNION
 
 	MATCH (p:Person)
-	WHERE count{ (p)-[:IS_FRIENDS_WITH]->() } > 1
+	WHERE COUNT { (p)-[:IS_FRIENDS_WITH]->() } > 1
 	RETURN p
 }
 RETURN min(p.birthdate) AS oldest, max(p.birthdate) AS youngest
@@ -274,14 +300,9 @@ RETURN min(p.birthdate) AS oldest, max(p.birthdate) AS youngest
 | 1985-04-04 | 1988-08-08
 |===
 
-[#cypher-next-steps]
-=== Next steps
+== Summary
 
-We have seen how to use the `EXISTS {}` clause to write complex filtering patterns, and the `CALL {}` clause to execute result returning subqueries.
-In the next section, we will learn how to use aggregation in Cypher and how to do more with the return results.
+You have seen how to use the `EXISTS {}` subquery expression to write complex filtering patterns and the `CALL {}` clause to execute result returning subqueries.
 
-[#cypher-resources]
-=== Resources
 
-* link:https://neo4j.com/docs/cypher-manual/current/clauses/where/#existential-subqueries[Neo4j Cypher Manual: Using existential subqueries in WHERE^]
-* link:https://neo4j.com/docs/cypher-manual/current/clauses/call-subquery/[Neo4j Cypher Manual: CALL {} (subquery)^]
+

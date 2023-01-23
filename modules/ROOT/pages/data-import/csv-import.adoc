@@ -198,6 +198,7 @@ SET c.businessType = type
 RETURN *
 ----
 
+[[optimizing-load-csv]]
 === Optimizing *LOAD CSV* for performance
 
 Often, there are ways to improve performance during data load, which are especially helpful when dealing with large amounts of data or complex loading.
@@ -269,7 +270,7 @@ When the amount of data being loaded is too much to fit into memory, there are a
 
 . Batch the import into sections with `CALL { ... } IN TRANSACTIONS`.
 +
-This suquery can be added after the `LOAD CSV` clause to tell Cypher to only process so many rows of the file before clearing memory and transaction state.
+This subquery can be added after the `LOAD CSV` clause to tell Cypher to only process so many rows of the file before clearing memory and transaction state.
 For more information, see https://neo4j.com/docs/cypher-manual/current/clauses/call-subquery/#subquery-call-in-transactions[Cypher Manual -> Subqueries^].
 +
 .Example
