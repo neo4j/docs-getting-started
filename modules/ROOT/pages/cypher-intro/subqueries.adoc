@@ -13,14 +13,15 @@
 [[recap]]
 == Recap our example graph
 
-All of our code examples will continue with the graph example we have been using before, but include some more data for the queries on this page.
+All of our code examples will continue with one of the graph examples we have been using before, but include some more data for the queries on this page.
 Below is an image of the new graph, a network of people, the companies they work for, and the technologies they like.
 
-We have added one more `Person` node (blue) who `WORKS_FOR` a `Company` node (red) and `LIKES` a `Technology` (green) node.
+We have added one more `Person` node (blue) who `WORKS_FOR` a `Company` node (red) and `LIKES` a `Technology` (green) node: *Ryan* works for _Company Z_ and likes *Python*.
+You can find this data on the right hand side of the graph.
 
 To recap, each person could also have multiple `IS_FRIENDS_WITH` relationships to other people.
 
-.Network of people, companies they work for, and technologies they like
+.Network of people, the companies they work for, and the technologies they like
 image::people-technologies-graph-arr1.svg[role="popup-link"]
 
 [[cypher-filtering]]
