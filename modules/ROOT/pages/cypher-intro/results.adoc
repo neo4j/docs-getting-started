@@ -1,6 +1,13 @@
 [[cypher-intro-results]]
 = Getting the correct results
 :description: This section describes how to manipulate the output of Cypher queries in order to get the results you are looking for.
+:page-ad-overline-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
+:page-ad-overline: Neo4j GraphAcademy
+:page-ad-title: Cypher Fundamentals
+:page-ad-description: Learn Cypher in this free, hands-on course
+:page-ad-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
+:page-ad-underline-role: button
+:page-ad-underline: Learn more
 
 [[cypher-intro-results-example-graph]]
 == Example graphes

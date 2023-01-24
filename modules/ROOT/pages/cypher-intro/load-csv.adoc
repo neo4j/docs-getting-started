@@ -1,4 +1,12 @@
 :description: This tutorial demonstrates how to import data from CSV files using `LOAD CSV`.
+:page-ad-overline-link: https://graphacademy.neo4j.com/?ref=guides
+:page-ad-overline: Neo4j GraphAcademy
+:page-ad-title: Importing CSV Data into Neo4j
+:page-ad-description: Learn how to import data into Neo4j in this free, hands-on course
+:page-ad-link: https://graphacademy.neo4j.com/courses/importing-data/
+:page-ad-underline-role: button
+:page-ad-underline: Learn more
+
 [[cypher-intro-load-csv]]
 = Tutorial: Import data
 
