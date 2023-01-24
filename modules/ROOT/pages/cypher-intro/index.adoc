@@ -2,6 +2,13 @@
 [[cypher-intro]]
 = Introduction to Cypher
 :description: A high-level overview of the graph query language Cypher.
+:page-ad-overline-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
+:page-ad-overline: Neo4j GraphAcademy
+:page-ad-title: Cypher Fundamentals
+:page-ad-description: Learn Cypher in this free, hands-on course
+:page-ad-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
+:page-ad-underline-role: button
+:page-ad-underline: Learn more
 
 This section introduces you to the graph query language -- Cypher.
 It aims to help you start thinking about graphs and patterns, apply this knowledge to simple problems, and learn how to write Cypher statements.
