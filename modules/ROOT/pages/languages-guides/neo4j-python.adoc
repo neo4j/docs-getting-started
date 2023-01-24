@@ -1,5 +1,4 @@
 = Using Neo4j from Python
-:python-driver-version: 5.4.0
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
 :examples: https://github.com/neo4j-examples
 :programming-language: python
