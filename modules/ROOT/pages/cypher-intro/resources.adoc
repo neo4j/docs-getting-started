@@ -3,11 +3,11 @@
 :author: Jennifer Reif
 :category: cypher
 :tags: cypher, queries, graph-queries, resources, documentation, cypher-training, cypher-help
-:page-ad-overline-link: https://graphacademy.neo4j.com/?ref=guides
+:page-ad-overline-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
 :page-ad-overline: Neo4j GraphAcademy
 :page-ad-title: Cypher Fundamentals
 :page-ad-description: Learn Cypher in this free, hands-on course
-:page-ad-link: https://graphacademy.neo4j.com/?ref=guides
+:page-ad-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
 :page-ad-underline-role: button
 :page-ad-underline: Learn more
 
