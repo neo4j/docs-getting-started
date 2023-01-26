@@ -28,13 +28,22 @@ You can create this dataset using the following Cypher query:
 
 [source,cypher]
 ----
-CREATE (diana:Person {name: "Diana"})-[:LIKES]->(q:Technology {type: "Query Languages"})<-[:LIKES]-(m:Person {name: "Melissa", twitter: "@melissa"})-[:LIKES]->(:Technology {type: "Data ETL"})<-[:LIKES]-(a:Person {name: "Dan", twitter: "@dan", yearsExperience: 6})-[:LIKES]->(:Technology {type: "Integrations"})<-[:LIKES]-(s:Person {name: "Sally", yearsExperience: 4})<-[:IS_FRIENDS_WITH]-(j:Person {name: "John", yearsExperience: 5, birthdate: "1985-04-04"})<-[:IS_FRIENDS_WITH]-(e:Person {name: "Jennifer", twitter: "@jennifer", yearsExperience: 5, birthdate: "1988-01-01"})-[:LIKES]->(:Technology {type: "Java"})<-[:LIKES]-(j)-[:WORKS_FOR]->(:Company {name: "XYZ"})<-[:WORKS_FOR]-(s)<-[:IS_FRIENDS_WITH]-(e)-[:IS_FRIENDS_WITH]->(m)
-CREATE (:Company {name: "Company X"})<-[:WORKS_FOR]-(d)<-[:IS_FRIENDS_WITH]-(o:Person {name: "Joe", birthdate: "1988-08-08"})-[:IS_FRIENDS_WITH]->(r:Person {name: "Mark", twitter: "@mark"})-[:LIKES]->(gr:Technology {type: "Graphs"})<-[:LIKES]-(e)-[:WORKS_FOR]->(:Company {name: "Neo4j"})
-CREATE (an:Person {name: "Ann"})<-[:IS_FRIENDS_WITH]-(e)-[:IS_FRIENDS_WITH]->(r)
-CREATE (j)-[:LIKES]->(:Technology {type: "Application Development"})<-[:LIKES]-(an)-[:IS_FRIENDS_WITH]->(a)-[:WORKS_FOR]->(c:Company {name: "ABC"})
-CREATE (an)-[:WORKS_FOR]->(c)
-CREATE (:Company {name: "Company A"})<-[:WORKS_FOR]-(m)-[:LIKES]->(gr)<-[:LIKES]-(d)
-CREATE (o)-[:LIKES]->(q)
+CREATE (diana:Person {name: "Diana"})-[:LIKES]->(query:Technology {type: "Query Languages"})
+CREATE (melissa:Person {name: "Melissa", twitter: "@melissa"})-[:LIKES]->(query)
+CREATE (dan:Person {name: "Dan", twitter: "@dan", yearsExperience: 6})-[:LIKES]->(etl:Technology {type: "Data ETL"})<-[:LIKES]-(melissa)
+CREATE (xyz:Company {name: "XYZ"})<-[:WORKS_FOR]-(sally:Person {name: "Sally", yearsExperience: 4})-[:LIKES]->(integrations:Technology {type: "Integrations"})<-[:LIKES]-(dan)
+CREATE (sally)<-[:IS_FRIENDS_WITH]-(john:Person {name: "John", yearsExperience: 5, birthdate: "1985-04-04"})-[:LIKES]->(java:Technology {type: "Java"})
+CREATE (john)<-[:IS_FRIENDS_WITH]-(jennifer:Person {name: "Jennifer", twitter: "@jennifer", yearsExperience: 5, birthdate: "1988-01-01"})-[:LIKES]->(java)
+CREATE (john)-[:WORKS_FOR]->(xyz)
+CREATE (sally)<-[:IS_FRIENDS_WITH]-(jennifer)-[:IS_FRIENDS_WITH]->(melissa)
+CREATE (joe:Person {name: "Joe", birthdate: "1988-08-08"})-[:LIKES]->(query)
+CREATE (mark:Person {name: "Mark", twitter: "@mark"})
+CREATE (ann:Person {name: "Ann"})
+CREATE (x:Company {name: "Company X"})<-[:WORKS_FOR]-(diana)<-[:IS_FRIENDS_WITH]-(joe)-[:IS_FRIENDS_WITH]->(mark)-[:LIKES]->(graphs:Technology {type: "Graphs"})<-[:LIKES]-(jennifer)-[:WORKS_FOR]->(:Company {name: "Neo4j"})
+CREATE (ann)<-[:IS_FRIENDS_WITH]-(jennifer)-[:IS_FRIENDS_WITH]->(mark)
+CREATE (john)-[:LIKES]->(:Technology {type: "Application Development"})<-[:LIKES]-(ann)-[:IS_FRIENDS_WITH]->(dan)-[:WORKS_FOR]->(abc:Company {name: "ABC"})
+CREATE (ann)-[:WORKS_FOR]->(abc)
+CREATE (a:Company {name: "Company A"})<-[:WORKS_FOR]-(melissa)-[:LIKES]->(graphs)<-[:LIKES]-(diana)
 CREATE (:Technology {type: "Python"})<-[:LIKES]-(:Person {name: "Ryan"})-[:WORKS_FOR]->(:Company {name: "Company Z"})
 ----
 
@@ -225,7 +234,7 @@ If you run that query, you will get the following output:
 | "John"     | 1985-04-04
 |===
 
-This approach works, but it's more difficult to write, and you have to keep passing through parts of state to the next part of the query.
+This approach works, but it's more difficult to write, as you have to keep passing through parts of the query to its next part.
 
 The https://neo4j.com/docs/cypher-manual/current/clauses/call-subquery/index.html[`CALL {...}`^] clause gives you the best of both worlds:
 
