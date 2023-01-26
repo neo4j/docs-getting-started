@@ -50,7 +50,7 @@ You will find the implementations for all drivers as https://github.com/neo4j-ex
 
 The Neo4j Java driver is *officially supported* by Neo4j and connects to the database using the binary protocol.
 It aims to be minimal, while being idiomatic to Java.
-We support Java 8 and 11 for the driver.
+We support Java 17 for the 5.x driver series.
 
 When using Maven, add this to your _pom.xml_ file:
 
