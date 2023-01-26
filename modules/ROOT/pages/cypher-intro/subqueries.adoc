@@ -1,12 +1,12 @@
 [[neo4j-subqueries]]
-= Subqueries
+= Subqueries in Cypher
 :tags: cypher, queries, graph-queries, subqueries, compare-queries
 :description: Building on the previous Cypher guides, this guide shows how to write subqueries.
-:page-ad-overline-link: https://graphacademy.neo4j.com/?ref=guides
+:page-ad-overline-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
 :page-ad-overline: Neo4j GraphAcademy
 :page-ad-title: Cypher Fundamentals
 :page-ad-description: Learn Cypher in this free, hands-on course
-:page-ad-link: https://graphacademy.neo4j.com/?ref=guides
+:page-ad-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
 :page-ad-underline-role: button
 :page-ad-underline: Learn more
 
@@ -23,6 +23,20 @@ To recap, each person could also have multiple `IS_FRIENDS_WITH` relationships t
 
 .Network of people, the companies they work for, and the technologies they like
 image::people-technologies-graph-arr1.svg[role="popup-link"]
+
+You can create this dataset using the following Cypher query:
+
+[source,cypher]
+----
+CREATE (diana:Person {name: "Diana"})-[:LIKES]->(q:Technology {type: "Query Languages"})<-[:LIKES]-(m:Person {name: "Melissa", twitter: "@melissa"})-[:LIKES]->(:Technology {type: "Data ETL"})<-[:LIKES]-(a:Person {name: "Dan", twitter: "@dan", yearsExperience: 6})-[:LIKES]->(:Technology {type: "Integrations"})<-[:LIKES]-(s:Person {name: "Sally", yearsExperience: 4})<-[:IS_FRIENDS_WITH]-(j:Person {name: "John", yearsExperience: 5, birthdate: "1985-04-04"})<-[:IS_FRIENDS_WITH]-(e:Person {name: "Jennifer", twitter: "@jennifer", yearsExperience: 5, birthdate: "1988-01-01"})-[:LIKES]->(:Technology {type: "Java"})<-[:LIKES]-(j)-[:WORKS_FOR]->(:Company {name: "XYZ"})<-[:WORKS_FOR]-(s)<-[:IS_FRIENDS_WITH]-(e)-[:IS_FRIENDS_WITH]->(m)
+CREATE (:Company {name: "Company X"})<-[:WORKS_FOR]-(d)<-[:IS_FRIENDS_WITH]-(o:Person {name: "Joe", birthdate: "1988-08-08"})-[:IS_FRIENDS_WITH]->(r:Person {name: "Mark", twitter: "@mark"})-[:LIKES]->(gr:Technology {type: "Graphs"})<-[:LIKES]-(e)-[:WORKS_FOR]->(:Company {name: "Neo4j"})
+CREATE (an:Person {name: "Ann"})<-[:IS_FRIENDS_WITH]-(e)-[:IS_FRIENDS_WITH]->(r)
+CREATE (j)-[:LIKES]->(:Technology {type: "Application Development"})<-[:LIKES]-(an)-[:IS_FRIENDS_WITH]->(a)-[:WORKS_FOR]->(c:Company {name: "ABC"})
+CREATE (an)-[:WORKS_FOR]->(c)
+CREATE (:Company {name: "Company A"})<-[:WORKS_FOR]-(m)-[:LIKES]->(gr)<-[:LIKES]-(d)
+CREATE (o)-[:LIKES]->(q)
+CREATE (:Technology {type: "Python"})<-[:LIKES]-(:Person {name: "Ryan"})-[:WORKS_FOR]->(:Company {name: "Company Z"})
+----
 
 [[cypher-filtering]]
 == An introduction to subqueries
