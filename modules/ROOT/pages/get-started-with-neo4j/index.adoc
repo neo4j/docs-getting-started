@@ -1,11 +1,11 @@
 [[get-started-with-neo4j]]
 = Get started with Neo4j
 :description: This section gives an orientation on how to get started with Neo4j.
-:page-ad-overline-link: https://graphacademy.neo4j.com/categories/beginners/
+:page-ad-overline-link: https://graphacademy.neo4j.com/categories/beginners/?ref=docs
 :page-ad-overline: Neo4j GraphAcademy
 :page-ad-title: Neo4j Beginners Courses
 :page-ad-description: Learn more about graph database concepts and Cypher in these free, hands-on courses
-:page-ad-link: https://graphacademy.neo4j.com/categories/beginners/
+:page-ad-link: https://graphacademy.neo4j.com/categories/beginners/?ref=docs
 :page-ad-underline-role: button
 :page-ad-underline: Learn more
 
