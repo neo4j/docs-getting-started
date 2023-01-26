@@ -1,6 +1,13 @@
 [[data-modeling]]
 = Data modeling
 :description: graph-modeling, data-model, schema, create-model, translate-model, model-performance, model-example
+:page-ad-overline-link: https://graphacademy.neo4j.com/courses/modeling-fundamentals/
+:page-ad-overline: Neo4j GraphAcademy
+:page-ad-title: Graph Data Modeling Fundamentals
+:page-ad-description: Learn how to design a Neo4j graph using best practices
+:page-ad-link: https://graphacademy.neo4j.com/courses/modeling-fundamentals/
+:page-ad-underline-role: button
+:page-ad-underline: Learn more
 
 [#graph-modeling]
 This section is designed to give you the tools you need to design and implement an efficient and flexible graph database technology through a good graph data model. +
