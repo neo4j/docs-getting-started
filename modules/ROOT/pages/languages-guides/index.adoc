@@ -10,6 +10,7 @@
 :page-ad-underline-role: button
 :page-ad-underline: Start on AuraDB
 
+
 [#neo4j-app-dev]
 == Neo4j language guides
 This section is designed to provide detailed examples of how to integrate Neo4j with your preferred programming language.
@@ -19,6 +20,18 @@ In this section, we provide an introduction and a consistent example application
 
 You should be familiar with xref:appendix/graphdb-concepts/index.adoc[graph database concepts] and the property graph model.
 You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or link:/download/[installed Neo4j locally].
+
+[#graphacademy]
+== Learn with GraphAcademy
+
+We have a range of link:https://graphacademy.neo4j.com/categories/developer/?ref=guides[Neo4j Developer courses^] that teach you to build connect to Neo4j using each of our officially supported Drivers.
+
+link:https://graphacademy.neo4j.com/courses/app-java/?ref=guides[image:https://graphacademy.neo4j.com/courses/app-java/badge/[Building Neo4j Applications with Java, width=120]^]
+link:https://graphacademy.neo4j.com/courses/app-nodejs/?ref=guides[image:https://graphacademy.neo4j.com/courses/app-nodejs/badge/[Building Neo4j Applications with Node.js, width=120]^]
+link:https://graphacademy.neo4j.com/courses/app-python/?ref=guides[image:https://graphacademy.neo4j.com/courses/app-python/badge/[Building Neo4j Applications with Python, width=120]^]
+link:https://graphacademy.neo4j.com/courses/app-dotnet/?ref=guides[image:https://graphacademy.neo4j.com/courses/app-dotnet/badge/[Building Neo4j Applications with .NET, width=120]^]
+link:https://graphacademy.neo4j.com/courses/app-go/?ref=guides[image:https://graphacademy.neo4j.com/courses/app-go/badge/[Building Neo4j Applications with Go, width=120]^]
+
 
 
 [#connect-neo4j]
