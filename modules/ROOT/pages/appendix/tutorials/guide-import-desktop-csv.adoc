@@ -2,153 +2,132 @@
 = How-To: Import CSV data with Neo4j Desktop
 :tags: data-import, import-csv, graph-import, desktop, load-csv, cypher
 :description: You will learn how to import data from CSV files to a Neo4j graph database using the Neo4j Desktop application. This tutorial is designed for you to follow along and step through the process.
-:page-pagination:
 
 
-[#about-desktop-import]
-== Neo4j Desktop import
+[[about-desktop-import]]
+== Introduction
 
-Neo4j Desktop provides a user-friendly interface for starting and creating Neo4j instances, adding or removing plugins, changing configurations, and other functionality.
+Neo4j Desktop provides a user-friendly interface for creating and starting Neo4j instances, adding or removing plugins, changing configurations, and other functionality.
 It also includes some shortcuts and easy access for importing files (such as CSVs) into Neo4j.
 
 In this guide, you will work with a zipped folder containing three CSV files and import the data to a graph with Neo4j Desktop.
 The CSV files contain data for products, orders, and order line items.
 You will look at the data in the files later in this guide.
 
-[#start-db]
-== 1. Creating and starting the Neo4j instance
+[[start-db]]
+== Creating and starting the Neo4j instance
 
-If you already know how to create a project, create a Neo4j instance (DBMS), and start the DBMS, you can skip to Step 2.
+[TIP]
+====
+If you already know how to create a Project in Neo4j Desktop, create a Neo4j instance (DBMS), and start the DBMS, you can skip to the next step: <<csv-location>>.
+====
 
+If you open Neo4j Desktop for the first time, you will see a *Neo4j Primer Project* with the _Movie Database_ already started.
+You can use this database if you want to begin learning about using Neo4j and Cypher.
 
-When you open Neo4j Desktop for the first time you will see a Neo4j Primer Project with the Movie Database already started as shown here:
+However, you can create your own Project which can contain one or more DBMSs.
 
-image::generic-first_open_desktop.png[role="popup-link"]
+Let's take a look on how to create a new Project, create and start a Neo4j instance in Neo4j Desktop.
 
-You can use this already-started DBMS if you want to begin learning about using Neo4j and Cypher.
-For your development, you typically create one or more projects where a project can contain one or more DBMSs.
+. You can only have a single DBMS running, so you must first stop the DBMS that is started by clicking the `Stop` button at the top bar.
+As the result, you can see that there is *No active DBMS*.
 
-Next, you will create a new project in Neo4j Desktop.
-You  can only have a single DBMS running, so you must first stop the DBMS that is started by clicking the *Stop* button:
+. To add a new project, go to the *Projects* drawer at the left sidebar by clicking the icon (image:neo4j-desktop-project-icon.png[width=30]).
+Then click `New` button in front of *Projects*. +
+This creates a project named *Project*.
 
-image::generic-stop_movie_database.png[role="popup-link"]
+. You can change the name of a project by hovering over the area to the right of its name and selecting the `Edit` button.
++
+image::generic-name_project.png[role="popup-link",650]
++
+Then you type a name for the project and select the `Check` button to save the name.
++
+image::generic-change_project_name.png[role="popup-link",650]
++
+. Next, you will create a local DBMS in a project.
+In the project where you want to add the DBMS, click the `Add` button on the right hand side, and then select *Local DBMS*. +
+This opens a dialog where you can specify the details of the DBMS.
 
-You should now see that there is no active DBMS:
-
-image::generic-movie_database_stopped.png[role="popup-link"]
-
-Add a new project by clicking *New* at the top of the sidebar:
-
-image::generic-create_project.png[role="popup-link"]
-
-This creates a project named *Project*:
-
-image::generic-project_created.png[role="popup-link"]
-
-You want your projects to be named something that describes the goal of the project.
-You can change the name of a project by hovering over the area to the right of the project name and selecting the *Edit* button:
-
-image::generic-name_project.png[role="popup-link"]
-
-Then you type a name for the project and select the "Check" button to save the name.
-
-image::generic-change_project_name.png[role="popup-link"]
-
-And here we see the project with the changed name:
-
-image::generic-project_named.png[role="popup-link"]
-
-
-
-In a Neo4j Desktop project, you can create one or more DBMSs.
-Next, you will create a local DBMS in a project and start it.
-
-In the project where you want to add the DBMS, click the *Add* button, and then select *Local DBMS*:
-
-image::generic-create_local_DBMS.png[role="popup-link"]
-
-This opens a dialog where you will specify the details of the DBMS.
-You can use the default name for the DBMS, which is Graph DBMS, but you should name it something that helps to identify the use case for the DBMS.
-Here we specify MyDBMS as the name:
-
-image::generic-name_DBMS.png[role="popup-link"]
-
-You [underline]#must# specify a password for the DBMS so enter a password that you will remember:
-
-image::generic-password_DBMS.png[role="popup-link"]
-
-Neo4j Desktop will create a DBMS with the default version for Neo4j Desktop.
+. Next step is to name your DBMS.
+You can use the default name for the DBMS, which is _Graph DBMS_, but it is recommended to rename it so that helps to identify the use case for the DBMS.
+For more details, see link:https://neo4j.com/docs/upgrade-migration-guide/current/version-4/migration/surface-changes/database/#_database_naming_rules[Upgrade and Migration Guide -> Database naming rules].
++
+Here we specify _MyDBMS_ as the name:
++
+image::generic-name_DBMS.png[role="popup-link",650]
++
+. You [underline]#must# specify a password for the DBMS, so enter a password that you will remember:
++
+image::generic-password_DBMS.png[role="popup-link",650]
++
+Starting with *Neo4j 5.3*, the initial password must be at least *eight characters* long. 
++
+. Neo4j Desktop will create a DBMS with the default version for Neo4j Desktop.
 However, you can select a different version.
-Keep in mind that if there is a down arrow shown next to the version, this means that Neo4j Desktop will need to download resources for that particular version of the DBMS. To do this you [underline]#must# be connected to the Internet:
-
-image::generic-version_DBMS.png[role="popup-link"]
-
-After you have specifed the details for the DBMS you want to create, you click the *Create* button:
-
-image::generic-create_DBMS.png[role="popup-link"]
-
+Keep in mind that if there is a down arrow shown next to the version, this means that Neo4j Desktop will need to download resources for that particular version of the DBMS. 
+To do this you [underline]#must# be connected to the Internet:
++
+image::generic-version_DBMS.png[role="popup-link",650]
++
+. After you have specifed the details for the DBMS you want to create, you click the `Create` button.
 And here is what you should see after the DBMS is successfully created:
-
++
 image::generic-DBMS_created.png[role="popup-link"]
-
-Recall that you cannot have more than one DBMS started.
-Provided you have no other DBMSs started in Neo4j Desktop, you can start your newly-created DBMS by hovering to the right of the DBMS name and clicking the *Start* button:
-
-image::generic-start_DBMS.png[role="popup-link"]
-
++
+. Recall that you cannot have more than one DBMS started.
+Provided you have no other DBMSs started in Neo4j Desktop, you can start your newly-created DBMS by hovering to the right of the DBMS name and clicking the `Start` button.
++
 The DBMS will take a few seconds to start. After it is started, you should see something like this:
-
++
 image::generic-DBMS_started.png[role="popup-link"]
 
 After the DBMS is started, you can access it with clients running on your system such as Neo4j Browser, Neo4j Bloom, etc.
 In Neo4j Desktop, the DBMS is an Enterprise Server, but it can only be accessed locally.
 
 
-[#csv-location]
-== 2. Putting CSV files in the import folder
+[[csv-location]]
+== Putting CSV files in the import folder
 
 First, download this https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/uploads/desktop-csv-import.zip[zip file^].
 Uncompress/unzip this file which should yield three CSV files for products, orders, and order details.
 You will put these files in the *import* folder that Neo4j expects for imports.
 
-Open a finder window on your system by hovering over the three dots to the right started DBMS and selecting *Open folder*, and then *Import*:
+You can open a finder window in Neo4j Desktop by hovering over the three dots to the right started DBMS and selecting *Open folder*, and then *Import*:
 
 image::generic-open_import_folder.png[role="popup-link"]
 
-Copy or move the three CSV files into this *import* folder on your system:
-
-image::developer-desktop-csv-import-files_for_import.png[role="popup-link"]
+Another option is to copy or move the three CSV files into the *import directory* on your system.
+For more information on Neo4j file locations, see https://neo4j.com/docs/operations-manual/5/configuration/file-locations/[Operations Manual -> Default file locations].
 
 Now that your files are in the *import* folder, you can import the data into the database managed by the DBMS.
 You will use the current table and column format in the CSV files and translate it into nodes and relationships.
 This can be done a few different ways, but you will use Cypher's `LOAD CSV` command in this guide.
 
-[#loadcsv-desktop]
+[[loadcsv-desktop]]
 == LOAD CSV
 
-`LOAD CSV` is a built-in command in Cypher that allows you to read CSV files and append regular Cypher statements to create or update the data as a graph.
+`LOAD CSV` is a built-in command in Cypher that allows you to read CSV files and append regular Cypher queries to create or update the data as a graph.
 You can also use `LOAD CSV` without creating the graph to output samples, counts, or distributions.
 This helps to detect incorrect header column counts, delimiters, quotes, escapes, or spelling of header names before the data is written and stored.
 
-To enter and run Cypher statements on a started DBMS, you can:
+To enter and run Cypher queries on a started DBMS, you can:
 
-. Use Neo4j Browser:
-.. Click the *Open* button for the started DBMS
-.. Type or copy Cypher statements into the edit pane.
+. Use link:https://neo4j.com/docs/browser-manual/current/[Neo4j Browser]:
+.. Click the `Open` button for the started DBMS
+.. Type or copy Cypher queries into the edit pane at the top (link:https://neo4j.com/docs/browser-manual/current/visual-tour/#editor[Cypher editor]).
 .. Execute the Cypher with the `play` button on the right.
-. Use cypher-shell:
-.. Click the drop-down menu to the right of the *Open* button and select *Terminal*.
+. Use link:https://neo4j.com/docs/operations-manual/current/tools/cypher-shell/[Cypher Shell]:
+.. Click the drop-down menu to the right of the `Open` button and select *Terminal*.
 
-image::generic-open_terminal.png[role="popup-link",float=center,width=500]
+To use Cypher Shell:
 
-[start=b]
-.. Enter `bin/cypher-shell`.
-.. Enter *neo4j* for the user.
-.. Enter the password you specified for the DBMS.
-.. All Cypher statements must end with ";" in Cypher Shell.
-.. Use `:exit` to quit.
+. Enter `bin/cypher-shell`.
+. Enter *neo4j* for the user.
+. Enter the password you specified for the DBMS.
+. All Cypher queries must end with semicolon `;` in Cypher Shell.
+. Use `:exit` to quit.
 
-In Step 2, you downloaded the *.zip* file and copied its CSV files to the *import* folder for the DBMS.
+Earlier you downloaded the *.zip* file and copied its CSV files to the *import* folder for the DBMS.
 Before you insert anything into your graph database, you should inspect the data in the files a bit.
 To do this, you can use the `LOAD CSV` statement.
 If you opened the files previously, you may have noticed that two of the files have headers and one does not (*products.csv*).
@@ -157,7 +136,7 @@ Let us see how to inspect each type of file.
 First, you can check how many lines are in the CSV files to ensure they didn't get corrupted or cut off from a potential export process.
 For the files with headers, you simply add the `WITH HEADERS` clause after `LOAD CSV`, so that it excludes the header row in the count and only counts the rows of data.
 
-You should execute this Cypher:
+You should run this Cypher:
 
 [source, cypher]
 ----
@@ -186,7 +165,7 @@ Running these statements should return the following counts:
 * 830 rows for *orders.csv*
 * 2155 rows for *order-details.csv*
 
-[#inspect-files]
+[[inspect-files]]
 == View data with `LOAD CSV`
 
 Next, you can take a look at what the data looks like in the CSV files and how `LOAD CSV` sees it.
@@ -313,7 +292,7 @@ Notice that the *orders.csv* and the *order-details.csv* return in a different f
 This is because those files have headers, so the column names are returned with the values for those rows.
 Since the *products.csv* does not have column names, then `LOAD CSV` just returns the plain data row from the file.
 
-[#filtering-load]
+[[filtering-load]]
 == Filtering what you load with `LOAD CSV`
 
 After inspecting the data, you may only want to view or load a subset of the data in the CSV file.
@@ -361,7 +340,7 @@ Your results should look something like this:
  }
 |===
 
-[#data-types]
+[[data-types]]
 == Data types
 
 The `LOAD CSV` command reads all values as a string.
@@ -371,9 +350,9 @@ So, before you import, you want to ensure you convert any values that are non-st
 There are a variety of conversion functions in Cypher.
 The ones you will use for this exercise are as follows:
 
-* *toInteger():* converts a value to an integer.
-* *toFloat():* converts a value to a float (in this case, for monetary amounts).
-* *datetime():* converts a value to a datetime.
+* `*toInteger()*`: converts a value to an integer.
+* `*toFloat()*`: converts a value to a float (in this case, for monetary amounts).
+* `*datetime()*`: converts a value to a datetime.
 
 We look at the values in each CSV file to determine what needs to be converted.
 
@@ -480,7 +459,7 @@ productId:orderId:quantityOrdered
 65:10250:15
 |===
 
-[#loading-data]
+[[loading-data]]
 == Loading the data
 
 Now that you have determined that the CSV file data looks good, and you have verified how `LOAD CSV` sees the data and converted any non-string values, you are almost ready to create the data in our graph database!
@@ -519,27 +498,27 @@ There are cases for applying indexes to a database before any data and with exis
 In this exercise, you will add two constraints before you create any data - one for `productId` and one for `orderId`.
 This will ensure that, when you create a new node of each of those types or a relationship to connect them, you know the entities are unique and indexed.
 
-Below is the Cypher for adding indexes.
+Below is the Cypher for adding constraints:
 
 [source, cypher]
 ----
-CREATE CONSTRAINT UniqueProduct ON (p:Product) ASSERT p.id IS UNIQUE;
-CREATE CONSTRAINT UniqueOrder ON (o:Order) ASSERT o.id IS UNIQUE;
+CREATE CONSTRAINT UniqueProduct FOR (p:Product) REQUIRE p.id IS UNIQUE;
+CREATE CONSTRAINT UniqueOrder FOR (o:Order) REQUIRE o.id IS UNIQUE;
 ----
 
 [[write-statements]]
 == Cypher queries
 
 Now you are ready to write the Cypher for creating the data in the graph.
-You could use `CREATE` statements where you are sure that you will not have duplicate rows in your CSV file and use `MATCH` to find existing data for updates.
-However, since it is hard to completely scrub all data and import perfectly clean data from any source, you will use `MERGE` statements to check if the data exists before inserting.
+You could use `CREATE` clause where you are sure that you will not have duplicate rows in your CSV file and use `MATCH` to find existing data for updates.
+However, since it is hard to completely scrub all data and import perfectly clean data from any source, you will use `MERGE` clause to check if the data exists before inserting.
 If the node or relationship exists, Cypher will match and return (without any writes), but if it does not exist, Cypher will insert it.
 Using `MERGE` can have some performance overhead, but often it is the better approach to maintain high data integrity.
 
 [NOTE]
 ====
-*Why both constraints and MERGE?*
-Using constraints is different from using MERGE.
+*Why both constraints and `MERGE`?*
+Using constraints is different from using `MERGE`.
 Statements that create data in violation of the constraint will error, while statements that use `MERGE` will simply return existing values (no errors).
 If you use both, you avoid terminating your load statements due to constraint violations, and you also ensure you don't accidentally create duplicates in adhoc queries.
 ====
@@ -576,8 +555,8 @@ image::developer-desktop-csv-import-verify_products.png[role="popup-link"]
 
 .Orders
 Next, you will load the orders.
-Again, since you want to verify you do not create duplicate `Order` nodes, you can use the `MERGE` statement.
-Just as with products, you start with the `LOAD CSV` command, then add Cypher statements and include your data conversions.
+Again, since you want to verify you do not create duplicate `Order` nodes, you can use the `MERGE` clause.
+Just as with products, you start with the `LOAD CSV` command, then add Cypher queries and include your data conversions.
 
 [source, cypher]
 ----
@@ -608,7 +587,7 @@ Then, the `MERGE` statement will add the new relationship or match an existing o
 
 As you found when you ran a count on the _order-details_ file above, there are 2,155 rows in the CSV.
 While this is not a huge number for file imports, you will have Cypher commit the data to the database in batches to reduce the memory overhead of the transaction state.
-For this, you can use the subquery `CALL {} IN TRANSACTIONS` after the `LOAD CSV` clause.
+For this, you can use the subquery `CALL {...} IN TRANSACTIONS` after the `LOAD CSV` clause.
 The number of input rows is set with the modifier `OF n ROWS` (or `ROW`).
 If omitted, the default batch size is 1000 rows.
 For this exercise, you will ask Cypher to commit every *500 rows*.
@@ -625,9 +604,9 @@ CALL {
 } IN TRANSACTIONS OF 500 ROWS
 ----
 
-[NOTE]
+[IMPORTANT]
 ====
-In Neo4j Browser, don't forget to prepend the preceding Cypher statement with `:auto`.
+In Neo4j Browser, don't forget to prepend the preceding Cypher query with `:auto`.
 ====
 
 Just as you did above, you can validate the data with the query below.
@@ -642,16 +621,16 @@ Here are the results in Neo4j Browser:
 
 image::developer-desktop-csv-import-verify_details.png[role="popup-link"]
 
-[#import-wrapup]
+[[import-wrapup]]
 == Wrapping up
 
 You have successfully loaded three CSV files into a Neo4j graph database using Neo4j Desktop!
 
 The `LOAD CSV` functionality, coupled with Cypher, is exceptionally useful for getting data from files into a graph structure.
 The best way to advance your skills in this area is to load a variety of files for various data sets and models.
-Practice makes perfect!
 
 .Increasing the challenge
 If you work through this exercise again at a later time, feel free to increase the challenge by coming up with your own data model for these files or try to load some other CSV files to a graph.
 
-If you have any questions or need assistance using `LOAD CSV`, reach out to us on the https://community.neo4j.com/[Community Site^]!
+If you have any questions or need assistance using `LOAD CSV`, reach out to us on the https://community.neo4j.com/[Community Site^].
+
