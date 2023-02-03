@@ -22,8 +22,8 @@ The following query creates this constraint:
 
 [source,cypher]
 ----
-CREATE CONSTRAINT ON (airport:Airport)
-ASSERT airport.code IS UNIQUE
+CREATE CONSTRAINT airport_id
+FOR (airport:Airport) REQUIRE airport.code IS UNIQUE
 ----
 
 .Results
@@ -258,8 +258,8 @@ Let's first create a constraint on the `Airline` label and `name` property so th
 
 [source,cypher]
 ----
-CREATE CONSTRAINT ON (airline:Airline)
-ASSERT airline.name IS UNIQUE
+CREATE CONSTRAINT airline_id
+FOR (airline:Airline) REQUIRE airline.name IS UNIQUE
 ----
 
 .Results
