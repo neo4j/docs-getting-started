@@ -2,17 +2,20 @@
 = Tutorial: Import data from a relational database into Neo4j
 :tags: data-import, graph-import, northwind-graph, relational-graph, load-csv
 :description: This tutorial shows the process for exporting data from a relational database (PostgreSQL) and importing into a graph database (Neo4j). You will learn how to take data from the relational system and to the graph by translating the schema and using import tools.
+:aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
 :page-pagination:
 :github: 'https://github.com/neo4j-contrib/developer-resources/tree/gh-pages'
 
-[abstract]
-{description}
+== Introduction
 
+This tutorial shows the process for exporting data from a relational database (PostgreSQL) and importing into a graph database (Neo4j).
+You will learn how to take data from the relational system and to the graph by translating the schema and using import tools.
 
 Alternatively, you can:
 
-* start a blank link:https://neo4j.com/sandbox/?ref=guide-importing-data-and-etl[Neo4j Sandbox^]
-* download and install link:https://neo4j.com/docs/desktop-manual/current/[Neo4j Desktop].
+* Create link:{aura_signup}[AuraDB cloud instance].
+* Start a blank link:https://neo4j.com/sandbox/?ref=guide-importing-data-and-etl[Neo4j Sandbox^].
+* Download and install link:https://neo4j.com/docs/desktop-manual/current/[Neo4j Desktop].
 
 
 This guide uses a specific dataset, but its principles can be applied and reused with any data domain.
@@ -337,12 +340,13 @@ c
 
 
 [NOTE]
---
+====
 For very large commercial or enterprise datasets, you may find out-of-memory errors, especially on smaller machines.
-To avoid these situations, you can prefix the statement with the `:auto USING PERIODIC COMMIT` query hint to commit data in batches.
+To avoid these situations, you can use `CALL IN {...} TRANSACTIONS` subquery to commit data in batches.
+Don't forget to prepend this query with `:auto` in Neo4j Browser.
 This practice is not standard recommendation for smaller datasets, but is only recommended when memory issues are threatened.
-More information on this query hint can be found in the https://neo4j.com/docs/cypher-manual/current/query-tuning/using/#query-using-periodic-commit-hint[Cypher manual^].
---
+More information on this subquery can be found in the link:https://neo4j.com/docs/cypher-manual/current/clauses/call-subquery/#subquery-call-in-transactions[Cypher manual -> Subqueries in transactions].
+====
 
 
 == Creating the indexes and constraints for the data in the graph
@@ -363,7 +367,7 @@ CREATE INDEX product_name FOR (p:Product) ON (p.productName);
 CREATE INDEX supplier_id FOR (s:Supplier) ON (s.supplierID);
 CREATE INDEX employee_id FOR (e:Employee) ON (e.employeeID);
 CREATE INDEX category_id FOR (c:Category) ON (c.categoryID);
-CREATE CONSTRAINT order_id ON (o:Order) ASSERT o.orderID IS UNIQUE;
+CREATE CONSTRAINT order_id FOR (o:Order) REQUIRE o.orderID IS UNIQUE;
 CALL db.awaitIndexes();
 ----
 
