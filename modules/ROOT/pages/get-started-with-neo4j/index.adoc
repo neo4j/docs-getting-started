@@ -78,7 +78,6 @@ You can also find comprehensive descriptions of Neo4j clustering here.
 * **Cypher Query Language** -- Docsets for Neo4j graph query language:
 ** link:https://neo4j.com/docs/cypher-manual/current/[The Neo4j Cypher Manual] -- the comprehensive manual for Cypher for the developers of a Neo4j client application.
 ** link:https://neo4j.com/docs/cypher-cheat-sheet/current/[Cypher Cheat Sheet] -- a printable set of notes for a quick overview of Cypher syntax basics.
-** link:https://neo4j.com/docs/cypher-refcard/current/[Neo4j Cypher Refcard] -- a quick reference guide for Cypher language. 
 * link:https://neo4j.com/docs/drivers-apis/[**Neo4j Drivers and APIs**] -- Docsets for officially supported drivers, connectors, and APIs.
 ** link:https://neo4j.com/docs/go-manual/current/[The Neo4j Go Driver Manual]
 ** link:https://neo4j.com/docs/java-manual/current/[The Neo4j Java Driver Manual] 
