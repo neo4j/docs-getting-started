@@ -29,10 +29,10 @@ However, you can create your own Project which can contain one or more DBMSs.
 
 Let's take a look on how to create a new Project, create and start a Neo4j instance in Neo4j Desktop.
 
-. You can only have a single DBMS running, so you must first stop the DBMS that is started by clicking the `Stop` button at the top bar.
+. You can only have a single DBMS running, so you must first stop the DBMS that is started by clicking the `Stop` button on the top bar.
 As the result, you can see that there is *No active DBMS*.
 
-. To add a new project, go to the *Projects* drawer at the left sidebar by clicking the icon (image:neo4j-desktop-project-icon.png[width=30]).
+. To add a new project, go to the *Projects* drawer on the left sidebar by clicking the icon (image:neo4j-desktop-project-icon.png[width=30]).
 Then click `New` button in front of *Projects*. +
 This creates a project named *Project*.
 
@@ -40,13 +40,13 @@ This creates a project named *Project*.
 +
 image::generic-name_project.png[role="popup-link",650]
 +
-Then you type a name for the project and select the `Check` button to save the name.
+Type a name for the project and select the `Check` button to save it.
 +
 image::generic-change_project_name.png[role="popup-link",650]
 +
 . Next, you will create a local DBMS in a project.
 In the project where you want to add the DBMS, click the `Add` button on the right hand side, and then select *Local DBMS*. +
-This opens a dialog where you can specify the details of the DBMS.
+This opens a dialog box where you can specify the details of the DBMS.
 
 . Next step is to name your DBMS.
 You can use the default name for the DBMS, which is _Graph DBMS_, but it is recommended to rename it so that helps to identify the use case for the DBMS.
@@ -69,19 +69,19 @@ To do this you [underline]#must# be connected to the Internet:
 +
 image::generic-version_DBMS.png[role="popup-link",650]
 +
-. After you have specifed the details for the DBMS you want to create, you click the `Create` button.
+. After specifying the details for the DBMS, click the `Create` button.
 And here is what you should see after the DBMS is successfully created:
 +
 image::generic-DBMS_created.png[role="popup-link"]
 +
 . Recall that you cannot have more than one DBMS started.
-Provided you have no other DBMSs started in Neo4j Desktop, you can start your newly-created DBMS by hovering to the right of the DBMS name and clicking the `Start` button.
+Provided that there is no other DBMS started in Neo4j Desktop, you can start your newly-created DBMS by hovering to the right of its name and clicking the `Start` button.
 +
 The DBMS will take a few seconds to start. After it is started, you should see something like this:
 +
 image::generic-DBMS_started.png[role="popup-link"]
 
-After the DBMS is started, you can access it with clients running on your system such as Neo4j Browser, Neo4j Bloom, etc.
+After the DBMS is started, you can access it with clients running on your system such as Neo4j Browser, Neo4j Bloom etc.
 In Neo4j Desktop, the DBMS is an Enterprise Server, but it can only be accessed locally.
 
 
@@ -101,7 +101,7 @@ For more information on Neo4j file locations, see https://neo4j.com/docs/operati
 
 Now that your files are in the *import* folder, you can import the data into the database managed by the DBMS.
 You will use the current table and column format in the CSV files and translate it into nodes and relationships.
-This can be done a few different ways, but you will use Cypher's `LOAD CSV` command in this guide.
+This can be done in a few different ways, but you will use Cypher's `LOAD CSV` command in this guide.
 
 [[loadcsv-desktop]]
 == LOAD CSV
@@ -113,7 +113,7 @@ This helps to detect incorrect header column counts, delimiters, quotes, escapes
 To enter and run Cypher queries on a started DBMS, you can:
 
 . Use link:https://neo4j.com/docs/browser-manual/current/[Neo4j Browser]:
-.. Click the `Open` button for the started DBMS
+.. Click the `Open` button for the started DBMS.
 .. Type or copy Cypher queries into the edit pane at the top (link:https://neo4j.com/docs/browser-manual/current/visual-tour/#editor[Cypher editor]).
 .. Execute the Cypher with the `play` button on the right.
 . Use link:https://neo4j.com/docs/operations-manual/current/tools/cypher-shell/[Cypher Shell]:
@@ -128,15 +128,15 @@ To use Cypher Shell:
 . Use `:exit` to quit.
 
 Earlier you downloaded the *.zip* file and copied its CSV files to the *import* folder for the DBMS.
-Before you insert anything into your graph database, you should inspect the data in the files a bit.
+Before you insert anything into your graph database, you should inspect the data in the files.
 To do this, you can use the `LOAD CSV` statement.
 If you opened the files previously, you may have noticed that two of the files have headers and one does not (*products.csv*).
 Let us see how to inspect each type of file.
 
-First, you can check how many lines are in the CSV files to ensure they didn't get corrupted or cut off from a potential export process.
-For the files with headers, you simply add the `WITH HEADERS` clause after `LOAD CSV`, so that it excludes the header row in the count and only counts the rows of data.
+First, check how many lines are in the CSV files to ensure they were not corrupted or cut off from a potential export process.
+For files with headers, you can add the `WITH HEADERS` clause after `LOAD CSV`, so that it excludes the header row in the count, and only counts the rows of data.
 
-You should run this Cypher:
+You should run this Cypher query:
 
 [source, cypher]
 ----
@@ -510,14 +510,14 @@ CREATE CONSTRAINT UniqueOrder FOR (o:Order) REQUIRE o.id IS UNIQUE;
 == Cypher queries
 
 Now you are ready to write the Cypher for creating the data in the graph.
-You could use `CREATE` clause where you are sure that you will not have duplicate rows in your CSV file and use `MATCH` to find existing data for updates.
-However, since it is hard to completely scrub all data and import perfectly clean data from any source, you will use `MERGE` clause to check if the data exists before inserting.
+You could use the `CREATE` clause where you are sure that you will not have duplicate rows in your CSV file and use `MATCH` to find existing data for updates.
+However, since it is hard to completely scrub all data and import perfectly clean data from any source, you will use the `MERGE` clause to check if the data exists before inserting.
 If the node or relationship exists, Cypher will match and return (without any writes), but if it does not exist, Cypher will insert it.
 Using `MERGE` can have some performance overhead, but often it is the better approach to maintain high data integrity.
 
 [NOTE]
 ====
-*Why both constraints and `MERGE`?*
+*Why use both constraints and `MERGE`:*
 Using constraints is different from using `MERGE`.
 Statements that create data in violation of the constraint will error, while statements that use `MERGE` will simply return existing values (no errors).
 If you use both, you avoid terminating your load statements due to constraint violations, and you also ensure you don't accidentally create duplicates in adhoc queries.
