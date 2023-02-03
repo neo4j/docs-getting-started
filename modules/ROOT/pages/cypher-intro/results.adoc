@@ -10,7 +10,7 @@
 :page-ad-underline: Learn more
 
 [[cypher-intro-results-example-graph]]
-== Example graphes
+== Example graphs
 
 In this section, two example datasets are used.
 The first graph is based on the Movie database.
