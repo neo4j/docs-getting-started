@@ -106,7 +106,7 @@ If necessary, you can also https://medium.com/neo4j/getting-certificates-for-neo
 | https://community.neo4j.com/c/drivers-stacks/NET[Neo4j Online Community^]
 
 | https://neo4j.com/docs/dotnet-manual/current/[icon:book[] Docs^]
-| link:/docs/api/dotnet-driver/current/[icon:code[] API]
+| link:https://neo4j.com/docs/dotnet-manual/current/[icon:code[] API]
 | http://github.com/neo4j/neo4j-dotnet-driver[icon:github[] Source]
 |===
 
