@@ -27,7 +27,7 @@ You can use this database if you want to begin learning about using Neo4j and Cy
 
 However, you can create your own Project which can contain one or more DBMSs.
 
-Let's take a look on how to create a new Project, create and start a Neo4j instance in Neo4j Desktop.
+Let's take a look on how to create a new Project, create, and start a Neo4j instance in Neo4j Desktop.
 
 . You can only have a single DBMS running, so you must first stop the DBMS that is started by clicking the `Stop` button on the top bar.
 As the result, you can see that there is *No active DBMS*.
@@ -36,7 +36,8 @@ As the result, you can see that there is *No active DBMS*.
 Then click `New` button in front of *Projects*. +
 This creates a project named *Project*.
 
-. You can change the name of a project by hovering over the area to the right of its name and selecting the `Edit` button.
+. To change the name of a project, hover its name and select the `Edit` button.
++
 +
 image::generic-name_project.png[role="popup-link",650]
 +
@@ -45,22 +46,25 @@ Type a name for the project and select the `Check` button to save it.
 image::generic-change_project_name.png[role="popup-link",650]
 +
 . Next, you will create a local DBMS in a project.
-In the project where you want to add the DBMS, click the `Add` button on the right hand side, and then select *Local DBMS*. +
+Click the `Add` button beside the name of the project where you want to add the DBMS and then select *Local DBMS*.
 This opens a dialog box where you can specify the details of the DBMS.
 
-. Next step is to name your DBMS.
+. Now you can name your DBMS.
 You can use the default name for the DBMS, which is _Graph DBMS_, but it is recommended to rename it so that helps to identify the use case for the DBMS.
 For more details, see link:https://neo4j.com/docs/upgrade-migration-guide/current/version-4/migration/surface-changes/database/#_database_naming_rules[Upgrade and Migration Guide -> Database naming rules].
 +
-Here we specify _MyDBMS_ as the name:
+Here _MyDBMS_ is specified as the name:
 +
 image::generic-name_DBMS.png[role="popup-link",650]
 +
-. You [underline]#must# specify a password for the DBMS, so enter a password that you will remember:
+. You [underline]#must# specify a password for the DBMS:
 +
 image::generic-password_DBMS.png[role="popup-link",650]
 +
+[NOTE]
+====
 Starting with *Neo4j 5.3*, the initial password must be at least *eight characters* long. 
+====
 +
 . Neo4j Desktop will create a DBMS with the default version for Neo4j Desktop.
 However, you can select a different version.
