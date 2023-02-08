@@ -51,7 +51,7 @@ This opens a dialog box where you can specify the details of the DBMS.
 
 . Now you can name your DBMS.
 You can use the default name for the DBMS, which is _Graph DBMS_, but it is recommended to rename it so that helps to identify the use case for the DBMS.
-For more details, see link:https://neo4j.com/docs/upgrade-migration-guide/current/version-4/migration/surface-changes/database/#_database_naming_rules[Upgrade and Migration Guide -> Database naming rules].
+For more details, see link:https://neo4j.com/docs/upgrade-migration-guide/current/version-4/migration/surface-changes/database/#_database_naming_rules[Upgrade and Migration Guide -> Database naming rules]. +
 +
 Here _MyDBMS_ is specified as the name:
 +
@@ -69,7 +69,7 @@ Starting with *Neo4j 5.3*, the initial password must be at least *eight characte
 . Neo4j Desktop will create a DBMS with the default version for Neo4j Desktop.
 However, you can select a different version.
 Keep in mind that if there is a down arrow shown next to the version, this means that Neo4j Desktop will need to download resources for that particular version of the DBMS. 
-To do this you [underline]#must# be connected to the Internet:
+To do this you [underline]#must# be connected to the Internet: +
 +
 image::generic-version_DBMS.png[role="popup-link",650]
 +
