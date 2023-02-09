@@ -78,7 +78,7 @@ And here is what you should see after the DBMS is successfully created:
 +
 image::generic-DBMS_created.png[role="popup-link"]
 +
-. Recall that you cannot have more than one DBMS started.
+. Keep in mind that you cannot have more than one DBMS started.
 Provided that there is no other DBMS started in Neo4j Desktop, you can start your newly-created DBMS by hovering to the right of its name and clicking the `Start` button.
 +
 The DBMS will take a few seconds to start. After it is started, you should see something like this:
@@ -122,25 +122,20 @@ To enter and run Cypher queries on a started DBMS, you can:
 .. Execute the Cypher with the `play` button on the right.
 . Use link:https://neo4j.com/docs/operations-manual/current/tools/cypher-shell/[Cypher Shell]:
 .. Click the drop-down menu to the right of the `Open` button and select *Terminal*.
-
-To use Cypher Shell:
-
-. Enter `bin/cypher-shell`.
-. Enter *neo4j* for the user.
-. Enter the password you specified for the DBMS.
-. All Cypher queries must end with semicolon `;` in Cypher Shell.
-. Use `:exit` to quit.
+.. Enter `bin/cypher-shell`.
+.. Enter *neo4j* for the user.
+.. Enter the password you specified for the DBMS.
+.. All Cypher queries must end with semicolon `;` in Cypher Shell.
+.. Use `:exit` to quit.
 
 Earlier you downloaded the *.zip* file and copied its CSV files to the *import* folder for the DBMS.
 Before you insert anything into your graph database, you should inspect the data in the files.
 To do this, you can use the `LOAD CSV` statement.
 If you opened the files previously, you may have noticed that two of the files have headers and one does not (*products.csv*).
-Let us see how to inspect each type of file.
-
-First, check how many lines are in the CSV files to ensure they were not corrupted or cut off from a potential export process.
+To inspect each type of file, first check how many lines are in the CSV files to ensure they were not corrupted or cut off from a potential export process.
 For files with headers, you can add the `WITH HEADERS` clause after `LOAD CSV`, so that it excludes the header row in the count, and only counts the rows of data.
 
-You should run this Cypher query:
+You should run the following Cypher queries:
 
 [source, cypher]
 ----
@@ -173,8 +168,8 @@ Running these statements should return the following counts:
 == View data with `LOAD CSV`
 
 Next, you can take a look at what the data looks like in the CSV files and how `LOAD CSV` sees it.
-The only line you need to change from the Cypher above is the `RETURN` statement.
-Since all of these files have several rows, you will use `LIMIT` to only get a sample.
+The only line you need to change from the Cypher query above is the `RETURN` clause.
+Since all of these files have several rows, use `LIMIT` to only get a sample.
 
 [source, cypher]
 ----
@@ -292,7 +287,7 @@ Your results should look something like this:
 |===
 
 
-Notice that the *orders.csv* and the *order-details.csv* return in a different format from the *products.csv*.
+Notice that the *orders.csv* and the *order-details.csv* return data in a different format from the *products.csv*.
 This is because those files have headers, so the column names are returned with the values for those rows.
 Since the *products.csv* does not have column names, then `LOAD CSV` just returns the plain data row from the file.
 
@@ -522,8 +517,8 @@ Using `MERGE` can have some performance overhead, but often it is the better app
 [NOTE]
 ====
 *Why use both constraints and `MERGE`:*
-Using constraints is different from using `MERGE`.
-Statements that create data in violation of the constraint will error, while statements that use `MERGE` will simply return existing values (no errors).
+Using constraints is different from using the `MERGE` clause.
+Statements that create data in violation of the constraint prompt an error, while statements that use the `MERGE` clause simply return existing values (no errors).
 If you use both, you avoid terminating your load statements due to constraint violations, and you also ensure you don't accidentally create duplicates in adhoc queries.
 ====
 
