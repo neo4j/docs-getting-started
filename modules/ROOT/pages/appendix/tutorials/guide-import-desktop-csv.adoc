@@ -287,7 +287,7 @@ Your results should look something like this:
 |===
 
 
-Notice that the *orders.csv* and the *order-details.csv* return data in a different format from the *products.csv*.
+Notice that *orders.csv* and *order-details.csv* return data in a different format than products.csv.
 This is because those files have headers, so the column names are returned with the values for those rows.
 Since the *products.csv* does not have column names, then `LOAD CSV` just returns the plain data row from the file.
 
@@ -471,19 +471,20 @@ An important step you need before writing Cypher statements, though, is to deter
 After all, importing the data in the existing table and column data will not provide the value you want to achieve from a graph.
 To utilize the graph database fully, you need a graph data model.
 
-Though there are a variety ways to organize the products and orders in your files, we will save that for another guide and use the below version of the model for this exercise.
+Though there are a variety ways to organize the products and orders in your files, this will be addressed in another guide.
+Use the following version of the model for this exercise.
 
 image::developer-desktop-csv-import-data_model-arr.svg[role="popup-link",width=700]
 
-We have two nodes - one for a product and one for an order.
+You have two nodes - one for a product and one for an order.
 Each of those nodes have properties from the CSV files.
-For the `Product`, we have ID, name, and unit cost.
-For the `Order`, we have ID, date/time, and country where it is going.
+For the `Product`, you have ID, name, and unit cost.
+For the `Order`, you have ID, date/time, and country where it is going.
 
 The _order-details.csv_ file defines the relationship between those two nodes.
 That file has the product ID, the order ID it belongs to, and the quantity of the product on the order.
 So, in the data model, this becomes the `CONTAINS` relationship between `Product` and `Order` nodes.
-We also include a property of `quantityOrdered` on the relationship because the product quantity value only exists when a product is related to an order.
+A property of `quantityOrdered` also is uncluded on the relationship because the product quantity value only exists when a product is related to an order.
 
 Now that you know the types of nodes and relationships you will have and the properties involved, you can construct the Cypher statements to create the data for this model.
 
