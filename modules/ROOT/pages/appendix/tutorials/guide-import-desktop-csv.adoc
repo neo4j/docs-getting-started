@@ -36,8 +36,7 @@ As the result, you can see that there is *No active DBMS*.
 Then click `New` button in front of *Projects*. +
 This creates a project named *Project*.
 
-. To change the name of a project, hover its name and select the `Edit` button.
-+
+. To change the name of a project, hover its name and select the `Edit` button. +
 +
 image::generic-name_project.png[role="popup-link",650]
 +
