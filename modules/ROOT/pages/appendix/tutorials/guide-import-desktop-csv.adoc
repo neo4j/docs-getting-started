@@ -24,16 +24,15 @@ If you already know how to create a Project in Neo4j Desktop, create a Neo4j ins
 
 If you open Neo4j Desktop for the first time, you will see a *Neo4j Primer Project* with the _Movie Database_ already started.
 You can use this database if you want to begin learning about using Neo4j and Cypher.
-
 However, you can create your own Project which can contain one or more DBMSs.
 
-Let's take a look on how to create a new Project, create, and start a Neo4j instance in Neo4j Desktop.
+Let's take a look on how to create a new Project, and how to create and start a Neo4j instance in Neo4j Desktop.
 
-. You can only have a single DBMS running, so you must first stop the DBMS that is started by clicking the `Stop` button on the top bar.
+. You can only have a single DBMS running at once. 
+To start a new one, you must first stop the DBMS that is active by clicking the `Stop` button on the top bar.
 As the result, you can see that there is *No active DBMS*.
 
-. To add a new project, go to the *Projects* drawer on the left sidebar by clicking the icon (image:neo4j-desktop-project-icon.png[width=30]).
-Then click `New` button in front of *Projects*. +
+. To add a new project, go to the *Projects* drawer on the left sidebar by clicking the icon image:neo4j-desktop-project-icon.png[width=30] and then click the `New` button in front of *Projects*.
 This creates a project named *Project*.
 
 . To change the name of a project, hover its name and select the `Edit` button. +
@@ -68,23 +67,24 @@ Starting with *Neo4j 5.3*, the initial password must be at least *eight characte
 . Neo4j Desktop will create a DBMS with the default version for Neo4j Desktop.
 However, you can select a different version.
 Keep in mind that if there is a down arrow shown next to the version, this means that Neo4j Desktop will need to download resources for that particular version of the DBMS. 
-To do this you [underline]#must# be connected to the Internet: +
+To do this you [underline]#must# be connected to the Internet. +
 +
 image::generic-version_DBMS.png[role="popup-link",650]
 +
 . After specifying the details for the DBMS, click the `Create` button.
-And here is what you should see after the DBMS is successfully created:
+Here is what you should see after the DBMS is successfully created:
 +
 image::generic-DBMS_created.png[role="popup-link"]
 +
 . Keep in mind that you cannot have more than one DBMS started.
 Provided that there is no other DBMS started in Neo4j Desktop, you can start your newly-created DBMS by hovering to the right of its name and clicking the `Start` button.
 +
-The DBMS will take a few seconds to start. After it is started, you should see something like this:
+The DBMS will take a few seconds to start. 
+If successful, you should see something like this:
 +
 image::generic-DBMS_started.png[role="popup-link"]
 
-After the DBMS is started, you can access it with clients running on your system such as Neo4j Browser, Neo4j Bloom etc.
+After the DBMS is started, you can access it through clients such as Neo4j Browser and Neo4j Bloom running on your system.
 In Neo4j Desktop, the DBMS is an Enterprise Server, but it can only be accessed locally.
 
 
@@ -470,20 +470,20 @@ An important step you need before writing Cypher statements, though, is to deter
 After all, importing the data in the existing table and column data will not provide the value you want to achieve from a graph.
 To utilize the graph database fully, you need a graph data model.
 
-Though there are a variety ways to organize the products and orders in your files, this will be addressed in another guide.
-Use the following version of the model for this exercise.
+Though there are a variety of ways to organize the products and orders in your files, this will be addressed in another guide.
+Use the following version of the model for this exercise:
 
 image::developer-desktop-csv-import-data_model-arr.svg[role="popup-link",width=700]
 
 You have two nodes - one for a product and one for an order.
 Each of those nodes have properties from the CSV files.
 For the `Product`, you have ID, name, and unit cost.
-For the `Order`, you have ID, date/time, and country where it is going.
+For the `Order`, you have ID, date/time, and country where it is going to.
 
-The _order-details.csv_ file defines the relationship between those two nodes.
-That file has the product ID, the order ID it belongs to, and the quantity of the product on the order.
+The *order-details.csv* file defines the relationship between those two nodes.
+It has the product ID, the order ID it belongs to, and the quantity of the product in the order.
 So, in the data model, this becomes the `CONTAINS` relationship between `Product` and `Order` nodes.
-A property of `quantityOrdered` also is uncluded on the relationship because the product quantity value only exists when a product is related to an order.
+The property `quantityOrdered` is also included to the relationship because the product quantity value only exists when a product is related to an order.
 
 Now that you know the types of nodes and relationships you will have and the properties involved, you can construct the Cypher statements to create the data for this model.
 
@@ -511,7 +511,7 @@ CREATE CONSTRAINT UniqueOrder FOR (o:Order) REQUIRE o.id IS UNIQUE;
 Now you are ready to write the Cypher for creating the data in the graph.
 You could use the `CREATE` clause where you are sure that you will not have duplicate rows in your CSV file and use `MATCH` to find existing data for updates.
 However, since it is hard to completely scrub all data and import perfectly clean data from any source, you will use the `MERGE` clause to check if the data exists before inserting.
-If the node or relationship exists, Cypher will match and return (without any writes), but if it does not exist, Cypher will insert it.
+If the node or relationship exists, Cypher will match and return them (without any writes), but if they do not exist, Cypher will insert it.
 Using `MERGE` can have some performance overhead, but often it is the better approach to maintain high data integrity.
 
 [NOTE]
@@ -555,7 +555,7 @@ image::developer-desktop-csv-import-verify_products.png[role="popup-link"]
 .Orders
 Next, you will load the orders.
 Again, since you want to verify you do not create duplicate `Order` nodes, you can use the `MERGE` clause.
-Just as with products, you start with the `LOAD CSV` command, then add Cypher queries and include your data conversions.
+Just as with products, you start with the `LOAD CSV` command, then add Cypher queries, and include your data conversions.
 
 [source, cypher]
 ----
@@ -626,7 +626,7 @@ image::developer-desktop-csv-import-verify_details.png[role="popup-link"]
 You have successfully loaded three CSV files into a Neo4j graph database using Neo4j Desktop!
 
 The `LOAD CSV` functionality, coupled with Cypher, is exceptionally useful for getting data from files into a graph structure.
-The best way to advance your skills in this area is to load a variety of files for various data sets and models.
+The best way to advance your skills in this area is to load a variety of files for various datasets and models.
 
 .Increasing the challenge
 If you work through this exercise again at a later time, feel free to increase the challenge by coming up with your own data model for these files or try to load some other CSV files to a graph.
