@@ -88,11 +88,10 @@ In Neo4j Desktop, the DBMS is an Enterprise Server, but it can only be accessed 
 
 
 [[csv-location]]
-== Putting CSV files in the import folder
+== Adding CSV files to the import folder
 
 First, download this https://s3.amazonaws.com/dev.assets.neo4j.com/wp-content/uploads/desktop-csv-import.zip[zip file^].
-Uncompress/unzip this file which should yield three CSV files for products, orders, and order details.
-You will put these files in the *import* folder that Neo4j expects for imports.
+Uncompress it to yield three CSV files for products, orders, and order details, and then add them to the *import* folder in Neo4j Desktop.
 
 You can open a finder window by hovering over the three dots to the right side of the started DBMS and select  *Open folder*, then *Import*:
 
@@ -106,7 +105,7 @@ You will use the current table and column format in the CSV files and translate 
 This can be done in a few different ways, but you will use Cypher's `LOAD CSV` command in this guide.
 
 [[loadcsv-desktop]]
-== LOAD CSV
+== `LOAD CSV`
 
 `LOAD CSV` is a built-in command in Cypher that allows you to read CSV files and append regular Cypher queries to create or update the data as a graph.
 You can also use `LOAD CSV` without creating the graph to output samples, counts, or distributions.
@@ -127,10 +126,10 @@ To enter and run Cypher queries on a started DBMS, you can:
 .. Use `:exit` to quit.
 
 Earlier you downloaded the *.zip* file and copied its CSV files to the *import* folder for the DBMS.
-Before you insert anything into your graph database, you should inspect the data in the files.
+It is recommended that before you insert anything into your graph database, you should inspect the data in the files to be added to the *import* folder.
 To do this, you can use the `LOAD CSV` statement.
 If you opened the files previously, you may have noticed that two of the files have headers and one does not (*products.csv*).
-To inspect each type of file, first check how many lines are in the CSV files to ensure they were not corrupted or cut off from a potential export process.
+To inspect each file, check how many lines there are in the CSV files to ensure they were not corrupted or cut off during a potential export process.
 For files with headers, you can add the `WITH HEADERS` clause after `LOAD CSV`, so that it excludes the header row in the count, and only counts the rows of data.
 
 Here are the Cypher queries to be used:
