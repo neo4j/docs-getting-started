@@ -122,12 +122,17 @@ To enter and run Cypher queries on a started DBMS, you can:
 .. Enter `bin/cypher-shell`.
 .. Enter *neo4j* for the user.
 .. Enter the password you specified for the DBMS.
-.. All Cypher queries must end with semicolon `;` in Cypher Shell.
 .. Use `:exit` to quit.
+
+[NOTE]
+====
+All Cypher queries must end with semicolon `;` in Cypher Shell.
+====
 
 Earlier you downloaded the *.zip* file and copied its CSV files to the *import* folder for the DBMS.
 It is recommended that before you insert anything into your graph database, you should inspect the data in the files to be added to the *import* folder.
-To do this, you can use the `LOAD CSV` statement.
+To do this, you can use the `LOAD CSV` statement. +
+
 If you opened the files previously, you may have noticed that two of the files have headers and one does not (*products.csv*).
 To inspect each file, check how many lines there are in the CSV files to ensure they were not corrupted or cut off during a potential export process.
 For files with headers, you can add the `WITH HEADERS` clause after `LOAD CSV`, so that it excludes the header row in the count, and only counts the rows of data.
@@ -284,7 +289,7 @@ Your results should look something like this:
 |===
 
 
-Notice that *orders.csv* and *order-details.csv* return data in a different format than products.csv.
+Notice that *orders.csv* and *order-details.csv* return data in a different format than *products.csv*.
 This is because those files have headers, so the column names are returned with the values for those rows.
 Since *products.csv* does not have column names, then `LOAD CSV` just returns the plain data row from the file.
 
@@ -341,7 +346,7 @@ Your results should look something like this:
 
 The `LOAD CSV` command reads all values as a string.
 No matter how the value appears in a file, it will be loaded as a string with `LOAD CSV`.
-So, before you import, you want to ensure you convert any values that are non-string.
+So, before you import, make sure you convert any values that are non-string.
 
 There are a variety of conversion functions in Cypher.
 The ones you will use for this exercise are as follows:
@@ -353,9 +358,9 @@ The ones you will use for this exercise are as follows:
 We look at the values in each CSV file to determine what needs to be converted.
 
 .Products.csv
-The values in the products.csv files are for product ID, product name, and unit cost.
-Product ID looks like an integer value that increases with each row, so you can convert this to an integer using the `toInteger()` function in Cypher.
-Product name can remain a string since it consists of characters.
+The values in the *products.csv* files are for `productID`, `productName`, and `unitCost`.
+`productID` looks like an integer value that increases with each row, so you can convert this to an integer using the `toInteger()` function in Cypher.
+`productName` can remain a string since it consists of characters.
 The final column is the product unit cost.
 Though the sample values from your inspection are all whole numbers, we know that monetary amounts often have decimal place values, so we will convert these values to floats using the `toFloat()` function.
 
@@ -384,11 +389,11 @@ Note that we are using collection positions (row[0], row[1], row[2]) to refer to
 In a file that has no headers, this is how to reference values in each position.
 
 .Orders.csv
-The values in the orders.csv (per the column names) are for orderID, orderDate, and shipCountry.
+The values in the *orders.csv* (per the column names) are for `orderID`, `orderDate`, and `shipCountry`.
 Again, you can evaluate the values and determine any conversions to apply.
 
-OrderID looks like an integer, so you can convert that using the `toInteger()` function.
-The orderDate column is certainly in a date format and will require us to format it using the `datetime()` function.
+`OrderID` looks like an integer, so you can convert that using the `toInteger()` function.
+The `orderDate` column is certainly in a date format and will require us to format it using the `datetime()` function.
 Finally, the shipCountry values are characters, so you can leave that as a string.
 
 Just as you did with the last CSV files, let us look at the results of these conversions without importing the data.
@@ -417,16 +422,16 @@ There was one tricky thing with this CSV in the `orderDate` column.
 Neo4j's datetime uses the https://en.wikipedia.org/wiki/ISO_8601[ISO 8601^] format which uses the delimiter `T` between the date and time values.
 The CSV file does not have the 'T' joining the date and time values but has a space between them instead.
 You used the `replace()` function to change the space to the character 'T' and get the string into the expected format.
-Then, you wrapped the `datetime()` function around that to convert the changed string to a datetime value.
+Then, you wrapped the `datetime()` function around that to convert the changed string to a _DateTime_ value.
 
 .Order-details.csv
-The values in the order-details.csv (from column names) are for productID, orderID, and quantity.
+The values in the *order-details.csv* (from column names) are for `productID`, `orderID`, and `quantity`.
 Let us look at which ones need to be converted.
 
-product ID is also from the products.csv file, where you converted that value to an integer.
+`productID` is also from the *products.csv* file, where you converted that value to an integer.
 You will do the same here to ensure you match formats.
-The order ID field contains values from the orders.csv file, so you will match your previous conversion and translate this field to an integer, as well.
-The quantity field in this file is a numeric value.
+The `orderID` field contains values from the *orders.csv* file, so you will match your previous conversion and translate this field to an integer, as well.
+The `quantity` field in this file is a numeric value.
 You can convert this to an integer with the `toInteger()` function you have been using.
 
 The results of these conversions are in the code below.
@@ -458,14 +463,14 @@ productId:orderId:quantityOrdered
 [[loading-data]]
 == Loading the data
 
-Now that you have determined that the CSV file data looks good, and you have verified how `LOAD CSV` sees the data and converted any non-string values, you are almost ready to create the data in our graph database!
+Now that you have determined that the CSV file data looks good, and you have verified how `LOAD CSV` sees the data and converted any non-string values, you are almost ready to create the data in our graph database.
 To do that, you will use Cypher statements alongside the `LOAD CSV` commands you used above.
 The `LOAD CSV` will read the files, and the Cypher statements will create the data in your database.
 
 === Graph data model
 
 An important step you need before writing Cypher statements, though, is to determine what the graph structure should look like once you import your file data.
-After all, importing the data in the existing table and column data will not provide the value you want to achieve from a graph.
+After all, importing the data from the existing table and column data will not provide the value you want to achieve from a graph.
 To utilize the graph database fully, you need a graph data model.
 
 Though there are a variety of ways to organize the products and orders in your files, this will be addressed in another guide.
@@ -521,9 +526,8 @@ If you use both, you avoid terminating your load statements due to constraint vi
 ====
 
 .Products
-To start, you will load the products into the graph.
-You start with your `LOAD CSV` statement from above, then you add the Cypher to create the data from the CSV into your graph model.
-You will use the `MERGE` statement to check if the `Product` already exists before you create it.
+To start loading the products into the graph, use the `LOAD CSV` statement from above and then run the Cypher query to create the data from the CSV files into your model.
+Remember to use `MERGE` to check whether the `Product` already exists.
 The properties will be set to the converted values you handled earlier in this guide.
 
 [source, cypher]
@@ -536,7 +540,7 @@ RETURN count(p);
 ----
 
 If you run that statement, it will return the number of product nodes (`count(p)`) that were created in the database.
-You can cross-check that number with the number of rows in the CSV file from earlier (77 rows in products.csv).
+You can cross-check that number with the number of rows in the CSV file from earlier (77 rows in *products.csv*).
 You can also run a validation query to return a sample of nodes and review that the properties look accurate.
 
 [source, cypher]
@@ -621,7 +625,7 @@ image::developer-desktop-csv-import-verify_details.png[role="popup-link"]
 [[import-wrapup]]
 == Wrapping up
 
-You have successfully loaded three CSV files into a Neo4j graph database using Neo4j Desktop!
+You have successfully loaded three CSV files into a Neo4j graph database using Neo4j Desktop.
 
 The `LOAD CSV` functionality, coupled with Cypher, is exceptionally useful for getting data from files into a graph structure.
 The best way to advance your skills in this area is to load a variety of files for various datasets and models.
