@@ -64,7 +64,7 @@ image::generic-password_DBMS.png[role="popup-link",650]
 Starting with *Neo4j 5.3*, the initial password must be at least *eight characters* long. 
 ====
 +
-. Neo4j Desktop will create a DBMS with the default version for Neo4j Desktop.
+. Neo4j Desktop automatically creates a DBMS with default version, but you can select a different version for it.
 However, you can select a different version.
 Keep in mind that if there is a down arrow shown next to the version, this means that Neo4j Desktop will need to download resources for that particular version of the DBMS. 
 To do this you [underline]#must# be connected to the Internet. +
@@ -294,7 +294,7 @@ This is because those files have headers, so the column names are returned with 
 Since *products.csv* does not have column names, then `LOAD CSV` just returns the plain data row from the file.
 
 [[filtering-load]]
-== Filtering what you load with `LOAD CSV`
+== Filtering loaded data with `LOAD CSV`
 
 After inspecting the data, you may only want to view or load a subset of the data in the CSV file.
 You can filter what you view (or load) as follows:
@@ -485,7 +485,7 @@ For the `Order`, you have ID, date/time, and country where it is going to.
 
 The *order-details.csv* file defines the relationship between those two nodes.
 It has the product ID, the order ID it belongs to, and the quantity of the product in the order.
-So, in the data model, this becomes the `CONTAINS` relationship between `Product` and `Order` nodes.
+In the data model, these become the `CONTAINS` relationship between `Product` and `Order` nodes.
 The property `quantityOrdered` is also included to the relationship because the product quantity value only exists when a product is related to an order.
 
 Now that you know the types of nodes and relationships you will have and the properties involved, you can construct the Cypher statements to create the data for this model.
