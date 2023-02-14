@@ -55,14 +55,14 @@ Here _MyDBMS_ is specified as the name:
 +
 image::generic-name_DBMS.png[role="popup-link",650]
 +
-. You [underline]#must# specify a password for the DBMS:
-+
-image::generic-password_DBMS.png[role="popup-link",650]
+. You [underline]#must# specify a password for the DBMS.
 +
 [NOTE]
 ====
 Starting with *Neo4j 5.3*, the initial password must be at least *eight characters* long. 
 ====
++
+image::generic-password_DBMS.png[role="popup-link",650]
 +
 . Neo4j Desktop automatically creates a DBMS with default version, but you can select a different version for it.
 However, you can select a different version.
@@ -361,10 +361,12 @@ We look at the values in each CSV file to determine what needs to be converted.
 The values in the *products.csv* files are for `productID`, `productName`, and `unitCost`.
 `productID` looks like an integer value that increases with each row, so you can convert this to an integer using the `toInteger()` function in Cypher.
 `productName` can remain a string since it consists of characters.
-The final column is the product unit cost.
-Though the sample values from your inspection are all whole numbers, we know that monetary amounts often have decimal place values, so we will convert these values to floats using the `toFloat()` function.
+The final column is the product `unitCost`.
+Though the sample values from your inspection are all whole numbers, monetary amounts often have decimal place values.
+For this reason, it is recommended to convert these values to floats using the `toFloat()` function.
 
-You can see the Cypher to handle all of these conversions below; however, you are still not loading the values into Neo4j yet.
+Below is how you should run the Cypher query.
+Keep in mind that you are still not loading the values into Neo4j at this point.
 You will be just viewing the CSV files with converted values.
 
 [source, cypher]
@@ -494,9 +496,9 @@ Now that you know the types of nodes and relationships you will have and the pro
 
 One final thing you need to think about before you create data in the graph is ensuring values are unique and performance is efficient.
 To handle this, you can use constraints.
-Just as with other databases, constraints ensure data integrity criteria is not violated, while simultaneously indexing the property with the constraint for faster query performance.
+Just as with other databases, constraints ensure data integrity criteria are not violated, while simultaneously indexing the property with the constraint for faster query performance.
 
-There are cases for applying indexes to a database before any data and with existing data.
+There are cases for applying indexes to a database before any data is imported and when there is already existing data.
 In this exercise, you will add two constraints before you create any data - one for `productId` and one for `orderId`.
 This will ensure that, when you create a new node of each of those types or a relationship to connect them, you know the entities are unique and indexed.
 
