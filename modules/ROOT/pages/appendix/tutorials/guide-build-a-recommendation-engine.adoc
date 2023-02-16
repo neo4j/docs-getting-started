@@ -151,7 +151,7 @@ We will mention a few specifically here with resources you can use to find more 
 
 We have a graph of a few friends with their favorite restaurants, cuisines, and locations.
 
-image::restaurant-recommendation.png[]
+image::restaurant-recommendation.svg[width=600]
 
 A practical question to answer here, formulated as a http://neo4j.com/blog/why-the-most-important-part-of-facebook-graph-search-is-graph/[graph search^], is:
 
@@ -159,7 +159,7 @@ A practical question to answer here, formulated as a http://neo4j.com/blog/why-t
 What Sushi restaurants are in New York that my friends like?
 ----
 
-How could we translate that into the appropriate Cypher statement?
+How to translate that into the appropriate Cypher statement?
 
 [source,cypher]
 ----
@@ -170,7 +170,7 @@ ORDER BY occurrence DESC
 LIMIT 5
 ----
 
-Other factors that can be easily integrated in this query are favorites, allergies, ratings, and distance from my current position.
+Other factors that can be easily integrated in this query are favorites, allergies, ratings, and distance from current position.
 
 === More recommendation solutions
 
