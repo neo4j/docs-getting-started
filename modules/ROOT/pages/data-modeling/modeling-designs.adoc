@@ -68,9 +68,9 @@ AND m1 <> m2
 RETURN m1, m2;
 ----
 
-Now, instead, if we were to model our movies and genres as separate nodes and create a relationship between them, we would come up with a model like the _Figure 2_.
+Now, instead, if you were to model movies and their genres as separate nodes and create a relationship between them, you would come up with a model like the _Figure 2_.
 
-.Graph of movies and their genres
+.Graph model of movies and their genres
 image::modeling_genre_node-arr.svg[role="popup-link",400,400]
 
 This creates a completely separate entity (node) for the genre, allowing you to connect all the movies with a shared genre to that `Genre` node.
@@ -138,7 +138,7 @@ The way Peter at Marvel handled hyperedges in their data is by creating an `Appe
 This `Appearance` can be related to multiple `Moment` nodes where the person and alias appear as a unit.
 This is represented in the model shown below (also in the https://player.vimeo.com/video/79399404[video^]).
 
-.Schema of Marvel characters
+.Graph model of a Marvel character
 image::modeling_marvel_hyperedge_appearance-arr.svg[role="popup-link",550,550]
 
 In a relational store, attempting to categorize and relate all of these complicated aspects would be extremely difficult and further complicate analysis and review of the data as a whole.
@@ -171,7 +171,7 @@ This model turns out like the one below.
 .Graph model of airline flights after review
 image::modeling_airport_flight_dates-arr.svg[role="popup-link",600,600]
 
-For the full walkthrough of the modeling process for airline flights, see link:https://maxdemarzi.com/2015/08/26/modeling-airline-flights-in-neo4j/[Max's blog post^].
+For the full walkthrough of the modeling process for airline flights, see link:https://maxdemarzi.com/2015/08/26/modeling-airline-flights-in-neo4j/[Blog post: Modeling Airline Flights in Neo4j^].
 
 === Versioning
 
