@@ -155,7 +155,7 @@ A common example is for modeling airline flights.
 An airline has a particular flight on a certain day from and to a specific location.
 We might start with a model like the _Figure 3_ below to show how flights travel from airport to airport.
 
-.Graph model of airline flights
+.Graph model for airline flights
 image::modeling_airport_flights-arr.svg[role="popup-link",450,450]
 
 We would soon realize that we need to model a `Flight` entity that exists between two destinations because multiple planes can travel between two destinations several times in one day.
@@ -168,7 +168,7 @@ This way, you wouldn't need to check each flight relationship to an airport.
 Instead, you would only look at the relationships for the dates you cared about.
 This model turns out like the one below.
 
-.Graph model of airline flights after review
+.Graph model for airline flights after review
 image::modeling_airport_flight_dates-arr.svg[role="popup-link",600,600]
 
 For the full walkthrough of the modeling process for airline flights, see link:https://maxdemarzi.com/2015/08/26/modeling-airline-flights-in-neo4j/[Blog post: Modeling Airline Flights in Neo4j^].
