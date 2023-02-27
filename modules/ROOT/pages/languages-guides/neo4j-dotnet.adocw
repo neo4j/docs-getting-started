@@ -86,7 +86,7 @@ If necessary, you can also https://medium.com/neo4j/getting-certificates-for-neo
 | icon:tag[] Version
 | icon:user[] Authors
 
-| Neo4jDotNetDriver
+| Neo4j .NET Driver
 | {dotnet-driver-version}
 | The Neo4j Team, http://twitter.com/cskardon[Charlotte Skardon], https://twitter.com/IngvarKofoed[Martin Jensen]
 
