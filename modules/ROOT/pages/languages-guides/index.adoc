@@ -65,8 +65,6 @@ Below you can find links to their reference documentation:
 * link:https://neo4j.com/docs/go-manual/current/[Go]
 * link:https://docs.spring.io/spring-data/neo4j/docs/current/reference/html/[Spring]
 
-If you are new to development, we recommend the https://www.jetbrains.com/products.html[Jetbrains IDE^] for a good developer experience which also comes with a link:https://neo4j.com/blog/jetbrains-ide-plugin-graph-database/[Neo4j Database plugin^].
-
 To demonstrate connection to and usage of Neo4j in different programming languages, an example application is created.
 It is a http://my-neo4j-movies-app.herokuapp.com/[simple, one-page webapp^], that uses Neo4j's movie demo database (movie, actor, director) as a dataset.
 The same front-end web page in all applications consumes three REST endpoints provided by backend implemented in the different programming languages and drivers:
