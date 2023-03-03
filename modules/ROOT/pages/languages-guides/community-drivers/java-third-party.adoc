@@ -1,5 +1,5 @@
 [[java-third-party]]
-= Third-party libraries
+= Java Drivers: Community projects
 :examples: https://github.com/neo4j-examples
 :programming-language: java
 :category: drivers
