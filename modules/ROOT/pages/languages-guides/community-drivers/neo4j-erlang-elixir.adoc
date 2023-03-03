@@ -1,4 +1,4 @@
-= Erlang and Elixir: Neo4j Community Driver
+= Using Neo4j from Erlang/Elixir
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
 :examples: https://github.com/neo4j-examples
 :programming-language: erlang-elixir
