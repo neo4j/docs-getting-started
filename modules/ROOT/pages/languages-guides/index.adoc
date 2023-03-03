@@ -88,11 +88,7 @@ The source code for all the different language examples is available on https://
 The HTTP API is available in Community Edition and Enterprise Edition, but not in AuraDB.
 ====
 
-<<<<<<< HEAD
-If you want to access Neo4j programmatically, you can also use https://neo4j.com/docs/http-api/current/actions/[HTTP-API^] which allow you to:
-=======
 If you want to access Neo4j programmatically, you can also use the HTTP API which enables you to:
->>>>>>> 68e93bc (Rename drivers section (#217))
 
 * POST one or more Cypher statements with parameters.
 * Keep transactions open over multiple requests.
