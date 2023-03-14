@@ -27,7 +27,7 @@ CREATE (robert)-[:DIRECTED]->(forrestGump)
 
 This is the resulting graph:
 
-image::cypher-intro-schema-data.svg[role="middle"]
+image::cypher-intro-schema-data-arr.svg[role="middle", width=600]
 
 
 [[cypher-intro-indexes]]
