@@ -320,5 +320,5 @@ If we run this query we'll see the following output:
 This guide has shown how to refactor a graph model, with help from procedures in the APOC Library.
 Below are some resources for learning more about refactoring in Neo4j:
 
-* link:https://neo4j.com/developer/neo4j-apoc/[APOC Library^]
-** https://neo4j.com/docs/labs/apoc/current/graph-updates/graph-refactoring/[Graph Refactoring Procedures^]
+* link:https://neo4j.com/docs/apoc/current/[APOC Library^]
+** https://neo4j.com/docs/apoc/current/graph-refactoring/[Graph Refactoring procedures^]
