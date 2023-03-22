@@ -172,7 +172,7 @@ For loading JSON, XML, XLS you need to have the https://neo4j.com/docs/apoc/curr
 === Using a dump of a Neo4j database
 
 Other datasets are provided as dump of a Neo4j datastore.
-Follow the link http://github.com/neo4j-graph-examples to find *.dump* files for many graph example datasets.
+Follow the link http://github.com/neo4j-graph-examples to find dump files for many graph example datasets.
 
 .Community Edition (replace the default database)
 1. Stop your Neo4j server.
@@ -188,7 +188,7 @@ Follow the link http://github.com/neo4j-graph-examples to find *.dump* files for
 The Neo4j version of some of the datasets might be older than your Neo4j version.
 Then you might need to configure Neo4j to upgrade your database, by using `neo4j-admin database migrate` command.
 Pay attention, the `neo4j-admin database migrate` command is run only on a stopped database.
-For more details, see link:https://neo4j.com/docs/operations-manual/5/tools/neo4j-admin/migrate-database/[Operations manual -> Tools].
+For more details, see link:https://neo4j.com/docs/operations-manual/current/tools/neo4j-admin/migrate-database/[Operations manual -> Tools].
 ====
 
 [#example-datasets]
