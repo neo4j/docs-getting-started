@@ -1,4 +1,5 @@
 :page-ogdescription: The Neo4j Getting Started Guide covers: How to get started with Neo4j. Introduction to graph database concepts and introduction to the graph query language Cypher.
+:neo4j-version-minor: 5.5
 :page-ad-overline-link: https://graphacademy.neo4j.com/categories/?ref=docs
 :page-ad-overline: Neo4j GraphAcademy
 :page-ad-title: Neo4j GraphAcademy Courses
