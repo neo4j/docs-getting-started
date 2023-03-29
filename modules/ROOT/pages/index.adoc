@@ -10,17 +10,31 @@
 :page-ogtitle: Getting Started Guide for Neo4j version {neo4j-version}
 
 [[getting-started]]
+ifdef::backend-pdf[]
+= Neo4j {neo4j-version} Getting Started Guide
+endif::[]
+ifndef::backend-pdf[]
 = Welcome to Neo4j
+endif::[]
+
+
 
 
 == The Neo4j Graph Data Platform
 
 
+ifndef::backend-pdf[]
 ++++
 <div class="responsive-embed">
 <iframe width="680" height="425" src="https://www.youtube.com/embed/urO5FyP9PoI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 ++++
+endif::[]
+
+ifdef::backend-pdf[]
+link:https://www.youtube.com/embed/urO5FyP9PoI[video: What is Neo4j?]
+endif::[]
+
 
 With a native graph database at the core, Neo4j stores and manages data in a natural, connected state.
 The graph database takes a property graph approach, which is beneficial for both traversal performance and operations runtime. +

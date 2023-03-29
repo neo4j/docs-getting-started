@@ -23,6 +23,11 @@ ifndef::backend-pdf[]
 ++++
 endif::[]
 
+ifdef::backendf-pdf[]
+link:https://www.youtube.com/watch?v=jFdEeJ-Ez1E[Video: What is Neo4j?]
+endif::[]
+
+
 [[property-graph]]
 == The property graph model
 
