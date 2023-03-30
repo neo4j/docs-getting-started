@@ -199,7 +199,7 @@ This graph is pretty big, for global graph queries you'd need a page-cache of 6G
 
 Here is an https://towardsdatascience.com/tagoverflow-correlating-tags-in-stackoverflow-66e2b0e1117b[article explaining the data model] and some exploratory analysis we ran on the data.
 
-image::https://cdn-images-1.medium.com/max/1600/0*lOrKWCLdlLGG4BXe.jpg[]
+image::stackoverflow_graph_model-arr.svg[width=600]
 
 The database is available in the <<demo-server,Demo Server>> as outlined above.
 
