@@ -57,7 +57,7 @@ ifndef::backend-pdf[]
 endif::[]
 
 ifdef::backend-pdf[]
-link:https://www.youtube.com/watch?v=NO3C-CWykkY[video: https://www.youtube.com/watch?v=NO3C-CWykkY]
+link:https://www.youtube.com/watch?v=NO3C-CWykkY[Video: https://www.youtube.com/watch?v=NO3C-CWykkY]
 endif::[]
 
 [#rdbms-graph-model]

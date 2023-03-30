@@ -32,7 +32,7 @@ ifndef::backend-pdf[]
 endif::[]
 
 ifdef::backend-pdf[]
-link:https://www.youtube.com/embed/urO5FyP9PoI[video: What is Neo4j?]
+link:https://www.youtube.com/embed/urO5FyP9PoI[Video: What is Neo4j?]
 endif::[]
 
 
