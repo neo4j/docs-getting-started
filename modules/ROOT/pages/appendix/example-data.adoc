@@ -182,11 +182,11 @@ Follow the link http://github.com/neo4j-graph-examples to find dump files for ma
 
 .Community Edition (replace the default database)
 1. Stop your Neo4j server.
-2. Then you can import the file using the `./bin/neo4j-admin database load  --overwrite-destination true --from file.dump` command.
+2. Then you can import the file using the `./bin/neo4j-admin database load  --overwrite-destination true --from-stdin neo4j < file.dump` command.
 3. Start the Neo4j server.
 
 .Enterprise Edition (also Neo4j Desktop)
-1. Import the file using the `./bin/neo4j-admin database load  --overwrite-destination true --from file.dump --database <dbname>` command.
+1. Import the file using the `./bin/neo4j-admin database load  --overwrite-destination true --from-stdin <dbname> < file.dump` command.
 2. Make the new database known to the system database with `CREATE DATABASE dbname` which will also automatically start it.
 
 [IMPORTANT]
