@@ -695,7 +695,7 @@ You may also want to apply these same principles to your own or another data set
 If you used this as a process flow to apply to a different data set or you would like to do that next, feel free to start at the top and work through this guide again with another domain.
 The steps and processes still apply (though, of course, the data model, queries, and business questions will need adjusted).
 
-If you have data that needs additional cleansing and manipulation than what is covered in this guide, the link:https://neo4j.com/labs/apoc/[APOC library^] may be able to help.
+If you have data that needs additional cleansing and manipulation than what is covered in this guide, the link:https://neo4j.com/docs/apoc/current/[APOC library^] may be able to help.
 It contains hundreds of procedures and functions for handling large amounts of data, translating values, cleaning messy data sources, and more!
 
 If you are interested in doing a one-time initial dump of relational data to Neo4j, then the link:https://neo4j.com/labs/etl-tool/[Neo4j ETL Tool^] might be what you are looking for.
@@ -706,7 +706,7 @@ The application is designed with a point-and-click user interface with the goal 
 
 * https://github.com/neo4j-contrib/developer-resources/tree/gh-pages/data/northwind[Northwind SQL, CSV and Cypher data files^], also as https://github.com/neo4j-contrib/developer-resources/tree/gh-pages/data/northwind/northwind.zip[zip^] file
 * https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[LOAD CSV^]: Cypher's command for importing CSV files
-* https://neo4j.com/labs/apoc/[APOC library^]: Neo4j's utility library
+* https://neo4j.com/docs/apoc/current/[APOC library^]: Neo4j's utility library
 * https://neo4j.com/labs/etl-tool//[Neo4j ETL Tool^]: Loading relational data without code
 * https://neo4j.com/docs/getting-started/4.4/data-import/[Importing Data with Neo4j^]
 * https://neo4j.com/docs/getting-started/4.4/data-modeling[Graph Data Modeling^]
