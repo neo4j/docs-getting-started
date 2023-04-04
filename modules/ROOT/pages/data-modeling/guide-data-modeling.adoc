@@ -288,7 +288,7 @@ There are plenty of opportunities throughout the upcoming sections to practice m
 Every data model is unique, depending on the use case and the types of questions that users need to answer with the data.
 Because of this, there is no "one-size-fits-all" approach to data modeling.
 Using best practices and careful modeling will provide the most valuable result in producing an accurate data model that benefits your processes and use case.
-A walkthrough of designs for different use cases is https://neo4j.com/docs/getting-started/4.4/data-modeling/modeling-designs/[in the following section].
+A walkthrough of designs for different use cases is xref:data-modeling/modeling-designs.adoc[in the following section].
 
 [[modeling-resources]]
 == Resources
