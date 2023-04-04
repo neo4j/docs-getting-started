@@ -62,7 +62,7 @@ History:
 
 1. https://github.com/andreasronge[Andreas Ronge^], one of our Swedish friends from Malmö, started writing his canonical Neo4j Ruby driver since before we hit 1.0.
 
-2. https://github.com/cheerfulstoic[Brian Underwood^] and https://github.com/subvertallchris[Chris Grigg^] joined the project and together released http://neo4j.com/blog/neo4j-rb-3-0-released/[version 3.0^] in September 2014.
+2. https://github.com/cheerfulstoic[Brian Underwood^] and https://github.com/subvertallchris[Chris Grigg^] joined the project and together released https://neo4j.com/blog/neo4j-rb-3-0-released/[version 3.0^] in September 2014.
 
 3. Starting in 2017, the team around https://github.com/klobuczek[Heinrich Klobuczek] contributed to the project and from *fall 2018 Heinrich took over the Neo4j.rb project as the primary maintainer*.
 
