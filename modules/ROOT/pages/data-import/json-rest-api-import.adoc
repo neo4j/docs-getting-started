@@ -10,9 +10,9 @@
 [#import-json]
 == Importing JSON data into Neo4j
 
-There are a plethora of JSON-based Web APIs that we can import into Neo4j, and we can use one of the link:https://neo4j.com/labs/apoc/4.4/import/load-json/[Load JSON^] procedures to retrieve data from these APIs and turn it into map values ready for Cypher to consume.
+There are a plethora of JSON-based Web APIs that we can import into Neo4j, and we can use one of the link:https://neo4j.com/docs/apoc/current/import/load-json/[Load JSON^] procedures to retrieve data from these APIs and turn it into map values ready for Cypher to consume.
 
-The APOC user guide provides a worked example showing how to link:https://neo4j.com/labs/apoc/4.4/import/load-json/#load-json-path-examples-stackoverflow[import data from StackOverflow into Neo4j^].
+The APOC user guide provides a worked example showing how to link:https://neo4j.com/docs/apoc/current/import/load-json/#load-json-examples-stackoverflow[import data from StackOverflow into Neo4j^].
 
 [#strava-api]
 == The Strava API
@@ -23,17 +23,17 @@ This data is available to users via a https://developers.strava.com/[JSON-based 
 Before we start calling the API, we need to https://www.strava.com/settings/api[create an application^].
 We will then be provided with an access token that we will need to use in all our requests to the API.
 
-We can create a parameter in the link:https://neo4j.com/docs/browser-manual/current/[Neo4j Browser] or Cypher shell by executing the following command:
+We can create a parameter in the link:https://neo4j.com/docs/browser-manual/current/[Neo4j Browser] or Cypher Shell by running the following command:
 
 [source, cypher]
 ----
 :params {stravaToken: "Bearer <insert-strava-token>"}
 ----
 
-****
 [IMPORTANT]
+====
 Don't forget to replace `<insert-strava-token>` with the token for your Strava application.
-****
+====
 
 [#paginated-endpoint]
 == Working with a paginated endpoint
@@ -154,5 +154,7 @@ This query sends multiple commits to the API until we have loaded all our activi
 
 [#import-api-resources]
 == Resources
-* https://neo4j.com/labs/apoc/4.4/import/load-json/#load-json-examples-stackoverflow[APOC Documentation: StackOverflow JSON Data Example^]
-* https://neo4j.com/docs/labs/apoc/4.4/import/load-json[APOC Documentation: Load JSON^]
+
+* https://neo4j.com/docs/apoc/current/import/load-json/[APOC Documentation: Load JSON^]
+* https://neo4j.com/docs/apoc/current/import/load-json/#load-json-examples-stackoverflow[APOC Documentation: StackOverflow JSON Data Example^]
+

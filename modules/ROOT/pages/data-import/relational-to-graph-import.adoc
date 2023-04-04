@@ -4,8 +4,6 @@
 :description: This article shows the different ways you can import data from a relational database to Neo4j. Completing this guide will give you the tools to choose how to import your relational data and transform it to the graph.
 :page-pagination:
 
-
-
 [#import-relational]
 == Importing data from a relational database
 
@@ -43,10 +41,10 @@ Some of these tools also can map out the flow and transformation of data through
 *6)* xref:languages-guides/index.adoc[Programmatic via drivers]: ability to retrieve data from a relational database (or other tabular structure) and use the bolt protocol to write it to Neo4j through one of the drivers with your programming language of choice.
 
 [NOTE]
---
+====
 You should create and understand your xref:data-modeling/index.adoc[graph data model] before transferring the data from an existing relational structure to a graph.
 If you do not have a good data model, then jumping into the import can cause frustration on data cleanup later.
---
+====
 
 [#relational-load-csv]
 == `LOAD CSV`
@@ -79,7 +77,7 @@ If you are in need of a way for flexible and custom data handling, `APOC` could 
 The downside to using this library for complicated scenarios is that it may result in many lines of code to handle multiple data transformations.
 
 === APOC resources
-* Documentation: https://neo4j-contrib.github.io/neo4j-apoc-procedures/index35.html[APOC^]
+* Documentation: link:https://neo4j.com/docs/apoc/current/[APOC^]
 * Videos: https://youtu.be/e8UfOHJngQA[APOC Video Series^]
 * Source code: https://github.com/neo4j-contrib/neo4j-apoc-procedures[Github project^]
 
@@ -130,17 +128,3 @@ Using the driver and programming language can be very useful for incremental upd
 
 === Driver import resources
 * Blog post: https://medium.com/neo4j/5-tips-tricks-for-fast-batched-updates-of-graph-structures-with-neo4j-and-cypher-73c7f693c8cc[Tips and Tricks for Fast-Batched Import with Neo4j^]
-
-////
-[#relational-other-tools]
-== Other ETL tools
-
-There are a few other data integration tools provided by other individuals or companies that work well with Neo4j.
-Open-source options such as Talend or Nifi offer simple processes for simple processes with already-familiar tools.
-
-=== Other resources
-* Talend: https://help.talend.com/reader/mjoDghHoMPI0yuyZ83a13Q/x2QYS1x3sfOsjGD3s5RtkQ[Writing data to Neo4j^]
-* Documentation: http://sim51.github.io/neo4j-talend-component/index.html[Talend Neo4j Connector^]
-* Blog post: https://neo4j.com/blog/fun-with-music-neo4j-and-talend/[Fun with music, Talend, and Neo4j^]
-* Source code: https://github.com/jonathantelfer/nifi-neo4j[Apache Nifi / Neo4j Connector^]
-////
