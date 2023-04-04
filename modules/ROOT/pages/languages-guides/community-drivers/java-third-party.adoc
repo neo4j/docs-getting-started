@@ -61,7 +61,7 @@ Just grab the https://github.com/neo4j-contrib/neo4j-jdbc/releases/latest[JAR of
 | icon:github[] Source | https://github.com/neo4j-contrib/neo4j-jdbc
 | icon:book[] Docs | https://github.com/neo4j-contrib/neo4j-jdbc/blob/master/README.adoc
 | icon:play-circle[] Example | {examples}/movies-java-jdbc
-| icon:book[] Blog Post | http://neo4j.com/blog/couchbase-jdbc-integrations-neo4j-3-0/
+| icon:book[] Blog Post | https://neo4j.com/blog/couchbase-jdbc-integrations-neo4j-3-0/
 |===
 
 [#java-jcypher]
