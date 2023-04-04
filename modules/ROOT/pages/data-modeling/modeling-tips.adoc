@@ -64,7 +64,7 @@ Users may also change their behaviors and cause shifts for the business.
 Cypher allows you to write queries to run mass updates across labels, add or remove properties, and insert additional nodes and relationships into the structure.
 There are also procedures to aid in batching queries and executing updates to cluster instances, as available.
 
-For more information in this topic, check out the https://neo4j-contrib.github.io/neo4j-apoc-procedures/[APOC standard library^]!
+For more information on this topic, check out the link:https://neo4j.com/docs/apoc/current/[APOC Library^]!
 
 [#model-concerns]
 == Other concerns
