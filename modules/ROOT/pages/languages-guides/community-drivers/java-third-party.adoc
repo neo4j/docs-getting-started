@@ -127,7 +127,7 @@ The project aims to provide seamless integration with most popular scala infrast
 |===
 | icon:user[] Author | https://twitter.com/dimafeng[Dmitry Fedosov^]
 | icon:github[] Source | https://github.com/neotypes/neotypes
-| icon:book[] Docs | https://neotypes.github.io/neotypes/docs.html
+| icon:book[] Docs | https://neotypes.github.io/neotypes/
 | icon:book[] Article | http://dimafeng.com/2018/12/27/neotypes-1/
 | icon:play-circle[] Example | https://github.com/neotypes/examples
 |===
