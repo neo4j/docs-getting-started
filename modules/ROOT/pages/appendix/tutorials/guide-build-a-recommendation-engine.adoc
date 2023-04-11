@@ -153,7 +153,7 @@ We have a graph of a few friends with their favorite restaurants, cuisines, and 
 
 image::restaurant-recommendation.svg[width=600]
 
-A practical question to answer here, formulated as a http://neo4j.com/blog/why-the-most-important-part-of-facebook-graph-search-is-graph/[graph search^], is:
+A practical question to answer here, formulated as a https://neo4j.com/blog/why-the-most-important-part-of-facebook-graph-search-is-graph/[graph search^], is:
 
 ----
 What Sushi restaurants are in New York that my friends like?
@@ -184,5 +184,5 @@ Other factors that can be easily integrated in this query are favorites, allergi
 * link:https://www.youtube.com/channel/UCvze3hU6OZBkB1vkhH2lH9Q/search?query=recommendation[Neo4j Videos: Building Recommendation Engines^]
 * link:https://neo4j.com/use-cases/real-time-recommendation-engine/[Recommendation Use Cases^]
 * link:/graphacademy/online-training/online-training/introduction-to-neo4j-40/[Online Training: Learn Cypher with Intro to Neo4j^]
-* http://www.slideshare.net/bachmanm/recommendations-with-neo4j[Michal Bachman Slides: Recommendation Engines with Neo4j^]
+* https://www.slideshare.net/bachmanm/recommendations-with-neo4j[Michal Bachman Slides: Recommendation Engines with Neo4j^]
 * link:/graphgists/?category=real-time-recommendations[GraphGists: Recommendation Engine Examples^]

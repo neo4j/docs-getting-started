@@ -69,7 +69,11 @@ There are two main types of functions that can be developed and used:
 * user-defined scalar functions,
 * user-defined aggregation functions.
 
-For more details see link:https://neo4j.com/docs/cypher-manual/current/functions/user-defined/[Cypher Manual -> User-defined functions].
+For more details, see link:https://neo4j.com/docs/cypher-manual/current/functions/user-defined/[Cypher Manual -> User-defined functions].
+
+You can take any procedure library and deploy it to your server to make additional procedures and functions available.
+
+Also take a look at the link:https://neo4j.com/docs/java-reference/current/extending-neo4j/[procedure section in the Neo4j Java Reference^].
 
 [#deploy-extension]
 == Deploying procedures and functions
