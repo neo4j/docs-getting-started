@@ -36,7 +36,7 @@ In graph theory:
 [[graphdb-example-graph]]
 == Example graph
 
-The example graph shown below, introduces the basic concepts of the property graph:
+The example graph shown below introduces the basic concepts of the property graph:
 
 .Example graph
 image::graph_simple-arr.svg[width=600]
