@@ -2,23 +2,23 @@
 = Graph database concepts
 :description: An introduction to graph database concepts.
 
+== Introduction
+
+The guide covers graph database fundamentals.
+
 Neo4j uses a _property graph_ database model.
-
 A graph data structure consists of *nodes* (discrete objects) that can be connected by *relationships*.
+Below is the image of a graph with three nodes (the circles) and three relationships (the arrows).
 
-.Concept of a graph structure.
-=====
-A graph with three nodes (the circles) and three relationships (the arrows).
-
-image::graph_concept_three_nodes.svg[]
-=====
+.Concept of a graph structure
+image::graph_concept_three_nodes-arr.svg[width=300]
 
 The Neo4j property graph database model consists of:
 
 * *Nodes* describe entities (discrete objects) of a domain.
 * *Nodes* can have zero or more *labels* to define (classify) what kind of nodes they are.
-* *Relationships* describes a connection between a _source node_ and a _target node_.
-* *Relationships* always has a direction (one direction).
+* *Relationships* describe a connection between a _source node_ and a _target node_.
+* *Relationships* always have a direction (one direction).
 * *Relationships* must have a *type* (one type) to define (classify) what type of relationship they are.
 * Nodes and relationships can have *properties* (key-value pairs), which further describe them.
 
@@ -26,7 +26,7 @@ The Neo4j property graph database model consists of:
 ====
 In mathematics, graph theory is the study of graphs.
 
-In graph therory:
+In graph theory:
 
 * Nodes are also refered to as vertices or points.
 * Relationships are also refered to as edges, links, or lines.
@@ -38,20 +38,15 @@ In graph therory:
 
 The example graph shown below, introduces the basic concepts of the property graph:
 
-.Example graph.
-=====
-image::graph_simple.svg[]
-=====
+.Example graph
+image::graph_simple-arr.svg[width=600]
 
-.Cypher.
-=====
 To create the example graph, use the Cypher clause `CREATE`.
 
-[source, cypher, role="noheader"]
+[source, cypher]
 -----
 CREATE (:Person:Actor {name: 'Tom Hanks', born: 1956})-[:ACTED_IN {roles: ['Forrest']}]->(:Movie {title: 'Forrest Gump'})<-[:DIRECTED]-(:Person {name: 'Robert Zemeckis', born: 1951})
 -----
-=====
 
 //.Cypher.
 //=====
@@ -77,9 +72,8 @@ Nodes are used to represent _entities_ (discrete objects) of a domain.
 The simplest possible graph is a single node with no relationships.
 Consider the following graph, consisting of a single node.
 
-.Node.
-=====
-image::graph_single_node.svg[]
+.Node
+image::graph_single_node-arr.svg[width=150]
 
 The node labels are:
 
@@ -97,10 +91,10 @@ The node can be created with Cypher using the query:
 -----
 CREATE (:Person:Actor {name: 'Tom Hanks', born: 1956})
 -----
-=====
+
 
 [[graphdb-labels]]
-== Node labels
+=== Node labels
 
 Labels shape the domain by grouping (classifying) nodes into sets where all nodes with a certain label belong to the same set.
 
@@ -117,10 +111,8 @@ More labels can be added to express different dimensions of the data.
 
 The following graph shows the use of multiple labels.
 
-.Multiple labels.
-=====
-image::graphdb-simple-labels-multi.svg[role="middle"]
-=====
+.Multiple labels
+image::graphdb-simple-labels-multi-arr.svg[role="middle", width=500]
 
 [[graphdb-relationship]]
 == Relationship
@@ -137,9 +129,8 @@ A relationship:
 
 Relationships organize nodes into structures, allowing a graph to resemble a list, a tree, a map, or a compound entity -- any of which may be combined into yet more complex, richly inter-connected structures.
 
-.Relationship.
-=====
-image::graph_example_relationship.svg[]
+.Relationship
+image::graph_example_relationship-arr.svg[width=400]
 
 The relationship type: `ACTED_IN`
 
@@ -161,7 +152,6 @@ CREATE ()-[:ACTED_IN {roles: ['Forrest'], performance: 5}]->()
 ====
 You must create or reference a _source node_ and a _target node_ to be able to create a relationship.
 ====
-=====
 
 Relationships always have a direction.
 However, the direction can be disregarded where it is not useful.
@@ -170,25 +160,21 @@ This means that there is no need to add duplicate relationships in the opposite 
 A node can have relationships to itself.
 To express that `Tom Hanks` `KNOWS` himself would be expressed as:
 
-.Relationship to a single node.
-=====
-image::graphdb-nodes-and-rel-self.svg[role="middle"]
-=====
+.Relationship to a single node
+image::graphdb-nodes-and-rel-self-arr.svg[role="middle", width=300]
 
 
 [[graphdb-relationship-type]]
-== Relationship type
+=== Relationship type
 
 A relationship must have exactly one relationship type.
 
 Below is an `ACTED_IN` relationship, with the `Tom Hanks` node as the _source node_ and `Forrest Gump` as the _target node_.
 
-.Relationship type.
-=====
-image::graphdb-nodes-and-rel.svg[role="middle"]
+.Relationship type
+image::graphdb-nodes-and-rel-arr.svg[role="middle", width=450]
 
 Observe that the `Tom Hanks` node has an _outgoing_ relationship, while the `Forrest Gump` node has an _incoming_ relationship.
-=====
 
 
 [[graphdb-properties]]
@@ -253,31 +239,28 @@ In most cases only a subset of the graph is visited.
 
 .Path matching.
 =====
-To find out which movies Tom Hanks acted in according to the tiny example database, the traversal would start from the `Tom Hanks` node, follow any `ACTED_IN` relationships connected to the node, and end up with `Forrest Gump` as the result (see the dashed lines):
+To find out which movies Tom Hanks acted in according to the tiny example database, the traversal would start from the `Tom Hanks` node, follow any `ACTED_IN` relationships connected to the node, and end up with the `Movie` node `Forrest Gump` as the result (see the black lines):
 
-image::graphdb-traversal.svg[role="middle"]
+image::graphdb-traversal-arr.svg[role="middle", width=400]
 
 The traversal result could be returned as a path with the length `1`:
 
-image::graphdb-path.svg[role="middle"]
+image::graphdb-path-arr.svg[role="middle", width=400]
 =====
 
 The shortest possible path has length zero.
 It contains a single node and no relationships.
 
-.Path of length zero.
-=====
 A path containing only a single node has the length of `0`.
 
-image::graphdb-path-zero.svg[role="middle"]
-=====
+.Path of length zero
+image::graphdb-path-zero-arr.svg[role="middle", width=150]
 
-.Path of length one.
-=====
+
 A path containing one relationship has the length of `1`.
 
-image::graphdb-path-example-loop.svg[role="middle"]
-=====
+.Path of length one
+image::graphdb-path-example-loop-arr.svg[role="middle", width=300]
 
 
 [[graphdb-schema]]
