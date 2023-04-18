@@ -32,26 +32,26 @@ image::procedures-functions-bolt.jpg[width=600]
 * Functions can be used in any expression or predicate.
 
 * Procedures are more complex operations and generate streams of results.
-* To check which procedures are available in your Neo4j DBMS, use the Cypher command `SHOW PROCEDURES`.
 * Procedures can generate, fetch, or compute data to make it available to later processing steps in your Cypher query.
+* To call a procedure deployed in the databasehe, use the `CALL` clause (for more details, see link:https://neo4j.com/docs/cypher-manual/current/clauses/call/#query-call-introduction[Cypher Manual -> CALL procedure]).
 
 [#cypher-list-extension]
 == Listing and using functions and procedures in Neo4j
 
-There are a number of built-in procedures in Neo4j.
+Neo4j comes with a number of built-in procedures.
 To learn more about them, see link:https://neo4j.com/docs/operations-manual/current/reference/procedures/[Operations Manual -> Procedures].
 
-To list all available functions and procedures, use the following Cypher commands:
+To list all available functions and procedures in DBMS, use the following Cypher commands:
 
 * `SHOW FUNCTIONS`
 * `SHOW PROCEDURES`
 
 You can refer to the link:https://neo4j.com/docs/cypher-cheat-sheet/current/[Cypher Cheat Sheet] to get a quick reference on how to use these commands.
 
-Also take a look at the link:https://neo4j.com/docs/java-reference/current/extending-neo4j/[procedure section in the Neo4j Java Reference^].
-
 Each procedure returns one or more columns of data.
-With `YIELD` clause these columns can be selected and also aliased and are then available in your Cypher statement.
+With the `YIELD` clause these columns can be selected and also aliased and are then available in your Cypher query.
+
+Like other Cypher admin commands `SHOW PROCEDURES` can be used with a subset of Cypher clauses, as shown below where we filter by 'db.' prefix and return the results ordered by name.
 
 [source,cypher]
 ----
@@ -61,7 +61,28 @@ WHERE name STARTS WITH 'db.'
 RETURN * ORDER BY name ASC
 ----
 
-Of course, you can process the result columns with other Cypher clauses and group the results.
+Below you can find one more example on how to group available procedures by a chosen category, for example by package. 
+
+[source,cypher]
+----
+SHOW PROCEDURES
+YIELD name, signature, description
+RETURN split(name,".")[0..-1] AS package,  count(*) AS count,
+       collect(split(name,".")[-1]) AS names
+ORDER BY count DESC
+----
+
+The result can be the following:
+
+[options=header]
+|===
+|package                      |count  |names
+|["dbms"]                     |20     |["checkConfigValue", "components", "info",...]
+|["db"]                       |16     |["awaitIndex", "awaitIndexes", "checkpoint",...]
+|["db","stats"]               |6      |["clear", "collect", "retrieve",...]
+|["dbms", "cluster"]          |6      |["checkConnectivity", "cordonServer", "protocols",...]
+|["db", "index", "fulltext"]  |4      |["awaitEventuallyConsistentIndexRefresh", "listAvailableAnalyzers",...]
+|===
 
 User-defined functions are written in Java, deployed into the database and are called in the same way as any other Cypher functions. 
 There are two main types of functions that can be developed and used:
@@ -71,7 +92,7 @@ There are two main types of functions that can be developed and used:
 
 For more details, see link:https://neo4j.com/docs/cypher-manual/current/functions/user-defined/[Cypher Manual -> User-defined functions].
 
-You can take any procedure library and deploy it to your server to make additional procedures and functions available.
+You can take any procedure library and deploy it to your self-managed server to make additional procedures and functions available.
 
 Also take a look at the link:https://neo4j.com/docs/java-reference/current/extending-neo4j/[procedure section in the Neo4j Java Reference^].
 
@@ -80,8 +101,6 @@ Also take a look at the link:https://neo4j.com/docs/java-reference/current/exten
 
 If you build your own procedures or download them from a community project, they are packaged in a JAR file.
 You can copy that file into the `$NEO4J_HOME/plugins` directory of your Neo4j server and restart.
-
-You can take any procedure library and deploy it to your server to make additional procedures and functions available.
 
 [WARNING]
 ====
@@ -95,8 +114,9 @@ See link:https://neo4j.com/docs/operations-manual/current/security/securing-exte
 
 [IMPORTANT]
 ====
-Certain procedures and functions are available for self-managed Neo4j Enterprise Edition and Community Edition. 
-Custom code described in this section is not compatible with link:{aura_signup}[AuraDB].
+Certain procedures and functions are available for self-managed Neo4j Enterprise Edition and Community Edition. +
+Custom code described in this section is not compatible with link:{aura_signup}[AuraDB]. +
+In Neo4j AuraDB, the set of available procedures and functions is limited to the built-in ones and a subset of the https://neo4j.com/docs/aura/platform/apoc/[APOC Core library^].
 ====
 
 [#procedure-function-gallery]
@@ -149,7 +169,7 @@ Many of your needs will already be covered by those, for example:
 
 [NOTE]
 ====
-Community projects are not supported officially and we don’t provide any SLAs or guarantees around backwards compatibility and deprecation.
+Community and Neo4j Labs projects are not supported officially and we don’t provide any SLAs or guarantees around backwards compatibility and deprecation.
 ====
 
 
