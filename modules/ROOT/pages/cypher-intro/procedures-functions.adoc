@@ -51,7 +51,7 @@ You can refer to the link:https://neo4j.com/docs/cypher-cheat-sheet/current/[Cyp
 Each procedure returns one or more columns of data.
 With the `YIELD` clause these columns can be selected and also aliased and are then available in your Cypher query.
 
-Like other Cypher admin commands `SHOW PROCEDURES` can be used with a subset of Cypher clauses, as shown below where we filter by 'db.' prefix and return the results ordered by name.
+Like other Cypher administrative commands, `SHOW PROCEDURES` can be used with a subset of Cypher clauses, as shown below where we filter by 'db.' prefix and return the results ordered by name.
 
 [source,cypher]
 ----
@@ -72,6 +72,7 @@ RETURN split(name,".")[0..-1] AS package,  count(*) AS count,
 ORDER BY count DESC
 ----
 
+Set of the available procedures depends on the type of installation you have and your configuration settings.
 The result can be the following:
 
 [options=header]
