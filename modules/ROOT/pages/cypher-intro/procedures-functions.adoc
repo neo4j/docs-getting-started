@@ -4,15 +4,13 @@
 :page-ad-overline-link: https://graphacademy.neo4j.com/categories/cypher/
 :page-ad-overline: Neo4j GraphAcademy
 :page-ad-title: Cypher Courses
-:page-ad-description: Learn Cypher in this free, hands-on courses
+:page-ad-description: Learn Cypher in these free, hands-on courses
 :page-ad-link: https://graphacademy.neo4j.com/categories/cypher/
 :page-ad-underline-role: button
 :page-ad-underline: Learn more
 
-// To rename this section: How to extend Cypher (or Neo4j). See https://neo4j.com/docs/java-reference/current/extending-neo4j/customized-code/
 
-[abstract]
-{description}
+This guide explains how to create, use and deploy user-defined procedures and functions, the extension mechanism of Cypher, Neo4j's query language.
 
 [#cypher-extension]
 == Extending Cypher
@@ -20,110 +18,114 @@
 Cypher is a powerful and expressive language, with first class graph pattern and collection support.
 But sometimes you need to do more than it currently offers, like additional graph algorithms, parallelization, or custom conversions.
 
-That's why Neo4j and Cypher can be extended with link:https://neo4j.com/docs/java-reference/current/extending-neo4j/[_User-defined procedures and functions_].
+Cypher can be extended with _User-defined procedures and functions_, as described in link:https://neo4j.com/docs/java-reference/current/extending-neo4j/procedures/[Java Reference -> User-defined procedures] and link:https://neo4j.com/docs/java-reference/current/extending-neo4j/functions/[Java Reference -> User-defined functions]. 
+
 Neo4j itself provides and utilizes custom procedures.
-Many of the monitoring, introspection and security features exposed by Neo4j Browser are implemented using procedures.
+Many of the monitoring, introspection and security features exposed by *Neo4j Browser* are implemented using procedures.
 
 image::procedures-functions-bolt.jpg[width=600]
 
 [#procedures-functions]
-== What are procedures and functions?
+== Procedures and functions in Neo4j
 
 * Functions are simple computations / conversions and return a single value.
 * Functions can be used in any expression or predicate.
 
 * Procedures are more complex operations and generate streams of results.
-* Procedures must be used within the `CALL` clause and `YIELD` their result columns.
-* They can generate, fetch or compute data to make it available to later processing steps in your Cypher query.
+* Procedures can generate, fetch, or compute data to make it available to later processing steps in your Cypher query.
+* To call a procedure deployed in the database, use the `CALL` clause (for more details, see link:https://neo4j.com/docs/cypher-manual/current/clauses/call/#query-call-introduction[Cypher Manual -> CALL procedure]).
 
 [#cypher-list-extension]
-== Listing & using functions and procedures
+== Listing and using functions and procedures in Neo4j
 
-There are a link:https://neo4j.com/docs/operations-manual/current/reference/procedures/[number of built in procedures^], two of which are used to list available functions and procedures.
+Neo4j comes with a number of built-in procedures.
+To learn more about them, see link:https://neo4j.com/docs/operations-manual/current/reference/procedures/[Operations Manual -> Procedures].
 
-Run the following statements along to get a hang of the usage and see their results.
+To list all available functions and procedures in DBMS, use the following Cypher commands:
 
-[source,cypher]
-----
-CALL dbms.procedures()
-----
+* `SHOW FUNCTIONS`
+* `SHOW PROCEDURES`
 
-Call `dbms.functions()` to list functions.
+You can refer to the link:https://neo4j.com/docs/cypher-cheat-sheet/current/[Cypher Cheat Sheet] to get a quick reference on how to use these commands.
 
 Each procedure returns one or more columns of data.
-With `yield` these columns can be selected and also aliased and are then available in your Cypher statement.
+With the `YIELD` clause these columns can be selected and also aliased and are then available in your Cypher query.
+
+Like other Cypher administrative commands, `SHOW PROCEDURES` can be used with a subset of Cypher clauses, as shown below where we filter by 'db.' prefix and return the results ordered by name.
 
 [source,cypher]
 ----
-CALL dbms.procedures()
+SHOW PROCEDURES
 YIELD name, signature, description as text
 WHERE name STARTS WITH 'db.'
 RETURN * ORDER BY name ASC
 ----
 
-Of course you can also process the result columns with other Cypher clauses.
-Here we group them by package.
+Below you can find one more example on how to group available procedures by a chosen category, for example by package. 
 
 [source,cypher]
 ----
-CALL dbms.procedures()
+SHOW PROCEDURES
 YIELD name, signature, description
-WITH split(name,".") AS parts
-RETURN parts[0..-1] AS package,  count(*) AS count,
-       collect(parts[-1]) AS names
+RETURN split(name,".")[0..-1] AS package,  count(*) AS count,
+       collect(split(name,".")[-1]) AS names
 ORDER BY count DESC
 ----
 
+A set of available procedures depends on the type of installation you have and your configuration settings.
+You can get the following result:
+
 [options=header]
 |===
-|package             |count  |names
-|["dbms","security"] |16     |["activateUser","addRoleToUser","changePassword",....]
-|["apoc","refactor"] |11     |["categorize","cloneNodes","from"....]
-|["apoc","load"]     |9      |["csv","driver","jdbc","jdbcParams","json","jsoe"]
-|["db"]              |9      |["awaitIndex","constraints","indexes","labels",..,"schema"]
-|["dbms"]            |9      |["components","functions","queries","procedures",...]
+|package                      |count  |names
+|["dbms"]                     |20     |["checkConfigValue", "components", "info",...]
+|["db"]                       |16     |["awaitIndex", "awaitIndexes", "checkpoint",...]
+|["db","stats"]               |6      |["clear", "collect", "retrieve",...]
+|["dbms", "cluster"]          |6      |["checkConnectivity", "cordonServer", "protocols",...]
+|["db", "index", "fulltext"]  |4      |["awaitEventuallyConsistentIndexRefresh", "listAvailableAnalyzers",...]
 |===
 
-As of Neo4j 3.1, all functions available are directly part of the Cypher implementation, so user-defined Functions would only come from installed libraries.
+User-defined functions are written in Java, deployed into the database and are called in the same way as any other Cypher functions. 
+There are two main types of functions that can be developed and used:
 
-You can take any procedure library and deploy it to your server to make additional procedures and functions available.
+* user-defined scalar functions,
+* user-defined aggregation functions.
+
+For more details, see link:https://neo4j.com/docs/cypher-manual/current/functions/user-defined/[Cypher Manual -> User-defined functions].
+
+You can take any procedure library and deploy it to your self-managed server to make additional procedures and functions available.
 
 Also take a look at the link:https://neo4j.com/docs/java-reference/current/extending-neo4j/[procedure section in the Neo4j Java Reference^].
 
 [#deploy-extension]
-== Deploying procedures & functions
+== Deploying procedures and functions
 
-If you built your own procedures or downloaded them from a community project, they are packaged in a jar-file.
+If you build your own procedures or download them from a community project, they are packaged in a JAR file.
 You can copy that file into the `$NEO4J_HOME/plugins` directory of your Neo4j server and restart.
 
 [WARNING]
-*A word of caution.*
+====
 As procedures and functions use the low level Java API they can access all Neo4j internals as well as the file system and machine.
 That's why you should know which procedures you deploy and why.
 Only install procedures from trusted sources.
 If they are open source, check their source-code and best build them yourself.
 
+See link:https://neo4j.com/docs/operations-manual/current/security/securing-extensions/[Operations Manual -> Securing extensions] for best practices on how to ensure the security of these additions.
+====
+
 [IMPORTANT]
-Certain procedures and functions are available for self-managed Neo4j Enterprise Edition and Community Edition.  Custom code
-described in this section is not compatible with link:{aura_signup}[AuraDB]
+====
+Certain procedures and functions are available for self-managed Neo4j Enterprise Edition and Community Edition. +
+Custom code described in this section is not compatible with link:{aura_signup}[AuraDB]. +
+In Neo4j AuraDB, the set of available procedures and functions is limited to the built-in ones and a subset of the https://neo4j.com/docs/aura/platform/apoc/[APOC Core library^].
+====
 
 [#procedure-function-gallery]
 == Procedure and function gallery
 
-In our link:https://neo4j.com/labs/[Neo4j Labs projects], we provide an impressive set of libraries built by our community and staff.
-Check it out to see what's already there.
-Many of your needs will already be covered by those, for example:
+link:https://neo4j.com/docs/apoc/current/introduction/[The APOC Core library] offers you a set of useful procedures on Cypher to increase functionality in areas of data integration, graph algorithms and data conversion.
 
-* index operations
-* database/api integration
-* graph refactorings
-* import and export
-* spatial index lookup
-* rdf import and export
-* and many more
-
-Here are two cool examples of what you can do:
-
+////
 A procedure to load data from another database:
 
 [source,cypher]
@@ -136,8 +138,9 @@ LIMIT 20
 -----
 
 image::https://raw.githubusercontent.com/neo4j-contrib/neo4j-apoc-procedures/3.2/docs/img/apoc-load-jdbc.jpg[]
+////
 
-Functions to format and parse timestamps of different resolutions:
+For example, functions to format and parse timestamps of different resolutions:
 
 [source,cypher]
 ----
@@ -153,13 +156,32 @@ RETURN apoc.date.format(timestamp()) as time,
 |"2017-01-05 13:06:39"|"2017-01-05"|158803200 |1483621387000
 |===
 
+In our link:https://neo4j.com/labs/[Neo4j Labs projects], you can find a set of libraries built by our community and staff.
+Check it out to see what's already there.
+Many of your needs will already be covered by those, for example:
+
+* index operations
+* database/api integration
+* graph refactorings
+* import and export
+* spatial index lookup
+* rdf import and export
+* and many more
+
+[NOTE]
+====
+Community and Neo4j Labs projects are not supported officially and we don’t provide any SLAs or guarantees around backwards compatibility and deprecation.
+====
+
+
 [#custom-extension]
 == Developing your own procedures and functions
 
-You can find details on writing and testing procedures in the link:https://neo4j.com/docs/java-reference/current/extending-neo4j/procedures-and-functions/introduction/[Neo4j Manual^].  
+You can find details on writing and testing procedures in the link:https://neo4j.com/docs/java-reference/current/extending-neo4j/procedures-and-functions/introduction/[Neo4j Java Reference^].  
+
 The https://github.com/neo4j-examples/neo4j-procedure-template[example GitHub repository^] contains detailed documentation and comments that you can clone directly and use as a starting point.
 
-Here are just some initial tips:
+Here are just some initial tips.
 
 User-defined functions are simpler, so let's start with them:
 
@@ -168,7 +190,7 @@ User-defined functions are simpler, so let's start with them:
 * they return a single value
 * are read only
 
-User defined procedures are similar:
+User-defined procedures are similar:
 
 * `@Procedure` annotated, Java methods
 * with an additional `mode` attribute (`READ, WRITE, DBMS`)
