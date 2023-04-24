@@ -1,0 +1,44 @@
+[[gds-neo4j]]
+= Data science with Neo4j
+:description: Introduction to data science tools in Neo4j. Overview of Graph Data Science Library - GDS, explanations of graph algorithms offered in GDS, recommendations on how to select a graph algorithm for a specific use case.
+:page-ad-overline-link: https://graphacademy.neo4j.com/courses/gds-product-introduction/?ref=docs
+:page-ad-overline: Neo4j GraphAcademy
+:page-ad-title: Introduction to Neo4j Graph Data Science
+:page-ad-description: Gain high-level understanding of the GDS library
+:page-ad-link: https://graphacademy.neo4j.com/courses/gds-product-introduction/?ref=docs
+:page-ad-underline-role: button
+:page-ad-underline: Learn more
+
+== Introduction
+
+We offer graph algorithms library - Graph Data Science.
+We have cloud sevice -- AuraDS
+?? Is AuraDS for work in team? how to share your workflow or results with other team members? Collaborate
+
+== Setting up the environment
+
+* Sandbox: https://neo4j.com/sandbox/?ref=developer-graph-algo -- ask Adam
+* Cloud option - AuraDS 
+* Locally - GDS as a plugin in Neo4j Desktop:
+** Community Edition and Enterprise Edition
+
+
+
+If you are Python oriented person, go to the Client docs.
+very short instruction on how to get started with client
+
+
+
+examples in Jupiter notebook - links to Client docs, AuraDS docs.
+
+
+
+== Resources
+
+* Neo4j Graph Data Science Library Manual
+* Neo4j Graph Data Science Client
+* AuraDS documentation
+* https://graphacademy.neo4j.com/categories/data-scientist/
+* Use cases and recommendations on how to select a specific algorithm.
+We have a Graphgist portal where you can find information about different use cases: https://neo4j.com/graphgists/.
+
