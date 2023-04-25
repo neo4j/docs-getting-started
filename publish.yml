@@ -24,8 +24,7 @@ urls:
 antora:
   extensions:
   - require: "@neo4j-antora/antora-modify-sitemaps"
-    sitemap_version: '5'
-    sitemap_loc_version: 'current'
+    sitemap_version: '~'
     move_sitemaps_to_components: true
 
 asciidoc:
