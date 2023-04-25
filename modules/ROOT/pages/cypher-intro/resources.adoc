@@ -3,9 +3,13 @@
 :author: Jennifer Reif
 :category: cypher
 :tags: cypher, queries, graph-queries, resources, documentation, cypher-training, cypher-help
-:page-pagination: previous
-:page-aliases: ROOT:cypher-resources.adoc
-:page-newsletter: true
+:page-ad-overline-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
+:page-ad-overline: Neo4j GraphAcademy
+:page-ad-title: Cypher Fundamentals
+:page-ad-description: Learn Cypher in this free, hands-on course
+:page-ad-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
+:page-ad-underline-role: button
+:page-ad-underline: Learn more
 
 == Cypher resources
 
@@ -15,7 +19,7 @@ To help you along your path of learning more about Cypher and how to use it, we 
 == Cypher basics and documentation
 * https://graphacademy.neo4j.com/courses/cypher-fundamentals/[GraphAcademy - Cypher Fundamentals].  Learn Cypher in 60 minutes.
 * https://neo4j.com/docs/cypher-manual/current/[Documentation: Cypher Manual^]
-* https://neo4j.com/docs/cypher-refcard/current/[Cypher Refcard^]
+* https://neo4j.com/docs/cypher-cheat-sheet/current/[Cypher Cheat Sheet^]
 * https://community.neo4j.com/c/neo4j-graph-platform/cypher[Neo4j Community Site: Ask Questions, Get Answers on Cypher^]
 
 [#cypher-sql-dev]

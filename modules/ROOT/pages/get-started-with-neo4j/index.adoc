@@ -1,6 +1,13 @@
 [[get-started-with-neo4j]]
 = Get started with Neo4j
 :description: This section gives an orientation on how to get started with Neo4j.
+:page-ad-overline-link: https://graphacademy.neo4j.com/categories/beginners/?ref=docs
+:page-ad-overline: Neo4j GraphAcademy
+:page-ad-title: Neo4j Beginners Courses
+:page-ad-description: Learn more about graph database concepts and Cypher in these free, hands-on courses
+:page-ad-link: https://graphacademy.neo4j.com/categories/beginners/?ref=docs
+:page-ad-underline-role: button
+:page-ad-underline: Learn more
 
 There are a number of options on how to get started with Neo4j, and your choice depends upon your needs and goals.
 Each option allows you to explore different possibilities of the Neo4j ecosystem.
@@ -71,7 +78,6 @@ You can also find comprehensive descriptions of Neo4j clustering here.
 * **Cypher Query Language** -- Docsets for Neo4j graph query language:
 ** link:https://neo4j.com/docs/cypher-manual/current/[The Neo4j Cypher Manual] -- the comprehensive manual for Cypher for the developers of a Neo4j client application.
 ** link:https://neo4j.com/docs/cypher-cheat-sheet/current/[Cypher Cheat Sheet] -- a printable set of notes for a quick overview of Cypher syntax basics.
-** link:https://neo4j.com/docs/cypher-refcard/current/[Neo4j Cypher Refcard] -- a quick reference guide for Cypher language. 
 * link:https://neo4j.com/docs/drivers-apis/[**Neo4j Drivers and APIs**] -- Docsets for officially supported drivers, connectors, and APIs.
 ** link:https://neo4j.com/docs/go-manual/current/[The Neo4j Go Driver Manual]
 ** link:https://neo4j.com/docs/java-manual/current/[The Neo4j Java Driver Manual] 

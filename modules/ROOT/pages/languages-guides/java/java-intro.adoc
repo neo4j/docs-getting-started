@@ -1,27 +1,26 @@
 [[java]]
 = Using Neo4j from Java
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
-:java-driver-version: 5.3.0
 :maven-artifact-info: https://search.maven.org/artifact/org.neo4j.driver/neo4j-java-driver/{java-driver-version}/jar
 :examples: https://github.com/neo4j-examples
 :programming-language: java
 :tags: java, project, official-driver, app-development, applications
 :description: If you are a Java developer, this guide provides an overview of options for connecting to Neo4j.
 
-[abstract]
-{description}
+If you are a Java developer, this guide provides an overview of options for connecting to Neo4j.
 While this guide is not comprehensive, it introduces the different APIs and links to the relevant resources.
 
-[abstract]
+
 You should be familiar with xref:appendix/graphdb-concepts/index.adoc[graph database concepts] and the property graph model.
 You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or link:/download/[installed Neo4j locally].
-When developing with Neo4j, use Java 8 or 11 and your preferred IDE.
 
+When developing with Neo4j 5.x, use Java 17 and your preferred IDE.
+
+5.x driver series requires Java 17.
+For more details, see link:https://neo4j.com/docs/java-manual/5/get-started/[Neo4j Java Driver Manual].
 
 [[neo4j-java]]
 == Neo4j for Java developers
-
-// image::{neo4j-img-base-uri}java.jpg[float=right,width=200]
 
 Neo4j provides drivers which allow you to make a connection to the database and develop applications
 which create, read, update, and delete information from the graph.
@@ -51,7 +50,7 @@ You will find the implementations for all drivers as https://github.com/neo4j-ex
 
 The Neo4j Java driver is *officially supported* by Neo4j and connects to the database using the binary protocol.
 It aims to be minimal, while being idiomatic to Java.
-We support Java 8 and 11 for the driver.
+We support Java 17 for the 5.x driver series.
 
 When using Maven, add this to your _pom.xml_ file:
 

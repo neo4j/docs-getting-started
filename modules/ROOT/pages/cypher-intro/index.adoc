@@ -2,6 +2,13 @@
 [[cypher-intro]]
 = Introduction to Cypher
 :description: A high-level overview of the graph query language Cypher.
+:page-ad-overline-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
+:page-ad-overline: Neo4j GraphAcademy
+:page-ad-title: Cypher Fundamentals
+:page-ad-description: Learn Cypher in this free, hands-on course
+:page-ad-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
+:page-ad-underline-role: button
+:page-ad-underline: Learn more
 
 This section introduces you to the graph query language -- Cypher.
 It aims to help you start thinking about graphs and patterns, apply this knowledge to simple problems, and learn how to write Cypher statements.
@@ -89,11 +96,17 @@ Cypher is also heavily based on patterns and is designed to recognize various ve
 The video below walks through some background on Cypher, basic syntax, and some intermediate examples.
 The concepts in the video are discussed in the following paragraphs, as well as in upcoming chapters.
 
+ifndef::backend-pdf[]
 ++++
 <div class="responsive-embed">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_dup3YOZSm8" title="What is Cypher?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 ++++
+endif::[]
+
+ifdef::backend-pdf[]
+link:https://www.youtube.com/watch?v=_dup3YOZSm8[What is Cypher?]
+endif::[]
 
 Cypher's constructs, based on English prose and neat iconography, make queries easy both to write and to read.
 For example, take a look at the simple graph data in the image below.

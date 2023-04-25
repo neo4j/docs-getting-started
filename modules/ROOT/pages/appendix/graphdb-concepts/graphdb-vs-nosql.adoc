@@ -12,11 +12,17 @@ Although unhelpfully named, the NoSQL ("Not only SQL") space brings together man
 
 With the advent of the NoSQL movement, the "one-size-fits-all" proposition of large relational systems was replaced by conscious decisions about finding the right tool for the job.
 
+ifndef::backend-pdf[]
 ++++
 <div class="responsive-embed">
 <iframe width="680" height="425" src="https://www.youtube.com/embed/5Tl8WcaqZoc" frameborder="0" allowfullscreen></iframe>
 </div>
 ++++
+endif::[]
+
+ifdef::backend-pdf[]
+link:https://www.youtube.com/embed/5Tl8WcaqZoc[Video: Evolution of DBs]
+endif::[]
 
 Most NoSQL systems are *aggregate-oriented*, grouping the data based on a particular criterion and the database type (such as document store, key-value pair, etc).
 This model provides only simple, limited operations and only forms one dedicated view of your data.
