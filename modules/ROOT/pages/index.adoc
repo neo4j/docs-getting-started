@@ -147,6 +147,7 @@ Neo4j Aura includes AuraDB for applications and AuraDS for data science.
 ++++
 ////
 
+
 == Neo4j Community Forum
 
 Neo4j is dedicated to kind and open communication and aims to create a developer-friendly environment. +
