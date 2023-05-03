@@ -23,21 +23,10 @@ Neo4j provides drivers which allow you to make a connection to the database and 
 which create, read, update, and delete information from the graph.
 
 [#dotnet-driver]
-== Neo4jDotNetDriver
+== Neo4j .Net Driver
 
 The Neo4j .NET driver is *officially supported* by Neo4j and connects to the database using the binary protocol.
 It aims to be minimal, while being idiomatic to .NET.
-
-Please note that the following example makes use of the `Neo4j.Driver.Simple` package that implements a blocking interface
-around the 'main' driver.
-This is to aid in clarity and simplicity for those just starting out with the Neo4j .Net driver.
-
-[source, subs=attributes]
-----
-PM> Install-Package Neo4j.Driver.Simple-{dotnet-driver-version}
-----
-
-For real projects, the `Neo4j.Driver` package should be used instead.
 
 [source, subs=attributes]
 ----
@@ -45,9 +34,9 @@ PM> Install-Package Neo4j.Driver-{dotnet-driver-version}
 ----
 
 
-[source, c]
+[source, csharp]
 ----
-include::https://raw.githubusercontent.com/neo4j/neo4j-dotnet-driver/{dotnet-driver-version}/Neo4j.Driver/Neo4j.Driver.Tests.Integration/Examples.cs[tag=hello-world,indent=0]
+include::https://raw.githubusercontent.com/neo4j/neo4j-dotnet-driver/{dotnet-driver-version}/Neo4j.Driver/Neo4j.Driver.Tests.Integration/ExamplesAsync.cs[tag=async-hello-world,indent=0]
 ----
 
 
@@ -97,7 +86,7 @@ If necessary, you can also https://medium.com/neo4j/getting-certificates-for-neo
 | icon:tag[] Version
 | icon:user[] Authors
 
-| Neo4jDotNetDriver
+| Neo4j .Net Driver
 | {dotnet-driver-version}
 | The Neo4j Team, http://twitter.com/cskardon[Charlotte Skardon], https://twitter.com/IngvarKofoed[Martin Jensen]
 
