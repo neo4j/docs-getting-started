@@ -26,6 +26,23 @@ You'll still need to refresh the page to view the changes.
 
 == Contributing
 
-To make changes to this repository, please create a fork of this repo and a new branch to stage your changes. Your branch should be prefixed with the version number, for example `4.3-new-examples`.
+To make changes to this repository, please create a fork of this repo and a new branch to stage your changes.
 
-When you are finished with your changes push the branch to your fork and create a Pull Request. Please add at least one approver.
+=== Branch management
+
+The docs-getting-started repo contains the following branches:
+
+* `dev` - this branch is published on the staging server, as a preview, but we will never publish from this branch publicly.
+* `main` - this is the currently published version, and therefore is the branch that we publish the GSG from.
+PRs merged into this branch will be published live immediately.
+* Other (versioned) branches -- `3.5`, `4.0`, `4.4`, `5.x`, etc. -- are not maintained any longer.
+
+=== Raising Pull Requests
+
+Since the Getting Started Guide has no version, raise your Pull Request against the `dev` branch.
+
+If your changes have to be published immediately, create a PR against the `main` branch.
+
+The general recommendation is to raise PRs against the `dev` branch and cherry-pick them back to `main` branch. 
+
+Please, add at least one approver.
