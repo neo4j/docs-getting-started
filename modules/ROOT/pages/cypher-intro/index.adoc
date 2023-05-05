@@ -26,9 +26,7 @@ Cypher is Neo4j's graph query language that lets you retrieve data from the grap
 It is like SQL for graphs, and was inspired by SQL so it lets you focus on what data you want out of the graph (not how to go get it).
 It is the easiest graph language to learn by far because of its similarity to other languages and intuitiveness.
 
-// image::cypher_learning.png[role="popup-link"]
-
-image::cypher_learning_arr.svg[role="popup-link"]
+image::cypher_learning_arr.svg[role="popup-link",width=450]
 
 // Note $$->$$ is used as a special escape to prevent asciidoc from replacing -> with arrow in unicode
 Cypher is unique because it provides a visual way of matching patterns and relationships.
@@ -40,42 +38,14 @@ Neo4j users use Cypher to construct expressive and efficient queries to do any k
 delete (CRUD) on their graph, and Cypher is the primary interface for Neo4j.
 
 [IMPORTANT]
+====
 Like Neo4j itself, Cypher is open source!  link:http://openCypher.org[The openCypher project^] provides all of the specs needed.
 Cypher is backed by a number of companies all of which benefit from cypher.
+====
 
 Once you have an AuraDB database, you can use the `:guide cypher` command inside of Neo4j Browser to get started.
 
 Getting Started Guide covers the basics of the language, which you can explore topic by topic, starting with basic material and building up towards more complex material.
-
-////
-In this section you are going to find the following subsections:
-
-* xref::/cypher-intro/patterns.adoc#cypher-intro-patterns[Patterns]
-** xref::/cypher-intro/patterns.adoc#cypher-intro-patterns-node-syntax[Node syntax]
-** xref::/cypher-intro/patterns.adoc#cypher-intro-patterns-relationship-syntax[Relationship syntax]
-** xref::/cypher-intro/patterns.adoc#cypher-intro-patterns-pattern-syntax[Pattern syntax]
-** xref::/cypher-intro/patterns.adoc#cypher-intro-patterns-pattern-variables[Pattern variables]
-** xref::/cypher-intro/patterns.adoc#cypher-intro-patterns-clauses[Clauses]
-* xref::/cypher-intro/patterns-in-practice.adoc#cypher-intro-patterns-in-practice[Patterns in practice]
-** xref::/cypher-intro/patterns-in-practice.adoc#cypher-intro-patterns-in-practice-creating-data[Creating data]
-** xref::/cypher-intro/patterns-in-practice.adoc#cypher-intro-patterns-in-practice-matching-patterns[Matching patterns]
-** xref::/cypher-intro/patterns-in-practice.adoc#cypher-intro-patterns-in-practice-attaching-structures[Attaching structures]
-** xref::/cypher-intro/patterns-in-practice.adoc#cypher-intro-patterns-in-practice-completing-patterns[Completing patterns]
-* xref::/cypher-intro/results.adoc#cypher-intro-results[Getting the correct results]
-** xref::/cypher-intro/results.adoc#cypher-intro-results-filtering[Filtering results]
-** xref::/cypher-intro/results.adoc#cypher-intro-results-returning[Returning results]
-** xref::/cypher-intro/results.adoc#cypher-intro-results-aggregating[Aggregating information]
-** xref::/cypher-intro/results.adoc#cypher-intro-results-ordering-and-pagination[Ordering and pagination]
-** xref::/cypher-intro/results.adoc#cypher-intro-results-collecting-aggregation[Collecting aggregation]
-* xref::/cypher-intro/large-statements.adoc#cypher-intro-large-statements[Composing large statements]
-** xref::/cypher-intro/large-statements.adoc#cypher-intro-large-statements-union[UNION]
-** xref::/cypher-intro/large-statements.adoc#cypher-intro-large-statements-with[WITH]
-* xref::/cypher-intro/schema.adoc#cypher-intro-schema[Defining a schema]
-** xref::/cypher-intro/schema.adoc#cypher-intro-schema[Using indexes]
-** xref::/cypher-intro/schema.adoc#cypher-intro-schema[Using constraints]
-* xref::/cypher-intro/load-csv.adoc#cypher-intro-load-csv[Import data]
-////
-
 
 == Getting started with Cypher
 
@@ -113,14 +83,12 @@ For example, take a look at the simple graph data in the image below.
 How would you represent this data in English? +
 _NOTE: the answer is in the paragraph below._
 
-// image::cypher_graph_v1.png[role="popup-link"]
-
-image::cypher_graph_v1_arr.svg[role="popup-link"]
+image::cypher_graph_v1_arr.svg[role="popup-link",width=600]
 
 [NOTE]
---
+====
 Sally likes Graphs. Sally is friends with John. Sally works for Neo4j.
---
+====
 
 Cypher syntax builds upon this English-language structure we just created.
 Further you can find information on how to write this example in Cypher.
@@ -133,10 +101,10 @@ You can add comments by starting a line with `//` and putting text after the sla
 Just like in other languages, starting the line with two forward slashes means that anything on that line will become a comment.
 
 [TIP]
---
+====
 This is especially helpful to use in Neo4j Browser when link:https://neo4j.com/docs/browser-manual/current/visual-tour/#favorites[saving queries].
 If you add a comment before the query, the comment automatically becomes the title of the saved query!
---
+====
 
 [#cypher-nodes]
 === Representing nodes in Cypher
@@ -144,11 +112,9 @@ If you add a comment before the query, the comment automatically becomes the tit
 Since Cypher is inspired by ASCII-Art for patterns, we need a visual way to represent each component of our pattern above.
 We know that the main components of the property graph model are nodes and relationships.
 Remember that nodes are the data entities in your graph and that you can often identify nodes by finding the nouns or objects in your data model.
-In our example, `Sally`, `John`, `Graphs`, and `Neo4j` are our nodes.
+In the example below, `Sally`, `John`, `Graphs`, and `Neo4j` are our nodes.
 
-// image::cypher_graph_nodes.png[role="popup-link"]
-
-image::cypher_graph_nodes_arr.svg[width=600, role="popup-link"]
+image::cypher_graph_nodes_arr.svg[role="popup-link",width=450]
 
 To depict nodes in Cypher, we surround the node with parentheses, e.g. `(node)`.
 Notice how the parentheses look similar to the circles that the visual representation uses for nodes in our data model.
@@ -174,10 +140,10 @@ This helps Cypher distinguish between entities and optimize execution for your q
 It is always better to use node labels in your queries, where possible.
 
 [TIP]
---
+====
 If you do not specify a label for Cypher to filter out non-matching node categories, the query checks all of the nodes in the database!
 As you can imagine, this would be cumbersome if you had a very large graph.
---
+====
 
 ==== Example: nodes in Cypher
 
@@ -201,9 +167,7 @@ Additional information, such as how nodes are connected (relationship type) and 
 
 In our example, the lines with `LIKES`, `IS_FRIENDS_WITH`, and `WORKS_FOR` between nodes are our relationships.
 
-// image::cypher_graph_rels.png[role="popup-link"]
-
-image::cypher_graph_rels_arr.svg[width=750, role="popup-link"]
+image::cypher_graph_rels_arr.svg[width=500,role="popup-link"]
 
 Undirected relationships are represented with no arrow and just two dashes `+--+`.
 This means that the relationship can be traversed in either direction.
@@ -211,7 +175,7 @@ While a direction *must* be inserted to the database, it can be matched with an 
 This allows the queries to be flexible and not force the user to know the physical direction of the relationship stored in the database.
 
 [NOTE]
---
+====
 If data is stored with one relationship direction, and a query specifies the wrong direction, Cypher will not return any results.
 In these cases where you may not be sure of direction, it is better to use an undirected relationship and retrieve some results.
 
@@ -226,7 +190,7 @@ MATCH (p:Person)<-[:LIKES]-(t:Technology)
 //better to query with undirected relationship unless sure of direction
 MATCH (p:Person)-[:LIKES]-(t:Technology)
 ----
---
+====
 
 ==== Relationship types
 
@@ -252,10 +216,10 @@ If you do not need to reference the relationship later, you can specify an anony
 As an example, you could use either `+-[rel]->+` or `+-[rel:LIKES]->+` and call the `rel` variable later in your query to reference the relationship and its details.
 
 [NOTE]
---
+====
 If you forget the colon in front of a relationship type like this `+-[LIKES]->+`, it represents a variable (not a relationship type).
 Since no relationship type declared, Cypher searches all types of relationships.
---
+====
 
 [#cypher-properties]
 === Node or relationship properties
@@ -271,9 +235,7 @@ Our example graph has both a node property (`name`) and a relationship property 
 * Node property: `(p:Person {name: 'Sally'})`
 * Relationship property: `+-[rel:IS_FRIENDS_WITH {since: 2018}]->+`
 
-// image::cypher_graph_props.png[role="popup-link"]
-
-image::cypher_graph_props_arr.svg[role="popup-link"]
+image::cypher_graph_props_arr.svg[role="popup-link",width=600]
 
 Properties can have values with a variety of data types.
 To see the full list that Cypher offers, see the manual section on link:https://neo4j.com/docs/cypher-manual/current/syntax/values/[values and types^].

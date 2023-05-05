@@ -42,7 +42,7 @@ Rows: 0
 
 As you started out with an empty database, you now have a database with a single node in it:
 
-image::cypher-intro-patterns-in-practice01-arr.svg[role="middle"]
+image::cypher-intro-patterns-in-practice01-arr.svg[role="middle",width=350]
 
 If you also want to return the created data, you can add a `RETURN` clause, which refers to the variable you have assigned to your pattern elements. + 
 The `RETURN` keyword in Cypher specifies what values or results you might want to return from a Cypher query. +
@@ -86,7 +86,7 @@ RETURN a, d, r, m
 
 This is the part of the updated graph:
 
-image::cypher-intro-patterns-in-practice02-arr.svg[role="middle"]
+image::cypher-intro-patterns-in-practice02-arr.svg[role="middle",width=600]
 
 In most cases, you want to add new data to existing structures.
 This requires knowing how to find existing patterns in your graph data, which is covered in the next section.
@@ -114,7 +114,7 @@ RETURN m
 
 Here's the result:
 
-image::cypher-intro-patterns-in-practice03-arr.svg[role="middle"]
+image::cypher-intro-patterns-in-practice03-arr.svg[role="middle",width=600]
 
 This should show both _The Matrix_ and _Forrest Gump_.
 
@@ -128,7 +128,7 @@ RETURN p
 
 This query returns the matching node:
 
-image::cypher-intro-patterns-in-practice04-arr.svg[role="middle"]
+image::cypher-intro-patterns-in-practice04-arr.svg[role="middle",width=350]
 
 Note that you only provide enough information to find the nodes, not all properties are required.
 In most cases, you have key-properties like SSN, ISBN, emails, logins, geolocation, or product codes to look for.
@@ -246,10 +246,10 @@ RETURN tom.name AS name, tom.born AS `Year Born`, movie.title AS title, movie.re
 // image:{neo4j-img-base-uri}cypher_with_aliases.jpg[role="popup-link"]
 
 [NOTE]
---
+====
 You can specify return aliases that have spaces by using the backtick character before and after the alias (movie.released AS `Year Released`).
 If you do not have an alias that contains spaces, then you do not need to use backticks.
---
+====
 
 [[cypher-intro-patterns-in-practice-attaching-structures]]
 == Attaching structures
@@ -267,7 +267,7 @@ RETURN p, r, m
 
 Here's what the structure looks like in the database:
 
-image::cypher-intro-patterns-in-practice05-arr.svg[role="middle"]
+image::cypher-intro-patterns-in-practice05-arr.svg[role="middle",width=600]
 
 [TIP]
 ====
@@ -349,7 +349,7 @@ ON CREATE SET r.roles =['Zachry']
 RETURN p, r, m
 ----
 
-image::cypher-intro-patterns-in-practice06-arr.svg[role="middle"]
+image::cypher-intro-patterns-in-practice06-arr.svg[role="middle",width=600]
 
 If the direction of a relationship is arbitrary, you can leave off the arrowhead.
 `MERGE` checks for the relationship in either direction and creates a new directed relationship if there is no matching relationship.
@@ -368,7 +368,7 @@ RETURN y, m10, m11
 
 This is the graph structure that gets created:
 
-image::cypher-intro-patterns-in-practice07-arr.svg[role="middle"]
+image::cypher-intro-patterns-in-practice07-arr.svg[role="middle",width=600]
 
 Here is no global search for the two `Month` nodes; they are only searched for in the context of the _2014_ `Year` node.
 
