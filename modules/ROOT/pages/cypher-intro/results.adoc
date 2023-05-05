@@ -149,7 +149,7 @@ WHERE 3 <= p.yearsExp <= 7
 RETURN p
 ----
 
-image::cypher-filter-ranges-arr.svg[width=600, role="popup-link"]
+image::cypher-filter-ranges-arr.svg[width=500, role="popup-link"]
 
 
 [[filter-exists]]
@@ -160,9 +160,11 @@ For instance, you might want to check which customers in your system have Twitte
 Or, you could check if all of your employees have a start date property to verify which entities might need to be updated.
 
 [IMPORTANT]
+====
 Remember: in Neo4j, a property only exists (is stored) if it has a value.
 A `null` property is not stored.
 This ensures that only valuable, necessary information is retained for your nodes and relationships.
+====
 
 To write this type of existence check in *Neo4j v5*, you need to use the `IS NOT NULL` predicate to only include nodes or relationships in which a property exists.
 
@@ -205,7 +207,7 @@ Rows: 9
 
 
 .Query2 results:
-image:cypher-filter-exists-relProp-arr.svg[role="popup-link"]
+image:cypher-filter-exists-relProp-arr.svg[role="popup-link",width=600]
 
 [[filter-strings]]
 === Checking strings -- partial values, fuzzy searches
@@ -315,7 +317,7 @@ RETURN friend.name;
 ----
 
 *Query1 results:*
-image:cypher-filter-exists-ptrn-arr.svg[role="popup-link"]
+image:cypher-filter-exists-ptrn-arr.svg[role="popup-link",width=600]
 
 *Query2 results:*
 

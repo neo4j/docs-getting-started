@@ -49,9 +49,9 @@ The first thing you will need to do to get data from a relational database into 
 Determining how you want to structure tables and rows as nodes and relationships may vary depending on what is most important to your business needs.
 
 [NOTE]
---
+====
 For more information on adapting your graph model to different scenarios, check out our xref:data-modeling/modeling-designs.adoc[modeling designs] guide.
---
+====
 
 When deriving a graph model from a relational model, you should keep a couple of general guidelines in mind.
 
@@ -79,7 +79,7 @@ With these principles in mind, we can map our relational model to a graph with t
 
 If we draw our translation out on the whiteboard, we have this graph data model.
 
-image::northwind_graph_simple.svg[width=600]
+image::northwind_graph_simple-arr.svg[width=600]
 
 Now, we can, of course, decide that we want to include the rest of the entities from our relational model, but for now, we will keep to this smaller graph model.
 

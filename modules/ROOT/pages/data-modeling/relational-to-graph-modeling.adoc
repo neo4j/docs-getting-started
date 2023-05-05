@@ -32,8 +32,8 @@ Finally, the query would check the `Department` table to find the actual values 
 
 The image below reviews this example we just described.
 
-.Relational - Person and Department tables (click to zoom)
-image:relational_model.jpg[role="popup-link"]
+.Relational - Person and Department tables
+image::relational_model.svg[role="popup-link",width=600]
 
 In a graph, you do not need to worry about table joins and index lookups because graph data is structured by each, individual entity and its relationships with other individual entities.
 
@@ -58,8 +58,8 @@ The steps to help you with the transformation of a relational diagram are listed
 
 If you apply the items in the list above to our example finding Alice's departments, we can come to a graph like the one shown below.
 
-.Graph - Alice and 3 Departments as nodes (click to zoom)
-image:relational_graph_model.jpg[role="popup-link"]
+.Graph - Alice and three departments as nodes
+image::relational_graph_model-arr.svg[role="popup-link",width=350]
 
 Though the two models have similarities such as categorizing data by using either a table structure or a label, the graph model does not confine data to a pre-defined and strict table/column layout.
 We will look at another example in the next section.
@@ -67,10 +67,10 @@ We will look at another example in the next section.
 [#org-domain-model]
 == Organizational domain data model
 
-To give us another chance to practice, we will use a standard organizational domain and show how it would be modeled in a relational database versus a graph database. To give yourself an extra challenge, try to create the graph data model on your own and then see how closely it lines up!
+To give us another chance to practice, we will use a standard organizational domain and show how it would be modeled in a relational database versus a graph database. To give yourself an extra challenge, try to create the graph data model on your own and then see how closely it lines up.
 
-.Organizational Domain - Relational Model
-image:relational_org_chart.jpg[role="popup-link"]
+.Organizational domain - Relational model
+image::relational_org_chart.svg[role="popup-link",width=600]
 
 === Conversion steps
 
@@ -79,7 +79,7 @@ Then, we can turn our table names into node labels.
 In this case, `Project`, `Person`, `Department`, and `Organization` become labels in our graph model.
 
 The rows on our tables become their own nodes and the columns in those rows become the properties on those nodes.
-For example, your row on the Person table will become a node with your name and date of birth as the properties on your node.
+For example, your row on the `Person` table will become a node with your name and date of birth as the properties on your node.
 Any indexed columns that allow multiple similar values will become an array (such as skill1, skill2, skill3 columns translate to three values stored in an array property on a node).
 
 If there are any technical primary keys (in other words, primary keys that were created simply to make the row unique - like a project_id in case there are multiple projects with the same title), then remove those and only keep the properties that are needed for the business requirements.
@@ -94,8 +94,8 @@ Finally, any duplicate data created to normalize tables or de-normalize for simp
 
 After this process, your graph data model should look something like the image below.
 
-.Answer: Organizational Domain - Graph Model
-image:graph_org_chart.jpg[600,600,role="popup-link"]
+.Organizational domain - Graph model
+image::graph_org_chart-arr.svg[width=500,role="popup-link"]
 
 It is important to have an basic understanding of the graph model before you start to import data, as it becomes easier to hydrate that model or adjust it later, as needs change.
 In an upcoming guide, how you model your graph data can impact queries, performance, and model changes.
