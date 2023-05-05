@@ -31,7 +31,7 @@ CREATE (robert)-[:DIRECTED]->(forrestGump)
 
 This is the resulting graph:
 
-image::cypher-intro-results01-arr.svg[role="middle"]
+image::cypher-intro-results01-arr.svg[role="middle",width=600]
 
 
 [[cypher-intro-large-statements-union]]
