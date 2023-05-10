@@ -57,7 +57,7 @@ It also supports basic CRUD and legacy indexing.
 [#js2neo-lib]
 ==== js2neo
 
-As a demonstration of a minimal JavaScript based bolt driver, Nigel Small put together https://js2neo.org/[js2neo^].
+As an example of a minimal JavaScript based Bolt driver, you can use link:https://github.com/technige/js2neo[js2neo^].
 
 [[python-community-drivers]]
 === Python Community drivers
