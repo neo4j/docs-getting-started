@@ -43,7 +43,7 @@
 *** xref:languages-guides/community-drivers/neo4j-perl.adoc[]
 ** xref:languages-guides/integration-tools/integration.adoc[]
 * xref:gds/index.adoc[]
-** xref:gds/end-to-end-example.adoc[]
+// ** xref:gds/end-to-end-example.adoc[]
 * xref:graph-visualization/graph-visualization.adoc[]
 ** xref:graph-visualization/graph-visualization-tools.adoc[]
 * xref:appendix/index.adoc[]
