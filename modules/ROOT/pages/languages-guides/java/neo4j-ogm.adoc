@@ -60,7 +60,7 @@ public class Actor {
 }
 
 @RelationshipEntity(type="ACTED_IN")
-public class ActorRelationship {
+public class Role {
     @Id @GeneratedValue
     private Long relationshipId;
     
