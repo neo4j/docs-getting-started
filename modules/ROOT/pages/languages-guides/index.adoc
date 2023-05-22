@@ -65,8 +65,14 @@ Below you can find links to their reference documentation:
 * link:https://neo4j.com/docs/go-manual/current/[Go]
 * link:https://docs.spring.io/spring-data/neo4j/docs/current/reference/html/[Spring]
 
+[NOTE]
+====
+Always use the latest version of the driver, as it will always work both with the previous Neo4j long-term support release and with the current and next major releases.
+The latest 5.x driver supports connection to any Neo4j 5 and 4.4 instance, and will also be compatible with Neo4j 6.
+====
+
 To demonstrate connection to and usage of Neo4j in different programming languages, an example application is created.
-It is a http://my-neo4j-movies-app.herokuapp.com/[simple, one-page webapp^], that uses Neo4j's movie demo database (movie, actor, director) as a dataset.
+It is a http://my-neo4j-movies-app.herokuapp.com/[simple, one-page webapp^], that uses Neo4j's Movie demo database (movie, actor, director) as a dataset.
 The same front-end web page in all applications consumes three REST endpoints provided by backend implemented in the different programming languages and drivers:
 
 * movie search by title
