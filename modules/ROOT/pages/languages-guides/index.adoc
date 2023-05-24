@@ -1,5 +1,5 @@
 [[language-guides]]
-= Connecting to Neo4j
+= Connect to Neo4j
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
 :tags: programming-languages, applications, bolt, app-development
 :page-ad-overline-link: https://neo4j.com/cloud/aura/?ref=developer-guides
