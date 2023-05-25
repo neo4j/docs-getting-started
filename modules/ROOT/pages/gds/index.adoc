@@ -12,14 +12,14 @@
 [[gds-intro]]
 == Introduction
 
-With a native graph database at the core, Neo4j offers link:https://neo4j.com/product/graph-data-science/[*Neo4j Graph Data Science*] -- a graph algorithms library for analysts and data scientists.
+With a native graph database at the core, Neo4j offers link:https://neo4j.com/product/graph-data-science/[*Neo4j Graph Data Science*] -- a library of graph algorithms for analysts and data scientists.
 
 The library includes algorithms for community detection, centrality, node similarity, pathfinding, and link prediction.
 Graph Data Science, or GDS, is designed to support data science workflows and machine learning (ML) tasks over your graphs.
 
 Graph algorithms are exposed through link:https://neo4j.com/product/cypher-graph-query-language/[Cypher] procedures.
 Cypher is a declarative graph query language created by Neo4j.
-For more information about Cypher, visit link:https://neo4j.com/docs/cypher-manual/current/introduction/[Cypher Manual].
+For more information about Cypher, visit the link:https://neo4j.com/docs/cypher-manual/current/introduction/[Cypher Manual].
 
 In Neo4j GDS, the generalized workflow is the following:
 
@@ -73,7 +73,8 @@ To avoid naming confusion with the server-side GDS library, we refer to the Neo4
 pip install graphdatascience
 ----
 
-. Keep in mind compatibility requirements between the Python client, the Neo4j Python Driver, a server-side installation of the GDS library. Check them in the link:https://neo4j.com/docs/graph-data-science-client/current/installation/#python-client-system-requirements[GDS Client Manual].
+. Keep in mind compatibility requirements between the Python client, the Neo4j Python Driver, a server-side installation of the GDS library. 
+Check them in the link:https://neo4j.com/docs/graph-data-science-client/current/installation/#python-client-system-requirements[GDS Client manual].
 
 . If you use the Python client on AuraDS, run the following:
 +
@@ -108,8 +109,7 @@ The source code of the GDS Python client is available at https://github.com/neo4
 
 You can apply the graph data science in all industries to make recommendations, identify anomalies and find fraudsters, improve customer knowledge, and optimize supply chains.
 
-We aim to create documentation that provides a direct practical experience for the users.
-Therefore, our manuals contain instructions on how to apply graph algorithms from GDS to real-life use cases. 
+The documentation provides instructions on how to apply graph algorithms from GDS to real-life use cases. 
 
 * Look into link:https://neo4j.com/docs/graph-data-science/current/end-to-end-examples/end-to-end-examples/[GDS Manual -> End-to-end examples], to understand how the GDS algorithms can solve realistic use cases end-to-end.
 
