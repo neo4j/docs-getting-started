@@ -1,4 +1,4 @@
-= Graph visualization
+= Visualize your data in Neo4j
 :level: Beginner
 :author: Jennifer Reif
 :category: visualization
