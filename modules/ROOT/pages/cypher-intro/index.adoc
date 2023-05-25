@@ -1,6 +1,6 @@
 
 [[cypher-intro]]
-= Introduction to Cypher
+= Query a Neo4j database using Cypher
 :description: A high-level overview of the graph query language Cypher.
 :page-ad-overline-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
 :page-ad-overline: Neo4j GraphAcademy
@@ -10,7 +10,7 @@
 :page-ad-underline-role: button
 :page-ad-underline: Learn more
 
-This section introduces you to the graph query language -- Cypher.
+This section introduces you to the graph query language -- *Cypher*.
 It aims to help you start thinking about graphs and patterns, apply this knowledge to simple problems, and learn how to write Cypher statements.
  
 [TIP]
@@ -39,8 +39,9 @@ delete (CRUD) on their graph, and Cypher is the primary interface for Neo4j.
 
 [IMPORTANT]
 ====
-Like Neo4j itself, Cypher is open source!  link:http://openCypher.org[The openCypher project^] provides all of the specs needed.
-Cypher is backed by a number of companies all of which benefit from cypher.
+Like Neo4j itself, Cypher is open source. 
+link:http://openCypher.org[The openCypher project^] provides all of the specs needed.
+Cypher is backed by a number of companies all of which benefit from Cypher.
 ====
 
 Once you have an AuraDB database, you can use the `:guide cypher` command inside of Neo4j Browser to get started.
