@@ -1,5 +1,5 @@
 [[data-import]]
-= Data importing
+= Import your data into Neo4j
 :tags: data-import, graph-import, import-csv, json-api, northwind-graph, example-data
 :page-pagination: next
 :page-ad-overline-link: https://graphacademy.neo4j.com/courses/importing-data/?ref=docs
@@ -23,7 +23,7 @@ Look at the GraphAcademy course "Import CSV data". It's announced that you learn
 * using an application for loading data / loading data via drivers
 * Neo4j ETL Tool to load data from RDBMS
 
-It makes sense, logic is clear. My idea is to redesign this section according to the aforementioned GraphAcademy course. 
+It makes sense, logic is clear. My idea is to redesign this section according to the aforementioned GraphAcademy course.
 
 Important! To make a section on Data Importer!
 

@@ -1,5 +1,5 @@
 [[data-modeling]]
-= Data modeling
+= Model your data for Neo4j
 :description: graph-modeling, data-model, schema, create-model, translate-model, model-performance, model-example
 :page-ad-overline-link: https://graphacademy.neo4j.com/courses/modeling-fundamentals/?ref=docs
 :page-ad-overline: Neo4j GraphAcademy
@@ -61,7 +61,7 @@ Visit our link:https://neo4j.com/graphgists/[GraphGists page^] and explore a ric
 
 
 [#Online-training]
-== Online training
+== GraphAcademy courses
 
 Learn everything you need to know about data modeling in Neo4j with the link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/?ref=docs[free Graph Data Modeling Fundamentals course^] on link:https://graphacademy.neo4j.com/courses/[Neo4j GraphAcademy^]. +
 This course is part of the link:https://graphacademy.neo4j.com/categories/beginners/?ref=docs[Beginners learning path^] which features four courses designed to teach you everything you need to know to feel confident working with Neo4j.
