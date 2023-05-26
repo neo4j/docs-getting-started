@@ -1,11 +1,14 @@
 [[community-drivers]]
-= Using Neo4j with Community Drivers
-:description:
+= Community-contributed drivers
+:description:neo4j community drivers, community projects, php, ruby, erlang-elixir, perl, java jdbc
 :examples: https://github.com/neo4j-examples
+:aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
 
-== Neo4j Community projects
 
-In addition to the officially supported drivers, you can find their Community alternatives.
+== Introduction
+
+In addition to the officially supported drivers, you can find Community alternatives.
+Besides Java, .NET, JavaScript, Go, and Python drivers, Neo4j Community offers support for Ruby, PHP, Erlang/Elixir, and Perl. +
 Links to their relevant resources are provided below.
 
 Members of the each programming language community have invested a lot of time and love to develop each one of the community drivers for Neo4j, so if you use any one of them, provide feedback to the authors.
@@ -17,12 +20,239 @@ Many of them are fully featured and well-maintained, but some may not be.
 Neo4j does not take any responsibility for their usability.
 ====
 
+[[neo4j-ruby]]
+== Using Neo4j from Ruby
+
+[#neo4jrb-lib]
+=== Neo4j.rb
+
+The link:http://neo4jrb.io/[Neo4j.rb project^] is made up of the following Ruby gems:
+
+neo4j-ruby-driver::
+A Neo4j driver for Ruby with an API consistent with the official drivers.
+It is based on Seabolt and FFI.
+Available on all rubies (including JRuby) and all platforms supported by Seabolt.
+neo4j-java-driver::
+A Neo4j driver for Ruby based on the official Java implementation.
+It provides a thin wrapper over the Java driver (only
+in JRuby).
+activegraph::
+A Object-Graph-Mapper (OGM) for the Neo4j graph database.
+It tries to follow API conventions established by ActiveRecord but with a Neo4j flavor.
+It requires one of the above drivers.
+neo4j-rake_tasks::
+A set of rake tasks for installing and managing a Neo4j database within your project.
+
+[cols="1,4"]
+|===
+| icon:browser[] Website                     | https://neo4jrb.io/
+| icon:user[] Authors         | https://twitter.com/klobuczek[Heinrich^], https://twitter.com/klobuczek[Amit^], http://twitter.com/cheerfulstoic[Brian^], https://twitter.com/subvertallchris[Chris^], https://twitter.com/ronge[Andreas^]
+| icon:gift[] Package        | https://rubygems.org/gems/neo4j-ruby-driver[neo4j-ruby-driver^], https://rubygems.org/gems/neo4j-java-driver[neo4j-java-driver^], https://rubygems.org/gems/activegraph[activegraph^]
+| icon:github[] Source       | https://github.com/neo4jrb
+| icon:book[] Docs           | https://neo4jrb.readthedocs.org/en/latest/
+| icon:rss[] Blog            | https://blog.brian-underwood.codes/
+| Protocols | Bolt
+|===
+
+[[neo4j-php]]
+== Using Neo4j from PHP
+
+Alternatively, Neo4j can be installed on any system and then accessed via its Bolt and HTTP APIs.
+We recommend the https://github.com/laudis-technologies/neo4j-php-client#roadmap[Neo4j PHP client^] for easiest development over Bolt and HTTP APIs.
+You can also directly access the Bolt protocol via the https://github.com/stefanak-michal/Bolt[PHP Bolt] library.
+
+[#Client]
+=== Neo4j PHP client
+
+*Neo4j PHP client* is a client supporting multiple protocols. 
+*HTTP* and *Bolt* are supported, starting from Neo4j 3.5 up until the most recent version.
+
+It is being actively developed.
+For more details, refer to a README file on the https://github.com/laudis-technologies/neo4j-php-client[Github page^].
+
+[cols="1,4"]
+|===
+| icon:user[] Author | https://www.linkedin.com/in/ghlen-nagels-1b6663134/[Ghlen Nagels^]
+| icon:github[] Source | https://github.com/neo4j-php/neo4j-php-client
+| icon:gift[] Package | https://packagist.org/packages/laudis/neo4j-php-client
+| icon:code-fork[] PHP    | 7.4 / 8.0+
+| icon:code-fork[] Neo4j    | 3.5 / 4.0+
+| Protocols | Bolt, HTTP
+| Example App | https://github.com/neo4j-examples/movies-neo4j-php-client
+|===
+
+
+[#bolt]
+=== PHP Bolt
+
+A low level driver for the Bolt protocol in PHP.
+
+[cols="1,4"]
+|===
+| icon:user[] Author | https://www.linkedin.com/in/michalstefanak/[Michal Stefanak^]
+| icon:github[] Source | https://github.com/neo4j-php/Bolt
+| icon:code-fork[] PHP    | 7.4+ / 8.0+
+| icon:code-fork[] Neo4j    | 3.0+ / 4.0+ / 5.0+
+| Protocols | Bolt
+|===
+
+
+[[neo4j-erlang-elixir]]
+== Using Neo4j from Erlang/Elixir
+
+[#elixir-bolt]
+=== Elixir Bolt.Sips Driver
+
+Neo4j driver for Elixir wrapped around the Bolt protocol.
+
+[cols="1,4"]
+|===
+| icon:user[] Author | http://twitter.com/florin[Florin Patrascu]
+| icon:gift[] Package | https://hex.pm/packages/bolt_sips
+| icon:github[] Source | https://github.com/florinpatrascu/bolt_sips
+| icon:book[] Docs | https://hexdocs.pm/bolt_sips/
+|===
+
+[#elixir-rest-wrapper]
+=== Neo4j.Sips
+
+A simple Elixir wrapper around the Neo4j graph database REST API.
+It aims to help Elixir developers to play with Neo4j and to eventually become the main support for a future https://github.com/elixir-lang/ecto[Ecto^] adapter.
+
+[cols="1,4"]
+|===
+| icon:user[] Author | http://twitter.com/florin[Florin Patrascu]
+| icon:gift[] Package | https://hex.pm/packages/neo4j_sips
+| icon:github[] Source | https://github.com/florinpatrascu/neo4j_sips
+| icon:book[] Docs | https://github.com/florinpatrascu/neo4j_sips/blob/master/README.md
+|===
+
+
+[[neo4j-perl]]
+== Using Neo4j from Perl
+
+[#neo4p-rest]
+=== REST::Neo4p
+
+This Perl driver from Mark Jensen works with Neo4j’s REST API by using Perl5 objects in a consistent, idiomatic Perl-style.
+There is also a related DBI-compliant wrapper (https://metacpan.org/pod/DBD::Neo4p[DBD::Neo4p])
+
+[cols="1,4"]
+|===
+| icon:user[] Author | https://www.linkedin.com/in/fortinbras[Mark A. Jensen]
+| icon:gift[] Package | https://metacpan.org/release/REST-Neo4p
+| icon:github[] Source | https://github.com/majensen/rest-neo4p
+| icon:book[] Docs | https://slideshare.net/majensen1/neo4p-dcbpw2015-46990541
+| icon:question-circle[] Community Site | https://community.neo4j.com/c/drivers-stacks/perl
+|===
+
+[#neo4j-driver]
+=== Neo4j::Driver
+
+This Perl driver enables interacting with a Neo4j server using the same classes and method calls as the official Neo4j drivers.
+It also has (currently experimental) support for HTTPS and Bolt.
+
+[cols="1,4"]
+|===
+| icon:user[] Author | Arne Johannessen
+| icon:gift[] Package | https://metacpan.org/release/Neo4j-Driver
+| icon:github[] Source | https://github.com/johannessen/neo4j-driver-perl
+|===
+
+
+[#neo4j-bolt]
+=== Neo4j::Bolt
+
+This is another driver from Mark Jensen.
+It's implemented as a Perl wrapper around the libneo4j-client C library, which implements the Bolt network protocol.
+
+[cols="1,4"]
+|===
+| icon:user[] Author | https://www.linkedin.com/in/fortinbras[Mark A. Jensen]
+| icon:github[] Source | https://github.com/majensen/perlbolt
+|===
+
+
+
+[[java-community-drivers]]
+== Java Community drivers
+
+[#neo4j-jdbc]
+=== Neo4j JDBC Driver
+
+[cols="1,4"]
+|===
+| icon:user[] Authors | Developers from http://www.larus-ba.it/neo4j/en/[Larus BA Italy^] and Neo4j
+| icon:gift[] Package | https://github.com/neo4j-contrib/neo4j-jdbc/releases/latest
+| icon:github[] Source | https://github.com/neo4j-contrib/neo4j-jdbc
+| icon:book[] Docs | https://github.com/neo4j-contrib/neo4j-jdbc/blob/master/README.adoc
+| icon:book[] Blog Post | https://neo4j.com/blog/couchbase-jdbc-integrations-neo4j-3-0/
+|===
+
+[#java-jcypher]
+=== JCypher
+
+JCypher provides seamlessly integrated Java access to Neo4j at different levels of abstraction.
+
+:maven-jcypher: http://search.maven.org/#search|gav|1|g%3A%22net.iot-solutions.graphdb%22%20AND%20a%3A%22jcypher%22
+
+[cols="1,4"]
+|===
+| icon:user[] Author | https://github.com/Wolfgang-Schuetzelhofer[Wolfgang Schützelhofer^]
+| icon:gift[] Package | link:{maven-jcypher}[http://maven.org^]
+| icon:github[] Source | https://github.com/Wolfgang-Schuetzelhofer/jcypher
+| icon:book[] Docs | https://jcypher.iot-solutions.net/
+| icon:book[] Blog Post | https://neo4j.com/blog/jcypher-focus-on-your-domain-model-not-how-to-map-it-to-the-database/
+|===
+
+[#neo4j-grails]
+=== Groovy & Grails: Neo4j Grails Plugin
+
+The goal of GORM for Neo4j is to provide a 'as-complete-as-possible' GORM implementation that maps domain classes and instances to the Neo4j nodespace. 
+
+[cols="1,4"]
+|===
+| icon:user[] Authors | Stefan Armbruster, Graeme Rocher
+| icon:gift[] Package | http://www.grails.org/plugin/neo4j
+| icon:github[] Source | https://github.com/grails/grails-data-mapping/tree/master/grails-datastore-gorm-neo4j
+| icon:book[] Docs | http://grails.github.io/grails-data-mapping/latest/neo4j/
+|===
+
+[#neo4j-scala]
+=== Scala: neotypes
+
+[cols="1,4"]
+|===
+| icon:user[] Author | https://twitter.com/dimafeng[Dmitry Fedosov^]
+| icon:github[] Source | https://github.com/neotypes/neotypes
+| icon:book[] Docs | https://neotypes.github.io/neotypes/
+| icon:book[] Blog Post | http://dimafeng.com/2018/12/27/neotypes-1/
+| icon:play-circle[] Example | https://github.com/neotypes/examples
+|===
+
+[#ogm-hibernate]
+=== JPA: Hibernate OGM
+
+Hibernate Object/Grid Mapper (http://hibernate.org/ogm[OGM^]) with Neo4j Support.
+
+:maven-hibernate-ogm: http://search.maven.org/#search|gav|1|g%3A%22org.hibernate.ogm%22%20AND%20a%3A%22hibernate-ogm-neo4j%22
+[cols="1,4"]
+|===
+| icon:user[] Authors | Davide D'Alto, Gunnar Moelling, Emmanuel Bernard
+| icon:gift[] Package | link:{maven-hibernate-ogm}[http://maven.org^]
+| icon:github[] Source | https://github.com/hibernate/hibernate-ogm/tree/master/neo4j
+| icon:book[] Docs | http://docs.jboss.org/hibernate/ogm/5.0/reference/en-US/html_single/#ogm-neo4j
+| icon:book[] Blog Post | http://in.relation.to/Bloggers/QueryImprovementsAndBetterNeo4jSupportHibernateOGM410Beta6IsOut[Blog], http://in.relation.to/Bloggers/HibernateOGM410Beta5IsOutJPQLQueriesForNeo4jAndMore[JPL Queries^]
+| icon:play-circle[] Example | https://github.com/TimmyStorms/hibernate-ogm-neo4j-example
+|===
+
+
 [[dotnet-community-drivers]]
-=== .NET Community drivers
+== .NET Community drivers
 
 
 [#neo4jclient-lib]
-==== Neo4jClient
+=== Neo4jClient
 
 A .NET client for Neo4j, which makes it easy to write Cypher queries in C# with IntelliSense.
 It also supports basic CRUD and legacy indexing.
@@ -34,11 +264,11 @@ It also supports basic CRUD and legacy indexing.
 | icon:user[] Authors        | http://twitter.com/cskardon[Charlotte Skardon^] http://twitter.com/tathamoddie[Tatham Oddie^]
 | icon:book[] Docs           | https://github.com/DotNet4Neo4j/Neo4jClient/wiki[]
 | icon:play-circle[] Example | {examples}/movies-dotnet-neo4jclient
-| Protocol                   | Bolt, Http
+| Protocol                   | Bolt, HTTP
 |===
 
 [#neo4j-driver-extensions]
-==== Neo4j.Driver.Extensions
+=== Neo4j.Driver.Extensions
 
 `Neo4j.Driver.Extensions` provides a set of extension methods to the official driver API, aiming at reducing boilerplate and easing mapping to entity classes.
 
@@ -51,29 +281,19 @@ It also supports basic CRUD and legacy indexing.
 |===
 
 [[javascript-community-drivers]]
-=== JavaScript Community drivers
+== JavaScript Community drivers
 
 
 [#js2neo-lib]
-==== js2neo
+=== js2neo
 
 As an example of a minimal JavaScript based Bolt driver, you can use link:https://github.com/technige/js2neo[js2neo^].
 
 [[python-community-drivers]]
-=== Python Community drivers
-
-For anyone working with https://www.python.org/[Python^], the Neo4j community have contributed a range of driver options.
-These range from lightweight to comprehensive driver packages as well as libraries designed for use with web frameworks such as https://www.djangoproject.com/[Django^].
-
-While Python 3 is preferred, some drivers still support Python 2, thus check with the individual project if you need it.
-
-While we do not provide a specific web framework recommendation, both the lightweight http://flask.pocoo.org/[Flask^] and the more comprehensive https://www.djangoproject.com/[Django^] frameworks are known to work well.
+== Python Community drivers
 
 [#py2neo-lib]
-==== Py2neo
-
-Py2neo is a client library and comprehensive toolkit for working with Neo4j from within Python applications and from the command line.
-It has been carefully designed to be easy and intuitive to use.
+=== Py2neo
 
 [cols="1,4"]
 |===
@@ -84,31 +304,12 @@ It has been carefully designed to be easy and intuitive to use.
 | icon:play-circle[] Example | {examples}/movies-python-py2neo
 | icon:book[] Docs           | http://py2neo.org/
 | icon:code-fork[] Python    | 2.7 / 3.4+
-| Protocols | Bolt, Http
+| Protocols | Bolt, HTTP
 |===
 
-.Installation
-[source,bash]
-----
-pip install py2neo
-----
-
-.Example
-[source,python]
-----
-from py2neo import Graph
-graph = Graph()
-
-tx = graph.begin()
-for name in ["Alice", "Bob", "Carol"]:
-    tx.append("CREATE (person:Person name: $name) RETURN person", name=name)
-alice, bob, carol = [result.one for result in tx.commit()]
-----
 
 [#neomodel-lib]
-==== Neomodel
-
-image::{neo4j-img-base-uri}neomodel.200x80.png[float="right",width=100]
+=== Neomodel
 
 An Object Graph Mapper built on top of the Neo4j python driver.
 Familiar Django style node definitions with a powerful query API, thread safe and full transaction support.
@@ -123,40 +324,14 @@ A Django plugin https://github.com/neo4j-contrib/django-neomodel[django_neomodel
 | icon:book[] Docs           | https://neomodel.readthedocs.io/en/latest/
 | icon:code-fork[] Python    | 2.7 / 3.3+
 | Protocols | Bolt
-| Example App | https://github.com/neo4j-examples/neo4j-movies-python-neomodel
+| Example | https://github.com/neo4j-examples/neo4j-movies-python-neomodel
 |===
 
-.Installation
-[source,bash]
-----
-pip install neomodel
-----
-
-.Example
-[source,python]
-----
-from neomodel import StructuredNode, StringProperty, RelationshipTo, RelationshipFrom, config
-
-config.DATABASE_URL = 'bolt://neo4j:test@localhost:7687'
-
-class Book(StructuredNode):
-    title = StringProperty(unique_index=True)
-    author = RelationshipTo('Author', 'AUTHOR')
-
-class Author(StructuredNode):
-    name = StringProperty(unique_index=True)
-    books = RelationshipFrom('Book', 'AUTHOR')
-
-harry_potter = Book(title='Harry potter and the..').save()
-rowling =  Author(name='J. K. Rowling').save()
-harry_potter.author.connect(rowling)
-----
-
 [[go-community-drivers]]
-=== Go Community drivers
+== Go Community drivers
 
 [#golang-bolt]
-==== GoGM: Golang Object Graph Mapper
+=== GoGM: Golang Object Graph Mapper
 
 [cols="1,4"]
 |===
