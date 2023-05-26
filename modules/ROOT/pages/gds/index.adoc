@@ -15,7 +15,7 @@
 With a native graph database at the core, Neo4j offers link:https://neo4j.com/product/graph-data-science/[*Neo4j Graph Data Science*] -- a library of graph algorithms for analysts and data scientists.
 
 The library includes algorithms for community detection, centrality, node similarity, pathfinding, and link prediction.
-Graph Data Science, or GDS, is designed to support data science workflows and machine learning (ML) tasks over your graphs.
+Graph Data Science (GDS) is designed to support data science workflows and machine learning tasks over your graphs.
 
 Graph algorithms are exposed through link:https://neo4j.com/product/cypher-graph-query-language/[Cypher] procedures.
 Cypher is a declarative graph query language created by Neo4j.
@@ -62,7 +62,7 @@ Besides, you can use link:https://neo4j.com/sandbox/?ref=developer-graph-algo[Ne
 
 If you are a Python oriented person, you can use the link:https://neo4j.com/docs/graph-data-science-client/current/getting-started[GDS Python client] package called `graphdatascience`.
 It enables users to write pure Python code to project graphs, run algorithms, use ML pipelines, and train ML models with GDS.
-To avoid naming confusion with the server-side GDS library, we refer to the Neo4j GDS client as the _Python client_.
+To avoid naming confusion with the server-side GDS library, we refer to the Neo4j GDS client as the _GDS Python client_.
 
 . To import and set up the Python client, follow instructions in the link:https://neo4j.com/docs/graph-data-science-client/current/getting-started/#_import_and_setup/[GDS Client manual -> Getting started].
 
@@ -78,13 +78,11 @@ Check them in the link:https://neo4j.com/docs/graph-data-science-client/current/
 
 . If you use the Python client on AuraDS, run the following:
 +
-The client is imported as the `GraphDataScience` class:
 +
 [source,python]
 ----
 # Client import
 from graphdatascience import GraphDataScience
-The aura_ds=True constructor argument should be used to have the recommended non-default configuration settings of the Python Driver applied automatically.
 ----
 +
 [source,python]
