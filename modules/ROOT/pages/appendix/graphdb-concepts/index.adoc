@@ -306,4 +306,4 @@ The following naming conventions are recommended:
 |===
 
 
-For the precise naming rules, refer to the link:{neo4j-docs-base-uri}/cypher-manual/{page-version}/syntax/naming#cypher-naming[Cypher manual -> Naming rules and recommendations].
+For the precise naming rules, refer to the link:https://neo4j.com/docs/cypher-manual/current/syntax/naming/[Cypher manual -> Naming rules and recommendations].
