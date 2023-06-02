@@ -10,7 +10,7 @@
 :page-ad-underline-role: button
 :page-ad-underline: Learn more
 
-This section introduces you to the graph query language -- *Cypher*.
+This section introduces you to the graph query language -- Cypher.
 It aims to help you start thinking about graphs and patterns, apply this knowledge to simple problems, and learn how to write Cypher statements.
  
 [TIP]

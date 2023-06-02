@@ -67,7 +67,8 @@ It is also possible to create different dissections of the graph (called perspec
 
 === Neo4j Browser
 
-Neo4j Browser is an interactive cypher command shell for developers that allows you to interact with your graph and visualize the information in it. Neo4j Browser is bundled with Neo4j and is available in all editions and versions of Neo4j.
+Neo4j Browser is an interactive Cypher command shell for developers that allows you to interact with your graph and visualize the information in it.
+Neo4j Browser is bundled with Neo4j and is available in all editions and versions of Neo4j.
 
 // image:{neo4j-img-base-uri}neo4j-browser-oneshot.png[role="popup-link"]
 
