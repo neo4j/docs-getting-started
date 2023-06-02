@@ -17,7 +17,7 @@ You should be able to read and understand Cypher queries after finishing this tu
 
 _The Movie Graph_ is a mini graph application containing actors and directors that are related through the movies they've collaborated on.
 
-It is helpful if you run the queries and cypher code to create data as you follow this tutorial.
+It is helpful if you run the queries and Cypher code to create data as you follow this tutorial.
 
 This tutorial will show you how to:
 
@@ -62,7 +62,9 @@ If you need help:
 `:help cypher`
 
 [NOTE]
+====
 When you run Cypher code in the query pane, it always creates a new pane with the results below the query pane.
+====
 
 [#cypher-movie-find]
 == Find actors and movies
