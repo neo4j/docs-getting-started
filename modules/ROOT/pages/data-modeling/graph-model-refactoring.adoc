@@ -3,8 +3,10 @@
 :tags: graph-modeling, data-model, schema, refactoring, apoc
 :description: Building on the Cypher Basics guides, this guide provides a worked example of changing a graph model. Upon finishing this guide, you should be able to evolve your graph model based on changing requirements.
 
-[abstract]
-{description}
+== Introduction
+
+Building on the Cypher basic concepts, this guide provides a worked example of changing a graph model.
+Upon finishing this guide, you should be able to evolve your graph model based on changing requirements.
 
 // My big concern here is that APOC procedures are heavy on use in this guide. Is it still valid? 
 
