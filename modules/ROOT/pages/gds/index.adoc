@@ -21,7 +21,7 @@ Graph algorithms are exposed through xref:cypher-intro/index.adoc[Cypher] proced
 Cypher is a declarative graph query language created by Neo4j.
 For more information about Cypher, visit the link:https://neo4j.com/docs/cypher-manual/current/introduction/[Cypher Manual].
 
-In Neo4j GDS, the generalized workflow is the following:
+In Neo4j GDS, the typical workflow is the following:
 
 * Read the graph data from the Neo4j database.
 * Create a graph projection -- loading the data into an in-memory graph.
@@ -61,7 +61,18 @@ You can select a learning path specifically designed for data scientists.
 +
 Besides, you can use link:https://neo4j.com/sandbox/?ref=developer-graph-algo[Neo4j Sandbox] for learning graph concepts and Cypher.
 
-=== Neo4j GDS Python client
+[[gds-connectors]]
+=== Integrating Neo4j GDS with your data ecosystem
+
+Minimizing friction around data movement makes the adoption of any product much easier.
+Bearing that in mind, Neo4j provides multiple link:https://neo4j.com/docs/drivers-apis/[connectors, drivers, and libraries] that allow easy data integration:
+
+* <<gds-python-client>> to call all Neo4j GDS procedures straight from Python.
+* link:https://neo4j.com/docs/spark/current/dwh/[Data Warehouse Connector] for moving data to and from Snowflake, Google BigQuery, Amazon Redshift, or Microsoft Azure Synapse Analytics.
+* BI Connector for direct access to BI tools like Microsoft Power BI, Tableau, Looker, TIBCO Spotfire, and Microstrategy.
+
+[[gds-python-client]]
+=== GDS Python client
 
 If you are a Python oriented person, you can use the link:https://neo4j.com/docs/graph-data-science-client/current/getting-started[GDS Python client] package called `graphdatascience`.
 It enables users to write pure Python code to project graphs, run algorithms, use ML pipelines, and train ML models with GDS.
@@ -100,6 +111,16 @@ The source code of the GDS Python client is available at https://github.com/neo4
 
 [[gds-and-bloom]]
 == Data visualization with Neo4j Bloom
+
+Data visualization is an essential part of data science workflow.
+That allows data specialists not only to analyze massive amounts of information but also to represent them efficiently.
+Data visualization tools and technologies can influence data-driven decisions.
+
+Neo4j offers a low-code visualization tool -- link:https://neo4j.com/docs/bloom-user-guide/current/[Neo4j Bloom], designed to explore and dynamically visualize big graphs.
+
+For instructions on how to use Bloom with the GDS library, see link:https://neo4j.com/docs/bloom-user-guide/current/bloom-tutorial/gds-integration/[Neo4j Bloom Manual -> Graph Data Science integration].
+
+// xref:gds/end-to-end-example.adoc[Tutorial] demonstrates 
 
 [[gds-use-cases]]
 == Graph Data Science use cases
