@@ -1,6 +1,6 @@
 [[community-drivers]]
 = Community-contributed libraries
-:description:neo4j community drivers, community projects, php, ruby, erlang-elixir, perl, java jdbc
+:description: Neo4j community-contributed drivers, community projects, php, ruby, erlang-elixir, perl, java jdbc.
 :examples: https://github.com/neo4j-examples
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
 
@@ -8,10 +8,10 @@
 == Introduction
 
 In addition to the officially supported drivers, you can find Community alternatives.
-Besides Java, .NET, JavaScript, Go, and Python drivers, Neo4j Community offers support for Ruby, PHP, Erlang/Elixir, and Perl. +
+Besides Java, .NET, JavaScript, Go, and Python drivers, Neo4j Community offers support for Ruby, PHP, Erlang/Elixir, and Perl.
 Links to their relevant resources are provided below.
 
-Members of the each programming language community have invested a lot of time and love to develop each one of the community drivers for Neo4j, so if you use any one of them, provide feedback to the authors.
+Members of the each programming language community have invested a lot of time and love to develop each one of the community drivers for Neo4j, so if you use any one of them, please provide feedback to the authors.
 
 [IMPORTANT]
 ====
