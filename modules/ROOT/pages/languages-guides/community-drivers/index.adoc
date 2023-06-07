@@ -1,5 +1,5 @@
 [[community-drivers]]
-= Community-contributed drivers
+= Community-contributed libraries
 :description:neo4j community drivers, community projects, php, ruby, erlang-elixir, perl, java jdbc
 :examples: https://github.com/neo4j-examples
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
