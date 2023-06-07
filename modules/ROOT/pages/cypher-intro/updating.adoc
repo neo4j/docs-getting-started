@@ -24,7 +24,48 @@ You can do this by matching the pattern you want to find and using the `SET` key
 
 We continue to use the following dataset: 
 
+.Graph: people, companies they work at, and technologies they like
 image::people-technologies-graph-arr.svg[role="popup-link"]
+
+To create the aforementioned graph, run the Cypher query:
+
+[source, cypher]
+----
+CREATE (diana:Person {name: "Diana"})
+CREATE (melissa:Person {name: "Melissa", twitter: "@melissa"})
+CREATE (dan:Person {name: "Dan", twitter: "@dan", yearsExperience: 6})
+CREATE (sally:Person {name: "Sally", yearsExperience: 4})
+CREATE (john:Person {name: "John", yearsExperience: 5})
+CREATE (jennifer:Person {name: "Jennifer", twitter: "@jennifer", yearsExperience: 5})
+CREATE (joe:Person {name: "Joe"})
+CREATE (mark:Person {name: "Mark", twitter: "@mark"})
+CREATE (ann:Person {name: "Ann"})
+CREATE (xyz:Company {name: "XYZ"})
+CREATE (x:Company {name: "Company X"})
+CREATE (a:Company {name: "Company A"})
+CREATE (Neo4j:Company {name: "Neo4j"})
+CREATE (abc:Company {name: "ABC"})
+CREATE (query:Technology {type: "Query Languages"})
+CREATE (etl:Technology {type: "Data ETL"})
+CREATE (integrations:Technology {type: "Integrations"})
+CREATE (graphs:Technology {type: "Graphs"})
+CREATE (dev:Technology {type: "Application Development"})
+CREATE (java:Technology {type: "Java"})
+CREATE (diana)-[:LIKES]->(query)
+CREATE (melissa)-[:LIKES]->(query)
+CREATE (dan)-[:LIKES]->(etl)<-[:LIKES]-(melissa)
+CREATE (xyz)<-[:WORKS_FOR]-(sally)-[:LIKES]->(integrations)<-[:LIKES]-(dan)
+CREATE (sally)<-[:IS_FRIENDS_WITH]-(john)-[:LIKES]->(java)
+CREATE (john)<-[:IS_FRIENDS_WITH]-(jennifer)-[:LIKES]->(java)
+CREATE (john)-[:WORKS_FOR]->(xyz)
+CREATE (sally)<-[:IS_FRIENDS_WITH]-(jennifer)-[:IS_FRIENDS_WITH]->(melissa)
+CREATE (joe)-[:LIKES]->(query)
+CREATE (x)<-[:WORKS_FOR]-(diana)<-[:IS_FRIENDS_WITH]-(joe)-[:IS_FRIENDS_WITH]->(mark)-[:LIKES]->(graphs)<-[:LIKES]-(jennifer)-[:WORKS_FOR]->(Neo4j)
+CREATE (ann)<-[:IS_FRIENDS_WITH]-(jennifer)-[:IS_FRIENDS_WITH]->(mark)
+CREATE (john)-[:LIKES]->(dev)<-[:LIKES]-(ann)-[:IS_FRIENDS_WITH]->(dan)-[:WORKS_FOR]->(abc)
+CREATE (ann)-[:WORKS_FOR]->(abc)
+CREATE (a)<-[:WORKS_FOR]-(melissa)-[:LIKES]->(graphs)<-[:LIKES]-(diana)
+----
 
 
 Using the above example dataset thus far, you could update Jennifer's node to add her birthdate.
@@ -58,9 +99,9 @@ Rows: 1
 
 
 [TIP]
---
-For more information on using `date()` and other temporal functions, visit link:https://neo4j.com/docs/cypher-manual/current/syntax/temporal/[the reference documentation on temporal values in Cypher^].
---
+====
+For more information on using `date()` and other temporal functions, visit the link:https://neo4j.com/docs/cypher-manual/current/functions/temporal/[Cypher manual -> Temporal functions^].
+====
 
 If you want to change Jennifer's birthdate, you can use the same query above to find Jennifer's node again and put a different date in the `SET` clause.
 
@@ -91,9 +132,9 @@ Rows: 1
 
 
 [NOTE]
---
+====
 If you want to return a graph view on the above query, you can add variables to the nodes for `p:Person` and `c:Company` and write the return line as `RETURN p, rel, c`.
---
+====
 
 [[cypher-delete]]
 == Deleting data with Cypher
@@ -240,7 +281,7 @@ RETURN mark
 
 *Query result:*
 
-image::cypher_graph_mergeFriend-arr.svg[role="popup-link"]
+image::cypher_graph_mergeFriend-arr.svg[role="popup-link", width=200]
 
 If you run the same statement again, Cypher will find an existing node this time that has the `name` property set to `Mark`, so it will return the matched node without any changes.
 
@@ -268,7 +309,7 @@ If the entire pattern (nodes, relationships, and any specified properties) does 
 Cypher never produces a partial mix of matching and creating within a pattern.
 To avoid a mix of match and create, you need to match any existing elements of your pattern first before doing a merge on any elements you might want to create, just as we did in the statement above.
 
-image::cypher_graph_mergeFriendRel-arr.svg[role="popup-link"]
+image::cypher_graph_mergeFriendRel-arr.svg[role="popup-link", width=600]
 
 [NOTE]
 ====
