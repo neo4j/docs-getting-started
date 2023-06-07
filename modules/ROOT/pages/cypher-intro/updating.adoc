@@ -100,7 +100,7 @@ Rows: 1
 
 [TIP]
 ====
-For more information on using `date()` and other temporal functions, visit link:https://neo4j.com/docs/cypher-manual/current/functions/temporal/[the reference documentation on temporal values in Cypher^].
+For more information on using `date()` and other temporal functions, visit the link:https://neo4j.com/docs/cypher-manual/current/functions/temporal/[Cypher manual -> Temporal functions^].
 ====
 
 If you want to change Jennifer's birthdate, you can use the same query above to find Jennifer's node again and put a different date in the `SET` clause.
