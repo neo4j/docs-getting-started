@@ -50,7 +50,7 @@ In this query:
 Maybe we want to make some changes to this article node to update the `datePublished` and `readingTime` properties.
 
 We've decided to publish the article next week rather than today, so we want to make that change.
-If we want to create a new `Date` type using a https://neo4j.com/docs/cypher-manual/current/syntax/temporal/#cypher-temporal-specify-date[supported format^], we could do so using the following query:
+If we want to create a new `Date` type using a https://neo4j.com/docs/cypher-manual/current/values-and-types/temporal/#cypher-temporal-specify-date[supported format^], we could do so using the following query:
 
 [source,cypher]
 ----
@@ -272,7 +272,7 @@ RETURN article.title AS title,
 This section has shown how to work more effectively with temporal types using the APOC libary.
 Below are some resources for learning more about using Temporal types in Neo4j:
 
-* link:https://neo4j.com/docs/cypher-manual/current/syntax/temporal[Temporal (Date/Time) values in Cypher^]
+* link:https://neo4j.com/docs/cypher-manual/current/values-and-types/temporal/[Temporal (Date/Time) values in Cypher^]
 * link:https://neo4j.com/docs/apoc/current/[APOC Library^]
 ** link:https://neo4j.com/docs/apoc/current/temporal/datetime-conversions/[Date and Time Conversions^]
 ** link:https://neo4j.com/docs/apoc/current/temporal/temporal-conversions/[Temporal Functions^]
