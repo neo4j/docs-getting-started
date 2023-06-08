@@ -69,7 +69,7 @@ Bearing that in mind, Neo4j provides multiple link:https://neo4j.com/docs/driver
 
 * <<gds-python-client>> to call all Neo4j GDS procedures straight from Python.
 * link:https://neo4j.com/docs/spark/current/dwh/[Data Warehouse Connector] for moving data to and from Snowflake, Google BigQuery, Amazon Redshift, or Microsoft Azure Synapse Analytics.
-* BI Connector for direct access to BI tools like Microsoft Power BI, Tableau, Looker, TIBCO Spotfire, and Microstrategy.
+* BI Connector for direct access to BI tools like Microsoft Power BI, Tableau, etc.
 
 [[gds-python-client]]
 === GDS Python client
