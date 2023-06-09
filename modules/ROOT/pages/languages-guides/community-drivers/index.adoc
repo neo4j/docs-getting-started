@@ -7,7 +7,7 @@
 
 == Introduction
 
-In addition to the officially supported drivers, you can find Community alternatives.
+In addition to the officially supported drivers, you can find their Community alternatives.
 Besides Java, .NET, JavaScript, Go, and Python drivers, Neo4j Community offers support for Ruby, PHP, Erlang/Elixir, and Perl.
 Links to their relevant resources are provided below.
 
@@ -15,7 +15,7 @@ Members of the each programming language community have invested a lot of time a
 
 [IMPORTANT]
 ====
-The Community Drivers have been graciously contributed by the Neo4j community.
+The Community drivers have been graciously contributed by the Neo4j community.
 Many of them are fully featured and well-maintained, but some may not be.
 Neo4j does not take any responsibility for their usability.
 ====
@@ -213,8 +213,8 @@ The goal of GORM for Neo4j is to provide a 'as-complete-as-possible' GORM implem
 [cols="1,4"]
 |===
 | icon:user[] Authors | Stefan Armbruster, Graeme Rocher
-| icon:gift[] Package | http://www.grails.org/plugin/neo4j
-| icon:github[] Source | https://github.com/grails/grails-data-mapping/tree/master/grails-datastore-gorm-neo4j
+// | icon:gift[] Package | http://www.grails.org/plugin/neo4j
+// | icon:github[] Source | https://github.com/grails/grails-data-mapping/tree/master/grails-datastore-gorm-neo4j
 | icon:book[] Docs | http://grails.github.io/grails-data-mapping/latest/neo4j/
 |===
 
@@ -337,6 +337,6 @@ A Django plugin https://github.com/neo4j-contrib/django-neomodel[django_neomodel
 |===
 | icon:user[] Author | https://github.com/erictg[Eric Solender^], CTO and co-founder of https://mindstand.com/about-us/[Mindstand^]
 // | icon:gift[] Package |
-| icon:github[] Source | https://github.com/mindstand/gogm
+| icon:github[] Source | https://github.com/z5labs/gogm
 | icon:book[] Docs | https://github.com/mindstand/gogm/blob/master/README.md
 |===
