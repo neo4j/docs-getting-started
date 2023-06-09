@@ -106,7 +106,7 @@ See the link:https://neo4j.com/docs/bloom-user-guide/current/[Documentation^] fo
 [[cypher]]
 === Cypher Query Language
 
-link:https://neo4j.com/product/cypher-graph-query-language/?ref=product[Cypher] is an open data query language, based on the https://opencypher.org/?ref=cypher-web-page/[openCypher initiative].
+Cypher is an open link:https://neo4j.com/product/cypher-graph-query-language/?ref=product[data query language], based on the https://opencypher.org/?ref=cypher-web-page/[openCypher initiative].
 It is the most established and intuitive query language used for property graphs.
 Cypher can be characterized by following:
 
@@ -146,6 +146,7 @@ Neo4j Aura includes AuraDB for applications and AuraDS for data science.
 </div>
 ++++
 ////
+
 
 == Neo4j Community Forum
 

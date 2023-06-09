@@ -466,6 +466,7 @@ productId:orderId:quantityOrdered
 == Loading the data
 
 Now that you have determined that the CSV file data looks good, and you have verified how `LOAD CSV` sees the data and converted any non-string values, you are almost ready to create the data in our graph database.
+
 To do that, you will use Cypher statements alongside the `LOAD CSV` commands you used above.
 The `LOAD CSV` will read the files, and the Cypher statements will create the data in your database.
 
@@ -514,9 +515,11 @@ CREATE CONSTRAINT UniqueOrder FOR (o:Order) REQUIRE o.id IS UNIQUE;
 == Cypher queries
 
 Now you are ready to write the Cypher for creating the data in the graph.
+
 You could use the `CREATE` clause where you are sure that you will not have duplicate rows in your CSV file and use `MATCH` to find existing data for updates.
 However, since it is hard to completely scrub all data and import perfectly clean data from any source, you will use the `MERGE` clause to check if the data already exists.
 If the node or relationship exists, Cypher will match and return them (without any writes), but if they do not exist, Cypher will insert it.
+
 Using `MERGE` can have some performance overhead, but often it is the better approach to maintain high data integrity.
 
 [NOTE]
@@ -524,6 +527,7 @@ Using `MERGE` can have some performance overhead, but often it is the better app
 *Why use both constraints and `MERGE`:*
 Using constraints is different from using the `MERGE` clause.
 Statements that create data in violation of the constraint prompt an error, while statements that use the `MERGE` clause simply return existing values (no errors).
+
 If you use both, you avoid terminating your load statements due to constraint violations, and you also ensure you don't accidentally create duplicates in adhoc queries.
 ====
 
@@ -591,6 +595,7 @@ Then, the `MERGE` statement will add the new relationship or match an existing o
 As you found when you ran a count on the _order-details_ file above, there are 2,155 rows in the CSV.
 While this is not a huge number for file imports, you will have Cypher commit the data to the database in batches to reduce the memory overhead of the transaction state.
 For this, you can use the subquery `CALL {...} IN TRANSACTIONS` after the `LOAD CSV` clause.
+
 The number of input rows is set with the modifier `OF n ROWS` (or `ROW`).
 If omitted, the default batch size is 1000 rows.
 For this exercise, you will ask Cypher to commit every *500 rows*.

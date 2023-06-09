@@ -28,6 +28,7 @@ link:https://www.youtube.com/watch?v=jFdEeJ-Ez1E[Video: What is Neo4j?]
 endif::[]
 
 
+
 [[property-graph]]
 == The property graph model
 
@@ -67,7 +68,7 @@ Neo4j is written in Java and Scala, and the source code is available on https://
 
 What makes Neo4j the easiest graph to work with?
 
-* *Cypher*, a declarative query language similar to SQL, but optimized for graphs.
+* Cypher, a declarative query language similar to SQL, but optimized for graphs.
 Now used by other databases like SAP HANA Graph and Redis graph via the http://www.opencypher.org/[openCypher project^].
 * *Constant time traversals* in big graphs for both depth and breadth due to efficient representation of nodes and relationships.
 Enables scale-up to billions of nodes on moderate hardware.
