@@ -117,7 +117,7 @@ This allows you to perform some intermediate calculations or operations within y
 
 The following dataset is used to demonstrate examples below:
 
-.Graph: people, technologies they like, and companies they work at
+.Graph: people, technologies they like, and companies where they work
 image::people-technologies-graph-arr.svg[role="popup-link"]
 
 To reproduce the graph, run the Cypher code:
