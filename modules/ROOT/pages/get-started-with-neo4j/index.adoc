@@ -14,7 +14,7 @@ Each option allows you to explore different possibilities of the Neo4j ecosystem
 
 [TIP]
 ====
-For all available options on how to get started with Neo4j, see link:https://neo4j.com/try-neo4j/[].
+To explore all available options on how to get started with Neo4j, visit link:https://neo4j.com/deployment-center/[Download center].
 ====
 
 [[neo4j-first-steps]]
