@@ -60,15 +60,17 @@ public class Actor {
 }
 
 @RelationshipEntity(type="ACTED_IN")
-@Id @GeneratedValue
+public class Role {
+    @Id @GeneratedValue
     private Long relationshipId;
-	@Property
+    
+    @Property
     private String title;
     
-	@StartNode
+    @StartNode
     private Actor actor;
     
-	@EndNode
+    @EndNode
     private Movie movie;
 }
 ----
