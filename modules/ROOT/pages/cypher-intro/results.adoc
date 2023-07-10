@@ -676,10 +676,10 @@ Rows: 1
 
 There are three different ways to use the `count()` function:
 
-. `count({empty}*)`: counts results and returns the number of matching rows.
-. `count(n)`: count the number of occurrences of `n` (excludes `null` values).
+. `count(*)`: counts results and returns the number of matching rows.
+. `count(n)`: counts the number of occurrences of `n` (excludes `null` values).
 You can specify nodes, relationships, or properties within the parentheses for Cypher to count.
-. The `DISTINCT` operator -- `count(DISTINCT variable)` -- removes duplicates from the results.
+. `count(DISTINCT variable)`: the `DISTINCT` operator removes duplicates from the results.
 
 In the dataset <<people-technologies-companies, _People, technologies, and companies_>>, some of the `Person` nodes have a Twitter handle, but others do not.
 If you run the first example query below, you will see that the `twitter` property has a value for four people and is `null` for the other five people.
