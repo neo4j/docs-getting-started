@@ -137,6 +137,7 @@ The syntax for this criteria is very similar to SQL and other programming langua
 
 The following dataset is used to demonstrate the Cypher queries for these cases.
 
+[[people-technologies-companies]]
 image::people-companies-technologies-rel-property.svg[role="popup-link"]
 
 To reproduce the dataset, run the following Cypher query:
@@ -612,10 +613,10 @@ You could also run that much of the query to see the friends and counts all in o
 The `LIMIT` pulls the top results from the ordered list.
 
 [TIP]
---
+====
 Try mixing up the query by removing the `ORDER BY` and `LIMIT` lines and then add each one separately.
 Notice that only removing the `ORDER BY` line pulls the starting three values from the list, getting a random sampling of the return results.
---
+====
 
 [[cypher-intro-results-aggregating]]
 == Aggregating information
@@ -624,7 +625,7 @@ In many cases, we wish to aggregate or group the data encountered while traversi
 In Cypher, aggregation happens in the `RETURN` clause while computing the final results.
 Many common aggregation functions are supported, for example `count`, `sum`, `avg`, `min`, and `max`, but there are several more.
 
-Counting the number of people in your Movie database could be achieved by this:
+Counting the number of people in the Movie database could be achieved by this:
 
 [source, cypher, role="noplay"]
 ----
@@ -643,8 +644,9 @@ Rows: 1
 +--------+
 ----
 
-Note that `NULL` values are skipped during aggregation.
-For aggregating only unique values use `DISTINCT`, for example: `count(DISTINCT role)`.
+If you want to skip `null` values, use the function `count(variable)`. 
+
+For aggregating only unique values use the `DISTINCT` operator, for example: `count(DISTINCT role)`.
 
 Aggregation works implicitly in Cypher.
 You specify which result columns you wish to aggregate.
@@ -671,15 +673,15 @@ Rows: 1
 +--------------------------------------------------------------------------------------------------------------+
 ----
 
-The `count()` function in Cypher allows you to count the number of occurences of entities, relationships, or results returned.
 
-There are two different ways you can count return results from your query.
+There are three different ways to use the `count()` function:
 
-* The first is by using `count(n)` to count the number of occurences of `n` and does not include `null` values.
+. `count(*)`: counts results and returns the number of matching rows.
+. `count(n)`: counts the number of occurrences of `n` (excludes `null` values).
 You can specify nodes, relationships, or properties within the parentheses for Cypher to count.
-* The second way to count results is with `count({empty}*)`, which counts the number of result rows returned (including those with `null` values).
+. `count(DISTINCT variable)`: the `DISTINCT` operator removes duplicates from the results.
 
-In the dataset, some of the `Person` nodes have a Twitter handle, but others do not.
+In the dataset <<people-technologies-companies, _People, technologies, and companies_>>, some of the `Person` nodes have a Twitter handle, but others do not.
 If you run the first example query below, you will see that the `twitter` property has a value for four people and is `null` for the other five people.
 The second and third queries show how to use the different `count` options.
 
