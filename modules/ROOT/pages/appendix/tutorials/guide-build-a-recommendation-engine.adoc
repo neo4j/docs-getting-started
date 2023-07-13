@@ -8,7 +8,7 @@
 
 [#cypher-tutorial]
 Graphs are everywhere.
-By following the meaningful relationships between the people and movies, you can determine occurences of actors working together, the frequency of actors working with one another, and the movies they have in common in the graph.
+By following the meaningful relationships between the people and movies, you can determine occurrences of actors working together, the frequency of actors working with one another, and the movies they have in common in the graph.
 This is one way we can recommend movies to users, based on what they liked before, and their favorite actors.
 We will step you through everything you need to get started with AuraDB and Cypher, to solve a real-world problem.
 
