@@ -335,7 +335,7 @@ A Django plugin https://github.com/neo4j-contrib/django-neomodel[django_neomodel
 
 [cols="1,4"]
 |===
-| icon:user[] Author | https://github.com/erictg[Eric Solender^], CTO and co-founder of https://mindstand.com/about-us/[Mindstand^]
+| icon:user[] Author | https://github.com/erictg[Eric Solender^], CTO and co-founder of Mindstand
 // | icon:gift[] Package |
 | icon:github[] Source | https://github.com/z5labs/gogm
 | icon:book[] Docs | https://github.com/mindstand/gogm/blob/master/README.md
