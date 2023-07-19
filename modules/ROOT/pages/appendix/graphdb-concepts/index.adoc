@@ -28,8 +28,8 @@ In mathematics, graph theory is the study of graphs.
 
 In graph theory:
 
-* Nodes are also refered to as vertices or points.
-* Relationships are also refered to as edges, links, or lines.
+* Nodes are also referred to as vertices or points.
+* Relationships are also referred to as edges, links, or lines.
 ====
 
 

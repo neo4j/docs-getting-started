@@ -152,7 +152,7 @@ Or using link:{neo4j-docs-base-uri}/operations-manual/current/tools/cypher-shell
 bin/cypher-shell --database=neo4j "CREATE CONSTRAINT personIdConstraint FOR (person:Person) REQUIRE person.id IS UNIQUE"
 ----
 
-**+3.+ Create a constraint so that each `Movie` node has a unique `id` propery.**
+**+3.+ Create a constraint so that each `Movie` node has a unique `id` property.**
 
 You create a constraint on the `id` property of `Movie` nodes to ensure that nodes with the `Movie` label will have a unique `id` property.
 
