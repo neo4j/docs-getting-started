@@ -109,7 +109,7 @@ One excellent example of a complex data structure that is difficult to model is 
 In the Marvel universe, there are comics that have characters who make appearances or play lead roles.
 Comics can be organized into a series of particular storylines or narratives for a certain time, and major events can take place in a comic that define a character path or series.
 Creators (including writers, illustrators, etc) are the authors of comics, defining storyline, character adaptations, and events that happen.
-Multiple creators can also participate interchangably to create a comic or series.
+Multiple creators can also participate interchangeably to create a comic or series.
 
 This dataset already seems complicated, with several entities and relationships at work.
 It adds a new layer of complexity when trying to model the hierarchies and intermediate entities that exist here.

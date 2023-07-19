@@ -111,7 +111,7 @@ Processes that need to log information to Neo4j or flexibility for embedding in 
 All of this functionality is bundled out-of-the-box through a simple, yet powerful GUI for your ETL developers.
 Cooperation with Neo4j simply requires the plugins for our graph data integration.
 
-=== Kettle Resoures
+=== Kettle Resources
 * Kettle Download: https://sourceforge.net/projects/pentaho/files/[Open-source project on SourceForge^]
 * Neo4j Plugins: https://github.com/knowbi/knowbi-pentaho-pdi-neo4j-output/releases/[Integrate Kettle with Neo4j^]
 * Blog post: https://medium.com/neo4j/getting-started-with-kettle-and-neo4j-32ff15b991f9[Getting Started with Kettle and Neo4j^]
