@@ -269,7 +269,7 @@ RETURN article.title AS title,
 [#cypher-resources]
 == Resources
 
-This section has shown how to work more effectively with temporal types using the APOC libary.
+This section has shown how to work more effectively with temporal types using the APOC library.
 Below are some resources for learning more about using Temporal types in Neo4j:
 
 * link:https://neo4j.com/docs/cypher-manual/current/values-and-types/temporal/[Temporal (Date/Time) values in Cypher^]
