@@ -26,7 +26,7 @@ You should have a basic understanding of the property graph model and know how t
 [#about-domain]
 == About the data domain
 
-In this guide, we will be using the link:https://github.com/neo4j-documentation/developer-resources/tree/gh-pages/data/northwind[NorthWind dataset^], an often-used SQL dataset.
+In this guide, we will be using the link:https://github.com/neo4j-documentation/developer-resources/tree/gh-pages/data/northwind[Northwind dataset^], an often-used SQL dataset.
 This data depicts a product sale system - storing and tracking customers, products, customer orders, warehouse stock, shipping, suppliers, and even employees and their sales territories.
 Although the NorthWind dataset is often used to demonstrate SQL and relational databases, the data also can be structured as a graph.
 
@@ -125,18 +125,17 @@ When you use `LOAD CSV` to create nodes and relationships in the database, you h
 * In the *import* folder for the Neo4j instance that you can manage.
 * From a publicly-available location such as an S3 bucket or a github location. You must use this option if you are using Neo4j AuraDB or Neo4j Sandbox.
 
-If you want to use the CSV files for your Neo4j instance that you manage, you can copy the CSV files from
-link:{github}/data/northwind/northwind.zip[Northwind zip from github]
-and place them in the *import* folder for your Neo4j DBMS.
+If you want to use the CSV files for the Neo4j instance you manage, you can copy the CSV files from
+link:https://github.com/neo4j-documentation/developer-resources/tree/gh-pages/data/northwind[Northwind files on GitHub] and place them in the *import* folder for your Neo4j DBMS.
 
-We have already placed these CSV files in Gihub for your access to them.
+We have already placed these CSV files in GitHub for your access to them.
 
 You use use Cypher's `LOAD CSV` statement to read each file and add Cypher clauses after it to take the row/column data and transform it to the graph.
 
 Next you will run Cypher code to:
 
 . Load the nodes from the CSV files.
-. Create the indexes and constraint for the data in the graph.
+. Create the indexes and constraints for the data in the graph.
 . Create the relationships between the nodes.
 
 
