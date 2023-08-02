@@ -95,9 +95,8 @@ Use these link:https://github.com/neo4j-graph-examples/get-started/raw/main/data
 
 [NOTE]
 ====
-Note Cypher queries below end with the semi-colon `;`. 
-It is a requirement in link:https://neo4j.com/docs/operations-manual/current/tools/cypher-shell/[Cypher Shell] -- a command-line tool that comes with the Neo4j distribution.
-In Neo4j Browser or Query of Workspace, you don't have to end Cypher queries with the semi-colon.
+The Cypher queries below end with the semi-colon `;`, which is a requirement in link:https://neo4j.com/docs/operations-manual/current/tools/cypher-shell/[Cypher Shell] -- the command-line tool that comes with the Neo4j distribution.
+In Neo4j Browser or Query in Workspace, you don't have to end Cypher queries with semi-colon.
 ====
 
 === Find all Products
@@ -204,7 +203,7 @@ CREATE INDEX FOR (p:Product) ON p.unitPrice;
 
 _Filter by List/Range_
 
-You can also filter by multiple values.
+You can also filter by multiple values in SQL.
 
 [source, plsql]
 ----
@@ -304,7 +303,7 @@ ORDER BY Volume DESC;
 
 //sqltable
 
-In our Cypher query, the `MATCH` between customer and order becomes an `OPTIONAL MATCH`, which is the equivalent of an `OUTER JOIN`.
+In your Cypher query, the `MATCH` between customer and order becomes an `OPTIONAL MATCH`, which is the equivalent of an `OUTER JOIN`.
 
 [source, cypher]
 ----
@@ -371,7 +370,7 @@ JOIN Territory AS t ON (et.TerritoryID = t.TerritoryID);
 //sqltable
 
 In Cypher, you can either return the structure like in SQL or use the `collect()` aggregation function, which aggregates values into a collection (list, array).
-So we only return one row per parent, containing an inlined collection of child values.
+This way, only one row per parent, containing an inlined collection of child values, is returned.
 This also works for nested values.
 
 [source, cypher]
