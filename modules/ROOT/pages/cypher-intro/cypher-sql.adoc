@@ -22,7 +22,7 @@ Before diving into the details, it is essential to understand that while both SQ
 Unlike SQL, which deals with relational databases, Cypher is centered around expressing xref:cypher-intro/patterns.adoc[graph patterns].
 Graph pattern matching is the core technique in Cypher, enabling navigation, description, and data extraction from a graph by applying declarative patterns.
 
-Important concepts of Cypher include clauses, expressions, keywords, operators, and functions.
+Important concepts of Cypher include clauses, keywords, expressions, operators, and functions.
 
 * Clauses in Cypher form the structural elements of a query and define different parts of the query's logic.
 For example, the `MATCH` clause is used to specify patterns to match in the graph, while the `WHERE` clause allows for filtering based on conditions.
@@ -39,13 +39,6 @@ You can use Cypher to update the graph structure and data and even to ingest lar
 
 With xref:cypher-intro/procedures-functions.adoc[*user-defined procedures*], you can extend the language with functionality that you need but is not yet available.
 
-Other highlights of Cypher are graph concepts like: 
-
-* paths 
-* variable length paths 
-* shortest path functions
-* the support of many functions, operations, and predicates on lists.
-
 For more information about the Cypher query language, refer to the link:https://neo4j.com/docs/cypher-manual/current/introduction/[Neo4j Cypher Manual^] and the link:https://neo4j.com/docs/cypher-cheat-sheet/5/[Cypher Cheat Sheet].
 
 
@@ -55,7 +48,7 @@ For more information about the Cypher query language, refer to the link:https://
 The Northwind database represents the data storage of a retail application.
 It contains customers, products, orders, employees, shippers, and categories as well as their interactions.
 
-It is recommended to familiarise yourself with the guides on xref:data-modeling/index.adoc[data modeling] and xref:data-import/index.adoc[data importing] into Neo4j.
+It is recommended to familiarize yourself with the guides on xref:data-modeling/index.adoc[data modeling] and xref:data-import/index.adoc[data importing] into Neo4j.
 
 Relational databases store data in tables with fixed structure (schema), each column having a name, type, length, constraints, etc.
 References between tables are represented by repeating the primary key of one table as a column in another as a foreign key.
@@ -82,14 +75,14 @@ This guide intends to introduce Cypher by comparing it with the equivalent SQL s
 
 You can run all the Cypher queries below using an {aura_signup}[AuraDB Free instance] and the Neo4j Workspace guide _Query fundamentals_.
 
-Follow the instructions in the guide to load the Northwind dataset.
-
+. Load the Northwind dataset by following instructions in the guide.
++
 .Guide _Query fundamentals_ in Neo4j Workspace
 image::northwind_dataset_load.png[]
-
-After populating the database, run the command `call db.schema visualization` in Query to check if everything is correct.
++
+. After populating the database, run the command `call db.schema visualization` in Query to check the imported data vs the model.
 Your output should be the following:
-
++
 .Model of the Nortwind dataset in Workspace Query
 image::northwind_schema_workspace.png[]
 
