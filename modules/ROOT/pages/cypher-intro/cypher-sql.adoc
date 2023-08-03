@@ -16,7 +16,7 @@
 This guide shows anyone familiar with SQL how to write the equivalent Cypher queries.
 The Northwind database is used to illustrate how to translate SQL queries into Cypher, showcasing the similarities and differences between the two languages.
 
-xref:cypher-intro/index.adoc[The previous page: Introduction to Cypher] covers its basics.
+xref:cypher-intro/index.adoc[The previous page: Query a Neo4j database using Cypher] covers its basics.
 
 Before diving into the details, it is essential to understand that while both SQL and Cypher are declarative query languages, Cypher is specifically designed for querying graphs.
 Unlike SQL, which deals with relational databases, Cypher is centered around expressing xref:cypher-intro/patterns.adoc[graph patterns].
@@ -33,6 +33,13 @@ For more information, visit the link:https://neo4j.com/docs/cypher-manual/curren
 
 * Expressions in Cypher are important in formulating complex conditions, transforming values, and performing calculations within your queries.
 
+* In Cypher, operators are symbols or keywords used to perform operations on values and expressions.
+Examples of operators include arithmetic operators, comparison operators, logical operators, and more.
+They are fundamental for filtering data and performing calculations in queries.
+
+* Cypher provides a set of built-in functions that can be used to manipulate data, perform computations, and transform values.
+To list the available functions, run the command `SHOW FUNCTIONS`.
+
 Cypher allows you to chain multiple query parts together, enabling the composition of complex queries. 
 
 You can use Cypher to update the graph structure and data and even to ingest large amounts of CSV data.
@@ -48,8 +55,6 @@ For more information about the Cypher query language, refer to the link:https://
 The Northwind database represents the data storage of a retail application.
 It contains customers, products, orders, employees, shippers, and categories as well as their interactions.
 
-It is recommended to familiarize yourself with the guides on xref:data-modeling/index.adoc[data modeling] and xref:data-import/index.adoc[data importing] into Neo4j.
-
 Relational databases store data in tables with fixed structure (schema), each column having a name, type, length, constraints, etc.
 References between tables are represented by repeating the primary key of one table as a column in another as a foreign key.
 For many-to-many references, JOIN-tables (or link-tables) are needed as an artificial construct between the connected tables.
@@ -57,6 +62,8 @@ For many-to-many references, JOIN-tables (or link-tables) are needed as an artif
 Graph databases store data in a xref:get-started-with-neo4j/graph-database.adoc#property-graph[graph] with nodes and relationships between them.
 
 For a sensible relational model, the transformation into a graph is not hard, as rows of entity tables are converted into *nodes* and foreign-key relationships and JOIN-tables into *relationships*.
+
+It is recommended to familiarize yourself with the guides on xref:data-modeling/index.adoc[data modeling] and xref:data-import/index.adoc[data importing] into Neo4j.
 
 Refer to the relational and graph models below when considering the data structures in the following queries.
 
@@ -80,7 +87,7 @@ You can run all the Cypher queries below using an {aura_signup}[AuraDB Free inst
 .Guide _Query fundamentals_ in Neo4j Workspace
 image::northwind_dataset_load.png[]
 +
-. After populating the database, run the command `call db.schema visualization` in Query to check the imported data vs the model.
+. After importing the data, run the command `call db.schema visualization` in Query to check the imported data vs the model.
 Your output should be the following:
 +
 .Model of the Nortwind dataset in Workspace Query
