@@ -290,7 +290,7 @@ Using link:{neo4j-docs-base-uri}/operations-manual/current/tools/cypher-shell[_C
 
 [source, shell, indent=0]
 ----
-bin/cypher-shell --database=neo4j 'LOAD CSV WITH HEADERS FROM "file:///roles.csv" AS csvLine CALL {MATCH (person:Person {id: toInteger(csvLine.personId)}), (movie:Movie {id: toInteger(csvLine.movieId)}) CREATE (person)-[:ACTED_IN {role: csvLine.role}]->(movie)} IN TRANSACTIONS OF 2 ROWS'
+bin/cypher-shell --database=neo4j 'LOAD CSV WITH HEADERS FROM "file:///roles.csv" AS csvLine CALL {WITH csvLine MATCH (person:Person {id: toInteger(csvLine.personId)}), (movie:Movie {id: toInteger(csvLine.movieId)}) CREATE (person)-[:ACTED_IN {role: csvLine.role}]->(movie)} IN TRANSACTIONS OF 2 ROWS'
 ----
 
 Output:
