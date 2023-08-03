@@ -59,7 +59,7 @@ Relational databases store data in tables with fixed structure (schema), each co
 References between tables are represented by repeating the primary key of one table as a column in another as a foreign key.
 For many-to-many references, JOIN-tables (or link-tables) are needed as an artificial construct between the connected tables.
 
-Graph databases store data in a xref:get-started-with-neo4j/graph-database.adoc#property-graph[graph] with nodes and relationships between them.
+Graph databases store data in a graph with nodes and relationships between them (refer to xref:get-started-with-neo4j/graph-database.adoc#property-graph[] for more information about the graph format).
 
 For a sensible relational model, the transformation into a graph is not hard, as rows of entity tables are converted into *nodes* and foreign-key relationships and JOIN-tables into *relationships*.
 
@@ -78,7 +78,7 @@ image::northwind_graph_workspace-arr.png[width=600]
 [#cypher-sql-queries]
 == Querying the data step by step
 
-This guide intends to introduce Cypher by comparing it with the equivalent SQL statements so that your existing SQL knowledge allows you to understand it immediately.
+This guide intends to introduce Cypher by comparing it with the equivalent SQL statements.
 
 You can run all the Cypher queries below using an {aura_signup}[AuraDB Free instance] and the Neo4j Workspace guide _Query fundamentals_.
 
@@ -396,8 +396,8 @@ If you have to express category-, territory- or organizational hierarchies in SQ
 Adding data is not problematic, as are single level queries (get all children for this parent).
 As soon as you get into multi-level queries, the number of joins explodes, especially if your level depth not fixed.
 
-Taking the example of the product categories, we have to decide upfront up to how many levels of categories we want to query.
-We will tackle only three potential levels here (which means 1+2+3 = 6 self-joins of the `ProductCategory` table).
+Taking the example of the product categories, you have to decide upfront up to how many levels of categories you want to query.
+Only three potential levels are shown here (which means 1+2+3 = 6 self-joins of the `ProductCategory` table).
 
 // TODO check
 
