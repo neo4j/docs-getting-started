@@ -1,4 +1,5 @@
 :page-ogdescription: The Neo4j Getting Started Guide covers: How to get started with Neo4j. Introduction to graph database concepts and introduction to the graph query language Cypher.
+:aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guide
 :page-ad-overline-link: https://graphacademy.neo4j.com/categories/?ref=docs
 :page-ad-overline: Neo4j GraphAcademy
 :page-ad-title: Neo4j GraphAcademy Courses
@@ -40,7 +41,7 @@ image::neo4j-architecture-diagram.svg[role="popup-link"]
 Neo4j started as a graph database and has evolved into a rich ecosystem with numerous tools, applications, and libraries.
 This ecosystem allows you to seamlessly integrate graph technologies with your working environment. +
 
-To explore more information about each component, visit the link:https://neo4j.com/deployment-center/[Download center^]. +
+To explore more information about each component, visit the link:https://neo4j.com/deployment-center/[Neo4j Download center^]. +
 For instructions on installing and deploying Neo4j, refer to the xref:get-started-with-neo4j/index.adoc#neo4j-docs[Neo4j documentation]. +
 *The latest version of Neo4j is {neo4j-version-minor}.*
 
@@ -49,21 +50,25 @@ For instructions on installing and deploying Neo4j, refer to the xref:get-starte
 
 link:https://neo4j.com/product/neo4j-graph-database/?ref=product/[Neo4j Graph Database^] is the core product, a native graph database that is built to store and retrieve connected data. + 
 link:https://neo4j.com/licensing/[Two editions^], a Community Edition and an Enterprise Edition, are available. +
-There are various ways to deploy Neo4j: on-premises server installation, self-hosted in the cloud with pre-built images, or by simply using *Neo4j Aura*. +
-You can find all necessary documentation on how to install and maintain Neo4j on the link:https://neo4j.com/docs/[Documentation page^]. 
+There are various ways to get started with Neo4j: 
+
+* link:https://neo4j.com/docs/operations-manual/current/installation/[by installing on-premises] 
+* link:https://neo4j.com/docs/operations-manual/current/cloud-deployments/[by deploying on the cloud platform] of your choice
+* by using {aura_signup}[Neo4j Aura]
+
+You can find all necessary documentation on how to install and maintain Neo4j in the link:https://neo4j.com/docs/operations-manual/current/[Operations manual^]. 
 
 [[neo4j-aura]]
 == Neo4j Aura
 
-Neo4j is a link:https://neo4j.com/cloud/[cloud-friendly] database, with a variety of cloud deployment options available.
-You can run Neo4j on public clouds like AWS, Azure, and Google Cloud Platform (GCP). +
-*Neo4j Aura* is a fully managed, cloud-native graph service, that gives developers and data scientists advanced graph tech tools.
-Neo4j Aura includes *AuraDB* and *AuraDS*.
+*Neo4j Aura* is a fully managed cloud service offering, that includes *AuraDB* and *AuraDS*.
 
-link:https://neo4j.com/cloud/aura/?ref=product[Neo4j AuraDB^] is a graph database as a service. +
-For more information, see the link:https://neo4j.com/docs/aura/current/[official documentation^]. +
+{aura_signup}[Neo4j AuraDB^] is a graph database as a service.
+For more information, see the link:https://neo4j.com/docs/aura/current/[official documentation^].
 
-link:https://neo4j.com/cloud/platform/aura-graph-data-science/[Neo4j AuraDS] makes it easy to run graph algorithms on Neo4j by integrating two main components:
+To interact with an Aura instance, use link:https://neo4j.com/product/workspace/[Neo4j Workspace^] -- a low-code UI-based tool that helps you to design a data model, preview the model, import the data, and explore and query the database.
+
+*Neo4j AuraDS* makes it easy to run graph algorithms on Neo4j by integrating two main components:
 
 * **Neo4j Database**, where graph data are loaded and stored, and Cypher queries and all database operations (for example user management, query termination, etc.) are executed.
 * **Graph Data Science**, a software component installed in the Neo4j Database, which main purpose is to run graph algorithms on in-memory projections of Neo4j Database.
@@ -88,7 +93,7 @@ Neo4j provides a variety of tools that aim to make learning and development of g
 
 The link:https://neo4j.com/product/developer-tools/[Neo4j Developer Tools^] page introduces the most important of them.
 
-* link:https://neo4j.com/docs/desktop-manual/current/[Neo4j Desktop] -- a local development environment for working with Neo4j, whether using local database instances or databases located on remote servers.
+* link:https://neo4j.com/docs/desktop-manual/current/[Neo4j Desktop] -- a local development environment for working with Neo4j, using local database instances.
 Free download includes Neo4j Enterprise Edition license.
 * link:https://neo4j.com/docs/browser-manual/current/[Neo4j Browser] -- online browser interface to query and view the data in the database.
 Basic visualization capabilities using Cypher query language.
