@@ -88,6 +88,14 @@ WHERE p.name =~ 'K.+' OR m.released > 2000 OR 'Neo' IN r.roles
 RETURN p, r, m
 ----
 
+Based on the given logical operator `OR` and the graph pattern `(p:Person)-[r:ACTED_IN]->(m:Movie)`, the query result has to meet *one* of the following requirements:
+
+* The person's `name` starts with the letter `'K'`.
+* The movie was released after the year `2000`.
+* The role is `'Neo'`.
+
+In our case, only the second condition matches the graph pattern `(p:Person)-[r:ACTED_IN]->(m:Movie)`, therefore the output is the following:
+
 [queryresult]
 ----
 Rows: 1
