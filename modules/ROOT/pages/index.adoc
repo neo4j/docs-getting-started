@@ -93,7 +93,7 @@ Neo4j provides a variety of tools that aim to make learning and development of g
 
 The link:https://neo4j.com/product/developer-tools/[Neo4j Developer Tools^] page introduces the most important of them.
 
-* link:https://neo4j.com/docs/desktop-manual/current/[Neo4j Desktop] -- a local development environment for working with Neo4j, using local database instances.
+* link:https://neo4j.com/docs/desktop-manual/current/[Neo4j Desktop] -- a local development environment for working with Neo4j, whether using local database instances or databases located on remote servers.
 Free download includes Neo4j Enterprise Edition license.
 * link:https://neo4j.com/docs/browser-manual/current/[Neo4j Browser] -- online browser interface to query and view the data in the database.
 Basic visualization capabilities using Cypher query language.
