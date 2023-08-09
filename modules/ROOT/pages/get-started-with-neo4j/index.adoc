@@ -27,7 +27,7 @@ At the moment, AuraDB provides a few example datasets to help you learn more abo
 If you are a data scientist, you might be interested in link:https://neo4j.com/docs/aura/aurads/[Neo4j AuraDS], a graph data science platform as a fully managed cloud service.
 You get access to more than 65 pretuned link:https://neo4j.com/docs/graph-data-science/current/algorithms/[graph algorithms].
 +
-* link:https://neo4j.com/pricing/#graph-database[Neo4j Database] can be installed on-premises and deployed in various contexts: link:https://neo4j.com/docs/operations-manual/current/installation/linux/[Linux], link:https://neo4j.com/docs/operations-manual/current/installation/osx/[macOs], and link:https://neo4j.com/docs/operations-manual/current/installation/windows/[Windows].
+* link:https://neo4j.com/pricing/#graph-database[Neo4j Database] can be installed on-premises and deployed in various systems: link:https://neo4j.com/docs/operations-manual/current/installation/linux/[Linux], link:https://neo4j.com/docs/operations-manual/current/installation/osx/[macOs], and link:https://neo4j.com/docs/operations-manual/current/installation/windows/[Windows].
 
 +
 To extend Neo4j capabilities, you can install several optional tools as plugins.
@@ -39,7 +39,7 @@ To configure the plugins, refer to the information on the pages:
 +
 * link:https://neo4j.com/docs/operations-manual/current/docker/[The Neo4j Docker image] provides a standard, ready-to-run package of Neo4j Community Edition and Enterprise Edition for a variety of versions.
 +
-* link:https://neo4j.com/product/developer-tools/[*Neo4j Desktop*] is one of the ways to set up an environment for developing an application with Neo4j and Cypher.
+* link:https://neo4j.com/docs/desktop-manual/current/[*Neo4j Desktop*] is one of the ways to set up an environment for developing an application with Neo4j and Cypher.
 Download Neo4j Desktop from link:https://neo4j.com/download/[] and follow the installation instructions for your operating system.
 +
 Neo4j Desktop comes with a variety of tools that can be installed as plugins.
