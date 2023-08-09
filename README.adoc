@@ -39,10 +39,7 @@ PRs merged into this branch will be published live immediately.
 
 === Raising Pull Requests
 
-Since the Getting Started Guide has no version, raise your Pull Request against the `dev` branch.
-
-If your changes have to be published immediately, create a PR against the `main` branch.
-
-The general recommendation is to raise PRs against the `dev` branch and cherry-pick them back to `main` branch. 
-
-Please, add at least one approver.
+* Always raise Pull Requests against the `dev` branch.
+* Please add at least one approver.
+* When merging a Pull Request, always use the "Squash and Merge" option.
+* After a Pull Request has been merged, you can publish the changes immediately by cherry-picking the PR to the `main` branch. 
