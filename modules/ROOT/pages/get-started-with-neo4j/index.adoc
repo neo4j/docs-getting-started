@@ -31,11 +31,7 @@ You get access to more than 65 pretuned link:https://neo4j.com/docs/graph-data-s
 
 +
 To extend Neo4j capabilities, you can install several optional tools as plugins.
-To configure the plugins, refer to the information on the pages:
-+
-** link:https://neo4j.com/docs/operations-manual/current/configuration/plugins/[Operations Manual -> Plugins]
-** link:https://neo4j.com/docs/operations-manual/current/configuration/file-locations/[Operations Manual -> Default file locations]
-
+To configure the plugins, refer to the information in the link:https://neo4j.com/docs/operations-manual/current/configuration/plugins/[Operations Manual -> Plugins].
 +
 * link:https://neo4j.com/docs/operations-manual/current/docker/[The Neo4j Docker image] provides a standard, ready-to-run package of Neo4j Community Edition and Enterprise Edition for a variety of versions.
 +
