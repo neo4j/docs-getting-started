@@ -18,9 +18,12 @@ jobs:
         with:
           node-version: lts/*
       - name: Teardown documentation
+        shell: bash
+        env:
+          SURGE_TOKEN: "${{ secrets.DOCS_SURGE_TOKEN }}"
         run: |
           npm install -g surge
-          surge teardown ${{ github.event.repository.owner.login}}-${{ github.event.repository.name}}-${{ github.event.pull_request.number }}.surge.sh --token ${{ secrets.DOCS_SURGE_TOKEN }}
+          surge teardown ${{ github.event.repository.owner.login}}-${{ github.event.repository.name}}-${{ github.event.pull_request.number }}.surge.sh --token "$SURGE_TOKEN"
       - name: Comment on PR
         uses: marocchino/sticky-pull-request-comment@v2
         with:
