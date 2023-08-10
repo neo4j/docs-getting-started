@@ -46,7 +46,7 @@ Data is only kept in your web browser; the tool does not use a server side compo
 
 [IMPORTANT]
 ====
-Today Neo4j Data Importer is available on Neo4j AuraDB instances only.
+Neo4j Data Importer is currently available on Neo4j AuraDB instances only.
 ====
 
 [[arrows-app]]
