@@ -20,35 +20,35 @@ To explore all available options on how to get started with Neo4j, visit link:ht
 [[neo4j-first-steps]]
 == First steps with Neo4j
 
-* link:https://neo4j.com/cloud/platform/aura-graph-database/[*Neo4j AuraDB*] is a fully managed cloud service and a good place to start for anyone interested in graph technologies. +
+* link:https://neo4j.com/cloud/platform/aura-graph-database/[Neo4j AuraDB] is a fully managed cloud service and a good place to start for anyone interested in graph technologies. +
 Besides the free option, you can select the subscription plan that suits you best. +
 At the moment, AuraDB provides a few example datasets to help you learn more about graph databases and graph query language, Cypher.
 +
 If you are a data scientist, you might be interested in link:https://neo4j.com/docs/aura/aurads/[Neo4j AuraDS], a graph data science platform as a fully managed cloud service.
 You get access to more than 65 pretuned link:https://neo4j.com/docs/graph-data-science/current/algorithms/[graph algorithms].
 +
-* link:https://neo4j.com/pricing/#graph-database[Neo4j Database] can be installed on-premises and deployed in various systems: link:https://neo4j.com/docs/operations-manual/current/installation/linux/[Linux], link:https://neo4j.com/docs/operations-manual/current/installation/osx/[macOs], and link:https://neo4j.com/docs/operations-manual/current/installation/windows/[Windows].
+* link:https://neo4j.com/deployment-center/[Neo4j Database] can be installed on-premises and deployed in various systems: 
+** link:https://neo4j.com/docs/operations-manual/current/installation/linux/[Linux]
+** link:https://neo4j.com/docs/operations-manual/current/installation/osx/[macOs]
+** link:https://neo4j.com/docs/operations-manual/current/installation/windows/[Windows].
 
 +
 To extend Neo4j capabilities, you can install several optional tools as plugins.
 To configure the plugins, refer to the information in the link:https://neo4j.com/docs/operations-manual/current/configuration/plugins/[Operations Manual -> Plugins].
 +
-* link:https://neo4j.com/docs/operations-manual/current/docker/[The Neo4j Docker image] provides a standard, ready-to-run package of Neo4j Community Edition and Enterprise Edition for a variety of versions.
+* link:https://neo4j.com/docs/operations-manual/current/docker/[The Neo4j Docker image] provides a standard package of Neo4j Community Edition and Enterprise Edition for a variety of versions.
 +
-* link:https://neo4j.com/docs/desktop-manual/current/[*Neo4j Desktop*] is one of the ways to set up an environment for developing an application with Neo4j and Cypher.
+* link:https://neo4j.com/docs/desktop-manual/current/[Neo4j Desktop] is one of the ways to set up an environment for developing an application with Neo4j and Cypher.
 Download Neo4j Desktop from link:https://neo4j.com/download/[] and follow the installation instructions for your operating system.
 +
 Neo4j Desktop comes with a variety of tools that can be installed as plugins.
 They are APOC, Neo4j Graph Data Science Library, Neo4j Streams, and Neosemantics.
 For more information on installing plugins, go to the link:https://neo4j.com/docs/desktop-manual/current/operations/install-plugin/[Neo4j Desktop documentation -> Install a plugin].
 +
-* link:https://neo4j.com/sandbox/[*Neo4j Sandbox*] provides a number of example datasets that can help you to learn more about Neo4j graph database and Cypher queries applied to a specific use case.
+* link:https://neo4j.com/sandbox/[Neo4j Sandbox] provides a number of example datasets that can help you to learn more about Neo4j graph database and Cypher queries applied to a specific use case.
 +
-All databases are grouped into two categories:
-+
-** for developers
-** for data scientists
-
+All databases are grouped into two categories: for developers and data scientists.
+You can go to the link:https://neo4j.com/data-science-sandbox/[Neo4j Data Science Sandbox] directly to explore cloud-based instance of Neo4j with GDS Community Edition preinstalled.
 +
 You can also select a blank sandbox and populate it with your own data.
 
