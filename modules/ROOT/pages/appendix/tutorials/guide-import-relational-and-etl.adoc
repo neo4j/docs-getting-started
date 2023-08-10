@@ -126,9 +126,8 @@ When you use `LOAD CSV` to create nodes and relationships in the database, you h
 * From a publicly-available location such as an S3 bucket or a github location. You must use this option if you are using Neo4j AuraDB or Neo4j Sandbox.
 
 If you want to use the CSV files for the Neo4j instance you manage, you can copy the CSV files from
-link:https://github.com/neo4j-documentation/developer-resources/tree/gh-pages/data/northwind[Northwind files on GitHub] and place them in the *import* folder for your Neo4j DBMS.
+link:https://github.com/neo4j-graph-examples/northwind/tree/main/import[Northwind files on GitHub] and place them in the *import* folder for your Neo4j DBMS.
 
-We have already placed these CSV files in GitHub for your access to them.
 
 You use use Cypher's `LOAD CSV` statement to read each file and add Cypher clauses after it to take the row/column data and transform it to the graph.
 
