@@ -62,6 +62,7 @@ For many-to-many references, JOIN-tables (or link-tables) are needed as an artif
 Graph databases store data in a graph with nodes and relationships between them (refer to xref:get-started-with-neo4j/graph-database.adoc#property-graph[] for more information about the graph format).
 
 For a sensible relational model, the transformation into a graph is not hard, as rows of entity tables are converted into *nodes* and foreign-key relationships and JOIN-tables into *relationships*.
+Nodes and relationships can hold arbitrary properties (key-value pairs) without the need for a fixed schema.
 
 It is recommended to familiarize yourself with the guides on xref:data-modeling/index.adoc[data modeling] and xref:data-import/index.adoc[data importing] into Neo4j.
 
@@ -76,7 +77,7 @@ image::Northwind_diagram.jpg[]
 image::northwind_graph_workspace-arr.png[width=600]
 
 [#cypher-sql-queries]
-== Querying the data step by step
+== Querying the data
 
 This guide intends to introduce Cypher by comparing it with the equivalent SQL statements.
 
@@ -102,7 +103,7 @@ Use these link:https://github.com/neo4j-graph-examples/get-started/raw/main/data
 
 [NOTE]
 ====
-The Cypher queries below end with the semi-colon `;`, which is a requirement in link:https://neo4j.com/docs/operations-manual/current/tools/cypher-shell/[Cypher Shell] -- the command-line tool that comes with the Neo4j distribution.
+The Cypher queries below end with the semicolon `;`, which is a requirement in link:https://neo4j.com/docs/operations-manual/current/tools/cypher-shell/[Cypher Shell] -- the command-line tool that comes with the Neo4j distribution.
 In Neo4j Browser or Query in Workspace, you don't have to end Cypher queries with semi-colon.
 ====
 
@@ -110,7 +111,7 @@ In Neo4j Browser or Query in Workspace, you don't have to end Cypher queries wit
 
 _Select and Return Records_
 
-This is straightforward in SQL, just select everything from the `products` table.
+To select and return records in SQL, select everything from the `products` table.
 
 [source, plsql]
 ----
@@ -132,7 +133,7 @@ RETURN p;
 
 _Field Access, Ordering and Paging_
 
-It is more efficient to *return only a subset of attributes*, like `ProductName` and `UnitPrice`.
+It is more efficient to return only a subset of attributes, like `ProductName` and `UnitPrice`.
 You can also order by price and only return the 10 most expensive items.
 
 [source, plsql]
@@ -179,7 +180,7 @@ In Cypher, the `WHERE` clause belongs to the `MATCH` statement.
 [source, cypher]
 ----
 MATCH (p:Product)
-WHERE p.productName = "Chocolade"
+WHERE p.productName = 'Chocolade'
 RETURN p.productName, p.unitPrice;
 ----
 
@@ -189,7 +190,7 @@ There is a shortcut in Cypher if you `MATCH` for a labeled node with a certain a
 
 [source, cypher]
 ----
-MATCH (p:Product {productName:"Chocolade"})
+MATCH (p:Product {productName:'Chocolade'})
 RETURN p.productName, p.unitPrice;
 ----
 
@@ -250,11 +251,11 @@ In Cypher, the `LIKE` operator is replaced by the `STARTS WITH` (there are also 
 [source, cypher]
 ----
 MATCH (p:Product)
-WHERE p.productName STARTS WITH "C" AND p.unitPrice > 100
+WHERE p.productName STARTS WITH 'C' AND p.unitPrice > 100
 RETURN p.productName, p.unitPrice;
 ----
 
-You can also use a regular expression, like `p.productName =~ "^C.*"`.
+You can also use a regular expression, like `p.productName =~ '^C.*'`.
 
 // table
 
@@ -314,7 +315,7 @@ In your Cypher query, the `MATCH` between customer and order becomes an `OPTIONA
 
 [source, cypher]
 ----
-MATCH (c:Customer {companyName:"Drachenblut Delikatessen"})
+MATCH (c:Customer {companyName:'Drachenblut Delikatessen'})
 OPTIONAL MATCH (p:Product)<-[o:ORDERS]-(:Order)<-[:PURCHASED]-(c)
 RETURN p.productName, toInteger(sum(o.unitPrice * o.quantity)) AS volume
 ORDER BY volume DESC;
@@ -423,7 +424,7 @@ Variable levels are represented by variable length paths, which are denoted by a
 
 [source, cypher]
 ----
-MATCH (p:Product)-[:PART_OF]->(l:Category)-[:PARENT*0..]-(:Category {name:"Dairy Products"})
+MATCH (p:Product)-[:PART_OF]->(l:Category)-[:PARENT*0..]-(:Category {name:'Dairy Products'})
 RETURN p.name;
 ----
 
