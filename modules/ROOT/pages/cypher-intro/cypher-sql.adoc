@@ -13,14 +13,14 @@
 
 == Introduction
 
-This guide shows anyone familiar with SQL how to write the equivalent Cypher queries.
-The Northwind database is used to illustrate how to translate SQL queries into Cypher, showcasing the similarities and differences between the two languages.
+This guide shows anyone familiar with SQL how to understand Cypher and write the equivalent Cypher queries.
+The Northwind database used for a long time to demonstrate relational database concepts helps to illustrate how to translate SQL queries into Cypher, showcasing the similarities and differences between the two languages.
 
 xref:cypher-intro/index.adoc[The previous page: Query a Neo4j database using Cypher] covers its basics.
 
 Before diving into the details, it is essential to understand that while both SQL and Cypher are declarative query languages, Cypher is specifically designed for querying graphs.
 Unlike SQL, which deals with relational databases, Cypher is centered around expressing xref:cypher-intro/patterns.adoc[graph patterns].
-Graph pattern matching is the core technique in Cypher, enabling navigation, description, and data extraction from a graph by applying declarative patterns.
+Graph pattern matching is the core technique in Cypher, enabling creation, navigation, description, and data extraction from a graph by applying declarative patterns.
 
 Important concepts of Cypher include clauses, keywords, expressions, operators, and functions.
 
@@ -40,11 +40,13 @@ They are fundamental for filtering data and performing calculations in queries.
 * Cypher provides a set of built-in functions that can be used to manipulate data, perform computations, and transform values.
 To list the available functions, run the command `SHOW FUNCTIONS`.
 
-Cypher allows you to chain multiple query parts together, enabling the composition of complex queries. 
+Cypher allows you to chain multiple query parts together, enabling the composition of complex queries.
+You can mix read and write operations within a single statement.
+The read operation can provide inputs for the subsequent write operation or, following after the write operation, return relevant subsets to the caller.
 
 You can use Cypher to update the graph structure and data and even to ingest large amounts of CSV data.
 
-With xref:cypher-intro/procedures-functions.adoc[*user-defined procedures*], you can extend the language with functionality that you need but is not yet available.
+With xref:cypher-intro/procedures-functions.adoc[*user-defined procedures and functions*], you can extend the language with functionality that you need but is not yet available.
 
 For more information about the Cypher query language, refer to the link:https://neo4j.com/docs/cypher-manual/current/introduction/[Neo4j Cypher Manual^] and the link:https://neo4j.com/docs/cypher-cheat-sheet/5/[Cypher Cheat Sheet].
 
@@ -59,7 +61,7 @@ Relational databases store data in tables with fixed structure (schema), each co
 References between tables are represented by repeating the primary key of one table as a column in another as a foreign key.
 For many-to-many references, JOIN-tables (or link-tables) are needed as an artificial construct between the connected tables.
 
-Graph databases store data in a graph with nodes and relationships between them (refer to xref:get-started-with-neo4j/graph-database.adoc#property-graph[] for more information about the graph format).
+Graph databases store data in a graph with nodes and relationships between them (refer to xref:get-started-with-neo4j/graph-database.adoc#property-graph[the property graph model] for more information).
 
 For a sensible relational model, the transformation into a graph is not hard, as rows of entity tables are converted into *nodes* and foreign-key relationships and JOIN-tables into *relationships*.
 Nodes and relationships can hold arbitrary properties (key-value pairs) without the need for a fixed schema.
@@ -104,7 +106,7 @@ Use these link:https://github.com/neo4j-graph-examples/get-started/raw/main/data
 [NOTE]
 ====
 The Cypher queries below end with the semicolon `;`, which is a requirement in link:https://neo4j.com/docs/operations-manual/current/tools/cypher-shell/[Cypher Shell] -- the command-line tool that comes with the Neo4j distribution.
-In Neo4j Browser or Query in Workspace, you don't have to end Cypher queries with semi-colon.
+In Neo4j Browser or Query in Workspace, you don't have to end Cypher queries with semicolon.
 ====
 
 === Find all Products
@@ -160,7 +162,7 @@ LIMIT 10;
 
 // table
 
-=== Find a single Product by Name
+=== Find a single product by name
 
 _Filter by equality_
 
@@ -200,6 +202,8 @@ _Indexing_
 
 If you want to match quickly by a specific node label and attribute combination, it makes sense to create an index for that pair, if you haven't already done that during the xref:appendix/tutorials/guide-import-relational-and-etl.adoc[import].
 For more details on how to create indexes, visit the link:https://neo4j.com/docs/cypher-manual/current/indexes-for-search-performance/[Cypher manual -> Indexes for search performance].
+Indexes in Cypher are only used for finding the starting points of a query, all subsequent pattern matching is done through the graph structure.
+Cypher supports range, text, point, full-text and vector indexes.
 
 [source, cypher]
 ----
@@ -284,7 +288,7 @@ Expressing connections as graph patterns is easier to read too.
 
 [source, cypher]
 ----
-MATCH (p:Product {productName:"Chocolade"})<-[:ORDERS]-(:Order)<-[:PURCHASED]-(c:Customer)
+MATCH (p:Product {productName:'Chocolade'})<-[:ORDERS]-(:Order)<-[:PURCHASED]-(c:Customer)
 RETURN DISTINCT c.companyName;
 ----
 
@@ -348,6 +352,7 @@ ORDER BY Count DESC LIMIT 10;
 
 In Cypher grouping for aggregation is implicit.
 As soon as you use the first aggregation function, all non-aggregated columns automatically become grouping keys.
+Also additional aggregation functions like `collect`, `percentileCont`, `stdDev` are available.
 
 [source, cypher]
 ----
