@@ -131,7 +131,7 @@ RETURN p;
 
 //table
 
-_Field Access, Ordering and Paging_
+_Field access, ordering, and paging_
 
 It is more efficient to return only a subset of attributes, like `ProductName` and `UnitPrice`.
 You can also order by price and only return the 10 most expensive items.
@@ -147,7 +147,7 @@ LIMIT 10;
 //sqltable
 
 You can copy and paste the changes from SQL to Cypher.
-But remember that labels, relationship types and property names are *case sensitive* in Neo4j.
+But remember that labels, relationship types, and property names are *case sensitive* in Neo4j.
 For more details on naming rules, see the link:https://neo4j.com/docs/cypher-manual/current/syntax/naming/[Cypher Manual -> Naming rules and recommendations].
 
 [source, cypher]
@@ -162,9 +162,9 @@ LIMIT 10;
 
 === Find a single Product by Name
 
-_Filter by Equality_
+_Filter by equality_
 
-If you only want to look at a single Product, for example _Chocolade_, you can filter in SQL with the `WHERE` clause.
+If you only want to look at a single product, for example, _Chocolade_, you can filter in SQL with the `WHERE` clause.
 
 [source, plsql]
 ----
@@ -186,7 +186,7 @@ RETURN p.productName, p.unitPrice;
 
 // table
 
-There is a shortcut in Cypher if you `MATCH` for a labeled node with a certain attribute.
+There is a shortcut in Cypher if you `MATCH` for a labeled node with a certain property attribute.
 
 [source, cypher]
 ----
@@ -198,7 +198,7 @@ _Indexing_
 
 // table
 
-If you want to match quickly by this node label and attribute combination, it makes sense to create an index for that pair, if you haven't already done that during the xref:appendix/tutorials/guide-import-relational-and-etl.adoc[import].
+If you want to match quickly by a specific node label and attribute combination, it makes sense to create an index for that pair, if you haven't already done that during the xref:appendix/tutorials/guide-import-relational-and-etl.adoc[import].
 For more details on how to create indexes, visit the link:https://neo4j.com/docs/cypher-manual/current/indexes-for-search-performance/[Cypher manual -> Indexes for search performance].
 
 [source, cypher]
@@ -207,9 +207,9 @@ CREATE INDEX FOR (p:Product) ON p.productName;
 CREATE INDEX FOR (p:Product) ON p.unitPrice;
 ----
 
-=== Filter Products
+=== Filter products
 
-_Filter by List/Range_
+_Filter by list/range_
 
 You can also filter by multiple values in SQL.
 
@@ -222,7 +222,7 @@ WHERE p.ProductName IN ('Chocolade','Chai');
 
 //sqltable
 
-This can be done similarly in Cypher, which has full collection support, not just the `IN` operator but collection functions, predicates, and transformations.
+This can also be achieved in Cypher, which has full collection support, including not only the `IN` operator but also collection functions, predicates, and transformations.
 
 [source, cypher]
 ----
@@ -233,9 +233,10 @@ RETURN p.productName, p.unitPrice;
 
 // table
 
-_Filter by Multiple Numeric and Textual Predicates_
+_Filter by multiple numeric and textual predicates_
 
-Filtering can go further, and as an example, try to find some expensive products starting with "C".
+Filtering can go further. 
+For example, the below query tries to find expensive products starting with "C".
 
 [source, plsql]
 ----
@@ -246,7 +247,7 @@ WHERE p.ProductName LIKE 'C%' AND p.UnitPrice > 100;
 
 //sqltable
 
-In Cypher, the `LIKE` operator is replaced by the `STARTS WITH` (there are also `CONTAINS` and `ENDS WITH`) all three of which are index-supported:
+In Cypher, the `LIKE` operator is replaced by the `STARTS WITH`, `CONTAINS`, and `ENDS WITH` operators (all three of which are index-supported):
 
 [source, cypher]
 ----
@@ -259,12 +260,12 @@ You can also use a regular expression, like `p.productName =~ '^C.*'`.
 
 // table
 
-=== Joining Products with Customers
+=== Joining products with customers
 
 _Join Records, Distinct Results_
 
 If you want to see who bought _Chocolade_, you can join the four tables together.
-Refer to the <<relational-model, model>> (ER-diagram) if you don't recall what the model looks like.
+Refer to the <<relational-model, model>> (ER-diagram) to recall what the model looks like.
 
 [source, plsql]
 ----
@@ -289,7 +290,7 @@ RETURN DISTINCT c.companyName;
 
 // table
 
-=== New Customers without Orders yet
+=== New customers without existing orders
 
 _Outer Joins, Aggregation_
 
@@ -327,7 +328,7 @@ ORDER BY volume DESC;
 
 _Aggregation, Grouping_
 
-In the previous query, a bit of aggregation was mentioned.
+The previous example mentioned aggregation.
 By summing up product prices and ordered quantities, an aggregated view per product for the customer was provided.
 
 You can use aggregation functions like `sum`, `count`, `avg`, `max` both in SQL and Cypher.
@@ -357,7 +358,7 @@ ORDER BY cnt DESC LIMIT 10;
 
 //table
 
-=== Employee Territories
+=== Employee territories
 
 _Collecting Master-Detail Queries_
 
@@ -394,8 +395,8 @@ RETURN t.territoryDescription, collect(e.lastName);
 _Hierarchies and Trees, Variable Length Joins_
 
 If you have to express category-, territory- or organizational hierarchies in SQL, you model it usually with a self-join via a foreign key from child to parent.
-Adding data is not problematic, as are single level queries (get all children for this parent).
-As soon as you get into multi-level queries, the number of joins explodes, especially if your level depth not fixed.
+Adding data is not problematic, and neither are single-level queries.
+As soon as you get into multi-level queries, the number of joins drastically increases, especially if your level depth is not fixed.
 
 Taking the example of the product categories, you have to decide upfront up to how many levels of categories you want to query.
 Only three potential levels are shown here (which means 1+2+3 = 6 self-joins of the `ProductCategory` table).
@@ -419,7 +420,7 @@ JOIN ProductCategory pc5 ON (pc4.ParentID = pc5.CategoryID AND pc5.CategoryName 
 
 //sqltable
 
-Cypher is able to express hierarchies of any depth just with the appropriate relationships.
+Cypher is able to express hierarchies of any depth using only the appropriate relationships.
 Variable levels are represented by variable length paths, which are denoted by a star `*` after the relationship type and optional limits (`min..max`).
 
 [source, cypher]
