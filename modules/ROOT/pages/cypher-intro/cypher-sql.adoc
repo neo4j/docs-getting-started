@@ -383,7 +383,7 @@ RETURN t.territoryDescription, collect(e.lastName);
 
 _Hierarchies and trees, variable length joins_
 
-If you have to express category-, territory- or organizational hierarchies in SQL, you model it usually with a self-join via a foreign key from child to parent.
+If you have to express category-, territory- or organizational hierarchies in SQL, it is usually modeled with a self-join via a foreign key from child to parent.
 Adding data is not problematic, and neither are single-level queries.
 As soon as you get into multi-level queries, the number of joins drastically increases, especially if your level depth is not fixed.
 
