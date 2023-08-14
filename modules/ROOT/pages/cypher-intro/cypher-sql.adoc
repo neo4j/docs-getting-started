@@ -14,31 +14,14 @@
 == Introduction
 
 This guide shows anyone familiar with SQL how to understand Cypher and write the equivalent Cypher queries.
-The Northwind database used for a long time to demonstrate relational database concepts helps to illustrate how to translate SQL queries into Cypher, showcasing the similarities and differences between the two languages.
-
-xref:cypher-intro/index.adoc[The previous page: Query a Neo4j database using Cypher] covers its basics.
+The Northwind database, used for a long time to demonstrate relational database concepts, helps to illustrate how to translate SQL queries into Cypher, showcasing the similarities and differences between the two languages.
 
 Before diving into the details, it is essential to understand that while both SQL and Cypher are declarative query languages, Cypher is specifically designed for querying graphs.
+Like in SQL, important concepts of Cypher include clauses, keywords, expressions, operators, and functions.
 Unlike SQL, which deals with relational databases, Cypher is centered around expressing xref:cypher-intro/patterns.adoc[graph patterns].
 Graph pattern matching is the core technique in Cypher, enabling creation, navigation, description, and data extraction from a graph by applying declarative patterns.
 
-Important concepts of Cypher include clauses, keywords, expressions, operators, and functions.
-
-* Clauses in Cypher form the structural elements of a query and define different parts of the query's logic.
-For example, the `MATCH` clause is used to specify patterns to match in the graph, while the `WHERE` clause allows for filtering based on conditions.
-
-* Keywords in Cypher are reserved words that have specific meanings and functionalities within the Cypher query language.
-They are grouped by categories and provide essential commands and operations to manipulate and retrieve data from graph databases.
-For more information, visit the link:https://neo4j.com/docs/cypher-manual/current/syntax/reserved/[Cypher Manual -> Reserved keywords].
-
-* Expressions in Cypher are important in formulating complex conditions, transforming values, and performing calculations within your queries.
-
-* In Cypher, operators are symbols or keywords used to perform operations on values and expressions.
-Examples of operators include arithmetic operators, comparison operators, logical operators, and more.
-They are fundamental for filtering data and performing calculations in queries.
-
-* Cypher provides a set of built-in functions that can be used to manipulate data, perform computations, and transform values.
-To list the available functions, run the command `SHOW FUNCTIONS`.
+xref:cypher-intro/index.adoc[The page: Query a Neo4j database using Cypher] covers its basics.
 
 Cypher allows you to chain multiple query parts together, enabling the composition of complex queries.
 You can mix read and write operations within a single statement.
@@ -49,7 +32,6 @@ You can use Cypher to update the graph structure and data and even to ingest lar
 With xref:cypher-intro/procedures-functions.adoc[*user-defined procedures and functions*], you can extend the language with functionality that you need but is not yet available.
 
 For more information about the Cypher query language, refer to the link:https://neo4j.com/docs/cypher-manual/current/introduction/[Neo4j Cypher Manual^] and the link:https://neo4j.com/docs/cypher-cheat-sheet/5/[Cypher Cheat Sheet].
-
 
 [#cypher-sql-northwind]
 == Northwind example model
@@ -66,8 +48,6 @@ Graph databases store data in a graph with nodes and relationships between them 
 For a sensible relational model, the transformation into a graph is not hard, as rows of entity tables are converted into *nodes* and foreign-key relationships and JOIN-tables into *relationships*.
 Nodes and relationships can hold arbitrary properties (key-value pairs) without the need for a fixed schema.
 
-It is recommended to familiarize yourself with the guides on xref:data-modeling/index.adoc[data modeling] and xref:data-import/index.adoc[data importing] into Neo4j.
-
 Refer to the relational and graph models below when considering the data structures in the following queries.
 
 [[relational-model]]
@@ -78,10 +58,12 @@ image::Northwind_diagram.jpg[]
 .Graph model
 image::northwind_graph_workspace-arr.png[width=600]
 
-[#cypher-sql-queries]
-== Querying the data
+It is recommended to familiarize yourself with the guides on xref:data-modeling/index.adoc[data modeling] and xref:data-import/index.adoc[data importing] into Neo4j.
 
-This guide intends to introduce Cypher by comparing it with the equivalent SQL statements.
+[#cypher-sql-queries]
+== Exploring Cypher queries: from simple to advanced
+
+This guide intends to introduce Cypher queries by comparing them with the equivalent SQL statements.
 
 You can run all the Cypher queries below using an {aura_signup}[AuraDB Free instance] and the Neo4j Workspace guide _Query fundamentals_.
 
@@ -109,9 +91,9 @@ The Cypher queries below end with the semicolon `;`, which is a requirement in l
 In Neo4j Browser or Query in Workspace, you don't have to end Cypher queries with semicolon.
 ====
 
-=== Find all Products
+=== Find all products
 
-_Select and Return Records_
+_Select and return records_
 
 To select and return records in SQL, select everything from the `products` table.
 
@@ -148,7 +130,7 @@ LIMIT 10;
 
 //sqltable
 
-You can copy and paste the changes from SQL to Cypher.
+Since the statements are similar except for the pattern matching part, you can copy and paste the changes from SQL to Cypher.
 But remember that labels, relationship types, and property names are *case sensitive* in Neo4j.
 For more details on naming rules, see the link:https://neo4j.com/docs/cypher-manual/current/syntax/naming/[Cypher Manual -> Naming rules and recommendations].
 
@@ -207,8 +189,8 @@ Cypher supports range, text, point, full-text and vector indexes.
 
 [source, cypher]
 ----
-CREATE INDEX FOR (p:Product) ON p.productName;
-CREATE INDEX FOR (p:Product) ON p.unitPrice;
+CREATE INDEX Product_productName IF NOT EXISTS FOR (p:Product) ON p.productName;
+CREATE INDEX Product_unitPrice IF NOT EXISTS FOR (p:Product) ON p.unitPrice;
 ----
 
 === Filter products
@@ -266,7 +248,7 @@ You can also use a regular expression, like `p.productName =~ '^C.*'`.
 
 === Joining products with customers
 
-_Join Records, Distinct Results_
+_Join records, distinct results_
 
 If you want to see who bought _Chocolade_, you can join the four tables together.
 Refer to the <<relational-model, model>> (ER-diagram) to recall what the model looks like.
@@ -296,7 +278,7 @@ RETURN DISTINCT c.companyName;
 
 === New customers without existing orders
 
-_Outer Joins, Aggregation_
+_`OUTER JOINS`, aggregation_
 
 If you rephrase the question as "What have I bought and paid in total?", the `JOIN` stays the same; only the filter expression changes.
 However, the situation is different if you have customers without any orders and still want to return them.
@@ -317,6 +299,7 @@ ORDER BY Volume DESC;
 //sqltable
 
 In your Cypher query, the `MATCH` between customer and order becomes an `OPTIONAL MATCH`, which is the equivalent of an `OUTER JOIN`.
+Non existing nodes and relationships will then have a `null` value, which will result in attributes being `null` and not being aggregated by `sum`.
 
 [source, cypher]
 ----
@@ -328,9 +311,9 @@ ORDER BY volume DESC;
 
 // table
 
-=== Top-selling Employees
+=== Top-selling employees
 
-_Aggregation, Grouping_
+_Aggregation, grouping_
 
 The previous example mentioned aggregation.
 By summing up product prices and ordered quantities, an aggregated view per product for the customer was provided.
@@ -357,15 +340,16 @@ Also additional aggregation functions like `collect`, `percentileCont`, `stdDev`
 [source, cypher]
 ----
 MATCH (:Order)<-[:SOLD]-(e:Employee)
-RETURN e.firstName, e.lastName, count(*) AS cnt
-ORDER BY cnt DESC LIMIT 10;
+WITH e, count(*) as cnt
+ORDER BY cnt DESC LIMIT 10
+RETURN e.firstName, e.lastName, cnt
 ----
 
 //table
 
 === Employee territories
 
-_Collecting Master-Detail Queries_
+_Collecting master-detail queries_
 
 In SQL, one of the challenging scenarios is dealing with master-detail information.
 You have one main entity (master, head, parent) and many dependent ones (detail, position, child).
@@ -395,9 +379,9 @@ RETURN t.territoryDescription, collect(e.lastName);
 
 //table
 
-=== Product Categories
+=== Product categories
 
-_Hierarchies and Trees, Variable Length Joins_
+_Hierarchies and trees, variable length joins_
 
 If you have to express category-, territory- or organizational hierarchies in SQL, you model it usually with a self-join via a foreign key from child to parent.
 Adding data is not problematic, and neither are single-level queries.
