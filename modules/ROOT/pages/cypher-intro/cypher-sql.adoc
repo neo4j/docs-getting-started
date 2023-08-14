@@ -61,7 +61,7 @@ image::northwind_graph_workspace-arr.png[width=600]
 It is recommended to familiarize yourself with the guides on xref:data-modeling/index.adoc[data modeling] and xref:data-import/index.adoc[data importing] into Neo4j.
 
 [#cypher-sql-queries]
-== Exploring Cypher queries: from simple to advanced
+== Exploring Cypher queries: from basic to advanced
 
 This guide intends to introduce Cypher queries by comparing them with the equivalent SQL statements.
 
@@ -278,7 +278,7 @@ RETURN DISTINCT c.companyName;
 
 === New customers without existing orders
 
-_`OUTER JOINS`, aggregation_
+_OUTER JOINS, aggregation_
 
 If you rephrase the question as "What have I bought and paid in total?", the `JOIN` stays the same; only the filter expression changes.
 However, the situation is different if you have customers without any orders and still want to return them.
@@ -335,14 +335,14 @@ ORDER BY Count DESC LIMIT 10;
 
 In Cypher grouping for aggregation is implicit.
 As soon as you use the first aggregation function, all non-aggregated columns automatically become grouping keys.
-Also additional aggregation functions like `collect`, `percentileCont`, `stdDev` are available.
+Also, additional aggregation functions like `collect`, `percentileCont`, `stdDev` are available.
 
 [source, cypher]
 ----
 MATCH (:Order)<-[:SOLD]-(e:Employee)
 WITH e, count(*) as cnt
 ORDER BY cnt DESC LIMIT 10
-RETURN e.firstName, e.lastName, cnt
+RETURN e.employeeID, e.firstName, e.lastName, cnt
 ----
 
 //table
