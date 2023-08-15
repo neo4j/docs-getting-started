@@ -61,7 +61,7 @@ You can find all necessary documentation on how to install and maintain Neo4j in
 [[neo4j-aura]]
 == Neo4j Aura
 
-*Neo4j Aura* is a fully managed cloud service offering, that includes *AuraDB* and *AuraDS*.
+AuraDB and AuraDS are fully managed cloud service offerings.
 
 {aura_signup}[Neo4j AuraDB^] is a graph database as a service.
 For more information, see the link:https://neo4j.com/docs/aura/current/[official documentation^].
