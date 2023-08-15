@@ -61,7 +61,7 @@ image::northwind_graph_workspace-arr.png[width=600]
 It is recommended to familiarize yourself with the guides on xref:data-modeling/index.adoc[data modeling] and xref:data-import/index.adoc[data importing] into Neo4j.
 
 [#cypher-sql-queries]
-== Exploring Cypher queries: from basic to advanced
+== Explore Cypher queries: from basic to advanced
 
 This guide intends to introduce Cypher queries by comparing them with the equivalent SQL statements.
 
@@ -324,11 +324,12 @@ If you want to see the top-selling employees, run the following query:
 
 [source, plsql]
 ----
-SELECT e.EmployeeID, count(*) AS Count
+SELECT e.EmployeeID, e.FirstName, e.LastName, COUNT(*) AS Count
 FROM Employee AS e
-JOIN Order AS o ON (o.EmployeeID = e.EmployeeID)
-GROUP BY e.EmployeeID
-ORDER BY Count DESC LIMIT 10;
+JOIN Orders AS o ON (o.EmployeeID = e.EmployeeID)
+GROUP BY e.EmployeeID, e.FirstName, e.LastName
+ORDER BY Count DESC
+LIMIT 10;
 ----
 
 //sqltable
