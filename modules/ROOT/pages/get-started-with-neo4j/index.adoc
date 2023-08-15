@@ -107,16 +107,9 @@ You can also find comprehensive descriptions of Neo4j clustering here.
 * **Neo4j security**
 * **Reference**
 
-If the official documentation is not enough, refer to the section *Reference*:
-
-* link:https://neo4j.com/docs/resources/docs-archive/[All documentation] --  you can find docsets for earlier releases there and download PDF-versions.
-* link:https://neo4j.com/docs/neo4j-glossary/[Neo4j glossary] -- a collection of terms specific to  Neo4j and graph databases.
-
-link:https://neo4j.com/labs/[Labs] menu at the top contains the list of all Neo4j Labs projects, which are designed and developed as a way to extend and test functionality of the Neo4j Graph Data Platform.
-The Labs projects are supported via the Neo4j Community, and we cannot provide any commercial support for them or guarantee backwards compatibility.   
-
 On the top right, you find the drop-down menu _Get Help_ with the following choices:  
 
+* link:https://graphacademy.neo4j.com/?ref=docs[GraphAcademy] -- free, hands-on online training.
 * link:https://community.neo4j.com/[Community Forum] -- for learning and guidance.
 * link:https://discord.com/invite/neo4j[Discord Chat] -- a live chat environment for communicating with other Neo4j users (requires signup). 
 * link:https://neo4j.com/developer/kb/[Knowledge Base] -- troubleshooting articles written by developers for developers on how to solve issues both for Community ans Enterprise Editions.
