@@ -24,7 +24,7 @@ To explore all available options on how to get started with Neo4j, visit link:ht
 Besides the free option, you can select the subscription plan that suits you best. +
 +
 Neo4j Workspace is the default option to start working with your instance on Aura.
-This tool brings together Neo4j Browser (`Query` tab), Neo4j Bloom (`Explore` tab), and Data Importer (`Import` tab) in one space so you do not have to separately log in to each.
+This tool brings together Neo4j Browser (`Query` tab), Neo4j Bloom (`Explore` tab), and Data Importer (`Import` tab) in one space.
 +
 If you are a data scientist, you might be interested in link:https://neo4j.com/docs/aura/aurads/[Neo4j AuraDS], a graph data science platform as a fully managed cloud service.
 You get access to more than 65 pretuned link:https://neo4j.com/docs/graph-data-science/current/algorithms/[graph algorithms].
