@@ -22,7 +22,9 @@ To explore all available options on how to get started with Neo4j, visit link:ht
 
 * link:https://neo4j.com/cloud/platform/aura-graph-database/[Neo4j AuraDB] is a fully managed cloud service and a good place to start for anyone interested in graph technologies. +
 Besides the free option, you can select the subscription plan that suits you best. +
-At the moment, AuraDB provides a few example datasets to help you learn more about graph databases and graph query language, Cypher.
++
+Neo4j Workspace is the default option to start working with your instance on Aura.
+This tool brings together Neo4j Browser (`Query` tab), Neo4j Bloom (`Explore` tab), and Data Importer (`Import` tab) in one space.
 +
 If you are a data scientist, you might be interested in link:https://neo4j.com/docs/aura/aurads/[Neo4j AuraDS], a graph data science platform as a fully managed cloud service.
 You get access to more than 65 pretuned link:https://neo4j.com/docs/graph-data-science/current/algorithms/[graph algorithms].
@@ -102,37 +104,15 @@ You can also find comprehensive descriptions of Neo4j clustering here.
 ** link:https://docs.spring.io/spring-data/neo4j/docs/current/reference/html/[Spring Data Neo4j]
 ** link:https://neo4j.com/docs/spark/current/[Neo4j Connector for Apache Spark]
 ** link:https://dist.neo4j.org/Neo4j-BI-Connector-JDBC-1.0.10-docs.pdf?_ga=2.205183254.709535527.1659343086-1345513218.1655306577&_gac=1.20913226.1659095710.Cj0KCQjwio6XBhCMARIsAC0u9aFZR-LU0FpO99ubpMUHLPysxMuwbCJtBb3dfvbgi8FEnagR96nCxnYaAkNZEALw_wcB[Neo4j Connector for BI (JDBC)]
-* **Resources**
+* **Neo4j security**
+* **Reference**
 
-If the officical documentation is not enough, you can refer to the aforementioned *Resources*:
+On the top right, you find the drop-down menu _Get Help_ with the following choices:  
 
-* link:https://neo4j.com/docs/resources/docs-archive/[Documentation Archive] -- docsets for earlier releases are available here.
-* link:https://neo4j.com/docs/resources/pdf-library/[PDF library] -- if you need, you can download PDF-versions of our documentation. Follow the link for a full list of all available PDFs.
-
-link:https://neo4j.com/labs/[Labs] menu at the top contains the list of all Neo4j Labs projects, which are designed and developed as a way to extend and test functionality of the Neo4j Graph Data Platform.
-The Labs projects are supported via the Neo4j Community, and we cannot provide any commercial support for them or guarantee backwards compatibility.   
-
-At the top on the right side, you find the drop-down menu _Get Help_ with the following choices:  
-
+* link:https://graphacademy.neo4j.com/?ref=docs[GraphAcademy] -- free, hands-on online training.
 * link:https://community.neo4j.com/[Community Forum] -- for learning and guidance.
 * link:https://discord.com/invite/neo4j[Discord Chat] -- a live chat environment for communicating with other Neo4j users (requires signup). 
 * link:https://neo4j.com/developer/kb/[Knowledge Base] -- troubleshooting articles written by developers for developers on how to solve issues both for Community ans Enterprise Editions.
 * link:https://medium.com/neo4j[Neo4j Developer Blog] -- Neo4j channel on Medium platform for deep dives into technical topics and announcements of new products, releases.
 * link:https://www.youtube.com/neo4j[Neo4j Videos] -- a link to the Neo4j channel on YouTube.
 
-
-The blue button _Get Started_ in the upper right hand corner allows you to access:
-
-* Neo4j AuraDB page, where you can choose AuraDB plan that best suits your needs.   
-* Neo4j Sandbox.
-* Neo4j Desktop download page. 
-
-If you click the button link:https://neo4j.com/cloud/platform/aura-graph-database/?ref=docs-nav-get-started/[Get Started^, role=button], you are redirected to the AuraDB page.
-
-
-////
-* xref:4.4@cypher-manual:ROOT:index.adoc#cypher-manual[The Cypher manual] -- This is the comprehensive manual for Cypher.
-* xref:4.4@operations-manual:ROOT:index.adoc#operations-manual[The Operations manual] -- This manual describes how to deploy and maintain Neo4j.
-The https://neo4j.com/docs/cypher-refcard/current[Cypher Refcard] is a valuable asset when learning and writing Cypher.
-Additionally, you can find more specialized documentation along with API documentation and documentation for older Neo4j releases.
-////

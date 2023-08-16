@@ -8,7 +8,9 @@ To help you with designing a new graph database structure, the following tools w
 * link:https://neo4j.com/labs/arrows/[Arrows.app^]
 
 If you have data stored in a flat file format, use *Neo4j Data Importer* -- no-code tool for importing flat file data (`.csv`, `.tsv`) into Neo4j databases.
-Today Data Importer is available on *AuraDB* instances.
+Data Importer is available on *AuraDB* instances as a part of Neo4j Workspace via the `Import` tab:
+
+image::workspace_import_tab.png[]
 
 *Arrows.app* is ideal for making a sketch of a graph, therefore if your aim is to design a domain model that your data will follow, go to the link:https://arrows.app/#/googledrive/ids=1osmv0pzcbyF8TEtvOEAMeXpONCWPn-e_[Arrows.app page].
 
@@ -25,7 +27,7 @@ Neo4j has many data import options:
 
 * APOC procedures for other formats 
 
-* `neo4j-admin import` command to load a full database 
+* `neo4j-admin database import` command to load a full database 
 
 These tools are capable, but you have to spend some time on learning them that can get in the way when you are just starting out.
 
@@ -45,8 +47,9 @@ Today Neo4j Data Importer provides:
 Data is only kept in your web browser; the tool does not use a server side component.
 
 [IMPORTANT]
-Today Neo4j Data Importer is available on Neo4j AuraDB instances only.
-
+====
+Neo4j Data Importer is available on Neo4j AuraDB instances.
+====
 
 [[arrows-app]]
 === Arrows.app
