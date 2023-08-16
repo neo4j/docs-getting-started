@@ -8,9 +8,9 @@ asciidoc:
   attributes:
     page-origin-private: false
     neo4j-version: '5'
-    neo4j-version-minor: '5.10'
-    neo4j-version-exact: '5.10.0'
-    neo4j-buildnumber: '5.10'
+    neo4j-version-minor: '5.11'
+    neo4j-version-exact: '5.11.0'
+    neo4j-buildnumber: '5.11'
     neo4j-ogm-version: '4.0.1'
     java-driver-version: '5.11.0'
     javascript-driver-version: '5.11.0'
