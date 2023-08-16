@@ -153,7 +153,7 @@ Because Neo4j is optimized specifically for traversing relationships between ent
 
 A common example is for modeling airline flights.
 An airline has a particular flight on a certain day from and to a specific location.
-We might start with a model like the _Figure 3_ below to show how flights travel from airport to airport.
+We might start with a model like the _Figure 4_ below to show how flights travel from airport to airport.
 
 .Graph model for airline flights
 image::modeling_airport_flights-arr.svg[role="popup-link",450,450]
