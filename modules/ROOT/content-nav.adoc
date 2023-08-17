@@ -14,6 +14,7 @@
 ** xref:data-import/json-rest-api-import.adoc[]
 ** xref:data-import/relational-to-graph-import.adoc[]
 * xref:cypher-intro/index.adoc[Query a Neo4j database]
+** xref:cypher-intro/cypher-sql.adoc[]
 ** xref:cypher-intro/patterns.adoc[]
 ** xref:cypher-intro/patterns-in-practice.adoc[]
 ** xref:cypher-intro/results.adoc[]
