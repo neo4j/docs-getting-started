@@ -550,7 +550,7 @@ To trim out duplicate entities, you can use the `DISTINCT` keyword.
 
 [source, cypher]
 ----
-//Query: find people who have a twitter or like graphs or query languages
+//Query: find people who have a twitter and like graphs or query languages
 MATCH (user:Person)
 WHERE user.twitter IS NOT null
 WITH user
