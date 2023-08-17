@@ -39,7 +39,7 @@ For more information about the Cypher query language, refer to the link:https://
 The Northwind database represents the data storage of a retail application.
 It contains customers, products, orders, employees, shippers, and categories as well as their interactions.
 
-Relational databases store data in tables with fixed structure (schema), each column having a name, type, length, constraints, etc.
+Relational databases store data in tables with a fixed structure (schema), each column having a name, type, length, constraints, etc.
 References between tables are represented by repeating the primary key of one table as a column in another as a foreign key.
 For many-to-many references, JOIN-tables (or link-tables) are needed as an artificial construct between the connected tables.
 
@@ -105,7 +105,7 @@ FROM products as p;
 
 //sqltable
 
-Similarly in Cypher, you *match* a simple pattern: all nodes with the *label* `:Product` and `RETURN` them.
+Similarly in Cypher, you `MATCH` a simple pattern: all nodes with the *label* `:Product` and `RETURN` them.
 
 [source, cypher]
 ----
@@ -148,7 +148,7 @@ LIMIT 10;
 
 _Filter by equality_
 
-If you only want to look at a single product, for example, _Chocolade_, you can filter in SQL with the `WHERE` clause.
+If you only want to look at a single product, for example, _Chocolade_, you can filter  data in SQL using the `WHERE` clause.
 
 [source, plsql]
 ----
@@ -185,7 +185,7 @@ _Indexing_
 If you want to match quickly by a specific node label and attribute combination, it makes sense to create an index for that pair, if you haven't already done that during the xref:appendix/tutorials/guide-import-relational-and-etl.adoc[import].
 For more details on how to create indexes, visit the link:https://neo4j.com/docs/cypher-manual/current/indexes-for-search-performance/[Cypher manual -> Indexes for search performance].
 Indexes in Cypher are only used for finding the starting points of a query, all subsequent pattern matching is done through the graph structure.
-Cypher supports range, text, point, full-text and vector indexes.
+Cypher supports range, text, point, lookup, full-text, and vector indexes.
 
 [source, cypher]
 ----
@@ -197,7 +197,7 @@ CREATE INDEX Product_unitPrice IF NOT EXISTS FOR (p:Product) ON p.unitPrice;
 
 _Filter by list/range_
 
-You can also filter by multiple values in SQL.
+You can filter by multiple values in SQL.
 
 [source, plsql]
 ----
@@ -250,7 +250,7 @@ You can also use a regular expression, like `p.productName =~ '^C.*'`.
 
 _Join records, distinct results_
 
-If you want to see who bought _Chocolade_, you can join the four tables together.
+In SQL, if you want to see who bought _Chocolade_, you can join the four tables together.
 Refer to the <<relational-model, model>> (ER-diagram) to recall what the model looks like.
 
 [source, plsql]
@@ -265,7 +265,7 @@ WHERE p.ProductName = 'Chocolade';
 
 //sqltable
 
-The <<graph-model, graph model>> is much simpler, as there is no need to `JOIN` tables.
+Using Cypher, the <<graph-model, graph model>> is much simpler, as there is no need to `JOIN` tables.
 Expressing connections as graph patterns is easier to read too.
 
 [source, cypher]
@@ -280,7 +280,7 @@ RETURN DISTINCT c.companyName;
 
 _OUTER JOINS, aggregation_
 
-If you rephrase the question as "What have I bought and paid in total?", the `JOIN` stays the same; only the filter expression changes.
+In SQL, if you rephrase the question as "What have I bought and paid in total?", the `JOIN` stays the same; only the filter expression changes.
 However, the situation is different if you have customers without any orders and still want to return them.
 In that case, you have to use `OUTER JOINS` to make sure that results are returned even if there are no matching rows in other tables.
 
