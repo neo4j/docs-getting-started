@@ -35,6 +35,7 @@ endif::[]
 With a native graph database at the core, Neo4j stores and manages data in a natural, connected state.
 The graph database takes a property graph approach, which is beneficial for both traversal performance and operations runtime. +
 
+[[neo4j-ecosystem-components]]
 .Overview of the Neo4j ecosystem
 image::neo4j-architecture-diagram.svg[role="popup-link"]
 

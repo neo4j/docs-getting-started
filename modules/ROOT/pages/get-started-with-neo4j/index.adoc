@@ -63,13 +63,11 @@ Neo4j Enterprise Edition can be deployed on-premises or on a link:https://neo4j.
 [[neo4j-docs]]
 == Neo4j documentation
 
-All the official documentation is available at link:https://neo4j.com/docs/[].
+The official documentation of all components of the xref::index.adoc#neo4j-ecosystem-components[Neo4j ecosystem] is available at link:https://neo4j.com/docs/[].
 
-Documentation homepage is designed to make your journey across all Neo4j products comfortable and pleasant. 
+The documentation homepage is designed to make your journey across all Neo4j products comfortable and pleasant.
 
-That is where you find reference documentation to all components of the xref:get-started-with-neo4j/graph-platform.adoc#platform-components[Neo4j Graph Data Platform].
-Guides are grouped by categories. 
-In the leftside navigation bar you see:
+Guides are grouped by categories, and in the left navigation bar you see:
 
 * **Neo4j DBMS** -- Documentation for the Neo4j graph database, a core product:
 ** link:https://neo4j.com/docs/getting-started/current/[Getting Started Guide] -- you are here. The starting point to enter the Neo4j world.
@@ -93,7 +91,7 @@ You can also find comprehensive descriptions of Neo4j clustering here.
 * **Cypher Query Language** -- Docsets for Neo4j graph query language:
 ** link:https://neo4j.com/docs/cypher-manual/current/[The Neo4j Cypher Manual] -- the comprehensive manual for Cypher for the developers of a Neo4j client application.
 ** link:https://neo4j.com/docs/cypher-cheat-sheet/current/[Cypher Cheat Sheet] -- a printable set of notes for a quick overview of Cypher syntax basics.
-* link:https://neo4j.com/docs/drivers-apis/[**Neo4j Drivers and APIs**] -- Docsets for officially supported drivers, connectors, and APIs.
+* link:https://neo4j.com/docs/drivers-apis/[**How to create applications with Neo4j**] -- Docsets for officially supported drivers, libraries, connectors, and APIs.
 ** link:https://neo4j.com/docs/go-manual/current/[The Neo4j Go Driver Manual]
 ** link:https://neo4j.com/docs/java-manual/current/[The Neo4j Java Driver Manual] 
 ** link:https://neo4j.com/docs/javascript-manual/current/[The Neo4j JavaScript Driver Manual]
@@ -105,8 +103,10 @@ You can also find comprehensive descriptions of Neo4j clustering here.
 ** link:https://docs.spring.io/spring-data/neo4j/docs/current/reference/html/[Spring Data Neo4j]
 ** link:https://neo4j.com/docs/spark/current/[Neo4j Connector for Apache Spark]
 ** link:https://dist.neo4j.org/Neo4j-BI-Connector-JDBC-1.0.10-docs.pdf?_ga=2.205183254.709535527.1659343086-1345513218.1655306577&_gac=1.20913226.1659095710.Cj0KCQjwio6XBhCMARIsAC0u9aFZR-LU0FpO99ubpMUHLPysxMuwbCJtBb3dfvbgi8FEnagR96nCxnYaAkNZEALw_wcB[Neo4j Connector for BI (JDBC)]
-* **Neo4j security**
-* **Reference**
+* link:https://neo4j.com/docs/security-docs/[**Neo4j security**] -- quick links to the security-related content across all guides.
+* **Reference**:
+** link:https://neo4j.com/docs/resources/docs-archive/[All documentation] -- an archive page with manuals for previous releases and PDF files for downloading.
+** link:https://neo4j.com/docs/neo4j-glossary/[Neo4j Glossary]
 
 On the top right, you find the drop-down menu _Get Help_ with the following choices:  
 
