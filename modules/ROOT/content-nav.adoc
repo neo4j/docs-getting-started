@@ -1,7 +1,6 @@
 * xref:index.adoc[]
 * xref:get-started-with-neo4j/index.adoc[]
 ** xref:get-started-with-neo4j/graph-database.adoc[]
-// ** xref:get-started-with-neo4j/graph-platform.adoc[]
 * xref:data-modeling/index.adoc[]
 ** xref:data-modeling/guide-data-modeling.adoc[]
 ** xref:data-modeling/modeling-designs.adoc[]
