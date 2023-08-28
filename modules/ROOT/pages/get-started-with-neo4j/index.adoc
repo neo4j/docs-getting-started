@@ -67,7 +67,7 @@ All the official documentation is available at link:https://neo4j.com/docs/[].
 
 Documentation homepage is designed to make your journey across all Neo4j products comfortable and pleasant. 
 
-That is where you find reference documentation to all components of the xref:get-started-with-neo4j/graph-platform.adoc#platform-components[Neo4j Graph Data Platform]. 
+That is where you find reference documentation to all components of the xref:get-started-with-neo4j/graph-platform.adoc#platform-components[Neo4j Graph Data Platform].
 Guides are grouped by categories. 
 In the leftside navigation bar you see:
 
@@ -83,9 +83,10 @@ You can also find comprehensive descriptions of Neo4j clustering here.
 ** link:https://neo4j.com/docs/aura/auradb/[Neo4j AuraDB] -- graph database as a fully managed service.
 ** link:https://neo4j.com/docs/aura/aurads/[Neo4j AuraDS] -- link:https://neo4j.com/product/graph-data-science/[Neo4j Graph Data Science platform] as a fully managed service.
 * link:https://neo4j.com/docs/developer-tools/[**Neo4j Tools**] -- Docsets for developer tools designed to make it easier to develop graph applications and to interact with Neo4j database:
+** link:https://neo4j.com/docs/data-importer/current/[Data Importer] -- the guide for a UI-based tool for importing data into Neo4j.
 ** link:https://neo4j.com/docs/bloom-user-guide/current/[Neo4j Bloom] -- the guide for a graph visualization tool designed for interactive exploration of graph data.
 ** link:https://neo4j.com/docs/browser-manual/current/[Neo4j Browser] -- the guide for a developer-focused tool that allows to run Cypher queries and visualize the results. 
-** link:https://neo4j.com/docs/desktop-manual/current/[Neo4j Desktop] -- the guide introduces a client application for working with Neo4j, whether using local database instances or databases located on remote servers. 
+** link:https://neo4j.com/docs/desktop-manual/current/[Neo4j Desktop] -- the guide introduces a client application for working with Neo4j, whether using local database instances or databases located on remote servers.
 ** link:https://neo4j.com/docs/ops-manager/[Neo4j Ops Manager] -- the docset for a UI-based tool that enables any administrator to monitor, administer, and operate all of the Neo4j database management systems in an Enterprise Edition.
 * **Neo4j Graph Data Science Library** provides extensive analytical capabilities centered around graph algorithms:
 ** link:https://neo4j.com/docs/graph-data-science/current/[The Neo4j Graph Data Science Library Manual] tells you how graph algorithms are implemented into Neo4j and how to use them as they are exposed as Cypher procedures. 

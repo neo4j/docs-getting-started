@@ -91,7 +91,7 @@ See link:https://neo4j.com/docs/graph-data-science/current/[documentation^] for 
 
 Neo4j provides a variety of tools that aim to make learning and development of graph applications easier. 
 
-The link:https://neo4j.com/product/developer-tools/[Neo4j Developer Tools^] page introduces the most important of them.
+For more information, visit the link:https://neo4j.com/docs/developer-tools/[Neo4j documentation -- Tools^] page.
 
 * link:https://neo4j.com/docs/desktop-manual/current/[Neo4j Desktop] -- a local development environment for working with Neo4j, whether using local database instances or databases located on remote servers.
 Free download includes Neo4j Enterprise Edition license.
@@ -100,7 +100,7 @@ Basic visualization capabilities using Cypher query language.
 * link:https://neo4j.com/docs/ops-manager/[Neo4j Operations Manager] (NOM) -- a UI-based tool that enables a database administrator to monitor, administer, and operate all of the Neo4j database management systems in an Enterprise Edition. +
 link:https://www.youtube.com/playlist?list=PL9Hl4pk2FsvXfH4ysxfocs2TT7C3UzcU1[Video series: _NOM Bytes_] introduces the product and provides some practical tips. +
 See the link:https://neo4j.com/docs/ops-manager/[Documentation] for Neo4j Ops Manager for more information.
-* link:https://neo4j.com/docs/aura/current/getting-started/access-database/#_neo4j_data_importer/[Data Importer^] -- a no-code tool that allows you to load data from flat files (`.csv` and `.tsv`), define a graph model, map your data to it, and import it to your Neo4j database.
+* link:https://neo4j.com/docs/data-importer/current/[Data Importer^] -- a no-code tool that allows you to load data from flat files (`.csv` and `.tsv`), define a graph model, map your data to it, and import it to your Neo4j database.
 * link:https://neo4j.com/product/bloom/?ref=product[Neo4j Bloom^] -- visualization tool for business users that does not require any code or programming skills to view and analyze data.
 See the link:https://neo4j.com/docs/bloom-user-guide/current/[Documentation^] for more information.
 

@@ -4,7 +4,7 @@
 
 To help you with designing a new graph database structure, the following tools were created:
 
-* link:https://neo4j.com/docs/aura/auradb/importing/importing-data/#_neo4j_data_importer[Neo4j Data Importer^]
+* link:https://neo4j.com/docs/data-importer/current/[Neo4j Data Importer^]
 * link:https://neo4j.com/labs/arrows/[Arrows.app^]
 
 If you have data stored in a flat file format, use *Neo4j Data Importer* -- no-code tool for importing flat file data (`.csv`, `.tsv`) into Neo4j databases.
