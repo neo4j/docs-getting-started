@@ -2,6 +2,8 @@
 [[graphdb-vs-rdbms]]
 = Transition from relational to graph database
 :description: This chapter explores the concepts of graph databases from a relational developer's point of view.
+:page-aliases: ROOT:appendix/graphdb-concepts/graphdb-vs-rdbms.adoc
+
 
 
 == Introduction

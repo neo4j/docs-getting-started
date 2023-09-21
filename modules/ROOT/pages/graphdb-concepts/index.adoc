@@ -1,6 +1,7 @@
 [[graphdb-concepts]]
 = Graph database concepts
 :description: An introduction to graph database concepts.
+:page-aliases: ROOT:appendix/graphdb-concepts/index.adoc
 
 == Introduction
 
