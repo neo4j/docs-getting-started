@@ -4,6 +4,7 @@
 :tags: get-started, introduction, nosql, graph, key-value, document, compare, concepts
 :description: This chapter explains how graph databases are related to other NoSQL databases and how they differ.
 :page-pagination:
+:page-aliases: ROOT:appendix/graphdb-concepts/graphdb-vs-nosql.adoc
 
 
 [#nosql-vs-graph]
