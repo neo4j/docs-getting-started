@@ -391,8 +391,10 @@ bin/neo4j-admin database import full
 ----
 
 [NOTE]
+====
 You must specify the parameters to this script on a *single* line.
 Line feeds are shown here for readability.
+====
 
 When you run this command, it imports data and make it available for the database.
 The `neo4j-admin database import` command does not create a new database.
@@ -426,6 +428,10 @@ There is specific markup on specific columns:
 
 For more details on this header format and the tool, see the section in the link:https://neo4j.com/docs/operations-manual/current/tools/neo4j-admin/neo4j-admin-import/[Neo4j Operations Manual -> Neo4j Admin import^] and the accompanying link:https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/[tutorial^].
 
+[TIP]
+====
+If you use Neo4j 4.4, go to the link:https://neo4j.com/docs/operations-manual/4.4/tutorial/neo4j-admin-import/[Operations manual -> Tutorials: Neo4j Admin import] for instructions.
+====
 
 [[data-load-quality]]
 == CSV data quality
