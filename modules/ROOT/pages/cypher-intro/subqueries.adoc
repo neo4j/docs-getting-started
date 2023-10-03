@@ -57,8 +57,8 @@ Go to the link:https://neo4j.com/docs/cypher-manual/current/subqueries/[Cypher m
 
 The following types of subqueries are possible in Neo4j:
 
-* link:https://neo4j.com/docs/cypher-manual/current/syntax/expressions/#existential-subqueries[`EXISTS` subquery expression]
-* link:https://neo4j.com/docs/cypher-manual/current/syntax/expressions/#count-subqueries[`COUNT` subquery expression]
+* link:https://neo4j.com/docs/cypher-manual/current/syntax/expressions/#existential-subqueries[`EXISTS` subquery]
+* link:https://neo4j.com/docs/cypher-manual/current/syntax/expressions/#count-subqueries[`COUNT` subquery]
 * link:https://neo4j.com/docs/cypher-manual/5/clauses/call-subquery/[`CALL {...}` subquery clause]
 * link:https://neo4j.com/docs/cypher-manual/5/clauses/call-subquery/#subquery-call-in-transactions[`CALL {...} IN TRANSACTIONS` subquery clause]
 * link:https://neo4j.com/docs/cypher-manual/current/subqueries/collect/[`COLLECT` subqueries] label:new[Introduced in 5.6]
@@ -71,7 +71,7 @@ To learn more about using `CALL {...} IN TRANSACTIONS`, see the code examples in
 * xref:data-import/csv-import.adoc#optimizing-load-csv[_Importing CSV data into Neo4j_]
 
 The `COLLECT` subqueries were introduced in Neo4j 5.6.
-It is a new kind of subquery expression for collecting results of a subquery into a list so that further operations like `DISTINCT`, `ORDER BY`, `LIMIT`, and `SKIP` can be performed.
+It is a new kind of subquery for collecting results of a subquery into a list so that further operations like `DISTINCT`, `ORDER BY`, `LIMIT`, and `SKIP` can be performed.
 `COLLECT` subqueries differ from `COUNT` and `EXISTS` subqueries in that the final `RETURN` clause is mandatory.
 The `RETURN` clause in a `COLLECT` subquery must return exactly one column.
 
@@ -337,7 +337,7 @@ RETURN min(p.birthdate) AS oldest, max(p.birthdate) AS youngest
 
 == Summary
 
-You have seen how to use the `EXISTS {}` subquery expression to write complex filtering patterns and the `CALL {}` clause to execute result-returning subqueries.
+You have seen how to use the `EXISTS {}` subquery to write complex filtering patterns and the `CALL {}` clause to execute result-returning subqueries.
 
 
 
