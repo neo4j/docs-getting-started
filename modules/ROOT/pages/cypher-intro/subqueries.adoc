@@ -185,7 +185,7 @@ You can also use subqueries to return results as well.
 
 Let's say you want to write a query that finds people who like Java or have more than one friend.
 Apart from that, you want to return the results ordered by date of birth in descending order.
-This can be partially achieved using the `UNION` clause and the `COUNT` subquery expression:
+This can be partially achieved using the `UNION` clause and the `COUNT` subquery:
 
 [source,cypher]
 ----
