@@ -50,20 +50,31 @@ CREATE (:Technology {type: "Python"})<-[:LIKES]-(:Person {name: "Ryan"})-[:WORKS
 [[cypher-filtering]]
 == An introduction to subqueries
 
-Subqueries were introduced in Neo4j v4.0.
+Subqueries were introduced in Neo4j 4.0.
+
+Go to the link:https://neo4j.com/docs/cypher-manual/current/subqueries/[Cypher manual -> Subqueries] for detailed information on how to use them.
+
 
 The following types of subqueries are possible in Neo4j:
 
-* link:https://neo4j.com/docs/cypher-manual/current/syntax/expressions/#existential-subqueries[`EXISTS` subquery expression]
-* link:https://neo4j.com/docs/cypher-manual/current/syntax/expressions/#count-subqueries[`COUNT` subquery expression]
+* link:https://neo4j.com/docs/cypher-manual/current/syntax/expressions/#existential-subqueries[`EXISTS` subquery]
+* link:https://neo4j.com/docs/cypher-manual/current/syntax/expressions/#count-subqueries[`COUNT` subquery]
 * link:https://neo4j.com/docs/cypher-manual/5/clauses/call-subquery/[`CALL {...}` subquery clause]
 * link:https://neo4j.com/docs/cypher-manual/5/clauses/call-subquery/#subquery-call-in-transactions[`CALL {...} IN TRANSACTIONS` subquery clause]
+* link:https://neo4j.com/docs/cypher-manual/current/subqueries/collect/[`COLLECT` subqueries] label:new[Introduced in 5.6]
 
 The `EXISTS`, `COUNT`, and `CALL {...}` subqueries are covered in this section.
-To learn more about using `CALL {...} IN TRANSACTIONS`, see the code examples in the following tutorials on how to import CSV data into a Neo4j instance:
+
+To learn more about using `CALL {...} IN TRANSACTIONS`, see the code examples in the following tutorials on how to import CSV data into a Neo4j database:
 
 * xref:cypher-intro/load-csv.adoc#call-in-transactions[_Tutorial: Import data_]
 * xref:data-import/csv-import.adoc#optimizing-load-csv[_Importing CSV data into Neo4j_]
+
+The `COLLECT` subqueries were introduced in Neo4j 5.6.
+It is a new kind of subquery for collecting results of a subquery into a list so that further operations like `DISTINCT`, `ORDER BY`, `LIMIT`, and `SKIP` can be performed.
+`COLLECT` subqueries differ from `COUNT` and `EXISTS` subqueries in that the final `RETURN` clause is mandatory.
+The `RETURN` clause in a `COLLECT` subquery must return exactly one column.
+
 
 [[cypher-subqueries]]
 == Cypher subqueries
@@ -97,7 +108,7 @@ If you run this query in Neo4j Browser, the following graph is returned:
 image::friends-of-neo4j.png[width=750,role="popup-link"]
 
 
-https://neo4j.com/docs/cypher-manual/current/syntax/expressions/#cypher-subquery-expressions[Cypher subqueries^] enable more powerful pattern filtering.
+https://neo4j.com/docs/cypher-manual/current/subqueries/[Cypher subqueries^] enable more powerful pattern filtering.
 Instead of using the `exists` function in the `WHERE` clause, you can use the `EXISTS` subquery.
 You can reproduce the previous example with the following query:
 
@@ -174,7 +185,7 @@ You can also use subqueries to return results as well.
 
 Let's say you want to write a query that finds people who like Java or have more than one friend.
 Apart from that, you want to return the results ordered by date of birth in descending order.
-This can be partially achieved using the `UNION` clause and `COUNT` subquery expression:
+This can be partially achieved using the `UNION` clause and the `COUNT` subquery:
 
 [source,cypher]
 ----
@@ -326,7 +337,7 @@ RETURN min(p.birthdate) AS oldest, max(p.birthdate) AS youngest
 
 == Summary
 
-You have seen how to use the `EXISTS {}` subquery expression to write complex filtering patterns and the `CALL {}` clause to execute result-returning subqueries.
+You have seen how to use the `EXISTS {}` subquery to write complex filtering patterns and the `CALL {}` clause to execute result-returning subqueries.
 
 
 
