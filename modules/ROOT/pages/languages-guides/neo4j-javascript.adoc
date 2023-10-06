@@ -29,7 +29,6 @@ It aims to be minimal while being idiomatic to JavaScript, allowing you to subsc
 For detailed information on how to build applications with Neo4j and JavaScript, go to the link:https://neo4j.com/docs/javascript-manual/current/[Neo4j JavaScript Driver Manual^].
 There you can find instructions and code examples for every workflow step.
 
-
 [#driver-configuration]
 === Driver configuration
 
@@ -96,17 +95,6 @@ Each backend implementation shows you how to connect to Neo4j from each of the d
 
 You can learn more about our small, consistent example project across many different language drivers link:/developer/example-project[here^].
 You will find the implementations for all drivers as https://github.com/neo4j-examples?q=movies[individual GitHub repositories^], which you can clone and deploy directly.
-
-
-[#js-http-endpoint]
-== Using the HTTP endpoint directly
-
-You can use Neo4j HTTP API to send Cypher queries to and receive responses from Neo4j.
-
-The endpoint protocol and formats are explained in detail in the link:https://neo4j.com/docs/http-api/current/[Neo4j HTTP API Manual^].
-
-It enables you do to much more, for example sending many statements per request or keeping transactions open across multiple requests.
-
 
 == link:https://graphacademy.neo4j.com/?ref=guides[Learn with GraphAcademy^]
 
