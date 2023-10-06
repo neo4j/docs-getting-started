@@ -10,8 +10,8 @@
 [[cypher-intro-patterns]]
 = Patterns
 
-Neo4j's Property Graphs are composed of nodes and relationships, either of which may have properties.
-Nodes represent entities, for example concepts, events, places and things.
+Neo4j's property graphs are composed of nodes and relationships, either of which may have properties.
+Nodes represent entities, for example concepts, events, places, and things.
 Relationships connect pairs of nodes.
 
 However, nodes and relationships can be considered as low-level building blocks.
@@ -134,4 +134,12 @@ Cypher statements typically have multiple _clauses_, each of which performs a sp
 * filter, project, sort, or paginate results
 * compose partial statements
 
-By combining Cypher clauses, we can compose more complex statements that express what we want to know or create.
+By combining Cypher clauses, you can compose complex statements that express what you want to know or create.
+
+For detailed information on Cypher clauses and their use, refer to link:https://neo4j.com/docs/cypher-manual/current/clauses/[Cypher Manual -> Clauses^].
+
+You can also visit the link:https://neo4j.com/docs/cypher-cheat-sheet/5/auradb-enterprise/[Cypher Cheat Sheet^] for quick reference on Cypher syntax. 
+
+
+
+
