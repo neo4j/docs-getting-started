@@ -136,7 +136,7 @@ Cypher statements typically have multiple _clauses_, each of which performs a sp
 
 By combining Cypher clauses, you can compose complex statements that express what you want to know or create.
 
-For detailed information on Cypher clauses and their use, refer to the link:https://neo4j.com/docs/cypher-manual/current/clauses/[Cypher Manual -> Clauses^].
+For detailed information on Cypher clauses and their use, refer to link:https://neo4j.com/docs/cypher-manual/current/clauses/[Cypher Manual -> Clauses^].
 
 You can also visit the link:https://neo4j.com/docs/cypher-cheat-sheet/5/auradb-enterprise/[Cypher Cheat Sheet^] for quick reference on Cypher syntax. 
 
