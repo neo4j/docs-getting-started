@@ -25,7 +25,6 @@ which create, read, update, and delete information from the graph.
 
 The Neo4j JavaScript driver connects to the database using the binary protocol Bolt.
 It aims to be minimal while being idiomatic to JavaScript, allowing you to subscribe to a stream of responses, errors, and completion events.
-You can use the official driver for JavaScript or <<js-http-endpoint, HTTP API>>.
 
 For detailed information on how to build applications with Neo4j and JavaScript, go to the link:https://neo4j.com/docs/javascript-manual/current/[Neo4j JavaScript Driver Manual^].
 There you can find instructions and code examples for every workflow step.
