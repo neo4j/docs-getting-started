@@ -41,8 +41,8 @@ link:https://neo4j.com/docs/aura/aurads/[AuraDS documentation] tells more about 
 
 * If you prefer to use on-premises solutions, you can:
 ** install GDS as a plugin in link:https://neo4j.com/docs/desktop-manual/current/operations/install-plugin/[Neo4j Desktop], client-side application to work with Neo4j, 
-** download `neo4j-graph-data-science-[version].zip` from the link:https://neo4j.com/download-center/#ngds[Neo4j Download Center] and follow instructions described in the link:https://neo4j.com/docs/graph-data-science/2.4-preview/installation/neo4j-server/[Neo4j GDS Library Manual -> Neo4j Server],
-** configure the GDS library as a Neo4j Docker plugin if you run link:https://neo4j.com/docs/graph-data-science/2.4-preview/installation/installation-docker/[Neo4j in a Docker container].
+** download `neo4j-graph-data-science-[version].zip` from the link:https://neo4j.com/download-center/#ngds[Neo4j Download Center] and follow instructions described in the link:https://neo4j.com/docs/graph-data-science/current/installation/neo4j-server/[Neo4j GDS Library Manual -> Neo4j Server],
+** configure the GDS library as a Neo4j Docker plugin if you run link:https://neo4j.com/docs/graph-data-science/current/installation/installation-docker/[Neo4j in a Docker container].
 +
 Two GDS editions are available: Community and Enterprise.
 To compare their features, visit link:https://neo4j.com/pricing/#graph-data-science[Neo4j Pricing] page.
@@ -52,7 +52,7 @@ To compare their features, visit link:https://neo4j.com/pricing/#graph-data-scie
 Note that the GDS library has to be compatible with Neo4j. 
 Before installing the GDS library, consult the compatibility matrix in the https://neo4j.com/docs/graph-data-science/current/installation/supported-neo4j-versions/[Neo4j GDS Manual -> The supported Neo4j versions].
 
-If you run Neo4j in a cluster, you can follow the same instructions for the Neo4j Server with link:https://neo4j.com/docs/graph-data-science/2.4-preview/production-deployment/neo4j-cluster/[some additional considerations].
+If you run Neo4j in a cluster, you can follow the same instructions for the Neo4j Server with link:https://neo4j.com/docs/graph-data-science/current/production-deployment/neo4j-cluster/[some additional considerations].
 ====
 
 * If you are new to graph technology and Neo4j, link:https://graphacademy.neo4j.com/categories/?ref=docs[GraphAcademy courses] could be a great starting point.
