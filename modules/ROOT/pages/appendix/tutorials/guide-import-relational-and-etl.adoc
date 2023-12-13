@@ -376,7 +376,7 @@ After you execute this code, you can run the following Cypher command to view th
 SHOW INDEXES;
 ----
 
-Two `token-lookup` indexes (one for node labels and one for relationship types) are present by default when creating a Neo4j database.
+Two token lookup indexes (one for node labels and one for relationship types) are present by default when creating a Neo4j database.
 They exclusively solve node label and relationship type predicates and assist with the population of other indexes.
 Deleting them may have negative performance implications.
 You should see these indexes (and constraint) in the database:
