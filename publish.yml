@@ -56,11 +56,5 @@ asciidoc:
     common-license-page-uri: https://neo4j.com/docs/license/
     neo4j-base-uri: '' # this attribute is empty for publish playbooks
     neo4j-docs-base-uri: '/docs'  # this attribute does not contain the full neo4j.com path for publish playbooks
-    page-ad-overline-link: https://neo4j.com/connections/
-    page-ad-overline: 13 & 14 December 2023
-    page-ad-title: Neo4j Connections
-    page-ad-description: "Join us for a day of Generative AI and Knowledge Graphs: Unveiling the future of Knowledge Retrieval"
-    page-ad-link: https://neo4j.com/connections/
-    page-ad-underline-role: button
-    page-ad-underline: Save your spot
+  
     
