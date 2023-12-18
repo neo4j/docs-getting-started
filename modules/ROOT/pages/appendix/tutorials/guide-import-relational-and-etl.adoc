@@ -381,18 +381,44 @@ They exclusively solve node label and relationship type predicates and assist wi
 Deleting them may have negative performance implications.
 You should see these indexes (and constraint) in the database:
 
-[format="csv", options="header"]
+////
+[options="header", cols="12"]
 |===
-id,name,state,populationPercent,type,entityType,labelsOrTypes,properties,indexprovider,owningConstraint, lastRead, readCount
-7,category_id,ONLINE,100.0,RANGE,NODE,[Category],[categoryID],range-1.0,null,null,0
-6,employee_id,ONLINE,100.0,RANGE,NODE,[Employee],[employeeID],range-1.0,null,null,0
-1,index_343aff4e,ONLINE,100.0,LOOKUP,NODE,null,null,token-lookup-1.0,null,2023-12-06T12:30:12.510000000Z,2286
-2,index_f7700477,ONLINE,100.0,LOOKUP,RELATIONSHIP,null,null,token-lookup-1.0,null,null,0
-8,order_id,ONLINE,100.0,RANGE,NODE,[Order],[orderID],range-1.0,order_id,2023-12-06T13:22:06.950000000Z,3815
-3,product_id,ONLINE,100.0,RANGE,NODE,[Product],[productID],range-1.0,null,null,0
-4,product_name,ONLINE,100.0,RANGE,NODE,[Product],[productName],range-1.0,null,null,0
-5,supplier_id,ONLINE,100.0,RANGE,NODE,[Supplier],[supplierID],range-1.0,null,null,0
+|id |name |state |populationPercent |type |entityType |labelsOrTypes |properties |indexprovider |owningConstraint |lastRead |readCount
+
+|7 |category_id |ONLINE |100.0 |RANGE |NODE |[Category] |[categoryID] |range-1.0 |null |null |0
+|6 |employee_id |ONLINE |100.0 |RANGE |NODE |[Employee] |[employeeID] |range-1.0 |null |null |0
+|1 |index_343aff4e |ONLINE |100.0 |LOOKUP |NODE |null |null |token-lookup-1.0 |null |2023-12-06T12:30:12.510000000Z |2286
+|2 |index_f7700477 |ONLINE |100.0 |LOOKUP |RELATIONSHIP |null |null |token-lookup-1.0 |null |null |0
+|8 |order_id |ONLINE |100.0 |RANGE |NODE |[Order] |[orderID] |range-1.0 |order_id |2023-12-06T13:22:06.950000000Z |3815
+|3 |product_id |ONLINE |100.0 |RANGE |NODE |[Product] |[productID] |range-1.0 |null |null |0
+|4 |product_name |ONLINE |100.0 |RANGE |NODE |[Product] |[productName] |range-1.0 |null |null |0
+|5 |supplier_id |ONLINE |100.0 |RANGE |NODE |[Supplier] |[supplierID] |range-1.0 |null |null |0
 |===
+////
+
+[source, results]
+----
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|id|name          |state |populationPercent|type  |entityType  |labelsOrTypes|properties   |indexprovider   |owningConstraint|lastRead                      |readCount|
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|7 |category_id   |ONLINE|100.0            |RANGE |NODE        |[Category]   |[categoryID] |range-1.0       |null            |null                          |0        |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|6 |employee_id   |ONLINE|100.0            |RANGE |NODE        |[Employee]   |[employeeID] |range-1.0       |null            |null                          |0        |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|1 |index_343aff4e|ONLINE|100.0            |LOOKUP|NODE        |null         |null         |token-lookup-1.0|null            |2023-12-06T12:30:12.510000000Z|2286     |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|2 |index_f7700477|ONLINE|100.0            |LOOKUP|RELATIONSHIP|null         |null         |token-lookup-1.0|null            |null                          |0        |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|8 |order_id      |ONLINE|100.0            |RANGE |NODE        |[Order]      |[orderID]    |range-1.0       |order_id        |2023-12-06T13:22:06.950000000Z|3815     |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|3 |product_id    |ONLINE|100.0            |RANGE |NODE        |[Product]    |[productID]  |range-1.0       |null            |null                          |0        |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|4 |product_name  |ONLINE|100.0            |RANGE |NODE        |[Product]    |[productName]|range-1.0       |null            |null                          |0        |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|5 |supplier_id   |ONLINE|100.0            |RANGE |NODE        |[Supplier]   |[supplierID] |range-1.0       |null            |null                          |0        |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+----
 
 For more information on indexes and their use in Neo4j, go to the https://neo4j.com/docs/cypher-manual/current/planning-and-tuning/query-tuning/indexes/[Cypher Manual -> The use of indexes].
 
