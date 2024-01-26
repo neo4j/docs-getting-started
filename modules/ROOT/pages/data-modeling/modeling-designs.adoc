@@ -124,17 +124,18 @@ For those new to the comic universe, some might want to determine where to start
 However, comic issues are not always sequentially numbered, and there are even some storylines that appear across multiple series and back again.
 This makes it incredibly difficult to separate certain blocks of stories or events, along with renditions of characters.
 
-=== Example: hyperedges or intermediate nodes
+=== Example: intermediate nodes
 
 One modeling technique that is useful in this model is the concept of a hyperedge.
-Hyperedges (or intermediate nodes) are often created to model relationships that exist between more than two entities.
+Neo4j doesn't support hyperedges, but instead it has the option to create intermediate nodes.
+These are often created to model relationships that exist between more than two entities.
 They are often created to represent the connection of multiple entities at a point in time.
 
 A common example of this is a university course.
 There may be multiple offerings of the same course with the same instructor in the same building, etc.
 Each section of the class (or offering) would then become an instance of the course.
 
-The way Peter at Marvel handled hyperedges in their data is by creating an `Appearance` node that represents the intersection of a `Person` and an `Alias` at a particular time.
+The way Peter at Marvel handled intemediate nodes in their data is by creating an `Appearance` node that represents the intersection of a `Person` and an `Alias` at a particular time.
 This `Appearance` can be related to multiple `Moment` nodes where the person and alias appear as a unit.
 This is represented in the model shown below (also in the https://player.vimeo.com/video/79399404[video^]).
 
