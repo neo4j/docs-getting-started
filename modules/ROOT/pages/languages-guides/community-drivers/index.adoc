@@ -1,6 +1,6 @@
 [[community-drivers]]
 = Community-contributed libraries
-:description: Neo4j community-contributed drivers, community projects, php, ruby, erlang-elixir, perl, java jdbc.
+:description: Neo4j community-contributed drivers, community projects, php, ruby, perl, java jdbc.
 :examples: https://github.com/neo4j-examples
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
 
@@ -8,7 +8,7 @@
 == Introduction
 
 In addition to the officially supported drivers, you can find their Community alternatives.
-Besides Java, .NET, JavaScript, Go, and Python drivers, Neo4j Community offers support for Ruby, PHP, Erlang/Elixir, and Perl.
+Besides Java, .NET, JavaScript, Go, and Python drivers, Neo4j Community offers support for Ruby, PHP, and Perl.
 Links to their relevant resources are provided below.
 
 Members of the each programming language community have invested a lot of time and love to develop each one of the community drivers for Neo4j, so if you use any one of them, please provide feedback to the authors.
@@ -96,55 +96,8 @@ A low level driver for the Bolt protocol in PHP.
 | Protocols | Bolt
 |===
 
-
-[[neo4j-erlang-elixir]]
-== Using Neo4j from Erlang/Elixir
-
-[#elixir-bolt]
-=== Elixir Bolt.Sips Driver
-
-Neo4j driver for Elixir wrapped around the Bolt protocol.
-
-[cols="1,4"]
-|===
-| icon:user[] Author | http://twitter.com/florin[Florin Patrascu]
-| icon:gift[] Package | https://hex.pm/packages/bolt_sips
-| icon:github[] Source | https://github.com/florinpatrascu/bolt_sips
-| icon:book[] Docs | https://hexdocs.pm/bolt_sips/
-|===
-
-[#elixir-rest-wrapper]
-=== Neo4j.Sips
-
-A simple Elixir wrapper around the Neo4j graph database REST API.
-It aims to help Elixir developers to play with Neo4j and to eventually become the main support for a future https://github.com/elixir-lang/ecto[Ecto^] adapter.
-
-[cols="1,4"]
-|===
-| icon:user[] Author | http://twitter.com/florin[Florin Patrascu]
-| icon:gift[] Package | https://hex.pm/packages/neo4j_sips
-| icon:github[] Source | https://github.com/florinpatrascu/neo4j_sips
-| icon:book[] Docs | https://github.com/florinpatrascu/neo4j_sips/blob/master/README.md
-|===
-
-
 [[neo4j-perl]]
 == Using Neo4j from Perl
-
-[#neo4p-rest]
-=== REST::Neo4p
-
-This Perl driver from Mark Jensen works with Neo4j’s REST API by using Perl5 objects in a consistent, idiomatic Perl-style.
-There is also a related DBI-compliant wrapper (https://metacpan.org/pod/DBD::Neo4p[DBD::Neo4p])
-
-[cols="1,4"]
-|===
-| icon:user[] Author | https://www.linkedin.com/in/fortinbras[Mark A. Jensen]
-| icon:gift[] Package | https://metacpan.org/release/REST-Neo4p
-| icon:github[] Source | https://github.com/majensen/rest-neo4p
-| icon:book[] Docs | https://slideshare.net/majensen1/neo4p-dcbpw2015-46990541
-| icon:question-circle[] Community Site | https://community.neo4j.com/c/drivers-stacks/perl
-|===
 
 [#neo4j-driver]
 === Neo4j::Driver
@@ -189,34 +142,6 @@ It's implemented as a Perl wrapper around the libneo4j-client C library, which i
 | icon:book[] Blog Post | https://neo4j.com/blog/couchbase-jdbc-integrations-neo4j-3-0/
 |===
 
-[#java-jcypher]
-=== JCypher
-
-JCypher provides seamlessly integrated Java access to Neo4j at different levels of abstraction.
-
-:maven-jcypher: http://search.maven.org/#search|gav|1|g%3A%22net.iot-solutions.graphdb%22%20AND%20a%3A%22jcypher%22
-
-[cols="1,4"]
-|===
-| icon:user[] Author | https://github.com/Wolfgang-Schuetzelhofer[Wolfgang Schützelhofer^]
-| icon:gift[] Package | link:{maven-jcypher}[http://maven.org^]
-| icon:github[] Source | https://github.com/Wolfgang-Schuetzelhofer/jcypher
-| icon:book[] Docs | https://jcypher.iot-solutions.net/
-| icon:book[] Blog Post | https://neo4j.com/blog/jcypher-focus-on-your-domain-model-not-how-to-map-it-to-the-database/
-|===
-
-[#neo4j-grails]
-=== Groovy & Grails: Neo4j Grails Plugin
-
-The goal of GORM for Neo4j is to provide a 'as-complete-as-possible' GORM implementation that maps domain classes and instances to the Neo4j nodespace. 
-
-[cols="1,4"]
-|===
-| icon:user[] Authors | Stefan Armbruster, Graeme Rocher
-// | icon:gift[] Package | http://www.grails.org/plugin/neo4j
-// | icon:github[] Source | https://github.com/grails/grails-data-mapping/tree/master/grails-datastore-gorm-neo4j
-| icon:book[] Docs | http://grails.github.io/grails-data-mapping/latest/neo4j/
-|===
 
 [#neo4j-scala]
 === Scala: neotypes
@@ -228,22 +153,6 @@ The goal of GORM for Neo4j is to provide a 'as-complete-as-possible' GORM implem
 | icon:book[] Docs | https://neotypes.github.io/neotypes/
 | icon:book[] Blog Post | http://dimafeng.com/2018/12/27/neotypes-1/
 | icon:play-circle[] Example | https://github.com/neotypes/examples
-|===
-
-[#ogm-hibernate]
-=== JPA: Hibernate OGM
-
-Hibernate Object/Grid Mapper (http://hibernate.org/ogm[OGM^]) with Neo4j Support.
-
-:maven-hibernate-ogm: http://search.maven.org/#search|gav|1|g%3A%22org.hibernate.ogm%22%20AND%20a%3A%22hibernate-ogm-neo4j%22
-[cols="1,4"]
-|===
-| icon:user[] Authors | Davide D'Alto, Gunnar Moelling, Emmanuel Bernard
-| icon:gift[] Package | link:{maven-hibernate-ogm}[http://maven.org^]
-| icon:github[] Source | https://github.com/hibernate/hibernate-ogm/tree/master/neo4j
-| icon:book[] Docs | http://docs.jboss.org/hibernate/ogm/5.0/reference/en-US/html_single/#ogm-neo4j
-| icon:book[] Blog Post | http://in.relation.to/Bloggers/QueryImprovementsAndBetterNeo4jSupportHibernateOGM410Beta6IsOut[Blog], http://in.relation.to/Bloggers/HibernateOGM410Beta5IsOutJPQLQueriesForNeo4jAndMore[JPL Queries^]
-| icon:play-circle[] Example | https://github.com/TimmyStorms/hibernate-ogm-neo4j-example
 |===
 
 
@@ -280,33 +189,9 @@ It also supports basic CRUD and legacy indexing.
 | icon:book[] Docs           | https://xclave.co.uk/2020/10/06/using-neo4j-driver-now-you-can-extend-it/[Introduction blogpost]
 |===
 
-[[javascript-community-drivers]]
-== JavaScript Community drivers
-
-
-[#js2neo-lib]
-=== js2neo
-
-As an example of a minimal JavaScript based Bolt driver, you can use link:https://github.com/technige/js2neo[js2neo^].
 
 [[python-community-drivers]]
 == Python Community drivers
-
-[#py2neo-lib]
-=== Py2neo
-
-[cols="1,4"]
-|===
-| icon:user[] Author         | https://twitter.com/technige[Nigel Small^]
-| icon:gift[] Package        | https://pypi.python.org/pypi/py2neo
-| icon:github[] Source       | https://github.com/technige/py2neo
-
-| icon:play-circle[] Example | {examples}/movies-python-py2neo
-| icon:book[] Docs           | http://py2neo.org/
-| icon:code-fork[] Python    | 2.7 / 3.4+
-| Protocols | Bolt, HTTP
-|===
-
 
 [#neomodel-lib]
 === Neomodel
