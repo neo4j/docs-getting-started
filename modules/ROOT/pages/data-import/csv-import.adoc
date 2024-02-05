@@ -288,7 +288,7 @@ CALL {
 +
 Some statements pull in more rows than it is necessary, adding extra processing up front.
 To avoid this, you can run link:https://neo4j.com/docs/cypher-manual/current/query-tuning/#how-do-i-profile-a-query[`PROFILE`] on your queries to see if they use `Eager` loading and either modify queries or run multiple passes on the same file, so it does not do this.
-For more information about the `Eager` operator, see the link:https://neo4j.com/docs/cypher-manual/current/execution-plans/operators/#query-plan-eager[Cypher manual -> Execution plan operators in detail^].
+For more information about the `Eager` operator, see the link:https://neo4j.com/docs/cypher-manual/current/planning-and-tuning/operators/operators-detail/[Cypher manual -> Execution plan operators in detail^].
 // To learn how to avoid loading EAGER, see https://markhneedham.com/blog/2014/10/23/neo4j-cypher-avoiding-the-eager/[Mark's blog post^].
 
 . Adjust configuration for the database on heap and memory to avoid page-faults.
