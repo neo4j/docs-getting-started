@@ -9,12 +9,12 @@
 [abstract]
 {description}
 
-// It would be good to use the blog post link:https://neo4j.com/developer-blog/15-tools-for-visualizing-your-neo4j-graph-database/[15 Tools for Visualizing Your Graph Database] by Niels de Jong. 
-// Also we have a new tool NeoDash2.0 (to ask Alistair: what is the future of this project? It's an open-source product, not an official one. You can download it from the Graph Apps Gallery). 
+// It would be good to use the blog post link:https://neo4j.com/developer-blog/15-tools-for-visualizing-your-neo4j-graph-database/[15 Tools for Visualizing Your Graph Database] by Niels de Jong.
+// Also we have a new tool NeoDash2.0 (to ask Alistair: what is the future of this project? It's an open-source product, not an official one. You can download it from the Graph Apps Gallery).
 // Apart from it, we need to update Bloom section by adding info of integrated graph algos from GDS.
 
 [#about-graph-vis]
-Neo4j is designed to be very visual in nature.  
+Neo4j is designed to be very visual in nature.
 Native graph databases like Neo4j focus on relationships.  Visualizing these relationships can give a unique
 "big picture" to your data that is difficult or impossible to get with traditional tables and business intelligence packages.
 
@@ -30,7 +30,7 @@ This section is designed to help you understand how to export your graph data in
 [#why-vis-graph]
 == Why visualize a graph?
 
-You have many options for working with data; JSON, XML, tabular, and others. 
+You have many options for working with data; JSON, XML, tabular, and others.
 Why represent it visually?
 
 Anyone reviewing a graph can see the connections, determine areas of interest, or quickly assess the current state and organization of the data.
@@ -57,8 +57,8 @@ We will briefly discuss the key details of each here.
 
 === Neo4j Bloom
 
-Bloom is a standalone product focused on visualization that comes with every link:{aura_signup}[AuraDB Instance], and is available with a Neo4j Desktop.  
-It was designed for business analysts annd nother non-developers to interact with graph data without writing any code.
+Bloom is a standalone product focused on visualization that comes with every link:{aura_signup}[AuraDB Instance], and is available with a Neo4j Desktop.
+It was designed for business analysts and other non-developers to interact with graph data without writing any code.
 
 // image:{neo4j-img-base-uri}bloom_vis_yelp.jpg[role="popup-link"]
 
