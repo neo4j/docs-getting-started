@@ -32,7 +32,7 @@ Useful procedures include apoc.load.jdbc, apoc.load.json, and others.
 *3)* link:https://neo4j.com/labs/etl-tool/[ETL Tool^]: Neo4j Labs UI tool that translates relational to graph from a JDBC connection.
 Allows bulk data import for large data sets with a fast performance and simple user experience.
 
-*4)* link:https://medium.com/neo4j/getting-started-with-kettle-and-neo4j-32ff15b991f9[Kettle^]: open-source tool for enterprise-scale data export and import.
+*4)* link:https://medium.com/@samuel.second/apache-hop-connecting-to-neo4j-using-environments-e6839c279de0[Apache Hop^]: open-source tool for enterprise-scale data export and import.
 Handles a variety of data sources and large data sets easily and organizes the data flow process.
 
 *5)* Other ETL tools: there are also a few vendor and community tools available for similar etl processes and GUI interaction for getting data in various formats into and out of Neo4j.
@@ -97,24 +97,20 @@ It is a community-driven tool, so updates are made as needed and not on a schedu
 * Blog post: https://medium.com/neo4j/tap-into-hidden-connections-translating-your-relational-data-to-graph-d3a2591d4026[Translating Relational Data to Graph^]
 * Source code: https://github.com/neo4j-contrib/neo4j-etl[Github project^]
 
-[#relational-kettle]
-== Kettle
+[#neo4j-apache-hop]
+== Apache Hop
 
-This highly diverse and flexible data loading tool has several connection options to and from Neo4j, as well as capabilities to generate CSV files from other systems to load into your graph database.
-Its goal is to help you create and manage a simple, self-describing, and maintainable data integration process from beginning to end.
+Apache Hop, an abbreviation for Hop Orchestration Platform, serves as a data orchestration and data engineering platform, designed to facillitate all aspects of data flows creation and management. 
 
-Kettle builds a data loading process that is self-documenting and transparent.
-It is especially helpful if the data import requires data retrieval from multiple sources or if there are multiple dependent steps to build or update your graph.
-If you need to transformation the data coming in or going out, Kettle can handle different kinds of manipulations, including aggregations.
-Processes that need to log information to Neo4j or flexibility for embedding in various environments also make excellent cases for using Kettle.
+The source code from the link:https://github.com/mattcasters/hop-neo4j[Neo4j Apache Hop^] project has been integrated into Apache Hop framework.
+If you download a recent version, you get the most recent version of the Neo4j plugins as well.
 
-All of this functionality is bundled out-of-the-box through a simple, yet powerful GUI for your ETL developers.
-Cooperation with Neo4j simply requires the plugins for our graph data integration.
+Using Apache Hop, you can load large datasets in Neo4j, update graphs, and get logging information.
 
-=== Kettle Resources
-* Kettle Download: https://sourceforge.net/projects/pentaho/files/[Open-source project on SourceForge^]
-* Neo4j Plugins: https://github.com/knowbi/knowbi-pentaho-pdi-neo4j-output/releases/[Integrate Kettle with Neo4j^]
-* Blog post: https://medium.com/neo4j/getting-started-with-kettle-and-neo4j-32ff15b991f9[Getting Started with Kettle and Neo4j^]
+=== Apache Hop resources
+* Documentation: link:https://hop.apache.org/manual/latest/technology/neo4j/index.html[Apache Hop Neo4j^]
+* Neo4j plugins: link:https://github.com/apache/hop[Use Apache Hop with Neo4j^]
+* Blog post: link:https://www.know-bi.be/blog/5-minutes-to-write-to-neo4j-with-apache-hop[5 minutes to load data to Neo4j and other graph databases with Apache Hop^]
 
 
 [#relational-drivers]
