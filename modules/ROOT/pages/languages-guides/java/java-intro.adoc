@@ -17,7 +17,7 @@ You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or l
 When developing with Neo4j 5.x, use Java 17 and your preferred IDE.
 
 5.x driver series requires Java 17.
-For more details, see link:https://neo4j.com/docs/java-manual/5/get-started/[Neo4j Java Driver Manual].
+For more details, see link:https://neo4j.com/docs/java-manual/current/[Neo4j Java Driver Manual].
 
 [[neo4j-java]]
 == Neo4j for Java developers
