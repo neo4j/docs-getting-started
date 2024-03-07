@@ -135,7 +135,7 @@ It does this using the `apoc.refactor.normalizeAsBoolean` procedure, which itsel
   ** `params` - parameters passed into those Cypher queries.
   ** `batchSize`- controls the number of inner statements that are run within a single transaction.
 
-After runnign the query, you see the following output:
+After running the query, you see the following output:
 
 .Results
 [opts="header"]
