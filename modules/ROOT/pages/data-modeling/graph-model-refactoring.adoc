@@ -5,7 +5,7 @@
 
 == Introduction
 
-Building on the Cypher basic concepts, this guide provides a worked example of changing a graph model.
+Building on the Cypher basic concepts, this guide provides a working example of changing a graph model.
 Upon finishing this guide, you should be able to evolve your graph model based on changing requirements.
 
 
