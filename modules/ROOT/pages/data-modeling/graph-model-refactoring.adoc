@@ -18,7 +18,7 @@ Below you can see the graph model of the database:
 
 image::initial_model-arr.svg[role="popup-link", width=600]
 
-Before you import any data, you should create a unique constraint on the `Airport` label and `code` property to ensure that you don't accidentally import duplicate airports.
+Before importing any data, you should create a unique constraint on the `Airport` label and `code` property to ensure that you don't accidentally import duplicate airports.
 The following query creates the constraint:
 
 [source,cypher]
@@ -62,7 +62,7 @@ If you run this query, you will see the following output:
 | Added 62 labels, created 62 nodes, set 7062 properties, created 1000 relationships, completed after 376 ms.
 |===
 
-This model is a good starter one, but there are some improvements that you can make.
+This is a starting model, but there are some improvements that you can make.
 
 [#property-to-boolean]
 == Convert property to boolean
@@ -104,8 +104,8 @@ RETURN count(*)
 | 1000
 |===
 
-If you have a lot of relationships to update, you may get an OutOfMemory exception trying to refactor them all in one transaction.
-You can therefore process them in batches using the link:https://neo4j.com/docs/apoc/current/graph-updates/periodic-execution/#periodic-execution-proc-overview[`apoc.periodic.iterate`] procedure.
+If you have a lot of relationships to update, you may get an `OutOfMemory` exception when trying to refactor them all in one transaction.
+You can therefore process the relationships in batches using the link:https://neo4j.com/docs/apoc/current/graph-updates/periodic-execution/#periodic-execution-proc-overview[`apoc.periodic.iterate`] procedure.
 The following query does this for the `cancelled` and `reverted` properties in the same query:
 
 [source,cypher]
@@ -120,13 +120,13 @@ YIELD batches
 RETURN propertyToDelete, batches
 ----
 
-For more details about the `UNWIND` clause, go to the link:https://neo4j.com/docs/cypher-manual/current/clauses/unwind/[Cypher manual -> UNWIND].
+For more details about the `UNWIND` clause, see the link:https://neo4j.com/docs/cypher-manual/current/clauses/unwind/[Cypher manual -> UNWIND page].
 
-The `apoc.periodic.iterate` procedure in the above query takes in three parameters:
+The `apoc.periodic.iterate` procedure in the previous query takes in three parameters:
 
 * An outer Cypher query that finds and returns a stream of `CONNECTED_TO` relationships to be processed.
 * An inner Cypher query that processes those `CONNECTED_TO` relationships, converting to boolean any values for the specified property on those relationships.
-It does this using the `apoc.refactor.normalizeAsBoolean` procedure, which itself takes in several parameters:
+It does this by using the `apoc.refactor.normalizeAsBoolean` procedure, which itself takes in several parameters:
   ** the entity on which the property exists
   ** the name of the property to normalize
   ** a list of values that should be considered `true`
@@ -135,7 +135,7 @@ It does this using the `apoc.refactor.normalizeAsBoolean` procedure, which itsel
   ** `params` - parameters passed into those Cypher queries.
   ** `batchSize`- controls the number of inner statements that are run within a single transaction.
 
-After running the query, you see the following output:
+After running the query, you will see the following output:
 
 .Results
 [opts="header"]
@@ -179,9 +179,9 @@ RETURN origin.code AS origin,
 [#create-node-from-relationship]
 == Create a node from a relationship
 
-Imagine that you want to write a query that finds a specific flight.
-This is quite difficult with our existing data model because flights are represented as relationships.
-You can evolve the model to create a `Flight` node from the properties stored on the `CONNECTED_TO` relationship.
+With the existing data model, writing a query that finds a specific flight can become a complex task.
+That is because here the flights are represented as relationships.
+However, you can change the model by creating a `Flight` node from the properties stored on the `CONNECTED_TO` relationship:
 
 image::flight_node-arr.svg[role="popup-link", width=600]
 
@@ -223,7 +223,7 @@ If you execute the query, you will see the following output:
 |===
 
 
-We can also do this refactoring using the link:https://neo4j.com/docs/apoc/current/overview/apoc.refactor/apoc.refactor.extractNode/[`apoc.refactor.extractNode`] procedure.
+You can also do this refactoring using the link:https://neo4j.com/docs/apoc/current/overview/apoc.refactor/apoc.refactor.extractNode/[`apoc.refactor.extractNode`] procedure.
 
 [source,cypher]
 ----
@@ -250,14 +250,14 @@ If we run this query we'll see the following output:
 [#create-node-from-property]
 == Create a node from a property
 
-At the moment the airline for the flights is stored in the `airline` property on the `Flight` nodes.
+At the moment the airline names are stored in the `airline` property on the `Flight` nodes.
 This means that if you want to return a stream of all airlines, you have to scan through every flight and check the `airline` property on each of those flights.
 
 You can make the process easier and more efficient by creating a node with an `Airline` label for each airline:
 
 image::airline-arr.svg[role="popup-link", width=600]
 
-Let's first create a constraint on the `Airline` label and `name` property to avoid duplicated airline nodes:
+First, create a constraint on the `Airline` label and a `name` property to avoid duplicated airline nodes:
 
 [source,cypher]
 ----
@@ -286,8 +286,9 @@ CALL apoc.periodic.iterate(
 Again you are using the `apoc.periodic.iterate` procedure with the following parameters:
 
 * An outer Cypher statement that returns a stream of `Flight` nodes to be processed.
-* An inner Cypher statementthat processes these flight nodes, creating `Airline` nodes based on flights' `airline` property and created an `AIRLINE` relationship from the `Flight` to the `Airline` node.
-You then remove the `airline` property from the `Flight` node.
+* An inner Cypher statement that processes the `Flight` nodes and creates `Airline` nodes based on the `airline` property.
+It also creates an `AIRLINE` relationship from the `Flight` to the `Airline` nodes.
+After that, you can remove the `airline` property from the `Flight` node.
 
 If you run this query, the output will be the following:
 
