@@ -1,7 +1,7 @@
 [[graph-model-refactoring]]
 = Graph model refactoring
 :tags: graph-modeling, data-model, schema, refactoring, apoc
-:description: This guide provides a worked example of changing a graph model. Upon finishing this guide, you should be able to evolve your graph model based on changing requirements.
+:description: This guide provides a working example of changing a graph model. Upon finishing this guide, you should be able to evolve your graph model based on changing requirements.
 
 == Introduction
 
