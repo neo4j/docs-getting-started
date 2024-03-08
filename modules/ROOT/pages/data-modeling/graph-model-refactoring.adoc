@@ -253,7 +253,7 @@ If we run this query we'll see the following output:
 At the moment the airline names are stored in the `airline` property on the `Flight` nodes.
 This means that if you want to return a stream of all airlines, you have to scan through every flight and check the `airline` property on each of those flights.
 
-You can make the process easier and more efficient by creating a node with an `Airline` label for each airline:
+You can make this task simpler and more efficient by creating a node with an `Airline` label for each airline:
 
 image::airline-arr.svg[role="popup-link", width=600]
 
@@ -299,7 +299,7 @@ If you run this query, the output will be the following:
 | 1       | 1000  | 0         | 1000                | 0                | 0             | 0       | {}            | {total: 1, committed: 1, failed: 0, errors: {}} | {total: 1000, committed: 1000, failed: 0, errors: {}} | FALSE
 |===
 
-You can then write the following query to find the airlines and number of flights involving each:
+You can then write the following query to find the airlines and number of flights involving each airline:
 
 [source,cypher]
 ----
