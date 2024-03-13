@@ -49,26 +49,6 @@ Other example datasets that you can run within your own Neo4j Browser are:
 // :play twitter-neo4j-stream
 // `:play life-science-import` drug and genome data import and repurposing examples
 
-== AuraDB Free example datasets
-
-When creating a new database in Neo4j AuraDB, besides the default empty you can also select one of the starting datasets:
-
-* Movies
-* Graph based Recommendations
-* Graphs for Cybersecurity
-* StackOverflow Data
-
-You can explore them following the Browser guides instructions and test data with suggested Cypher queries.
-
-In addition, you have few options to download graph data into Aura from other Neo4j instances:
-
-* Load a dump from Neo4j Sandbox backup.
-* Load a dump from Neo4j Graph Example repository.
-* Load a dump from Neo4j Desktop.
-
-For more information, you can read the blog post link:https://medium.com/neo4j/week-10-getting-dumps-and-example-projects-into-aura-free-6980b178dc69/[Week 10 -- Getting Dumps and Example Projects into Aura Free] and watch the corresponding link:https://www.youtube.com/watch?v=q6sU38nQiic&t=779s/[video] from the series *_Discover Neo4j Aura Free with Michael and Alex_*. 
-
-
 [#neo4j-sandbox]
 == Neo4j Sandbox
 
