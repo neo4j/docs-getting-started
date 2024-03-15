@@ -100,17 +100,18 @@ It is a community-driven tool, so updates are made as needed and not on a schedu
 [#neo4j-apache-hop]
 == Apache Hop
 
-Apache Hop, an abbreviation for Hop Orchestration Platform, serves as a data orchestration and data engineering platform, designed to facillitate all aspects of data flows creation and management. 
+Apache Hop, an abbreviation for Hop Orchestration Platform, is a data orchestration and data engineering platform.
+It was designed to facilitate creation and management of data flow.
 
-The source code from the link:https://github.com/mattcasters/hop-neo4j[Neo4j Apache Hop^] project has been integrated into Apache Hop framework.
-If you download a recent version, you get the most recent version of the Neo4j plugins as well.
+The source code from the link:https://github.com/mattcasters/hop-neo4j[Neo4j Apache Hop^] project has been integrated into the Apache Hop framework.
+Recent versions include the Neo4j plugins as well.
 
-Using Apache Hop, you can load large datasets in Neo4j, update graphs, and get logging information.
+With Apache Hop, you can load large datasets in Neo4j, update graphs, and get logging information.
 
 === Apache Hop resources
-* Documentation: link:https://hop.apache.org/manual/latest/technology/neo4j/index.html[Apache Hop Neo4j^]
-* Neo4j plugins: link:https://github.com/apache/hop[Use Apache Hop with Neo4j^]
-* Blog post: link:https://www.know-bi.be/blog/5-minutes-to-write-to-neo4j-with-apache-hop[5 minutes to load data to Neo4j and other graph databases with Apache Hop^]
+* *Documentation*: link:https://hop.apache.org/manual/latest/technology/neo4j/index.html[Apache Hop Neo4j^]
+* *Neo4j plugins*: link:https://github.com/apache/hop[Use Apache Hop with Neo4j^]
+* *Tutorial*: link:https://www.know-bi.be/blog/5-minutes-to-write-to-neo4j-with-apache-hop[5 minutes to load data to Neo4j and other graph databases with Apache Hop^]
 
 
 [#relational-drivers]
