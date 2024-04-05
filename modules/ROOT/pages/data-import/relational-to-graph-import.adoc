@@ -24,7 +24,7 @@ We will briefly cover how each operates on this page, but more detailed walkthro
 *1)* xref:data-import/csv-import.adoc[LOAD CSV]: possibly the simplest way to import data from your relational database.
 Requires a dump of individual entity-tables and join-tables formatted as CSV files.
 
-*2)* link:https://neo4j.com/labs/apoc/4.4/[APOC^]: Awesome Procedures on Cypher.
+*2)* link:https://neo4j.com/docs/apoc/current/[APOC^]: Awesome Procedures on Cypher.
 Created as an extension library to provide common procedures and functions to developers.
 This library is especially helpful for complex transformations and data manipulations.
 Useful procedures include apoc.load.jdbc, apoc.load.json, and others.
@@ -33,8 +33,9 @@ Useful procedures include apoc.load.jdbc, apoc.load.json, and others.
 Allows bulk data import for large data sets with a fast performance and simple user experience.
 
 *4)* link:https://medium.com/@samuel.second/apache-hop-connecting-to-neo4j-using-environments-e6839c279de0[Apache Hop^]: open-source tool for enterprise-scale data export and import.
-Note that this import option is not supported officially.
 Handles a variety of data sources and large data sets easily and organizes the data flow process.
+
+Note that this import option is not supported officially.
 
 *5)* Other ETL tools: there are also a few vendor and community tools available for similar etl processes and GUI interaction for getting data in various formats into and out of Neo4j.
 Some of these tools also can map out the flow and transformation of data through the system.
