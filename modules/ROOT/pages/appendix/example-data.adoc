@@ -49,6 +49,10 @@ Other example datasets that you can run within your own Neo4j Browser are:
 // :play twitter-neo4j-stream
 // `:play life-science-import` drug and genome data import and repurposing examples
 
+== Neo4j guides on Aura
+
+With a new instance on Aura, you can explore a set of Neo4j Guides created to adapt to your needs and learning style.
+Click on a student-hat button at the top, to access the Neo4j guides. 
 [#neo4j-sandbox]
 == Neo4j Sandbox
 
