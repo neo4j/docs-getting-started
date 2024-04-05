@@ -33,6 +33,7 @@ Useful procedures include apoc.load.jdbc, apoc.load.json, and others.
 Allows bulk data import for large data sets with a fast performance and simple user experience.
 
 *4)* link:https://medium.com/@samuel.second/apache-hop-connecting-to-neo4j-using-environments-e6839c279de0[Apache Hop^]: open-source tool for enterprise-scale data export and import.
+Note that this import option is not supported officially.
 Handles a variety of data sources and large data sets easily and organizes the data flow process.
 
 *5)* Other ETL tools: there are also a few vendor and community tools available for similar etl processes and GUI interaction for getting data in various formats into and out of Neo4j.
