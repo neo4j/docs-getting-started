@@ -14,7 +14,7 @@ asciidoc:
     neo4j-ogm-version: '4.0.1'
     java-driver-version: '5.19.0'
     javascript-driver-version: '5.19.0'
-    dotnet-driver-version: '5.19.0'
+    dotnet-driver-version: '5.18.0'
     go-driver-version: '5.19.0'
     python-driver-version: '5.19.0'
     testcontainers-version: '1.17.6'
