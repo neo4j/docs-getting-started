@@ -95,8 +95,6 @@ If necessary, you can also https://medium.com/neo4j/getting-certificates-for-neo
 | {go-driver-version}
 | The Neo4j Team
 
-| https://community.neo4j.com/c/drivers-stacks/go[Neo4j Online Community^]
-
 | https://neo4j.com/docs/go-manual/current/[icon:book[] Docs^]
 | https://godoc.org/github.com/neo4j/neo4j-go-driver/neo4j[icon:code[] API]
 | https://github.com/neo4j/neo4j-go-driver[icon:github[] Source]

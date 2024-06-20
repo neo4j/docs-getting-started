@@ -332,5 +332,5 @@ SessionFactory sessionFactory;
 |===
 | icon:book[] Quarkus Documentation | https://quarkus.io/guides/neo4j[Neo4j integration^], https://quarkus.io/guides/neo4j#configuration-reference[Configuration properties], https://quarkus.io/guides/[Guide^]
 | icon:book[] Neo4j-OGM Quarkus Extension | https://github.com/neo4j/neo4j-ogm-quarkus[GitHub^]
-| icon:play-circle[] Examples | https://github.com/michael-simons/neo4j-from-the-jvm-ecosystem[Quarkus examples^] | https://github.com/sdaschner/movies-java-quarkus/[Quarkus Movies example application^]
+| icon:play-circle[] Examples | https://github.com/michael-simons/neo4j-from-the-jvm-ecosystem[Quarkus examples^], https://github.com/sdaschner/movies-java-quarkus/[Quarkus Movies example application^]
 |===
