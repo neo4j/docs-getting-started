@@ -1,12 +1,5 @@
 :page-ogdescription: The Neo4j Getting Started Guide covers: How to get started with Neo4j. Introduction to graph database concepts and introduction to the graph query language Cypher.
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guide
-:page-ad-overline-link: https://graphacademy.neo4j.com/categories/?ref=docs
-:page-ad-overline: Neo4j GraphAcademy
-:page-ad-title: Neo4j GraphAcademy Courses
-:page-ad-description: Learn more about Neo4j, Cypher in these free, hands-on courses
-:page-ad-link: https://graphacademy.neo4j.com/categories/?ref=docs
-:page-ad-underline-role: button
-:page-ad-underline: Learn more
 
 :page-ogtitle: Getting Started Guide for Neo4j version {neo4j-version}
 
@@ -163,5 +156,8 @@ endif::[]
 ifdef::backend-pdf[]
 License: Creative Commons 4.0
 endif::[]
+
+// Edit at: https://github.com/neo4j-graphacademy/courses/blob/main/asciidoc/courses/neo4j-fundamentals/promo.adoc
+include::https://raw.githubusercontent.com/neo4j-graphacademy/courses/main/asciidoc/courses/neo4j-fundamentals/promo.adoc[]
 
 
