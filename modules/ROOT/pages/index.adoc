@@ -164,4 +164,7 @@ ifdef::backend-pdf[]
 License: Creative Commons 4.0
 endif::[]
 
+// Edit at: https://github.com/neo4j-graphacademy/courses/blob/main/asciidoc/courses/neo4j-fundamentals/promo.adoc
+include::https://raw.githubusercontent.com/neo4j-graphacademy/courses/main/asciidoc/courses/neo4j-fundamentals/promo.adoc[]
+
 
