@@ -72,7 +72,7 @@ Read more about the link:https://neo4j.com/licensing/[available editions].
 
 == Work with data
 
-You can xref:import:index.adoc[import] your own data to Neo4j or use link:{docs-home}/getting-started/appendix/example-data/[example datasets].
+You can link:{docs-home}/import[import] your own data to Neo4j or use link:{docs-home}/getting-started/appendix/example-data/[example datasets].
 Both Aura and Neo4j Desktop feature embedded guides that allow you to create example datasets and start link:{docs-home}/getting-started/cypher-intro/[querying your database].
 
 In case you are working with your own dataset, it is recommended to link:{docs-home}/getting-started/data-modeling/[model your data] for a better experience with your new graph database.
@@ -89,7 +89,7 @@ ifndef::backend-pdf[]
 endif::[]
 == Glossary
 
-include::../partials/glossary.adoc[]
+include::glossary.adoc[]
 
 ifdef::backend-pdf[]
 <<<

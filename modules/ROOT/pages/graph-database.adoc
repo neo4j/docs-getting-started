@@ -34,7 +34,7 @@ Graph databases are structured through nodes and relationships.
 * Can be link:{docs-home}/getting-started/cypher-intro/patterns/#cypher-intro-patterns-relationship-syntax[directed or undirected].
 * Can have properties, like nodes.
 * Can be attached to nodes, no matter how many they are and of what type, without sacrificing performance.
-* Are very useful as a strategy for xref:data-modeling:index.adoc[modeling your data].
+* Are very useful as a strategy for xref:data-modeling/index.adoc[modeling your data].
 
 In summary, nodes and relationships are an efficient and flexible approach because, with them, you can:
 
@@ -83,7 +83,7 @@ ifndef::backend-pdf[]
 endif::[]
 == Glossary
 
-include::../partials/glossary.adoc[]
+include::glossary.adoc[]
 
 ifdef::backend-pdf[]
 <<<
