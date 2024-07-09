@@ -1,167 +1,120 @@
-:page-ogdescription: The Neo4j Getting Started Guide covers: How to get started with Neo4j. Introduction to graph database concepts and introduction to the graph query language Cypher.
-:aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guide
-:page-ad-overline-link: https://graphacademy.neo4j.com/categories/?ref=docs
-:page-ad-overline: Neo4j GraphAcademy
-:page-ad-title: Neo4j GraphAcademy Courses
-:page-ad-description: Learn more about Neo4j, Cypher in these free, hands-on courses
-:page-ad-link: https://graphacademy.neo4j.com/categories/?ref=docs
-:page-ad-underline-role: button
-:page-ad-underline: Learn more
+= Get started with Neo4j
+:page-layout: docs-ndl
+:page-theme: docs
+:page-role: explainer
+:page-show-home-link: true
+:page-hide-nav-title: true
+// :page-disablefeedback: true
+:page-toclevels: 1
 
-:page-ogtitle: Getting Started Guide for Neo4j version {neo4j-version}
+[.cards.selectable]
 
-[[getting-started]]
-ifdef::backend-pdf[]
-= Neo4j {neo4j-version} Getting Started Guide
-endif::[]
-ifndef::backend-pdf[]
-= Welcome to Neo4j
-endif::[]
+== Explore the capabilities of graph databases
 
+With a native graph database at the core, Neo4j takes a property graph approach which is beneficial for both traversal performance and operations runtime.
+Navigate through this page to learn more about the product and how you can start working with your data.
 
-ifndef::backend-pdf[]
-++++
-<div class="responsive-embed">
-<iframe width="680" height="425" src="https://www.youtube.com/embed/urO5FyP9PoI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-++++
-endif::[]
+=== What is Neo4j
 
-ifdef::backend-pdf[]
-link:https://www.youtube.com/embed/urO5FyP9PoI[Video: What is Neo4j?]
-endif::[]
+[.icon]
+image:ROOT:icon-neo4j.svg[]
 
+[.description]
+Learn what is a graph database and how to use it in your projects.
 
-With a native graph database at the core, Neo4j stores and manages data in a natural, connected state.
-The graph database takes a property graph approach, which is beneficial for both traversal performance and operations runtime. +
+[.link]
+xref:whats-neo4j.adoc[]
 
-[[neo4j-ecosystem-components]]
-.Overview of the Neo4j ecosystem
-image::neo4j-architecture-diagram.svg[role="popup-link"]
+=== Import data to Neo4j
 
-Neo4j started as a graph database and has evolved into a rich ecosystem with numerous tools, applications, and libraries.
-This ecosystem allows you to seamlessly integrate graph technologies with your working environment. +
+[.icon]
+image:ROOT:icon-import.svg[]
 
-To explore more information about each component, visit the link:https://neo4j.com/deployment-center/[Neo4j Download center^]. +
-For instructions on installing and deploying Neo4j, refer to the xref:get-started-with-neo4j/index.adoc#neo4j-docs[Neo4j documentation]. +
-*The latest version of Neo4j is {neo4j-version-minor}.*
+[.description]
+Read more about the several ways of importing data to your Neo4j graph database.
 
-[[graph-database]]
-== Neo4j Graph Database
+[.link]
+link:{docs-home}/getting-started/data-import/[]
 
-link:https://neo4j.com/product/neo4j-graph-database/?ref=product/[Neo4j Graph Database^] is the core product, a native graph database that is built to store and retrieve connected data. + 
-link:https://neo4j.com/licensing/[Two editions^], a Community Edition and an Enterprise Edition, are available. +
-There are various ways to get started with Neo4j: 
+=== Model your data to Neo4j
 
-* link:https://neo4j.com/docs/operations-manual/current/installation/[by installing on-premises] 
-* link:https://neo4j.com/docs/operations-manual/current/cloud-deployments/[by deploying on the cloud platform] of your choice
-* by using {aura_signup}[Neo4j Aura]
+[.icon]
+image:ROOT:icon-csvtodb.svg[]
 
-You can find all necessary documentation on how to install and maintain Neo4j in the link:https://neo4j.com/docs/operations-manual/current/[Operations manual^]. 
+[.description]
+Discover strategies to model your data and to improve your workflow.
 
-[[neo4j-aura]]
-== Neo4j Aura
+[.link]
+link:{docs-home}/getting-started/data-modeling/[]
 
-AuraDB and AuraDS are fully managed cloud service offerings.
+=== Query a Neo4j database
 
-{aura_signup}[Neo4j AuraDB^] is a graph database as a service.
-For more information, see the link:https://neo4j.com/docs/aura/current/[official documentation^].
+[.icon]
+image:ROOT:icon-developer.svg[]
 
-To interact with an Aura instance, use link:https://neo4j.com/product/workspace/[Neo4j Workspace^] -- a low-code UI-based tool that helps you to design a data model, preview the model, import the data, and explore and query the database.
+[.description]
+Learn Cypher, Neo4j's graph query language, and start thinking about graphs and patterns.
 
-*Neo4j AuraDS* makes it easy to run graph algorithms on Neo4j by integrating two main components:
+[.link]
+link:{docs-home}/getting-started/cypher-intro/[]
 
-* **Neo4j Database**, where graph data are loaded and stored, and Cypher queries and all database operations (for example user management, query termination, etc.) are executed.
-* **Graph Data Science**, a software component installed in the Neo4j Database, which main purpose is to run graph algorithms on in-memory projections of Neo4j Database.
+=== Create applications with Neo4j
 
-Neo4j AuraDS is available on GCP. 
-See link:https://neo4j.com/pricing/#graph-data-science[pricing] page for details.
-You can find more details in the https://neo4j.com/docs/aura/aurads/[official documentation] for AuraDS. 
+[.icon]
+image:ROOT:icon-code.svg[]
 
-[[neo4j-gds]]
-== Neo4j Graph Data Science 
+[.description]
+Run through detailed examples of how to integrate Neo4j with your preferred programming language. 
 
-link:https://neo4j.com/product/graph-data-science/?ref=product[Neo4j Graph Data Science^] (GDS) gives you access to more than 65 graph algorithms, which can be executed with Neo4j and optimized for enterprise workloads and pipelines.
-GDS helps you to get insights from big data in order to answer critical questions and improve predictions.
-GDS is the connected data analysis platform that unifies the ML surface and graph database into a single workspace.
+[.link]
+link:{docs-home}/getting-started/language-guides/[]
 
-See link:https://neo4j.com/docs/graph-data-science/current/[documentation^] for the library for more details.
+=== Data science with Neo4j
 
-[[neo4j-tools]]
-== Neo4j Tools
+[.icon]
+image:ROOT:icon-gds.svg[]
 
-Neo4j provides a variety of tools that aim to make learning and development of graph applications easier. 
+[.description]
+Learn how to use Neo4j Graph Data Science, a library of graph algorithms for analysts and data scientists.
 
-For more information, visit the link:https://neo4j.com/docs/developer-tools/[Neo4j documentation -- Tools^] page.
+[.link]
+link:{docs-home}/getting-started/gds/[]
 
-* link:https://neo4j.com/docs/desktop-manual/current/[Neo4j Desktop] -- a local development environment for working with Neo4j, whether using local database instances or databases located on remote servers.
-Free download includes Neo4j Enterprise Edition license.
-* link:https://neo4j.com/docs/browser-manual/current/[Neo4j Browser] -- online browser interface to query and view the data in the database.
-Basic visualization capabilities using Cypher query language.
-* link:https://neo4j.com/docs/ops-manager/[Neo4j Operations Manager] (NOM) -- a UI-based tool that enables a database administrator to monitor, administer, and operate all of the Neo4j database management systems in an Enterprise Edition. +
-link:https://www.youtube.com/playlist?list=PL9Hl4pk2FsvXfH4ysxfocs2TT7C3UzcU1[Video series: _NOM Bytes_] introduces the product and provides some practical tips. +
-See the link:https://neo4j.com/docs/ops-manager/[Documentation] for Neo4j Ops Manager for more information.
-* link:https://neo4j.com/docs/data-importer/current/[Data Importer^] -- a no-code tool that allows you to load data from flat files (`.csv` and `.tsv`), define a graph model, map your data to it, and import it to your Neo4j database.
-* link:https://neo4j.com/product/bloom/?ref=product[Neo4j Bloom^] -- visualization tool for business users that does not require any code or programming skills to view and analyze data.
-See the link:https://neo4j.com/docs/bloom-user-guide/current/[Documentation^] for more information.
+=== Visualize data in Neo4j
 
-[[cypher]]
-== Cypher query language
+[.icon]
+image:ROOT:icon-gds.svg[]
 
-Cypher is an open link:https://neo4j.com/product/cypher-graph-query-language/?ref=product[data query language], based on the https://opencypher.org/?ref=cypher-web-page/[openCypher initiative].
-It is the most established and intuitive query language used for property graphs.
-Cypher can be characterized by following:
+[.description]
+Learn how to export your graph data in Neo4j for display as a visualization.
 
-* easy to learn
-* visual and logical
-* secure, reliable, and data-rich
-* open and flexible
+[.link]
+link:{docs-home}/getting-started/graph-visualization/graph-visualization/[]
 
-See xref:cypher-intro/index.adoc[introduction to Cypher] to familiarize yourself with the fundamentals of Cypher. 
+=== GraphAcademy: Neo4j Fundamentals
 
-For detailed information, refer to the link:https://neo4j.com/docs/cypher-manual/current/[Cypher manual].
-// Cypher is one of the graph query languages that are being used as the base for a new *standard* language -- link:https://www.gqlstandards.org/home[Graph Query Language].
+[.icon]
+image:ROOT:icon-graphacademy.svg[]
 
-[[connect-to-neo4j]]
-== Connecting to Neo4j
+[.description]
+Enroll to Neo4j Fundamentals course on GraphAcademy to get started with the technology.
 
-Neo4j provides a wide range of opportunities for link:https://neo4j.com/docs/create-applications/[integrating Neo4j] with any working environment and creating applications. 
+[.link]
+link:https://graphacademy.neo4j.com/courses/neo4j-fundamentals/[]
 
-* xref:languages-guides/index.adoc[Neo4j Drivers] -- Officially supported drivers and community-contributed libraries.
-* xref:languages-guides/integration-tools/integration.adoc[Neo4j Connectors] -- A set of connectors to integrate your existing workflow with Neo4j.
-* link:https://neo4j.com/product/graphql-library/[GraphQL Library] is a flexible, low-code, open source JavaScript library that enables rapid API development for cross-platform and mobile applications by tapping into the power of connected data. 
-* link:https://neo4j.com/docs/ogm-manual/current/[OGM] -- An Object Graph Mapping Library for Neo4j.
+[.next-steps]
+== Keep exploring
 
+Here are some recommended resources to get started with Neo4j:
 
-== Getting started resources
+. link:{docs-home}/getting-started/appendix/graphdb-concepts/[*Graph database concepts*]
++
+Learn the fundamentals of graph database and how to transition from other types of database.
 
-For more comprehensive information on Neo4j products, refer to the xref::appendix/getting-started-resources.adoc[Getting started resources].
+. link:{docs-home}/getting-started/appendix/example-data/[*Example datasets*]
++
+Use these example datasets to explore Neo4j's features and tools.
 
-=== Neo4j Community Forum
-
-Neo4j is dedicated to kind and open communication and aims to create a developer-friendly environment. +
-Neo4j is open-source and has a large and vibrant community of graph database enthusiasts. 
-You can reach out to our link:https://community.neo4j.com/[Community Forum] or link:https://discord.com/invite/neo4j[Discord Chat] for any help or advice you may need. +
-
-=== Neo4j GraphAcademy
-
-If you want learn how to build, optimize, and launch your Neo4j project, visit the link:https://graphacademy.neo4j.com/?ref=docs[GraphAcademy page].
-GraphAcademy courses are free, interactive, and hands-on. +
-All of them have been developed by experienced Neo4j professionals.
-The set of courses targets a wide range of job roles: data scientists, developers, and database administrators.
-
-
-
-This guide is written for anyone who is exploring Neo4j ecosystem.
-
-(C){copyright}
-ifndef::backend-pdf[]
-License: link:{common-license-page-uri}[Creative Commons 4.0]
-endif::[]
-
-//License page should be added at the end when generating pdf. (neo4j-manual-modeling-antora)
-ifdef::backend-pdf[]
-License: Creative Commons 4.0
-endif::[]
-
-
+. link:{docs-home}/getting-started/appendix/getting-started-resources/[*Resources*]
++ 
+Go through a list of complementary resources to help you get started with Neo4j and graph databases.

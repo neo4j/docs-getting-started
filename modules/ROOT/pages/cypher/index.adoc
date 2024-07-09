@@ -1,0 +1,303 @@
+[[cypher-intro]]
+= Query a Neo4j database using Cypher
+:description: A high-level overview of the graph query language Cypher.
+:page-ad-overline-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
+:page-ad-overline: Neo4j GraphAcademy
+:page-ad-title: Cypher Fundamentals
+:page-ad-description: Learn Cypher in this free, hands-on course
+:page-ad-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
+:page-ad-underline-role: button
+:page-ad-underline: Learn more
+
+[NOTE]
+This page covers the basics of Cypher.
+For the complete documentation, refer to link:{docs-home}/cypher-manual/[Cypher].
+
+.A visual representation of a Cypher query
+image::cypher-learning-arr.svg[role="popup-link",width=450]
+
+Cypher is Neo4j's declarative query language available as open source via link:http://openCypher.org[The openCypher project]. 
+It is similar to SQL, but optimized for graphs, so that you can focus on *what data* you want out of the graph and not *how to* get it.
+
+Intuitive and close to natural language, Cypher provides a visual way of matching patterns and relationships by having its own design based on ASCII-art type of syntax:
+
+[source,cypher]
+----
+(nodes)-[:ARE_CONNECTED_TO]->(otherNodes)
+----
+
+Round brackets are used to represent `(nodes)`, and `-[:ARROWS]->` to represent a relationship between the `(nodes)`.
+With this query syntax, you can perform create, read, update, or delete (CRUD) operations on your graph.
+
+[TIP]
+For a quick look with no installation required, get a free link:https://neo4j.com/cloud/platform/aura-graph-database/[Aura instance].
+Write `:guide cypher` in Aura's "Query" tab to access a full hands-on guide on Cypher.
+
+== How does Cypher work?
+
+Neo4j's graph model is composed of <<nodes>> and <<relationships>>, which may also have <<properties>> associated with them.
+Despite their simplicity, *nodes and relationships can build powerful patterns* that can express simple or complex traversals and paths.
+
+Pattern recognition is a fundamental human cognitive process, and that is why visual diagrams or memory-matching games can be useful in learning.
+Cypher is also heavily based on patterns and is designed to recognize them in data, which makes it a language that is easy to learn and use.
+
+[#cypher-syntax]
+== Cypher syntax
+
+ifndef::backend-pdf[]
+++++
+<div class="responsive-embed">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_dup3YOZSm8" title="What is Cypher?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+++++
+endif::[]
+
+ifdef::backend-pdf[]
+link:https://www.youtube.com/watch?v=_dup3YOZSm8[What is Cypher?]
+endif::[]
+
+Cypher's constructs are based on English prose and iconography.
+This make queries easy both to write and to read.
+
+.A graph example involving four nodes and three relationships.
+image::cypherintro-graph1.svg[role="popup-link",width=600]
+
+If you were to represent the data in this graph in English, it would probably read as something like: _"Sally likes Graphs. Sally is friends with John. Sally works for Neo4j."_
+
+Now, if you were to write this same information in Cypher, then it would look like this:
+
+[source, cypher]
+----
+(Sally)-[:LIKES]->(Graphs)
+(Sally)-[:IS_FRIENDS_WITH]->(John)
+(Sally)-[:WORKS_FOR]->(Neo4j)
+----
+
+However, in order to have this information in the graph, first you need to represent it as nodes and relationships.
+
+=== Representing nodes in Cypher
+
+In a property graph model, the main components are nodes and relationships.
+Nodes are often used to represent nouns or objects in your data model.
+In the previous example, `Sally`, `John`, `Graphs`, and `Neo4j` are the nodes:
+
+.A visual representation of nodes.
+image::cypherintro-nodes.svg[role="popup-link",width=450]
+
+In Cypher, you can depict a node by surrounding it with parentheses, e.g. `(node)`.
+The parentheses are a representation of the circles that compose the nodes in the visualization.
+
+==== Node labels and variables
+
+Nodes can be grouped together through a <<label>>.
+They work like tags and allow you to specify certain types of entities to look for or to create.
+Labels also help Cypher distinguish between entities and optimize execution for your queries.
+
+In the example, both `Sally` and `John` can be grouped under a `Person` label, `Graphs` can receive a `Technology` label, and `Neo4j` can be labeled as `Company`:
+
+.Nodes grouped in labels. Note that `Sally`, `John`, `Graphs`, and `Neo4j` are now xref:cypher/index.adoc#cypher-properties[properties] instead.
+image::cypher-graph-nodes-arr.svg[role="popup-link",width=450]
+
+In a relational database context, this would be the same as telling SQL which table to look for the particular row.
+The same way you can tell SQL to query a person's information from a `Person` table, you can also tell Cypher to only check the `Person` label for that information.
+
+[TIP]
+If you do not specify a label for Cypher to filter out non-matching node categories, the query will check all of the nodes in the database.
+This can affect performance in very large graphs.
+
+==== Node variables
+
+You don't need to refer to a label always in full.
+Similarly to abbreviations and other programming language variables, node variables can be used as a shortcut.
+
+In this example, you can use the variable `(p)`, for example, to replace `Person`, so you don't need to write it in full every time you query it:
+
+[source,cypher]
+----
+(p:Person)         //using variable p and label Person
+----
+
+If the node is not relevant to your return results, you can also specify an anonymous node using empty parentheses `()`.
+However, you won't be able to return this node later in the query as it was never specified.
+
+[source,cypher]
+----
+()                //anonymous node (no label or variable) can refer to any node in the database
+----
+
+You can also refrain from using a variable for certain nodes:
+
+[source,cypher]
+----
+(:Technology)     //no variable, label Technology
+----
+
+Or use a whole word as a synonym:
+
+[source,cypher]
+----
+(work:Company)   //using variable work and label Company
+----
+
+=== Cypher comments
+
+In the previous section, the code blocks contain annotations after `//`.
+This same resource can be used when writing Cypher queries, so you can leave comments that can explain the syntax or what a query is doing.
+For example:
+
+[source, cypher]
+----
+CREATE (p:Person)-[:LIKES]->(t:Technology)  //Creates a :LIKES relationship between p:Person and t:Technology
+----
+
+In Neo4j Browser, you can also use this resource to link:https://neo4j.com/docs/browser-manual/current/visual-tour/#favorites[save queries].
+If you add a comment before the query, the comment automatically becomes the title of the saved query:
+
+[source,cypher]
+----
+//Person likes technology
+CREATE (p:Person)-[:LIKES]->(t:Technology)
+----
+
+[#cypher-relationships]
+=== Representing relationships in Cypher
+
+To fully utilize the power of a graph database, we also need to express the relationships between our nodes.
+Relationships are represented in Cypher using an arrow `+-->+` or `+<--+` between two nodes.
+Notice how the syntax looks like the arrows and lines connecting our nodes in the visual representation.
+Additional information, such as how nodes are connected (relationship type) and any properties pertaining to the relationship, can be placed in square brackets inside of the arrow.
+
+In our example, the lines with `LIKES`, `IS_FRIENDS_WITH`, and `WORKS_FOR` between nodes are our relationships.
+
+image::cypher_graph_rels_arr.svg[width=500,role="popup-link"]
+
+Undirected relationships are represented with no arrow and just two dashes `+--+`.
+This means that the relationship can be traversed in either direction.
+While a direction *must* be inserted to the database, it can be matched with an undirected relationship where Cypher ignores any particular direction and retrieves the relationship and connected nodes, no matter what the physical direction is.
+This allows the queries to be flexible and not force the user to know the physical direction of the relationship stored in the database.
+
+[NOTE]
+====
+If data is stored with one relationship direction, and a query specifies the wrong direction, Cypher will not return any results.
+In these cases where you may not be sure of direction, it is better to use an undirected relationship and retrieve some results.
+
+[source,cypher]
+----
+//data stored with this direction
+CREATE (p:Person)-[:LIKES]->(t:Technology)
+
+//query relationship backwards will not return results
+MATCH (p:Person)<-[:LIKES]-(t:Technology)
+
+//better to query with undirected relationship unless sure of direction
+MATCH (p:Person)-[:LIKES]-(t:Technology)
+----
+====
+
+==== Relationship types
+
+Relationship types categorize and add meaning to a relationship, similar to how labels group nodes.
+In our property graph data model, relationships show how nodes are connected and related to each other.
+You can usually identify relationships in your data model by looking for actions or verbs.
+
+You can specify any type of relationship you want between nodes, but we recommend good naming conventions using verbs and actions.
+Poor relationship type names make it more difficult to both read and write Cypher (remember, it should sound like English!).
+
+For example, let us look at the relationship types from our example graph.
+
+* `[:LIKES]` - makes sense when we put nodes on either side of the relationship (Sally LIKES Graphs)
+* `[:IS_FRIENDS_WITH]` - makes sense when we put nodes with it (Sally IS_FRIENDS_WITH John)
+* `[:WORKS_FOR]` - makes sense with nodes (Sally WORKS_FOR Neo4j)
+
+==== Relationship variables
+
+Just as we did with nodes, if we want to refer to a relationship later in a query, we can give it a variable like `[r]` or `[rel]`.
+We can also use longer, more expressive variable names like `[likes]` or `[knows]`.
+If you do not need to reference the relationship later, you can specify an anonymous relationship using two dashes `+--+`, `+-->+`, `+<--+`.
+
+As an example, you could use either `+-[rel]->+` or `+-[rel:LIKES]->+` and call the `rel` variable later in your query to reference the relationship and its details.
+
+[NOTE]
+====
+If you forget the colon in front of a relationship type like this `+-[LIKES]->+`, it represents a variable (not a relationship type).
+Since no relationship type declared, Cypher searches all types of relationships.
+====
+
+[#cypher-properties]
+=== Node or relationship properties
+
+We have talked about how to write Cypher for nodes, relationships, and labels.
+The last piece of our property graph data model is for properties.
+Remember that properties are name-value pairs that provide additional details to our nodes and relationships.
+
+To represent these in Cypher, we can use curly braces within the parentheses of a node or the brackets of a relationship.
+The name and value of the property then go inside the curly braces.
+Our example graph has both a node property (`name`) and a relationship property (`since`).
+
+* Node property: `(p:Person {name: 'Sally'})`
+* Relationship property: `+-[rel:IS_FRIENDS_WITH {since: 2018}]->+`
+
+image::cypher_graph_props_arr.svg[role="popup-link",width=600]
+
+Properties can have values with a variety of data types.
+To see the full list that Cypher offers, see the manual section on link:https://neo4j.com/docs/cypher-manual/current/values-and-types/[values and types^].
+
+[#cypher-patterns]
+=== Patterns in Cypher
+
+Nodes and relationships make up the building blocks for graph patterns.
+These building blocks can come together to express simple or complex patterns.
+Patterns are the most powerful capability of graphs.
+In Cypher, they can be written as a continuous path or separated into smaller patterns and tied together with commas.
+
+To show a pattern in Cypher, you need to combine the node and relationship syntaxes you have learned so far.
+Let's use the example of `Sally likes Graphs`.
+
+In Cypher, this pattern would look like the code below.
+
+[source, cypher]
+----
+(p:Person {name: "Sally"})-[rel:LIKES]->(g:Technology {type: "Graphs"})
+----
+
+This bit of Cypher tells the pattern we want, but it does not tell whether we want to find that existing pattern or insert it as a new pattern.
+To tell Cypher what we want it to do with the pattern, we need to add some keywords.
+
+[TIP]
+.Are you struggling?
+If you need help with any of the information contained on this page, you can reach out to other members of our community.
+You can ask questions on the link:https://community.neo4j.com/c/neo4j-graph-platform/cypher/12?ref=guides[Neo4j Community Site^].
+
+[#recommendation-engine]
+== Tutorial: Build a Recommendation Engine
+
+With Cypher structure and syntax covered in the sections above, you can dive into building your own recommendation engine to use graph data and Cypher to recommend movies, colleagues, cuisines, and more.
+
+xref:guide-build-a-recommendation-engine.adoc[Tutorial: Build a Recommendation Engine,role=more information] walks through using queries and filtering that takes advantage of the relationships in a graph in order to lend insight into habits and hidden connections and provide valuable recommendations.
+
+[#cypher-resources]
+== xref:cypher-intro/resources.adoc[Cypher resources]
+
+Find out where else you can learn Cypher or increase your depth of knowledge from experts and solutions.
+There are a variety of training opportunities, blogs, videos, and more for taking the next steps in your Cypher (and Neo4j) journey!
+
+
+== link:https://graphacademy.neo4j.com/?ref=guides[Learn with GraphAcademy^]
+
+link:https://graphacademy.neo4j.com/courses/cypher-fundamentals/?ref=guides[Cypher Fundamentals^]
+
+This course teaches you the essentials of using Cypher, Neo4j’s powerful query language, in as little time as possible, with videos, quizzes and hands-on exercises.
+
+link:https://graphacademy.neo4j.com/courses/cypher-fundamentals/?ref=guides[Learn Cypher with GraphAcademy^,role=button]
+
+
+ifndef::backend-pdf[]
+[discrete.glossary]
+endif::[]
+== Glossary
+
+include::glossary.adoc[]
+
+ifdef::backend-pdf[]
+<<<
+endif::[]
