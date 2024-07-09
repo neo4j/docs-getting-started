@@ -1,0 +1,309 @@
+[[graphdb-concepts]]
+= Graph database concepts
+:description: An introduction to graph database concepts.
+
+== Introduction
+
+The guide covers graph database fundamentals.
+
+Neo4j uses a _property graph_ database model.
+A graph data structure consists of *nodes* (discrete objects) that can be connected by *relationships*.
+Below is the image of a graph with three nodes (the circles) and three relationships (the arrows).
+
+.Concept of a graph structure
+image::graph_concept_three_nodes-arr.svg[width=300]
+
+The Neo4j property graph database model consists of:
+
+* *Nodes* describe entities (discrete objects) of a domain.
+* *Nodes* can have zero or more *labels* to define (classify) what kind of nodes they are.
+* *Relationships* describe a connection between a _source node_ and a _target node_.
+* *Relationships* always have a direction (one direction).
+* *Relationships* must have a *type* (one type) to define (classify) what type of relationship they are.
+* Nodes and relationships can have *properties* (key-value pairs), which further describe them.
+
+[NOTE]
+====
+In mathematics, graph theory is the study of graphs.
+
+In graph theory:
+
+* Nodes are also referred to as vertices or points.
+* Relationships are also referred to as edges, links, or lines.
+====
+
+
+[[graphdb-example-graph]]
+== Example graph
+
+The example graph shown below introduces the basic concepts of the property graph:
+
+.Example graph
+image::graph_simple-arr.svg[width=600]
+
+To create the example graph, use the Cypher clause `CREATE`.
+
+[source, cypher]
+-----
+CREATE (:Person:Actor {name: 'Tom Hanks', born: 1956})-[:ACTED_IN {roles: ['Forrest']}]->(:Movie {title: 'Forrest Gump', released: 1994})<-[:DIRECTED]-(:Person {name: 'Robert Zemeckis', born: 1951})
+-----
+
+//.Cypher.
+//=====
+//This Cypher query uses references to express the equivalent `CREATE` statement as the previous example.
+//
+//[source, cypher, role="noheader"]
+//-----
+//CREATE
+//  (n1:Person:Actor {name: 'Tom Hanks', born: 1956}),
+//  (n2:Movie {title: 'Forrest Gump'}),
+//  (n3:Person {name: 'Robert Zemeckis', born: 1951}),
+//  (n1)-[:ACTED_IN {roles: ['Forrest']}]->(n2),
+//  (n3)-[:DIRECTED]->(n2)
+//-----
+//=====
+
+
+[[graphdb-node]]
+== Node
+
+Nodes are used to represent _entities_ (discrete objects) of a domain.
+
+The simplest possible graph is a single node with no relationships.
+Consider the following graph, consisting of a single node.
+
+.Node
+image::graph_single_node-arr.svg[width=150]
+
+The node labels are:
+
+* `Person`
+* `Actor`
+
+The properties are:
+
+* `name: Tom Hanks`
+* `born: 1956`
+
+The node can be created with Cypher using the query:
+
+[source, cypher, role="noheader"]
+-----
+CREATE (:Person:Actor {name: 'Tom Hanks', born: 1956})
+-----
+
+
+[[graphdb-labels]]
+=== Node labels
+
+Labels shape the domain by grouping (classifying) nodes into sets where all nodes with a certain label belong to the same set.
+
+For example, all nodes representing users could be labeled with the label `User`.
+With that in place, you can ask Neo4j to perform operations only on your user nodes, such as finding all users with a given name.
+
+Since labels can be added and removed during runtime, they can also be used to mark temporary states for nodes.
+A `Suspended` label could be used to denote bank accounts that are suspended, and a `Seasonal` label can denote vegetables that are currently in season.
+
+A node can have zero to many labels.
+
+In the example graph, the node labels, `Person`, `Actor`, and `Movie`, are used to describe (classify) the nodes.
+More labels can be added to express different dimensions of the data.
+
+The following graph shows the use of multiple labels.
+
+.Multiple labels
+image::graphdb-simple-labels-multi-arr.svg[role="middle", width=500]
+
+[[graphdb-relationship]]
+== Relationship
+
+A relationship describes how a connection between a _source node_ and a _target node_ are related.
+It is possible for a node to have a relationship to itself.
+
+A relationship:
+
+* Connects a _source node_ and a _target node_.
+* Has a direction (one direction).
+* Must have a *type* (one type) to define (classify) what type of relationship it is.
+* Can have properties (key-value pairs), which further describe the relationship.
+
+Relationships organize nodes into structures, allowing a graph to resemble a list, a tree, a map, or a compound entity -- any of which may be combined into yet more complex, richly inter-connected structures.
+
+.Relationship
+image::graph_example_relationship-arr.svg[width=400]
+
+The relationship type: `ACTED_IN`
+
+The properties are:
+
+* `roles: ['Forrest']`
+* `performance: 5`
+
+The `roles` property has an array value with a single item (`'Forrest'`) in it.
+
+The relationship can be created with Cypher using the query:
+
+[source, cypher, role="noheader"]
+-----
+CREATE ()-[:ACTED_IN {roles: ['Forrest'], performance: 5}]->()
+-----
+
+[NOTE]
+====
+You must create or reference a _source node_ and a _target node_ to be able to create a relationship.
+====
+
+Relationships always have a direction.
+However, the direction can be disregarded where it is not useful.
+This means that there is no need to add duplicate relationships in the opposite direction unless it is needed to describe the data model properly.
+
+A node can have relationships to itself.
+To express that `Tom Hanks` `KNOWS` himself would be expressed as:
+
+.Relationship to a single node
+image::graphdb-nodes-and-rel-self-arr.svg[role="middle", width=300]
+
+
+[[graphdb-relationship-type]]
+=== Relationship type
+
+A relationship must have exactly one relationship type.
+
+Below is an `ACTED_IN` relationship, with the `Tom Hanks` node as the _source node_ and `Forrest Gump` as the _target node_.
+
+.Relationship type
+image::graphdb-nodes-and-rel-arr.svg[role="middle", width=450]
+
+Observe that the `Tom Hanks` node has an _outgoing_ relationship, while the `Forrest Gump` node has an _incoming_ relationship.
+
+
+[[graphdb-properties]]
+== Properties
+
+Properties are key-value pairs that are used for storing data on nodes and relationships.
+
+The value part of a property:
+
+* Can hold different data types, such as `number`, `string`, or `boolean`.
+* Can hold a homogeneous list (array) containing, for example, strings, numbers, or boolean values.
+
+.Number
+=====
+[source, cypher, role=noheader]
+-----
+CREATE (:Example {a: 1, b: 3.14})
+-----
+
+* The property `a` has the type `integer` with the value `1`.
+* The property `b` has the type `float` with the value `3.14`.
+=====
+
+.String and boolean
+=====
+[source, cypher, role=noheader]
+-----
+CREATE (:Example {c: 'This is an example string', d: true, e: false})
+-----
+
+* The property `c` has the type `string` with the value `'This is an example string'`.
+* The property `d` has the type `boolean` with the value `true`.
+* The property `e` has the type `boolean` with the value `false`.
+=====
+
+.Lists
+=====
+[source, cypher, role=noheader]
+-----
+CREATE (:Example {f: [1, 2, 3], g: [2.71, 3.14], h: ['abc', 'example'], i: [true, true, false]})
+-----
+
+* The property `f` contains an array with the value `[1, 2, 3]`.
+* The property `g` contains an array with the value `[2.71, 3.14]`.
+* The property `h` contains an array with the value `['abc', 'example']`.
+* The property `i` contains an array with the value `[true, true, false]`.
+=====
+
+[TIP]
+====
+For a thorough description of the available data types, refer to the link:{neo4j-docs-base-uri}/cypher-manual/{page-version}/syntax/values#cypher-values[Cypher manual -> Values and types].
+====
+
+
+[[graphdb-traversal]]
+== Traversals and paths
+
+A traversal is how you query a graph in order to find answers to questions, for example: "What music do my friends like that I don't yet own?", or "What web services are affected if this power supply goes down?".
+
+Traversing a graph means visiting nodes by following relationships according to some rules.
+In most cases only a subset of the graph is visited.
+
+.Path matching.
+=====
+To find out which movies Tom Hanks acted in according to the tiny example database, the traversal would start from the `Tom Hanks` node, follow any `ACTED_IN` relationships connected to the node, and end up with the `Movie` node `Forrest Gump` as the result (see the black lines):
+
+image::graphdb-traversal-arr.svg[role="middle", width=400]
+
+The traversal result could be returned as a path with the length `1`:
+
+image::graphdb-path-arr.svg[role="middle", width=400]
+=====
+
+The shortest possible path has length zero.
+It contains a single node and no relationships.
+
+A path containing only a single node has the length of `0`.
+
+.Path of length zero
+image::graphdb-path-zero-arr.svg[role="middle", width=150]
+
+
+A path containing one relationship has the length of `1`.
+
+.Path of length one
+image::graphdb-path-example-loop-arr.svg[role="middle", width=300]
+
+
+[[graphdb-schema]]
+== Schema
+
+A _schema_ in Neo4j refers to indexes and constraints.
+
+Neo4j is often described as _schema optional_, meaning that it is not necessary to create indexes and constraints.
+You can create data -- nodes, relationships and properties -- without defining a schema up front.
+Indexes and constraints can be introduced when desired, in order to gain performance or modeling benefits.
+
+
+[[graphdb-indexes]]
+== Indexes
+
+Indexes are used to increase performance.
+To see examples of how to work with indexes, see xref::/cypher-intro/schema.adoc#cypher-intro-indexes[Using indexes].
+For detailed descriptions of how to work with indexes in Cypher, see link:{neo4j-docs-base-uri}/cypher-manual/current/indexes-for-search-performance/[Cypher Manual -> Indexes].
+
+
+[[graphdb-constraints]]
+== Constraints
+
+Constraints are used to make sure that the data adheres to the rules of the domain.
+To see examples of how to work with constraints, see xref::/cypher-intro/schema.adoc#cypher-intro-constraints[Using constraints].
+For detailed descriptions of how to work with constraints in Cypher, see the link:{neo4j-docs-base-uri}/cypher-manual/current/constraints[Cypher manual -> Constraints].
+
+
+[[graphdb-naming-conventions]]
+== Naming conventions
+
+Node labels, relationship types, and properties (the key part) are case sensitive, meaning, for example, that the property `name` is different from the property `Name`.
+
+The following naming conventions are recommended:
+
+.Naming conventions
+[options="header"]
+|===
+| Graph entity      | Recommended style                                       | Example
+| Node label        | Camel case, beginning with an upper-case character      | `:VehicleOwner` rather than `:vehicle_owner`
+| Relationship type | Upper case, using underscore to separate words          | `:OWNS_VEHICLE` rather than `:ownsVehicle`
+| Property          | Lower camel case, beginning with a lower-case character | `firstName` rather than `first_name`
+|===
+
+
+For the precise naming rules, refer to the link:https://neo4j.com/docs/cypher-manual/current/syntax/naming/[Cypher manual -> Naming rules and recommendations].
