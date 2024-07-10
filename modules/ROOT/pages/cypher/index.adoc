@@ -75,7 +75,7 @@ Now, if you were to write this same information in Cypher, then it would look li
 
 However, in order to have this information in the graph, first you need to represent it as nodes and relationships.
 
-=== Representing nodes in Cypher
+=== Nodes
 
 In a property graph model, the main components are nodes and relationships.
 Nodes are often used to represent nouns or objects in your data model.
@@ -87,7 +87,7 @@ image::cypherintro-nodes.svg[role="popup-link",width=450]
 In Cypher, you can depict a node by surrounding it with parentheses, e.g. `(node)`.
 The parentheses are a representation of the circles that compose the nodes in the visualization.
 
-==== Node labels and variables
+==== Node labels
 
 Nodes can be grouped together through a <<label>>.
 They work like tags and allow you to specify certain types of entities to look for or to create.
@@ -110,7 +110,7 @@ This can affect performance in very large graphs.
 You don't need to refer to a label always in full.
 Similarly to abbreviations and other programming language variables, node variables can be used as a shortcut.
 
-In this example, you can use the variable `(p)`, for example, to replace `Person`, so you don't need to write it in full every time you query it:
+In this example, you can use the variable `(p)`, for example, to replace `Person`, so you don't need to write it in full every time you mention it in the same query:
 
 [source,cypher]
 ----
@@ -139,108 +139,121 @@ Or use a whole word as a synonym:
 (work:Company)   //using variable work and label Company
 ----
 
-=== Cypher comments
-
-In the previous section, the code blocks contain annotations after `//`.
-This same resource can be used when writing Cypher queries, so you can leave comments that can explain the syntax or what a query is doing.
-For example:
-
-[source, cypher]
-----
-CREATE (p:Person)-[:LIKES]->(t:Technology)  //Creates a :LIKES relationship between p:Person and t:Technology
-----
-
-In Neo4j Browser, you can also use this resource to link:https://neo4j.com/docs/browser-manual/current/visual-tour/#favorites[save queries].
-If you add a comment before the query, the comment automatically becomes the title of the saved query:
-
-[source,cypher]
-----
-//Person likes technology
-CREATE (p:Person)-[:LIKES]->(t:Technology)
-----
-
 [#cypher-relationships]
-=== Representing relationships in Cypher
+=== Relationships
 
-To fully utilize the power of a graph database, we also need to express the relationships between our nodes.
-Relationships are represented in Cypher using an arrow `+-->+` or `+<--+` between two nodes.
-Notice how the syntax looks like the arrows and lines connecting our nodes in the visual representation.
-Additional information, such as how nodes are connected (relationship type) and any properties pertaining to the relationship, can be placed in square brackets inside of the arrow.
+One of the benefits of graph databases is that you can create relationships between elements (nodes).
+In Cypher, relationships are represented as an arrow connecting two nodes (e.g. `(Node1)-->(Node2)`), similarly to how you would represent that if drafting on a whiteboard.
 
-In our example, the lines with `LIKES`, `IS_FRIENDS_WITH`, and `WORKS_FOR` between nodes are our relationships.
+In the example, the lines containing `:LIKES`, `:IS_FRIENDS_WITH`, and `:WORKS_FOR` represent the relationship between the nodes:
 
-image::cypher_graph_rels_arr.svg[width=500,role="popup-link"]
+.Graph featuring nodes and relationships.
+image::cypherintro-graph1.svg[]
 
-Undirected relationships are represented with no arrow and just two dashes `+--+`.
-This means that the relationship can be traversed in either direction.
-While a direction *must* be inserted to the database, it can be matched with an undirected relationship where Cypher ignores any particular direction and retrieves the relationship and connected nodes, no matter what the physical direction is.
-This allows the queries to be flexible and not force the user to know the physical direction of the relationship stored in the database.
+==== Relationship directions
 
-[NOTE]
-====
-If data is stored with one relationship direction, and a query specifies the wrong direction, Cypher will not return any results.
-In these cases where you may not be sure of direction, it is better to use an undirected relationship and retrieve some results.
+Relationships *must* always have a direction and  a colon (`:`) in the beginning of it.
+They can be to the right:
 
 [source,cypher]
 ----
-//data stored with this direction
-CREATE (p:Person)-[:LIKES]->(t:Technology)
-
-//query relationship backwards will not return results
-MATCH (p:Person)<-[:LIKES]-(t:Technology)
-
-//better to query with undirected relationship unless sure of direction
-MATCH (p:Person)-[:LIKES]-(t:Technology)
+(p:Person)-[:LIKES]->(t:Technology)
 ----
-====
+
+To the left:
+
+[source,cypher]
+----
+(p:Person)<-[:LIKES]-(t:Technology)
+----
+
+Or be undirected:
+
+[source,cypher]
+----
+(p:Person)-[:LIKES]-(t:Technology)
+----
+
+An undirected relationship does not mean that it doesn't have a direction, but that it can be traversed in *either* direction.
+
+When using undirected relationships in a query, Cypher retrieves the relationship with all its connected nodes, no matter the direction of their connection. This allows queries to be flexible and not force the user to know the direction of the relationship stored in the database.
+
+Undirected relationships are particularly useful when you don't know in what direction a relationship is stored in the database.
+If you write a query with the wrong direction, Cypher will not return anything.
+For this reason, it is recommended to use an undirected relationship instead, so you can get any results back.
 
 ==== Relationship types
 
-Relationship types categorize and add meaning to a relationship, similar to how labels group nodes.
-In our property graph data model, relationships show how nodes are connected and related to each other.
-You can usually identify relationships in your data model by looking for actions or verbs.
+In the previous section, you saw how nodes can be connected through a relationship, but the only information that you had there is the direction of this connection.
 
-You can specify any type of relationship you want between nodes, but we recommend good naming conventions using verbs and actions.
-Poor relationship type names make it more difficult to both read and write Cypher (remember, it should sound like English!).
+Relationship types can categorize and add meaning to a relationship, similarly to how labels group nodes.
+It is recommended to name relationship types after verbs and action words to communicate how the nodes relate or connect to each other.
+Also, this makes the query closer to natural language, as it can look like a sentence with a subject (node), a verb (relationship), and an object (another node).
 
-For example, let us look at the relationship types from our example graph.
+In the example used in this page, the relationship types are:
 
-* `[:LIKES]` - makes sense when we put nodes on either side of the relationship (Sally LIKES Graphs)
-* `[:IS_FRIENDS_WITH]` - makes sense when we put nodes with it (Sally IS_FRIENDS_WITH John)
-* `[:WORKS_FOR]` - makes sense with nodes (Sally WORKS_FOR Neo4j)
+* `[:LIKES]` - communicates that Sally (a node) _likes_ graphs (another node).
+* `[:IS_FRIENDS_WITH]` - communicates that Sally _is friends with_ John.
+* `[:WORKS_FOR]` - communicates that Sally _works for_ Neo4j.
 
 ==== Relationship variables
 
-Just as we did with nodes, if we want to refer to a relationship later in a query, we can give it a variable like `[r]` or `[rel]`.
-We can also use longer, more expressive variable names like `[likes]` or `[knows]`.
-If you do not need to reference the relationship later, you can specify an anonymous relationship using two dashes `+--+`, `+-->+`, `+<--+`.
+In the same way as xref:cypher/index.adoc#_node_variables [node variables], relationship variables can also be used as a shortcut.
+Instead of writing the whole relationship type name (e.g. `[:LIKES]`) twice in the query, you can use a variable.
 
-As an example, you could use either `+-[rel]->+` or `+-[rel:LIKES]->+` and call the `rel` variable later in your query to reference the relationship and its details.
+Take this example:
 
-[NOTE]
-====
-If you forget the colon in front of a relationship type like this `+-[LIKES]->+`, it represents a variable (not a relationship type).
-Since no relationship type declared, Cypher searches all types of relationships.
-====
+[source,cypher]
+----
+MATCH (p:Person)-[r:LIKES]->[t:Technology]
+RETURN p,r,t
+----
+
+This query has variables for both the nodes with the labels `Person` and `Technology`, and the relationship `:LIKES`.
+When returning it, you don't need to write the labels over again, but use the variables you appended to them (i.e. `p`, `r`, and `t`.).
+
+This would be your result:
+
+.Result for the example query using node and relationship variables.
+image::cypherintro-variables.svg[]
+
+.Result
+[role="queryresult",options="header,footer",cols="3*<m"]
+|===
+| p | r | t
+
+| (:Person) | [:LIKES]  | (:Technology)
+
+3+d|Rows: 1
+|===
+
+Remember to always use a colon in front of a relationship type.
+If you happen to forget it, and write the query like this:
+
+[source,cypher]
+----
+(Person)-[LIKES]->(Technology)
+----
+
+`[LIKES]` will represent a relationship *variable*, not a relationship *type*.
+In this case, since no relationship type is declared, Cypher will search for all types of relationships in order to retrieve a result to your query.
 
 [#cypher-properties]
-=== Node or relationship properties
+=== Properties
 
-We have talked about how to write Cypher for nodes, relationships, and labels.
-The last piece of our property graph data model is for properties.
-Remember that properties are name-value pairs that provide additional details to our nodes and relationships.
+Properties are name-value pairs that provide additional details to nodes and relationships.
+In Cypher, they are represented with curly braces within the parentheses of a node or the brackets of a relationship:
 
-To represent these in Cypher, we can use curly braces within the parentheses of a node or the brackets of a relationship.
-The name and value of the property then go inside the curly braces.
-Our example graph has both a node property (`name`) and a relationship property (`since`).
+.Graph example with node and relationship properties.
+image::cypherintro-properties.svg[]
 
-* Node property: `(p:Person {name: 'Sally'})`
-* Relationship property: `+-[rel:IS_FRIENDS_WITH {since: 2018}]->+`
-
-image::cypher_graph_props_arr.svg[role="popup-link",width=600]
+[source,cypher]
+----
+(Person {name: 'Sally'})-[:IS_FRIENDS_WITH {since:'2018'}]->(Person {name: 'John'})
+----
 
 Properties can have values with a variety of data types.
-To see the full list that Cypher offers, see the manual section on link:https://neo4j.com/docs/cypher-manual/current/values-and-types/[values and types^].
+You can see the full list of values and types in the link:https://neo4j.com/docs/cypher-manual/current/values-and-types/[Cypher documentation].
 
 [#cypher-patterns]
 === Patterns in Cypher
@@ -267,6 +280,26 @@ To tell Cypher what we want it to do with the pattern, we need to add some keywo
 .Are you struggling?
 If you need help with any of the information contained on this page, you can reach out to other members of our community.
 You can ask questions on the link:https://community.neo4j.com/c/neo4j-graph-platform/cypher/12?ref=guides[Neo4j Community Site^].
+
+=== Cypher comments
+
+Previous examples feature code blocks containing after `//`.
+This same resource can be used when writing Cypher queries, so you can leave comments that can explain the syntax or what a query is doing.
+For example: 
+
+[source, cypher]
+----
+CREATE (p:Person)-[:LIKES]->(t:Technology)  //Creates a :LIKES relationship between p:Person and t:Technology
+----
+
+In Neo4j Browser, you can also use this resource to link:https://neo4j.com/docs/browser-manual/current/visual-tour/#favorites[save queries].
+If you add a comment before the query, the comment automatically becomes the title of the saved query:
+
+[source,cypher]
+----
+//Person likes technology
+CREATE (p:Person)-[:LIKES]->(t:Technology)
+----
 
 [#recommendation-engine]
 == Tutorial: Build a Recommendation Engine
