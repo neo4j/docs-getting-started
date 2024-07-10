@@ -2,6 +2,7 @@
 = Import your data into Neo4j
 :tags: data-import, graph-import, import-csv, json-api, northwind-graph, example-data
 :page-pagination: next
+include::https://raw.githubusercontent.com/neo4j-graphacademy/courses/main/asciidoc/courses/modeling-fundamentals/ad.adoc[]
 
 [#about-import]
 The goal of the following articles and tutorials is to help you understand how to import various types of data into Neo4j.

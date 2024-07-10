@@ -2,7 +2,7 @@
 [[cypher-intro]]
 = Query a Neo4j database using Cypher
 :description: A high-level overview of the graph query language Cypher.
-
+include::https://raw.githubusercontent.com/neo4j-graphacademy/courses/main/asciidoc/courses/cypher-fundamentals/ad.adoc[]
 
 This section introduces you to the graph query language -- Cypher.
 It aims to help you start thinking about graphs and patterns, apply this knowledge to simple problems, and learn how to write Cypher statements.
