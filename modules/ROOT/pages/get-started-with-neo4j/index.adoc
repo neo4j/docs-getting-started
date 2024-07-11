@@ -1,13 +1,7 @@
 [[get-started-with-neo4j]]
 = Get started with Neo4j
 :description: This section gives an orientation on how to get started with Neo4j. Learn more about plugins.
-:page-ad-overline-link: https://graphacademy.neo4j.com/categories/beginners/?ref=docs
-:page-ad-overline: Neo4j GraphAcademy
-:page-ad-title: Neo4j Beginners Courses
-:page-ad-description: Learn more about graph database concepts and Cypher in these free, hands-on courses
-:page-ad-link: https://graphacademy.neo4j.com/categories/beginners/?ref=docs
-:page-ad-underline-role: button
-:page-ad-underline: Learn more
+include::https://raw.githubusercontent.com/neo4j-graphacademy/courses/main/asciidoc/ads/generic.adoc[]
 
 There are a number of options on how to get started with Neo4j, and your choice depends upon your needs and goals.
 Each option allows you to explore different possibilities of the Neo4j ecosystem.
