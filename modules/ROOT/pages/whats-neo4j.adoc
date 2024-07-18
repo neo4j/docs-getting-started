@@ -1,15 +1,7 @@
 = What is Neo4j?
 :description: An introduction on how to get started with Neo4j.
 :!page-layout:
-:page-hide-nav-title: true
-:page-toclevels: 3
-:page-ad-overline-link: https://graphacademy.neo4j.com/categories/beginners/?ref=docs
-:page-ad-overline: Neo4j GraphAcademy
-:page-ad-title: Neo4j Beginners Courses
-:page-ad-description: Learn more about graph database concepts and Cypher in these free, hands-on courses
-:page-ad-link: https://graphacademy.neo4j.com/categories/beginners/?ref=docs
-:page-ad-underline-role: button
-:page-ad-underline: Learn more
+include::https://raw.githubusercontent.com/neo4j-graphacademy/courses/main/asciidoc/ads/generic.adoc[]
 
 [.center]
 image::ROOT:neo4j-architecture.svg[]

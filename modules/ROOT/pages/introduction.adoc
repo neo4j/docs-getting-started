@@ -1,6 +1,7 @@
 [[cypher-intro]]
 = What is Cypher
 :description: A high-level overview of the graph query language Cypher.
+:!page-layout:
 include::https://raw.githubusercontent.com/neo4j-graphacademy/courses/main/asciidoc/courses/cypher-fundamentals/ad.adoc[]
 
 [NOTE]
