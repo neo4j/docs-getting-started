@@ -1,5 +1,5 @@
 * *Getting started with Neo4j* 
-* link:{docs-home}/getting-started[Introduction]
+* xref:introduction.adoc[Introduction]
 * xref:whats-neo4j.adoc[What is Neo4j]
 * xref:graph-database.adoc[What is a graph database]
 * xref:cypher/index.adoc[What is Cypher]
