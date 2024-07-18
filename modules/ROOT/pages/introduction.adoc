@@ -23,7 +23,29 @@ image:ROOT:icon-neo4j.svg[]
 Learn what is a graph database and how to use it in your projects.
 
 [.link]
-link:{docs-home}/getting-started/get-started-with-neo4j/[]
+xref:whats-neo4j.adoc[]
+
+=== What is a graph database
+
+[.icon]
+image:ROOT:icon-graph.svg[]
+
+[.description]
+Learn the principles of a graph database.
+
+[.link]
+xref:graph-database.adoc[]
+
+=== What is Cypher
+
+[.icon]
+image:ROOT:icon-developer.svg[]
+
+[.description]
+Learn Cypher, Neo4j's graph query language, and start thinking about graphs and patterns.
+
+[.link]
+xref:cypher/index.adoc[]
 
 === Import data to Neo4j
 
@@ -46,17 +68,6 @@ Discover strategies to model your data and to improve your workflow.
 
 [.link]
 link:{docs-home}/getting-started/data-modeling/[]
-
-=== Query a Neo4j database
-
-[.icon]
-image:ROOT:icon-developer.svg[]
-
-[.description]
-Learn Cypher, Neo4j's graph query language, and start thinking about graphs and patterns.
-
-[.link]
-link:{docs-home}/getting-started/cypher-intro/[]
 
 === Create applications with Neo4j
 

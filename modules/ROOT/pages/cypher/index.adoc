@@ -1,5 +1,5 @@
 [[cypher-intro]]
-= Query a Neo4j database using Cypher
+= What is Cypher
 :description: A high-level overview of the graph query language Cypher.
 :page-ad-overline-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
 :page-ad-overline: Neo4j GraphAcademy
@@ -16,8 +16,9 @@ For the complete documentation, refer to link:{docs-home}/cypher-manual/[Cypher]
 .A visual representation of a Cypher query
 image::cypher-learning-arr.svg[role="popup-link",width=450]
 
-Cypher is Neo4j's declarative query language available as open source via link:http://openCypher.org[The openCypher project]. 
-It is similar to SQL, but optimized for graphs, so that you can focus on *what data* you want out of the graph and not *how to* get it.
+Cypher is Neo4j's declarative query language. 
+Available as open source via link:http://openCypher.org[The openCypher project], Cypher is similar to SQL, but optimized for graphs.
+This means Cypher focuses on *what data* you want out of the graph rather than *how to* get it.
 
 Intuitive and close to natural language, Cypher provides a visual way of matching patterns and relationships by having its own design based on ASCII-art type of syntax:
 
@@ -31,15 +32,16 @@ With this query syntax, you can perform create, read, update, or delete (CRUD) o
 
 [TIP]
 For a quick look with no installation required, get a free link:https://neo4j.com/cloud/platform/aura-graph-database/[Aura instance].
-Write `:guide cypher` in Aura's "Query" tab to access a full hands-on guide on Cypher.
+Write `:guide cypher` in Aura's "Query" tab to access a hands-on guide on Cypher.
 
 == How does Cypher work?
 
 Neo4j's graph model is composed of <<nodes>> and <<relationships>>, which may also have <<properties>> associated with them.
-Despite their simplicity, *nodes and relationships can build powerful patterns* that can express simple or complex traversals and paths.
+With nodes and relationships, you can build powerful patterns that can express simple or complex traversals and paths.
 
 Pattern recognition is a fundamental human cognitive process, and that is why visual diagrams or memory-matching games can be useful in learning.
-Cypher is also heavily based on patterns and is designed to recognize them in data, which makes it a language that is easy to learn and use.
+Cypher is also heavily based on patterns and it is designed to recognize them in data.
+That makes Cypher a language that is easy to learn and use.
 
 [#cypher-syntax]
 == Cypher syntax
@@ -57,12 +59,12 @@ link:https://www.youtube.com/watch?v=_dup3YOZSm8[What is Cypher?]
 endif::[]
 
 Cypher's constructs are based on English prose and iconography.
-This make queries easy both to write and to read.
+This makes queries easy both to write and to read.
 
 .A graph example involving four nodes and three relationships.
 image::cypherintro-graph1.svg[role="popup-link",width=600]
 
-If you were to represent the data in this graph in English, it would probably read as something like: _"Sally likes Graphs. Sally is friends with John. Sally works for Neo4j."_
+If you were to represent the data in this graph in English, it might read as something like: _"Sally likes Graphs. Sally is friends with John. Sally works for Neo4j."_
 
 Now, if you were to write this same information in Cypher, then it would look like this:
 
@@ -132,7 +134,7 @@ You can also refrain from using a variable for certain nodes:
 (:Technology)     //no variable, label Technology
 ----
 
-Or use a whole word as a synonym:
+Or use a whole word as synonym:
 
 [source,cypher]
 ----
@@ -152,7 +154,7 @@ image::cypherintro-graph1.svg[]
 
 ==== Relationship directions
 
-Relationships *must* always have a direction and  a colon (`:`) in the beginning of it.
+Relationships *must* always have a direction and a colon (`:`) in the beginning of it.
 They can be to the right:
 
 [source,cypher]
@@ -176,10 +178,9 @@ Or be undirected:
 
 An undirected relationship does not mean that it doesn't have a direction, but that it can be traversed in *either* direction.
 
-When using undirected relationships in a query, Cypher retrieves the relationship with all its connected nodes, no matter the direction of their connection. This allows queries to be flexible and not force the user to know the direction of the relationship stored in the database.
+When using undirected relationships in a query, Cypher retrieves the relationship with all its connected nodes, no matter the direction of their connection. This allows queries to be flexible and not force the user to know the direction of the relationships stored in the database.
 
-Undirected relationships are particularly useful when you don't know in what direction a relationship is stored in the database.
-If you write a query with the wrong direction, Cypher will not return anything.
+Undirected relationships are particularly useful in this case, because if you write a query with the wrong direction, Cypher will not return anything.
 For this reason, it is recommended to use an undirected relationship instead, so you can get any results back.
 
 ==== Relationship types
@@ -258,71 +259,24 @@ You can see the full list of values and types in the link:https://neo4j.com/docs
 [#cypher-patterns]
 === Patterns in Cypher
 
-Nodes and relationships make up the building blocks for graph patterns.
-These building blocks can come together to express simple or complex patterns.
-Patterns are the most powerful capability of graphs.
-In Cypher, they can be written as a continuous path or separated into smaller patterns and tied together with commas.
-
-To show a pattern in Cypher, you need to combine the node and relationship syntaxes you have learned so far.
-Let's use the example of `Sally likes Graphs`.
-
-In Cypher, this pattern would look like the code below.
+As mentioned before, Cypher is heavily based on patterns and it is designed to recognize them in data.
+For example:
 
 [source, cypher]
 ----
 (p:Person {name: "Sally"})-[rel:LIKES]->(g:Technology {type: "Graphs"})
 ----
 
-This bit of Cypher tells the pattern we want, but it does not tell whether we want to find that existing pattern or insert it as a new pattern.
-To tell Cypher what we want it to do with the pattern, we need to add some keywords.
+This bit of Cypher represents a pattern, but it is not a query.
+It only expresses that `Person` node with _Sally_ as its `name` property has a `:LIKES` relationship with the `Technology` node with _Graphs_ as its `type` property.
 
-[TIP]
-.Are you struggling?
-If you need help with any of the information contained on this page, you can reach out to other members of our community.
-You can ask questions on the link:https://community.neo4j.com/c/neo4j-graph-platform/cypher/12?ref=guides[Neo4j Community Site^].
+In order to *do* something with this pattern, for example, adding it to the graph or retrieving it in case it already exists, you need to *query* the database.
+In the complete Cypher documentation, you can learn more how to write link:{docs-home}/cypher-manual/current/queries/basic/[basic queries] and what link:{docs-home}/cypher-manual/current/clauses/[clauses] you can use to read data from the database.
 
-=== Cypher comments
+== Keep learning
 
-Previous examples feature code blocks containing after `//`.
-This same resource can be used when writing Cypher queries, so you can leave comments that can explain the syntax or what a query is doing.
-For example: 
-
-[source, cypher]
-----
-CREATE (p:Person)-[:LIKES]->(t:Technology)  //Creates a :LIKES relationship between p:Person and t:Technology
-----
-
-In Neo4j Browser, you can also use this resource to link:https://neo4j.com/docs/browser-manual/current/visual-tour/#favorites[save queries].
-If you add a comment before the query, the comment automatically becomes the title of the saved query:
-
-[source,cypher]
-----
-//Person likes technology
-CREATE (p:Person)-[:LIKES]->(t:Technology)
-----
-
-[#recommendation-engine]
-== Tutorial: Build a Recommendation Engine
-
-With Cypher structure and syntax covered in the sections above, you can dive into building your own recommendation engine to use graph data and Cypher to recommend movies, colleagues, cuisines, and more.
-
-xref:guide-build-a-recommendation-engine.adoc[Tutorial: Build a Recommendation Engine,role=more information] walks through using queries and filtering that takes advantage of the relationships in a graph in order to lend insight into habits and hidden connections and provide valuable recommendations.
-
-[#cypher-resources]
-== xref:cypher-intro/resources.adoc[Cypher resources]
-
-Find out where else you can learn Cypher or increase your depth of knowledge from experts and solutions.
-There are a variety of training opportunities, blogs, videos, and more for taking the next steps in your Cypher (and Neo4j) journey!
-
-
-== link:https://graphacademy.neo4j.com/?ref=guides[Learn with GraphAcademy^]
-
-link:https://graphacademy.neo4j.com/courses/cypher-fundamentals/?ref=guides[Cypher Fundamentals^]
-
-This course teaches you the essentials of using Cypher, Neo4j’s powerful query language, in as little time as possible, with videos, quizzes and hands-on exercises.
-
-link:https://graphacademy.neo4j.com/courses/cypher-fundamentals/?ref=guides[Learn Cypher with GraphAcademy^,role=button]
-
+The GraphAcademy course link:https://graphacademy.neo4j.com/courses/cypher-fundamentals/[Cypher Fundamentals] gives further information on how to get started with Cypher and writing queries.
+You can also reach out to other members of our community on the link:https://community.neo4j.com/c/neo4j-graph-platform/cypher/12?ref=guides[Neo4j Community Site].
 
 ifndef::backend-pdf[]
 [discrete.glossary]
