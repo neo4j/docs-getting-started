@@ -17,7 +17,7 @@ For the complete documentation, refer to link:{docs-home}/cypher-manual/[Cypher]
 image::cypher-learning-arr.svg[role="popup-link",width=450]
 
 Cypher is Neo4j's declarative query language. 
-Available as open source via link:http://openCypher.org[The openCypher project], Cypher is similar to SQL, but optimized for graphs.
+Available as open source via link:http://openCypher.org[The openCypher project], Cypher is link:{docs-home}/cypher-manual/current/introduction/cypher-overview/#_cypher_and_sql_key_differences[similar to SQL], but optimized for graphs.
 This means Cypher focuses on *what data* you want out of the graph rather than *how to* get it.
 
 Intuitive and close to natural language, Cypher provides a visual way of matching patterns and relationships by having its own design based on ASCII-art type of syntax:
@@ -97,7 +97,7 @@ Labels also help Cypher distinguish between entities and optimize execution for 
 
 In the example, both `Sally` and `John` can be grouped under a `Person` label, `Graphs` can receive a `Technology` label, and `Neo4j` can be labeled as `Company`:
 
-.Nodes grouped in labels. Note that `Sally`, `John`, `Graphs`, and `Neo4j` are now xref:cypher/index.adoc#cypher-properties[properties] instead.
+.Nodes grouped in labels. Note that `Sally`, `John`, `Graphs`, and `Neo4j` are now xref:cypher.adoc#cypher-properties[properties] instead.
 image::cypher-graph-nodes-arr.svg[role="popup-link",width=450]
 
 In a relational database context, this would be the same as telling SQL which table to look for the particular row.
@@ -199,7 +199,7 @@ In the example used in this page, the relationship types are:
 
 ==== Relationship variables
 
-In the same way as xref:cypher/index.adoc#_node_variables [node variables], relationship variables can also be used as a shortcut.
+In the same way as xref:cypher.adoc#_node_variables [node variables], relationship variables can also be used as a shortcut.
 Instead of writing the whole relationship type name (e.g. `[:LIKES]`) twice in the query, you can use a variable.
 
 Take this example:
@@ -271,12 +271,34 @@ This bit of Cypher represents a pattern, but it is not a query.
 It only expresses that `Person` node with _Sally_ as its `name` property has a `:LIKES` relationship with the `Technology` node with _Graphs_ as its `type` property.
 
 In order to *do* something with this pattern, for example, adding it to the graph or retrieving it in case it already exists, you need to *query* the database.
-In the complete Cypher documentation, you can learn more how to write link:{docs-home}/cypher-manual/current/queries/basic/[basic queries] and what link:{docs-home}/cypher-manual/current/clauses/[clauses] you can use to read data from the database.
 
 == Keep learning
 
-The GraphAcademy course link:https://graphacademy.neo4j.com/courses/cypher-fundamentals/[Cypher Fundamentals] gives further information on how to get started with Cypher and writing queries.
-You can also reach out to other members of our community on the link:https://community.neo4j.com/c/neo4j-graph-platform/cypher/12?ref=guides[Neo4j Community Site].
+Now that the basic Cypher concepts are presented, you can follow this introductory tutorial on how to xref:tutorials/cypher-basics.adoc[Get started with Cypher] for a more hands-on approach.
+In the complete link:{docs-home}/cypher-manual[Cypher documentation], you will also find more information on:
+
+* How to write link:{docs-home}/cypher-manual/current/queries/basic/[basic queries] and what link:{docs-home}/cypher-manual/current/clauses/[clauses] you can use to read data from the database.
+* How link:{docs-home}/cypher-manual/current/patterns/[patterns] work and how you can use them to navigate, describe and extract data from a graph.
+* What link:{docs-home}/cypher-manual/current/values-and-types/[values and types], and link:{docs-home}/cypher-manual/current/functions/[functions] are available in Cypher.
+
+=== From SQL to Cypher
+
+In case you are already familiar with SQL, there are some resources you can check for more information:
+
+* link:{docs-home}/cypher-manual/current/introduction/cypher-overview/#_cypher_and_sql_key_differences[Key differences between Cypher and SQL]
+* xref:reference/graphdb-vs-rdbms[Transition from relational to graph database]
+* xref:tutorials/cypher-sql.adoc[Tutorial: Comparing Cypher with SQL]
+* xref:tutorials/relational-to-graph-import.adoc[Import: RDBMS to graph]
+* xref:tutorials/import-relational-and-etl.adoc[Tutorial: Import data from a relational database into Neo4j]
+* link:how-to/relational-to-graph-modeling.adoc[Modeling: relational to graph]
+
+=== From NoSQL to Graphs
+
+If you are familiar with NoSQL ("Not only SQL") system, you can also learn more on xref:reference/graphdb-vs-nosql[how to make the transition] to a graph database.
+
+=== GraphAcademy
+
+The link:https://graphacademy.neo4j.com/courses/cypher-fundamentals/[Cypher Fundamentals] course offers further guidance on how to get started with Cypher and writing queries.
 
 ifndef::backend-pdf[]
 [discrete.glossary]

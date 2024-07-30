@@ -738,5 +738,5 @@ The application is designed with a point-and-click user interface with the goal 
 * https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[LOAD CSV^]: Cypher's command for importing CSV files
 * https://neo4j.com/docs/apoc/current/[APOC library^]: Neo4j's utility library
 * https://neo4j.com/labs/etl-tool//[Neo4j ETL Tool^]: Loading relational data without code
-* https://neo4j.com/docs/getting-started/4.4/data-import/[Importing Data with Neo4j^]
+* link:{docs-home}/import[Importing Data with Neo4j^]
 * https://neo4j.com/docs/getting-started/4.4/data-modeling[Graph Data Modeling^]

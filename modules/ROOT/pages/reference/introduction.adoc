@@ -1,13 +1,13 @@
 = Get started with Neo4j
 :page-layout: docs-ndl
 :page-theme: docs
-:page-role: hub
+:page-role: explainer
 :page-show-home-link: true
 :page-hide-nav-title: true
 // :page-disablefeedback: true
 :page-toclevels: -1
 
-[.display.cards.selectable]
+[.cards.selectable]
 
 == Explore the capabilities of graph databases
 
@@ -56,7 +56,7 @@ image:ROOT:icon-import.svg[]
 Read more about the several ways of importing data to your Neo4j graph database.
 
 [.link]
-link:{docs-home}/import/[]
+link:{docs-home}/import/
 
 === Model your data to Neo4j
 
@@ -67,7 +67,7 @@ image:ROOT:icon-csvtodb.svg[]
 Discover strategies to model your data and to improve your workflow.
 
 [.link]
-link:{docs-home}/model[]
+link:{docs-home}/getting-started/data-modeling/[]
 
 === Create applications with Neo4j
 
@@ -78,7 +78,7 @@ image:ROOT:icon-code.svg[]
 Run through detailed examples of how to integrate Neo4j with your preferred programming language. 
 
 [.link]
-link:{docs-home}/create-applications[]
+link:{docs-home}/getting-started/languages-guides/[]
 
 === Data science with Neo4j
 
@@ -89,7 +89,7 @@ image:ROOT:icon-gds.svg[]
 Learn how to use Neo4j Graph Data Science, a library of graph algorithms for analysts and data scientists.
 
 [.link]
-link:{docs-home}/gds[]
+link:{docs-home}/getting-started/gds/[]
 
 === Visualize data in Neo4j
 
@@ -100,12 +100,9 @@ image:ROOT:icon-dataviz.svg[]
 Learn how to export your graph data in Neo4j for display as a visualization.
 
 [.link]
-link:{docs-home}/visualize/[]
+link:{docs-home}/getting-started/graph-visualization/graph-visualization/[]
 
-[.display.cards.selectable]
-== GraphAcademy
-
-=== Neo4j Fundamentals
+=== GraphAcademy: Neo4j Fundamentals
 
 [.icon]
 image:ROOT:icon-graphacademy.svg[]
@@ -121,14 +118,14 @@ link:https://graphacademy.neo4j.com/courses/neo4j-fundamentals/[]
 
 Here are some recommended resources to get started with Neo4j:
 
-. link:reference/graphdb-concepts/index.adoc[*Graph database concepts*]
+. link:{docs-home}/getting-started/reference/graphdb-concepts/[*Graph database concepts*]
 +
 Learn the fundamentals of graph database and how to transition from other types of database.
 
-. xref:reference/example-data/[*Example datasets*]
+. link:{docs-home}/getting-started/reference/example-data/[*Example datasets*]
 +
 Use these example datasets to explore Neo4j's features and tools.
 
-. xref:reference/resources.adoc[*Resources*]
+. link:{docs-home}/getting-started/reference/[*Reference*]
 + 
 Go through a list of complementary resources to help you get started with Neo4j and graph databases.

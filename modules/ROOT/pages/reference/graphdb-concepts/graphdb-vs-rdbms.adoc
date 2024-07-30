@@ -132,7 +132,7 @@ RETURN p.name
 
 [TIP]
 ====
-You can find more about Cypher syntax in the upcoming chapters for https://neo4j.com/docs/getting-started/current/cypher-intro[Cypher Query Language^] and transitioning https://neo4j.com/developer/guide-sql-to-cypher/[from SQL to Cypher^].
+You can find more about Cypher syntax in the upcoming chapters for xref:cypher.adoc[Cypher Query Language^] and transitioning xref:tutorials/cypher-sql.adoc[from SQL to Cypher^].
 ====
 
 [#rdbms-graph-practice]

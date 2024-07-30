@@ -102,6 +102,6 @@ In an upcoming guide, how you model your graph data can impact queries, performa
 [#modeling-resources]
 == Resources
 * https://dzone.com/refcardz/from-relational-to-graph-a-developers-guide?chapter=1[DZone Refcard: From Relational to Graph^]
-* xref:appendix/graphdb-concepts/graphdb-vs-rdbms.adoc[Concepts: Relational to Graph]
+* xref:reference/graphdb-concepts/graphdb-vs-rdbms.adoc[Concepts: Relational to Graph]
 // * xref:cypher:guide-sql-to-cypher.adoc[From SQL to Cypher]
-* xref:get-started-with-neo4j/graph-database.adoc#property-graph[Review: Property Graph Model]
+* xref:graph-database.adoc#property-graph[Review: Property Graph Model]

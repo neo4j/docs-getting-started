@@ -12,6 +12,12 @@ Instead of using a "graph abstraction" on top of another technology, the data is
 Since 2007, Neo4j has evolved into a rich ecosystem of tools, applications, and libraries. 
 This ecosystem allows you to integrate graph technologies with your working environment in a number of ways which are here described.
 
+[NOTE]
+====
+Neo4j is written in Java and Scala.
+You can check the source code on https://github.com/neo4j/neo4j[GitHub^].
+====
+
 == How to interact with Neo4j
 
 Neo4j uses Cypher, a declarative query language similar to SQL, but optimized for graphs.
@@ -25,7 +31,7 @@ Beyond the core graph, Neo4j also provides ACID transactions, <<cluster>> suppor
 == Start exploring
 
 Deploying a database is the first step to take to explore Neo4j.
-link:{docs-home}/deployment-option[Choose a deployment method] that better suits your project among the following options:
+link:{docs-home}/deployment-options[Choose a deployment method] that better suits your project among the following options:
 
 === Fully managed cloud service
 
@@ -64,17 +70,17 @@ Read more about the link:https://neo4j.com/licensing/[available editions].
 
 == Work with data
 
-You can link:{docs-home}/import[import] your own data to Neo4j or use link:{docs-home}/getting-started/appendix/example-data/[example datasets].
-Both Aura and Neo4j Desktop feature embedded guides that allow you to create example datasets and start link:{docs-home}/getting-started/cypher-intro/[querying your database].
+You can link:{docs-home}/import[import] your own data to Neo4j or use xref:reference/example-data.adoc[example datasets].
+Both Aura and Neo4j Desktop feature embedded guides that allow you to create example datasets and start xref:cypher.adoc[querying your database].
 
 In case you are working with your own dataset, it is recommended to link:{docs-home}/getting-started/data-modeling/[model your data] for a better experience with your new graph database.
 
 == Keep learning
 
-To learn more about xref:graph-database.adoc[what is a graph database] and xref:graphdb-concepts.adoc[the concepts] behind the technology, continue reading the documentation or check xref:resources.adoc[other curated resources].
+To learn more about xref:graph-database.adoc[what is a graph database] and xref:reference/graphdb-concepts/index.adoc[the concepts] behind the technology, continue reading the documentation or check xref:reference/resources.adoc[other curated resources].
 
-Neo4j is written in Java and Scala.
-You can check the source code on https://github.com/neo4j/neo4j[GitHub^].
+You can also reach out to other members of our community on the link:https://community.neo4j.com/c/neo4j-graph-platform/cypher/12?ref=guides[Neo4j Community Site] for a more collaborative approach.
+
 
 ifndef::backend-pdf[]
 [discrete.glossary]

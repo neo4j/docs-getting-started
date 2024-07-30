@@ -1,4 +1,4 @@
-= Comparing Cypher with SQL
+= Tutorial: Comparing Cypher with SQL
 :tags: cypher, queries, graph-queries, sql-cypher, northwind-graph
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guide
 :description: This guide teaches anyone familiar with SQL how to write the equivalent, efficient Cypher statements. We'll use the well-known Northwind database to explain the concepts and work through the queries from simple to advanced.
@@ -10,40 +10,48 @@
 :page-ad-underline-role: button
 :page-ad-underline: Learn more
 
+This tutorial shows anyone familiar with SQL how to understand Cypher and write the equivalent Cypher queries using the Northwind dataset.
 
-== Introduction
-
-This guide shows anyone familiar with SQL how to understand Cypher and write the equivalent Cypher queries.
-The Northwind database, used for a long time to demonstrate relational database concepts, helps to illustrate how to translate SQL queries into Cypher, showcasing the similarities and differences between the two languages.
-
-Before diving into the details, it is essential to understand that while both SQL and Cypher are declarative query languages, Cypher is specifically designed for querying graphs.
-Like in SQL, important concepts of Cypher include clauses, keywords, expressions, operators, and functions.
-Unlike SQL, which deals with relational databases, Cypher is centered around expressing xref:cypher-intro/patterns.adoc[graph patterns].
-Graph pattern matching is the core technique in Cypher, enabling creation, navigation, description, and data extraction from a graph by applying declarative patterns.
-
-xref:cypher-intro/index.adoc[The page: Query a Neo4j database using Cypher] covers its basics.
-
-Cypher allows you to chain multiple query parts together, enabling the composition of complex queries.
-You can mix read and write operations within a single statement.
-The read operation can provide inputs for the subsequent write operation or, following after the write operation, return relevant subsets to the caller.
-
-You can use Cypher to update the graph structure and data and even to ingest large amounts of CSV data.
-
-With xref:cypher-intro/procedures-functions.adoc[*user-defined procedures and functions*], you can extend the language with functionality that you need but is not yet available.
-
-For more information about the Cypher query language, refer to the link:https://neo4j.com/docs/cypher-manual/current/introduction/[Neo4j Cypher Manual^] and the link:https://neo4j.com/docs/cypher-cheat-sheet/5/[Cypher Cheat Sheet].
+[NOTE]
+To know more what are the differences between the two query languages, refer to the link:{docs-home}/cypher-manual/current/introduction/cypher-overview/#_cypher_and_sql_key_differences[Cypher documentation].
 
 [#cypher-sql-northwind]
-== Northwind example model
+== Load the Northwind dataset
 
-The Northwind database represents the data storage of a retail application.
+The Northwind dataset represents the data storage of a retail application.
 It contains customers, products, orders, employees, shippers, and categories as well as their interactions.
+Follow these steps to start working with this dataset:
+
+. link:{docs-home}/deployment-options[Create a Neo4j instance].
+. Import the Northwind dataset.
+.. In case you are using Aura, click on the hat icon on the top-right side menu and follow the _Query fundamentals_ guide up to step 2.
++
+image::northwind_dataset_load.png[]
+.. If you are using Neo4j Browser, run `:guide northwind` in the query area.
++
+image::browser-northwind.png[]
+.. Another option, functional both in Aura and Browser, is to xref:tutorials/import-relational-and-etl.adoc[import the dataset as a _.zip_ file].
+
+Your graph should now look like this:
+
+image::northwind.png[]
+
+== Start querying
+
+A first, basic query that you can do is t
+
+_Select and return records_
+
+To select and return records in SQL, select everything from the `products` table.
+
+[source, plsql]
+----
+SELECT p.*
+FROM products as p;
+----
 
 Relational databases store data in tables with a fixed structure (schema), each column having a name, type, length, constraints, etc.
-References between tables are represented by repeating the primary key of one table as a column in another as a foreign key.
-For many-to-many references, JOIN-tables (or link-tables) are needed as an artificial construct between the connected tables.
-
-Graph databases store data in a graph with nodes and relationships between them (refer to xref:get-started-with-neo4j/graph-database.adoc#property-graph[the property graph model] for more information).
+On the other hand, graph databases store data in a graph with nodes and relationships between them.
 
 For a sensible relational model, the transformation into a graph is not hard, as rows of entity tables are converted into *nodes* and foreign-key relationships and JOIN-tables into *relationships*.
 Nodes and relationships can hold arbitrary properties (key-value pairs) without the need for a fixed schema.
@@ -58,7 +66,7 @@ image::Northwind_diagram.jpg[]
 .Graph model
 image::northwind_graph_workspace-arr.png[width=600]
 
-It is recommended to familiarize yourself with the guides on xref:data-modeling/index.adoc[data modeling] and xref:data-import/index.adoc[data importing] into Neo4j.
+It is recommended to familiarize yourself with the guides on xref:data-modeling/index.adoc[data modeling] and link:{docs-home}/import[data importing] into Neo4j.
 
 [#cypher-sql-queries]
 == Explore Cypher queries: from basic to advanced
@@ -78,12 +86,7 @@ Your output should be the following:
 .Model of the Nortwind dataset in Workspace Query
 image::northwind_schema_workspace.png[]
 
-[TIP]
-====
-Graph data modeling is a flexible task.
-You can create your own model of the Northwind dataset.
-Use these link:https://github.com/neo4j-graph-examples/get-started/raw/main/data/northwind-full.zip[`.zip` files] and follow instructions in xref:appendix/tutorials/guide-import-relational-and-etl.adoc[the tutorial] on how to import data from a relational database into a graph database.
-====
+
 
 [NOTE]
 ====
@@ -91,17 +94,7 @@ The Cypher queries below end with the semicolon `;`, which is a requirement in l
 In Neo4j Browser or Query in Workspace, you don't have to end Cypher queries with semicolon.
 ====
 
-=== Find all products
 
-_Select and return records_
-
-To select and return records in SQL, select everything from the `products` table.
-
-[source, plsql]
-----
-SELECT p.*
-FROM products as p;
-----
 
 //sqltable
 
@@ -182,7 +175,7 @@ _Indexing_
 
 // table
 
-If you want to match quickly by a specific node label and attribute combination, it makes sense to create an index for that pair, if you haven't already done that during the xref:appendix/tutorials/guide-import-relational-and-etl.adoc[import].
+If you want to match quickly by a specific node label and attribute combination, it makes sense to create an index for that pair, if you haven't already done that during the xref:tutorials/import-relational-and-etl.adoc[import].
 For more details on how to create indexes, visit the link:https://neo4j.com/docs/cypher-manual/current/indexes-for-search-performance/[Cypher manual -> Indexes for search performance].
 Indexes in Cypher are only used for finding the starting points of a query, all subsequent pattern matching is done through the graph structure.
 Cypher supports range, text, point, lookup, full-text, and vector indexes.

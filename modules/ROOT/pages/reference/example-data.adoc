@@ -148,7 +148,7 @@ You can also drag and drop or paste the script into Neo4j Browser (check that `m
 
 // image::{neo4j-img-base-uri}cypher-import-browser.png[]
 
-CSV data can be imported using either xref:data-import/csv-import.adoc#import-load-csv/[`LOAD CSV` clause in Cypher] or https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/[`neo4j-admin database import` for initial bulk imports^] of large datasets.
+CSV data can be imported using either xref:how-to/csv-import.adoc#import-load-csv/[`LOAD CSV` clause in Cypher] or https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/[`neo4j-admin database import` for initial bulk imports^] of large datasets.
 
 For loading JSON, XML files you need to have the https://neo4j.com/docs/apoc/current/[APOC Core library^] installed, which comes with a https://neo4j.com/docs/apoc/current/import/[number of procedures for importing data^] also from other databases.
 

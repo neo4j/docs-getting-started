@@ -21,7 +21,7 @@ In this guide, we want to discuss all of the options and why you can or should c
 There are three main approaches to moving relational data to a graph.
 We will briefly cover how each operates on this page, but more detailed walkthroughs are in the linked pages.
 
-*1)* xref:data-import/csv-import.adoc[LOAD CSV]: possibly the simplest way to import data from your relational database.
+*1)* xref:how-to/csv-import.adoc[LOAD CSV]: possibly the simplest way to import data from your relational database.
 Requires a dump of individual entity-tables and join-tables formatted as CSV files.
 
 *2)* link:https://neo4j.com/docs/apoc/current/[APOC^]: Awesome Procedures on Cypher.
@@ -60,8 +60,8 @@ For those cases, you might need to add an `APOC` procedure to the `LOAD CSV` sta
 
 === LOAD CSV resources
 * Cypher Manual: link:https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[LOAD CSV^]
-* Guide: xref:data-import/csv-import.adoc[Importing CSV data into Neo4j]
-* Docs Tutorial: link:https://neo4j.com/docs/getting-started/current/cypher-intro/load-csv/[LOAD CSV for import^]
+* Guide: xref:how-to/csv-import.adoc[Importing CSV data into Neo4j]
+* Docs Tutorial: xref:tutorials/load-csv/[LOAD CSV for import^]
 
 [#relational-apoc]
 == APOC

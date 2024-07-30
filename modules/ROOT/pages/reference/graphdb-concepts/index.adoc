@@ -277,7 +277,7 @@ Indexes and constraints can be introduced when desired, in order to gain perform
 == Indexes
 
 Indexes are used to increase performance.
-To see examples of how to work with indexes, see xref::/cypher-intro/schema.adoc#cypher-intro-indexes[Using indexes].
+To see examples of how to work with indexes, see link:{docs-home}/cypher-manual/current/indexes/[Using indexes].
 For detailed descriptions of how to work with indexes in Cypher, see link:{neo4j-docs-base-uri}/cypher-manual/current/indexes-for-search-performance/[Cypher Manual -> Indexes].
 
 
@@ -285,7 +285,7 @@ For detailed descriptions of how to work with indexes in Cypher, see link:{neo4j
 == Constraints
 
 Constraints are used to make sure that the data adheres to the rules of the domain.
-To see examples of how to work with constraints, see xref::/cypher-intro/schema.adoc#cypher-intro-constraints[Using constraints].
+To see examples of how to work with constraints, see link:/cypher-manual/current/constraints/[Using constraints].
 For detailed descriptions of how to work with constraints in Cypher, see the link:{neo4j-docs-base-uri}/cypher-manual/current/constraints[Cypher manual -> Constraints].
 
 

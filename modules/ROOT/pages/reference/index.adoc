@@ -4,7 +4,6 @@
 :tags: get-started, introduction, resources, neo4j-help, cypher, graph, nosql-graph, neo4j-training
 :page-pagination:
 
-
 To help you along your path of learning more about Neo4j, we want to provide you with the resources which may encourage you to dive deeper into Neo4j products and graph technology.
 
 [#graphdb-resources]
@@ -26,7 +25,7 @@ To help you along your path of learning more about Neo4j, we want to provide you
 == Cypher Query Language
 * https://neo4j.com/product/cypher-graph-query-language/[Cypher Query Language^]
 * https://neo4j.com/docs/cypher-cheat-sheet/current/[Cypher Cheat Sheet^]
-* xref:cypher-intro/cypher-sql.adoc[From SQL to Cypher]
+* xref:tutorials/cypher-sql.adoc[From SQL to Cypher]
 
 [#nosql-graph-resources]
 == Graph for NoSQL developers
@@ -88,5 +87,5 @@ When to use which? Read more about the differences between link:https://communit
 * https://twitch.tv/neo4j/[Weekly Twitch stream sessions^]
 * http://www.opencypher.org/[openCypher project^]
 * https://neo4j.com/customers/[Neo4j Customers^]
-* xref:get-started-with-neo4j/graph-database.adoc[Neo4j Features^]
+* xref:graph-database.adoc[Neo4j Features^]
 * https://neo4j.com/licensing/[Neo4j Editions^]
