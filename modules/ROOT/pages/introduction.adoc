@@ -1,7 +1,7 @@
 = Get started with Neo4j
 :page-layout: docs-ndl
 :page-theme: docs
-:page-role: hub
+:page-role: explainer
 :page-show-home-link: true
 :page-hide-nav-title: true
 // :page-disablefeedback: true
@@ -11,8 +11,7 @@
 
 == Explore the capabilities of graph databases
 
-As a property graph database, Neo4j is beneficial for both traversal performance and operations runtime.
-Learn more about the product and how to start working with your data.
+With a property graph database at its core, Neo4j offers an ecosystem of tools, applications, and libraries which aim to help you get started with the technology.
 
 === What is Neo4j
 
@@ -47,17 +46,6 @@ Learn Cypher, Neo4j's graph query language, and start thinking about graphs and 
 [.link]
 xref:cypher.adoc[]
 
-=== Import data to Neo4j
-
-[.icon]
-image:ROOT:icon-import.svg[]
-
-[.description]
-Read more about the several ways of importing data to your Neo4j graph database.
-
-[.link]
-link:{docs-home}/import/[]
-
 === Model your data to Neo4j
 
 [.icon]
@@ -68,6 +56,17 @@ Discover strategies to model your data and to improve your workflow.
 
 [.link]
 link:{docs-home}/model[]
+
+=== Import data to Neo4j
+
+[.icon]
+image:ROOT:icon-import.svg[]
+
+[.description]
+Read more about the several ways of importing data to your Neo4j graph database.
+
+[.link]
+link:{docs-home}/import/[]
 
 === Create applications with Neo4j
 
@@ -102,33 +101,23 @@ Learn how to export your graph data in Neo4j for display as a visualization.
 [.link]
 link:{docs-home}/visualize/[]
 
-[.display.cards.selectable]
-== GraphAcademy
-
-=== Neo4j Fundamentals
-
-[.icon]
-image:ROOT:icon-graphacademy.svg[]
-
-[.description]
-Enroll to Neo4j Fundamentals course on GraphAcademy to get started with the technology.
-
-[.link]
-link:https://graphacademy.neo4j.com/courses/neo4j-fundamentals/[]
-
 [.next-steps]
-== Keep exploring
+== GraphAcademy courses
 
-Here are some recommended resources to get started with Neo4j:
+Here are some recommended interactive courses to get started with Neo4j:
 
-. link:reference/graphdb-concepts/index.adoc[*Graph database concepts*]
+. link:https://graphacademy.neo4j.com/courses/neo4j-fundamentals/[*Neo4j fundamentals*]
 +
-Learn the fundamentals of graph database and how to transition from other types of database.
+Enroll to this course on GraphAcademy to get started with the technology.
 
-. xref:reference/example-data/[*Example datasets*]
+. link:https://graphacademy.neo4j.com/courses/cypher-fundamentals/[*Cypher fundamentals*]
 +
-Use these example datasets to explore Neo4j's features and tools.
+Enroll to this 60-minute course to learn the essentials of using Cypher.
 
-. xref:reference/resources.adoc[*Resources*]
-+ 
-Go through a list of complementary resources to help you get started with Neo4j and graph databases.
+. link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/[*Data modeling fundamentals*]
++
+Learn how to design a Neo4j graph using best practices.
+
+. link:https://graphacademy.neo4j.com/courses/importing-fundamentals/[*Importing data fundamentals*]
++
+Learn how to import data into Neo4j.

@@ -1,10 +1,13 @@
-* *Getting started with Neo4j* 
+* *Get started* 
 * xref:introduction.adoc[Introduction]
 * xref:whats-neo4j.adoc[What is Neo4j]
 * xref:graph-database.adoc[What is a graph database]
 * xref:cypher.adoc[What is Cypher]
+
+* *Work with data*
+
 * link:{docs-home}/model[How to model data]
-* link:{docs-home}/import/[Import data to Neo4j]
+* link:{docs-home}/import/[Import data into Neo4j]
 * link:{docs-home}/create-applications/[Create an application]
 * link:{docs-home}/gds/[Get insights from data]
 * link:{docs-home}/visualize/[Create data visualizations]
@@ -12,9 +15,12 @@
 * *GraphAcademy courses*
 * link:https://graphacademy.neo4j.com/courses/neo4j-fundamentals/[Neo4j fundamentals]
 * link:https://graphacademy.neo4j.com/courses/cypher-fundamentals/[Cypher fundamentals]
+* link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/[Data modeling fundamentals]
+* link:https://graphacademy.neo4j.com/courses/importing-fundamentals/[Importing data fundamentals]
 
 * *Reference*
-* link:{docs-home}/getting-started/appendix/graphdb-concepts/[Graph database concepts]
+
+* xref:reference/graphdb-concepts/index.adoc[Graph database concepts]
+* xref:reference/example-data.adoc[Example datasets]
 * link:{docs-home}/tutorials/#_getting_started[Tutorials]
-* link:{docs-home}/getting-started/appendix/example-data/[Example datasets]
-* xref:reference/resources.adoc[Other resources]
+* xref:reference/resources.adoc[Resources]

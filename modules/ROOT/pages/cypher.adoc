@@ -9,9 +9,11 @@
 :page-ad-underline-role: button
 :page-ad-underline: Learn more
 
-[NOTE]
+[IMPORTANT]
+====
 This page covers the basics of Cypher.
 For the complete documentation, refer to link:{docs-home}/cypher-manual/[Cypher].
+====
 
 .A visual representation of a Cypher query
 image::cypher-learning-arr.svg[role="popup-link",width=450]
@@ -31,8 +33,10 @@ Round brackets are used to represent `(nodes)`, and `-[:ARROWS]->` to represent 
 With this query syntax, you can perform create, read, update, or delete (CRUD) operations on your graph.
 
 [TIP]
+====
 For a quick look with no installation required, get a free link:https://neo4j.com/cloud/platform/aura-graph-database/[Aura instance].
 Write `:guide cypher` in Aura's "Query" tab to access a hands-on guide on Cypher.
+====
 
 == How does Cypher work?
 
@@ -103,9 +107,11 @@ image::cypher-graph-nodes-arr.svg[role="popup-link",width=450]
 In a relational database context, this would be the same as telling SQL which table to look for the particular row.
 The same way you can tell SQL to query a person's information from a `Person` table, you can also tell Cypher to only check the `Person` label for that information.
 
-[TIP]
+[CAUTION]
+====
 If you do not specify a label for Cypher to filter out non-matching node categories, the query will check all of the nodes in the database.
 This can affect performance in very large graphs.
+====
 
 ==== Node variables
 
@@ -274,7 +280,7 @@ In order to *do* something with this pattern, for example, adding it to the grap
 
 == Keep learning
 
-Now that the basic Cypher concepts are presented, you can follow this introductory tutorial on how to xref:tutorials/cypher-basics.adoc[Get started with Cypher] for a more hands-on approach.
+Now that the basic Cypher concepts were introduced, you can follow the tutorial on how to xref:tutorials/cypher-basics.adoc[Get started with Cypher] for a more hands-on approach.
 In the complete link:{docs-home}/cypher-manual[Cypher documentation], you will also find more information on:
 
 * How to write link:{docs-home}/cypher-manual/current/queries/basic/[basic queries] and what link:{docs-home}/cypher-manual/current/clauses/[clauses] you can use to read data from the database.
@@ -298,7 +304,11 @@ If you are familiar with NoSQL ("Not only SQL") system, you can also learn more 
 
 === GraphAcademy
 
-The link:https://graphacademy.neo4j.com/courses/cypher-fundamentals/[Cypher Fundamentals] course offers further guidance on how to get started with Cypher and writing queries.
+With the link:https://graphacademy.neo4j.com/courses/cypher-fundamentals/[Cypher Fundamentals] course, you can learn Cypher in 60 minutes and practice using a sandbox.
+
+=== Other resources
+
+For more suggestions on how to expand your knowledge about Cypher, refer to xref:reference/resources.adoc[Resources].
 
 ifndef::backend-pdf[]
 [discrete.glossary]

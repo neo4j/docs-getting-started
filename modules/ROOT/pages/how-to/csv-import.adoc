@@ -28,7 +28,7 @@ For more details and documentation, visit link:https://neo4j.com/labs/etl-tool/[
 4. Kettle import tool: maps and executes steps for the data process flow and works well for very large datasets, especially if you are already familiar with using this tool. _Works with any setup, including AuraDB._
 
 In the below section, you can find a brief oview of the `LOAD CSV` Cypher command and `neo4j-admin database import` command, how they operate, and how to get started with a general use case.
-Data quality can also be an issue for any type of data import to any system, so a few of these potential difficulties and ways to overcome them will be covered in this section.
+Data quality can also be an issue for any type of data import into any system, so a few of these potential difficulties and ways to overcome them will be covered in this section.
 
 [[import-load-csv]]
 == *LOAD CSV* command with Cypher

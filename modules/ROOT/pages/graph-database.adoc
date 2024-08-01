@@ -18,7 +18,7 @@ And since graph databases are not restricted to a pre-defined model, you can tak
 .A visual way of matching patterns and relationships using Cypher
 image::ROOT:sample-cypher.svg[]
 
-== What are graph databases made of
+== How it works
 
 Graph databases are structured through nodes and relationships.
 
@@ -43,7 +43,7 @@ In summary, nodes and relationships are an efficient and flexible approach becau
 * Design flexible property graph <<schemas>> that can adapt over time.
 
 [[why-graphdb]]
-== Why use graph databases
+== Why use it
 
 Often times, projects can deal with large amounts of data that happens to be also very complex.
 In such cases, graph databases come to be a powerful tool.
@@ -60,7 +60,7 @@ Moreover, many daily challenges and tasks can be viewed from a graph perspective
 * Find hidden connections between distant items.
 * Discover inter-relationships between items.
 
-== Graph database uses
+== How to use
 
 image::use-case-summary.svg[role="popup-link"]
 
