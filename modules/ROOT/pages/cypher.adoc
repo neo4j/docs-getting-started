@@ -12,7 +12,7 @@
 [IMPORTANT]
 ====
 This page covers the basics of Cypher.
-For the complete documentation, refer to link:{docs-home}/cypher-manual/[Cypher].
+For the complete documentation, refer to link:{docs-home}/cypher/[Cypher].
 ====
 
 .A visual representation of a Cypher query
