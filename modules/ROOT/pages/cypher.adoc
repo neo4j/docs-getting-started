@@ -294,9 +294,9 @@ In case you are already familiar with SQL, there are some resources you can chec
 * link:{docs-home}/cypher-manual/current/introduction/cypher-overview/#_cypher_and_sql_key_differences[Key differences between Cypher and SQL]
 * xref:reference/graphdb-vs-rdbms[Transition from relational to graph database]
 * xref:tutorials/cypher-sql.adoc[Tutorial: Comparing Cypher with SQL]
-* xref:tutorials/relational-to-graph-import.adoc[Import: RDBMS to graph]
+* xref:how-to/relational-to-graph-import.adoc[How-to: Import from RDBMS into graph]
 * xref:tutorials/import-relational-and-etl.adoc[Tutorial: Import data from a relational database into Neo4j]
-* link:how-to/relational-to-graph-modeling.adoc[Modeling: relational to graph]
+* link:how-to/relational-to-graph-modeling.adoc[How-to: Model data from relational to graph]
 
 === From NoSQL to Graphs
 
