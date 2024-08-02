@@ -1,7 +1,7 @@
 = Get started with Neo4j
 :page-layout: docs-ndl
 :page-theme: docs
-:page-role: explainer
+:page-role: hub
 :page-show-home-link: true
 :page-hide-nav-title: true
 // :page-disablefeedback: true
@@ -45,6 +45,10 @@ Learn Cypher, Neo4j's graph query language, and start thinking about graphs and 
 
 [.link]
 xref:cypher.adoc[]
+
+[.display.cards.selectable]
+
+== Work with data
 
 === Model your data to Neo4j
 
@@ -101,7 +105,55 @@ Learn how to export your graph data in Neo4j for display as a visualization.
 [.link]
 link:{docs-home}/visualize/[]
 
-[.next-steps]
+[.display.cards.selectable]
+
+== GraphAcademy courses
+
+=== Visualize data in Neo4j
+
+[.icon]
+image:ROOT:icon-dataviz.svg[]
+
+[.description]
+Learn how to export your graph data in Neo4j for display as a visualization.
+
+=== Visualize data in Neo4j
+
+[.icon]
+image:ROOT:icon-dataviz.svg[]
+
+[.description]
+Learn how to export your graph data in Neo4j for display as a visualization.
+
+=== Visualize data in Neo4j
+
+[.icon]
+image:ROOT:icon-dataviz.svg[]
+
+[.description]
+Learn how to export your graph data in Neo4j for display as a visualization.
+
+
+=== Visualize data in Neo4j
+
+[.icon]
+image:ROOT:icon-dataviz.svg[]
+
+[.description]
+Learn how to export your graph data in Neo4j for display as a visualization.
+
+
+=== Visualize data in Neo4j
+
+[.icon]
+image:ROOT:icon-dataviz.svg[]
+
+[.description]
+Learn how to export your graph data in Neo4j for display as a visualization.
+
+
+
+[.next-steps.display]
 == GraphAcademy courses
 
 Here are some recommended interactive courses to get started with Neo4j:
