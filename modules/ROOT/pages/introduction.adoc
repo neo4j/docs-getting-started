@@ -105,71 +105,19 @@ Learn how to export your graph data in Neo4j for display as a visualization.
 [.link]
 link:{docs-home}/visualize/[]
 
-[.display.cards.selectable]
-
-== GraphAcademy courses
-
-=== Visualize data in Neo4j
+[.widget.highlights]
+== Tutorials & How-to guides
 
 [.icon]
-image:ROOT:icon-dataviz.svg[]
+image:ROOT:highlights.svg[]
 
-[.description]
-Learn how to export your graph data in Neo4j for display as a visualization.
+[.caption]
+GraphAcademy courses
 
-=== Visualize data in Neo4j
-
-[.icon]
-image:ROOT:icon-dataviz.svg[]
-
-[.description]
-Learn how to export your graph data in Neo4j for display as a visualization.
-
-=== Visualize data in Neo4j
-
-[.icon]
-image:ROOT:icon-dataviz.svg[]
-
-[.description]
-Learn how to export your graph data in Neo4j for display as a visualization.
-
-
-=== Visualize data in Neo4j
-
-[.icon]
-image:ROOT:icon-dataviz.svg[]
-
-[.description]
-Learn how to export your graph data in Neo4j for display as a visualization.
-
-
-=== Visualize data in Neo4j
-
-[.icon]
-image:ROOT:icon-dataviz.svg[]
-
-[.description]
-Learn how to export your graph data in Neo4j for display as a visualization.
-
-
-
-[.next-steps.display]
-== GraphAcademy courses
-
-Here are some recommended interactive courses to get started with Neo4j:
-
-. link:https://graphacademy.neo4j.com/courses/neo4j-fundamentals/[*Neo4j fundamentals*]
-+
-Enroll to this course on GraphAcademy to get started with the technology.
-
-. link:https://graphacademy.neo4j.com/courses/cypher-fundamentals/[*Cypher fundamentals*]
-+
-Enroll to this 60-minute course to learn the essentials of using Cypher.
-
-. link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/[*Data modeling fundamentals*]
-+
-Learn how to design a Neo4j graph using best practices.
-
-. link:https://graphacademy.neo4j.com/courses/importing-fundamentals/[*Importing data fundamentals*]
-+
-Learn how to import data into Neo4j.
+[.list]
+* link:{docs-home}/genai/tutorials/embeddings-vector-indexes/[Embedding & Vector Indexes Tutorial]
+* link:{docs-home}/getting-started/appendix/tutorials/guide-import-relational-and-etl/[Import data from a relational database into Neo4j]
+* link:{docs-home}/getting-started/appendix/tutorials/guide-build-a-recommendation-engine/[Build a Cypher recommendation engine]
+* link:{docs-home}/operations-manual/current/tutorial/tutorial-composite-database/[Set up and use a composite database]
+* link:{docs-home}/cdc/current/procedures/query-examples/[Capture and track changes in real-time]
+* link:{docs-home}/graph-data-science-client/current/tutorials/centrality-algorithms/[Apply centrality algorithms to your graph]
