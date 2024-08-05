@@ -6,7 +6,7 @@
 
 * *Work with data*
 
-* link:{docs-home}/model[How to model data]
+* link:{docs-home}/model[Model data]
 * link:{docs-home}/import/[Import data into Neo4j]
 * link:{docs-home}/create-applications/[Create an application]
 * link:{docs-home}/gds/[Get insights from data]

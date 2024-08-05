@@ -10,7 +10,7 @@
 :page-ad-underline-role: button
 :page-ad-underline: Learn more
 
-A Neo4j graph database stores data as <<nodes>>, <<relationships>>, and <<properties>> instead of tables or documents.
+A Neo4j graph database stores data as <<nodes>>, <<relationships>>, and <<properties>> instead of in tables or documents.
 This means you can organize your data in a similar way as when sketching ideas on a whiteboard.
 
 And since graph databases are not restricted to a pre-defined model, you can take more flexible approaches and strategies when working with them.
@@ -25,10 +25,10 @@ Graph databases are structured through nodes and relationships.
 *Nodes* are entities in the graph which can:
 
 * Be tagged with <<labels>> representing their different roles in a domain (e.g., `Person`).
-* Hold any number of link:https://neo4j.com/docs/cypher-manual/current/values-and-types/[key-value pairs] and properties (e.g., `name`).
+* Hold any number of link:https://neo4j.com/docs/cypher-manual/current/values-and-types/[key-value pairs] as properties (e.g., `name`).
 * Include metadata such as <<indexes>> or <<constraints>> information.
 
-*Relationships* provide named connections between two node entities (e.g., _Person_ - `LOVES` - _Person_) and they:
+*Relationships* provide named connections between two nodes (e.g., _Person_ - `LOVES` - _Person_) and they:
 
 * Must always have a start node, an end node, and a xref:https://neo4j.com/docs/cypher-manual/current/values-and-types/[type] (e.g. )
 * Can be directed or undirected.
@@ -36,7 +36,7 @@ Graph databases are structured through nodes and relationships.
 * Can be attached to nodes, no matter how many they are and of what type, without sacrificing performance.
 * Are very useful as a strategy for xref:data-modeling/index.adoc[modeling your data].
 
-In summary, nodes and relationships are an efficient and flexible approach because, with them, you can:
+In summary, nodes and relationships are an efficient and flexible way to store data since they allow you to:
 
 * Create constant time traversals in big graphs for both depth and breadth.
 * Scale-up your database to billions of nodes while using moderate hardware.
@@ -45,11 +45,11 @@ In summary, nodes and relationships are an efficient and flexible approach becau
 [[why-graphdb]]
 == Why use it
 
-Often times, projects can deal with large amounts of data that happens to be also very complex.
-In such cases, graph databases come to be a powerful tool.
+Projects often deal with large amounts of complex data.
+In such projects, graph databases can be a powerful tool.
 
-There are different kinds of databases, such as relational databases which can also store relationships.
-However, relational databases use computing-wise expensive `JOIN` operations or cross-looks, which are often tied to a rigit schema.
+Aside from graph databases, there are other ways to store data as objects and connections, such as relational databases, for example.
+However, relational databases use computing-wise expensive `JOIN` operations or cross-looks, which are often tied to a rigid schema.
 
 Graph databases do not use these methods.
 Relationships are stored natively alongside the data elements (nodes) in a more flexible format, which allows the optimization of data traversing and millions of connections to be accessed per second, per core.
@@ -64,18 +64,18 @@ Moreover, many daily challenges and tasks can be viewed from a graph perspective
 
 image::use-case-summary.svg[role="popup-link"]
 
-Whether it's a social or a road network, everything can be structured as an interconnected graph of relationships. 
+Whether it's a social or a road network, all networks can be structured as an interconnected graph of relationships. 
 Many times, any project's questions and challenges revolve around the relationship between elements, not the elements themselves (e.g. how to get from A to B, instead of what is A and what is B).
 For this reason, graphs can be applied to many areas of society and to a wide variety of projects.
 
-Neo4j is used today by thousands of https://neo4j.com/customers/[startups, educational institutions, and large enterprises] in all sectors including financial services, government, energy, technology, retail, and manufacturing.
+Neo4j is frequently used today by https://neo4j.com/customers/[startups, educational institutions, and large enterprises] in a variety of sectors including financial services, government, energy, technology, retail, and manufacturing.
 Graphs have been successful in helping them on the development of innovative new technology, business management, insight and revenue regenration, as well as overall improvements in efficiency.
 
-You can find more information link:https://neo4j.com/use-cases/[on use cases] by navigating through the main website.
+You can find more information about use cases on link:https://neo4j.com/use-cases/[Neo4j's main website].
 
 == Keep learning
 
-If you want to have a better and deeper understanding of what a graph database is, read more about xref:reference/graphdb-concepts/index.adoc[Graph database concepts], and enroll to the GraphAcademy course on link:https://graphacademy.neo4j.com/courses/neo4j-fundamentals/[Neo4j Fundamentals].
+If you want to have a better and deeper understanding of graph databases, you can read more about xref:reference/graphdb-concepts/index.adoc[Graph database concepts], or enroll to the GraphAcademy course on link:https://graphacademy.neo4j.com/courses/neo4j-fundamentals/[Neo4j Fundamentals].
 
 
 ifndef::backend-pdf[]

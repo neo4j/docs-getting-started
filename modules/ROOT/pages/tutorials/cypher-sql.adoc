@@ -13,7 +13,9 @@
 This tutorial shows anyone familiar with SQL how to understand Cypher and write the equivalent Cypher queries using the Northwind dataset.
 
 [NOTE]
-To know more what are the differences between the two query languages, refer to the link:{docs-home}/cypher-manual/current/introduction/cypher-overview/#_cypher_and_sql_key_differences[Cypher documentation].
+====
+To learn more about the differences between the two query languages, refer to the link:{docs-home}/cypher-manual/current/introduction/cypher-overview/#_cypher_and_sql_key_differences[Cypher documentation].
+====
 
 [#cypher-sql-northwind]
 == Load the Northwind dataset
@@ -24,7 +26,7 @@ Follow these steps to start working with this dataset:
 
 . link:{docs-home}/deployment-options[Create a Neo4j instance].
 . Import the Northwind dataset.
-.. In case you are using Aura, click on the hat icon on the top-right side menu and follow the _Query fundamentals_ guide up to step 2.
+.. If you are using Aura, click on the hat icon on the top-right side menu and follow the _Query fundamentals_ guide up to step 2.
 +
 image::northwind_dataset_load.png[]
 .. If you are using Neo4j Browser, run `:guide northwind` in the query area.
@@ -38,7 +40,7 @@ image::northwind.png[]
 
 == Start querying
 
-A first, basic query that you can do is t
+A first basic query to do is to find and return records.
 
 _Select and return records_
 

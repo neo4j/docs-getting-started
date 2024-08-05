@@ -126,7 +126,7 @@ In this example, you can use the variable `(p)`, for example, to replace `Person
 ----
 
 If the node is not relevant to your return results, you can also specify an anonymous node using empty parentheses `()`.
-However, you won't be able to return this node later in the query as it was never specified.
+However, you can't return anonymous nodes later in the query.
 
 [source,cypher]
 ----
@@ -140,7 +140,7 @@ You can also refrain from using a variable for certain nodes:
 (:Technology)     //no variable, label Technology
 ----
 
-Or use a whole word as synonym:
+Or use a whole word as the variable:
 
 [source,cypher]
 ----
@@ -150,7 +150,7 @@ Or use a whole word as synonym:
 [#cypher-relationships]
 === Relationships
 
-One of the benefits of graph databases is that you can create relationships between elements (nodes).
+One of the benefits of graph databases is that you can store information about how elements are related to each other in the form of relationships between the elements (nodes).
 In Cypher, relationships are represented as an arrow connecting two nodes (e.g. `(Node1)-->(Node2)`), similarly to how you would represent that if drafting on a whiteboard.
 
 In the example, the lines containing `:LIKES`, `:IS_FRIENDS_WITH`, and `:WORKS_FOR` represent the relationship between the nodes:
@@ -161,21 +161,21 @@ image::cypherintro-graph1.svg[]
 ==== Relationship directions
 
 Relationships *must* always have a direction and a colon (`:`) in the beginning of it.
-They can be to the right:
+They can go from left to right:
 
 [source,cypher]
 ----
 (p:Person)-[:LIKES]->(t:Technology)
 ----
 
-To the left:
+From right to left:
 
 [source,cypher]
 ----
 (p:Person)<-[:LIKES]-(t:Technology)
 ----
 
-Or be undirected:
+Or be undirected (where the direction is *not* specified):
 
 [source,cypher]
 ----
@@ -184,7 +184,8 @@ Or be undirected:
 
 An undirected relationship does not mean that it doesn't have a direction, but that it can be traversed in *either* direction.
 
-When using undirected relationships in a query, Cypher retrieves the relationship with all its connected nodes, no matter the direction of their connection. This allows queries to be flexible and not force the user to know the direction of the relationships stored in the database.
+When using undirected relationships in a query, Cypher retrieves *all* nodes connected by the specified relationship type, regardless of direction.
+This allows for flexible querying. 
 
 Undirected relationships are particularly useful in this case, because if you write a query with the wrong direction, Cypher will not return anything.
 For this reason, it is recommended to use an undirected relationship instead, so you can get any results back.
@@ -193,9 +194,9 @@ For this reason, it is recommended to use an undirected relationship instead, so
 
 In the previous section, you saw how nodes can be connected through a relationship, but the only information that you had there is the direction of this connection.
 
-Relationship types can categorize and add meaning to a relationship, similarly to how labels group nodes.
+Relationship types categorize and add meaning to a relationship, similar to how labels group nodes together.
 It is recommended to name relationship types after verbs and action words to communicate how the nodes relate or connect to each other.
-Also, this makes the query closer to natural language, as it can look like a sentence with a subject (node), a verb (relationship), and an object (another node).
+This way, Cypher is almost like natural language, where nodes are the subjects and objects (nouns), and the relationships (verbs) are the action words that relate them.
 
 In the example used in this page, the relationship types are:
 
@@ -212,12 +213,12 @@ Take this example:
 
 [source,cypher]
 ----
-MATCH (p:Person)-[r:LIKES]->[t:Technology]
+MATCH (p:Person)-[r:LIKES]->(t:Technology)
 RETURN p,r,t
 ----
 
 This query has variables for both the nodes with the labels `Person` and `Technology`, and the relationship `:LIKES`.
-When returning it, you don't need to write the labels over again, but use the variables you appended to them (i.e. `p`, `r`, and `t`.).
+In the return clause, you can then use the variables (i.e.`p`, `r`, and `t`) instead of spelling out the full node labels and relationship type.
 
 This would be your result:
 
@@ -249,7 +250,7 @@ In this case, since no relationship type is declared, Cypher will search for all
 === Properties
 
 Properties are name-value pairs that provide additional details to nodes and relationships.
-In Cypher, they are represented with curly braces within the parentheses of a node or the brackets of a relationship:
+In Cypher, they are represented by curly brackets within the parentheses of a node or the brackets of a relationship:
 
 .Graph example with node and relationship properties.
 image::cypherintro-properties.svg[]

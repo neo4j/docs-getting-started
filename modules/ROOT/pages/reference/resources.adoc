@@ -7,7 +7,7 @@
 :page-toclevels: 3
 
 
-To help you along your path of learning more about Neo4j, we want to provide you with the resources which may encourage you to dive deeper into Neo4j products and graph technology.
+To help you along your learning path about Neo4j, the following are some resources that may encourage you to dive deeper into Neo4j products and graph technology.
 
 [#graphdb-resources]
 == Graph database concepts
@@ -28,9 +28,9 @@ To help you along your path of learning more about Neo4j, we want to provide you
 == Cypher query language
 
 === Cypher basics and documentation
-* https://graphacademy.neo4j.com/courses/cypher-fundamentals/[GraphAcademy: Cypher Fundamentals]
 * https://neo4j.com/docs/cypher-manual/current/[Cypher documentation]
 * https://neo4j.com/docs/cypher-cheat-sheet/current/[Cypher Cheat Sheet]
+* https://graphacademy.neo4j.com/courses/cypher-fundamentals/[GraphAcademy: Cypher Fundamentals]
 * https://community.neo4j.com/c/neo4j-graph-platform/cypher[Neo4j Community forum]
 * https://neo4j.com/product/cypher-graph-query-language/[Cypher Query Language^]
 * xref:tutorials/cypher-sql/[From SQL to Cypher]

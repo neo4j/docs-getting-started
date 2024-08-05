@@ -19,7 +19,7 @@ With a property graph database at its core, Neo4j offers an ecosystem of tools, 
 image:ROOT:icon-neo4j.svg[]
 
 [.description]
-Learn what is a graph database and how to use it in your projects.
+Learn what a graph database is and how to use it in your projects.
 
 [.link]
 xref:whats-neo4j.adoc[]
@@ -67,7 +67,7 @@ link:{docs-home}/model[]
 image:ROOT:icon-import.svg[]
 
 [.description]
-Read more about the several ways of importing data to your Neo4j graph database.
+Read more about the different ways of importing data to your Neo4j graph database.
 
 [.link]
 link:{docs-home}/import/[]
