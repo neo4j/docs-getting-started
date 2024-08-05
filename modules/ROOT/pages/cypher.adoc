@@ -195,7 +195,8 @@ For this reason, it is recommended to use an undirected relationship instead, so
 In the previous section, you saw how nodes can be connected through a relationship, but the only information that you had there is the direction of this connection.
 
 Relationship types categorize and add meaning to a relationship, similar to how labels group nodes together.
-It is recommended to name relationship types after verbs and action words to communicate how the nodes relate or connect to each other.
+It is considered best practice to use verbs or derivatives for the relationship type.
+The type describes how the nodes relate to each other.
 This way, Cypher is almost like natural language, where nodes are the subjects and objects (nouns), and the relationships (verbs) are the action words that relate them.
 
 In the example used in this page, the relationship types are:
@@ -281,8 +282,8 @@ In order to *do* something with this pattern, for example, adding it to the grap
 
 == Keep learning
 
-Now that the basic Cypher concepts were introduced, you can follow the tutorial on how to xref:tutorials/cypher-basics.adoc[Get started with Cypher] for a more hands-on approach.
-In the complete link:{docs-home}/cypher-manual[Cypher documentation], you will also find more information on:
+Now that the basic Cypher concepts have been introduced, you can follow the tutorial on how to xref:tutorials/cypher-basics.adoc[Get started with Cypher] for a more hands-on approach.
+In the complete link:{docs-home}/cypher-manual[Cypher manual], you will also find more information on:
 
 * How to write link:{docs-home}/cypher-manual/current/queries/basic/[basic queries] and what link:{docs-home}/cypher-manual/current/clauses/[clauses] you can use to read data from the database.
 * How link:{docs-home}/cypher-manual/current/patterns/[patterns] work and how you can use them to navigate, describe and extract data from a graph.
@@ -290,7 +291,7 @@ In the complete link:{docs-home}/cypher-manual[Cypher documentation], you will a
 
 === From SQL to Cypher
 
-In case you are already familiar with SQL, there are some resources you can check for more information:
+In case you have a background in SQL and are new to graph databases, these are some resources for more information on the key differences and the transition to graphs:
 
 * link:{docs-home}/cypher-manual/current/introduction/cypher-overview/#_cypher_and_sql_key_differences[Key differences between Cypher and SQL]
 * xref:reference/graphdb-vs-rdbms[Transition from relational to graph database]
@@ -301,7 +302,7 @@ In case you are already familiar with SQL, there are some resources you can chec
 
 === From NoSQL to Graphs
 
-If you are familiar with NoSQL ("Not only SQL") system, you can also learn more on xref:reference/graphdb-vs-nosql[how to make the transition] to a graph database.
+If you are familiar with NoSQL ("Not only SQL") system, you can also learn more on xref:reference/graphdb-concepts/graphdb-vs-nosql.adoc[how to make the transition] to a graph database.
 
 === GraphAcademy
 

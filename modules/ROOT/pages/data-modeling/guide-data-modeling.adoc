@@ -212,7 +212,7 @@ image::modeling_johnsally_relationships-arr.svg[450,450,role="popup-link"]
 We have gone through the process of creating a basic graph data model for the interactions between people and books.
 We can take this data model further by defining attributes of these entities as key-value properties.
 
-Properties are name-value pairs of data that you can store on nodes or on relationships.
+Properties are key-value pairs of data that you can store on nodes or on relationships.
 Most standard data types are supported as properties, and you can find information on that in the section xref:reference/graphdb-concepts/index.adoc[Graph database concepts].
 
 Properties allow you to store relevant data about the node or relationship with the entity it describes.
