@@ -1,45 +1,50 @@
-{
-  "name": "getting-started",
-  "version": "1.0.0",
-  "description": "Neo4j Getting Started Guide",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon -e adoc --exec \"npm run build && npm run serve\"",
-    "serve": "node server.js",
-    "build": "antora --stacktrace preview.yml",
-    "build-verify": "antora --stacktrace --fetch preview.yml --log-format=json --log-level=info --log-file ./build/log/log.json",
-    "publish-verify": "antora --stacktrace --fetch publish.yml --log-format=json --log-file ./build/log/log.json"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/neo4j/docs-getting-started.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/neo4j/docs-getting-started/issues"
-  },
-  "homepage": "https://github.com/neo4j/docs-getting-started#readme",
-  "dependencies": {
-    "@antora/cli": "^3.1.4",
-    "@antora/site-generator-default": "^3.1.4",
-    "@neo4j-antora/antora-add-notes": "^0.3.1",
-    "@neo4j-antora/antora-listing-roles": "^0.1.0",
-    "@neo4j-antora/antora-modify-sitemaps": "^0.4.4",
-    "@neo4j-antora/antora-table-footnotes": "^0.3.2",
-    "@neo4j-antora/mark-terms": "^1.1.0",
-    "@neo4j-documentation/macros": "^1.0.2",
-    "@neo4j-documentation/remote-include": "^1.0.0"
-  },
-  "devDependencies": {
-    "express": "^4.18.2",
-    "nodemon": "^3.0.1"
-  },
-  "overrides": {
-    "@antora/site-generator-default": {
-      "glob-parent": "6.0.2"
-    }
-  }
-}
+site:
+  title: Neo4j Docs
+  url: https://neo4j.com/docs
+  start_page: getting-started:ROOT:introduction.adoc
+
+content:
+  sources:
+  - url: ./
+    branches: ['HEAD']
+    edit_url: https://github.com/neo4j/docs-getting-started/tree/{refname}/{path}
+    exclude:
+    - '!**/_includes/*'
+    - '!**/readme.adoc'
+    - '!**/README.adoc'
+ui:
+  bundle:
+    url: https://static-content.neo4j.com/build/ui-bundle-latest.zip
+    snapshot: true
+  output_dir: /assets
+
+urls:
+  html_extension_style: indexify
+
+asciidoc:
+  extensions:
+  - "@neo4j-documentation/remote-include"
+  - "@neo4j-documentation/macros"
+  - "@neo4j-antora/antora-add-notes"
+  - "@neo4j-antora/antora-listing-roles"
+  - "@neo4j-antora/antora-table-footnotes"
+  - "@neo4j-antora/mark-terms"
+  attributes:
+    page-theme: docs
+    page-type: Docs
+    page-search-type: Docs
+    page-search-site: Reference Docs
+    page-canonical-root: /docs
+    page-pagination: true
+    page-no-canonical: true
+    page-origin-private: false
+    page-hide-toc: false
+    page-mixpanel: 4bfb2414ab973c741b6f067bf06d5575
+    page-terms-to-mark: Cypher
+    includePDF: false
+    nonhtmloutput: ""
+    experimental: ''
+    copyright: 2024
+    common-license-page-uri: https://neo4j.com/docs/license/
+    neo4j-base-uri: https://neo4j.com # this attribute should be an empty string in publish.yml
+    neo4j-docs-base-uri: https://neo4j.com/docs # this attribute should be an empty string in publish.yml
