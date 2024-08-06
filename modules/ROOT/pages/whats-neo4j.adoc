@@ -4,7 +4,7 @@
 include::https://raw.githubusercontent.com/neo4j-graphacademy/courses/main/asciidoc/ads/generic.adoc[]
 
 [.center]
-image::ROOT:neo4j-architecture.svg[]
+image::ROOT:neo4j-architecture-diagram.svg[]
 
 Neo4j is a _native graph database_, which means that it implements a true <<graph>> model all the way down to the storage level.
 Instead of using a "graph abstraction" on top of another technology, the data is stored in Neo4j in the same way you may whiteboard your ideas.

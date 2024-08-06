@@ -35,7 +35,7 @@ With this query syntax, you can perform create, read, update, or delete (CRUD) o
 [TIP]
 ====
 For a quick look with no installation required, get a free link:https://neo4j.com/cloud/platform/aura-graph-database/[Aura instance].
-Write `:guide cypher` in Aura's "Query" tab to access a hands-on guide on Cypher.
+Open *Query* and write `:guide cypher` to access a hands-on guide on Cypher.
 ====
 
 == How does Cypher work?
@@ -151,16 +151,24 @@ Or use a whole word as the variable:
 === Relationships
 
 One of the benefits of graph databases is that you can store information about how elements are related to each other in the form of relationships between the elements (nodes).
-In Cypher, relationships are represented as an arrow connecting two nodes (e.g. `(Node1)-->(Node2)`), similarly to how you would represent that if drafting on a whiteboard.
+
+In Cypher, relationships are represented as an arrow connecting two nodes (e.g. `(Node1)->(Node2)`), similarly to how you would represent that if drafting on a whiteboard.
 
 In the example, the lines containing `:LIKES`, `:IS_FRIENDS_WITH`, and `:WORKS_FOR` represent the relationship between the nodes:
 
 .Graph featuring nodes and relationships.
 image::cypherintro-graph1.svg[]
 
+[NOTE]
+====
+It is a best practice to write the relationship type in upper-case, preceded by a colon (`:`).
+====
+
 ==== Relationship directions
 
-Relationships *must* always have a direction and a colon (`:`) in the beginning of it.
+Relationships *always* have a direction and they are expressed in code enclosed by square brackets (`[]`).
+The direction is indicated by an arrow.
+
 They can go from left to right:
 
 [source,cypher]
@@ -179,27 +187,30 @@ Or be undirected (where the direction is *not* specified):
 
 [source,cypher]
 ----
-(p:Person)-[:LIKES]-(t:Technology)
+MATCH (p:Person)-[:LIKES]-(t:Technology)
 ----
 
+==== Undirected relationships
+
 An undirected relationship does not mean that it doesn't have a direction, but that it can be traversed in *either* direction.
+While you can't *create* relationships without a direction, you can *query* them undirected (in the example, using the link:{docs-home}/cypher-manual/current/clauses/match/[`MATCH`] clause).
 
-When using undirected relationships in a query, Cypher retrieves *all* nodes connected by the specified relationship type, regardless of direction.
-This allows for flexible querying. 
+Using undirected relationships in queries is particularly useful when you don't know the direction, since Cypher won't return anything if you write a query with the wrong direction.
+Cypher will therefore retrieve *all* nodes connected by the specified relationship type, regardless of direction.
 
-Undirected relationships are particularly useful in this case, because if you write a query with the wrong direction, Cypher will not return anything.
-For this reason, it is recommended to use an undirected relationship instead, so you can get any results back.
+[CAUTION]
+====
+Due to performance reasons, it is generally not recommended to query undirected relationships, especially in the case of bigger datasets.
+====
 
 ==== Relationship types
-
-In the previous section, you saw how nodes can be connected through a relationship, but the only information that you had there is the direction of this connection.
 
 Relationship types categorize and add meaning to a relationship, similar to how labels group nodes together.
 It is considered best practice to use verbs or derivatives for the relationship type.
 The type describes how the nodes relate to each other.
 This way, Cypher is almost like natural language, where nodes are the subjects and objects (nouns), and the relationships (verbs) are the action words that relate them.
 
-In the example used in this page, the relationship types are:
+In the previous example, the relationship types are:
 
 * `[:LIKES]` - communicates that Sally (a node) _likes_ graphs (another node).
 * `[:IS_FRIENDS_WITH]` - communicates that Sally _is friends with_ John.
@@ -207,8 +218,8 @@ In the example used in this page, the relationship types are:
 
 ==== Relationship variables
 
-In the same way as xref:cypher.adoc#_node_variables [node variables], relationship variables can also be used as a shortcut.
-Instead of writing the whole relationship type name (e.g. `[:LIKES]`) twice in the query, you can use a variable.
+Variables can be used for relationships in the same way as for nodes. 
+Once you specify a variable, you can use it later in the query to reference the relationship.
 
 Take this example:
 
@@ -218,7 +229,7 @@ MATCH (p:Person)-[r:LIKES]->(t:Technology)
 RETURN p,r,t
 ----
 
-This query has variables for both the nodes with the labels `Person` and `Technology`, and the relationship `:LIKES`.
+This query specifies variables for both the node labels (`p` for `Person` and `t` for `Technology`) and the relationship type (`r` for `:LIKES`).
 In the return clause, you can then use the variables (i.e.`p`, `r`, and `t`) instead of spelling out the full node labels and relationship type.
 
 This would be your result:
@@ -250,19 +261,25 @@ In this case, since no relationship type is declared, Cypher will search for all
 [#cypher-properties]
 === Properties
 
-Properties are name-value pairs that provide additional details to nodes and relationships.
-In Cypher, they are represented by curly brackets within the parentheses of a node or the brackets of a relationship:
+Property values can be added both to nodes and relationships.
+They can also be of a variety of data types.
+For a full list of values and types, see link:{docs-home}cypher-manual/current/values-and-types/[Cypher manual -> Values and types].
+
+Considerintg the previous example, another way to organize the same data would be to add Sally and John in the database not as a label of the node type `Person`, but as a node property such as `name`:
 
 .Graph example with node and relationship properties.
 image::cypherintro-properties.svg[]
 
 [source,cypher]
 ----
-(Person {name: 'Sally'})-[:IS_FRIENDS_WITH {since:'2018'}]->(Person {name: 'John'})
+CREATE (Person {name:'Sally'})-[:IS_FRIENDS_WITH]->(Person {name:'John'})
+RETURN p,r
 ----
 
-Properties can have values with a variety of data types.
-You can see the full list of values and types in the link:https://neo4j.com/docs/cypher-manual/current/values-and-types/[Cypher documentation].
+Note that properties are enclosed by curly brackets (`{}`), and with its content enclosed by apostrophes (`''`).
+
+In case you have already added Sally and John as node labels, but want to change them into node properties, you will need to refactor your graph.
+Refactoring is a strategy in link:{docs-home}/model[data modeling] that you can try out in link:{docs-home}/getting-started/data-modeling/graph-model-refactoring/[this tutorial].
 
 [#cypher-patterns]
 === Patterns in Cypher
@@ -278,7 +295,22 @@ For example:
 This bit of Cypher represents a pattern, but it is not a query.
 It only expresses that `Person` node with _Sally_ as its `name` property has a `:LIKES` relationship with the `Technology` node with _Graphs_ as its `type` property.
 
-In order to *do* something with this pattern, for example, adding it to the graph or retrieving it in case it already exists, you need to *query* the database.
+In order to *do* something with this pattern, such as adding it to the graph or retrieving it in case it already exists, you need to *query* the database.
+
+For example, you can add information to the database:
+
+[source, cypher]
+----
+CREATE (p:Person {name: "Sally"})-[r:LIKES]->(t:Technology {type: "Graphs"})
+----
+
+And once this data is written to the database, you can retrieve this pattern:
+
+[source, cypher]
+----
+MATCH (p:Person {name: "Sally"})-[r:LIKES]->(t:Technology {type: "Graphs"})
+RETURN p,rel,g
+----
 
 == Keep learning
 
