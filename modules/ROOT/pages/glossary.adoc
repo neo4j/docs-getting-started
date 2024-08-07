@@ -1,0 +1,27 @@
+[glossary]
+
+[[label]]label:: Marks a node as a member of a named and indexed subset. A node may be assigned zero or more labels.
+[[labels]]labels:: A label marks a node as a member of a named and indexed subset. A node may be assigned zero or more labels.
+
+[[node]]node:: A node represents an entity or discrete object in your graph data model. Nodes can be connected by relationships, hold data in properties, and are classified by labels.
+[[nodes]]nodes:: A node represents an entity or discrete object in your graph data model. Nodes can be connected by relationships, hold data in properties, and are classified by labels.
+
+[[relationship]]relationship:: A relationship represents a connection between nodes in your graph data model. Relationships connect a source node to a target node, hold data in properties, and are classified by type.
+[[relationships]]relationships:: A relationship represents a connection between nodes in your graph data model. Relationships connect a source node to a target node, hold data in properties, and are classified by type.
+
+[[property]]property:: Properties are key-value pairs that are used for storing data on nodes and relationships.
+[[properties]]properties:: Properties are key-value pairs that are used for storing data on nodes and relationships.
+
+[[cluster]]cluster:: A Neo4j DBMS that spans multiple servers working together to increase fault tolerance and/or read scalability. Databases on a cluster may be configured to replicate across servers in the cluster thus achieving read scalability or high availability.
+[[clusters]]clusters:: A Neo4j DBMS that spans multiple servers working together to increase fault tolerance and/or read scalability. Databases on a cluster may be configured to replicate across servers in the cluster thus achieving read scalability or high availability.
+
+[[graph]]graph:: A logical representation of a set of nodes where some pairs are connected by relationships.
+[[graphs]]graphs:: A logical representation of a set of nodes where some pairs are connected by relationships.
+
+[[schema]]schema:: The prescribed property existence and datatypes for nodes and relationships.
+[[schemas]]schemas:: The prescribed property existence and datatypes for nodes and relationships.
+[[database schema]]database schema:: The prescribed property existence and datatypes for nodes and relationships.
+
+[[indexes]]indexes:: Data structure that improves read performance of a database. link:https://neo4j.com/docs/cypher-manual/current/indexes/[Read more about supported categories of indexes].
+
+[[constraints]]constraints:: Constraints are sets of data modeling rules that ensure the data is consistent and reliable. link:https://neo4j.com/docs/cypher-manual/current/constraints/[See what constraints are available in Cypher].
