@@ -30,8 +30,8 @@ Neo4j currently supports Java, JavaScript, .NET, Python, Go, GraphQL, Spring, an
 
 == Create a Neo4j instance
 
-Deploying a database is the first step to take to explore Neo4j.
-link:{docs-home}/deployment-options[Choose a deployment method] that better suits your project among the following options:
+Deploying a database is the first step towards exploring Neo4j.
+link:{docs-home}/deployment-options[Select a deployment method] that suits your project from the following options:
 
 === Fully managed cloud service
 
@@ -47,18 +47,19 @@ link:https://neo4j.com/pricing/[See full comparison].
 You can also deploy your graph database on a link:{docs-home}/operations-manual/current/cloud-deployments[cloud platform] of your choice.
 Neo4j works with Amazon Web Services (AWS), Google Cloud (GCP), and Microsoft Azure. 
 
-For this option, you need to link:{docs-home}/operations-manual/current/installation/[install Neo4j] to your machine or use link:{docs-home}/desktop-manual[Neo4j Desktop] in case your project is not in a production environment.
+For self-managed cloud services, you need to link:{docs-home}/operations-manual/current/installation/[install Neo4j] locally or use link:{docs-home}/desktop-manual[Neo4j Desktop] if your project is not in a production environment.
 
 Neo4j is available for installation on link:https://neo4j.com/docs/operations-manual/current/installation/linux/[Linux], link:https://neo4j.com/docs/operations-manual/current/installation/osx/[macOs], and link:https://neo4j.com/docs/operations-manual/current/installation/windows/[Windows].
 
 === Self-managed local deployment
 
-If you prefer to work with a local deployment, you can follow the same instructions: install link:{docs-home}/desktop-manual[Neo4j Desktop] in case you are not working in a production environment or link:{docs-home}/operations-manual/current/installation/[install Neo4j] to your machine.
+If you prefer to work with a local deployment: install link:{docs-home}/desktop-manual[Neo4j Desktop] if you are not working in a production environment or link:{docs-home}/operations-manual/current/installation/[install Neo4j] locally.
 
 ==== Neo4j on Docker
 
-link:{docs-home}/operations-manual/current/docker[Docker] can be downloaded for macOS, Windows, and Linux from the link:https://www.docker.com/get-started[DockerHub].
-It hosts an official Neo4j image that provides a standard, ready-to-run package of Neo4j Community Edition and Enterprise Edition for a variety of versions.
+Neo4j can be run in a Docker container.
+An official Neo4j image that provides a standard, ready-to-run package of Neo4j Community Edition and Enterprise Edition for a variety of versions can be downloaded from the link:https://www.docker.com/get-started[DockerHub].
+It is available for macOS, Windows, and Linux.
 
 ==== Neo4j on Kubernetes
 
@@ -70,7 +71,7 @@ Read more about the link:https://neo4j.com/licensing/[available editions].
 
 == Work with data
 
-After creating your database, you can take different paths depending on whether you want to work with your own data or use Neo4j's example datasets:
+After creating your database, your learning can take different paths depending on whether you want to work with your own data or use Neo4j's example datasets:
 
 * *Own data*: There are several ways to link:{docs-home}/import[import] data to Neo4j.
 In case your dataset is not set for a graph database, it is recommended to link:{docs-home}/getting-started/data-modeling/[model] it for a better experience.
@@ -109,9 +110,9 @@ At link:https://neo4j.com/labs/[Neo4j Labs], you can find experimental projects 
 
 == Keep learning
 
-To learn more about xref:graph-database.adoc[what is a graph database] and xref:reference/graphdb-concepts/index.adoc[the concepts] behind the technology, continue reading the documentation or check xref:reference/resources.adoc[other curated resources].
+To learn more about xref:graph-database.adoc[what a graph database is] and xref:reference/graphdb-concepts/index.adoc[the concepts] behind the technology, continue reading the documentation or browse xref:reference/resources.adoc[other curated resources].
 
-You can also reach out to other members of our community on the link:https://community.neo4j.com/c/neo4j-graph-platform/cypher/12?ref=guides[Neo4j Community Site].
+You can also reach out to other members of the Neo4j community on the link:https://community.neo4j.com/c/neo4j-graph-platform/cypher/12?ref=guides[Neo4j Community Site].
 
 
 ifndef::backend-pdf[]

@@ -115,7 +115,7 @@ This can affect performance in very large graphs.
 
 ==== Node variables
 
-You don't need to refer to a label always in full.
+You don't always need to refer to a label in full.
 Similarly to abbreviations and other programming language variables, node variables can be used as a shortcut.
 
 In this example, you can use the variable `(p)`, for example, to replace `Person`, so you don't need to write it in full every time you mention it in the same query:
@@ -152,7 +152,7 @@ Or use a whole word as the variable:
 
 One of the benefits of graph databases is that you can store information about how elements are related to each other in the form of relationships between the elements (nodes).
 
-In Cypher, relationships are represented as an arrow connecting two nodes (e.g. `(Node1)->(Node2)`), similarly to how you would represent that if drafting on a whiteboard.
+In Cypher, relationships are represented as square brackets and an arrow connecting two nodes (e.g. `(Node1)-[]->(Node2)`), as how you may draw a relationship on a whiteboard.
 
 In the example, the lines containing `:LIKES`, `:IS_FRIENDS_WITH`, and `:WORKS_FOR` represent the relationship between the nodes:
 
@@ -161,13 +161,12 @@ image::cypherintro-graph1.svg[]
 
 [NOTE]
 ====
-It is a best practice to write the relationship type in upper-case, preceded by a colon (`:`).
+Best practice is to write the relationship type in upper-case, preceded by a colon (`:`).
 ====
 
 ==== Relationship directions
 
-Relationships *always* have a direction and they are expressed in code enclosed by square brackets (`[]`).
-The direction is indicated by an arrow.
+Relationships *always* have a direction which is indicated by an arrow.
 
 They can go from left to right:
 
@@ -200,7 +199,7 @@ Cypher will therefore retrieve *all* nodes connected by the specified relationsh
 
 [CAUTION]
 ====
-Due to performance reasons, it is generally not recommended to query undirected relationships, especially in the case of bigger datasets.
+Due to performance reasons, it is generally not recommended to query undirected relationships, especially in the case of larger datasets.
 ====
 
 ==== Relationship types
@@ -247,7 +246,7 @@ image::cypherintro-variables.svg[]
 3+d|Rows: 1
 |===
 
-Remember to always use a colon in front of a relationship type.
+Remember to always put a colon in front of a relationship type.
 If you happen to forget it, and write the query like this:
 
 [source,cypher]
@@ -265,7 +264,7 @@ Property values can be added both to nodes and relationships.
 They can also be of a variety of data types.
 For a full list of values and types, see link:{docs-home}cypher-manual/current/values-and-types/[Cypher manual -> Values and types].
 
-Considerintg the previous example, another way to organize the same data would be to add Sally and John in the database not as a label of the node type `Person`, but as a node property such as `name`:
+Another way to organize the data in the previous example would be to add a *property*, `name`, and `Sally` and `John` as *property values* on `Person`-labeled nodes:
 
 .Graph example with node and relationship properties.
 image::cypherintro-properties.svg[]
@@ -278,8 +277,8 @@ RETURN p,r
 
 Note that properties are enclosed by curly brackets (`{}`), and with its content enclosed by apostrophes (`''`).
 
-In case you have already added Sally and John as node labels, but want to change them into node properties, you will need to refactor your graph.
-Refactoring is a strategy in link:{docs-home}/model[data modeling] that you can try out in link:{docs-home}/getting-started/data-modeling/graph-model-refactoring/[this tutorial].
+In case you have already added Sally and John as node labels, but want to change them into node properties, you need to refactor your graph.
+Refactoring is a strategy in link:{docs-home}/model[data modeling] that you can learn more about in link:{docs-home}/getting-started/data-modeling/graph-model-refactoring/[this tutorial].
 
 [#cypher-patterns]
 === Patterns in Cypher
@@ -295,7 +294,7 @@ For example:
 This bit of Cypher represents a pattern, but it is not a query.
 It only expresses that `Person` node with _Sally_ as its `name` property has a `:LIKES` relationship with the `Technology` node with _Graphs_ as its `type` property.
 
-In order to *do* something with this pattern, such as adding it to the graph or retrieving it in case it already exists, you need to *query* the database.
+In order to *do* something with this pattern, such as adding it to or retrieving it from the graph, you need to *query* the database.
 
 For example, you can add information to the database:
 
@@ -304,18 +303,18 @@ For example, you can add information to the database:
 CREATE (p:Person {name: "Sally"})-[r:LIKES]->(t:Technology {type: "Graphs"})
 ----
 
-And once this data is written to the database, you can retrieve this pattern:
+And once this data is written to the database, you can retrieve it with this pattern:
 
 [source, cypher]
 ----
 MATCH (p:Person {name: "Sally"})-[r:LIKES]->(t:Technology {type: "Graphs"})
-RETURN p,rel,g
+RETURN p,r,t
 ----
 
 == Keep learning
 
-Now that the basic Cypher concepts have been introduced, you can follow the tutorial on how to xref:tutorials/cypher-basics.adoc[Get started with Cypher] for a more hands-on approach.
-In the complete link:{docs-home}/cypher-manual[Cypher manual], you will also find more information on:
+Now that the basic Cypher concepts have been introduced, you can take the tutorial on how to xref:tutorials/cypher-basics.adoc[Get started with Cypher] to learn how to write your own queries.
+In the link:{docs-home}/cypher-manual[Cypher manual], you can find more information on:
 
 * How to write link:{docs-home}/cypher-manual/current/queries/basic/[basic queries] and what link:{docs-home}/cypher-manual/current/clauses/[clauses] you can use to read data from the database.
 * How link:{docs-home}/cypher-manual/current/patterns/[patterns] work and how you can use them to navigate, describe and extract data from a graph.

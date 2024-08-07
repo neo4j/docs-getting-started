@@ -30,10 +30,10 @@ Graph databases are structured through nodes and relationships.
 
 *Relationships* provide named connections between two nodes (e.g., _Person_ - `LOVES` - _Person_) and they:
 
-* Must always have a start node, an end node, and a xref:https://neo4j.com/docs/cypher-manual/current/values-and-types/[type] (e.g. )
-* Can be directed or undirected.
+* Must always have a start node, an end node, and a xref:https://neo4j.com/docs/cypher-manual/current/values-and-types/[type].
+* Must have a direction.
 * Can have properties, like nodes.
-* Can be attached to nodes, no matter how many they are and of what type, without sacrificing performance.
+* Nodes can have multiple relationships of various types without sacrificing performance.
 * Are very useful as a strategy for xref:data-modeling/index.adoc[modeling your data].
 
 In summary, nodes and relationships are an efficient and flexible way to store data since they allow you to:
@@ -45,10 +45,9 @@ In summary, nodes and relationships are an efficient and flexible way to store d
 [[why-graphdb]]
 == Why use a graph database
 
-Projects often deal with large amounts of complex data.
-In such projects, graph databases can be a powerful tool.
+Projects often deal with large amounts of complex data and graph databases can be a powerful tool.
 
-Aside from graph databases, there are other ways to store data as objects and connections, such as relational databases, for example.
+There are other ways to store data as objects and connections, such as relational databases, for example.
 However, relational databases use computing-wise expensive `JOIN` operations or cross-looks, which are often tied to a rigid schema.
 
 Graph databases do not use JOINs.
@@ -65,7 +64,7 @@ Moreover, many daily challenges and tasks can be viewed from a graph perspective
 image::use-case-summary.svg[role="popup-link"]
 
 Whether it's a social or a road network, all networks can be structured as an interconnected graph of relationships. 
-Many times, any project's questions and challenges revolve around the relationship between elements, not the elements themselves (e.g. how to get from A to B, instead of what is A and what is B).
+Many times, a project's questions and challenges revolve around the relationship between elements, not the elements themselves (e.g. how to get from A to B, instead of what A is and what B is).
 For this reason, graphs can be applied to many areas of society and to a wide variety of projects.
 
 Neo4j is frequently used today by https://neo4j.com/customers/[startups, educational institutions, and large enterprises] in a variety of sectors including financial services, government, energy, technology, retail, and manufacturing.
@@ -75,7 +74,7 @@ You can find more information about use cases on link:https://neo4j.com/use-case
 
 == Keep learning
 
-If you want to have a better and deeper understanding of graph databases, you can read more about xref:reference/graphdb-concepts/index.adoc[Graph database concepts], or enroll to the GraphAcademy course on link:https://graphacademy.neo4j.com/courses/neo4j-fundamentals/[Neo4j Fundamentals].
+If you want to get a better and deeper understanding of graph databases, you can read more about xref:reference/graphdb-concepts/index.adoc[Graph database concepts], or enroll to the GraphAcademy course on link:https://graphacademy.neo4j.com/courses/neo4j-fundamentals/[Neo4j Fundamentals].
 
 
 ifndef::backend-pdf[]
