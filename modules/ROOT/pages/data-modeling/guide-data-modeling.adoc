@@ -296,7 +296,6 @@ A walkthrough of designs for different use cases is xref:data-modeling/modeling-
 * link:https://neo4j.com/blog/data-modeling-basics/[Blog post: Graph Data Modeling Basics^]
 * link:https://neo4j.com/graphgists/[GraphGists: Graph Model Examples^]
 * link:https://neo4j.com/blog/data-modeling-pitfalls/[Blog post: Data Modeling Pitfalls to Avoid^]
-* link:https://neo4j.com/blog/data-modeling-basics/[Blog post: Graph Data Modeling Basics^]
 * link:https://neo4j.com/graphgists/[GraphGists: Graph Model Examples^]
 * link:https://neo4j.com/blog/data-modeling-pitfalls/[Blog post: Data Modeling Pitfalls to Avoid^]
 * https://graphacademy.neo4j.com/courses/modeling-fundamentals/[Free online training course: Graph Data Modeling Fundamentals^]
