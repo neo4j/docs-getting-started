@@ -18,7 +18,7 @@ For the complete documentation, refer to link:{docs-home}/cypher/[Cypher].
 .A visual representation of a Cypher query
 image::cypher-learning-arr.svg[role="popup-link",width=450]
 
-Cypher is Neo4j's declarative query language. 
+Cypher is Neo4j's declarative, link:https://neo4j.com/docs/cypher-manual/current/appendix/gql-conformance/[GQL conformant] query language. 
 Available as open source via link:http://openCypher.org[The openCypher project], Cypher is link:{docs-home}/cypher-manual/current/introduction/cypher-overview/#_cypher_and_sql_key_differences[similar to SQL], but optimized for graphs.
 This means Cypher focuses on *what data* you want out of the graph rather than *how to* get it.
 
@@ -29,7 +29,7 @@ Intuitive and close to natural language, Cypher provides a visual way of matchin
 (nodes)-[:ARE_CONNECTED_TO]->(otherNodes)
 ----
 
-Round brackets are used to represent `(nodes)`, and `-[:ARROWS]->` to represent a relationship between the `(nodes)`.
+Round brackets are used to represent `(:Nodes)`, and `-[:ARROWS]->` to represent a relationship between the `(:Nodes)`.
 With this query syntax, you can perform create, read, update, or delete (CRUD) operations on your graph.
 
 [TIP]
@@ -40,12 +40,10 @@ Open *Query* and write `:guide cypher` to access a hands-on guide on Cypher.
 
 == How does Cypher work?
 
-Neo4j's graph model is composed of <<nodes>> and <<relationships>>, which may also have <<properties>> associated with them.
-With nodes and relationships, you can build powerful patterns that can express simple or complex traversals and paths.
+Neo4j's graph model is composed of <<nodes>> and <<relationships>>, which may also have assigned <<properties>>.
+With nodes and relationships, you can build powerful patterns that can express simple or complex patterns.
 
-Pattern recognition is a fundamental human cognitive process, and that is why visual diagrams or memory-matching games can be useful in learning.
-Cypher is also heavily based on patterns and it is designed to recognize them in data.
-That makes Cypher a language that is easy to learn and use.
+Pattern recognition is a key fundamental cognitive process, making Cypher, which utilizes pattern matching, intuitive and easy to learn.
 
 [#cypher-syntax]
 == Cypher syntax
@@ -152,7 +150,7 @@ Or use a whole word as the variable:
 
 One of the benefits of graph databases is that you can store information about how elements are related to each other in the form of relationships between the elements (nodes).
 
-In Cypher, relationships are represented as square brackets and an arrow connecting two nodes (e.g. `(Node1)-[]->(Node2)`), as how you may draw a relationship on a whiteboard.
+In Cypher, relationships are represented as square brackets and an arrow connecting two nodes (e.g. `(Node1)-[]->(Node2)`).
 
 In the example, the lines containing `:LIKES`, `:IS_FRIENDS_WITH`, and `:WORKS_FOR` represent the relationship between the nodes:
 
@@ -229,7 +227,7 @@ RETURN p,r,t
 ----
 
 This query specifies variables for both the node labels (`p` for `Person` and `t` for `Technology`) and the relationship type (`r` for `:LIKES`).
-In the return clause, you can then use the variables (i.e.`p`, `r`, and `t`) instead of spelling out the full node labels and relationship type.
+In the return clause, you can then use the variables (i.e.`p`, `r`, and `t`) to return the bound entities.
 
 This would be your result:
 
@@ -260,8 +258,7 @@ In this case, since no relationship type is declared, Cypher will search for all
 [#cypher-properties]
 === Properties
 
-Property values can be added both to nodes and relationships.
-They can also be of a variety of data types.
+Property values can be added both to nodes and relationships and be of a variety of data types.
 For a full list of values and types, see link:{docs-home}cypher-manual/current/values-and-types/[Cypher manual -> Values and types].
 
 Another way to organize the data in the previous example would be to add a *property*, `name`, and `Sally` and `John` as *property values* on `Person`-labeled nodes:
@@ -275,7 +272,7 @@ CREATE (Person {name:'Sally'})-[:IS_FRIENDS_WITH]->(Person {name:'John'})
 RETURN p,r
 ----
 
-Note that properties are enclosed by curly brackets (`{}`), and with its content enclosed by apostrophes (`''`).
+Properties are enclosed by curly brackets (`{}`), the key is followed by a colon, and the value is enclosed by single or double quotation marks.
 
 In case you have already added Sally and John as node labels, but want to change them into node properties, you need to refactor your graph.
 Refactoring is a strategy in link:{docs-home}/model[data modeling] that you can learn more about in link:{docs-home}/getting-started/data-modeling/graph-model-refactoring/[this tutorial].
@@ -292,7 +289,7 @@ For example:
 ----
 
 This bit of Cypher represents a pattern, but it is not a query.
-It only expresses that `Person` node with _Sally_ as its `name` property has a `:LIKES` relationship with the `Technology` node with _Graphs_ as its `type` property.
+It only expresses that a `Person` node with _Sally_ as its `name` property has a `:LIKES` relationship to the `Technology` node with _Graphs_ as its `type` property.
 
 In order to *do* something with this pattern, such as adding it to or retrieving it from the graph, you need to *query* the database.
 
