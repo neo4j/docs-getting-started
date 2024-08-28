@@ -12,12 +12,6 @@
 * link:{docs-home}/gds/[Get insights from data]
 * link:{docs-home}/visualize/[Create data visualizations]
 
-* *GraphAcademy courses*
-* link:https://graphacademy.neo4j.com/courses/neo4j-fundamentals/[Neo4j fundamentals]
-* link:https://graphacademy.neo4j.com/courses/cypher-fundamentals/[Cypher fundamentals]
-* link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/[Data modeling fundamentals]
-* link:https://graphacademy.neo4j.com/courses/importing-fundamentals/[Importing data fundamentals]
-
 * *Reference*
 
 * xref:reference/graphdb-concepts/index.adoc[Graph database concepts]
