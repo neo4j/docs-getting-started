@@ -20,13 +20,12 @@ image::cypher-learning-arr.svg[role="popup-link",width=450]
 
 Cypher is Neo4j's declarative, link:https://neo4j.com/docs/cypher-manual/current/appendix/gql-conformance/[GQL conformant] query language. 
 Available as open source via link:http://openCypher.org[The openCypher project], Cypher is link:{docs-home}/cypher-manual/current/introduction/cypher-overview/#_cypher_and_sql_key_differences[similar to SQL], but optimized for graphs.
-This means Cypher focuses on *what data* you want out of the graph rather than *how to* get it.
 
 Intuitive and close to natural language, Cypher provides a visual way of matching patterns and relationships by having its own design based on ASCII-art type of syntax:
 
 [source,cypher]
 ----
-(nodes)-[:ARE_CONNECTED_TO]->(otherNodes)
+(:nodes)-[:ARE_CONNECTED_TO]->(:otherNodes)
 ----
 
 Round brackets are used to represent `(:Nodes)`, and `-[:ARROWS]->` to represent a relationship between the `(:Nodes)`.
@@ -72,9 +71,9 @@ Now, if you were to write this same information in Cypher, then it would look li
 
 [source, cypher]
 ----
-(Sally)-[:LIKES]->(Graphs)
-(Sally)-[:IS_FRIENDS_WITH]->(John)
-(Sally)-[:WORKS_FOR]->(Neo4j)
+(:Sally)-[:LIKES]->(:Graphs)
+(:Sally)-[:IS_FRIENDS_WITH]->(:John)
+(:Sally)-[:WORKS_FOR]->(:Neo4j)
 ----
 
 However, in order to have this information in the graph, first you need to represent it as nodes and relationships.
@@ -113,42 +112,48 @@ This can affect performance in very large graphs.
 
 ==== Node variables
 
-You don't always need to refer to a label in full.
-Similarly to abbreviations and other programming language variables, node variables can be used as a shortcut.
+Though not mandatory, variables are particularly useful when querying a database, as they allow referencing specified nodes in subsequent clauses without writing their label in full.
 
-In this example, you can use the variable `(p)`, for example, to replace `Person`, so you don't need to write it in full every time you mention it in the same query:
+Variables can be single letters or words, and should be written in lower-case.
+For example, if you want to bound all nodes labeled `Person` to the variable `p`, you write `(p:Person)`.
+Likewise, if you want to use a full word, then you can write `(person:Person)`.
+
+In a link:{docs-home}/cypher-manual/current/clauses/match/[`MATCH`] query to retrieve all nodes labeled `Person`, this is how it looks like:
+
+[cols="<,<",options="header"]
+|===
+| **Without variable**
+| **With variable** 
+
+a| [source,cypher]
+----
+MATCH (:Person)
+RETURN Person
+----
+a| [source,cypher]
+----
+MATCH (p:Person)
+RETURN p
+----
+|===
+
+Note that in the example without a variable, the node `Person` is preceded by a colon (`:`).
+This is how you prevent a type or label of becoming a variable.
+
+In case you forget to add a colon and write the query like this:
 
 [source,cypher]
 ----
-(p:Person)         //using variable p and label Person
+MATCH (Person)
+RETURN Person
 ----
 
-If the node is not relevant to your return results, you can also specify an anonymous node using empty parentheses `()`.
-However, you can't return anonymous nodes later in the query.
-
-[source,cypher]
-----
-()                //anonymous node (no label or variable) can refer to any node in the database
-----
-
-You can also refrain from using a variable for certain nodes:
-
-[source,cypher]
-----
-(:Technology)     //no variable, label Technology
-----
-
-Or use a whole word as the variable:
-
-[source,cypher]
-----
-(work:Company)   //using variable work and label Company
-----
+Then `Person` would be a variable, not a type or label.
 
 [#cypher-relationships]
 === Relationships
 
-One of the benefits of graph databases is that you can store information about how elements are related to each other in the form of relationships between the elements (nodes).
+One of the benefits of graph databases is that you can store information about how elements (nodes) are related to each other in the form of relationships.
 
 In Cypher, relationships are represented as square brackets and an arrow connecting two nodes (e.g. `(Node1)-[]->(Node2)`).
 
@@ -159,7 +164,8 @@ image::cypherintro-graph1.svg[]
 
 [NOTE]
 ====
-Best practice is to write the relationship type in upper-case, preceded by a colon (`:`).
+Remember to always put a colon in front of a relationship type.
+If you happen to forget it, and write a query such as `(:Person)-[LIKES]->(:Technology)`, `[LIKES]` will then represent a xref:cypher.adoc#_relationship_variables[relationship *variable*], not a relationship *type*.
 ====
 
 ==== Relationship directions
@@ -268,8 +274,8 @@ image::cypherintro-properties.svg[]
 
 [source,cypher]
 ----
-CREATE (Person {name:'Sally'})-[:IS_FRIENDS_WITH]->(Person {name:'John'})
-RETURN p,r
+CREATE (p:Person {name:'Sally'})-[r:IS_FRIENDS_WITH]->(p:Person {name:'John'})
+RETURN p, r
 ----
 
 Properties are enclosed by curly brackets (`{}`), the key is followed by a colon, and the value is enclosed by single or double quotation marks.
@@ -280,20 +286,22 @@ Refactoring is a strategy in link:{docs-home}/model[data modeling] that you can 
 [#cypher-patterns]
 === Patterns in Cypher
 
-As mentioned before, Cypher is heavily based on patterns and it is designed to recognize them in data.
-For example:
+Graph pattern matching sits at the very core of Cypher. 
+It is the mechanism used to navigate, describe, and extract data from a graph by applying a declarative pattern.
+
+Consider this example:
 
 [source, cypher]
 ----
-(p:Person {name: "Sally"})-[rel:LIKES]->(g:Technology {type: "Graphs"})
+(p:Person {name: "Sally"})-[r:LIKES]->(g:Technology {type: "Graphs"})
 ----
 
 This bit of Cypher represents a pattern, but it is not a query.
-It only expresses that a `Person` node with _Sally_ as its `name` property has a `:LIKES` relationship to the `Technology` node with _Graphs_ as its `type` property.
+It only expresses that a `Person` node with _Sally_ as its `name` property has a `LIKES` relationship to the `Technology` node with _Graphs_ as its `type` property.
 
 In order to *do* something with this pattern, such as adding it to or retrieving it from the graph, you need to *query* the database.
 
-For example, you can add information to the database:
+For example, you can add this information to the database using the link:{docs-home}/cypher-manual/current/clauses/create/[`CREATE`] clause:
 
 [source, cypher]
 ----
@@ -307,6 +315,11 @@ And once this data is written to the database, you can retrieve it with this pat
 MATCH (p:Person {name: "Sally"})-[r:LIKES]->(t:Technology {type: "Graphs"})
 RETURN p,r,t
 ----
+
+=== Patterns variables
+
+In the same way as nodes and relationships, you can also use variables for patterns.
+For more information, refer to link:{docs-home}/cypher-manual/current/patterns/reference/[Cypher manual -> Patterns -> Syntax and Semantics].
 
 == Keep learning
 

@@ -23,5 +23,6 @@
 [[database schema]]database schema:: The prescribed property existence and datatypes for nodes and relationships.
 
 [[indexes]]indexes:: Data structure that improves read performance of a database. link:https://neo4j.com/docs/cypher-manual/current/indexes/[Read more about supported categories of indexes].
+[[indexed]]indexed:: Data structure that improves read performance of a database. link:https://neo4j.com/docs/cypher-manual/current/indexes/[Read more about supported categories of indexes].
 
 [[constraints]]constraints:: Constraints are sets of data modeling rules that ensure the data is consistent and reliable. link:https://neo4j.com/docs/cypher-manual/current/constraints/[See what constraints are available in Cypher].

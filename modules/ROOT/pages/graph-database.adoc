@@ -26,20 +26,19 @@ Graph databases are structured through nodes and relationships.
 
 * Be tagged with <<labels>> representing their different roles in a domain (e.g., `Person`).
 * Hold any number of link:https://neo4j.com/docs/cypher-manual/current/values-and-types/[key-value pairs] as properties (e.g., `name`).
-* Include metadata such as <<indexes>> or <<constraints>> information.
+* Be <<indexed>> and bound by <<constraints>>.
 
 *Relationships* provide named connections between two nodes (e.g., _Person_ - `LOVES` - _Person_) and they:
 
-* Must always have a start node, an end node, and a xref:https://neo4j.com/docs/cypher-manual/current/values-and-types/[type].
+* Must always have a start node, an end node, and one and only type.
 * Must have a direction.
 * Can have properties, like nodes.
 * Nodes can have multiple relationships of various types without sacrificing performance.
-* Are very useful as a strategy for xref:data-modeling/index.adoc[modeling your data].
 
 In summary, nodes and relationships are an efficient and flexible way to store data since they allow you to:
 
 * Create constant time traversals in big graphs for both depth and breadth.
-* Scale-up your database to billions of nodes while using moderate hardware.
+* Scale-up your database to billions of nodes.
 * Design flexible property graph <<schemas>> that can adapt over time.
 
 [[why-graphdb]]
