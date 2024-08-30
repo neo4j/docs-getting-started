@@ -201,9 +201,10 @@ While you can't *create* relationships without a direction, you can *query* them
 Using undirected relationships in queries is particularly useful when you don't know the direction, since Cypher won't return anything if you write a query with the wrong direction.
 Cypher will therefore retrieve *all* nodes connected by the specified relationship type, regardless of direction.
 
-[CAUTION]
+[NOTE]
 ====
-Due to performance reasons, it is generally not recommended to query undirected relationships, especially in the case of larger datasets.
+Because undirected relationships in queries are traversed twice (once for each direction), the same pattern will be returned twice.
+This may impact the performance of the query.
 ====
 
 ==== Relationship types

@@ -39,7 +39,7 @@ In summary, nodes and relationships are an efficient and flexible way to store d
 
 * Create constant time traversals in big graphs for both depth and breadth.
 * Scale-up your database to billions of nodes.
-* Design flexible property graph <<schemas>> that can adapt over time.
+* Design flexible property graph data models that can adapt over time.
 
 [[why-graphdb]]
 == Why use a graph database
@@ -47,7 +47,7 @@ In summary, nodes and relationships are an efficient and flexible way to store d
 Projects often deal with large amounts of complex data and graph databases can be a powerful tool.
 
 There are other ways to store data as objects and connections, such as relational databases, for example.
-However, relational databases use computing-wise expensive `JOIN` operations or cross-looks, which are often tied to a rigid schema.
+However, relational databases use computing-wise expensive `JOIN` operations or cross-looks, which are often tied to a rigid data model.
 
 Graph databases do not use JOINs.
 Rather, relationships are stored natively alongside the data elements (nodes) in a more flexible format, which allows the optimization of data traversing and millions of connections to be accessed per second.
