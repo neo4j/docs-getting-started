@@ -37,7 +37,7 @@ Graph databases are structured through nodes and relationships.
 
 In summary, nodes and relationships are an efficient and flexible way to store data since they allow you to:
 
-* Create constant time traversals in big graphs for both depth and breadth.
+* Create traversals in big graphs for both depth and breadth.
 * Scale-up your database to billions of nodes.
 * Design flexible property graph data models that can adapt over time.
 
