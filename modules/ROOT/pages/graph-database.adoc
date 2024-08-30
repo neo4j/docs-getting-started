@@ -30,7 +30,7 @@ Graph databases are structured through nodes and relationships.
 
 *Relationships* provide named connections between two nodes (e.g., _Person_ - `LOVES` - _Person_) and they:
 
-* Must always have a start node, an end node, and one and only type.
+* Must always have a start node, an end node, and exactly one type.
 * Must have a direction.
 * Can have properties, like nodes.
 * Nodes can have multiple relationships of various types without sacrificing performance.

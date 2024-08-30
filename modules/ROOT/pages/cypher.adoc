@@ -18,7 +18,7 @@ For the complete documentation, refer to link:{docs-home}/cypher/[Cypher].
 .A visual representation of a Cypher query
 image::cypher-learning-arr.svg[role="popup-link",width=450]
 
-Cypher is Neo4j's declarative, link:https://neo4j.com/docs/cypher-manual/current/appendix/gql-conformance/[GQL conformant] query language. 
+Cypher is Neo4j's declarative and link:https://neo4j.com/docs/cypher-manual/current/appendix/gql-conformance/[GQL conformant] query language. 
 Available as open source via link:http://openCypher.org[The openCypher project], Cypher is link:{docs-home}/cypher-manual/current/introduction/cypher-overview/#_cypher_and_sql_key_differences[similar to SQL], but optimized for graphs.
 
 Intuitive and close to natural language, Cypher provides a visual way of matching patterns and relationships by having its own design based on ASCII-art type of syntax:
@@ -115,7 +115,7 @@ This can affect performance in very large graphs.
 Though not mandatory, variables are particularly useful when querying a database, as they allow referencing specified nodes in subsequent clauses without writing their label in full.
 
 Variables can be single letters or words, and should be written in lower-case.
-For example, if you want to bound all nodes labeled `Person` to the variable `p`, you write `(p:Person)`.
+For example, if you want to bind all nodes labeled `Person` to the variable `p`, you write `(p:Person)`.
 Likewise, if you want to use a full word, then you can write `(person:Person)`.
 
 In a link:{docs-home}/cypher-manual/current/clauses/match/[`MATCH`] query to retrieve all nodes labeled `Person`, this is how it looks like:
