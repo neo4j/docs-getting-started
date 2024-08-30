@@ -34,7 +34,7 @@ With this query syntax, you can perform create, read, update, or delete (CRUD) o
 [TIP]
 ====
 For a quick look with no installation required, get a free link:https://neo4j.com/cloud/platform/aura-graph-database/[Aura instance].
-Open *Query* and write `:guide cypher` to access a hands-on guide on Cypher.
+Click on the graduation cap icon on the top right section and to access "Query fundamentals", a hands-on guide on Cypher.
 ====
 
 == How does Cypher work?
