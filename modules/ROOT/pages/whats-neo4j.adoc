@@ -75,7 +75,7 @@ After creating your database, your learning can take different paths depending o
 
 * *Own data*: There are several ways to link:{docs-home}/import[import] data to Neo4j and to link:{docs-home}/getting-started/data-modeling/[model] it for a better experience.
 * *Example datasets*: Both link:{docs-home}/aura[Aura] and link:{docs-home}/browser-manual/[Neo4j Browser] feature embedded guides that allow you to create example datasets and start querying.
-To access them, click on the graduation cap icon on the top right section in Aura or write `:guide` in Neo4j Browser. +
+To access them, use the graduation cap icon on the top right section in Aura or write `:guide` in Neo4j Browser. +
 You can also xref:reference/example-data.adoc[download] the example datasets and then import them to your instance.
 
 === Neo4j tools
