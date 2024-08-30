@@ -1,0 +1,126 @@
+= What is Neo4j?
+:description: An introduction on how to get started with Neo4j.
+:!page-layout:
+include::https://raw.githubusercontent.com/neo4j-graphacademy/courses/main/asciidoc/ads/generic.adoc[]
+
+[.center]
+image::ROOT:neo4j-architecture-diagram.svg[]
+
+Neo4j is a _native graph database_, which means that it implements a true <<graph>> model all the way down to the storage level.
+Instead of using a "graph abstraction" on top of another technology, the data is stored in Neo4j in the same way you may whiteboard your ideas.
+
+Since 2007, Neo4j has evolved into a rich ecosystem of tools, applications, and libraries. 
+This ecosystem allows you to integrate graph technologies with your working environment in a number of ways which are here described.
+
+Beyond the core graph, Neo4j also provides ACID transactions, <<cluster>> support, and runtime failover.
+
+[NOTE]
+====
+Neo4j is written in Java and Scala.
+You can check the source code on https://github.com/neo4j/neo4j[GitHub^].
+====
+
+== How to interact with Neo4j
+
+Neo4j uses xref:cypher.adoc[Cypher], a declarative query language similar to SQL, but optimized for graphs.
+The same language is also used by other databases such as SAP HANA Graph via the http://www.opencypher.org/[openCypher project].
+
+Another option is to use link:https://neo4j.com/docs/create-applications[libraries].
+Neo4j currently supports Java, JavaScript, .NET, Python, Go, GraphQL, Spring, and more.
+
+== Create a Neo4j instance
+
+Deploying a database is the first step towards exploring Neo4j.
+link:{docs-home}/deployment-options[Select a deployment method] that suits your project from the following options:
+
+=== Fully managed cloud service
+
+link:https://neo4j.com/cloud/platform/aura-graph-database/[Neo4j AuraDB] is a fully managed cloud service that allows you to start exploring Neo4j right from your browser.
+
+If you are a data scientist, you might also want to check link:https://neo4j.com/docs/aura/aurads/[Neo4j AuraDS] and get access to more than 65 pretuned link:https://neo4j.com/docs/graph-data-science/current/algorithms/[graph algorithms].
+
+Neo4j Aura has both free and subscription-based editions.
+link:https://neo4j.com/pricing/[See full comparison].
+
+=== Self-managed cloud services
+
+You can also deploy your graph database on a link:{docs-home}/operations-manual/current/cloud-deployments[cloud platform] of your choice.
+Neo4j works with Amazon Web Services (AWS), Google Cloud (GCP), and Microsoft Azure. 
+
+For self-managed cloud services, you need to link:{docs-home}/operations-manual/current/installation/[install Neo4j] locally or use link:{docs-home}/desktop-manual[Neo4j Desktop] if your project is not in a production environment.
+
+Neo4j is available for installation on link:https://neo4j.com/docs/operations-manual/current/installation/linux/[Linux], link:https://neo4j.com/docs/operations-manual/current/installation/osx/[macOs], and link:https://neo4j.com/docs/operations-manual/current/installation/windows/[Windows].
+
+=== Self-managed local deployment
+
+If you prefer to work with a local deployment: install link:{docs-home}/desktop-manual[Neo4j Desktop] if you are not working in a production environment or link:{docs-home}/operations-manual/current/installation/[install Neo4j] locally.
+
+==== Neo4j on Docker
+
+Neo4j can be run in a Docker container.
+An official Neo4j image that provides a standard, ready-to-run package of Neo4j Community Edition and Enterprise Edition for a variety of versions can be downloaded from the link:https://www.docker.com/get-started[DockerHub].
+It is available for macOS, Windows, and Linux.
+
+==== Neo4j on Kubernetes
+
+With Neo4j Helm charts, you can deploy both a standalone and a cluster deployment of link:{docs-home}/operations-manual/current/kubernetes[Neo4j on Kubernetes], and use configuration options suitable for the most common scenarios. 
+
+[NOTE]
+Neo4j has free and subscription-based licensing options.
+Read more about the link:https://neo4j.com/licensing/[available editions].
+
+== Work with data
+
+After creating your database, your learning can take different paths depending on whether you want to work with your own data or use Neo4j's example datasets:
+
+* *Own data*: There are several ways to link:{docs-home}/import[import] data to Neo4j and to link:{docs-home}/getting-started/data-modeling/[model] it for a better experience.
+* *Example datasets*: Both link:{docs-home}/aura[Aura] and link:{docs-home}/browser-manual/[Neo4j Browser] feature embedded guides that allow you to create example datasets and start querying.
+To access them, use the graduation cap icon on the top right section in Aura or write `:guide` in Neo4j Browser. +
+You can also xref:reference/example-data.adoc[download] the example datasets and then import them to your instance.
+
+=== Neo4j tools
+
+Neo4j has a catalogue of tools that can be used for various ends such as database administration, data visualization, and more.
+You can check all products in the link:{docs-home}/tools[Tools] hub.
+
+=== Supported libraries
+
+Neo4j supports several of the most the popular link:{docs-home}/create-applications[query languages] and also offers proprietary libraries for a customized experience:
+
+* The link:{docs-home}/gds/[Neo4j Graph Data Science (GDS)] library provides implementations of common graph algorithms and machine learning pipelines to train predictive supervised models.
+You can use them to solve graph problems, such as predicting missing relationships, for example.
+
+* The link:{docs-home}/ogm-manual[Object Graph Mapping (OGM)] library, maps nodes and relationships in the graph to objects and references in a domain model.
+You can use this resource to start tracking changes and minimize necessary updates and transitive persistence (reading and updating neighborhoods of an object).
+
+=== APIs
+
+Neo4j currently offers three proprietary link:{docs-home}/create-applications/#_apis[APIs]:
+
+* The link:{docs-home}/http-api[Neo4j HTTP API] allows you to execute a series of Cypher statements against a Neo4j instance through HTTP requests.
+* The link:{docs-home}/cdc[Change Data Capture (CDC) API] allows you to capture and track changes to your database in real-time, as well as keep data sources up to date.
+* The link:{docs-home}/query-apip[Neo4j Query API] allows you to develop client applications in languages not currently supported by Neo4j.
+
+[NOTE]
+====
+At link:https://neo4j.com/labs/[Neo4j Labs], you can find experimental projects including APIs, libraries, and visualization tools.
+====
+
+
+== Keep learning
+
+To learn more about xref:graph-database.adoc[what a graph database is] and xref:reference/graphdb-concepts/index.adoc[the concepts] behind the technology, continue reading the documentation or browse xref:reference/resources.adoc[other curated resources].
+
+You can also reach out to other members of the Neo4j community on the link:https://community.neo4j.com/c/neo4j-graph-platform/cypher/12?ref=guides[Neo4j Community Site].
+
+
+ifndef::backend-pdf[]
+[discrete.glossary]
+endif::[]
+== Glossary
+
+include::glossary.adoc[]
+
+ifdef::backend-pdf[]
+<<<
+endif::[]
