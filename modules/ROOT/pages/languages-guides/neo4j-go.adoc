@@ -5,7 +5,7 @@
 [abstract]
 {description}
 
-You should be familiar with xref:appendix/graphdb-concepts/index.adoc[graph database concepts] and the property graph model.
+You should be familiar with xref:reference/graphdb-concepts/index.adoc[graph database concepts] and the property graph model.
 You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or link:/download/[installed Neo4j locally].
 
 
@@ -106,6 +106,6 @@ The Neo4j example project is a small, one page webapp for the Movies database bu
 The front-end page is the same for all drivers: movie search, movie details, and a graph visualization of actors and movies.
 Each backend implementation shows you how to connect to Neo4j from each of the different languages and drivers.
 
-You can learn more about our small, consistent example project across many different language drivers xref:appendix/example-data.adoc[here].
+You can learn more about our small, consistent example project across many different language drivers xref:reference/example-data.adoc[here].
 You can find the implementations for all drivers as https://github.com/neo4j-examples?q=movies[individual GitHub repositories^], which you can clone and deploy directly.
 

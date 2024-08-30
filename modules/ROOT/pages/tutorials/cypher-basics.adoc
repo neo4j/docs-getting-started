@@ -1,9 +1,9 @@
-[[guide-cypher-basics]]
+[[cypher-basics]]
 = Tutorial: Getting Started with Cypher
 // Quickstart with Cypher
 :tags: cypher, queries, graph-queries, movie-graph, cypher-example
 :description: This tutorial explains the basic concepts of Cypher, Neo4j's query language, including how to create and query graphs.
-:page-aliases: ROOT:guide-cypher-basics.adoc
+:page-aliases: ROOT:cypher-basics.adoc
 :page-newsletter: true
 
 //We have the built-in Browser guide - The Movie Graph Guide - where you can find exactly the same queries. Does it make sense to keep this tutorial and the Browser guide which is in fact the replica of the tutorial (or tutorial is a replica of the Browser guide)? 
@@ -12,7 +12,6 @@
 This tutorial explains the basic concepts of Cypher, Neo4j's query language, including how to create and query graphs.
 You should be able to read and understand Cypher queries after finishing this tutorial.
 
-[#cypher-basics]
 == Pop culture connections
 
 _The Movie Graph_ is a mini graph application containing actors and directors that are related through the movies they've collaborated on.

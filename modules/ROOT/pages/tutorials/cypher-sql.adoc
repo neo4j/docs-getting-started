@@ -82,7 +82,7 @@ image::northwind_schema_workspace.png[]
 ====
 Graph data modeling is a flexible task.
 You can create your own model of the Northwind dataset.
-Use these link:https://github.com/neo4j-graph-examples/get-started/raw/main/data/northwind-full.zip[`.zip` files] and follow instructions in xref:appendix/tutorials/guide-import-relational-and-etl.adoc[the tutorial] on how to import data from a relational database into a graph database.
+Use these link:https://github.com/neo4j-graph-examples/get-started/raw/main/data/northwind-full.zip[`.zip` files] and follow instructions in xref:how-to/import-relational-and-etl.adoc[the tutorial] on how to import data from a relational database into a graph database.
 ====
 
 [NOTE]
@@ -182,7 +182,7 @@ _Indexing_
 
 // table
 
-If you want to match quickly by a specific node label and attribute combination, it makes sense to create an index for that pair, if you haven't already done that during the xref:appendix/tutorials/guide-import-relational-and-etl.adoc[import].
+If you want to match quickly by a specific node label and attribute combination, it makes sense to create an index for that pair, if you haven't already done that during the xref:how-to/import-relational-and-etl.adoc[import].
 For more details on how to create indexes, visit the link:https://neo4j.com/docs/cypher-manual/current/indexes-for-search-performance/[Cypher manual -> Indexes for search performance].
 Indexes in Cypher are only used for finding the starting points of a query, all subsequent pattern matching is done through the graph structure.
 Cypher supports range, text, point, lookup, full-text, and vector indexes.
