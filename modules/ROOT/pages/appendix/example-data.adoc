@@ -20,7 +20,7 @@ This list includes all available datasets, descriptions, and how to access them 
 [IMPORTANT]
 ====
 Some datasets are not continuously maintained.
-Information might be outdated.
+Information may be outdated.
 ====
 
 [options=header,cols="^.^2,^.^,^.^2,^.^2,4"]
@@ -80,7 +80,7 @@ It contains information on the interaction between the characters throughout the
 | {cross-mark}
 | {cross-mark}
 a| link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://fincen@demo.neo4jlabs.com&db=fincen[`fincen`]
-| A graph with data from the global investigation FinCEN Files for money laundering.
+| A graph with data from the global investigation FinCEN Files concerning money laundering.
 
 | link:https://github.com/neo4j-graph-examples/twitter-v2[Twitter]
 | {cross-mark}
@@ -156,7 +156,7 @@ With them, you can create or import a dataset and learn how to explore it.
 === Neo4j Workspace
 
 When running your link:{docs-home}/aura[Aura instance], use the graduation cap icon on the top right section to access the interactive guides.
-There you will find interactive guides that will help you create several of the xref:appendix/example-data.adoc#_available_datasets[available datasets] and learn how to work with them.
+There you find interactive guides that contain several of the xref:appendix/example-data.adoc#_available_datasets[available datasets] and learn how to work with them.
 
 image:workspace-guides.png[]
 
