@@ -155,7 +155,7 @@ With them, you can create or import a dataset and learn how to explore it.
 
 === Neo4j Workspace
 
-When running your link:{docs-home}/aura[Aura instance], use the graduation cap icon on the top right section to access the interactive guides.
+When running your link:{docs-home}/aura[Aura instance], use the academic cap icon on the top right section to access the interactive guides.
 There you find interactive guides that contain several of the xref:appendix/example-data.adoc#_available_datasets[available datasets] and learn how to work with them.
 
 image:workspace-guides.png[]
