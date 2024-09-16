@@ -13,69 +13,33 @@
 
 == Introduction
 
-This guide shows anyone familiar with SQL how to understand Cypher and write the equivalent Cypher queries.
-The Northwind database, used for a long time to demonstrate relational database concepts, helps to illustrate how to translate SQL queries into Cypher, showcasing the similarities and differences between the two languages.
+This tutorial shows anyone familiar with SQL how to understand Cypher and write the equivalent Cypher queries. The Northwind dataset is here used to illustrate how to translate SQL queries into Cypher, and what are the similarities and differences between the two languages.
 
-Before diving into the details, it is essential to understand that while both SQL and Cypher are declarative query languages, Cypher is specifically designed for querying graphs.
-Like in SQL, important concepts of Cypher include clauses, keywords, expressions, operators, and functions.
-Unlike SQL, which deals with relational databases, Cypher is centered around expressing xref:cypher-intro/patterns.adoc[graph patterns].
-Graph pattern matching is the core technique in Cypher, enabling creation, navigation, description, and data extraction from a graph by applying declarative patterns.
+For a more in-depth explanation on the differences and similarities between graph and relational databases, see xref:reference/graphdb-concepts/graphdb-vs-rdbms.adoc[Transition from relational to graph database].
 
-xref:cypher-intro/index.adoc[The page: Query a Neo4j database using Cypher] covers its basics.
+== Create an instance
 
-Cypher allows you to chain multiple query parts together, enabling the composition of complex queries.
-You can mix read and write operations within a single statement.
-The read operation can provide inputs for the subsequent write operation or, following after the write operation, return relevant subsets to the caller.
+While there are several ways to xref:whats-neo4j.adoc#_create_a_neo4j_instance[create a Neo4j], this tutorial will use an Aura free instance. 
+To create it:
 
-You can use Cypher to update the graph structure and data and even to ingest large amounts of CSV data.
+. Navigate to the link:https://console.neo4j.io/?product=aura-db[Neo4j Aura Console].
+. Select *New Instance -> AuraDB Free*
+. Copy and store the instance’s *Username* and *Generated password* or download the credentials as a _.txt_ file.
+. Wait until the instance is created and then select *Open -> Connect*.
 
-With xref:cypher-intro/procedures-functions.adoc[*user-defined procedures and functions*], you can extend the language with functionality that you need but is not yet available.
+== Load the dataset
 
-For more information about the Cypher query language, refer to the link:https://neo4j.com/docs/cypher-manual/current/introduction/[Neo4j Cypher Manual^] and the link:https://neo4j.com/docs/cypher-cheat-sheet/5/[Cypher Cheat Sheet].
+Use the in-built guide to load the Northwind dataset to your instance:
 
-[#cypher-sql-northwind]
-== Northwind example model
-
-The Northwind database represents the data storage of a retail application.
-It contains customers, products, orders, employees, shippers, and categories as well as their interactions.
-
-Relational databases store data in tables with a fixed structure (schema), each column having a name, type, length, constraints, etc.
-References between tables are represented by repeating the primary key of one table as a column in another as a foreign key.
-For many-to-many references, JOIN-tables (or link-tables) are needed as an artificial construct between the connected tables.
-
-Graph databases store data in a graph with nodes and relationships between them (refer to xref:get-started-with-neo4j/graph-database.adoc#property-graph[the property graph model] for more information).
-
-For a sensible relational model, the transformation into a graph is not hard, as rows of entity tables are converted into *nodes* and foreign-key relationships and JOIN-tables into *relationships*.
-Nodes and relationships can hold arbitrary properties (key-value pairs) without the need for a fixed schema.
-
-Refer to the relational and graph models below when considering the data structures in the following queries.
-
-[[relational-model]]
-.Relational model
-image::Northwind_diagram.jpg[]
-
-[[graph-model]]
-.Graph model
-image::northwind_graph_workspace-arr.png[width=600]
-
-It is recommended to familiarize yourself with the guides on xref:data-modeling/index.adoc[data modeling] and xref:data-import/index.adoc[data importing] into Neo4j.
-
-[#cypher-sql-queries]
-== Explore Cypher queries: from basic to advanced
-
-This guide intends to introduce Cypher queries by comparing them with the equivalent SQL statements.
-
-You can run all the Cypher queries below using an {aura_signup}[AuraDB Free instance] and the Neo4j Workspace guide _Query fundamentals_.
-
-. Load the Northwind dataset by following instructions in the guide.
+. Select the academic cap button (image:icon-guides.svg[width=3%]) on the top right side of the page to open the guides.
+. Select *Query Fundamentals* and follow the instructions up to step 2, where you should select the button *Load the Northwind dataset*.
 +
-.Guide _Query fundamentals_ in Neo4j Workspace
 image::northwind_dataset_load.png[]
 +
-. After importing the data, run the command `call db.schema visualization` in Query to check the imported data vs the model.
+. Select the button *Run import* to import the dat. 
+After importing the data, run the command `CALL db.schema.visualization()` in *Query* to check the imported data vs the model.
 Your output should be the following:
 +
-.Model of the Nortwind dataset in Workspace Query
 image::northwind_schema_workspace.png[]
 
 [TIP]
@@ -85,41 +49,44 @@ You can create your own model of the Northwind dataset.
 Use these link:https://github.com/neo4j-graph-examples/get-started/raw/main/data/northwind-full.zip[`.zip` files] and follow instructions in xref:how-to/import-relational-and-etl.adoc[the tutorial] on how to import data from a relational database into a graph database.
 ====
 
-[NOTE]
-====
-The Cypher queries below end with the semicolon `;`, which is a requirement in link:https://neo4j.com/docs/operations-manual/current/tools/cypher-shell/[Cypher Shell] -- the command-line tool that comes with the Neo4j distribution.
-In Neo4j Browser or Query in Workspace, you don't have to end Cypher queries with semicolon.
-====
+== Start querying
 
-=== Find all products
+Here are some query examples and a comparison of how you could write them in SQL vs in Cypher.
 
-_Select and return records_
+=== Select and return records
 
-To select and return records in SQL, select everything from the `products` table.
+[options=header,cols='1,1']
+|===
 
+| SQL
+| Cypher
+
+a| To select and return records in SQL, you would select everything from the `products` table:
 [source, plsql]
 ----
 SELECT p.*
 FROM products as p;
 ----
 
-//sqltable
-
-Similarly in Cypher, you `MATCH` a simple pattern: all nodes with the *label* `:Product` and `RETURN` them.
-
+a| In Cypher, you `MATCH` a simple pattern: all nodes with the *label* `:Product` and `RETURN` them:
 [source, cypher]
 ----
 MATCH (p:Product)
 RETURN p;
 ----
+|===
 
-//table
+=== Field access, ordering, and paging
 
-_Field access, ordering, and paging_
+It is more efficient to return only a subset of attributes, like `ProductName` and `UnitPrice` in case you want to order items.
 
-It is more efficient to return only a subset of attributes, like `ProductName` and `UnitPrice`.
-You can also order by price and only return the 10 most expensive items.
+[options=header,cols='1,1']
+|===
 
+| SQL
+| Cypher
+
+a| In SQL, this is how you could order items after price and only return the 10 most expensive items:
 [source, plsql]
 ----
 SELECT p.ProductName, p.UnitPrice
@@ -128,12 +95,7 @@ ORDER BY p.UnitPrice DESC
 LIMIT 10;
 ----
 
-//sqltable
-
-Since the statements are similar except for the pattern matching part, you can copy and paste the changes from SQL to Cypher.
-But remember that labels, relationship types, and property names are *case sensitive* in Neo4j.
-For more details on naming rules, see the link:https://neo4j.com/docs/cypher-manual/current/syntax/naming/[Cypher Manual -> Naming rules and recommendations].
-
+a| In Cypher, since the statements are similar except for the pattern matching part, you can simply copy and paste the changes:
 [source, cypher]
 ----
 MATCH (p:Product)
@@ -141,14 +103,25 @@ RETURN p.productName, p.unitPrice
 ORDER BY p.unitPrice DESC
 LIMIT 10;
 ----
+|===
 
-// table
+[IMPORTANT]
+====
+Remember that labels, relationship types, and property names are *case sensitive* in Neo4j.
+For more details on naming rules, see the link:https://neo4j.com/docs/cypher-manual/current/syntax/naming/[Cypher Manual -> Naming rules and recommendations].
+====
 
 === Find a single product by name
 
-_Filter by equality_
+There are different ways to specifically query the product named `Chocolade` and retrieving its price:
 
-If you only want to look at a single product, for example, _Chocolade_, you can filter  data in SQL using the `WHERE` clause.
+[options=header,cols='1,1']
+|===
+
+| SQL
+| Cypher
+
+a| In SQL, you can filter data using the `WHERE` clause:
 
 [source, plsql]
 ----
@@ -157,9 +130,7 @@ FROM products AS p
 WHERE p.ProductName = 'Chocolade';
 ----
 
-//sqltable
-
-In Cypher, the `WHERE` clause belongs to the `MATCH` statement.
+a| In Cypher, the `WHERE` clause belongs to the `MATCH` statement:
 
 [source, cypher]
 ----
@@ -168,9 +139,7 @@ WHERE p.productName = 'Chocolade'
 RETURN p.productName, p.unitPrice;
 ----
 
-// table
-
-There is a shortcut in Cypher if you `MATCH` for a labeled node with a certain property attribute.
+Another way would be using the label `productName` to specify the product in the `MATCH` statement:
 
 [source, cypher]
 ----
@@ -178,9 +147,10 @@ MATCH (p:Product {productName:'Chocolade'})
 RETURN p.productName, p.unitPrice;
 ----
 
-_Indexing_
+|===
 
-// table
+
+=== Indexing
 
 If you want to match quickly by a specific node label and attribute combination, it makes sense to create an index for that pair, if you haven't already done that during the xref:how-to/import-relational-and-etl.adoc[import].
 For more details on how to create indexes, visit the link:https://neo4j.com/docs/cypher-manual/current/indexes-for-search-performance/[Cypher manual -> Indexes for search performance].
