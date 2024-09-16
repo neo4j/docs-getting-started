@@ -192,7 +192,7 @@ You can also refer to the link:{docs-home}import/[Importing your data] section t
 [IMPORTANT]
 ====
 The Neo4j version of some of the dump files might be older than your Neo4j version.
-In this case, you might need to configure Neo4j to upgrade your database by using `neo4j-admin database migrate` command.
+In this case, you might need to upgrade your database dump using the `neo4j-admin database migrate` command before loading it into Neo4j.
 Note that this command is run only on a stopped database.
 For more details, see https://neo4j.com/docs/upgrade-migration-guide/current/version-5/migration/migrate-databases/[Upgrade and Migration guide -> Migrate your databases].
 ====
