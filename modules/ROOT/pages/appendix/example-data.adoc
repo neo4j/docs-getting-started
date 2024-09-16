@@ -156,7 +156,7 @@ With them, you can create or import a dataset and learn how to explore it.
 === Neo4j Workspace
 
 From the Aura Console, Workspace can be accessed from your link:{docs-home}/aura[Aura instance] via the `Open` button.
-Once in Workspace, use the academic cap icon on the top right to access the interactive guides.
+Once in Workspace, use the academic cap icon (image:icon-guides.svg[width=3%]) on the top right to access the interactive guides.
 There you find interactive guides that contain several of the xref:appendix/example-data.adoc#_available_datasets[available datasets] and learn how to work with them.
 
 image:workspace-guides.png[]
