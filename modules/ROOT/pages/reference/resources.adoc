@@ -26,7 +26,7 @@ To help you along your path of learning more about Neo4j, we want to provide you
 == Cypher Query Language
 * https://neo4j.com/product/cypher-graph-query-language/[Cypher Query Language^]
 * https://neo4j.com/docs/cypher-cheat-sheet/current/[Cypher Cheat Sheet^]
-* xref:tutorials/cypher-sql.adoc[From SQL to Cypher]
+* xref:reference/graphdb-concepts/cypher-sql.adoc[From SQL to Cypher]
 
 [#nosql-graph-resources]
 == Graph for NoSQL developers
