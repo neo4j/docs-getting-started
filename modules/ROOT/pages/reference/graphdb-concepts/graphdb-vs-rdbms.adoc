@@ -3,55 +3,6 @@
 = Transition from relational to graph database
 :description: This chapter explores the concepts of graph databases from a relational developer's point of view.
 
-/////
-This guide shows anyone familiar with SQL how to understand Cypher and write the equivalent Cypher queries.
-The Northwind database, used for a long time to demonstrate relational database concepts, helps to illustrate how to translate SQL queries into Cypher, showcasing the similarities and differences between the two languages.
-
-Before diving into the details, it is essential to understand that while both SQL and Cypher are declarative query languages, Cypher is specifically designed for querying graphs.
-Like in SQL, important concepts of Cypher include clauses, keywords, expressions, operators, and functions.
-Unlike SQL, which deals with relational databases, Cypher is centered around expressing xref:cypher-intro/patterns.adoc[graph patterns].
-Graph pattern matching is the core technique in Cypher, enabling creation, navigation, description, and data extraction from a graph by applying declarative patterns.
-
-xref:cypher-intro/index.adoc[The page: Query a Neo4j database using Cypher] covers its basics.
-
-Cypher allows you to chain multiple query parts together, enabling the composition of complex queries.
-You can mix read and write operations within a single statement.
-The read operation can provide inputs for the subsequent write operation or, following after the write operation, return relevant subsets to the caller.
-
-You can use Cypher to update the graph structure and data and even to ingest large amounts of CSV data.
-
-With xref:cypher-intro/procedures-functions.adoc[*user-defined procedures and functions*], you can extend the language with functionality that you need but is not yet available.
-
-For more information about the Cypher query language, refer to the link:https://neo4j.com/docs/cypher-manual/current/introduction/[Neo4j Cypher Manual^] and the link:https://neo4j.com/docs/cypher-cheat-sheet/5/[Cypher Cheat Sheet].
-
-[#cypher-sql-northwind]
-== Northwind example model
-
-The Northwind database represents the data storage of a retail application.
-It contains customers, products, orders, employees, shippers, and categories as well as their interactions.
-
-Relational databases store data in tables with a fixed structure (schema), each column having a name, type, length, constraints, etc.
-References between tables are represented by repeating the primary key of one table as a column in another as a foreign key.
-For many-to-many references, JOIN-tables (or link-tables) are needed as an artificial construct between the connected tables.
-
-Graph databases store data in a graph with nodes and relationships between them (refer to xref:get-started-with-neo4j/graph-database.adoc#property-graph[the property graph model] for more information).
-
-For a sensible relational model, the transformation into a graph is not hard, as rows of entity tables are converted into *nodes* and foreign-key relationships and JOIN-tables into *relationships*.
-Nodes and relationships can hold arbitrary properties (key-value pairs) without the need for a fixed schema.
-
-Refer to the relational and graph models below when considering the data structures in the following queries.
-
-[[relational-model]]
-.Relational model
-image::Northwind_diagram.jpg[]
-
-[[graph-model]]
-.Graph model
-image::northwind_graph_workspace-arr.png[width=600]
-
-It is recommended to familiarize yourself with the guides on xref:data-modeling/index.adoc[data modeling] and xref:data-import/index.adoc[data importing] into Neo4j.
-/////
-
 == Introduction
 The article aims to explain the conceptual differences between relational and graph database structures and data models.
 It also gives a high-level overview of how working with each database type is similar or different - from the relational and graph query languages to interacting with the database from applications.
