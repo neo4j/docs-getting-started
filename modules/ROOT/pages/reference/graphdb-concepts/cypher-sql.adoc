@@ -14,7 +14,7 @@
 image::relational-vs-graph.svg[]
 
 This page shows anyone familiar with SQL how to understand Cypher and write the equivalent Cypher queries.
-It uses the Northwind dataset as an example for the comparison.
+The Northwind dataset is used in the examples.
 Refer to xref:reference/example-data.adoc[Example datasets] to learn how to load it to your Neo4j instance.
 
 [TIP]
@@ -24,7 +24,6 @@ For a more in-depth explanation on the differences and similarities between grap
 
 == Query examples
 
-Here is a list of query examples and how they compare between SQL and Cypher.
 
 === Select and return records
 
@@ -59,7 +58,7 @@ It is more efficient to return only a subset of attributes, like `ProductName` a
 | SQL
 | Cypher
 
-a| In SQL, this is how you could order items after price and only return the 10 most expensive items:
+a| In SQL, this is how you order items by price and return the 10 most expensive items:
 [source, plsql]
 ----
 SELECT p.ProductName, p.UnitPrice
@@ -68,7 +67,7 @@ ORDER BY p.UnitPrice DESC
 LIMIT 10;
 ----
 
-a| In Cypher, since the statements are similar except for the pattern matching part, you can simply copy and paste the changes:
+a| The statement is similar in Cypher, except for the pattern matching part:
 [source, cypher]
 ----
 MATCH (p:Product)
@@ -86,7 +85,7 @@ For more details on naming rules, see the link:https://neo4j.com/docs/cypher-man
 
 === Find a single product by name
 
-There are different ways to specifically query the product named `Chocolade` and retrieving its price.
+There are different ways to query the database and retrieve a single item, for example, a product named `Chocolade`.
 
 ==== Filtering by equality
 
@@ -114,7 +113,7 @@ WHERE p.productName = 'Chocolade'
 RETURN p.productName, p.unitPrice;
 ----
 
-Another option is using the label `productName` to specify the product in the `MATCH` statement:
+A shorter option is to use the label `productName` to specify the product in the `MATCH` statement:
 
 [source, cypher]
 ----
@@ -144,7 +143,7 @@ Read more about how to use indexes in link:{docs-home}/cypher-manual/current/ind
 
 === Filter products
 
-There are several ways to filter products in Cypher that are similar to how you would proceed in SQL.
+There are several ways to filter products in Cypher that are similar to SQL.
 
 ==== Filter by list/range
 
@@ -163,7 +162,7 @@ FROM products as p
 WHERE p.ProductName IN ('Chocolade','Chai');
 ----
 
-a| Cypher has full collection support, so you can use `IN` as well as other collection functions, predicates, and transformations:
+a| Cypher has full collection support, including `IN` and other collection functions, predicates, and transformations:
 
 [source, cypher]
 ----
@@ -182,7 +181,7 @@ RETURN p.productName, p.unitPrice;
 | SQL
 | Cypher
 
-a| This query tries to find expensive products starting with "C":
+a| This query retrieves products with a name starting with "C" and a price larger than 100:
 
 [source, plsql]
 ----
@@ -199,7 +198,14 @@ MATCH (p:Product)
 WHERE p.productName STARTS WITH 'C' AND p.unitPrice > 100
 RETURN p.productName, p.unitPrice;
 ----
+You can also use a regular expression:
 
+[source, cypher]
+----
+MATCH (p:Product)
+WHERE p.productName =~ '^C.*'
+RETURN p.productName, p.unitPrice
+----
 |===
 
 === Joining products with customers
@@ -234,7 +240,7 @@ RETURN DISTINCT c.companyName;
 
 === New customers without existing orders
 
-If you rephrase the question as "What have I bought and paid in total?", the `JOIN` in the previous SQL query stays the same, only the filter expression changes.
+If you instead want to see **who** bought **what** and what did they **pay in total**, the `JOIN` in the previous SQL query stays the same, only the filter expression changes.
 However, if you have customers without any orders and still want to return them, you will need to make some adjustments.
 
 [options=header,cols='1,1']
@@ -266,7 +272,7 @@ RETURN p.productName, toInteger(sum(o.unitPrice * o.quantity)) AS volume
 ORDER BY volume DESC;
 ----
 
-Non existing nodes and relationships will then have a `null` value, which will result in attributes being `null` and not being aggregated by `sum`.
+Non-existing nodes and relationships will then have a `null` value, which will result in attributes being `null` and not being aggregated by `sum`.
 |===
 
 === Top-selling employees
@@ -274,7 +280,7 @@ Non existing nodes and relationships will then have a `null` value, which will r
 The previous example mentioned aggregation.
 By summing up product prices and ordered quantities, an aggregated view per product for the customer was provided.
 
-You can use aggregation functions like `sum`, `count`, `avg`, and `max` both in SQL and Cypher.
+You can use aggregation functions like `sum`, `count`, `avg`, and `max` in both SQL and Cypher.
 
 [options=header,cols='1,1']
 |===
@@ -283,7 +289,7 @@ You can use aggregation functions like `sum`, `count`, `avg`, and `max` both in 
 | Cypher
 
 a| In SQL, aggregation is explicit, so you have to provide all grouping keys again in the `GROUP BY` clause.
-This is how you can query to see the top-selling employees, run the following query:
+To see the top-selling employees, run the following query:
 
 [source, plsql]
 ----
@@ -314,10 +320,10 @@ Additional aggregation functions like `collect`, `percentileCont`, `stdDev` are 
 
 === Employee territories
 
-In SQL, one challenging scenario is dealing with master-detail information.
+In SQL, dealing with master-detail information can be challenging.
 This is the case when you have one main entity (master, head, parent) and many dependent ones (detail, position, child).
 
-Usually you either query it by joining both and returning the master data multiple times (once for each detail) or by only fetching the primary key of the master and then pulling all detail rows via that foreign key.
+You can either write a query that joins both and returns the master data multiple times (once for each detail) or you fetch only the primary key of the master and then pull all detail rows via that foreign key.
 
 [options=header,cols='1,1']
 |===
@@ -353,7 +359,7 @@ This also works for nested values.
 === Product categories
 
 If you have to express category, territory or organizational hierarchies in SQL, it is usually modeled with a self-join via a foreign key from child to parent.
-Taking the example of the product categories, you have to decide upfront up to how many levels of categories you want to query.
+In the example of the product categories, you have to decide upfront how many levels of categories you want to query.
 
 [options=header,cols='1,1']
 |===
