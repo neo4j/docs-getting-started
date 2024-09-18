@@ -14,8 +14,7 @@
 [#neo4j-app-dev]
 == Neo4j language guides
 
-This section is designed to provide detailed examples of how to integrate Neo4j with your preferred programming language.
-Neo4j *officially supports the drivers for .Net, Java, JavaScript, Go, and Python* for the binary Bolt protocol.
+Neo4j provides *official libraries for Python, JavaScript, Java, .NET, and Go*.
 
 Our community contributors provide drivers for all major programming languages for all protocols and APIs.
 In this section, we provide an introduction and a consistent example application for several languages and Neo4j drivers.
@@ -79,42 +78,145 @@ The same front-end web page in all applications consumes three REST endpoints pr
 * single movie listing
 * graph visualization of the domain model
 
-
-[#app-project-source]
-== GitHub
-
-The source code for all the different language examples is available on https://github.com/neo4j-examples?query=movies[GitHub^] as individual repositories that can be cloned and directly used as starting points.
+The source code for the language examples is available on https://github.com/neo4j-examples?query=movies[GitHub^] as individual repositories that can be cloned and used as starting points.
 
 
-[#http-api]
-== Using the HTTP API
+[#query-api]
+== The Query API
 
-[NOTE]
+The Query API allows you to query a Neo4j server through HTTP/HTTPS.
+
+For more information, see link:https://neo4j.com/docs/query-api/current/[Documentation -> Query API].
+
 ====
-The HTTP API is available in Community Edition and Enterprise Edition, but not in AuraDB.
-====
+[discrete]
+=== Example request
 
-
-If you want to access Neo4j programmatically, you can also use the HTTP API which enables you to:
-
-* POST one or more Cypher statements with parameters.
-* Keep transactions open over multiple requests.
-* Choose different result formats.
-
-Let's look at one of the underlying remote API endpoint that Neo4j offers to run queries.
-These APIs can be then used directly via a HTTP library or a driver for your language.
-
-A simple HTTP Cypher request, executable in the Neo4j Browser, would look like this:
+[source, headers]
+----
+POST http://localhost:7474/db/neo4j/query/v2
+Authorization: Basic bmVvNGo6dmVyeXNlY3JldA==
+Content-Type: application/json
+----
 
 [source, json]
 ----
-:POST /db/<database-name>/tx/commit {"statements":[
-      {"statement":"CREATE (p:Person {firstName: $name}) RETURN p",
-       "parameters":{"name":"Daniel"}}
-    ]}
+{
+  "statement": "MERGE (n:Person {name: $name, age: $age}) RETURN n AS alice",
+  "parameters": {
+    "name": "Alice",
+    "age": 42
+  }
+}
 ----
 
-Some of the language drivers use the HTTP API under the hood, but make them available in a more convenient way.
+[discrete]
+=== Example response
+
+[source, headers]
+----
+202: Accepted
+Content-Type: application/json
+----
+
+[source, json]
+----
+{
+  "data": {
+    "fields": [
+      "alice"
+    ],
+    "values": [
+      {
+        "elementId": "4:ff04df25-ff2b-4b55-98f8-6888297b025e:0",
+        "labels": [
+          "Person"
+        ],
+        "properties": {
+          "name": "Alice",
+          "age": 42
+        }
+      }
+    ]
+  },
+  "bookmarks": [
+    "FB:kcwQ/wTfJf8rS1WY+GiIKXsCXgmQ"
+  ]
+}
+----
+====
+
+
+[role=label--not-on-aura]
+[#http-api]
+== The HTTP API
+
+The HTTP API allows you to query a Neo4j server through HTTP/HTTPS.
+
+For more information, see link:https://neo4j.com/docs/http-api/current/[Documentation -> HTTP API].
+
+====
+[discrete]
+=== Example request
+
+[source, headers]
+----
+POST http://localhost:7474/db/neo4j/tx/commit
+Accept: application/json;charset=UTF-8
+Content-Type: application/json
+Authorization: Basic bmVvNGo6dmVyeXNlY3JldA==
+----
+
+[source, json]
+----
+{
+  "statements": [
+    {
+      "statement": "MERGE (n:Person {name: $name, age: $age}) RETURN n",
+      "parameters": {
+        "name": "Alice",
+        "age": 42
+      }
+    }
+  ]
+}
+----
+
+[discrete]
+=== Example response
+
+[source, headers]
+----
+200: OK
+Content-Type: application/json;charset=utf-8
+----
+
+[source, json]
+----
+{
+  "results": [ {
+    "columns": ["n"],
+    "data": [ {
+      "row": [ {
+        "name": "Alice",
+        "age": 42
+      } ],
+      "meta": [ {
+        "id": 36,
+        "elementId": "4:0ea4a108-32c5-498c-99e7-95cc67ab5f7d:36",
+        "type": "node",
+        "deleted": false
+      } ]
+    } ]
+  } ],
+  "errors": [],
+  "lastBookmarks": [
+    "FB:kcwQDqShCDLFSYyZ55XMZ6tffRuQ"
+  ]
+}
+----
+====
+
 
 == link:https://graphacademy.neo4j.com/[Learn with GraphAcademy^]
 
