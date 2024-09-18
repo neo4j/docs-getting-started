@@ -1,197 +1,199 @@
 [[example-data]]
 = Example datasets
-:sandbox: https://neo4j.com/sandbox/
-:sandbox-script: https://github.com/neo4j-contrib/sandbox-guides/tree/master/
-:author: Michael Hunger
-:tags: graph-data, data-sets, import-data, graph-examples, sandboxes, graph-gallery
-:description: Here you can find a list of available example datasets for Neo4j and learn how to import and explore them.
+:description: See a list of available example datasets for Neo4j and learn how to import and explore them.
 :page-pagination: previous
 
-[abstract]
-{description}
+//Check Mark
+:check-mark: icon:check[]
 
+//Cross Mark
+:cross-mark: icon:times[]
 
-[#data-sets]
-== Datasets
+Neo4j offers a variety of example datasets to get started with the products.
+Some of them are built-in, others can be retrieved from a GitHub repository or accessed from the link:https://demo.neo4jlabs.com:7473[demo server].
+This page shows how to access them.
 
-For getting started with Neo4j, it's helpful to use example datasets relevant to your domain and use case.
-For each we want to provide a description, the graph model and some use case queries.
+== Available datasets
 
-
-[#built-in-examples]
-== Built-in examples
-
-Neo4j Browser comes with two built-in databases, which you can create and explore using interactive slideshows.
-
-The *"Movies"* example, is launched via the `:guide movie-graph` command and contains a small graph of movies and people related to those movies as actors, directors, producers etc.
-
-// image::browser-example-guides-movies.png[link=https://neo4j.com/developer/guide-neo4j-browser/#_built_in_guides]
-
-The *"Northwind"* example, is run via `:guide northwind-graph` and contains a traditional retail-system with products, orders, customers, suppliers and employees.
-It walks you through the import of the data and incrementally complex queries using the available data.
-
-// image::browser-example-guides-northwind.png[link=https://neo4j.com/developer/guide-neo4j-browser/#_built_in_guides]
-
-[#guide-examples]
-=== Other Browser guides
-
-// Is `:play` command going to be removed? is it deprecated now? what is the plan for the following guides? All of them are available right now. Whom to ask? 
-
-Other example datasets that you can run within your own Neo4j Browser are:
-
-* Game of Thrones Interactions -- `:play got` 
-* UK company registration, property ownership, political donations -- `:play ukcompanies` + 
-* Stack Overflow users, tags and Q&A data -- `:play stackoverflow` 
-* BBC Good Foods recipe data -- `:play recipes` 
-* Airbnb listings data -- `:play listings` 
-* Football (Soccer) transfer data -- `:play football_transfers` 
-// `:play nasa` NASA knowledge graph example
-// :play twitter-neo4j-stream
-// `:play life-science-import` drug and genome data import and repurposing examples
-
-== Neo4j guides on Aura
-
-With a new instance on Aura, you can explore a set of Neo4j Guides created to adapt to your needs and learning style.
-Click on a student-hat button at the top, to access the Neo4j guides. 
-[#neo4j-sandbox]
-== Neo4j Sandbox
-
-To explore a wide variety of datasets in an *online setup* without a local installation, you can use the link:/sandbox/?ref=developer-ex-data[Neo4j Sandbox^].
-
-Each sandbox is available for at least three days after creation and can also be remotely accessed from applications using any Neo4j driver.
-
-// image::{neo4j-img-base-uri}neo4j-sandboxes.png[link=https://neo4j.com/sandbox/?ref=developer-ex-data-img]
-
-Except for the "blank" sandbox, all other sandboxes come prepopulated with the domain data and focus on use case specific queries.
-
-All sandboxes provide access to Neo4j Browser, Neo4j Bloom, APOC, Graph Data Science, neosemantics (n10s) and a GraphQL integration.
-
-== Neo4j Graph Example repository on Github
-
-The data, browser guides, code examples (JavaScript, Java, Python, Go, C#), Cypher queries, Bloom perspectives for each sandbox are all available on https://github.com/neo4j-graph-examples[GitHub repository^].
-
-The use cases range from
-
-* https://sandbox.neo4j.com?usecase=recommendations[movie recommendations^] (https://github.com/neo4j-graph-examples/recommendations[Repo])
-* https://sandbox.neo4j.com?usecase=network-management[network management^] (https://github.com/neo4j-graph-examples/network-management[Repo])
-* https://sandbox.neo4j.com?usecase=icij-paradise-papers[investigative data from the ICIJ (Panama Papers)^] (https://github.com/neo4j-graph-examples/icij-paradise-papers[Repo])
-* https://sandbox.neo4j.com?usecase=pole[crime investigation^] (https://github.com/neo4j-graph-examples/pole[Repo])
-* https://sandbox.neo4j.com?usecase=twitter-v2[social networks^] optionally using your own Twitter account (https://github.com/neo4j-graph-examples/twitter[Repo]).
-
-
-[[demo-server]]
-== Neo4j dataset demo server
-
-=== Access information
-
-If you need to explore more graph databases you can access the server on https://demo.neo4jlabs.com:7473 +
-This server hosts a number of datasets with read-only access for public use. +
-The username and password are the same as the database name. +
-For instance, for `recommendations` database the username is `recommendations` and password is `recommendations` too. +
-
-=== Hosted databases
-
-You can open any of the following databases by clicking the link. Don't forget to copy the username and password.
-
-:db: recommendations
-* link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://{db}@demo.neo4jlabs.com&db={db}[{db}]
-
-:db: movies
-* link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://{db}@demo.neo4jlabs.com&db={db}[{db}]
-
-:db: northwind
-* link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://{db}@demo.neo4jlabs.com&db={db}[{db}]
-
-:db: fincen
-* link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://{db}@demo.neo4jlabs.com&db={db}[{db}]
-
-:db: twitter
-* link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://{db}@demo.neo4jlabs.com&db={db}[{db}]
-
-:db: stackoverflow
-* link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://{db}@demo.neo4jlabs.com&db={db}[{db}]
-
-:db: gameofthrones
-* link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://{db}@demo.neo4jlabs.com&db={db}[{db}]
-
-:db: neoflix
-* link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://{db}@demo.neo4jlabs.com&db={db}[{db}]
-
-:db: wordnet
-* link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://{db}@demo.neo4jlabs.com&db={db}[{db}]
-
-:db: slack
-* link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://{db}@demo.neo4jlabs.com&db={db}[{db}]
-
-
-[#means-data-import]
-== Means of data import
-
-[#load-data-source]
-=== Loading data from source data
-
-The most reliable way to get a dataset into Neo4j is to import it from the raw sources.
-Then you are independent of database versions, which you otherwise might have to upgrade.
-That's why we provided raw data (CSV, JSON, XML) for several of the datasets, accompanied by import scripts in Cypher.
-
-You could run the Cypher script using a command-line client like `cypher-shell`.
-
-// image::{neo4j-img-base-uri}cypher-import-shell.png[]
-
-.Run Cypher Shell from the "Terminal" of your Graph Database in Neo4j Desktop
-[source, shell]
-----
-./bin/cypher-shell -u neo4j -p "password" -f import-file.cypher
-----
-
-You can also drag and drop or paste the script into Neo4j Browser (check that `multi-statement editor` is enabled in the settings) and run it from there.
-
-// image::{neo4j-img-base-uri}cypher-import-browser.png[]
-
-CSV data can be imported using either xref:data-import/csv-import.adoc#import-load-csv/[`LOAD CSV` clause in Cypher] or https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/[`neo4j-admin database import` for initial bulk imports^] of large datasets.
-
-For loading JSON, XML files you need to have the https://neo4j.com/docs/apoc/current/[APOC Core library^] installed, which comes with a https://neo4j.com/docs/apoc/current/import/[number of procedures for importing data^] also from other databases.
-
-[NOTE]
-====
-To load XLS files, you can use link:https://neo4j.com/labs/apoc/5/import/[APOC Extended library].
-Note APOC Extended library is not officially supported.
-====
-
-[#load-db-copy]
-=== Using a dump of a Neo4j database
-
-Other datasets are provided as dump of a Neo4j datastore.
-Follow the link http://github.com/neo4j-graph-examples to find dump files for many graph example datasets.
-
-.Community Edition (replace the default database)
-1. Stop your Neo4j server.
-2. Then you can import the file using the `./bin/neo4j-admin database load  --overwrite-destination true --from-stdin neo4j < file.dump` command.
-3. Start the Neo4j server.
-
-.Enterprise Edition (also Neo4j Desktop)
-1. Import the file using the `./bin/neo4j-admin database load  --overwrite-destination true --from-stdin <dbname> < file.dump` command.
-2. Make the new database known to the system database with `CREATE DATABASE dbname` which will also automatically start it.
+This list includes all available datasets, descriptions, and how to access them from different platforms.
 
 [IMPORTANT]
 ====
-The Neo4j version of some of the datasets might be older than your Neo4j version.
-Then you might need to configure Neo4j to upgrade your database, by using `neo4j-admin database migrate` command.
-Pay attention, the `neo4j-admin database migrate` command is run only on a stopped database.
-For more details, see link:https://neo4j.com/docs/operations-manual/current/tools/neo4j-admin/migrate-database/[Operations manual -> Tools].
+Some datasets are not continuously maintained.
+Information may be outdated.
 ====
 
-[#example-datasets]
-=== Large data dumps
+[options=header,cols="^.^2,^.^,^.^2,^.^2,4"]
+|===
+| GitHub
+| Aura
+| Neo4j Browser
+| Demo server
+| Description
 
-[#stack-overflow]
-==== Stack Overflow
+| link:https://github.com/neo4j-graph-examples/recommendations[Movies]
+| {check-mark}
+m| :guide movies
+a| link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://movies@demo.neo4jlabs.com&db=movies[`movies`]
+| A small graph containing actors and directors that are related through the movies they have collaborated on.
+It includes the year when the actors, producers, and directors were born, as well as the year when the movie was released.
 
-This is a graph-import of the Stack Overflow archive with 16.4M questions, 52k tags and 8.9M users (http://example-data.neo4j.org/so.dump[Stack Overflow Dump (6.2GB)]).
-This graph is pretty big, for global graph queries you'd need a page-cache of 6G and heap of 16G to work with it.
+| link:https://github.com/neo4j-graph-examples/northwind[Northwind]
+| {check-mark}
+m| :guide northwind
+a| link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://northwind@demo.neo4jlabs.com&db=northwind[`northwind`]
+| A graph representing a traditional retail system with products, orders, customers, suppliers, and employees.
 
-Here is an https://towardsdatascience.com/tagoverflow-correlating-tags-in-stackoverflow-66e2b0e1117b[article explaining the data model] and some exploratory analysis we ran on the data.
+| link:https://github.com/neo4j-graph-examples/stackoverflow[StackOverflow]
+| {check-mark}
+m| :guide stackoverflow
+a| link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://stackoverflow@demo.neo4jlabs.com&db=stackoverflow[`movies`]
+| A graph including users, tags, and Q&A data retrieved from the website StackOverflow.
 
-image::stackoverflow_graph_model-arr.svg[width=600]
+| link:https://github.com/neo4j-graph-examples/recommendations[Movie recommendations]
+| {check-mark}
+| {cross-mark}
+a| link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://recommendations@demo.neo4jlabs.com&db=recommendations[`recommendations`]
+| A graph example using a dataset of movie reviews for generating personalized, real-time recommendations.
 
-The database is available in the <<demo-server,Demo Server>> as outlined above.
+| link:https://github.com/neo4j-graph-examples/pole[Crime investigation (POLE)]
+| {check-mark}
+| {cross-mark}
+| {cross-mark}
+| A Persons Objects Locations Events example data model focused on the relationships between people, objects, locations, and events.
+
+s| Healthcare analysis
+| {check-mark}
+| {cross-mark}
+| {cross-mark}
+| An example graph using FDA Adverse Event Reporting System (FAERS) datasets.
+It contains information on adverse event and medication error reports submitted to FDA.
+
+| link:https://github.com/neo4j-examples/game-of-thrones[Game of Thrones]
+| {cross-mark}
+m| :guide got
+a| link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://gameofthrones@demo.neo4jlabs.com&db=gameofthrones[`gameofthrones`]
+| A graph based on George R. R. Martin's series Game of Thrones.
+It contains information on the interaction between the characters throughout the books.
+
+| link:https://github.com/jexp/fincen[FinCEN]
+| {cross-mark}
+| {cross-mark}
+a| link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://fincen@demo.neo4jlabs.com&db=fincen[`fincen`]
+| A graph with data from the global investigation FinCEN Files concerning money laundering.
+
+| link:https://github.com/neo4j-graph-examples/twitter-v2[Twitter]
+| {cross-mark}
+| {cross-mark}
+a| link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://twitter@demo.neo4jlabs.com&db=twitter[`twitter`]
+| An example graph based on the structure of a social network, with Neo4j’s Twitter data.
+
+s| BBC recipes
+| {cross-mark}
+m| :guide recipes
+| {cross-mark}
+| A graph using data from BBC Good Foods.
+It contains information on ingredients, diet types, recipes, and author of the recipes.
+
+s| UK companies
+| {cross-mark}
+m| :guide ukcompanies
+| {cross-mark}
+| A graph containing information on UK company registration, land ownership, and political donation data.
+
+s| Airbnb listings
+| {cross-mark}
+m| :guide listings
+| {cross-mark}
+| A graph containing information on Airbnb listings, hosts, and reviews.
+
+s| Football transfers
+| {cross-mark}
+m| :guide football_transfers
+| {cross-mark}
+| A graph with transfers data.
+It includes information on players, clubs, transfers, and countries.
+
+| link:https://github.com/adam-cowley/neoflix[Neoflix]
+| {cross-mark}
+| {cross-mark}
+a| link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://neoflix@demo.neo4jlabs.com&db=neoflix[`neoflix`]
+| A graph with over 300 movie nodes including information on release status and date, revenue, budget, language, and synopsis.
+
+s| WordNet
+| {cross-mark}
+| {cross-mark}
+a| link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://wordnet@demo.neo4jlabs.com&db=wordnet[`wordnet`]
+| A graph using data from WordNet, a large lexical database of English. 
+It groups nouns, verbs, adjectives, and adverbs into sets of cognitive synonyms (synsets), each expressing a distinct concept.
+
+| link:https://github.com/neo4j-graph-examples/icij-paradise-papers[Panama Papers]
+| {cross-mark}
+| {cross-mark}
+| {cross-mark}
+| The Paradise Papers dataset and guide from the International Consortium of Investigative Journalists (ICIJ).
+
+| link:https://github.com/neo4j-partners/neo4j-transport-for-london[London public transportation network]
+| {cross-mark}
+| {cross-mark}
+| {cross-mark}
+| A graph of the London public transportation network containing information on statios and tube lines.
+
+| link:https://github.com/neo4j-graph-examples/network-management[IT management]
+| {cross-mark}
+| {cross-mark}
+| {cross-mark}
+| An example graph representing a network and IT management.
+It contains information for dependency and root cause analysis, and more.
+
+|===
+
+== Built-in examples
+
+Some example datasets can be retrieved directly from Workspace and Neo4j Browser in the form of guides.
+With them, you can create or import a dataset and learn how to explore it.
+
+=== Neo4j Workspace
+
+From the Aura Console, Workspace can be accessed from your link:{docs-home}/aura[Aura instance] via the `Open` button.
+Once in Workspace, use the academic cap icon (image:icon-guides.svg[width=3%]) on the top right to access the interactive guides.
+There you find interactive guides that contain several of the xref:reference/example-data.adoc#_available_datasets[available datasets] and learn how to work with them.
+
+image:workspace-guides.png[]
+
+=== Neo4j Browser
+
+Use the command `:guide` to access a list of built-in interactive guides or access them directly using these previously listed xref:reference/example-data.adoc#_available_datasets[commands].
+
+image:browser-guides.png[]
+
+== Demo server
+
+Optionally, you can access the demo server on https://demo.neo4jlabs.com:7473 to explore a number of datasets with read-only access for public use.
+
+The username and password are the same as the dataset name.
+For instance, for the `recommendations` dataset the username is `recommendations` and password is `recommendations` too.
+
+Find the full list of datasets and the username/password entries to use in the xref:reference/example-data.adoc#_available_datasets[available datasets] table.
+
+== Database dump files
+
+In the GitHub repository link:http://github.com/neo4j-graph-examples[Neo4j graph examples], you find dump files for several graph example datasets, including the ones listed previously in the xref:reference/example-data.adoc#_available_datasets[available datasets] table.
+
+There are several ways to load them, depending on the environment that is being used:
+
+* link:{docs-home}/aura/aurads/importing-data/import-db/#_import_database[Aura]
+* link:{docs-home}/desktop-manual/current/operations/create-from-dump/[Neo4j Desktop]
+* link:{docs-home}/operations-manual/current/kubernetes/operations/dump-load/#kubernetes-neo4j-load[Kubernetes]
+* link:{docs-home}/operations-manual/current/docker/dump-load/[Docker]
+* link:{docs-home}/operations-manual/current/backup-restore/restore-dump/[Neo4j Admin]
+
+You can also refer to the link:{docs-home}import/[Importing your data] section to learn more ways to load a dataset to your instance, including other supported file formats.
+
+[IMPORTANT]
+====
+The Neo4j version of some of the dump files may be older than your Neo4j version.
+In this case, you need to upgrade your database dump using the `neo4j-admin database migrate` command before loading it into Neo4j.
+Note that this command can only be run on a stopped database.
+For more details, see link:https://neo4j.com/docs/upgrade-migration-guide/current/version-5/migration/migrate-databases/[Upgrade and Migration guide -> Migrate your databases].
+====
