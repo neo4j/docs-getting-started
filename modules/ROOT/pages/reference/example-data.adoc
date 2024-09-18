@@ -157,13 +157,13 @@ With them, you can create or import a dataset and learn how to explore it.
 
 From the Aura Console, Workspace can be accessed from your link:{docs-home}/aura[Aura instance] via the `Open` button.
 Once in Workspace, use the academic cap icon (image:icon-guides.svg[width=3%]) on the top right to access the interactive guides.
-There you find interactive guides that contain several of the xref:appendix/example-data.adoc#_available_datasets[available datasets] and learn how to work with them.
+There you find interactive guides that contain several of the xref:reference/example-data.adoc#_available_datasets[available datasets] and learn how to work with them.
 
 image:workspace-guides.png[]
 
 === Neo4j Browser
 
-Use the command `:guide` to access a list of built-in interactive guides or access them directly using these previously listed xref:appendix/example-data.adoc#_available_datasets[commands].
+Use the command `:guide` to access a list of built-in interactive guides or access them directly using these previously listed xref:reference/example-data.adoc#_available_datasets[commands].
 
 image:browser-guides.png[]
 
@@ -174,11 +174,11 @@ Optionally, you can access the demo server on https://demo.neo4jlabs.com:7473 to
 The username and password are the same as the dataset name.
 For instance, for the `recommendations` dataset the username is `recommendations` and password is `recommendations` too.
 
-Find the full list of datasets and the username/password entries to use in the xref:appendix/example-data.adoc#_available_datasets[available datasets] table.
+Find the full list of datasets and the username/password entries to use in the xref:reference/example-data.adoc#_available_datasets[available datasets] table.
 
 == Database dump files
 
-In the GitHub repository link:http://github.com/neo4j-graph-examples[Neo4j graph examples], you find dump files for several graph example datasets, including the ones listed previously in the xref:appendix/example-data.adoc#_available_datasets[available datasets] table.
+In the GitHub repository link:http://github.com/neo4j-graph-examples[Neo4j graph examples], you find dump files for several graph example datasets, including the ones listed previously in the xref:reference/example-data.adoc#_available_datasets[available datasets] table.
 
 There are several ways to load them, depending on the environment that is being used:
 
