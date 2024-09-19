@@ -13,9 +13,10 @@
 .A comparison between the relational and graph models of the Northwind dataset, when considering the data structures in the following queries.
 image::relational-vs-graph.svg[]
 
-This page shows anyone familiar with SQL how to understand Cypher and write the equivalent Cypher queries.
-The Northwind dataset is used in the examples.
-Refer to xref:reference/example-data.adoc[Example datasets] to learn how to load it to your Neo4j instance.
+The following query examples use the Northwind dataset.
+They are designed to help anyone familiar with SQL to understand Cypher and write the equivalent Cypher queries.
+
+Refer to xref:reference/example-data.adoc[Example datasets] to learn how to load Northwind to your Neo4j instance and try the examples out.
 
 [TIP]
 ====
@@ -23,7 +24,6 @@ For a more in-depth explanation on the differences and similarities between grap
 ====
 
 == Query examples
-
 
 === Select and return records
 
@@ -33,7 +33,7 @@ For a more in-depth explanation on the differences and similarities between grap
 | SQL
 | Cypher
 
-a| To select and return records in SQL, you would select everything from the `products` table:
+a| To select and return records in SQL, select everything from the `products` table:
 [source, plsql]
 ----
 SELECT p.*
@@ -50,7 +50,7 @@ RETURN p;
 
 === Field access, ordering, and paging
 
-It is more efficient to return only a subset of attributes, like `ProductName` and `UnitPrice` in case you want to order items.
+Rather than returning all attributes, you can filter out the ones you are interested in -- `ProductName` and `UnitPrice`, for example.
 
 [options=header,cols='1,1']
 |===
@@ -124,8 +124,11 @@ RETURN p.productName, p.unitPrice;
 
 ==== Indexing
 
-Cypher offers indexes as a method to facilitate the search for specific items in a dataset by using node labels and attribute combinations.
-In this case, creating indexes for the node labels `productName` and `unitPrice` could be a way to facilitate the search for the product `Chocolade` and its price:
+Indexing is a resource available both in SQL and Cypher.
+Cypher uses indexes to make the search for specific items in the database more efficient.
+With them, you can match node labels and property combinations.
+
+In the Northwind dataset, adding indexes on the node labels `productName` and `unitPrice` makes searching for a product and its price easier:
 
 [source, cypher]
 ----
@@ -238,7 +241,7 @@ RETURN DISTINCT c.companyName;
 ----
 |===
 
-=== New customers without existing orders
+=== Return customers without existing orders
 
 If you instead want to see **who** bought **what** and what did they **pay in total**, the `JOIN` in the previous SQL query stays the same, only the filter expression changes.
 However, if you have customers without any orders and still want to return them, you will need to make some adjustments.
@@ -321,7 +324,7 @@ Additional aggregation functions like `collect`, `percentileCont`, `stdDev` are 
 === Employee territories
 
 In SQL, dealing with master-detail information can be challenging.
-This is the case when you have one main entity (master, head, parent) and many dependent ones (detail, position, child).
+One example is when you have one main entity (master, head, parent) and many dependent ones (detail, position, child).
 
 You can either write a query that joins both and returns the master data multiple times (once for each detail) or you fetch only the primary key of the master and then pull all detail rows via that foreign key.
 
