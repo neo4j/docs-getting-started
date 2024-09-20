@@ -1,23 +1,25 @@
 
 [[graphdb-vs-rdbms]]
 = Transition from relational to graph database
-:description: This chapter explores the concepts of graph databases from a relational developer's point of view.
+:description: Learn more about the transition from a relational to a graph database, from a developer's point of view.
 
-== Introduction
-The article aims to explain the conceptual differences between relational and graph database structures and data models.
-It also gives a high-level overview of how working with each database type is similar or different - from the relational and graph query languages to interacting with the database from applications.
-
+Migrating from a relational to a graph database requires an understanding of the conceptual differences and similarities between both technologies.
+This includes how each kind of data model and query language works, and which are more suitable for a project.
 
 [#relational-vs-graph]
-== Relational database overview
+== Relational databases: an overview
 
-Relational databases have been the work horse of software applications since the 80's, and continue as such to this day.
-They store highly-structured data in tables with predetermined columns of specific types and many rows of those defined types of information.
-Due to the rigidity of their organization, relational databases require developers and applications to strictly structure the data used in their applications.
+Relational databases have been a core technology for software applications since the 1980s, and it continues to be relevant to this day.
+It is characterized by its method of storing highly-structure data in tables with predetermined columns and rows of defined types of information.
 
-In relational databases, references to other rows and tables are indicated by referring to primary key attributes via foreign key columns.
+Despite its many advantages, a relational database has a very strict method of data organization which can be costly, from a computing perspective.
+In it, references to other rows and tables are indicated with primary key attributes via foreign key columns.
 Joins are computed at query time by matching primary and foreign keys of all rows in the connected tables.
 These operations are compute-heavy and memory-intensive and have an exponential cost.
+
+ that can be heavy on computing and memory processing, thus having an exponential cost.
+ can also be compute and memory-intensive, and consequently have an exponential cost.
+
 
 When many-to-many relationships occur in the model, you must introduce a _JOIN_ table (or associative entity table) that holds foreign keys of both the participating tables, further increasing join operation costs.
 The image below shows this concept of connecting a Person (from Person table) to a Department (in Department table) by creating a Person-Department join table that contains the ID of the person in one column and the ID of the associated department in the next column.
