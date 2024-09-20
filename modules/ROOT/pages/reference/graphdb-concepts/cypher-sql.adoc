@@ -10,11 +10,12 @@
 :page-ad-underline-role: button
 :page-ad-underline: Learn more
 
-.A comparison between the relational and graph models of the Northwind dataset, when considering the data structures in the following queries.
+.The relational and graph models of the Northwind dataset.
 image::relational-vs-graph.svg[]
 
 The following query examples use the Northwind dataset.
-They are designed to help anyone familiar with SQL to understand Cypher and write the equivalent Cypher queries.
+They are designed to help anyone familiar with SQL to understand Cypher and write Cypher queries equivalent to SQL.
+See Figure 1 for a visual representation of the difference between relational and graph models of the dataset used in the following queries.
 
 Refer to xref:reference/example-data.adoc[Example datasets] to learn how to load Northwind to your Neo4j instance and try the examples out.
 
@@ -40,7 +41,7 @@ SELECT p.*
 FROM products as p;
 ----
 
-a| In Cypher, you `MATCH` a simple pattern: all nodes with the *label* `:Product` and `RETURN` them:
+a| In Cypher, you `MATCH` a simple pattern: all nodes with the *label* `:Product`, and `RETURN` them:
 [source, cypher]
 ----
 MATCH (p:Product)
@@ -126,9 +127,8 @@ RETURN p.productName, p.unitPrice;
 
 Indexing is a resource available both in SQL and Cypher.
 Cypher uses indexes to make the search for specific items in the database more efficient.
-With them, you can match node labels and property combinations.
 
-In the Northwind dataset, adding indexes on the node labels `productName` and `unitPrice` makes searching for a product and its price easier:
+In the Northwind dataset, adding indexes on the node labels `productName` and `unitPrice` makes searching for a product and its price quicker:
 
 [source, cypher]
 ----
@@ -146,7 +146,7 @@ Read more about how to use indexes in link:{docs-home}/cypher-manual/current/ind
 
 === Filter products
 
-There are several ways to filter products in Cypher that are similar to SQL.
+There are several ways to filter results in Cypher that are similar to SQL.
 
 ==== Filter by list/range
 
