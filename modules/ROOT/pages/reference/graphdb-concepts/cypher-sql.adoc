@@ -125,8 +125,10 @@ RETURN p.productName, p.unitPrice;
 
 ==== Indexing
 
-Indexing is a resource available both in SQL and Cypher.
-Cypher uses indexes to make the search for specific items in the database more efficient.
+Indexes are available both in SQL and Cypher and make searching for a specific node label and attribute combination more efficient.
+
+Indexes in Cypher are only used for finding the starting points of a query; all subsequent pattern matching is done through the graph structure.
+Cypher supports range, text, point, lookup, full-text, and vector indexes.
 
 In the Northwind dataset, adding indexes on the node labels `productName` and `unitPrice` makes searching for a product and its price quicker:
 
