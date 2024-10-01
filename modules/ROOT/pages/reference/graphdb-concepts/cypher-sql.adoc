@@ -245,7 +245,7 @@ RETURN DISTINCT c.companyName;
 
 === Return customers without existing orders
 
-If you instead want to see **who** bought **what** and what did they **pay in total**, the `JOIN` in the previous SQL query stays the same, only the filter expression changes.
+If you instead want to see **who** bought **what** and what they **paid in total**, the `JOIN` in the previous SQL query stays the same, only the filter expression changes.
 However, if you have customers without any orders and still want to return them, you will need to make some adjustments.
 
 [options=header,cols='1,1']
