@@ -15,6 +15,9 @@
 * *Reference*
 
 * xref:reference/graphdb-concepts/index.adoc[Graph database concepts]
+** xref:reference/graphdb-concepts/cypher-sql.adoc[]
+** xref:reference/graphdb-concepts/graphdb-vs-nosql.adoc[]
+** xref:reference/graphdb-concepts/graphdb-vs-rdbms.adoc[]
 * xref:reference/example-data.adoc[Example datasets]
 * link:{docs-home}/tutorials/#_getting_started[Tutorials]
 * xref:reference/resources.adoc[Resources]
