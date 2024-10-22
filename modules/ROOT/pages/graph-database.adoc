@@ -1,0 +1,88 @@
+[[what-is-graphdb]]
+= What is a graph database
+:description: An introduction to graph databases and how they work.
+:aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
+:page-ad-overline-link: https://graphacademy.neo4j.com/courses/neo4j-fundamentals/?ref=docs
+:page-ad-overline: Neo4j GraphAcademy
+:page-ad-title: Neo4j Fundamentals
+:page-ad-description: Learn the basics of Neo4j and the property graph model
+:page-ad-link: https://graphacademy.neo4j.com/courses/neo4j-fundamentals/?ref=docs
+:page-ad-underline-role: button
+:page-ad-underline: Learn more
+
+A Neo4j graph database stores data as <<nodes>>, <<relationships>>, and <<properties>> instead of in tables or documents.
+This means you can organize your data in a similar way as when sketching ideas on a whiteboard.
+
+And since graph databases are not restricted to a pre-defined model, you can take more flexible approaches and strategies when working with them.
+
+.A visual way of matching patterns and relationships using Cypher
+image::ROOT:sample-cypher.svg[]
+
+== How it works
+
+Graph databases are structured through nodes and relationships.
+
+*Nodes* are entities in the graph which can:
+
+* Be tagged with <<labels>> representing their different roles in a domain (e.g., `Person`).
+* Hold any number of link:https://neo4j.com/docs/cypher-manual/current/values-and-types/[key-value pairs] as properties (e.g., `name`).
+* Be <<indexed>> and bound by <<constraints>>.
+
+*Relationships* provide named connections between two nodes (e.g., _Person_ - `LOVES` - _Person_) and they:
+
+* Must always have a start node, an end node, and exactly one type.
+* Must have a direction.
+* Can have properties, like nodes.
+* Nodes can have multiple relationships of various types without sacrificing performance.
+
+In summary, nodes and relationships are an efficient and flexible way to store data since they allow you to:
+
+* Create traversals in big graphs for both depth and breadth.
+* Scale-up your database to billions of nodes.
+* Design flexible property graph data models that can adapt over time.
+
+[[why-graphdb]]
+== Why use a graph database
+
+Projects often deal with large amounts of complex data and graph databases can be a powerful tool.
+
+There are other ways to store data as objects and connections, such as relational databases, for example.
+However, relational databases use computing-wise expensive `JOIN` operations or cross-looks, which are often tied to a rigid data model.
+
+Graph databases do not use JOINs.
+Rather, relationships are stored natively alongside the data elements (nodes) in a more flexible format, which allows the optimization of data traversing and millions of connections to be accessed per second.
+
+Moreover, many daily challenges and tasks can be viewed from a graph perspective as it allows you to:
+
+* Navigate deep hierarchies.
+* Find hidden connections between distant items.
+* Discover inter-relationships between items.
+
+== How to use
+
+image::use-case-summary.svg[role="popup-link"]
+
+Whether it's a social or a road network, all networks can be structured as an interconnected graph of relationships. 
+Many times, a project's questions and challenges revolve around the relationship between elements, not the elements themselves (e.g. how to get from A to B, instead of what A is and what B is).
+For this reason, graphs can be applied to many areas of society and to a wide variety of projects.
+
+Neo4j is frequently used today by https://neo4j.com/customers/[startups, educational institutions, and large enterprises] in a variety of sectors including financial services, government, energy, technology, retail, and manufacturing.
+Graphs have been successful in helping them on the development of innovative new technology, business management, insight and revenue regenration, as well as overall improvements in efficiency.
+
+You can find more information about use cases on link:https://neo4j.com/use-cases/[Neo4j's main website].
+
+== Keep learning
+
+If you want to get a better and deeper understanding of graph databases, you can read more about xref:appendix/graphdb-concepts/index.adoc[Graph database concepts], or enroll to the GraphAcademy course on link:https://graphacademy.neo4j.com/courses/neo4j-fundamentals/[Neo4j Fundamentals].
+
+
+ifndef::backend-pdf[]
+[discrete.glossary]
+endif::[]
+== Glossary
+
+include::glossary.adoc[]
+
+ifdef::backend-pdf[]
+<<<
+endif::[]
