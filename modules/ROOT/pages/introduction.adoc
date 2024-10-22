@@ -50,7 +50,7 @@ xref:cypher.adoc[]
 
 == Work with data
 
-=== Model your data to Neo4j
+=== Model your data for Neo4j
 
 [.icon]
 image:ROOT:icon-csvtodb.svg[]
