@@ -1,5 +1,5 @@
 [[data-modeling]]
-= Model your data for Neo4j
+= Graph data modeling
 :description: graph-modeling, data-model, schema, create-model, translate-model, model-performance, model-example
 :page-ad-overline-link: https://graphacademy.neo4j.com/courses/modeling-fundamentals/?ref=docs
 :page-ad-overline: Neo4j GraphAcademy
@@ -9,11 +9,47 @@
 :page-ad-underline-role: button
 :page-ad-underline: Learn more
 
-[#graph-modeling]
-This section is designed to give you the tools you need to design and implement an efficient and flexible graph database technology through a good graph data model. +
-Best practices and tips gathered from Neo4j's tenure of building and recommending graph technologies provide you with the confidence to build graph-based solutions with rich data models.
-The focus of this section is to provide you with the necessary guidelines and tools to help you model your domain as a graph. +
- 
+Data modeling is a practice that creates structure to a dataset by defining relationships and access routes.
+It is an important step to take when using graph databases, as it helps ensuring data integrity and improved performance.
+
+This page contains an introduction to graph data modeling and how to get started with it.
+
+== Graph data model = whiteboard-friendly
+
+Graph data models are often referred as being _whiteboard-friendly_.
+Typically, when designing a non-graph data model, people draw and connect example data on the whiteboard to show how different items relate.
+This is then re-formatted and structured to fit normalized tables for a relational model.
+
+A similar process exists in graph data modeling too.
+However, instead of adapting the data model to a normalized table structure, the graph data model stays the same.
+Take this example using data about the movie "The Matrix":
+
+.Matrix - whiteboard model
+image::matrix-whiteboard-model1.svg[500,500,role="popup-link"]
+
+To fit this data into a graph database and use xref:cypher.adoc[Cypher] as a query language, these entities need to be turned into nodes and their connections, into relationships:
+
+.Matrix - match node and relationship format of property graph model
+image::matrix-whiteboard-model2.svg[500,500,role="popup-link"]
+
+The next step is to add labels and determine properties for the nodes and relationships.
+This helps differentiate entities and thus make it easier to retrieve them from the database:
+
+.Matrix - add labels and properties
+image::matrix-whiteboard-model3.svg[500,500,role="popup-link"]
+
+Finally, you can view this data model in Neo4j Browser and ensure it matches what was drawn on the whiteboard.
+Also, notice how it is nearly identical to the whiteboard model we initially designed.
+
+.Matrix - final model in Neo4j 
+image::matrix_whiteboard_model4.svg[600,600,role="popup-link"]
+
+The ability to easily whiteboard your data model makes the graph data model incredibly simple and visual.
+There is no need to draw up business model versions or explain ERD terms to business users.
+Instead, the graph data model can be understood by anyone.
+
+
+ introduction to graph data modeling, and how to get started with that.
 
 // image::graph_data_modeling.jpg[role="popup-link"]
 
