@@ -17,7 +17,7 @@ With a native graph database at the core, Neo4j offers link:https://neo4j.com/pr
 The library includes algorithms for community detection, centrality, node similarity, pathfinding, and link prediction.
 Graph Data Science (GDS) is designed to support data science workflows and machine learning tasks over your graphs.
 
-Graph algorithms are exposed through xref:cypher-intro/index.adoc[Cypher] procedures.
+Graph algorithms are exposed through xref:cypher.adoc[Cypher] procedures.
 Cypher is a declarative graph query language created by Neo4j.
 For more information about Cypher, visit the link:https://neo4j.com/docs/cypher-manual/current/introduction/[Cypher Manual].
 

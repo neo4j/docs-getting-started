@@ -2,6 +2,8 @@
 = Graph database concepts
 :description: An introduction to graph database concepts.
 
+// This page may become redundant after graph-database.adoc
+
 == Introduction
 
 The guide covers graph database fundamentals.

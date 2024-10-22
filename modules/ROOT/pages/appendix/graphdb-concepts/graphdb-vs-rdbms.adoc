@@ -3,7 +3,6 @@
 = Transition from relational to graph database
 :description: This chapter explores the concepts of graph databases from a relational developer's point of view.
 
-
 == Introduction
 The article aims to explain the conceptual differences between relational and graph database structures and data models.
 It also gives a high-level overview of how working with each database type is similar or different - from the relational and graph query languages to interacting with the database from applications.
