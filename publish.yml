@@ -1,7 +1,7 @@
 site:
   title: Neo4j Docs
   url: https://neo4j.com/docs
-  start_page: getting-started:ROOT:pages:introduction.adoc
+  start_page: getting-started:ROOT:introduction.adoc
 
 content:
   sources:
