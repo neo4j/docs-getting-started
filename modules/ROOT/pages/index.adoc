@@ -106,11 +106,12 @@ Learn how to export your graph data in Neo4j for display as a visualization.
 link:{docs-home}/visualize/[]
 
 [.widget.highlights]
-== GA courses
+== GraphAcademy courses
 
 [.icon]
-image:ROOT:ga-home.svg[]
+image:ga-home.svg[]
 
+--
 [.caption]
 GraphAcademy courses
 
@@ -121,3 +122,4 @@ GraphAcademy courses
 * link:https://graphacademy.neo4j.com/courses/llm-fundamentals/[Neo4j and LLM fundamentals]
 * link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/[Graph data modeling fundamentals]
 * link:https://graphacademy.neo4j.com/courses/gds-product-introduction/[Introduction to Graph Data Science]
+--
