@@ -57,7 +57,7 @@ Neo4j Enterprise Edition can be deployed on-premises or on a link:https://neo4j.
 [[neo4j-docs]]
 == Neo4j documentation
 
-The official documentation of all components of the xref:introduction.adoc#neo4j-ecosystem-components[Neo4j ecosystem] is available at link:https://neo4j.com/docs/[].
+The official documentation of all components of the xref:index.adoc#neo4j-ecosystem-components[Neo4j ecosystem] is available at link:https://neo4j.com/docs/[].
 
 The documentation homepage is designed to make your journey across all Neo4j products comfortable and pleasant.
 

@@ -1,7 +1,7 @@
 name: getting-started
 title: Getting Started
 version: ~
-start_page: ROOT:introduction.adoc
+start_page: ROOT:index.adoc
 nav:
 - modules/ROOT/content-nav.adoc
 asciidoc:
