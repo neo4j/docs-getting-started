@@ -1,95 +1,112 @@
 [[data-modeling-tools]]
 = Data modeling tools
-:description: arrows.app, data importer, visualization tools, schema
+:description: See a list of tools that you can use when designing a data model.
+:page-role: labs-label
 
-To help you with designing a new graph database structure, the following tools were created:
+//Check Mark
+:check-mark: icon:check[]
 
-* link:https://neo4j.com/docs/data-importer/current/[Neo4j Data Importer^]
-* link:https://neo4j.com/labs/arrows/[Arrows.app^]
+//Cross Mark
+:cross-mark: icon:times[]
 
-If you have data stored in a flat file format, use *Neo4j Data Importer* -- no-code tool for importing flat file data (`.csv`, `.tsv`) into Neo4j databases.
-Data Importer is available on *AuraDB* instances as a part of Neo4j Workspace via the `Import` tab:
+Neo4j offers a range of no-code tools to get you started with data modeling.
+Find here the available options.
 
-image::workspace_import_tab.png[]
+== Neo4j Data Importer
 
-*Arrows.app* is ideal for making a sketch of a graph, therefore if your aim is to design a domain model that your data will follow, go to the link:https://arrows.app/#/googledrive/ids=1osmv0pzcbyF8TEtvOEAMeXpONCWPn-e_[Arrows.app page].
+image::data-importer-1.png[600,600,role="popup-link"]
 
-== Projects overview
+Besides being a tool for xref:data-import/index.adoc[data importing], you can use Neo4j Data Importer to sketch out a graph model and map your input data to its structure and properties.
+You can access it:
 
-[[data-importer]]
-=== Neo4j Data Importer
+* Via the *Import* tab in link:https://neo4j.com/product/auradb/?ref=docs-nav-get-started[Neo4j Aura].
+* As a standalone version link:https://data-importer.neo4j.io/[with secure connection only] or link:https://data-importer.graphapp.io/[with both secure and insecure connections].
 
-If you are new to Neo4j or completely new to graph, it could be hard to know where to start when it comes to loading data.
+For more information, refer to the link:{docs-home}/data-importer/current/modeling[Neo4j Data Importer -> Data modeling].
 
-Neo4j has many data import options: 
+== Arrows.app
 
-* `LOAD CSV` Cypher command for online import 
+image::northwind-graph-model.png[600,600,role="popup-link"]
 
-* APOC procedures for other formats 
+link:https://arrows.app[Arrows.app] is a no-code visualization platform which allows whiteboarding ideas into a graph model.
+It is ideal for making a sketch of a graph, especially if you want to design a domain model for your data.
 
-* `neo4j-admin database import` command to load a full database 
+With this platform, you can:
 
-These tools are capable, but you have to spend some time on learning them that can get in the way when you are just starting out.
+* Draft your own whiteboard from scratch or import data from JSON files and plain text.
+* Create, modify, and delete nodes and relationships with their labels and properties without writing any code.
+* Export the visualization model as Cypher statements, so you can load the same data model into a Neo4j database.
 
-To address this need, *Neo4j Data Importer* was created, a small but capable no-code user-friendly interface for loading flat file data into Neo4j databases.
+[role=label--labs]
+== Cypher Workbench
 
-image::data-importer-1.png[role="middle"]
+image::cypher-workbench.png[600,600,role="popup-link"]
 
-Today Neo4j Data Importer provides:
+link:https://help.neo4j.solutions/neo4j-solutions/cypher-workbench/[Cypher Workbench] is a cloud-based tool that assists Neo4j developers in creating and maintaining solutions built on top of Neo4j. 
+It combines no-code visual solutions as the ones available in link:https://arrows.app[Arrows.app] while also offering importing options similar to link:{docs-home}/data-importer[Neo4j Data Importer].
 
-* Support for flat-file inputs (`.csv`, `.tsv`) in the region of 1 million total rows equivalent (no upper limit is enforced, but larger loads take longer and rely on a reliable network connection to your database).
+With this platform, you can:
 
-* The ability to sketch out a graph model and map your input data to its structure and properties.
+* Create a data model from scratch or import data from from JSON files.
+* Reverse-engineer data models from existing Neo4j databases.
+* Use Cypher statements to augment the current data model, including node labels, relationship types, and properties.
+* Validate your model (naming conventions, constraints, data, common mistakes, etc).
+* Use a business scenarios tool for capturing questions and scenarios of use cases.
+* Import scenarios from Excel, Google Sheets, or plain text.
 
-* Loads into any Neo4j database which are reachable from your machine.
+To install it:
 
+* Check out the code from the link:https://github.com/neo4j-labs/cypher-workbench[GitHub Repository].
+* Ensure that you have Node.js on your machine.
+* Follow the instructions in the Cypher Workbench project README or refer to the link:https://help.neo4j.solutions/neo4j-solutions/cypher-workbench/[documentation].
 
-Data is only kept in your web browser; the tool does not use a server side component.
+== Other tools
 
-[IMPORTANT]
-====
-Neo4j Data Importer is currently available on Neo4j AuraDB instances.
-====
+Here is a list of other non-Neo4j tools that can be used for data modeling:
 
-[[arrows-app]]
-=== Arrows.app
+* link:https://mermaid.live/[Mermaid]: general data modeling tool (not specifically for graph databases), based on Markdown.
+Ideal for documenting modeling strategies.
+* link:https://plantuml.com/[PlantUML]: application for creating diagrams from plain text.
+Works better with version control rather than first model design.
+* link:https://hackolade.com/[Hackolade]: a tool to design, document, and communicate data models and schemas.
+Built to support data modeling of Neo4j node labels and relationship types.
 
-*Arrows.app* is a web-based tool from link:https://neo4j.com/labs/[Neo4j Labs] for drawing graphs.
+== Tools comparison
 
-While designing a graph data model, you may need to visualize different versions. 
-Remember, there is no right or wrong way to structure your data for a graph database!
-Your domain model depends on your business needs and aims to solve your specific problems.
-Its flexibility allows you to refactor data model to improve performance and maximize capabilities of your graph database. 
+[options=header,cols="^.^2,^.^,^.^2,^.^2"]
+|===
+| Tool
+| Free
+| Import
+| Export
 
-image::northwind-graph-model.png[role=middle]
+| Data Importer
+| {check-mark}
+| .csv, .tsv
+| -
 
-Graphs are easy and intuitive to sketch on a whiteboard (we say whiteboard-friendly), and Arrows.app tries to be just as easy and intuitive as using a whiteboard.
-You are able to create a visual layout of the organization's data entities, relationships, and properties. 
-Graph data model stays exactly as it was drawn on the whiteboard/Arrows.app canvas.
+| Arrows
+| {check-mark}
+| JSON
+| Image, Cypher, JSON,URL, GraphQL
 
-With the help of Arrows.app: 
+| Cypher Workbench
+| {cross-mark}
+| Cypher Workbench JSON, Apoc.meta.schema, Arrows JSON
+| JSON
 
-. You can create, modify, and delete essential parts of the Neo4j graph database: nodes and relationships with their labels and properties.
+| PlantUML
+| {check-mark}
+| PUML,JSON
+| PNG, SVG, LaTeX format and ASCII art diagrams
 
-. You can convert your table into a graph by using Arrows.app import functions.
+| Mermaid
+| {cross-mark}
+| MarkDown
+| MarkDown
 
-. You are able to export images from Arrows.app as Cypher statements and load data into Neo4j database.
-
-Arrows.app features:
-
-* quick intuitive drawing with a mouse
-
-* fine-grained styling control: sizes, layouts, and colors
-
-* several options for exporting images
-
-* functionality for importing JSON files or tables
-
-
-[[data-modeling-tools-resources]]
-== Resources
-
-* link:https://neo4j.com/developer-blog/week-17-discover-auradb-free-analysing-nft-trades/[Blog Post. Aura Series: Discover AuraDB Free and Learn More about New Data Importer^]
-* link:https://neo4j.com/developer-blog/neo4j-devtools-happy-new-year-new-data-importer-and-neo4j-browser-updates/[Blog Post. Neo4j DevTools’ Happy New Year: New Data Importer and Neo4j Browser Updates^]
-* link:https://neo4j.com/videos/8-drawing-and-creating-graphs-with-arrows-app/[Video. Drawing and Creating Graphs with Arrows.app^]
-* link:https://medium.com/neo4j/drawing-graphs-with-arrows-app-ee5735caa04d[Blog Post. Drawing graphs with Arrows.app^]
+| Hackolade
+| {cross-mark}
+| Hackolade JSON, YAML, DDL, XSD, Excel Template, Cloud Storage, Collibra Data Dictionary
+| Cypher, HTML
+|===
