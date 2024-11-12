@@ -39,7 +39,7 @@ If you want to relate your existing knowledge of relational data models to the g
 
 From typical process steps to conversion mappings, we will walk through how the process can differ and what tables and columns look like as a graph.
 
-xref:how-to/relational-to-graph-modeling.adoc[Modeling: relational to graph]
+xref:data-modeling/relational-to-graph-modeling.adoc[Modeling: relational to graph]
 
 [#optimize-graph-model]
 == Optimizing graph data models

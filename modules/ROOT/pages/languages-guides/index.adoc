@@ -19,7 +19,7 @@ Neo4j provides *official libraries for Python, JavaScript, Java, .NET, and Go*.
 Our community contributors provide drivers for all major programming languages for all protocols and APIs.
 In this section, we provide an introduction and a consistent example application for several languages and Neo4j drivers.
 
-You should be familiar with xref:reference/graphdb-concepts/index.adoc[graph database concepts] and the property graph model.
+You should be familiar with xref:appendix/graphdb-concepts/index.adoc[graph database concepts] and the property graph model.
 You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or link:/download/[installed Neo4j locally].
 
 [#graphacademy]
