@@ -10,7 +10,7 @@
 :cross-mark: icon:times[]
 
 Neo4j offers a range of no-code tools to get you started with data modeling.
-The available options are described here.
+Available options are here listed.
 
 == Neo4j Data Importer
 
@@ -22,7 +22,7 @@ You can access it:
 * Via *Import* in link:https://neo4j.com/product/auradb/?ref=docs-nav-get-started[Neo4j Aura].
 * As a standalone version link:https://data-importer.neo4j.io/[with secure connection only] or link:https://data-importer.graphapp.io/[with both secure and insecure connections].
 
-For more information, refer to the link:{docs-home}/data-importer/current/modeling[Neo4j Data Importer -> Data modeling].
+For more information, refer to link:{docs-home}/data-importer/[Neo4j Data Importer's documentation].
 
 == Arrows.app
 
@@ -47,18 +47,14 @@ It combines no-code visual solutions as the ones available in link:https://arrow
 
 With this platform, you can:
 
-* Create a data model from scratch or import data from from JSON files.
+* Create a data model from scratch or import data from JSON files.
 * Reverse-engineer data models from existing Neo4j databases.
 * Use Cypher statements to augment the current data model, including node labels, relationship types, and properties.
 * Validate your model (naming conventions, constraints, data, common mistakes, etc).
 * Use a business scenarios tool for capturing questions and scenarios of use cases.
 * Import scenarios from Excel, Google Sheets, or plain text.
 
-To install it:
-
-* Check out the code from the link:https://github.com/neo4j-labs/cypher-workbench[GitHub Repository].
-* Ensure that you have Node.js on your machine.
-* Follow the instructions in the Cypher Workbench project README or refer to the link:https://help.neo4j.solutions/neo4j-solutions/cypher-workbench/[documentation].
+For instructions on how to install it, refer to link:https://help.neo4j.solutions/neo4j-solutions/cypher-workbench/installation/[Cypher Workbench's documentation].
 
 == Other tools
 
