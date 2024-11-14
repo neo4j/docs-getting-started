@@ -17,11 +17,11 @@ The following query examples use the Northwind dataset.
 They are designed to help anyone familiar with SQL to understand Cypher and write Cypher queries equivalent to SQL.
 See Figure 1 for a visual representation of the difference between relational and graph models of the dataset used in the following queries.
 
-Refer to xref:reference/example-data.adoc[Example datasets] to learn how to load Northwind to your Neo4j instance and try the examples out.
+Refer to xref:appendix/example-data.adoc[Example datasets] to learn how to load Northwind to your Neo4j instance and try the examples out.
 
 [TIP]
 ====
-For a more in-depth explanation on the differences and similarities between graph and relational databases, see xref:reference/graphdb-concepts/graphdb-vs-rdbms.adoc[Transition from relational to graph database].
+For a more in-depth explanation on the differences and similarities between graph and relational databases, see xref:appendix/graphdb-concepts/graphdb-vs-rdbms.adoc[Transition from relational to graph database].
 ====
 
 == Query examples

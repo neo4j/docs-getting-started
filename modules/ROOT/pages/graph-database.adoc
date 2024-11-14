@@ -73,7 +73,7 @@ You can find more information about use cases on link:https://neo4j.com/use-case
 
 == Keep learning
 
-If you want to get a better and deeper understanding of graph databases, you can read more about xref:reference/graphdb-concepts/index.adoc[Graph database concepts], or enroll to the GraphAcademy course on link:https://graphacademy.neo4j.com/courses/neo4j-fundamentals/[Neo4j Fundamentals].
+If you want to get a better and deeper understanding of graph databases, you can read more about xref:appendix/graphdb-concepts/index.adoc[Graph database concepts], or enroll to the GraphAcademy course on link:https://graphacademy.neo4j.com/courses/neo4j-fundamentals/[Neo4j Fundamentals].
 
 
 ifndef::backend-pdf[]

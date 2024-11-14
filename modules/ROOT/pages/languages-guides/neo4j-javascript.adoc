@@ -14,7 +14,7 @@
 [abstract]
 This guide introduces the Neo4j JavaScript driver and links to the relevant resources.
 
-You should be familiar with xref:reference/graphdb-concepts/index.adoc[graph database concepts] and the property graph model.
+You should be familiar with xref:appendix/graphdb-concepts/index.adoc[graph database concepts] and the property graph model.
 You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or link:/download/[installed Neo4j locally].
 
 [#neo4j-javascript]

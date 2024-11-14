@@ -307,9 +307,9 @@ In `neo4j.conf`:
 
 ==== *LOAD CSV* resources
 
-* xref:tutorials/import-desktop-csv.adoc[How-To: Import CSV data with Neo4j Desktop]
+* xref:appendix/tutorials/guide-import-desktop-csv.adoc[How-To: Import CSV data with Neo4j Desktop]
 * link:https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[Cypher Manual: LOAD CSV^]
-* xref:how-to/import-relational-and-etl.adoc[Tutorial: Import relational data into Neo4j]
+* xref:data-import/import-relational-and-etl.adoc[Tutorial: Import relational data into Neo4j]
 * link:https://graphacademy.neo4j.com/courses/importing-data[GraphAcademy: Importing CSV Data into Neo4j]
 
 [[batch-importer]]
@@ -486,7 +486,7 @@ For handling these types of situations or general data cleanup, there are a numb
 Basic tools, such as hexdump, vi, emacs, UltraEdit, and Notepad++ work well for handling shortcut-based commands for editing and manipulating files.
 However, there are also other more efficient or user-friendly options available that assist in data cleanup and formatting.
 
-* xref:tutorials/import-desktop-csv.adoc#inspect-files[Cypher] - what Cypher sees is what will be imported, so you can use that to your advantage.
+* xref:appendix/tutorials/guide-import-desktop-csv.adoc#inspect-files[Cypher] - what Cypher sees is what will be imported, so you can use that to your advantage.
 Using `LOAD CSV` without creating graph structure just outputs samples, counts, or distributions to make it possible to detect incorrect header column counts, delimiters, quotes, escapes, or header name spellings.
 
 * link:https://csvkit.readthedocs.io/en/latest/[CSVKit^] - a set of Python tools that provides statistics (csvstat), search (csvgrep), and more for your CSV files.

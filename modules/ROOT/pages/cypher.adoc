@@ -325,7 +325,7 @@ For more information, refer to link:{docs-home}/cypher-manual/current/patterns/r
 
 == Keep learning
 
-Now that the basic Cypher concepts have been introduced, you can take the tutorial on how to xref:tutorials/cypher-basics.adoc[Get started with Cypher] to learn how to write your own queries.
+Now that the basic Cypher concepts have been introduced, you can take the tutorial on how to xref:appendix/tutorials/guide-cypher-basics.adoc[Get started with Cypher] to learn how to write your own queries.
 In the link:{docs-home}/cypher-manual[Cypher manual], you can find more information on:
 
 * How to write link:{docs-home}/cypher-manual/current/queries/basic/[basic queries] and what link:{docs-home}/cypher-manual/current/clauses/[clauses] you can use to read data from the database.
@@ -338,14 +338,14 @@ In case you have a background in SQL and are new to graph databases, these are s
 
 * link:{docs-home}/cypher-manual/current/introduction/cypher-overview/#_cypher_and_sql_key_differences[Key differences between Cypher and SQL]
 * xref:reference/graphdb-vs-rdbms[Transition from relational to graph database]
-* xref:reference/graphdb-concepts/cypher-sql.adoc[Reference: Comparing Cypher with SQL]
-* xref:how-to/relational-to-graph-import.adoc[How-to: Import from RDBMS into graph]
-* xref:how-to/import-relational-and-etl.adoc[Tutorial: Import data from a relational database into Neo4j]
-* link:how-to/relational-to-graph-modeling.adoc[How-to: Model data from relational to graph]
+* xref:cypher-intro/cypher-sql.adoc[Reference: Comparing Cypher with SQL]
+* xref:data-import/relational-to-graph-import.adoc[How-to: Import from RDBMS into graph]
+* xref:data-import/import-relational-and-etl.adoc[Tutorial: Import data from a relational database into Neo4j]
+* link:data-modeling/relational-to-graph-modeling.adoc[How-to: Model data from relational to graph]
 
 === From NoSQL to Graphs
 
-If you are familiar with NoSQL ("Not only SQL") system, you can also learn more on xref:reference/graphdb-concepts/graphdb-vs-nosql.adoc[how to make the transition] to a graph database.
+If you are familiar with NoSQL ("Not only SQL") system, you can also learn more on xref:appendix/graphdb-concepts/graphdb-vs-nosql.adoc[how to make the transition] to a graph database.
 
 === GraphAcademy
 
@@ -353,7 +353,7 @@ With the link:https://graphacademy.neo4j.com/courses/cypher-fundamentals/[Cypher
 
 === Other resources
 
-For more suggestions on how to expand your knowledge about Cypher, refer to xref:reference/resources.adoc[Resources].
+For more suggestions on how to expand your knowledge about Cypher, refer to xref:appendix/getting-started-resources.adoc[Resources].
 
 ifndef::backend-pdf[]
 [discrete.glossary]

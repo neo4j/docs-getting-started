@@ -13,7 +13,7 @@ A Neo4j graph database stores nodes and relationships instead of tables or docum
 Data is stored just like you might sketch ideas on a whiteboard.
 Your data is stored without restricting it to a pre-defined model, allowing a very flexible way of thinking about and using it.
 
-To learn more about graph fundamentals, see xref:reference/graphdb-concepts/index.adoc[Graph database concepts].
+To learn more about graph fundamentals, see xref:appendix/graphdb-concepts/index.adoc[Graph database concepts].
 
 ifndef::backend-pdf[]
 ++++
