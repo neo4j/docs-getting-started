@@ -1,5 +1,5 @@
 [[data-modeling]]
-= Model your data for Neo4j
+= What is graph data modeling?
 :description: graph-modeling, data-model, schema, create-model, translate-model, model-performance, model-example
 :page-ad-overline-link: https://graphacademy.neo4j.com/courses/modeling-fundamentals/?ref=docs
 :page-ad-overline: Neo4j GraphAcademy
@@ -9,59 +9,126 @@
 :page-ad-underline-role: button
 :page-ad-underline: Learn more
 
-[#graph-modeling]
-This section is designed to give you the tools you need to design and implement an efficient and flexible graph database technology through a good graph data model. +
-Best practices and tips gathered from Neo4j's tenure of building and recommending graph technologies provide you with the confidence to build graph-based solutions with rich data models.
-The focus of this section is to provide you with the necessary guidelines and tools to help you model your domain as a graph. +
- 
+Data modeling is a practice that defines the logic of queries and the structure of the data in storage.
+It is an important step to take when using any type of database, as it helps ensuring data integrity and improved performance.
 
-// image::graph_data_modeling.jpg[role="popup-link"]
+This section gets you started with data modeling by introducing the concept, designs, tips, and how to migrate from relational to graph databases.
 
-// We should add a new section about tools for modeling:
-// * Arrows - application (use Labs docs and videos)
-// * Data Importer - right now as a part of Aura
-// * Cypher Workbench (???)
-
-[#create-graph-model]
 == How to create a graph data model
 
-To start, _Graph Modeling Guidelines_ introduces the basic process of designing a graph data model and walks you through the first steps to create a graph data model, building upon the foundations of the property graph data model.
+There are different ways to organize data into a model.
+In the case of graph data models, they are often referred as being _whiteboard-friendly_.
 
-It helps you determine the questions you need to ask and share design considerations, best practices learned from experts through the years, and tips for building a more flexible and clean data model to structure your data model for the best results.
+Typically, when designing a non-graph data model, people draw and connect example data on the whiteboard to show how different items relate.
+This is then re-formatted and structured to fit normalized tables for a relational model.
 
-xref:data-modeling/guide-data-modeling.adoc[Graph modeling guidelines] +
-xref:data-modeling/modeling-designs.adoc[Modeling designs]
+A similar process also exists in graph data modeling.
+However, instead of adapting the <<data model>> to a normalized table structure, the graph data model stays the same.
+Take this example using data about the movie "The Matrix", found in the xref:appendix/example-data.adoc[*Movies* example dataset]:
 
-[#rdbms-graph-schema]
-== Translating an RDBMS schema to graph
+.Matrix - whiteboard model
+image::matrix-whiteboard-model.png[500,500,role="popup-link"]
 
-If you want to relate your existing knowledge of relational data models to the graph data model or to convert an existing relational model to graph, next section helps you translate that existing ERD skill and design to a graph data model.
+To add this information to a graph database and use xref:cypher.adoc[Cypher] as a query language, these entities need to be turned into <<nodes>> and their connections into <<relationships>>:
 
-From typical process steps to conversion mappings, we will walk through how the process can differ and what tables and columns look like as a graph.
+.Matrix - match node and relationship format of property graph model
+image::matrix-whiteboard-model2.svg[500,500,role="popup-link"]
 
-xref:data-modeling/relational-to-graph-modeling.adoc[Modeling: relational to graph]
+The next step is to add <<labels>> and determine <<properties>> for the nodes and relationships.
+This helps differentiating entities and thus making it easier to retrieve them from the database:
 
-[#optimize-graph-model]
-== Optimizing graph data models
+.Matrix - add labels and properties
+image::matrix-whiteboard-model3.svg[500,500,role="popup-link"]
 
-Finally, your data model may be working, but you find that query performance or other aspects are not giving you the quality you desired.
-The data model can affect queries and performance of your use case.
+To visualize that in Neo4j Browser or in Query, you can retrieve the information from the xref:appendix/example-data.adoc[*Movies* example dataset] or write the data from scratch:
 
-Learn how to improve your graph solution and maximize the capabilities of what is existing with recommendations for optimization techniques and ideas.
+[source,cypher]
+--
+CREATE (p1:Person:Actor {name: "Tom Hanks"})-[:ACTED_IN]->(m1:Movie {title: "Cloud Atlas"})<-[:ACTED_IN]-(p2:Person:Actor {name: "Hugo Weaving"}),
+(p2)-[:ACTED_IN]->(m2:Movie {title: "The Matrix"})<-[:DIRECTED]-(p3:Person:Director {name: "Lana Wachowski"}),
+(p3)-[:DIRECTED]->(m1)
+--
 
-xref:data-modeling/modeling-tips.adoc[Graph modeling tips]
+To retrieve this information from the database, write the following query:
 
-[#graphgist-models]
-== Live graph models - GraphGists
+[source,cypher]
+--
+MATCH p=()-[:ACTED_IN]->()<-[:DIRECTED]-()
+RETURN p
+--
 
-If you look for graph data model examples or ideas, go to our Neo4j GraphGists, where the Neo4j Community share examples of their solutions.
-Based on your use case or industry, you can find some projects that could aid your design process.
+The visualization should look like this:
 
-Visit our link:https://neo4j.com/graphgists/[GraphGists page^] and explore a rich variety of examples the Neo4j user community created! They are valuable and help developers and others by showing real-life solutions.
+.Matrix - final model in Neo4j 
+image::matrix-whiteboard-model4.svg[400,400,role="popup-link"]
 
+[TIP]
+====
+If you are new to these concepts, refer to xref:cypher.adoc[What is Cypher] for an introduction.
+====
 
-[#Online-training]
-== GraphAcademy courses
+=== Domain definition
 
-Learn everything you need to know about data modeling in Neo4j with the link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/?ref=docs[free Graph Data Modeling Fundamentals course^] on link:https://graphacademy.neo4j.com/courses/[Neo4j GraphAcademy^]. +
-This course is part of the link:https://graphacademy.neo4j.com/categories/beginners/?ref=docs[Beginners learning path^] which features four courses designed to teach you everything you need to know to feel confident working with Neo4j.
+It is important to understand the domain of your dataset when designing data models.
+As an example, consider the following scenario:
+
+* Two _people_, *Sally* and *John*, +++<u>are friends</u>+++.
+* Both *John* and *Sally* +++<u>have read</u>+++ the _book_ *Graph Databases*.
+
+You can use this information to build a data model by identifying the components as labels, nodes, and relationships.
+To add it to the graph, you can write the following Cypher statement:
+
+[source,cypher]
+--
+CREATE (b:Book {name:'Graph Databases', author:'Jim Webber', author:'Ian Robinson'})<-[:HAS_READ {on:date("2013-03-02"), rated:5}]-(p1:Person {name:'John', age:27})-[:IS_FRIENDS_WITH {since:date("2013-09-01")}]->(p2:Person {name:'Sally', age:32})
+--
+
+And the visualization should look like this:
+
+image::property_graph_elements-arr.svg[700,700,role="popup-link"]
+
+You can see that:
+
+* Nodes (circles) represent objects and people.
+* Nodes can have properties (name/value pairs).
+* Relationships (arrows) connect nodes and represent actions.
+* Relationships are directional and can have properties (name/value pairs).
+
+The domain in this example is, therefore, about people and books, and how they relate to each other.
+
+=== Refactoring
+
+Data models can be designed in different ways.
+For instance, the same example used previously could have been modeled with John and Sally being two different nodes instead of having their names added as a property for the nodes labeled `Person`.
+
+However, in case more people are added to the graph, it would make more sense to group John and Sally together into bigger categories, like `Person`, to make retrieving data easier.
+Updating the way you organize your data (e.g. turning nodes into node properties) is called xref:data-modeling/graph-model-refactoring.adoc[refactoring] and the iterations are called versioning.
+
+=== Design strategy
+
+Neo4j is *schema-free*, which means that the data model can adapt and change easily as a project advances, thus making refactoring and versioning simpler processes.
+This allows developers and architects to have more flexibility when determining the structure of the data model and how to define entities for queries.
+
+Still, since datasets can often share many points in common (e.g. domains, objects, measurements), you can opt to follow strategies that are already known and used in the relevant industry.
+Refer to xref:data-modeling/modeling-designs.adoc[Modeling designs] for a more detailed explanation.
+
+== Keep learning
+
+For a more hands-on approach to data modeling, try the following resources:
+
+// * xref:tutorials/tutorial-data-modeling.adoc[Tutorial: Create a graph data model]: a more in-depth tutorial that follows up to the example used here.
+* link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/?ref=docs[GraphAcademy: Data Modeling Fundamentals]: enroll to an interactive course.
+* xref:data-modeling/relational-to-graph-modeling.adoc[From relational to graph]: learn how to adapt data from a relational to a graph data model.
+* xref:data-modeling/data-modeling-tools.adoc[Data modeling tools]: see a list of tools you can use to create your data model.
+* link:https://neo4j.com/graphgists/[Neo4j GraphGists]: find examples of graph data modeling shared by the Neo4j community.
+
+ifndef::backend-pdf[]
+[discrete.glossary]
+endif::[]
+== Glossary
+
+include::../glossary.adoc[]
+
+ifdef::backend-pdf[]
+<<<
+endif::[]

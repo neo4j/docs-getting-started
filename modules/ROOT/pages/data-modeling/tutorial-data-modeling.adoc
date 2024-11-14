@@ -42,23 +42,23 @@ Let us look at an example to demonstrate this.
 In the whiteboard drawing below, we have a data set about the movie _The Matrix_.
 
 .Matrix - whiteboard model
-image::matrix_whiteboard_model1.png[600,600,role="popup-link"]
+image::matrix-whiteboard-model.png[600,600,role="popup-link"]
 
 Next, we formalize our entities a bit and match expected syntax for relationship types to create the node/relationship view for the property graph model.
 
 .Matrix - match node and relationship format of property graph model
-image::matrix_whiteboard_model2.svg[600,600,role="popup-link"]
+image::matrix-whiteboard-model2.svg[600,600,role="popup-link"]
 
 For our next step, we add labels and determine properties of our nodes and relationships for the property graph model.
 
 .Matrix - add labels and properties
-image::matrix_whiteboard_model3-arr.svg[600,600,role="popup-link"]
+image::matrix-whiteboard-model3.svg[600,600,role="popup-link"]
 
 Finally, you can view this data model in Neo4j Browser and ensure it matches what was drawn on the whiteboard.
 Also, notice how it is nearly identical to the whiteboard model we initially designed.
 
 .Matrix - final model in Neo4j 
-image::matrix_whiteboard_model4.svg[600,600,role="popup-link"]
+image::matrix-whiteboard-model4.svg[600,600,role="popup-link"]
 
 The ability to easily whiteboard your data model makes the graph data model incredibly simple and visual.
 There is no need to draw up business model versions or explain ERD terms to business users.
