@@ -78,7 +78,7 @@ If you break up the scenario into smaller components, you can define them as par
 
 Start by simplifying the model:
 
-image::property_graph_elements-arr.svg[700,700,role="popup-link"]
+image::property-graph-elements-arr.svg[400,400,role="popup-link"]
 
 In the model, you can see that:
 

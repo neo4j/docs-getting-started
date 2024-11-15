@@ -81,7 +81,7 @@ Let us take the scenario into pieces and define them as parts of our property gr
 However, for a start, we simplify the model.
 
 .Review - property graph elements
-image::property_graph_elements-arr.svg[700,700,role="popup-link"]
+image::property-graph-elements-arr.svg[400,400,role="popup-link"]
 
 You can see that:
 
