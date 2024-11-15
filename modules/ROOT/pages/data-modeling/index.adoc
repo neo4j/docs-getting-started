@@ -74,14 +74,9 @@ As an example, consider the following scenario:
 * Both *John* and *Sally* +++<u>have read</u>+++ the _book_ *Graph Databases*.
 
 You can use this information to build a data model by identifying the components as labels, nodes, and relationships.
-To add it to the graph, you can write the following Cypher statement:
+If you break up the scenario into smaller components, you can define them as parts of your property graph model. 
 
-[source,cypher]
---
-CREATE (b:Book {name:'Graph Databases', author:'Jim Webber', author:'Ian Robinson'})<-[:HAS_READ {on:date("2013-03-02"), rated:5}]-(p1:Person {name:'John', age:27})-[:IS_FRIENDS_WITH {since:date("2013-09-01")}]->(p2:Person {name:'Sally', age:32})
---
-
-And the visualization should look like this:
+Start by simplifying the model:
 
 image::property_graph_elements-arr.svg[700,700,role="popup-link"]
 
@@ -92,14 +87,15 @@ In the model, you can see that:
 * Relationships (arrows) connect nodes and represent actions.
 * Relationships are directional and can have properties (name/value pairs).
 
-The domain in this example is, therefore, about people and books, and how they relate to each other.
 
 === Refactoring
 
 Data models can be designed in different ways.
-For instance, the same example used previously could have been modeled with John and Sally being two different nodes instead of having their names added as a property for the nodes labeled `Person`.
+In the previous example, the nodes _Sally_ and _John_ both have the same label, `Person` and their names are added as properties.
+In this small model, similar results could be achieved by using the names as labels instead.
+However, it would be cumbersome if you wanted to add more people to the graph.
+In that case, it would be advisable to group all people nodes using the label `Person`.
 
-However, in case more people are added to the graph, it would make more sense to group John and Sally together into bigger categories, like `Person`, to make retrieving data easier.
 Updating the way you organize your data (e.g. turning nodes into node properties) is called xref:data-modeling/graph-model-refactoring.adoc[refactoring] and the iterations are called versioning.
 
 === Design strategy
