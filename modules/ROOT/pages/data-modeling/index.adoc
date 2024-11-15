@@ -27,7 +27,7 @@ Take this example using data about the movie "The Matrix", also found in the xre
 .Matrix - whiteboard model
 image::matrix-whiteboard-model.png[500,500,role="popup-link"]
 
-To add this information to a graph database and use xref:cypher.adoc[Cypher] as a query language, these entities need to be turned into <<nodes>> and their connections into <<relationships>>:
+To turn the whiteboard model into a proper graph data model, the entities need to be turned into <<nodes>> and the connections between them into <<relationships>>:
 
 .Matrix - match node and relationship format of property graph model
 image::matrix-whiteboard-model2.svg[500,500,role="popup-link"]
