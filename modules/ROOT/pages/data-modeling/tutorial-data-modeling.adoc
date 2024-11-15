@@ -39,7 +39,7 @@ However, instead of modifying the data model to fit a normalized table structure
 This is where the graph data model gets its name for being _whiteboard-friendly_.
 
 Let us look at an example to demonstrate this.
-In the whiteboard drawing below, we have a data set about the movie _The Matrix_.
+The whiteboard drawing below contains a data set about the movie _The Matrix_.
 
 .Matrix - whiteboard model
 image::matrix-whiteboard-model.png[600,600,role="popup-link"]

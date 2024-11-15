@@ -64,10 +64,10 @@ image::matrix-whiteboard-model4.svg[400,400,role="popup-link"]
 
 [TIP]
 ====
-If you are new to these concepts, refer to xref:cypher.adoc[What is Cypher] for an introduction.
+If you are new to the Cypher query language, refer to xref:cypher.adoc[What is Cypher] for an introduction.
 ====
 
-=== Domain definition
+=== Domain description
 
 It is easier to understand the process of designing a graph data model if you consider the domain.
 As an example, consider the following scenario:
@@ -109,7 +109,7 @@ Updating the way you organize your data (e.g. turning nodes into node properties
 Neo4j is *schema-free*, which means that the data model can adapt as a project advances, making refactoring and versioning easier.
 This allows developers and architects to have more flexibility when determining the structure of the data model and how to define entities for queries.
 
-Still, since datasets can often share many points in common (e.g. domains, objects, measurements), you can opt to follow strategies that are already known and used in the relevant industry.
+Datasets often have many things in common (for example, domains, objects, measurements), and there are existing strategies you can follow.
 Refer to xref:data-modeling/modeling-designs.adoc[Modeling designs] for a more detailed explanation.
 
 == Keep learning
