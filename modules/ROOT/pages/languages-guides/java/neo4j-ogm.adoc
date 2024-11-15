@@ -13,7 +13,9 @@ You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or l
 [#neo4j-ogm]
 == Neo4j-OGM
 
-include::https://raw.githubusercontent.com/neo4j/neo4j-ogm/master/neo4j-ogm-docs/src/main/asciidoc/introduction/index.adoc[lines=25..32,leveloffset=+1]
+* Version control - https://github.com/neo4j/neo4j-ogm
+
+* Bug tracker - https://github.com/neo4j/neo4j-ogm/issues
 
 [#ogm-features]
 == Features
@@ -87,12 +89,16 @@ You will find the implementations for all drivers as https://github.com/neo4j-ex
 [#ogm-faq]
 == FAQ
 
-include::https://raw.githubusercontent.com/neo4j/neo4j-ogm/master/neo4j-ogm-docs/src/main/asciidoc/appendix/faq.adoc[lines=3..-1,leveloffset=+1]
+What is the difference between Neo4j-OGM and Spring Data Neo4j (SDN)?::
+Spring Data Neo4j (SDN) up to version 5.3.x uses Neo4j-OGM under the covers. It’s like Spring Data JPA, where JPA/Hibernate is the underlay. Most of the power of SDN actually comes from Neo4j-OGM. Starting with Spring Data Neo4j 6.x (Spring Boot 2.4) does not need Neo4j-OGM anymore. Please note that, intentionally, Neo4j-OGM 4+ does not work as a drop-in replacement for Spring Data 5.x.
+
+How are labels generated when using inheritance?::
+All concrete classes generate a label, abstract classes and interfaces not. If any kind of class or interface gets annotated with @NodeEntity or @NodeEntity(label="customLabel") it will generate a label. Any class annotated with @Transient will not generate a label.
 
 [#ogm-resources]
 == Resources
 
-:maven-ogm: http://search.maven.org/#search|ga|1|a%3A%22neo4j-ogm%22
+link:https://search.maven.org/#search|ga|1|a%3A%22neo4j-ogm%22[Neo4j OGM]
 
 [cols="1,4"]
 |===
@@ -102,6 +108,30 @@ include::https://raw.githubusercontent.com/neo4j/neo4j-ogm/master/neo4j-ogm-docs
 | icon:book[] Docs | https://neo4j.com/docs/ogm-manual/current/
 |===
 
-include::https://raw.githubusercontent.com/neo4j/neo4j-ogm/master/README.adoc[lines=1]
-:ogm-version: {version}
-include::https://raw.githubusercontent.com/neo4j/neo4j-ogm/master/neo4j-ogm-docs/src/main/asciidoc/reference/getting-started.adoc[lines=3..-1,leveloffset=+1]
+== Compatibility
+
+Consult the version table to determine which version of Neo4j-OGM to use with a particular version of Neo4j and related technologies.
+
+[frame="topbot",options="header"]
+|======================
+|Neo4j-OGM Version   |Neo4j Version^1^
+|4.0.x^2^            |4.4.x^6^, 5.x
+|3.2.x               |3.2.x, 3.3.x, 3.4.x, 3.5.x, 4.0.x^2^, 4.1.x^2^, 4.2.x^2^, 4.3.x^2,5^, 4.4.x^2,5^
+|3.1.x^3^            |3.1.x, 3.2.x, 3.3.x, 3.4.x
+|3.0.x^3^            |3.1.9, 3.2.12, 3.3.4, 3.4.4
+|2.1.x^4^            |2.3.9, 3.0.11, 3.1.6
+|2.0.2^4^            |2.3.8, 3.0.7
+|2.0.1^4^            |2.2.x, 2.3.x
+|======================
+
+^1^ __The latest supported bugfix versions.__ +
+
+^2^ __These versions only support connections via Bolt.__ +
+
+^3^ __These versions are no longer actively developed.__ +
+
+^4^ __These versions are no longer actively developed or supported.__ +
+
+^5^ __Neo4j-OGM 3.2.24+ only.__ +
+
+^6^ __Technical working but not officially supported__ +
