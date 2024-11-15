@@ -17,14 +17,12 @@ This section gets you started with data modeling by introducing the concept, des
 == How to create a graph data model
 
 There are different ways to organize data into a model.
-In the case of graph data models, they are often referred as being _whiteboard-friendly_.
+For example, using a whiteboard to show how different items are related is quite common when designing <<data models>>.
 
-Typically, when designing a non-graph data model, people draw and connect example data on the whiteboard to show how different items relate.
-This is then re-formatted and structured to fit normalized tables for a relational model.
+For a relational database, the model on the whiteboard must then be re-formatted and structured to fit normalized tables.
+Graph data models, however, are _whiteboard-friendly_ since the data model stays the same as drawn on the whiteboard.
 
-A similar process also exists in graph data modeling.
-However, instead of adapting the <<data model>> to a normalized table structure, the graph data model stays the same.
-Take this example using data about the movie "The Matrix", found in the xref:appendix/example-data.adoc[*Movies* example dataset]:
+Take this example using data about the movie "The Matrix", also found in the xref:appendix/example-data.adoc[*Movies* example dataset]:
 
 .Matrix - whiteboard model
 image::matrix-whiteboard-model.png[500,500,role="popup-link"]
