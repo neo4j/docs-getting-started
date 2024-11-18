@@ -1,7 +1,6 @@
 [[data-modeling-tools]]
 = Data modeling tools
 :description: See a list of tools that you can use when designing a data model.
-:page-role: labs-label
 
 //Check Mark
 :check-mark: icon:check[]
