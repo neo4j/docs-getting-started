@@ -112,7 +112,7 @@ link:https://search.maven.org/#search|ga|1|a%3A%22neo4j-ogm%22[Neo4j OGM]
 [cols="1,4"]
 |===
 | icon:user[] Authors | The Neo4j and http://graphaware.com/neo4j-experts/[GraphAware Teams]
-| icon:gift[] Package | link:{maven-ogm}[http://maven.org]
+| icon:gift[] Package | link:https://central.sonatype.com/artifact/org.neo4j/neo4j-ogm[neo4j-ogm]
 | icon:github[] Source | https://github.com/neo4j/neo4j-ogm
 | icon:book[] Docs | https://neo4j.com/docs/ogm-manual/current/
 |===
