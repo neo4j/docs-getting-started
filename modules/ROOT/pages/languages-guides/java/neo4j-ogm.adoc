@@ -92,10 +92,10 @@ You will find the implementations for all drivers as https://github.com/neo4j-ex
 What is the difference between Neo4j-OGM and Spring Data Neo4j (SDN)?::
 Spring Data Neo4j (SDN) up to version 5.3.x uses Neo4j-OGM under the covers. 
 It’s like Spring Data JPA, where JPA/Hibernate is the underlay.
-
++
 Most of the power of SDN actually comes from Neo4j-OGM.
 However, starting with Spring Data Neo4j 6.x (Spring Boot 2.4), Neo4j-OGM is not needed anymore. 
-
++
 Please note that, intentionally, Neo4j-OGM 4+ does not work as a drop-in replacement for Spring Data 5.x.
 
 
