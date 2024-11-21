@@ -16,46 +16,47 @@ A well-designed model is the key to leveraging the strengths of a graph database
 
 To organize data into a <<data model>>, the first thing to do is to think about what questions you want to answer.
 
-For example, assume that you work for a retail company and want to learn what products customers buy first and what products they buy next.
-To answer that, you need to:
+For example, assume that you work for a retail company and want to learn what products customers are buying.
+To answer that:
 
-. Have data on the products sold by the company, who are its customers, and what they purchased at a certain point in time.
+* Have data on the products sold, the customers, and what they purchased at a certain point in time.
 This process is known as "entity extraction".
-. Understand how these entities relate to each other, and what the properties for these entities are (e.g. time of purchase, customer name).
-. Optionally, you can use xref:data-modeling/data-modeling-tools.adoc[no-code data modeling tools] to visualize the model before actually creating it.
-. If satisfied, you can start writing the data into an instance.
+* Understand how these entities relate to each other.
+* Think about what other details need to be provided, i.e. what properties should be added to these entities (e.g. time of purchase, customer name).
+* Optionally, visualize the model before you create it using xref:data-modeling/data-modeling-tools.adoc[no-code data modeling tools].
+* If satisfied, you can start writing the data into an instance.
 
 In this fictional scenario, you can start by adding this information to the graph:
 
 [source,cypher]
 --
-MERGE (c:Customer {name: "John"})
-MERGE (p:Product {name: “Camera”})
-MERGE (c)-[:BUYS]->(p)
+CREATE (c:Customer {name: "John"})
+CREATE (p:Product {name: “Camera”})
+CREATE (c)-[:BUYS]->(p)
 --
 
-Then, you can test this model by querying the database with a question (e.g. who bought a camera):
+Then, you can test this model by querying the database with a question (e.g. what did John buy):
 
 [source,cypher]
 --
-MATCH (c)-[b:BUYS]->(p:Product {name:"Camera"})
-RETURN c
+MATCH (c:Customer {name: "John"})-[b:BUYS]->(p)
+RETURN p
 --
 
 Keep in mind that graph data modeling is an iterative process.
 Your initial graph data model is only a starting point. 
 As you learn more about your use cases or if they change, the model needs to adapt.
+
 Additionally, you may find that, especially when the graph scales, you need to xref:data-modeling/graph-model-refactoring.adoc[refactor] your model to ensure it is aligned with your business needs as they evolve.
 
 In summary, the process of creating a data model includes the following:
 
 . Understand the domain and define specific use cases (questions) for the application.
-. Develop the initial graph data model by extracting entities and how they relate to each other.
+. Develop an initial graph data model by extracting entities and decide how they relate to each other.
 . Test the use cases against the initial data model.
 . Create the graph with test data using Cypher.
 . Test the use cases, including performance against the graph.
-. Refactor (improve) the graph data model due to a change in the key use cases or for performance reasons.
-. Implement the refactoring on the graph and retest using Cypher.
+. Refactor the graph data model due to changes in the key use cases or for performance reasons.
 
 == Keep learning
 
