@@ -8,7 +8,7 @@
 == Introduction
 
 In addition to the officially supported drivers, you can find their Community alternatives.
-Besides Java, .NET, JavaScript, Go, and Python drivers, Neo4j Community offers support for Ruby, PHP, and Perl.
+Besides Java, .NET, JavaScript, Go, and Python drivers, Neo4j Community offers support for Ruby, PHP, Perl, and Rust.
 Links to their relevant resources are provided below.
 
 Members of the each programming language community have invested a lot of time and love to develop each one of the community drivers for Neo4j, so if you use any one of them, please provide feedback to the authors.
@@ -224,4 +224,20 @@ A Django plugin https://github.com/neo4j-contrib/django-neomodel[django_neomodel
 // | icon:gift[] Package |
 | icon:github[] Source | https://github.com/z5labs/gogm
 | icon:book[] Docs | https://github.com/mindstand/gogm/blob/master/README.md
+|===
+
+[#neo4j-rust]
+== Using Neo4j from Rust
+
+[#neo4rs]
+=== Neo4rs
+
+A driver for Neo4j in Rust. This driver does not yet implement client-side routing. It is possible that operations against a cluster (such as Aura) will fail.
+
+[cols="1,4"]
+|===
+| icon:github[] Source | https://github.com/neo4j-labs/neo4rs
+| icon:code-fork[] Rust     | 1.63.0+
+| icon:code-fork[] Neo4j    | 4.4+ / 5.0+
+| Protocols | Bolt 4.0 / 4.1
 |===
