@@ -17,12 +17,12 @@ A well-designed model is the key to leveraging the strengths of a graph database
 To organize data into a <<data model>>, the first thing to do is to think about what questions you want to answer.
 
 For example, assume that you work for a retail company and want to learn what products customers are buying.
-To answer that:
+To answer that, you need to:
 
-* Have data on the products sold, the customers, and what they purchased at a certain point in time.
+* Have data on the products sold and the customers who bought them.
 This process is known as "entity extraction".
 * Understand how these entities relate to each other.
-* Think about what other details need to be provided, i.e. what properties should be added to these entities (e.g. time of purchase, customer name).
+* Think about what other details that need to be provided, i.e. what properties should be added to these entities (e.g. customer name).
 * Optionally, visualize the model before you create it using xref:data-modeling/data-modeling-tools.adoc[no-code data modeling tools].
 * If satisfied, you can start writing the data into an database.
 
