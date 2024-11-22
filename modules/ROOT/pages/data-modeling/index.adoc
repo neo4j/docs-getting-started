@@ -24,7 +24,7 @@ This process is known as "entity extraction".
 * Understand how these entities relate to each other.
 * Think about what other details need to be provided, i.e. what properties should be added to these entities (e.g. time of purchase, customer name).
 * Optionally, visualize the model before you create it using xref:data-modeling/data-modeling-tools.adoc[no-code data modeling tools].
-* If satisfied, you can start writing the data into an instance.
+* If satisfied, you can start writing the data into an database.
 
 In this fictional scenario, you can start by adding this information to the graph:
 
@@ -35,7 +35,7 @@ CREATE (p:Product {name: “Camera”})
 CREATE (c)-[:BUYS]->(p)
 --
 
-Then, you can test this model by querying the database with a question (e.g. what did John buy):
+Then, you can test this model with a query (e.g. what did John buy):
 
 [source,cypher]
 --
