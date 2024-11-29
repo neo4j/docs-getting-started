@@ -29,7 +29,7 @@ To start, _Graph Modeling Guidelines_ introduces the basic process of designing 
 
 It helps you determine the questions you need to ask and share design considerations, best practices learned from experts through the years, and tips for building a more flexible and clean data model to structure your data model for the best results.
 
-xref:data-modeling/guide-data-modeling.adoc[Graph modeling guidelines] +
+xref:data-modeling/tutorial-data-modeling.adoc[Graph modeling guidelines] +
 xref:data-modeling/modeling-designs.adoc[Modeling designs]
 
 [#rdbms-graph-schema]
