@@ -302,7 +302,7 @@ Note that the information about roles needs to be added to the graph before bein
 
 [source,cypher]
 --
-MERGE (TomH:Person {name:'Tom Hanks'})-[:ACTED_IN {roles:'Jim Lovell'}]->(Apollo13)
+MERGE (TomH)-[:ACTED_IN {roles:'Jim Lovell'}]->(Apollo13)
 MERGE (TomH)-[:ACTED_IN {roles:'Sam Baldwin'}]->(SleeplessInSeattle)
 MERGE (MegR)-[:ACTED_IN {roles:'Annie Reed'}]->(SleeplessInSeattle)
 MERGE (DannyD)-[:ACTED_IN {roles:'Robert "Bobby" Ciaro'}]->(Hoffa)
@@ -346,9 +346,9 @@ And then connect them to the `Movie` nodes through a `RATED` relationship which 
 
 [source,cypher]
 --
-MERGE (Sandy)-[:RATED {rating:5}]->(Apollo)
+MERGE (Sandy)-[:RATED {rating:5}]->(Apollo13)
 MERGE (Sandy)-[:RATED {rating:4}]->(SleeplessInSeattle)
-MERGE (Clinton)-[:RATED {rating:3}]->(Apollo)
+MERGE (Clinton)-[:RATED {rating:3}]->(Apollo13)
 MERGE (Clinton)-[:RATED {rating:3}]->(SleeplessInSeattle)
 MERGE (Clinton)-[:RATED {rating:3}]->(Hoffa)
 --
