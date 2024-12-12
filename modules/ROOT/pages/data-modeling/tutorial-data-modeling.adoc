@@ -45,14 +45,14 @@ When designing a graph data model for an application, you may need both a data m
 === Data model
 
 The data model describes the nodes and relationships in the domain and includes labels, types, and properties. 
-It does not have the specific data that will be created in the graph, but it drafts what information will be needed to answer the initial questions.
+It doesn't contain any data but shows what information might be needed to answer the use cases.
 At this stage, you can opt to use xref:data-modeling/data-modeling-tools.adoc[no-code tools] to visualize your plan.
 
 Considering the domain you are working with and the questions you need to answer, you can assume that this is some of the information that you will need to have in your data model from the start:
 
 * Differentiation between a person who acted in a movie, who directed a movie, and who rated a movie.
 * What ratings were given, how many they are, and when they were submitted.
-* What role an actor played in a movie and what their age is.
+* Which role an actor played in a movie and what their age is.
 * The genres of the movies.
 * Etc.
 
@@ -71,14 +71,14 @@ While not mandatory, it is recommended that:
 
 [NOTE]
 ====
-In the xref:data-modeling/tutorial-data-modeling.adoc[Define entities] step you will get more details on why certain information has been turned into a certain element (e.g. a node property) instead of another (e.g. a node itsef).
-At this initial stage, you can concentrate on drafting a high level plan for your data model and consider that, after you xref:#_test_the_model[test it], you will probably need to update or xref:data-modeling/graph-model-refactoring.adoc[refactor] your model anyway.
+At this stage of creating your initial model, focus on the high-level design of your model, i.e. how your entities connect.
+The xref:#_define_entities[Define entities] step describes a more detailed view on how to allocate certain information in a graph (e.g., as a node, relationship, property, etc).
 ====
 
 === Instance model
 
 An important part of the graph data modeling process is to test the model against the use cases.
-To do so, you need to have some sample data:
+To do so, you need to have some sample data and load it to a link:{docs-home}/deployment-options[deployment of your choice]:
 
 image::sample-data-instance-model.svg[Sample data model contaning nodes for movies and people with the properties title, name, date of release, birth, rating, and ID,500,500,role=popup]
 
@@ -96,7 +96,7 @@ CREATE (Hoffa:Movie {title: 'Hoffa', tmdbID: 10410, released: '1992-12-25', imdb
 [NOTE]
 ====
 The data used here can be found in the xref:appendix/example-data.adoc[Movies example dataset], also available in Browser and Aura guides.
-However, in order to practice data modeling, it is recommended that you add the data manually using Cypher or link:{docs-home}/data-importer/modeling[Data Importer].
+However, in order to practice data modeling, it is recommended that you add the data manually using Cypher.
 ====
 
 == Define entities
@@ -133,7 +133,7 @@ MATCH (p:Person)-[:ACTED_IN]-(m:Movie {title: 'Apollo 13'})-[:RATED]-(u:User)
 RETURN p,u
 --
 
-.Return data from the query.
+.Return data from the query
 [source,cypher]
 --
 MATCH (p:Person {name: 'Tom Hanks'})-[:ACTED_IN]-(m:Movie) 
@@ -248,12 +248,13 @@ For the example use cases, you could define relationships as:
 * `ACTED_IN`
 * `DIRECTED`
 
-And this way you also start to plan how each node will relate to each other when it comes to the direction of the relationship.
+With these options, you can already plan the direction of the relationships.
 
 ==== Relationship direction
 
-When you create a relationship in Neo4j, a direction must either be specified explicitly or inferred by the left-to-right direction in the pattern specified. 
-At runtime, during a query, direction is typically not required.
+All relationships must have a direction.
+When created, relationships need to specify their direction explicity or inferred by the left-to-right order of the pattern.
+When you query the database, however, you don't need to specify the direction, as long as the direction is inferred by the order of the pattern in a query.
 
 In the example use cases, the `ACTED_IN` relationship must be created to go from a `Person` node to a `Movie` node:
 
@@ -297,11 +298,12 @@ For more information, see xref:{docs-home}/cypher-manual/current/planning-and-tu
 Properties for a relationship are used to enrich how two nodes are related. 
 When you need to know *how* two nodes are related and not just that they are related, you can use relationship properties to further define the relationship.
 
-In the example, the use case "What role did a person play in a movie?" could be asked with the help of the property `roles` in the `ACTED_IN` relationship:
+The example question "Which role did a person play in a movie?" can be asked with the help of the property `roles` in the `ACTED_IN` relationship:
 
 image::relationship-roles.svg[Example showing how a person node connected to a movie node with the relationship acted in which has the property role,400,400,role=popup]
 
-Note that the information about roles needs to be added to the graph before being retrieved:
+Note that the information about roles needs to be added to the graph before being retrieved.
+You can use this Cypher statement for that:
 
 [source,cypher]
 --
@@ -330,7 +332,7 @@ Now that you have created the first connections between the nodes, it's time to 
 This way, you can answer more questions, such as:
 
 * How many users rated a movie?
-* What users gave a movie a rating of 5?
+* Which users gave a movie a rating of 5?
 
 To answer these questions, you need information about users and their ratings in your graph, which means a change in your data model.
 Note that, with the addition of new data such as the property `roles` in the `ACTED_IN` relationship, your xref:#_data_model[initial data model] has already been updated along the way:
@@ -345,7 +347,12 @@ MERGE (Sandy:User {name: 'Sandy Jones', userID: 1})
 MERGE (Clinton:User {name: 'Clinton Spencer, userID: 2'})
 --
 
-And then connect them to the `Movie` nodes through a `RATED` relationship which contains the `rating` property:
+[NOTE]
+====
+While it is possible to add user information as a `Person` node, it is advisable to separate them from actors and directors as they relate to the `Movie` nodes differently.
+====
+
+Then, connect the `User` nodes to the `Movie` nodes through a `RATED` relationship which contains the `rating` property:
 
 [source,cypher]
 --
@@ -364,7 +371,7 @@ image::user-ratings.svg["Graph containing person, movie, and user nodes connecte
 
 After populating the graph to implement the data model with a small set of test data, you should now test it to ensure that it satisfies every xref:#_define_the_use_case[use case].
 
-For example, if you want to test the use case "What people acted in a movie?", you can execute the following query:
+For example, if you want to test the use case "Which people acted in a movie?", you can run the following query:
 
 [source,cypher]
 --
@@ -374,7 +381,7 @@ RETURN p.name
 --
 
 This is just a simple example of testing.
-As you go through the use cases, you may think of more data that you want to add to the graph to round out the testing.
+As you go through the use cases, you may think of more data to be added to the graph in order to round out the testing.
 
 Additionally, make sure that the Cypher statements used to test the use cases are correct.
 A query written incorrectly could lead to the assumption that the data model has failed, for example.
