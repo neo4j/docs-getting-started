@@ -7,7 +7,7 @@ You will use the xref:appendix/example-data.adoc[Movies example dataset] as the 
 
 [TIP]
 ====
-For an interactive course on the fundamentals of data modeling, check link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/?ref=docs[GraphAcademy].
+For an interactive course on the fundamentals of data modeling, see link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/?ref=docs[GraphAcademy].
 ====
 
 == Define the domain
@@ -20,54 +20,54 @@ It is in the connections (relationships) between these entities that you find in
 
 == Define the use case
 
-With the stakeholders and developers of the application considered, you need to identify what the use cases are and which of them should be prioritized.
+With the domain defined, you need to identify what the use case is for your application.
+In other words, what questions are you trying to answer?
 
 Most use cases for an application can be defined with a *list of questions*.
 With this information, you can better define how the application will behave at runtime.
 
-For this tutorial, consider these as the questions that need to be answered by the application:
+For this tutorial, consider these the questions that you want answered by your application:
 
-* What people acted in a movie?
-* What person directed a movie?
-* What movies did a person act in?
+* Which people acted in a movie?
+* Which person directed a movie?
+* Which movies did a person act in?
 * How many users rated a movie?
 * Who was the youngest person to act in a movie?
-* What role did a person play in a movie?
-* What is the highest rated movie in a particular year according to imDB?
-* What drama movies did an actor act in?
-* What users gave a movie a rating of 5?
+* Which role did a person play in a movie?
+* Which is the highest rated movie in a particular year according to imDB?
+* Which drama movies did an actor act in?
+* Which users gave a movie a rating of 5?
 
 == Define the purpose
 
-When designing a graph data model for an application, you may need at least two types of models: a data model and an instance model.
+When designing a graph data model for an application, you may need both a data model and an instance model.
 
 === Data model
 
-The data model describes the labels, relationships, and properties for the graph. 
+The data model describes the nodes and relationships in the domain and includes labels, types, and properties. 
 It does not have the specific data that will be created in the graph, but it drafts what information will be needed to answer the initial questions.
 At this stage, you can opt to use xref:data-modeling/data-modeling-tools.adoc[no-code tools] to visualize your plan.
 
 Considering the domain you are working with and the questions you need to answer, you can assume that this is some of the information that you will need to have in your data model from the start:
 
-* Differentiation between a person who acted in or directed a movie from a user or reviewer who rated a movie.
+* Differentiation between a person who acted in a movie, who directed a movie, and who rated a movie.
 * What ratings were given, how many they are, and when they were submitted.
 * What role an actor played in a movie and what their age is.
-* The genre of the movies.
+* The genres of the movies.
 * Etc.
 
-In link:https://arrows.app[Arrows.app], for example, you can draft a rough data model indicating the type of data that you have:
+With link:https://arrows.app[Arrows.app], for example, you can draft a data model that includes node labels, relationship types, and properties:
 
 image::sample-data-model.svg[Sample data model featuring two nodes for person and movie connected through two relationships, one for directed and another for acted in,role=popup]
 
 Note that labels, relationship types, and property keys were written in a certain style.
-In Cypher, these are case-sensitive entries, but keywords are not.
 
-Cypher has a link:{docs-home}/cypher-manual/current/styleguide[style guide] that you can follow when designing your graph data model.
-While not a mandatory step, it is recommended that:
+See the Cypher link:{docs-home}/cypher-manual/current/styleguide[style guide] for more information.
+While not mandatory, it is recommended that:
 
-* A label should begin with a capital letter and can be CamelCase (e.g. `Person`, `Movie`, `ImdbUser`).
-* A relationship type should be written with all capital letters and an underscore character as a separator (e.g. `DIRECTED`, `ACTED_IN`).
-* A property key for a node or a relationship should begin with a lower-case letter and can be camelCase (e.g. `name`, `userID`).
+* Labels are capitalized and can be CamelCase (e.g., `Person`, `Movie`, `ImdbUser`).
+* Relationship types are written with all capital letters and an underscore character as a separator (e.g., `DIRECTED`, `ACTED_IN`).
+* Property keys for nodes or relationships are *not* capitalized and can be camelCase (e.g. `name`, `userID`).
 
 [NOTE]
 ====
@@ -78,7 +78,7 @@ At this initial stage, you can concentrate on drafting a high level plan for you
 === Instance model
 
 An important part of the graph data modeling process is to test the model against the use cases.
-For that, you need to have a set of sample data that you can use to check that:
+To do so, you need to have some sample data:
 
 image::sample-data-instance-model.svg[Sample data model contaning nodes for movies and people with the properties title, name, date of release, birth, rating, and ID,500,500,role=popup]
 
@@ -95,7 +95,7 @@ CREATE (Hoffa:Movie {title: 'Hoffa', tmdbID: 10410, released: '1992-12-25', imdb
 
 [NOTE]
 ====
-The data used here can be found in the xref:appendix/example-data.adoc[Movies example dataset], also available as guides in Browser and Aura.
+The data used here can be found in the xref:appendix/example-data.adoc[Movies example dataset], also available in Browser and Aura guides.
 However, in order to practice data modeling, it is recommended that you add the data manually using Cypher or link:{docs-home}/data-importer/modeling[Data Importer].
 ====
 
@@ -109,7 +109,7 @@ A good tip is to review your use cases and analyze the components of your questi
 Entities are the dominant nouns in your application use cases.
 For example:
 
-* What [.underline]#person# acted in a [.underline]#movie#?
+* Which [.underline]#person# acted in a [.underline]#movie#?
 * How many [.underline]#users# rated a [.underline]#movie#?
 
 Although this could change after xref:data-modeling/graph-model-refactoring.adoc[refactoring], you can assume that the dominant nouns "person", "movie", and "user" will be nodes in the first iteration of the data model.
@@ -122,19 +122,22 @@ For example, in a Cypher statement, properties can be used to:
 .Anchor (where to begin the query)
 [source,cypher]
 --
-MATCH (p:Person {name: 'Tom Hanks'})-[:ACTED_IN]-(m:Movie) RETURN m
+MATCH (p:Person {name: 'Tom Hanks'})-[:ACTED_IN]-(m:Movie)
+RETURN m
 --
 
 .Traverse the graph (navigation)
 [source,cypher]
 --
-MATCH (p:Person)-[:ACTED_IN]-(m:Movie {title: 'Apollo 13'})-[:RATED]-(u:User) RETURN p,u
+MATCH (p:Person)-[:ACTED_IN]-(m:Movie {title: 'Apollo 13'})-[:RATED]-(u:User) 
+RETURN p,u
 --
 
 .Return data from the query.
 [source,cypher]
 --
-MATCH (p:Person {name: 'Tom Hanks'})-[:ACTED_IN]-(m:Movie) RETURN m.title, m.released
+MATCH (p:Person {name: 'Tom Hanks'})-[:ACTED_IN]-(m:Movie) 
+RETURN m.title, m.released
 --
 
 This is why people names and movie titles were turned into node properties rather than separate nodes, for example.
@@ -142,13 +145,13 @@ Besides the fact that you already have `Person` and `Movie` nodes, this is a way
 
 ==== Unique identifiers
 
-You can use node properties to uniquely identify them.
+You can use properties to uniquely identify nodes.
 
 In this tutorial, you are working with movies and people, both entities that have names.
 While you can create a property called `name` for both `Person` and `Movie` nodes, it is advisable to use different terms to provide unique identifiers.
-Therefore, opt to use the property `name` for a `Person` node and `title` for `Movie`.
+Therefore, to get around this, you can use the property `name` for a `Person` node and `title` for `Movie`.
 
-In this initial instance model, these are the properties set for the `Movies` nodes:
+In the initial instance model, these are the properties set for the `Movies` nodes:
 
 * `Movie.title` (string)
 * `Movie.tmdbID` (integer)
@@ -162,7 +165,7 @@ And for the `Person` nodes:
 * `Person.tmdbID` (integer)
 * `Person.born` (date)
 
-With such differentiators, you can visualize more easily the steps to be followed to answer the use case questions.
+With such differentiators, it is easier to visualize what you need from the graph to answer the use case questions.
 For example:
 
 [options=header,cols="1,1a,1a"]
@@ -172,7 +175,7 @@ For example:
 | Steps required
 | Query example
 
-| What people acted in a movie?
+| Which people acted in a movie?
 |* Retrieve a movie by its *title*.
 * Return the *names* of the actors.
 |[source,cypher]
@@ -181,7 +184,7 @@ MATCH (m:Movie {title:'Hoffa'})<-[r:ACTED_IN]-(p:Person)
 RETURN p.name
 --
 
-| What person directed a movie?
+| Which person directed a movie?
 |* Retrieve a movie by its *title*.
 * Return the *name* of the director.
 |[source,cypher]
@@ -190,7 +193,7 @@ MATCH (m:Movie {title:'Hoffa'})<-[r:DIRECTED]-(p:Person)
 RETURN p.name
 --
 
-| What movies did a person act in?
+| Which movies did a person act in?
 | * Retrieve a person by their *name*.
 * Return the *titles* of the movies.
 |[source,cypher]
@@ -202,7 +205,7 @@ RETURN m.title
 | Who was the youngest person to act in a movie?
 | * Retrieve a movie by its *title*.
 * Evaluate the *ages* of the actors.
-* Return the *name* of the actor.
+* Return the *name* of the actor with the lowest age.
 |[source,cypher]
 --
 MATCH (m:Movie {title:'Sleepless in Seattle'})<-[r:ACTED_IN]-(p:Person)
@@ -214,7 +217,7 @@ LIMIT 1
 | What is the highest rated movie in a particular year according to imDB?
 | * Retrieve all movies *released* in a particular year.
 * Evaluate the *imDB ratings*.
-* Return the movie *title*.
+* Return the movie *title* for the movie with the highest rating.
 |[source,cypher]
 --
 MATCH (m:Movie {release:date('1995')})
@@ -227,10 +230,10 @@ LIMIT 1
 
 === Relationships
 
-Relationships are connections between entities and these connections are the verbs in your use cases:
+Relationships are connections between nodes, and these connections are the verbs in your use cases:
 
-* What person [.underline]#acted in# a movie?
-* What person [.underline]#directed# a movie?
+* Which person [.underline]#acted in# a movie?
+* Which person [.underline]#directed# a movie?
 
 At a glance, connections seem straightforward, but their micro- and macro-design are arguably the most critical factors in graph performance. 
 To get started, thinking of relationships from the perspective that “connections are verbs” works well, but there are other important considerations that you will learn as you advance with your model.
@@ -238,7 +241,7 @@ To get started, thinking of relationships from the perspective that “connectio
 ==== Naming
 
 It is important to choose good names (types) for the relationships in the graph.
-Relationship types need to be intuitive to stakeholders and developers alike, and cannot be confused with an entity name.
+Relationship types need to be intuitive and not confused with node labels.
 
 For the example use cases, you could define relationships as:
 
@@ -256,7 +259,7 @@ In the example use cases, the `ACTED_IN` relationship must be created to go from
 
 image::relationship-direction.svg[Example showing the person node connecting to the movie node via an acted in relationship,400,400,role=popup]
 
-To add all `ACTED_IN` and `DIRECTED` relationships, you can run this code:
+To add all `ACTED_IN` and `DIRECTED` relationships, you can use this statement:
 
 [source,cypher]
 --
@@ -274,7 +277,7 @@ image::relationships-graph.svg[All person nodes are now connected to the movie n
 
 [TIP]
 ====
-You can always use the query `MATCH (n) RETURN n` to check how your graph looks like.
+You can always use the query `MATCH (n) RETURN n` to see what your graph looks like.
 ====
 
 ==== Super nodes
@@ -292,7 +295,7 @@ For more information, see xref:{docs-home}/cypher-manual/current/planning-and-tu
 ==== Relationship properties
 
 Properties for a relationship are used to enrich how two nodes are related. 
-When you define a property for a relationship, it is because your use cases ask a specific question about how two nodes are related, not just that they are related.
+When you need to know *how* two nodes are related and not just that they are related, you can use relationship properties to further define the relationship.
 
 In the example, the use case "What role did a person play in a movie?" could be asked with the help of the property `roles` in the `ACTED_IN` relationship:
 
@@ -309,7 +312,7 @@ MERGE (DannyD)-[:ACTED_IN {roles:'Robert "Bobby" Ciaro'}]->(Hoffa)
 MERGE (JackN)-[:ACTED_IN {roles:'Hoffa'}]->(Hoffa)
 --
 
-Then, in order to check what role Tom Hanks played in Apollo 13, you use the following code:
+Then, in order to find which role Tom Hanks played in Apollo 13, you use the following statement:
 
 [source,cypher]
 --
@@ -324,7 +327,7 @@ image::roles-graph.svg[Graph with person and movies nodes, and acted in relation
 == Add more data
 
 Now that you have created the first connections between the nodes, it's time to add more information to the graph.
-This way, you can work with other use cases, such as:
+This way, you can answer more questions, such as:
 
 * How many users rated a movie?
 * What users gave a movie a rating of 5?
@@ -334,7 +337,7 @@ Note that, with the addition of new data such as the property `roles` in the `AC
 
 image::updated-model.svg[Addition of a new user node to the graph,role=popup]
 
-You can start first by adding the users to your graph:
+You can start by adding the users to your graph:
 
 [source,cypher]
 --
@@ -373,10 +376,10 @@ RETURN p.name
 This is just a simple example of testing.
 As you go through the use cases, you may think of more data that you want to add to the graph to round out the testing.
 
-Additionally, make sure that the Cypher code used to test the use cases is correct.
+Additionally, make sure that the Cypher statements used to test the use cases are correct.
 A query written incorrectly could lead to the assumption that the data model has failed, for example.
 
-At this point, you will also start considering scalability of your graph and how performant it would be if you write the same queries in a graph with millions of nodes and relationships.
+At this point, you can also start considering the scalability of your graph and how performant it would be if you write the same queries in a graph with millions of nodes and relationships.
 
 == Refactoring
 
