@@ -48,7 +48,7 @@ The data model describes the nodes and relationships in the domain and includes 
 It doesn't contain any data but shows what information might be needed to answer the use cases.
 At this stage, you can opt to use xref:data-modeling/data-modeling-tools.adoc[no-code tools] to visualize your plan.
 
-Considering the domain you are working with and the questions you need to answer, you can assume that this is some of the information that you will need to have in your data model from the start:
+With your example domain and initial questions in mind, you can list the information you need to have in your first model:
 
 * Differentiation between a person who acted in a movie, who directed a movie, and who rated a movie.
 * What ratings were given, how many they are, and when they were submitted.
@@ -60,7 +60,8 @@ With link:https://arrows.app[Arrows.app], for example, you can draft a data mode
 
 image::sample-data-model.svg[Sample data model featuring two nodes for person and movie connected through two relationships, one for directed and another for acted in,role=popup]
 
-Note that labels, relationship types, and property keys were written in a certain style.
+Note that in the model, labels, relationship types, and property keys follow a certain syntax.
+In Cypher, these are called identifiers and they are case-sensitive, as are string values.
 
 See the Cypher link:{docs-home}/cypher-manual/current/styleguide[style guide] for more information.
 While not mandatory, it is recommended that:
@@ -106,7 +107,7 @@ A good tip is to review your use cases and analyze the components of your questi
 
 === Labels
 
-Entities are the dominant nouns in your application use cases.
+The dominant nouns in your application use case are represented as nodes in your model and are used as *node labels*.
 For example:
 
 * Which [.underline]#person# acted in a [.underline]#movie#?
