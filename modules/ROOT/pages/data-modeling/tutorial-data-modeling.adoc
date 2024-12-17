@@ -16,7 +16,7 @@ Before starting to work with the data model itself, it is recommended that you i
 This helps you to have a better idea of what the application will be, which people and systems will use it, and thus which domain you will work with.
 
 In this tutorial, you will use the xref:appendix/example-data.adoc[Movies example dataset], which means your domain includes movies, people who acted or directed movies, and users who rated movies. 
-It is in the connections (relationships) between these entities that you find interesting information about your domain.
+It is in the connections (relationships) between these entities that you find insights about your domain.
 
 == Define the use case
 
@@ -103,7 +103,7 @@ However, in order to practice data modeling, it is recommended that you add the 
 == Define entities
 
 Creating an instance model in the previous step helps you preview how you may define the data as nodes, relationships, and properties.
-A good tip is to review your use cases and analyze the components of your questions.
+The next step is to refine your model with more details.
 
 === Labels
 
@@ -113,11 +113,12 @@ For example:
 * Which [.underline]#person# acted in a [.underline]#movie#?
 * How many [.underline]#users# rated a [.underline]#movie#?
 
-Although this could change after xref:data-modeling/graph-model-refactoring.adoc[refactoring], you can assume that the dominant nouns "person", "movie", and "user" will be nodes in the first iteration of the data model.
+The nodes in your initial model are thus *Person*, *Movie*, and *User*.
+Note that creating a model is an iterative process and, after xref:data-modeling/graph-model-refactoring.adoc[refactoring], your model may look different.
 
 === Node properties
 
-Node properties are used to uniquely identify a node, answer specific details of the use cases for the application, and to return data.
+Node properties are used to uniquely identify a node and let you retrieve specific data when queried.
 For example, in a Cypher statement, properties can be used to:
 
 .Anchor (where to begin the query)
@@ -141,8 +142,9 @@ MATCH (p:Person {name: 'Tom Hanks'})-[:ACTED_IN]-(m:Movie)
 RETURN m.title, m.released
 --
 
-This is why people names and movie titles were turned into node properties rather than separate nodes, for example.
-Besides the fact that you already have `Person` and `Movie` nodes, this is a way to avoid xref:#_super_nodes[super nodes].
+Since you are interested in how individual people are related to individual movies, you want each instance of an entity (each different person and each different movie) to be a separate node.
+In other words, every instance of your model's *Person* node is a distinct node and you use properties to separate them.
+For example, the `Person` node with the property `name` and the value 'Tom Hanks' is distinct from the `Person` node with the property value `Meg Ryan` for the same property. 
 
 ==== Unique identifiers
 
@@ -282,18 +284,6 @@ image::relationships-graph.svg[All person nodes are now connected to the movie n
 You can always use the query `MATCH (n) RETURN n` to see what your graph looks like.
 ====
 
-==== Super nodes
-
-Now, consider a hypothetical scenario in which you decided to have the actors as separate nodes rather than referring to them using the `name` property in `Person` nodes:
-
-image::supernode.svg[Hypothetical representation of a super node with the label movie connected to several actor nodes,400,400,role=popup]
-
-While this is not an incorrect approach to data modeling, you risk ending up with a fan-out or super node.
-These are very dense nodes that may contain even thousands of incoming and outgoing relationships, which in turn may cause performance issues.
-
-To handle super nodes efficiently, you can use techniques like index-free adjacency, relationship indexing, or node properties to optimize traversal and querying.
-For more information, see xref:{docs-home}/cypher-manual/current/planning-and-tuning/query-tuning/[Cypher -> Query tuning].
-
 ==== Relationship properties
 
 Properties for a relationship are used to enrich how two nodes are related. 
@@ -385,7 +375,9 @@ This is just a simple example of testing.
 As you go through the use cases, you may think of more data to be added to the graph in order to round out the testing.
 
 Additionally, make sure that the Cypher statements used to test the use cases are correct.
-A query written incorrectly could lead to the assumption that the data model has failed, for example.
+A query written incorrectly could lead to the assumption that the data model has failed.
+
+For example, if you want want to find a user, but you forgot that their data is stored as a `User` node rather than a `Person` node, when you query for them using the `Person` node, you won't get any information and assume that they don't exist in the graph.
 
 At this point, you can also start considering the scalability of your graph and how performant it would be if you write the same queries in a graph with millions of nodes and relationships.
 
