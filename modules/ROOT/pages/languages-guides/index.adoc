@@ -1,5 +1,5 @@
 [[language-guides]]
-= Connect to Neo4j
+= Create an application
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
 :tags: programming-languages, applications, bolt, app-development
 :page-ad-overline-link: https://neo4j.com/cloud/aura/?ref=developer-guides
@@ -10,215 +10,66 @@
 :page-ad-underline-role: button
 :page-ad-underline: Start on AuraDB
 
+Neo4j supports several libraries, protocols, and APIs that you can use to create an application.
+This page lists the officially supported options.
 
-[#neo4j-app-dev]
-== Neo4j language guides
+== Libraries
 
-Neo4j provides *official libraries for Python, JavaScript, Java, .NET, and Go*.
+[IMPORTANT]
+====
+Always use the latest version of the library.
+The latest 5.x drivers support connection to any Neo4j 5 and 4.4 instance, and will also be compatible with Neo4j 6.
+====
 
-Our community contributors provide drivers for all major programming languages for all protocols and APIs.
-In this section, we provide an introduction and a consistent example application for several languages and Neo4j drivers.
+[options=header,cols="1,1a"]
+|===
 
-You should be familiar with xref:appendix/graphdb-concepts/index.adoc[graph database concepts] and the property graph model.
-You should have link:{aura_signup}[created an Neo4j AuraDB cloud instance], or link:/download/[installed Neo4j locally].
+| Documentation
+| GraphAcademy course
 
-[#graphacademy]
-== Learn with GraphAcademy
+| link:{docs-home}/python-manual[Python]
+| link:https://graphacademy.neo4j.com/courses/app-python/[Building Neo4j Applications with Python]
 
-We have a range of link:https://graphacademy.neo4j.com/categories/developer/?ref=guides[Neo4j Developer courses^] that teach you to build connect to Neo4j using each of our officially supported Drivers.
+| link:{docs-home}/javascript-manual[JavaScript]
+| link:https://graphacademy.neo4j.com/courses/app-typescript/[Building Neo4j Applications with TypeScript]
 
-link:https://graphacademy.neo4j.com/courses/app-java/?ref=guides[image:https://graphacademy.neo4j.com/courses/app-java/badge/[Building Neo4j Applications with Java, width=120]^]
-link:https://graphacademy.neo4j.com/courses/app-nodejs/?ref=guides[image:https://graphacademy.neo4j.com/courses/app-nodejs/badge/[Building Neo4j Applications with Node.js, width=120]^]
-link:https://graphacademy.neo4j.com/courses/app-python/?ref=guides[image:https://graphacademy.neo4j.com/courses/app-python/badge/[Building Neo4j Applications with Python, width=120]^]
-link:https://graphacademy.neo4j.com/courses/app-dotnet/?ref=guides[image:https://graphacademy.neo4j.com/courses/app-dotnet/badge/[Building Neo4j Applications with .NET, width=120]^]
-link:https://graphacademy.neo4j.com/courses/app-go/?ref=guides[image:https://graphacademy.neo4j.com/courses/app-go/badge/[Building Neo4j Applications with Go, width=120]^]
+| link:{docs-home}/java-manual[Java]
+| link:https://graphacademy.neo4j.com/courses/app-java/[Building Neo4j Applications with Java]
 
-[#connect-neo4j]
-== How to connect to Neo4j?
+| link:{docs-home}/dotnet-manual[.NET]
+| link:https://graphacademy.neo4j.com/courses/app-dotnet/[Building Neo4j Applications with .NET]
 
-If you've created an link:{aura_signup}[AuraDB instance^], or link:/download/[installed] and started Neo4j as a server on your system, you can already work interactively with the database via the built-in Neo4j Browser, which you find in the AuraDB console, or if you're running locally, on http://localhost:7474[localhost:7474].
+| link:{docs-home}/go-manual[Go]
+| link:https://graphacademy.neo4j.com/courses/app-go/[Building Neo4j Applications with Go]
 
-To build an application, you want to connect to Neo4j from your technology stack, use a driver which connects to Neo4j via Bolt or HTTP.
+| link:{docs-home}/graphql[GraphQL]
+| link:https://graphacademy.neo4j.com/courses/graphql-basics/[Introduction to Neo4j & GraphQL]
+
+| *Node.js*
+| link:https://graphacademy.neo4j.com/courses/app-nodejs/[Building Neo4j Applications with Node.js]
+
+| link:https://docs.spring.io/spring-data/neo4j/reference/[Spring Data]
+| link:https://graphacademy.neo4j.com/courses/app-spring-data/[Building Neo4j Applications with Spring Data]
+
+| link:{docs-home}/ogm-manual/[Neo4j OGM]
+| -
+
+|===
 
 [#bolt-protocol]
-== The binary Bolt Protocol
+== Bolt Protocol
 
-Starting with Neo4j v3.0, we support a binary protocol called link:https://neo4j.com/docs/bolt/current/[Bolt].
-It is based on the PackStream serialization and supports the Cypher type system, protocol versioning, authentication, and TLS via certificates.
+The binary protocol link:https://neo4j.com/docs/bolt/current/[Bolt] is based on the PackStream serialization and supports the Cypher type system, protocol versioning, authentication, and TLS via certificates.
 For Neo4j Clusters, Bolt provides smart client routing with load balancing and failover.
 
-The binary protocol is enabled in Neo4j by default, so you can use any language driver that supports it.
-
-_For more details on the protocol implementation, see the https://github.com/neo4j-contrib/boltkit[implementers documentation^]._
-
-[#neo4j-drivers]
-== Neo4j Drivers
-
-Neo4j provides official drivers for a number of popular programming languages.
-Below you can find links to their reference documentation:
-
-* link:https://neo4j.com/docs/java-manual/current/[Java]
-* link:https://neo4j.com/docs/dotnet-manual/current/[.NET]
-* link:https://neo4j.com/docs/javascript-manual/current/[JavaScript]
-* link:https://neo4j.com/docs/python-manual/current/[Python]
-* link:https://neo4j.com/docs/go-manual/current/[Go]
-* link:https://docs.spring.io/spring-data/neo4j/docs/current/reference/html/[Spring]
-
-[NOTE]
-====
-Always use the latest version of the driver, as it will always work both with the previous Neo4j long-term support release and with the current and next major releases.
-The latest 5.x driver supports connection to any Neo4j 5 and 4.4 instance, and will also be compatible with Neo4j 6.
-====
-
-To demonstrate connection to and usage of Neo4j in different programming languages, an example application is created.
-It is a http://my-neo4j-movies-app.herokuapp.com/[simple, one-page webapp^], that uses Neo4j's Movie demo database (movie, actor, director) as a dataset.
-The same front-end web page in all applications consumes three REST endpoints provided by backend implemented in the different programming languages and drivers:
-
-* movie search by title
-* single movie listing
-* graph visualization of the domain model
-
-The source code for the language examples is available on https://github.com/neo4j-examples?query=movies[GitHub^] as individual repositories that can be cloned and used as starting points.
-
+The binary protocol is enabled in Neo4j by default, so you can use any language library that supports it.
+For more details, refer to the link:https://neo4j.com/docs/bolt/current/[Bolt documentation].
 
 [#query-api]
-== The Query API
+== APIs
 
-The Query API allows you to query a Neo4j server through HTTP/HTTPS.
+Neo4j supports the following APIs:
 
-For more information, see link:https://neo4j.com/docs/query-api/current/[Documentation -> Query API].
-
-====
-[discrete]
-=== Example request
-
-[source, headers]
-----
-POST http://localhost:7474/db/neo4j/query/v2
-Authorization: Basic bmVvNGo6dmVyeXNlY3JldA==
-Content-Type: application/json
-----
-
-[source, json]
-----
-{
-  "statement": "MERGE (n:Person {name: $name, age: $age}) RETURN n AS alice",
-  "parameters": {
-    "name": "Alice",
-    "age": 42
-  }
-}
-----
-
-[discrete]
-=== Example response
-
-[source, headers]
-----
-202: Accepted
-Content-Type: application/json
-----
-
-[source, json]
-----
-{
-  "data": {
-    "fields": [
-      "alice"
-    ],
-    "values": [
-      {
-        "elementId": "4:ff04df25-ff2b-4b55-98f8-6888297b025e:0",
-        "labels": [
-          "Person"
-        ],
-        "properties": {
-          "name": "Alice",
-          "age": 42
-        }
-      }
-    ]
-  },
-  "bookmarks": [
-    "FB:kcwQ/wTfJf8rS1WY+GiIKXsCXgmQ"
-  ]
-}
-----
-====
-
-
-[role=label--not-on-aura]
-[#http-api]
-== The HTTP API
-
-The HTTP API allows you to query a Neo4j server through HTTP/HTTPS.
-
-For more information, see link:https://neo4j.com/docs/http-api/current/[Documentation -> HTTP API].
-
-====
-[discrete]
-=== Example request
-
-[source, headers]
-----
-POST http://localhost:7474/db/neo4j/tx/commit
-Accept: application/json;charset=UTF-8
-Content-Type: application/json
-Authorization: Basic bmVvNGo6dmVyeXNlY3JldA==
-----
-
-[source, json]
-----
-{
-  "statements": [
-    {
-      "statement": "MERGE (n:Person {name: $name, age: $age}) RETURN n",
-      "parameters": {
-        "name": "Alice",
-        "age": 42
-      }
-    }
-  ]
-}
-----
-
-[discrete]
-=== Example response
-
-[source, headers]
-----
-200: OK
-Content-Type: application/json;charset=utf-8
-----
-
-[source, json]
-----
-{
-  "results": [ {
-    "columns": ["n"],
-    "data": [ {
-      "row": [ {
-        "name": "Alice",
-        "age": 42
-      } ],
-      "meta": [ {
-        "id": 36,
-        "elementId": "4:0ea4a108-32c5-498c-99e7-95cc67ab5f7d:36",
-        "type": "node",
-        "deleted": false
-      } ]
-    } ]
-  } ],
-  "errors": [],
-  "lastBookmarks": [
-    "FB:kcwQDqShCDLFSYyZ55XMZ6tffRuQ"
-  ]
-}
-----
-====
-
-
-== link:https://graphacademy.neo4j.com/[Learn with GraphAcademy^]
-
-Learn everything you need to know to build an application on top of Neo4j with free, hands-on courses from link:https://graphacademy.neo4j.com/categories/developer/?ref=guides[Neo4j GraphAcademy^].
-
+* *link:{docs-home}/http-api/[HTTP API] (_Not available on Aura_) and link:{docs-home}/query-api[Query API]* -> allow executing Cypher statements against a Neo4j server through HTTP requests.
+The main use case of these APIs is for developing client applications in languages for which there is no supported library.
+* link:{docs-home}/cdc[Change Data Capture] -> allows capturing and tracking changes to your database in real-time, enabling you to keep your other data sources up to date with Neo4j.
