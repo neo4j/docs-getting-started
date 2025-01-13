@@ -47,7 +47,7 @@
 ** link:{docs-home}/ogm[Neo4j OGM]
 ** xref:languages-guides/community-drivers/index.adoc[]
 
-* xref:languages-guides/integration-tools/integration.adoc[Connect data sources]
+* link:{docs-home}/connectors[Connect data sources]
 
 * xref:gds/index.adoc[Get insights from data]
 

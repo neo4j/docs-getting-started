@@ -10,16 +10,9 @@
 :page-ad-underline-role: button
 :page-ad-underline: Start on AuraDB
 
-Neo4j supports several libraries, protocols, and APIs that you can use to create an application.
-This page lists the officially supported options.
+This page lists the officially supported libraries and APIs that you can use to link:{docs-home}/create-aplications[create an application].
 
 == Libraries
-
-[IMPORTANT]
-====
-Always use the latest version of the library.
-The latest 5.x drivers support connection to any Neo4j 5 and 4.4 instance, and will also be compatible with Neo4j 6.
-====
 
 [options=header,cols="1,1a"]
 |===
@@ -55,15 +48,6 @@ The latest 5.x drivers support connection to any Neo4j 5 and 4.4 instance, and w
 | -
 
 |===
-
-[#bolt-protocol]
-== Bolt Protocol
-
-The binary protocol link:https://neo4j.com/docs/bolt/current/[Bolt] is based on the PackStream serialization and supports the Cypher type system, protocol versioning, authentication, and TLS via certificates.
-For Neo4j Clusters, Bolt provides smart client routing with load balancing and failover.
-
-The binary protocol is enabled in Neo4j by default, so you can use any language library that supports it.
-For more details, refer to the link:https://neo4j.com/docs/bolt/current/[Bolt documentation].
 
 [#query-api]
 == APIs
