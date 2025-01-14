@@ -2,7 +2,7 @@
 :tags: graph-modeling, data-model, schema, model-process, model-domain, tutorial
 :description: This tutorial is designed to help you understand how data modeling works through an example case.
 
-This tutorial is designed to help you understand how data modeling works through an example case.
+This tutorial is designed to help you understand how to model your data based on what you intend to use it for.
 You will use the xref:appendix/example-data.adoc[Movies example dataset] as the main resource.
 
 [TIP]
@@ -12,9 +12,6 @@ For an interactive course on the fundamentals of data modeling, see link:https:/
 
 == Define the domain
 
-Before starting to work with the data model itself, it is recommended that you identify which stakeholders and developers will be working on the application that will use the model.
-This helps you to have a better idea of what the application will be, which people and systems will use it, and thus which domain you will work with.
-
 In this tutorial, you will use the xref:appendix/example-data.adoc[Movies example dataset], which means your domain includes movies, people who acted or directed movies, and users who rated movies. 
 It is in the connections (relationships) between these entities that you find insights about your domain.
 
@@ -23,8 +20,8 @@ It is in the connections (relationships) between these entities that you find in
 With the domain defined, you need to identify what the use case is for your application.
 In other words, what questions are you trying to answer?
 
-Most use cases for an application can be defined with a *list of questions*.
-With this information, you can better define how the application will behave at runtime.
+You can make a *list of questions* to help you identify the use cases of your application.
+This way, you can better define what you need from it, and what data must be included in the graph.
 
 For this tutorial, consider these the questions that you want answered by your application:
 
