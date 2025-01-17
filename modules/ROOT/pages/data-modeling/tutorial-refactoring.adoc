@@ -45,7 +45,7 @@ MERGE (Clinton)-[:RATED {rating:3}]->(SleeplessInSeattle)
 MERGE (Clinton)-[:RATED {rating:3}]->(Hoffa)
 --
 
-== Answering remaining or new use cases
+== Remaining or new use cases
 
 Suppose that now you want to know what movies are available in a particular language.
 
@@ -97,7 +97,7 @@ This isn't wrong, but as the graph scales, you may encounter two issues:
 
 The answer for these issues is, therefore, to refactor the property `languages` into a node and connect it to the `Movie` nodes with a new relationship.
 
-=== Refactoring a property into a node
+== Eliminating duplicated data
 
 In order to refactor the node property `languages` into a node, you need to:
 
@@ -143,7 +143,7 @@ What the code previously listed does is:
 After this refactoring, you should have only one `Language` node with the value "English" and the equivalent movies connected to it.
 This eliminates a lot of duplication in the graph and grants good performance for the next time you search for all movies in English.
 
-== Deal with complex data
+== Dealing with complex data
 
 Suppose a new use case has come up, and now you need to include information about the producers of each film.
 Part of the data about the producers include their physical address, which is what can be considered complex data.
@@ -172,6 +172,36 @@ With this refactoring, if there are any queries that need to filter production c
 
 How you refactor your graph to handle complex data depends upon the performance of the queries when your graph scales.
 The next topic addresses how to measure performance in your graph by testing it.
+
+== Using specific relationships
+
+Specific relationships are a refactor strategy that you can use when your project has a recurrent use case that needs a certain piece of information to be constantly retrieved.
+The reason why you should use them include:
+
+* Reducing the number of nodes that need to be retrieved.
+* Improving query performance.
+
+Suppose that you constantly need to retrieve information about actors specifically when referring to the year of 1995.
+You would normally write the query this way:
+
+[source,cypher]
+--
+MATCH (p:Person)-[:ACTED_IN]-(m:Movie)
+WHERE p.name = 'Tom Hanks' AND m.released STARTS WITH '1995'
+RETURN DISTINCT m.title AS Movie
+--
+
+But if you create a specific relationship, for example, `ACTED_IN_1995`, when you query for this same information, you will write the code like this instead:
+
+[source,cypher]
+--
+MATCH (p:Person)-[:ACTED_IN_1995]-(m:Movie)
+WHERE p.name = 'Tom Hanks'
+RETURN m.title AS Movie
+--
+
+This way, the query won't need to retrieve all the `Movie` nodes connected to Tom Hanks and read all their `m.released` properties, but only retrieve the title of those that are connected with Tom Hanks by the specific relationship `ACTED_IN_1995`.
+You can therefore avoid overfetching and improve query performance.
 
 == Retest the graph
 
@@ -311,4 +341,4 @@ You can read more advanced explanation on query tunning and planning at link:{do
 
 Most of the refactoring that you can keep doing on your model is about repurposing or adding more information to your graph.
 
-You can see more examples on how to split the node `Person` into `Actor` and `Director` nodes, as well as how to turn the `Movie` node property `genre` into nodes by following the interactive course link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/[Graph Data Modeling Fundamentals] at GraphAcademy.
+You can see more examples on how to split the node `Person` into `Actor` and `Director` nodes, how to turn the `Movie` node property `genre` into nodes, and other refactoring strategies by following the interactive course link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/[Graph Data Modeling Fundamentals] on GraphAcademy.
