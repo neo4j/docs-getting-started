@@ -17,13 +17,13 @@ It is in the connections (relationships) between these entities that you find in
 
 == Define the use case
 
-With the domain defined, you need to identify what the use case is for your application.
+With the domain defined, you need to identify your application use cases.
 In other words, what questions are you trying to answer?
 
-You can make a *list of questions* to help you identify the use cases of your application.
-This way, you can better define what you need from it, and what data must be included in the graph.
+You can make a *list of questions* to help you identify the application use cases.
+The questions will help you define what you need from the application, and what data must be included in the graph.
 
-For this tutorial, consider these the questions that you want answered by your application:
+For this tutorial, your application should be able to answer these questions:
 
 * Which people acted in a movie?
 * Which person directed a movie?
@@ -99,12 +99,12 @@ However, in order to practice data modeling, it is recommended that you add the 
 
 == Define entities
 
-Creating an instance model in the previous step helps you preview how you may define the data as nodes, relationships, and properties.
+An instance model helps you preview how the data will be stored as nodes, relationships, and properties.
 The next step is to refine your model with more details.
 
 === Labels
 
-The dominant nouns in your application use case are represented as nodes in your model and are used as *node labels*.
+The dominant nouns in your application use case are represented as nodes in your model and can be used as *node labels*.
 For example:
 
 * Which [.underline]#person# acted in a [.underline]#movie#?
@@ -369,12 +369,12 @@ RETURN p.name
 --
 
 This is just a simple example of testing.
-As you go through the use cases, you may think of more data to be added to the graph in order to round out the testing.
+As you go through the use cases, you may think of more data to be added to the graph in order to complete the testing.
 
 Additionally, make sure that the Cypher statements used to test the use cases are correct.
 A query written incorrectly could lead to the assumption that the data model has failed.
 
-For example, if you want want to find a user, but you forgot that their data is stored as a `User` node rather than a `Person` node, when you query for them using the `Person` node, you won't get any information and assume that they don't exist in the graph.
+For example, using an incorrect node label in a test may lead you to believe that the data doesn't exist in the graph.
 
 At this point, you can also start considering the scalability of your graph and how performant it would be if you write the same queries in a graph with millions of nodes and relationships.
 
