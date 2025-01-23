@@ -1,6 +1,6 @@
 = Tutorial: Create a graph data model
 :tags: graph-modeling, data-model, schema, model-process, model-domain, tutorial
-:description: This tutorial is designed to help you understand how data modeling works through an example case.
+:description: This tutorial is designed to help you understand how data modeling works through an example use case.
 
 This tutorial is designed to help you understand how to model your data based on what you intend to use it for.
 You will use the xref:appendix/example-data.adoc[Movies example dataset] as the main resource.
@@ -12,7 +12,7 @@ For an interactive course on the fundamentals of data modeling, see link:https:/
 
 == Define the domain
 
-In this tutorial, you will use the xref:appendix/example-data.adoc[Movies example dataset], which means your domain includes movies, people who acted or directed movies, and users who rated movies. 
+In this tutorial, you will use the xref:appendix/example-data.adoc[Movies example dataset], the domain includes movies, people who acted or directed movies, and users who rated movies.
 It is in the connections (relationships) between these entities that you find insights about your domain.
 
 == Define the use case
@@ -43,19 +43,19 @@ When designing a graph data model for an application, you may need both a data m
 
 The data model describes the nodes and relationships in the domain and includes labels, types, and properties. 
 It doesn't contain any data but shows what information might be needed to answer the use cases.
+
 At this stage, you can opt to use xref:data-modeling/data-modeling-tools.adoc[no-code tools] to visualize your plan.
+With link:https://arrows.app[Arrows.app], for example, you can draft a data model that includes node labels, relationship types, and properties:
+
+image::sample-data-model.svg[Sample data model featuring two nodes for person and movie connected through two relationships, one for directed and another for acted in,role=popup]
 
 With your example domain and initial questions in mind, you can list the information you need to have in your first model:
 
 * Differentiation between a person who acted in a movie, who directed a movie, and who rated a movie.
-* What ratings were given, how many they are, and when they were submitted.
+* What ratings were given, how many there are, and when they were submitted.
 * Which role an actor played in a movie and what their age is.
 * The genres of the movies.
 * Etc.
-
-With link:https://arrows.app[Arrows.app], for example, you can draft a data model that includes node labels, relationship types, and properties:
-
-image::sample-data-model.svg[Sample data model featuring two nodes for person and movie connected through two relationships, one for directed and another for acted in,role=popup]
 
 Note that in the model, labels, relationship types, and property keys follow a certain syntax.
 In Cypher, these are called identifiers and they are case-sensitive, as are string values.
@@ -63,7 +63,7 @@ In Cypher, these are called identifiers and they are case-sensitive, as are stri
 See the Cypher link:{docs-home}/cypher-manual/current/styleguide[style guide] for more information.
 While not mandatory, it is recommended that:
 
-* Labels are capitalized and can be CamelCase (e.g., `Person`, `Movie`, `ImdbUser`).
+* Labels are capitalized and should be CamelCase (e.g., `Person`, `Movie`, `ImdbUser`).
 * Relationship types are written with all capital letters and an underscore character as a separator (e.g., `DIRECTED`, `ACTED_IN`).
 * Property keys for nodes or relationships are *not* capitalized and can be camelCase (e.g. `name`, `userID`).
 
@@ -75,8 +75,10 @@ The xref:#_define_entities[Define entities] step describes a more detailed view 
 
 === Instance model
 
-An important part of the graph data modeling process is to test the model against the use cases.
-To do so, you need to have some sample data and load it to a link:{docs-home}/deployment-options[deployment of your choice]:
+An instance model is a representation of the data that is stored and processed in the actual model.
+You can use an instance model to test against your use cases.
+
+To create an instance model, you need to have some sample data and load it to a link:{docs-home}/deployment-options[deployment of your choice]:
 
 image::sample-data-instance-model.svg[Sample data model contaning nodes for movies and people with the properties title, name, date of release, birth, rating, and ID,500,500,role=popup]
 
@@ -146,11 +148,6 @@ For example, the `Person` node with the property `name` and the value 'Tom Hanks
 ==== Unique identifiers
 
 You can use properties to uniquely identify nodes.
-
-In this tutorial, you are working with movies and people, both entities that have names.
-While you can create a property called `name` for both `Person` and `Movie` nodes, it is advisable to use different terms to provide unique identifiers.
-Therefore, to get around this, you can use the property `name` for a `Person` node and `title` for `Movie`.
-
 In the initial instance model, these are the properties set for the `Movies` nodes:
 
 * `Movie.title` (string)
@@ -253,8 +250,7 @@ With these options, you can already plan the direction of the relationships.
 ==== Relationship direction
 
 All relationships must have a direction.
-When created, relationships need to specify their direction explicity or inferred by the left-to-right order of the pattern.
-When you query the database, however, you don't need to specify the direction, as long as the direction is inferred by the order of the pattern in a query.
+When created, relationships need to specify their direction explicity or be inferred by the left-to-right order of the pattern.
 
 In the example use cases, the `ACTED_IN` relationship must be created to go from a `Person` node to a `Movie` node:
 
@@ -306,7 +302,7 @@ Then, in order to find which role Tom Hanks played in Apollo 13, you use the fol
 
 [source,cypher]
 --
-MATCH (TomH)-[r:ACTED_IN]->(Apollo13)
+MATCH (p:Person {name:'Tom Hanks'})-[r:ACTED_IN]->(m:Movie {title:'Apollo 13'})
 RETURN r.roles
 --
 
