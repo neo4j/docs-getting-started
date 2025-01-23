@@ -23,7 +23,6 @@
 
 * xref:data-modeling/index.adoc[Model data]
 ** xref:data-modeling/tutorial-data-modeling.adoc[Tutorial: Create a data model]
-** xref:data-modeling/graph-model-refactoring.adoc[]
 ** xref:data-modeling/modeling-designs.adoc[]
 ** xref:data-modeling/relational-to-graph-modeling.adoc[]
 ** xref:data-modeling/modeling-tips.adoc[]
@@ -39,14 +38,15 @@
 *** xref:languages-guides/java/spring-data-neo4j.adoc[]
 *** xref:languages-guides/java/quarkus.adoc[]
 *** xref:languages-guides/java/java-frameworks.adoc[]
-*** xref:languages-guides/java/neo4j-ogm.adoc[]
 *** xref:languages-guides/java/java-procedures.adoc[]
-** xref:languages-guides/neo4j-dotnet.adoc[]
-** xref:languages-guides/neo4j-javascript.adoc[]
-** xref:languages-guides/neo4j-python.adoc[]
-** xref:languages-guides/neo4j-go.adoc[]
-** xref:languages-guides/integration-tools/integration.adoc[]
+** link:{docs-home}/dotnet-manual[Using Neo4j from .NET]
+** link:{docs-home}/javascript-manual[Using Neo4j from JavaScript]
+** link:{docs-home}/python-manual[Using Neo4j from Python]
+** link:{docs-home}/go-manual[Using Neo4j from Go]
+** link:{docs-home}/ogm[Neo4j OGM]
 ** xref:languages-guides/community-drivers/index.adoc[]
+
+* link:{docs-home}/connectors[Connect data sources]
 
 * xref:gds/index.adoc[Get insights from data]
 
