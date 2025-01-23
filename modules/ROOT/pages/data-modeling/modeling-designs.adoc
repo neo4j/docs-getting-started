@@ -1,19 +1,47 @@
 [[modeling-designs]]
 = Modeling designs
 :tags: graph-modeling, data-model, schema, model-design, modeling-decisions
-:description: Learn how to represent graph data using a variety of modeling decisions. The way you construct your data model can impact your queries and performance.
+:description: In this section, you learn how to represent graph data using a variety of modeling decisions. The way you construct your data model can impact your queries and performance.
 
-Evaluating your model and making appropriate changes to your data is an important step in the data modeling process.
-Also known as xref:data-modeling/graph-model-refactoring.adoc[refactoring], this step can help you define the best solution for your use case and maximize the performance of your queries.
+[abstract]
+{description}
+Our goal is to show you how to evaluate your model and make appropriate changes, so you can define the best solution for your use case and maximize the performance of your queries.
 
-This page shows tips and designs that you can use as inspiration for when you create a data model with Neo4j, so you learn how certain model decisions can impact queries and performance for traversing graph data.
+// here we can add info on data accessibility. Hierarchy of data accessibility. Defining the data model you should remember about different levels of info accessibility in Neo4j graph database:
+// . Anchor labels/types/properties
+// . Non-anchor relationship types
+// . Non-anchor node labels
+// . Non-anchor properties
+// Also we need to mention the start point in the traversal path: for ex., the start node. It helps to understand why indexes are important, and on what query performance depends.  
+// Knowledge about that helps to improve query performance.
+
+[#model-impact]
+== Why the data model makes a difference
+
+As with any database, the data model that you design is important in determining the logic your queries and the structure of data in storage.
+This practice extends to graph databases, with one exception.
+Neo4j is schema-free, which means that your data model can adapt and change easily with your business.
+
+Need to start collecting a new field and capture new analysis?
+Or need to change the way you interpret a customer or other entity and modify its definition?
+Or regulation requires systems to capture less information or restrict readability (change data format/types)?
+
+You may have worked for a company where each area or department defines a domain differently.
+Take, for instance, a generic customer domain.
+To different areas within the business, a customer can be defined as different types of individuals.
+These definitions may also change over time or the company may decide to unify the meaning of a customer across departments.
+
+If you have worked with other types of databases, you will already be familiar with the development and administrative work that any of these scenarios entail.
+However, Neo4j allows you to effortlessly adjust detailed and broad changes across pieces or the entirety of the graph.
+Whether it is small changes over time or a broad definition that includes a variety of needed information about your entities, the database is able to handle it.
+It is simply up to the developers and architects to determine the structure of the data model and how to define entities for queries.
+
+In the next few paragraphs, we will introduce a few different ways to look at different data sets and show how each impacts queries and performance for traversing graph data.
 
 [#property-vs-relationship]
 == Property vs relationship
 
-One of the earliest decisions you may encounter is whether to model something as a property on a node or as a relationship connecting nodes.
-In the xref:data-modeling/tutorial-refactoring.adoc[Tutorial: Refactor a graph data model], for example, you change 
-
+One of the earliest decisions you may encounter is whether to model something as a property on a node or as a relationship to a separate node.
 Take, for example, the data below modeling a movie genre as a property on the `Movie` node.
 
 .The `Movie` node and its property -- `genre`
