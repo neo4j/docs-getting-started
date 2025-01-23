@@ -232,7 +232,7 @@ A Django plugin https://github.com/neo4j-contrib/django-neomodel[django_neomodel
 [#neo4rs]
 === neo4rs
 
-Neo4j can be used from Rust using the http://neo4jrb.io/[neo4rs driver].
+Neo4j can be used from Rust using the https://github.com/neo4j-labs/neo4rs[neo4rs driver].
 *neo4rs* supports using Neo4j via *Bolt*, starting from Neo4j 4.4 up until the most recent version.
 
 You can also ask questions on the link:https://discord.com/invite/neo4j[Neo4j Community Discord] in the link:https://discord.com/channels/787399249741479977/1052516552517357588[`#drivers`] channel.
