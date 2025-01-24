@@ -57,7 +57,7 @@ We will briefly discuss the key details of each here.
 
 === Neo4j Bloom
 
-Bloom is a standalone product focused on visualization that comes with every link:{aura_signup}[AuraDB Instance], and is available with a Neo4j Desktop.
+Bloom is a standalone product focused on visualization that comes with every link:{aura_signup}[AuraDB Instance], and is available both with Neo4j Desktop and standalone.
 It was designed for business analysts and other non-developers to interact with graph data without writing any code.
 
 // image:{neo4j-img-base-uri}bloom_vis_yelp.jpg[role="popup-link"]
@@ -75,6 +75,12 @@ Neo4j Browser is bundled with Neo4j and is available in all editions and version
 Its visualization functionality is designed to display a node-graph representation of the underlying data stored in the database in response to a given Cypher query, showing circles for nodes and lines for relationships.
 Neo4j Browser also provides some functionality for styling with color and size based on node labels and relationship types, or you can customize your own styles by importing a GRASS (graph-stylesheet) file for Neo4j Browser to reference.
 You can also use the built-in drop-down buttons on query result panes to easily export the data to link:/developer/neo4j-browser#browser-tips[PNG, SVG, or CSV formats].
+
+=== Neo4j Visualization Library
+
+NVL is a collection of libraries you can use if you want to build your own graph visualizations.
+The same visualizations are used in Neeo4j Bloom en Explore.
+For more information about NVL, see link:{docs-home}/nvl/current[NVL] documentation and the link:{docs-home}/api/nvl/current[NVL API] documentation.
 
 [#other-vis]
 == Alternative visualizations of graph data
