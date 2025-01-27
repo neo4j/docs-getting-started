@@ -82,7 +82,7 @@ You can also use the built-in drop-down buttons on query result panes to easily 
 NVL is a collection of libraries that you can use if you want to build your own graph visualizations.
 The same visualizations are used in Neo4j Bloom and Explore.
 For more information about NVL, see link:{docs-home}/nvl/current[NVL] documentation and the link:{docs-home}/api/nvl/current[NVL API] documentation.
-
+ 
 [#other-vis]
 == Alternative visualizations of graph data
 
