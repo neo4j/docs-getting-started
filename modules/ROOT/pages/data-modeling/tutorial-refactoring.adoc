@@ -97,6 +97,17 @@ This isn't wrong, but as the graph scales, you may encounter two issues:
 
 The answer for these issues is, therefore, to refactor the property `languages` into a node and connect it to the `Movie` nodes with a new relationship.
 
+[options=header,cols="1a,1a"]
+|===
+
+|Now
+|Refactored
+
+|image::language-before.svg[Movie node with a language property]
+|image::language-after.svg[Movie node connected to a language node via an in language property.]
+
+|===
+
 == Eliminating duplicated data
 
 In order to refactor the node property `languages` into a node, you need to:
@@ -106,18 +117,17 @@ In order to refactor the node property `languages` into a node, you need to:
 [source,cypher]
 --
 MATCH (m:Movie)
-UNWIND m.languages AS language
-WITH  language, collect(m) AS movies
-MERGE (l:Language {name:language})
+WITH m, m.languages AS languages
+UNWIND languages AS language
+MERGE (l:Language {name: language})
 --
 
 . Create the `IN_LANGUAGE` relationship to connect the `Movie` nodes to their respective `Language` nodes:
 +
 [source,cypher]
 --
-MATCH (m:Movie)
-MATCH (l:Language)
-WITH l,m
+MATCH (m), (l:Language)
+WHERE l.name IN m.languages
 MERGE (m)-[:IN_LANGUAGE]->(l)
 --
 
@@ -126,7 +136,7 @@ MERGE (m)-[:IN_LANGUAGE]->(l)
 [source,cypher]
 --
 MATCH (m:Movie)
-SET m.languages = null
+REMOVE m.languages
 --
 
 Your graph should look like this after following these steps:
@@ -238,9 +248,9 @@ RETURN m
 | How many users rated a movie?
 | [source,cypher]
 --
-MATCH (u:User)-[:RATED]-(m:Movie)
+MATCH (m:Movie)
 WHERE m.title = 'Apollo 13'
-RETURN count(*) AS `Number of reviewers`
+RETURN COUNT {(:User)-[:RATED]->(m)} AS `Number of reviewers`
 --
 
 | Who was the youngest person to act in a movie?
@@ -315,7 +325,6 @@ MATCH (m:Movie)-[:IN_LANGUAGE]->(l:Language)
 WHERE l.name = 'English'
 RETURN m.title as Movie in English
 --
-
 |===
 
 === Performance check
@@ -333,7 +342,7 @@ RETURN n
 
 This should be the result:
 
-image::query-plan.png[Screenshot of Browser featuring a query plan that shows the number of database hits when you retrieve all person nodes,400,400,role=popup]
+image::query-plan.svg[Screenshot of Neo4j Aura featuring a query plan that shows the number of database hits when you retrieve all person nodes,400,400,role=popup]
 
 You can read more advanced explanation on query tunning and planning at link:{docs-home}/cypher-manual/current/planning-and-tuning/[Cypher manual -> Execution plans and query tuning].
 
