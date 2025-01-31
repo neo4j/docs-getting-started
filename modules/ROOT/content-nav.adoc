@@ -22,11 +22,10 @@
 * *Work with data*
 
 * xref:data-modeling/index.adoc[Model data]
-// ** xref:data-modeling/tutorial-data-modeling.adoc[]
+** xref:data-modeling/tutorial-data-modeling.adoc[Tutorial: Create a data model]
 ** xref:data-modeling/modeling-designs.adoc[]
 ** xref:data-modeling/relational-to-graph-modeling.adoc[]
 ** xref:data-modeling/modeling-tips.adoc[]
-** xref:data-modeling/graph-model-refactoring.adoc[]
 ** xref:data-modeling/data-modeling-tools.adoc[]
 
 * xref:data-import/index.adoc[Import data into Neo4j]
