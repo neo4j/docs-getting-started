@@ -78,9 +78,10 @@ The xref:#_define_entities[Define entities] step describes a more detailed view 
 An instance model is a representation of the data that is stored and processed in the actual model.
 You can use an instance model to test against your use cases.
 
-To create an instance model, you need to have some sample data and load it to a link:{docs-home}/deployment-options[deployment of your choice]:
+To create an instance model, you need to have some sample data and load it to a link:{docs-home}/deployment-options[deployment of your choice].
+The current example is a small but representative dataset:
 
-image::sample-data-instance-model.svg[Sample data model contaning nodes for movies and people with the properties title, name, date of release, birth, rating, and ID,500,500,role=popup]
+image::instance-example.svg[Sample data model contaning nodes for movies and people with the properties title, name, date of release, birth, rating, and ID,500,500,role=popup]
 
 [source,cypher]
 --
@@ -115,10 +116,14 @@ For example:
 The nodes in your initial model are thus *Person*, *Movie*, and *User*.
 Note that creating a model is an iterative process and, after xref:data-modeling/graph-model-refactoring.adoc[refactoring], your model may look different.
 
+[NOTE]
+====
+Read more about labels in xref:appendix/graphdb-concepts/index.adoc#graphdb-labels[Graph database concepts].
+====
+
 === Node properties
 
-Node properties are used to uniquely identify a node and let you retrieve specific data when queried.
-For example, in a Cypher statement, properties can be used to:
+You can use node properties to:
 
 .Anchor (where to begin the query)
 [source,cypher]
@@ -141,28 +146,7 @@ MATCH (p:Person {name: 'Tom Hanks'})-[:ACTED_IN]-(m:Movie)
 RETURN m.title, m.released
 --
 
-Since you are interested in how individual people are related to individual movies, you want each instance of an entity (each different person and each different movie) to be a separate node.
-In other words, every instance of your model's *Person* node is a distinct node and you use properties to separate them.
-For example, the `Person` node with the property `name` and the value 'Tom Hanks' is distinct from the `Person` node with the property value `Meg Ryan` for the same property. 
-
-==== Unique identifiers
-
-You can use properties to uniquely identify nodes.
-In the initial instance model, these are the properties set for the `Movies` nodes:
-
-* `Movie.title` (string)
-* `Movie.tmdbID` (integer)
-* `Movie.released` (date)
-* `Movie.imdbRating` (decimal between 0-10)
-* `Movie.genres` (list of strings)
-
-And for the `Person` nodes:
-
-* `Person.name` (string)
-* `Person.tmdbID` (integer)
-* `Person.born` (date)
-
-With such differentiators, it is easier to visualize what you need from the graph to answer the use case questions.
+With these properties, it is easier to visualize what you need from the graph to answer the use case questions.
 For example:
 
 [options=header,cols="1,1a,1a"]
@@ -225,6 +209,34 @@ LIMIT 1
 
 |===
 
+==== Unique identifiers
+
+In Cypher, it is possible to create two different nodes with the exact same data.
+However, from a data management and model perspective, different nodes should contain different data.
+You can use *unique identifiers* to make sure that every node is a separate and distinguished entity.
+
+In the initial instance model, these are the properties set for the `Movies` nodes:
+
+* `Movie.title` (string)
+* `Movie.tmdbID` (integer)
+* `Movie.released` (date)
+* `Movie.imdbRating` (decimal between 0-10)
+* `Movie.genres` (list of strings)
+
+And for the `Person` nodes:
+
+* `Person.name` (string)
+* `Person.tmdbID` (integer)
+* `Person.born` (date)
+
+The `Movie` node property `tmdbID` is a good example of a unique identifier, as there might be different movies with the same title in the database, but the property will be different and thus function as a unique identifier.
+
+[TIP]
+====
+You can enforce unique identifiers by using uniqueness constrains.
+Read more about this topic in link:{docs-home}/cypher-manual/current/constraints/managing-constraints/#create-property-uniqueness-constraints[Cypher -> Create property uniqueness constraints].
+====
+
 === Relationships
 
 Relationships are connections between nodes, and these connections are the verbs in your use cases:
@@ -237,10 +249,11 @@ To get started, thinking of relationships from the perspective that “connectio
 
 ==== Naming
 
-It is important to choose good names (types) for the relationships in the graph.
-Relationship types need to be intuitive and not confused with node labels.
+It is important to choose good names (types) for the relationships in the graph and be as specific as possible in order to allow Neo4j to traverse only relevant connections.
 
-For the example use cases, you could define relationships as:
+For example, instead of connecting two nodes with a generic relationship type (e.g. `CONNECTED_TO`), prefer to be more specific and intuitive about the way those entities connect.
+
+For this tutorial sample, you could define relationships as:
 
 * `ACTED_IN`
 * `DIRECTED`
@@ -372,7 +385,7 @@ A query written incorrectly could lead to the assumption that the data model has
 
 For example, using an incorrect node label in a test may lead you to believe that the data doesn't exist in the graph.
 
-At this point, you can also start considering the scalability of your graph and how performant it would be if you write the same queries in a graph with millions of nodes and relationships.
+At this point, you can also start considering the scalability of your graph and link:{docs-home}/cypher-manual/current/planning-and-tuning/[how performant] it would be if you write the same queries in a graph with millions of nodes and relationships.
 
 == Refactoring
 
