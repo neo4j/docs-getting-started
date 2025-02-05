@@ -233,7 +233,7 @@ The `Movie` node property `tmdbID` is a good example of a unique identifier, as 
 
 [TIP]
 ====
-You can enforce unique identifiers by using uniqueness constrains.
+It is strongly suggested that you enforce unique identifiers by using uniqueness constrains.
 Read more about this topic in link:{docs-home}/cypher-manual/current/constraints/managing-constraints/#create-property-uniqueness-constraints[Cypher -> Create property uniqueness constraints].
 ====
 
