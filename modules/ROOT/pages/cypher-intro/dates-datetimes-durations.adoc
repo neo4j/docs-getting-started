@@ -243,7 +243,7 @@ However, that query results in the following output: _no changes, no records_.
 
 If we want to compare durations we need to do that comparison by adding those durations to dates.
 We don’t really care about dates for our query so we’ll just use the current time to work around this issue.
-We can get the current time by calling the datetime() function.
+We can get the current time by calling the link:{neo4j-docs-base-uri}/cypher-manual/current/functions/temporal/#functions-datetime[`datetime()` function].
 
 Our updated query reads like this:
 
