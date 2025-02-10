@@ -16,7 +16,7 @@ This tutorial is a follow-up to xref:data-modeling/tutorial-data-modeling.adoc[T
 You need the data model created there before proceeding.
 
 Optionally, you can also create it from scratch now.
-Choose your preferred link:{docs-home}/deployment-options[deployment method] and use this code to add the model to the graph:
+Choose your preferred link:{docs-home}/deployment-options[deployment method] and use this code to add the data:
 
 [source,cypher]
 --
@@ -52,7 +52,7 @@ Suppose that you want to know what movies are available in a particular language
 To answer that question, you need to first add this information to the graph the same way you did when adding information about users in the xref:data-modeling/tutorial-data-modeling.adoc[Tutorial: Create a graph data model].
 However, adding new data poses the risk of duplication, which, in turn, affects the xref:#check-the-graph-performance[performance of your graph].
 
-To illustrate this situation, add the new property `languages` to the 'Movie' nodes and their correspondent entries:
+To illustrate this situation, add the new property `languages` to the 'Movie' nodes and its corresponding values:
 
 [source,cypher]
 --
@@ -93,7 +93,7 @@ This query retrieves all `Movie` nodes and then test whether the `languages` pro
 This isn't wrong, but as the graph scales, you may encounter two issues:
 
 * *In order to perform the query, all `Movie` nodes must be retrieved* -> As the graph scales, the performance of such queries is diminished by modelling your data this way.
-* *The name of the language is duplicated in many `Movie` nodes (in this case, all of them)* -> If many nodes share a same property value, it could be a sign that this property value could instead become a new entity, like a node or a relationship, for example.
+* *The same property value of the `language` property is duplicated across many `Movie` nodes (in this case, all of them)* -> If many nodes share a same property value, it is a sign that this property value can be made into a new entity, like a node or a relationship, for example.
 
 The solution for these issues is to refactor the property `languages` into a node and connect it to the `Movie` nodes with a new relationship.
 
@@ -143,13 +143,6 @@ Your graph should now look like this:
 
 image::language-nodes.svg[Refactored graph with new language nodes for English, Italian, and Latin connected to their respective movie nodes through an in language relationship, role=popup]
 
-What the code previously listed does is:
-
-* Use the `UNWIND` clause to separate each element of the `languages` property list into a separate row value that is processed later in the query.
-* Iterate through all `Movie` nodes and create a `Language` node for each language it finds.
-* Create the relationship between the `Movie` nodes and `Language` nodes using the `IN_LANGUAGE` relationship.
-* Remove the `languages` property from all `Movie` nodes.
-
 After this refactoring, you should have only one `Language` node with the value "English" and the equivalent movies connected to it.
 This eliminates a lot of duplication in the graph and improves performance when the graph scales.
 
@@ -158,30 +151,39 @@ This eliminates a lot of duplication in the graph and improves performance when 
 Suppose a new use case has come up that requires information about the producers of each film.
 Part of the data about the producers include their physical address, which is what can be considered complex data.
 
-You could add this information to the graph by creating a `ProductionCompany` node and an `address` property:
+You can add this information to the graph by creating a `ProductionCompany` node and an `address` property:
+
+[source,cypher]
+--
+MERGE (p:ProductionCompany {name:'Imagine Entertainment', country:'US', postalCode:90212, state:'CA', city:'Beverly Hills', address1:'10351 Santa Monica Blvd'})-[:PRODUCED]->(m:Movie {title:'Apollo 13'})
+MERGE (:ProductionCompany {name:'Jersey Films', country:'US', postalCode:90049, state:'CA', city:'Los Angeles', address1:'10351 Santa Monica Blvd'})-[:PRODUCED]->(:Movie {title:'Hoffa'})
+--
 
 image::producers.svg[Graph connecting the movies Apollo 13 and Hoffa to new production company nodes,400,400,role=popup]
 
-However, storing complex data in the nodes like this may not be beneficial for a couple of reasons, including:
+However, storing complex data on nodes this way may not be beneficial for different reasons, including:
 
 * *Duplicate data*: There may exist several production companies in the same location, and the same information is then repeated on multiple nodes.
 ** Example: In the xref:#_answering_remaining_or_new_use_cases[previous step], you refactored the property 'languages' to become a node to avoid having the entry "English" duplicated on all `Movie` nodes.
-* *Overfetching*: Queries related to the information in the nodes require that all nodes be retrieved.
-** Example: If you want to retrieve only what production companies are located in California, the query needs to scan all the properties of the `ProductionCompany` nodes to retrieve that.
+* *Over-fetching*: Queries related to the information on the nodes require that more nodes in a category be retrieved unnecessarily.
+** Example: If you want to return production companies that are located in California, all the properties of the `ProductionCompany` nodes need to be scanned to retrieve the property value `California` from the `state` key.
 Instead, a node for `California` could be a shorter path to this information and you wouldn't need to retrieve more information than what you need.
 
 *The goal in data modeling is to reduce the size of the graph that is touched by a query.*
-If there is a high amount of duplicate data in the nodes or if key questions of your use cases would perform better if all nodes need not be retrieved to get at the complex data, then you might consider refactoring the graph again.
+If the graph contains a large amount of duplicate data or if your queries still over-fetch data, you may need to refactor your model again.
 
-One way to improve your current model is to check for duplicate key values and see if you can turn them into another entity, like a node or a relationship.
+In the current model, you have added more information in the form of a new node label `ProductionCompany` with a number of address properties. 
+The property values contain a lot of duplicate data, which is not desirable.
+To make the model more efficient, check for duplicate key values and see if you can turn them into another entity, like a node or a relationship.
+
 In this case, both production companies are based in California, so the state could be turned into a node for `State` and be connected to the producer companies via a new relationship `LOCATED_AT`:
 
 image::california.svg[The producer company nodes now have one less property for state and connect to a state node for California, role=popup]
 
-With this refactoring, if there are any queries that need to filter production companies by their state, then it will be faster to query based upon the `State.name` value, rather than evaluating all `ProductionCompany` nodes for the `ProductionCompany.state` property.
+After this refactoring, queries that retrieve production companies by their state can now be filtered based on the `State.name` value, rather than evaluating all `ProductionCompany` nodes for the `ProductionCompany.state` property.
 
 How you refactor your graph to handle complex data depends on the performance of the queries when your graph scales.
-The next topic addresses how to measure performance in your graph by testing it.
+The next step is xref:#_performance_check[to measure performance] in your graph by testing it.
 
 == Using specific relationships
 
@@ -192,7 +194,7 @@ The benefits of using them include:
 * Improving query performance.
 
 Suppose that you frequently need to retrieve information about actors in reference to the year 1995.
-You would normally write the query this way:
+The query for that could be:
 
 [source,cypher]
 --
