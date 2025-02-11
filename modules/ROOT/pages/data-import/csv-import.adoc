@@ -22,9 +22,9 @@ Let us see some of the ways Neo4j can read and import CSV files.
 . link:{docs-home}/data-importer/[Neo4j Data Importer]: UI-based tool for importing data into Neo4j, including CSV files.
 . `LOAD CSV` Cypher command: this command is a great starting point and handles small- to medium-sized datasets (up to 10 million records).
 _Works with any setup, including AuraDB._
-. The link:{docs-home}/operations-manual/5/tools/neo4j-admin/[`neo4j-admin database import`] command: command-line tool useful for straightforward loading of large datasets.
+. The link:{docs-home}/operations-manual/current/tools/neo4j-admin/neo4j-admin-import/[`neo4j-admin database import`] command: the most efficient way for importing large CSV files into an empty database (full) or when import cannot be completed in a single full import, by allowing the import to be a series of smaller imports (incremental).
 _Works with Neo4j Desktop, Neo4j EE Docker image and local installations._
-. Neo4j ETL tool: Neo4j Labs project.
+. Neo4j ETL tool (Neo4j Labs project): an interactive tool for the initial import of data from relational database management systems into Neo4j. 
 For more details and documentation, visit link:https://neo4j.com/labs/etl-tool/[Neo4j ETL Tool page].
 . Kettle import tool: maps and executes steps for the data process flow and works well for very large datasets, especially if you are already familiar with using this tool. _Works with any setup, including AuraDB._
 
