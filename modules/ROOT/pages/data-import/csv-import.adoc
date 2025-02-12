@@ -17,7 +17,7 @@ It is a standard file format that humans and systems are already familiar with u
 There are a few different approaches to get CSV data into Neo4j, each with varying criteria and functionality.
 The option you choose depends on the dataset size, as well as your degree of comfort with various tools.
 
-Let us see some of the ways Neo4j can read and import CSV files.
+These are some of the ways Neo4j can read and import CSV files.
 
 . link:{docs-home}/data-importer/[Neo4j Data Importer]: UI-based tool for importing data into Neo4j, including CSV files.
 . link:https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[`LOAD CSV`] Cypher command: use it to import small- to medium-sized datasets (up to 10 million records) from local and remote files, including from cloud URIs.
