@@ -1,42 +1,42 @@
 [[modeling-designs]]
 = Modeling designs
 :tags: graph-modeling, data-model, schema, model-design, modeling-decisions
-:description: In this section, you learn how to represent graph data using a variety of modeling decisions. The way you construct your data model can impact your queries and performance.
+:description: This page features examples of graph data modeling patterns and designs which are commonly used with Neo4j.
 
-[abstract]
-{description}
-Our goal is to show you how to evaluate your model and make appropriate changes, so you can define the best solution for your use case and maximize the performance of your queries.
+This page features examples of graph data modeling patterns and designs which are commonly used with Neo4j.
+The purpose is to get an overview of the options available for building (graphy) data models based and how some known strategies can be adapted to your own project.
 
-// here we can add info on data accessibility. Hierarchy of data accessibility. Defining the data model you should remember about different levels of info accessibility in Neo4j graph database:
-// . Anchor labels/types/properties
-// . Non-anchor relationship types
-// . Non-anchor node labels
-// . Non-anchor properties
-// Also we need to mention the start point in the traversal path: for ex., the start node. It helps to understand why indexes are important, and on what query performance depends.  
-// Knowledge about that helps to improve query performance.
+== Intermediate nodes
 
-[#model-impact]
-== Why the data model makes a difference
+Intermediate nodes are nodes that are needed, but often aren’t identified in the initial data model.
+They are nodes that contain data that needs to be in the graph, but don't seem to fit in the beginning of the modeling process.
 
-As with any database, the data model that you design is important in determining the logic your queries and the structure of data in storage.
-This practice extends to graph databases, with one exception.
-Neo4j is schema-free, which means that your data model can adapt and change easily with your business.
+This kind of situation often occurs when you use a single relationship to connect *more* than two nodes.
+While this is an acceptable strategy in mathematical graphs, which can use hyperedges, it is not supported in Neo4j.
 
-Need to start collecting a new field and capture new analysis?
-Or need to change the way you interpret a customer or other entity and modify its definition?
-Or regulation requires systems to capture less information or restrict readability (change data format/types)?
+One way to identify that you’re dealing with a potential hyperedge is when you want to locate something in a relationship rather than a node. 
+For example, here there is a person who works at a company and there is information about their position:
 
-You may have worked for a company where each area or department defines a domain differently.
-Take, for instance, a generic customer domain.
-To different areas within the business, a customer can be defined as different types of individuals.
-These definitions may also change over time or the company may decide to unify the meaning of a customer across departments.
+image::hyperedge.svg[An example of a hyperedge in which a relationship is connected to two nodes, a feature not available in Neo4j,width=400,role=popup]
 
-If you have worked with other types of databases, you will already be familiar with the development and administrative work that any of these scenarios entail.
-However, Neo4j allows you to effortlessly adjust detailed and broad changes across pieces or the entirety of the graph.
-Whether it is small changes over time or a broad definition that includes a variety of needed information about your entities, the database is able to handle it.
-It is simply up to the developers and architects to determine the structure of the data model and how to define entities for queries.
+In a mathematical graph, you could use the same relationship `WORKED_AT` to connect the `Person` node with both `Position` and `Company` nodes.
+However, in Neo4j, you can't do it.
 
-In the next few paragraphs, we will introduce a few different ways to look at different data sets and show how each impacts queries and performance for traversing graph data.
+Instead, you could either turn the `Position` into a property of the `WORKED_AT` relationship or use an intermediate node between the `Person` and `Company` nodes:
+
+image::refactored-hyperedge.svg[Instead of using one single relationship to both Company and Position nodes, an intermediary Employment node can solve the problem of incompatibility of hyperedges in Neo4j,width=500,role=popup]
+
+In this new graph, instead of saying Patrick works at company Acme, it’s phrased as Patrick having an employment event, which becomes a new node.
+The employment event holds the employment start and end dates, and logically relates to the other three nodes. 
+
+Despite the idea of an employment event being an abstract idea, it provides a good way to link any amount of related additional information.
+
+=== Sharing context
+
+The previous example can be expanded to show more people who have been employees of the Acme company and thus represent a share context between multiple nodes using a common event (employment):
+
+
+
 
 [#property-vs-relationship]
 == Property vs relationship
