@@ -148,6 +148,9 @@ You can add this information to the graph by creating a `ProductionCompany` node
 CREATE (p:ProductionCompany {name:'Imagine Entertainment', country:'US', postalCode:90212, state:'CA', city:'Beverly Hills', address1:'10351 Santa Monica Blvd'})
 MERGE (Apollo13:Movie {title:'Apollo 13'})
 CREATE (p)-[:PRODUCED]->(Apollo13)
+CREATE (jerseyFilms:ProductionCompany {name:'Jersey Films', country:'US', postalCode:90049, state:'CA', city:'Los Angeles', address1:'10351 Santa Monica Blvd'})
+MERGE (hoffa:Movie {title:'Hoffa'})
+CREATE (jerseyFilms)-[:PRODUCED]->(hoffa)
 --
 
 image::producers.svg[Graph connecting the movies Apollo 13 and Hoffa to new production company nodes,400,400,role=popup]
