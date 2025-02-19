@@ -93,6 +93,7 @@ This query retrieves all `Movie` nodes and then test whether the `languages` pro
 This isn't wrong, but as the graph scales, you may encounter two issues:
 
 * *In order to perform the query, all `Movie` nodes must be retrieved* -> As the graph scales, the performance of such queries is diminished by modelling your data this way.
+The alternative to avoid this would be to link:{docs-home}/cypher-manual/current/indexes/search-performance-indexes/managing-indexes/#create-indexes[create an index].
 * *The same property value of the `language` property is duplicated across many `Movie` nodes (in this case, all of them)* -> If many nodes share a same property value, it is a sign that this property value can be made into a new entity, like a node or a relationship, for example.
 
 The solution for these issues is to refactor the property `languages` into a node and connect it to the `Movie` nodes with a new relationship.
@@ -110,34 +111,23 @@ The solution for these issues is to refactor the property `languages` into a nod
 
 == Eliminating duplicated data
 
-In order to refactor the node property `languages` into a node, you need to:
+In order to refactor the node property `languages` into a node, you can use the following query:
 
-. link:{docs-home}/cypher-manual/current/clauses/unwind/[`UNWIND`] the `languages` property from the `Movie` node and turn their entries into new `Language` nodes:
-+
 [source,cypher]
 --
 MATCH (m:Movie)
 WITH m, m.languages AS languages
 UNWIND languages AS language
 MERGE (l:Language {name: language})
---
-
-. Create the `IN_LANGUAGE` relationship to connect the `Movie` nodes to their respective `Language` nodes:
-+
-[source,cypher]
---
-MATCH (m:Movie), (l:Language)
-WHERE l.name IN m.languages
 MERGE (m)-[:IN_LANGUAGE]->(l)
---
-
-. Remove the languages property from the `Movie` node:
-+
-[source,cypher]
---
-MATCH (m:Movie)
 REMOVE m.languages
 --
+
+By breaking down the query, this is what you should be doing:
+
+. link:{docs-home}/cypher-manual/current/clauses/unwind/[`UNWIND`] the `languages` property from the `Movie` node and turn their entries into new `Language` nodes.
+. Create the `IN_LANGUAGE` relationship to connect the `Movie` nodes to their respective `Language` nodes:
+. Remove the languages property from the `Movie` node.
 
 Your graph should now look like this:
 
@@ -155,8 +145,9 @@ You can add this information to the graph by creating a `ProductionCompany` node
 
 [source,cypher]
 --
-MERGE (p:ProductionCompany {name:'Imagine Entertainment', country:'US', postalCode:90212, state:'CA', city:'Beverly Hills', address1:'10351 Santa Monica Blvd'})-[:PRODUCED]->(m:Movie {title:'Apollo 13'})
-MERGE (:ProductionCompany {name:'Jersey Films', country:'US', postalCode:90049, state:'CA', city:'Los Angeles', address1:'10351 Santa Monica Blvd'})-[:PRODUCED]->(:Movie {title:'Hoffa'})
+CREATE (p:ProductionCompany {name:'Imagine Entertainment', country:'US', postalCode:90212, state:'CA', city:'Beverly Hills', address1:'10351 Santa Monica Blvd'})
+MERGE (Apollo13:Movie {title:'Apollo 13'})
+CREATE (p)-[:PRODUCED]->(Apollo13)
 --
 
 image::producers.svg[Graph connecting the movies Apollo 13 and Hoffa to new production company nodes,400,400,role=popup]
@@ -168,6 +159,7 @@ However, storing complex data on nodes this way may not be beneficial for differ
 * *Over-fetching*: Queries related to the information on the nodes require that more nodes in a category be retrieved unnecessarily.
 ** Example: If you want to return production companies that are located in California, all the properties of the `ProductionCompany` nodes need to be scanned to retrieve the property value `California` from the `state` key.
 Instead, a node for `California` could be a shorter path to this information and you wouldn't need to retrieve more information than what you need.
+** Alternatively, you can also link:{docs-home}/cypher-manual/current/indexes/search-performance-indexes/managing-indexes/#create-indexes[create an index].
 
 *The goal in data modeling is to reduce the size of the graph that is touched by a query.*
 If the graph contains a large amount of duplicate data or if your queries still over-fetch data, you may need to refactor your model again.
@@ -182,7 +174,7 @@ image::california.svg[The producer company nodes now have one less property for 
 
 After this refactoring, queries that retrieve production companies by their state can now be filtered based on the `State.name` value, rather than evaluating all `ProductionCompany` nodes for the `ProductionCompany.state` property.
 
-How you refactor your graph to handle complex data depends on the performance of the queries when your graph scales.
+How you refactor your graph to handle complex data depends on the questions you'd like to answer and the performance of the queries when your graph scales.
 The next step is xref:#_performance_check[to measure performance] in your graph by testing it.
 
 == Using specific relationships
@@ -250,8 +242,7 @@ RETURN m
 | How many users rated a movie?
 | [source,cypher]
 --
-MATCH (m:Movie)
-WHERE m.title = 'Apollo 13'
+MATCH (m:Movie {title: 'Apollo 13'})
 RETURN COUNT {(:User)-[:RATED]->(m)} AS `Number of reviewers`
 --
 
