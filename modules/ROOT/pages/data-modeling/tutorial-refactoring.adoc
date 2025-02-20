@@ -50,7 +50,7 @@ MERGE (Clinton)-[:RATED {rating:3}]->(Hoffa)
 Suppose that you want to know what movies are available in a particular language.
 
 To answer that question, you need to first add this information to the graph the same way you did when adding information about users in the xref:data-modeling/tutorial-data-modeling.adoc[Tutorial: Create a graph data model].
-However, adding new data poses the risk of duplication, which, in turn, affects the xref:#check-the-graph-performance[performance of your graph].
+However, adding new data poses the risk of duplication, which, in turn, affects the xref:#_performance_check[performance of your graph].
 
 To illustrate this situation, add the new property `languages` to the 'Movie' nodes and its corresponding values:
 
@@ -158,7 +158,7 @@ image::producers.svg[Graph connecting the movies Apollo 13 and Hoffa to new prod
 However, storing complex data on nodes this way may not be beneficial for different reasons, including:
 
 * *Duplicate data*: There may exist several production companies in the same location, and the same information is then repeated on multiple nodes.
-** Example: In the xref:#_answering_remaining_or_new_use_cases[previous step], you refactored the property 'languages' to become a node to avoid having the entry "English" duplicated on all `Movie` nodes.
+** Example: In the xref:#_eliminating_duplicated_data[previous step], you refactored the property 'languages' to become a node to avoid having the entry "English" duplicated on all `Movie` nodes.
 * *Over-fetching*: Queries related to the information on the nodes require that more nodes in a category be retrieved unnecessarily.
 ** Example: If you want to return production companies that are located in California, all the properties of the `ProductionCompany` nodes need to be scanned to retrieve the property value `California` from the `state` key.
 Instead, a node for `California` could be a shorter path to this information and you wouldn't need to retrieve more information than what you need.
