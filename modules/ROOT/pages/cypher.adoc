@@ -337,7 +337,7 @@ In the link:{docs-home}/cypher-manual[Cypher manual], you can find more informat
 In case you have a background in SQL and are new to graph databases, these are some resources for more information on the key differences and the transition to graphs:
 
 * link:{docs-home}/cypher-manual/current/introduction/cypher-overview/#_cypher_and_sql_key_differences[Key differences between Cypher and SQL]
-* xref:appendix/graphdb-vs-rdbms[Transition from relational to graph database]
+* xref:appendix/graphdb-concepts/graphdb-vs-rdbms[Transition from relational to graph database]
 * xref:cypher-intro/cypher-sql.adoc[Reference: Comparing Cypher with SQL]
 * xref:data-import/relational-to-graph-import.adoc[How-to: Import from RDBMS into graph]
 * xref:appendix/tutorials/guide-import-relational-and-etl.adoc[Tutorial: Import data from a relational database into Neo4j]
