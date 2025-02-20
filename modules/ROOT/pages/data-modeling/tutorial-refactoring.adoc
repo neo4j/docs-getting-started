@@ -1,0 +1,349 @@
+= Tutorial: Refactor a graph data model
+:description: This tutorial teaches you how to refactor your graph data model.
+
+Refactoring is the process of changing the data model and the graph.
+The main reasons why you would need to refactor a data model include:
+
+* The graph as modeled does not cover all of the use cases.
+* A new use case has come up.
+* The Cypher for the use cases does not perform optimally, especially when the graph scales.
+
+In order to address these demands, this tutorial guides you through the design, implementation, and testing of a refactored data model with updated Cypher.
+
+==== Pre-requisites
+
+This tutorial is a follow-up to xref:data-modeling/tutorial-data-modeling.adoc[Tutorial: Create a graph data model].
+You need the data model created there before proceeding.
+
+Optionally, you can also create it from scratch now.
+Choose your preferred link:{docs-home}/deployment-options[deployment method] and use this code to add the data:
+
+[source,cypher]
+--
+CREATE (Apollo13:Movie {title: 'Apollo 13', tmdbID: 568, released: '1995-06-30', imdbRating: 7.6, genres: ['Drama', 'Adventure', 'IMAX']})
+CREATE (TomH:Person {name: 'Tom Hanks', tmdbID: 31, born: '1956-07-09'})
+CREATE (MegR:Person {name: 'Meg Ryan', tmdbID: 5344, born: '1961-11-19'})
+CREATE (DannyD:Person {name: 'Danny DeVito', tmdbID: 518, born: '1944-11-17'})
+CREATE (JackN:Person {name: 'Jack Nicholson', tmdbID: 514, born: '1937-04-22'})
+CREATE (SleeplessInSeattle:Movie {title: 'Sleepless in Seattle', tmdbID: 858, released: '1993-06-25', imdbRating: 6.8, genres: ['Comedy', 'Drama', 'Romance']})
+CREATE (Hoffa:Movie {title: 'Hoffa', tmdbID: 10410, released: '1992-12-25', imdbRating: 6.6, genres: ['Crime', 'Drama']})
+
+MERGE (TomH)-[:ACTED_IN {roles:'Jim Lovell'}]->(Apollo13)
+MERGE (TomH)-[:ACTED_IN {roles:'Sam Baldwin'}]->(SleeplessInSeattle)
+MERGE (MegR)-[:ACTED_IN {roles:'Annie Reed'}]->(SleeplessInSeattle)
+MERGE (DannyD)-[:DIRECTED]->(Hoffa)
+MERGE (DannyD)-[:ACTED_IN {roles:'Robert "Bobby" Ciaro'}]->(Hoffa)
+MERGE (JackN)-[:ACTED_IN {roles:'Hoffa'}]->(Hoffa)
+
+CREATE (Sandy:User {name: 'Sandy Jones', userID: 1})
+CREATE (Clinton:User {name: 'Clinton Spencer', userID: 2})
+
+MERGE (Sandy)-[:RATED {rating:5}]->(Apollo13)
+MERGE (Sandy)-[:RATED {rating:4}]->(SleeplessInSeattle)
+MERGE (Clinton)-[:RATED {rating:3}]->(Apollo13)
+MERGE (Clinton)-[:RATED {rating:3}]->(SleeplessInSeattle)
+MERGE (Clinton)-[:RATED {rating:3}]->(Hoffa)
+--
+
+== Remaining or new use cases
+
+Suppose that you want to know what movies are available in a particular language.
+
+To answer that question, you need to first add this information to the graph the same way you did when adding information about users in the xref:data-modeling/tutorial-data-modeling.adoc[Tutorial: Create a graph data model].
+However, adding new data poses the risk of duplication, which, in turn, affects the xref:#check-the-graph-performance[performance of your graph].
+
+To illustrate this situation, add the new property `languages` to the 'Movie' nodes and its corresponding values:
+
+[source,cypher]
+--
+MATCH (Apollo13:Movie {title:'Apollo 13'})
+MATCH (SleeplessInSeattle:Movie {title:'Sleepless in Seattle'})
+MATCH (Hoffa:Movie {title:'Hoffa'})
+SET Apollo13.languages = ['English']
+SET SleeplessInSeattle.languages = ['English']
+SET Hoffa.languages = ['English', 'Italian', 'Latin']
+--
+
+Your updated graph should look like this:
+
+image::movie-languages.svg[Graph with person and movie nodes connected through acted in and directed relationships, now with added property for movie languages, 500, 500, role=popup]
+
+If you want to retrieve all movies in English, execute this query:
+
+[source,cypher]
+--
+MATCH (m:Movie)
+WHERE 'English' IN m.languages
+RETURN m.title
+--
+
+The result for this query answers the question and returns the movies "Apollo 13", "Sleepless in Seattle", and "Hoffa":
+
+.Result
+[role="queryresult",options="header",cols="1"]
+|===
+| m.title 
+
+| "Apollo 13"
+| "Sleepless in Seattle"
+| "Hoffa"
+|===
+
+This query retrieves all `Movie` nodes and then test whether the `languages` property contains the value `English`.
+This isn't wrong, but as the graph scales, you may encounter two issues:
+
+* *In order to perform the query, all `Movie` nodes must be retrieved* -> As the graph scales, the performance of such queries is diminished by modelling your data this way.
+The alternative to avoid this would be to link:{docs-home}/cypher-manual/current/indexes/search-performance-indexes/managing-indexes/#create-indexes[create an index].
+* *The same property value of the `language` property is duplicated across many `Movie` nodes (in this case, all of them)* -> If many nodes share a same property value, it is a sign that this property value can be made into a new entity, like a node or a relationship, for example.
+
+The solution for these issues is to refactor the property `languages` into a node and connect it to the `Movie` nodes with a new relationship.
+
+[options=header,cols="1a,1a"]
+|===
+
+|Now
+|Refactored
+
+|image::language-before.svg[Movie node with a language property]
+|image::language-after.svg[Movie node connected to a language node via an in language property.]
+
+|===
+
+== Eliminating duplicated data
+
+In order to refactor the node property `languages` into a node, you can use the following query:
+
+[source,cypher]
+--
+MATCH (m:Movie)
+WITH m, m.languages AS languages
+UNWIND languages AS language
+MERGE (l:Language {name: language})
+MERGE (m)-[:IN_LANGUAGE]->(l)
+REMOVE m.languages
+--
+
+By breaking down the query, this is what you should be doing:
+
+. link:{docs-home}/cypher-manual/current/clauses/unwind/[`UNWIND`] the `languages` property from the `Movie` node and turn their entries into new `Language` nodes.
+. Create the `IN_LANGUAGE` relationship to connect the `Movie` nodes to their respective `Language` nodes:
+. Remove the languages property from the `Movie` node.
+
+Your graph should now look like this:
+
+image::language-nodes.svg[Refactored graph with new language nodes for English, Italian, and Latin connected to their respective movie nodes through an in language relationship, role=popup]
+
+After this refactoring, you should have only one `Language` node with the value "English" and the equivalent movies connected to it.
+This eliminates a lot of duplication in the graph and improves performance when the graph scales.
+
+== Dealing with complex data
+
+Suppose a new use case has come up that requires information about the producers of each film.
+Part of the data about the producers include their physical address, which is what can be considered complex data.
+
+You can add this information to the graph by creating a `ProductionCompany` node and an `address` property:
+
+[source,cypher]
+--
+CREATE (p:ProductionCompany {name:'Imagine Entertainment', country:'US', postalCode:90212, state:'CA', city:'Beverly Hills', address1:'10351 Santa Monica Blvd'})
+MERGE (Apollo13:Movie {title:'Apollo 13'})
+CREATE (p)-[:PRODUCED]->(Apollo13)
+CREATE (jerseyFilms:ProductionCompany {name:'Jersey Films', country:'US', postalCode:90049, state:'CA', city:'Los Angeles', address1:'10351 Santa Monica Blvd'})
+MERGE (hoffa:Movie {title:'Hoffa'})
+CREATE (jerseyFilms)-[:PRODUCED]->(hoffa)
+--
+
+image::producers.svg[Graph connecting the movies Apollo 13 and Hoffa to new production company nodes,400,400,role=popup]
+
+However, storing complex data on nodes this way may not be beneficial for different reasons, including:
+
+* *Duplicate data*: There may exist several production companies in the same location, and the same information is then repeated on multiple nodes.
+** Example: In the xref:#_answering_remaining_or_new_use_cases[previous step], you refactored the property 'languages' to become a node to avoid having the entry "English" duplicated on all `Movie` nodes.
+* *Over-fetching*: Queries related to the information on the nodes require that more nodes in a category be retrieved unnecessarily.
+** Example: If you want to return production companies that are located in California, all the properties of the `ProductionCompany` nodes need to be scanned to retrieve the property value `California` from the `state` key.
+Instead, a node for `California` could be a shorter path to this information and you wouldn't need to retrieve more information than what you need.
+** Alternatively, you can also link:{docs-home}/cypher-manual/current/indexes/search-performance-indexes/managing-indexes/#create-indexes[create an index].
+
+*The goal in data modeling is to reduce the size of the graph that is touched by a query.*
+If the graph contains a large amount of duplicate data or if your queries still over-fetch data, you may need to refactor your model again.
+
+In the current model, you have added more information in the form of a new node label `ProductionCompany` with a number of address properties. 
+The property values contain a lot of duplicate data, which is not desirable.
+To make the model more efficient, check for duplicate key values and see if you can turn them into another entity, like a node or a relationship.
+
+In this case, both production companies are based in California, so the state could be turned into a node for `State` and be connected to the producer companies via a new relationship `LOCATED_AT`:
+
+image::california.svg[The producer company nodes now have one less property for state and connect to a state node for California, role=popup]
+
+After this refactoring, queries that retrieve production companies by their state can now be filtered based on the `State.name` value, rather than evaluating all `ProductionCompany` nodes for the `ProductionCompany.state` property.
+
+How you refactor your graph to handle complex data depends on the questions you'd like to answer and the performance of the queries when your graph scales.
+The next step is xref:#_performance_check[to measure performance] in your graph by testing it.
+
+== Using specific relationships
+
+Specific relationships are a refactor strategy that you can use when your project has a recurrent use case that needs a certain piece of information to be constantly retrieved.
+The benefits of using them include:
+
+* Reducing the number of nodes that need to be retrieved.
+* Improving query performance.
+
+Suppose that you frequently need to retrieve information about actors in reference to the year 1995.
+The query for that could be:
+
+[source,cypher]
+--
+MATCH (p:Person)-[:ACTED_IN]-(m:Movie)
+WHERE p.name = 'Tom Hanks' AND m.released STARTS WITH '1995'
+RETURN DISTINCT m.title AS Movie
+--
+
+But if you create a specific relationship, for example, `ACTED_IN_1995`, when you query for this same information, you will write the code like this instead:
+
+[source,cypher]
+--
+MATCH (p:Person)-[:ACTED_IN_1995]-(m:Movie)
+WHERE p.name = 'Tom Hanks'
+RETURN m.title AS Movie
+--
+
+This way, the query won't need to retrieve all the `Movie` nodes connected to Tom Hanks and read all their `m.released` properties, but only retrieve the title of those that are connected with Tom Hanks by the specific relationship `ACTED_IN_1995`.
+You can therefore avoid overfetching and improve query performance.
+
+== Retest the graph
+
+After you have refactored the graph, you should revisit all queries for your xref:data-modeling/tutorial-data-modeling.adoc#_define_the_use_case[use cases] and determine whether any of them can be rewritten to take advantage of the refactoring.
+Here is a list:
+
+[options=header,cols="1,1a"]
+|===
+
+| Use case
+| Query example
+
+| Which people acted in a movie?
+| [source,cypher]
+--
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie {title:'Hoffa'})
+RETURN p
+--
+
+| Which person directed a movie?
+| [source,cypher]
+--
+MATCH (p:Person)-[:DIRECTED]->(m:Movie {title:'Hoffa'})
+RETURN p
+--
+
+| Which movies did a person act in?
+| [source,cypher]
+--
+MATCH (p:Person {name:'Tom Hanks'})-[:ACTED_IN]->(m:Movie)
+RETURN m
+--
+
+| How many users rated a movie?
+| [source,cypher]
+--
+MATCH (m:Movie {title: 'Apollo 13'})
+RETURN COUNT {(:User)-[:RATED]->(m)} AS `Number of reviewers`
+--
+
+| Who was the youngest person to act in a movie?
+| [source,cypher]
+--
+MATCH (p:Person)-[:ACTED_IN]-(m:Movie)
+WHERE m.title = 'Hoffa'
+RETURN  p.name AS Actor, p.born as `Year Born` ORDER BY p.born DESC LIMIT 1
+--
+
+| Which role did a person play in a movie?
+| [source,cypher]
+--
+MATCH (p:Person {name:'Tom Hanks'})-[a:ACTED_IN]->(m:Movie {title: 'Apollo 13'})
+RETURN a.roles
+--
+
+| Which is the highest rated movie in a particular year according to imDB?
+| [source,cypher]
+--
+MATCH (m:Movie)
+WHERE m.released STARTS WITH '1995'
+RETURN  m.title as Movie, m.imdbRating as Rating ORDER BY m.imdbRating DESC LIMIT 1
+--
+
+| Which drama movies did an actor act in?
+| [source,cypher]
+--
+MATCH (p:Person)-[:ACTED_IN]-(m:Movie)
+WHERE p.name = 'Tom Hanks' AND
+'Drama' IN m.genres
+RETURN m.title AS Movie
+--
+
+| Which users gave a movie a rating of 5?
+| [source,cypher]
+--
+MATCH (u:User)-[r:RATED]-(m:Movie)
+WHERE m.title = 'Apollo 13' AND
+r.rating = 5
+RETURN u.name as Reviewer
+--
+
+| Which movies are in English?
+| [source,cypher]
+--
+MATCH (m:Movie)
+WHERE m.languages = 'English'
+RETURN m.title as Movie in English
+--
+
+|===
+
+With this considered, you should now determine if any of the queries need to be rewritten to take advantage of the refactoring and rewrite them when applicable.
+For example, for the use case "Which movies are in English?":
+
+[options=header,cols="1a,1a"]
+|===
+
+| Old query
+| Query after refactoring
+
+| [source,cypher]
+--
+MATCH (m:Movie)
+WHERE m.languages = 'English'
+RETURN m.title as Movie in English
+--
+| [source,cypher]
+--
+MATCH (m:Movie)-[:IN_LANGUAGE]->(l:Language)
+WHERE l.name = 'English'
+RETURN m.title as Movie in English
+--
+|===
+
+=== Performance check
+
+When testing on a real application and, especially with a fully-scaled graph, you can also profile the new queries to see if it improves performance. 
+On a small instance model such as the example in this tutorial, you will not see significant improvements, but you may see differences in the number of rows retrieved.
+
+As an example, if you want to see the number of database hits for a query to retrieve all `Person` nodes, you need to add the clause link:{docs-home}/cypher-manual/current/planning-and-tuning/#profile-and-explain[`PROFILE`] before it:
+
+[source,cypher]
+--
+PROFILE MATCH (n:Person)
+RETURN n
+--
+
+This should be the result:
+
+image::query-plan.svg[Screenshot of Neo4j Aura featuring a query plan that shows the number of database hits when you retrieve all person nodes,400,400,role=popup]
+
+You can find more detailed information on query tuning and planning at link:{docs-home}/cypher-manual/current/planning-and-tuning/[Cypher manual -> Execution plans and query tuning].
+
+== Keep learning
+
+Most of the refactoring that you can keep doing on your model is about repurposing or adding more information to your graph.
+
+You can see more examples on how to split the node `Person` into `Actor` and `Director` nodes, how to turn the `Movie` node property `genre` into nodes, and other refactoring strategies by following the interactive course link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/[Graph Data Modeling Fundamentals] on GraphAcademy.
