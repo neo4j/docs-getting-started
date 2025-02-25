@@ -1,4 +1,5 @@
 = Tutorial: Refactor a graph data model
+:page-aliases: data-modeling/graph-model-refactoring.adoc
 :description: This tutorial teaches you how to refactor your graph data model.
 
 Refactoring is the process of changing the data model and the graph.

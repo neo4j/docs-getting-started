@@ -1,4 +1,5 @@
 = Tutorial: Create a graph data model
+:page-aliases: data-modeling/guide-data-modeling.adoc
 :tags: graph-modeling, data-model, schema, model-process, model-domain, tutorial
 :description: This tutorial is designed to help you understand how data modeling works through an example use case.
 
