@@ -10,7 +10,7 @@ The main reasons why you would need to refactor a data model include:
 
 In order to address these demands, this tutorial guides you through the design, implementation, and testing of a refactored data model with updated Cypher.
 
-==== Pre-requisites
+== Pre-requisites
 
 This tutorial is a follow-up to xref:data-modeling/tutorial-data-modeling.adoc[Tutorial: Create a graph data model].
 You need the data model created there before proceeding.
