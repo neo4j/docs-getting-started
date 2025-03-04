@@ -123,3 +123,9 @@ GraphAcademy courses
 * link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/[Graph data modeling fundamentals]
 * link:https://graphacademy.neo4j.com/courses/gds-product-introduction/[Introduction to Graph Data Science]
 --
+
+[.next-steps]
+== Licenses and disclaimers
+
+[.link]
+* link:{docs-home}/license[Licenses and disclaimers]
