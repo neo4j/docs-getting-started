@@ -26,3 +26,6 @@
 [[indexed]]indexed:: Data structure that improves read performance of a database. link:https://neo4j.com/docs/cypher-manual/current/indexes/[Read more about supported categories of indexes].
 
 [[constraints]]constraints:: Constraints are sets of data modeling rules that ensure the data is consistent and reliable. link:https://neo4j.com/docs/cypher-manual/current/constraints/[See what constraints are available in Cypher].
+
+[[data-model]]data model:: A data model defines how information is organized in a database. A good data model will make querying and understanding your data easier. In Neo4j, the data models have a graph structure.
+[[data-models]]data models:: A data model defines how information is organized in a database. A good data model will make querying and understanding your data easier. In Neo4j, the data models have a graph structure.
