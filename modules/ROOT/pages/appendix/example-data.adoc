@@ -188,7 +188,7 @@ There are several ways to load them, depending on the environment that is being 
 * link:{docs-home}/operations-manual/current/docker/dump-load/[Docker]
 * link:{docs-home}/operations-manual/current/backup-restore/restore-dump/[Neo4j Admin]
 
-You can also refer to the link:{docs-home}import/[Importing your data] section to learn more ways to load a dataset to your instance, including other supported file formats.
+You can also refer to the link:{docs-home}/import/[Importing your data] section to learn more ways to load a dataset to your instance, including other supported file formats.
 
 [IMPORTANT]
 ====
