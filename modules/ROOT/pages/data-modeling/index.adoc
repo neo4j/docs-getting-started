@@ -47,7 +47,7 @@ Keep in mind that graph data modeling is an iterative process.
 Your initial graph data model is only a starting point. 
 As you learn more about your use cases or if they change, the model needs to adapt.
 
-Additionally, you may find that, especially when the graph scales, you need to xref:data-modeling/graph-model-refactoring.adoc[refactor] your model to ensure it is aligned with your business needs as they evolve.
+Additionally, you may find that, especially when the graph scales, you need to xref:data-modeling/tutorial-refactoring.adoc[refactor] your model to ensure it is aligned with your business needs as they evolve.
 
 In summary, the process of creating a data model includes the following:
 

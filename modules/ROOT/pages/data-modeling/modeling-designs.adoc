@@ -6,46 +6,6 @@
 This page features examples of graph data modeling patterns and designs that are commonly used with Neo4j.
 The purpose is to get an overview of the options available for building graph data models and how known strategies can be adapted to your project.
 
-== Multiple structures
-
-You can combine multiple graph structures to create a data model.
-Take this example:
-
-image::multiple-structures.svg[Example graph using multiple structures to create a data model with timeline tree and employment events,width=600,role=popup]
-
-This graph features:
-
-* A xref:#_timeline_tree[timeline tree] which is divided into years and months subsequently at the top.
-* Employment events are represented as `Employment` nodes, which are connected to the timeline and show the starting and the ending months.
-* The `Employment` nodes are xref:#_intermediate_nodes[intermediate nodes] that connect people, companies, and job roles. 
-In this case, the intermediate nodes are serving the dual purpose of reducing the density of `Person` nodes, and providing an attachment point for the timeline tree.
-* Employment events that are organized into xref:#_linked_list[linked lists] for each person and represent a sequence of events in an individual’s career.
-The graph shows overlaps in people's employment history.
-
-The example shows how different structures can be combined into one graph, and how different types of questions can be answered by one single graph if you use the correct design, depending on the question.
-It also shows the many ways nodes and structures can span out.
-
-=== Monopartite
-
-image::monopartite.svg[Example of monopartite graph structure,width=300,role=popup]
-
-A monopartite graph structure consists of a single set of nodes with a single label.
-Most algorithms rely on this type of graph and they are very common when using spanning trees, link:{docs-home}/cypher-manual/current/patterns/shortest-paths/[shortest paths], and link:{docs-home}/graph-data-science/current/algorithms/community/[community detection].
-
-=== Bipartite
-
-Bipartite structures contain nodes that can be divided into two sets, such that relationships only exist between sets but not within each set.
-link:{docs-home}/graph-data-science/current/algorithms/node-similarity/[Node similarity algorithms] rely on this type of graph.
-
-image::bipartite.svg[Example of bipartite graph structure,width=300,role=popup]
-
-=== Multipartite
-
-Multipartite structures contain multiple independent sets of nodes with many labels.
-Real-world graph analysis often deals with multipartite networks.
-
-image::multipartite.svg[Example of a multipartite structure featuring multiple independent sets of nodes, labels, and different relationships,width=600,role=popup]
-
 == Intermediate nodes
 
 Intermediate nodes are often not identified in the initial data model, but added during refactoring to improve performance of your graph.
@@ -56,7 +16,7 @@ This type of relationship is called a *hyperedge* and these are used in mathemat
 However, hyperedges are *not* supported in Neo4j and can instead be refactored into *intermediate nodes*.
 
 One way to identify that you’re dealing with a potential hyperedge is when you want to contain information in a relationship rather than a node. 
-For example, here there is a person who works at a company and there is information about their role:
+For example, consider a person who works at a company and you need to convey information about their role:
 
 image::hyperedge.svg[An example of a hyperedge in which a relationship is connected to two nodes, a feature not available in Neo4j,width=400,role=popup]
 
@@ -103,14 +63,14 @@ image::sarah-emailed.svg[Graph showing how a user named Sarah emailed several ot
 
 If every `EMAILED` relationship included a property with the content of the message, two problems can arise:
 
-* *Sarah’s node is becoming very dense*: For every recipient of a message she writes, she gains another relationship.
-* *It's expensive to retrieve the content of the email*: With the data modeled like this, it's very expensive to determine who in Sarah’s recipient network has received a given message.
+* *Sarah’s node is becoming very dense*: For every recipient of a message she adds, her node gains another relationship.
+* *It's expensive to retrieve the content of the email*: With the data modeled like this, it's very expensive to determine who in Sarah’s recipient network has received a given message by searching for the content in multiple 'EMAILED' relationships.
 
 By adding intermediate nodes to represent each email message, Sarah's node has only one relationship per email message, regardless of the number of recipients:
 
 image::sarah-emailed-intermediate.svg[Updated graph with intemediate nodes for emails sent by Sarah to several other users,width=300,role=popup]
 
-With this model, you can find the recepients by locating the specific `Email` node that now contains the content of the message and see which users are connected to it via `RECEIVED` and `TO` relationships.
+With this model, you can find the recepients by locating the specific `Email` node that now contains the content of the message in the `content` property, and then see which users are connected to it via `TO` relationships.
 
 While both models use a gather-and-inspect approach, the scope of the problem is reduced significantly after the refactoring.
 In the first iteration, if you want to see who received a certain email, you need to find all users connected to Sarah via the `EMAILED` relationship.
@@ -162,7 +122,7 @@ When working with linked lists, there is often a “parent” node that is used 
 The parent almost always points to the first item in the sequence, using an appropriately named relationship. 
 Sometimes, another relationship points to the last item in a list.
 
-In this example, you can see a first and a last relationship that stresses which are the first and the last episodes:
+In this example, you can see a `FIRST` and a `LAST` relationship, referring to their places in the sequence:
 
 image::head-tail-list.svg[List of five Dr Who episodes from season twelve, showing the first and the last through a relationship with the season node,width=700,role=popup]
 
@@ -176,11 +136,13 @@ When the `NEXT` episode ("The Sontaran Experiment") airs, the relationship is up
 
 == Timeline tree
 
-Timeline trees are useful when your queries are time related.
-This can be done by using an anchor, a navigational aid when querying, or when there are periods of time that are of interest relative to a query.
+Timeline trees are useful when your queries are time-related.
+To create a timeline tree, you can use an anchor, which is a navigational aid that you add when querying or when there are periods of time that are of interest relative to a query.
+Anchors can be a starting/parent node or an entity that you can use as a reference point (e.g. a date).
 
-The division and length of the time periods are set based on the context of the question.
-Also known as the "all time node", the topmost node in the timeline tree spans the entire timeline and then splits into whatever time period is relevant.
+The division and length of the time periods are set based on the context of the question you need to answer.
+On the top of the timeline tree is the "all time node" that represents the entire timeline.
+The timeline is then divided into relevant time periods, represented by the nodes below the all time node.
 
 This example features subdivisions for each branch in years, months, and days, and how they connect to `Purchase` nodes:
 
@@ -190,17 +152,9 @@ This timeline tree structure shows how otherwise expensive queries can be answer
 For instance, if you want to find all purchases that happened at a given time period, such as every purchase in the month of December 2012, you only need to:
 
 . Navigate from the 2012 `Year` node to December (`Month` node with the property value "12").
-. Fetch everything from the connected leaf nodes under that branch.
+. Fetch everything from the connected leaf nodes (that is, nodes with no descendants) under that branch.
 
-If you were, instead, dealing with time as a navigator, but not as the anchor, and you wanted to answer the same question, you would need to:
-
-. Start by finding the event of a specific purchase.
-. Find all other purchases within a year.
-. Start a leaf node for the original purchase.
-. Traverse into the timeline tree, going up to the year of interest.
-. Go back down the tree, fetching all relevant data while descending it. 
-
-Without a timeline tree in the graph, a same question could require a great deal of property lookups and a lot of inefficient gather-and-inspect.
+If you were, instead, working with a data model with no timeline tree, this same question could require a great deal of property lookups and a lot of inefficient gather-and-inspect.
 
 == Time-bound data
 
@@ -212,17 +166,58 @@ A common example is modeling airline flights:
 image::airport.svg[Example graph connecting airport nodes through a flying to relationship,width=500,role=popup]
 
 This could be a first iteration showing what flights happen between airports.
-Now, suppose you want to know about an airline in particular and how many flights it performed during a specific date.
-This particular model is not very efficient as you would need to scan for this information through all properties of the `FLYING_TO` relationship and, in reality, airports perform multiple flights from several airlines everyday.
+Now, suppose you want to know about a particular airline and how many flights it had on a specific date.
+The described model is not very efficient as you would need to scan all properties of the `FLYING_TO` relationship and, in reality, airports have multiple flights operated by many different airlines everyday.
 
 So instead of performing an expensive query, you could refactor the graph and add xref:#_intermediate_nodes[intermediate nodes].
 In this case, you can create an intermediate node `Flight` between the `Airport` nodes, and another one, `AirportDay`, between the `Airport` and `Flight` nodes:
 
 image::flight.svg[Refactored graph with intermediate nodes,width=600,role=popup]
 
-With this xref:data-modeling/graph-model-refactoring.adoc[refactored design], you can look only at the relationships for dates you care about and then scan for the relevant airline through the `airline` property in the `Flight` node.
+With this xref:data-modeling/tutorial-refactoring.adoc[refactored design], you can look only at the relationships for dates you care about and then scan for the relevant airline through the `airline` property in the `Flight` node.
 
 This is an improvement, but the model is still not optimal and should be iterated on.
 When changes are done to your model, it is important to keep track of them by versioning your model.
 
 // Content on versioning is WIP.
+
+
+== Multiple structures
+
+You can combine multiple graph structures to create a data model.
+Take this example:
+
+image::multiple-structures.svg[Example graph using multiple structures to create a data model with timeline tree and employment events,width=600,role=popup]
+
+This graph features:
+
+* A xref:#_timeline_tree[timeline tree] which is divided into years and months subsequently at the top.
+* Employment events are represented as `Employment` nodes, which are connected to the timeline and show the starting and the ending months.
+* The `Employment` nodes are xref:#_intermediate_nodes[intermediate nodes] that connect people, companies, and job roles. 
+In this case, the intermediate nodes are serving the dual purpose of reducing the density of `Person` nodes, and providing an attachment point for the timeline tree.
+* Employment events that are organized into xref:#_linked_list[linked lists] for each person and represent a sequence of events in an individual’s career.
+The graph shows overlaps in people's employment history.
+
+The example shows how different structures can be combined into one graph, and how different types of questions can be answered by one single graph if the modeling is done efficiently.
+It also shows the many ways nodes and structures can span out.
+
+=== Monopartite
+
+image::monopartite.svg[Example of monopartite graph structure,width=300,role=popup]
+
+A monopartite graph structure consists of a single set of nodes with a single label.
+Most algorithms rely on this type of graph and they are very common when using spanning trees, link:{docs-home}/graph-data-science/current/algorithms/page-rank/[PageRank], link:{docs-home}/graph-data-science/current/algorithms/eigenvector-centrality/[Eigenvector], and link:{docs-home}/graph-data-science/current/algorithms/community/[community detection].
+
+=== Bipartite
+
+Bipartite structures contain nodes that can be divided into two sets, such that relationships only exist between sets but not within each set.
+link:{docs-home}/graph-data-science/current/algorithms/node-similarity/[Node similarity algorithms] rely on this type of graph.
+
+image::bipartite.svg[Example of bipartite graph structure,width=300,role=popup]
+
+=== Multipartite
+
+Multipartite structures contain multiple independent sets of nodes with many labels.
+Real-world graph analysis often deals with multipartite networks.
+
+image::multipartite.svg[Example of a multipartite structure featuring multiple independent sets of nodes, labels, and different relationships,width=600,role=popup]
