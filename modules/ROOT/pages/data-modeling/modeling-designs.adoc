@@ -4,18 +4,18 @@
 :description: This page features examples of graph data modeling patterns and designs that are commonly used with Neo4j.
 
 This page features examples of graph data modeling patterns and designs that are commonly used with Neo4j.
-The purpose is to get an overview of the options available for building graphy data models and how known strategies can be adapted to your project.
+The purpose is to get an overview of the options available for building graph data models and how known strategies can be adapted to your project.
 
 == Multiple structures
 
-You can combine multiple structures to create a data model.
+You can combine multiple graph structures to create a data model.
 Take this example:
 
 image::multiple-structures.svg[Example graph using multiple structures to create a data model with timeline tree and employment events,width=600,role=popup]
 
 This graph features:
 
-* A xref:#_timeline_tree[timeline tree] which is subdivided into years and months at the top.
+* A xref:#_timeline_tree[timeline tree] which is divided into years and months subsequently at the top.
 * Employment events are represented as `Employment` nodes, which are connected to the timeline and show the starting and the ending months.
 * The `Employment` nodes are xref:#_intermediate_nodes[intermediate nodes] that connect people, companies, and job roles. 
 In this case, the intermediate nodes are serving the dual purpose of reducing the density of `Person` nodes, and providing an attachment point for the timeline tree.
@@ -48,13 +48,14 @@ image::multipartite.svg[Example of a multipartite structure featuring multiple i
 
 == Intermediate nodes
 
-Intermediate nodes are nodes that are needed, but often aren’t identified in the initial data model.
-They are nodes that contain data that needs to be in the graph, but don't seem to fit in the beginning of the modeling process.
+Intermediate nodes are often not identified in the initial data model, but added during refactoring to improve performance of your graph.
+They are nodes that contain data that needs to be in the graph, but don't seem to fit neatly anywhere in the beginning of the modeling process.
 
-This kind of situation often occurs when you use a single relationship to connect *more* than two nodes.
-While this is an acceptable strategy in mathematical graphs, which can use hyperedges, it is not supported in Neo4j.
+You could solve the problem by using a single relationship to connect *more* than two nodes.
+This type of relationship is called a *hyperedge* and these are used in mathematical graphs.
+However, hyperedges are *not* supported in Neo4j and can instead be refactored into *intermediate nodes*.
 
-One way to identify that you’re dealing with a potential hyperedge is when you want to locate something in a relationship rather than a node. 
+One way to identify that you’re dealing with a potential hyperedge is when you want to contain information in a relationship rather than a node. 
 For example, here there is a person who works at a company and there is information about their role:
 
 image::hyperedge.svg[An example of a hyperedge in which a relationship is connected to two nodes, a feature not available in Neo4j,width=400,role=popup]
@@ -73,20 +74,20 @@ Despite the idea of an employment event being an abstract idea, it provides a go
 
 === Sharing context
 
-In this expanded version of the previous example, a new `Person` node with the name David has been added:
+In this expanded version of the previous example, a new `Person` node with the name David is added:
 
 image::intermediate-nodes-employement-sharing-context-example.svg[Graph showing shared context between employment and company nodes,width=600,role=popup]
 
 In this iteration, the `Person` nodes share context through `Role` and `Company` nodes.
 The `Employment` nodes provide a way to trace details such as a person's career, or the overlap between different individuals at the same `Company`, or those who had the same `Role`.
 
-This modeling design can also answer the question "Who has worked at the same company, at the same time?" as it contains information about when each individual worked at a certain company.
+This modeling design can also answer the question "Who worked at the same company at the same time?" as it contains information about when each individual worked at a certain company.
 The question can be answered with a `MATCH` query that will show that Patrick and David both worked at Acme, being colleagues from 2004 to 2005.
 
 === Sharing data
 
 Intemediate nodes can also add value to a model by providing a way to share data and thus reduce duplicate information.
-By using a fanout, duplication can be reduced as a property (`content`) is split onto its own node (`Email` with the property `content`) instead of being repeated, for example, in this case, in relationships:
+By using a fan-out, duplication can be reduced as a property (`content`) is broken out and made into its own node (`Email` with the property `content`) instead of being repeated, in this case, on every relationship:
 
 image::intermediate-nodes-employement-sharing-example.svg[Example of how to not repeat a same property by turning it into an intermediate node,width=600,role=popup]
 
@@ -95,8 +96,8 @@ Now there are no copies or duplications.
 
 === Organizing data
 
-Intermediate nodes can also help organizing structures.
-In this example, Sarah has sent emailed to several people:
+Intermediate nodes can also help organize structures.
+In this example, Sarah sent the same email message to several people:
 
 image::sarah-emailed.svg[Graph showing how a user named Sarah emailed several other users,width=300,role=popup]
 
@@ -105,32 +106,32 @@ If every `EMAILED` relationship included a property with the content of the mess
 * *Sarah’s node is becoming very dense*: For every recipient of a message she writes, she gains another relationship.
 * *It's expensive to retrieve the content of the email*: With the data modeled like this, it's very expensive to determine who in Sarah’s recipient network has received a given message.
 
-By using intermediate nodes, you can have only one relationship per email, regardless of the number of recipients:
+By adding intermediate nodes to represent each email message, Sarah's node has only one relationship per email message, regardless of the number of recipients:
 
 image::sarah-emailed-intermediate.svg[Updated graph with intemediate nodes for emails sent by Sarah to several other users,width=300,role=popup]
 
 With this model, you can find the recepients by locating the specific `Email` node that now contains the content of the message and see which users are connected to it via `RECEIVED` and `TO` relationships.
 
-While both models use a gather-and-inspect approach, the scope of the problem has been reduced significantly after the refactoring.
-In the first iteration, if you wanted to see who received a certain email, you would need to check all users connected to Sarah via the `EMAILED` relationship.
-In the second iteration, you only need to locate the correct `Email` node that you want to know more about, then traverse from it to all of the connected recipients.
+While both models use a gather-and-inspect approach, the scope of the problem is reduced significantly after the refactoring.
+In the first iteration, if you want to see who received a certain email, you need to find all users connected to Sarah via the `EMAILED` relationship.
+In the second iteration, you only need to locate the correct `Email` node, then traverse from it to all of the connected recipients.
 
-In summary, you're likely to find many uses for intermediate nodes, but you might rarely recognize the need for them at the outset of the data modeling.
-When refactoring and re-imagining the graph, however, they prove to be very useful.
+In summary, you're likely to find many uses for intermediate nodes during refactoring since you rarely recognize the need for them at the outset of the data modeling.
 
 == Linked list
 
 Linked lists are commonly used in computer science and they are particularly useful whenever the sequence of objects matters.
-Despite being a good practice to use verbs when creating a relationship, it is very common in this case to connect sequential items using terms such as "next" and "previous" instead.
+It is good practice to use verbs as relationship types, however, it is very common with linked lists to connect sequential items using terms such as "next" and "previous" instead.
 
-With this strategy, you can have simple- or double-linked lists, but *you should never use a double-linked list in Neo4j*.
+In this data structure, a simple-linked list is where each node links to the next node only, whereas in a double-linked list, each node links both to the next and the previous node.
+Neo4j *does not* support double-linked lists.
 For example:
 
 [cols="<,<",options="header"]
 |===
 
-a| **Correct: simple-linked list**
-a| **Incorrect: double-linked list**
+a| **Supported: simple-linked list**
+a| **Not supported: double-linked list**
 
 a| image::simple-linked-list.svg[Episodes of Dr Who linked in sequence with next relationships,role=popup]
 a| image::double-linked-list.svg[Episodes of Dr Who doubly linked with next and previous relationships, an incorrect modeling design in Neo4j,role=popup]
@@ -138,7 +139,7 @@ a| image::double-linked-list.svg[Episodes of Dr Who doubly linked with next and 
 
 === Interleaved linked list
 
-There are different ways to sequence a list of items.
+A list of items is not always sequential.
 When nodes are connected in a nonlinear fashion, they are referred to as an interleaved linked list.
 
 Interleaved lists are used when you want to sequence a set of list based on context, not necessarily a sequence in time.
@@ -170,12 +171,12 @@ This can be done through a relationship, for example:
 
 image::latest-aired.svg[The latest aired episode is pointed with the help of a latest aired relationship coming from the season node,width=700,role=popup]
 
-The progress pointer here is the `LATESTED_AIRED` relationship and it shows which was the most recently aired episode (i.e. "The Ark in Space").
+The progress pointer here is the `LATEST_AIRED` relationship and it shows which was the most recently aired episode (i.e. "The Ark in Space").
 When the `NEXT` episode ("The Sontaran Experiment") airs, the relationship is updated by deleting the current one and creating a new `LATEST_AIRED` pointer, so that it always points to the current item.
 
 == Timeline tree
 
-Timeline trees are useful whenever you want to use a time period.
+Timeline trees are useful when your queries are time related.
 This can be done by using an anchor, a navigational aid when querying, or when there are periods of time that are of interest relative to a query.
 
 The division and length of the time periods are set based on the context of the question.
@@ -203,8 +204,8 @@ Without a timeline tree in the graph, a same question could require a great deal
 
 == Time-bound data
 
-One way to model time-specific data and relationships is by including data in the relationship type.
-Because Neo4j is optimized specifically for traversing relationships between entities, you can often improve query performance by specifying a date as the relationship type and only traversing particular dated relationships.
+Another way to model time-specific data and relationships is by including data in the relationship type.
+Because Neo4j is optimized for traversing relationships between entities, you can often improve query performance by using a date as the relationship type and only traversing relationships with a particular date.
 
 A common example is modeling airline flights:
 
@@ -214,14 +215,14 @@ This could be a first iteration showing what flights happen between airports.
 Now, suppose you want to know about an airline in particular and how many flights it performed during a specific date.
 This particular model is not very efficient as you would need to scan for this information through all properties of the `FLYING_TO` relationship and, in reality, airports perform multiple flights from several airlines everyday.
 
-So instead of performing an expensive query, you could refactor the graph to add xref:#_intermediate_nodes[intermediate nodes].
+So instead of performing an expensive query, you could refactor the graph and add xref:#_intermediate_nodes[intermediate nodes].
 In this case, you can create an intermediate node `Flight` between the `Airport` nodes, and another one, `AirportDay`, between the `Airport` and `Flight` nodes:
 
 image::flight.svg[Refactored graph with intermediate nodes,width=600,role=popup]
 
-With this xref:data-modeling/graph-model-refactoring.adoc[refactored design], you can look only at the relationships for dates you care about and then scan for the relevant airline through the `Airline` property in the `Flight` node.
+With this xref:data-modeling/graph-model-refactoring.adoc[refactored design], you can look only at the relationships for dates you care about and then scan for the relevant airline through the `airline` property in the `Flight` node.
 
-Despite the improvement, this model is still not the most optimal design, but it is nevertheless an iteration.
-When such changes are performed, it can be important to keep track of them by versioning your model.
+This is an improvement, but the model is still not optimal and should be iterated on.
+When changes are done to your model, it is important to keep track of them by versioning your model.
 
 // Content on versioning is WIP.
