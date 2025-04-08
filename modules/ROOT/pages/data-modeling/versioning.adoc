@@ -194,7 +194,7 @@ RETURN purchase
 
 == Combined approach
 
-Some complex use-cases require the combination of one or more of the previously mentioned modelling techniques since each has advantages and disadvantages.
+Some complex use-cases require the combination of one or more of the previously mentioned modeling techniques since each has advantages and disadvantages.
 
 The right combination is strongly dependent on the specific use-case. 
 Factors such as query times and the frequency of transactions should be considered as well.
