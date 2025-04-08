@@ -1,0 +1,108 @@
+= Versioning
+:description: See what options of graph data model versioning are commonly used in combination with Neo4j.
+
+Every time you xref:data-modeling/graph-model-refactoring.adoc[refactor] your data model, you create new versions of it.
+Tracking changes in the data structure or showing a current and past value can be incredibly important for auditing purposes, trend analysis, etc.
+This page gives an overview of the options available for data model versioning on top of Neo4j.
+
+== Versioning of entities
+
+You can keep track of changes in a data model by versioning relevant entities.
+This strategy is mostly useful when you need to:
+
+* Access the many versions of specific entities (nodes, for instance) in a graph (e.g. different names a same product had throughout time).
+* Retrieve the latest version only (e.g. the current name of a product).
+
+image::versioned-entities.svg[Example of a graph showing different versions of an entity which had its property value changed over time,width=300,role=popup]
+
+This example of entities versioning shows that:
+
+* The entity `Product` is linked to its different versions by an explicit relationship.
+* The entity `Product` is immutable.
+Only the properties that are stored in the different versions (`State` nodes) change.
+* The `LATEST` relationship links the entity `Product` to its most recent version (`State`), which also happens to be version 2 (`V2`).
+
+=== Pros and cons
+
+[cols="<,<",options="header"]
+|===
+| **Pros**
+| **Cons** 
+
+| Simple in terms of modelling, querying and maintenance.
+| Updating nodes requires the deletion of the `LATEST` relationship, and the creation of a new relationship between the entity and its latest version.
+
+| Explicit for end users without any transformation.
+| Can be limited if not using other versioning patterns, as it can be hard to know which version you want to retrieve if it’s not the latest.
+|===
+
+=== Query examples
+
+These are common queries you could make when using the entity versioning strategy:
+
+.Get the name of the version 2 of a `Product` with the id '1'
+[source,cypher]
+--
+MATCH (:Product {id:1})-[:V2]->(s:State)
+RETURN s.name
+--
+
+.Get the name of the latest version of a `Product` with the id '1'
+[source,cypher]
+--
+MATCH (:Product {id:1})-[:LATEST]->(s:State)
+RETURN s.name
+--
+
+== Linked list
+
+A linked list is also a modeling design that can be particularly useful whenever the sequence of objects matters.
+Versioning is a process that uses sequencing to track changes, thus linked lists can be a versioning method too.
+
+Linked lists are particularly useful when you need to know:
+
+* In what order certain changes were made in a data model (e.g. getting the order of transactions executed on a bank account).
+* What are the previous and next elements of a list, based on the relationship between them (e.g. what song is the next on a playlist, or undo an action on a text document).
+
+image::linked-list-versioning.svg[Example graph showing a linked list model design being used for versioning,width=400,role=popup]
+
+This example of a linked list versioning shows that:
+
+* The entity `Product` is linked to the first element of the sequence, and can be linked to the last one.
+* Similarly to the the xref:#_versioning_of_entities[versioning of entities], the entity `Product` is also immutable here.
+* Each element of the sequence is linked to the next one through a `NEXT` relationship, thus showing a sequence without necessarily numbering versions.
+
+=== Pros and cons
+
+[cols="<,<",options="header"]
+|===
+| **Pros**
+| **Cons** 
+
+| Efficient by using relationships to get the next/previous element.
+| Limited to very specific use cases without using other versioning patterns.
+
+| Simple modeling and maintenance.
+| Difficult to find a specific version which is not the first or the last.
+
+| Explicit for end users.
+|
+|===
+
+=== Query examples
+
+These are common queries you could make when using the linked list versioning strategy:
+
+.Get the next name of the product named “Professional chair”
+[source,cypher]
+--
+MATCH (:State{name: “Professional chair”})-[:NEXT]->(s:State)
+RETURN s.name
+--
+
+.Get the previous name of the product with the id '1'
+[source,cypher]
+--
+MATCH (:Product {id:1})-[:LAST]->(:State)<-[:NEXT]-(s:State)
+RETURN s.name
+--

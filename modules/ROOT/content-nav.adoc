@@ -25,6 +25,7 @@
 ** xref:data-modeling/tutorial-data-modeling.adoc[Create a data model]
 ** xref:data-modeling/tutorial-refactoring.adoc[Refactor your model]
 ** xref:data-modeling/modeling-designs.adoc[]
+** xref:data-modeling/versioning.adoc[]
 ** xref:data-modeling/relational-to-graph-modeling.adoc[]
 ** xref:data-modeling/modeling-tips.adoc[]
 ** xref:data-modeling/data-modeling-tools.adoc[]
