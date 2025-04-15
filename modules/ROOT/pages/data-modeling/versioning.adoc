@@ -2,20 +2,20 @@
 :description: See what options of graph data model versioning are commonly used in combination with Neo4j.
 
 Every time you xref:data-modeling/graph-model-refactoring.adoc[refactor] your data model, you create new versions of it.
-Tracking changes in the data structure or showing a current and past value can be incredibly important for auditing purposes, trend analysis, etc.
+Tracking changes in the data structure or showing a current and past value can be valuable for auditing purposes, trend analysis, etc.
 This page gives an overview of the options available for data model versioning on top of Neo4j.
 
 == Versioning of entities
 
-You can keep track of changes in a data model by versioning relevant entities.
-This strategy is mostly useful when you need to:
+You can keep track of changes in data by versioning relevant entities.
+This strategy is useful when you need to:
 
-* Access the many versions of specific entities (nodes, for instance) in a graph (e.g. different names a same product had throughout time).
+* Access the many versions of specific entities (nodes, for instance) in a graph (e.g. the different names a product has had throughout time).
 * Retrieve the latest version only (e.g. the current name of a product).
 
 image::versioned-entities.svg[Example of a graph showing different versions of an entity which had its property value changed over time,width=300,role=popup]
 
-This example of entities versioning shows that:
+With entities versioning:
 
 * The entity `Product` is linked to its different versions by an explicit relationship.
 * The entity `Product` is immutable.
@@ -29,7 +29,7 @@ Only the properties that are stored in the different versions (`State` nodes) ch
 | **Pros**
 | **Cons** 
 
-| Simple in terms of modelling, querying and maintenance.
+| Simple in terms of modeling, querying, and maintenance.
 | Updating nodes requires the deletion of the `LATEST` relationship, and the creation of a new relationship between the entity and its latest version.
 
 | Explicit for end users without any transformation.
@@ -38,7 +38,7 @@ Only the properties that are stored in the different versions (`State` nodes) ch
 
 === Query examples
 
-These are common queries you could make when using the entity versioning strategy:
+These are examples of common queries that are useful with the entity versioning strategy:
 
 .Get the name of the version 2 of a `Product` with the id '1'
 [source,cypher]
@@ -57,7 +57,7 @@ RETURN s.name
 == Time-based versioning of entities
 
 A variation of the entity versioning is a time-based approach.
-It is especially useful in case you want to get a:
+It is useful when you are interested in:
 
 * *Graph snapshot* by retrieving all valid elements (nodes and relationships) of the graph to a specific point in time (e.g. which products are available on Monday the 12.06.23).
 * *Graph difference* by comparing two graph snashots of different time stamps (e.g. which nodes are added, which are deleted, and which remain the same).
@@ -66,7 +66,7 @@ It is especially useful in case you want to get a:
 
 image::time-based-entities.svg[Example graph of time-based versioning of entities,width=400,role=popup]
 
-This example of a time-based versioning of entities shows that:
+With time-based versioning of entities:
 
 * Each element has dedicated `validFrom`/`validTo` time properties.
 * Nodes can only share a relationship if their validity timespan overlap.
@@ -92,9 +92,9 @@ This example of a time-based versioning of entities shows that:
 
 === Query examples
 
-These are common queries you could make when using the time-based entity versioning strategy:
+These are examples of common queries that are useful with the time-based entity versioning strategy:
 
-.Get the current price of the `Product` rice cooker
+.Get the current price of the `Product` Rice Cooker
 [source,cypher]
 --
 MATCH (p:Product)
@@ -102,7 +102,7 @@ WHERE p.name = “Rice Cooker” AND p.validTo = ∞
 RETURN p.price
 --
 
-.Get the price of the `Product` rice cooker in November
+.Get the price of the `Product` Rice Cooker in November
 [source,cypher]
 --
 MATCH (p:Product)
@@ -121,21 +121,20 @@ RETURN p.name, p.price
 
 == Linked list
 
-A linked list is also a modeling design that can be particularly useful whenever the sequence of objects matters.
-Versioning is a process that uses sequencing to track changes, thus linked lists can be a versioning method too.
+A linked list is another modeling strategy that can be useful when the sequence of objects matters.
 
-Linked lists are particularly useful when you need to know:
+Linked lists are useful when:
 
-* In what order certain changes were made in a data model (e.g. getting the order of transactions executed on a bank account).
+* The order of events is of interest, e.g. getting the order of transactions executed on a bank account.
 * What are the previous and next elements of a list, based on the relationship between them (e.g. what song is the next on a playlist, or undo an action on a text document).
 
 image::linked-list-versioning.svg[Example graph showing a linked list model design being used for versioning,width=400,role=popup]
 
-This example of a linked list versioning shows that:
+With a linked list:
 
 * The entity `Product` is linked to the first element of the sequence, and can be linked to the last one.
 * Similarly to the the xref:#_versioning_of_entities[versioning of entities], the entity `Product` is also immutable here.
-* Each element of the sequence is linked to the next one through a `NEXT` relationship, thus showing a sequence without necessarily numbering versions.
+* Each element of the sequence is linked to the next one through a `NEXT` relationship.
 
 === Pros and cons
 
@@ -174,8 +173,9 @@ RETURN s.name
 
 == Timeline tree
 
-Besides being a xref:data-modeling/modeling-designs.adoc[modeling design] on its own, timeline trees can also be used for versioning,
-In this example, the timeline structure spans from years to days, and the rest of the non-time data nodes are the nodes that contain the important pieces data in the graph:
+As mentioned in xref:data-modeling/modeling-designs.adoc[Modeling designs], the timeline tree is a common modeling design.
+It can be a useful strategy when you want to track change.
+In this example, the timeline structure spans from years to days, and the rest of the non-time data nodes are the nodes that contain the important pieces of data in the graph:
 
 image::timeline-tree.svg[Graph with two different timeslines divided in years, months, and days and what purchases are connected to these dates,width=600,role=popup]
 
@@ -196,7 +196,7 @@ RETURN purchase
 
 Some complex use-cases require the combination of one or more of the previously mentioned modeling techniques since each has advantages and disadvantages.
 
-The right combination is strongly dependent on the specific use-case. 
+The right combination depends on the specific use-case. 
 Factors such as query times and the frequency of transactions should be considered as well.
 
 image::combined-approach.svg[Example graph of a more complex approach to versioning combining timeline tree, versioned entities, and more,width=600,role=popup]
