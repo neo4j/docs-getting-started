@@ -93,6 +93,13 @@ a| link:https://neo4j.com/docs/kafka/current/[Neo4j Connector for Apache Spark]
 | {cross-mark}
 | Language-independent columnar memory format for flat and nested data.
 
+| link:https://hop.apache.org/manual/latest/technology/neo4j/index.html[Apache Hop]
+| Open source ETL (extract, transform, load) tool used for real-time analytics and data processing workloads.
+| {cross-mark}
+| {check-mark}
+| {cross-mark}
+| hwf, hpl, JSON, CSV, TXT, XML, Markdown, SVG, Log, SAS 7 BDAT files
+
 a| link:https://neo4j.com/docs/jdbc-manual/current/[Neo4j JDBC]
 | Method for importing data when integration with ETL and ELT tools don’t offer an integration based on the common Neo4j Java driver, or when you want to build integrations for ecosystems like Jakarta EE or migrations tools such as Flyway.
 | {check-mark}
@@ -120,13 +127,6 @@ a| link:https://neo4j.com/labs/neo4j-migrations/[Neo4j Migrations]
 | {check-mark}
 | {check-mark}
 | link:https://neo4j.com/labs/neo4j-migrations/#_features[See compatibility and features].
-
-| link:https://www.youtube.com/watch?v=W8ReehdtBDg[Kettle import tool]
-| Maps and executes steps for the data process flow and works well for very large datasets, especially if you are already familiar with using this tool.
-| {check-mark}
-| {check-mark}
-| {cross-mark}
-| CSV
 
 |===
 
