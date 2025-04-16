@@ -94,8 +94,9 @@ a| link:https://neo4j.com/docs/kafka/current/[Neo4j Connector for Apache Spark]
 | Language-independent columnar memory format for flat and nested data.
 
 | link:https://hop.apache.org/manual/latest/technology/neo4j/index.html[Apache Hop]
-| Open source ETL (extract, transform, load) tool used for real-time analytics and data processing workloads.
-| {cross-mark}
+| Open-source tool for enterprise-scale data export and import. 
+Handles a variety of data sources and large data sets easily and organizes the data flow process.
+| {check-mark}
 | {check-mark}
 | {cross-mark}
 | hwf, hpl, JSON, CSV, TXT, XML, Markdown, SVG, Log, SAS 7 BDAT files
