@@ -55,6 +55,13 @@ a| link:https://neo4j.com/docs/apoc/current/import/[APOC import]
 | {cross-mark}
 | CSV, JSON, XML, XLS
 
+a| link:{docs-home}/create-applications[Language libraries]
+| Use Python, Java, JavaScript, Go, .NET, and JCBD to import files.
+| {check-mark}
+| {check-mark}
+| {cross-mark}
+| Language-independent columnar memory format for flat and nested data.
+
 a| link:https://www.neo4j.com/docs/operations-manual/current/import/#import-tool-full[`neo4j-admin database import full`]
 | Initial import into a non-existent empty database.
 Use it with link:{docs-home}/operations-manual/current/neo4j-admin-neo4j-cli/[Neo4j Admin].
@@ -101,13 +108,6 @@ Handles a variety of data sources and large data sets easily and organizes the d
 | {cross-mark}
 | hwf, hpl, JSON, CSV, TXT, XML, Markdown, SVG, Log, SAS 7 BDAT files
 
-a| link:https://neo4j.com/docs/jdbc-manual/current/[Neo4j JDBC]
-| Method for importing data when integration with ETL and ELT tools don’t offer an integration based on the common Neo4j Java driver, or when you want to build integrations for ecosystems like Jakarta EE or migrations tools such as Flyway.
-| {check-mark}
-| {check-mark}
-| {cross-mark}
-| SQL to Cypher. link:https://neo4j.com/docs/jdbc-manual/current/datatypes/[Read more].
-
 a| link:https://neo4j.com/labs/etl-tool/[Neo4j ETL Tool]
 | Neo4j Labs' interactive tool for the initial import of data from relational database management systems into Neo4j.
 | {cross-mark}
@@ -130,12 +130,6 @@ a| link:https://neo4j.com/labs/neo4j-migrations/[Neo4j Migrations]
 | link:https://neo4j.com/labs/neo4j-migrations/#_features[See compatibility and features].
 
 |===
-
-[NOTE]
-====
-An alternative method is to create your own application using the supported language libraries.
-link:{docs-home}/create-applications[See the complete list].
-====
 
 == Keep learning
 
