@@ -34,6 +34,14 @@ The following table shows all supported methods for importing data into Neo4j:
 | Enterprise only
 | Supported file formats
 
+a| link:https://neo4j.com/docs/aura/import/introduction/[Import]
+| A tool for importing data into your Aura instance.
+Also available as a standalone service as link:{docs-home}/data-importer/current[Data Importer].
+| {check-mark}
+| {cross-mark}
+| {cross-mark}
+| CSV, PostgreSQL, MySQL, SQL Server, Oracle
+
 a| link:{docs-home}/data-importer/current[Data Importer]
 | UI-based tool for importing data into Neo4j, including CSV files.
 | {check-mark}
@@ -64,7 +72,6 @@ a| link:{docs-home}/create-applications[Language libraries]
 
 a| link:https://www.neo4j.com/docs/operations-manual/current/import/#import-tool-full[`neo4j-admin database import full`]
 | Initial import into a non-existent empty database.
-Use it with link:{docs-home}/operations-manual/current/neo4j-admin-neo4j-cli/[Neo4j Admin].
 | {cross-mark}
 | {check-mark}
 | {cross-mark}
@@ -73,7 +80,6 @@ Use it with link:{docs-home}/operations-manual/current/neo4j-admin-neo4j-cli/[Ne
 a| link:https://www.neo4j.com/docs/operations-manual/current/import/#import-tool-incremental[`neo4j-admin database import incremental`]
 | Used when import cannot be completed in a single full process.
 It allows the import to be performed as a series of smaller batches.
-Use it with link:{docs-home}/operations-manual/current/neo4j-admin-neo4j-cli/[Neo4j Admin].
 | {cross-mark}
 | {check-mark}
 | {check-mark}
