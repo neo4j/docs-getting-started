@@ -25,19 +25,17 @@ image::import-data-charts.svg[Decision chart with options to import data to Neo4
 
 The following table shows all supported methods for importing data into Neo4j:
 
-[options=header,cols="^.^2,3,^.^,^.^,^.^,^.^2"]
+[options=header,cols="^.^2,3,^.^,^.^,^.^2"]
 |===
 | Method
 ^.^| Description
 | Available on Aura
 | Available on self-managed
-| Enterprise only
-| Supported file formats
+| Supported file formats and data sources
 
 a| link:https://neo4j.com/docs/aura/import/introduction/[Import]
 | A service for importing data into your Aura instance.
 | {check-mark}
-| {cross-mark}
 | {cross-mark}
 | CSV, PostgreSQL, MySQL, SQL Server, Oracle
 
@@ -45,64 +43,55 @@ a| link:{docs-home}/data-importer/current[Data Importer]
 | UI-based tool for importing flat files into Neo4j.
 | {check-mark}
 | {check-mark}
-| {cross-mark}
 | CSV, TSV
 
 a| link:https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[`LOAD CSV`]
 | Cypher command to import small- to medium-sized datasets (up to 10 million records) from local and remote files, including from cloud URIs.
 | {check-mark}
 | {check-mark}
-| {cross-mark}
 | CSV
 
 a| link:https://neo4j.com/docs/apoc/current/import/[APOC import]
 | A library of user-defined procedures and functions that extends the use of Cypher.
 | {check-mark}
 | {check-mark}
-| {cross-mark}
 | CSV, JSON, XML, XLS
 
 a| link:{docs-home}/create-applications[Language libraries]
 | Use Python, Java, JavaScript, Go, .NET, and JCBD to import files.
 | {check-mark}
 | {check-mark}
-| {cross-mark}
 | Language-independent columnar memory format for flat and nested data.
 
 a| link:https://www.neo4j.com/docs/operations-manual/current/import/#import-tool-full[`neo4j-admin database import full`]
 | Initial import into a non-existent empty database.
 | {cross-mark}
 | {check-mark}
-| {cross-mark}
 | CSV, Parquet
 
 a| link:https://www.neo4j.com/docs/operations-manual/current/import/#import-tool-incremental[`neo4j-admin database import incremental`]
 | Used when import cannot be completed in a single full process.
 It allows the import to be performed as a series of smaller batches.
 | {cross-mark}
-| {check-mark}
-| {check-mark}
+| {check-mark} footnote:enterpriseonly[Enterprise only]
 | CSV, Parquet
 
 a| link:https://neo4j.com/docs/graph-data-science/current/management-ops/graph-creation/graph-project-apache-arrow/[Apache Arrow]
 | Projecting graphs via Apache Arrow allows importing graph data which is stored outside of Neo4j. Apache Arrow is a language-agnostic in-memory, columnar data structure specification.
 | {check-mark}
-| {check-mark}
-| {check-mark}
+| {check-mark} footnote:enterpriseonly[]
 | Language-independent columnar memory format for flat and nested data.
 
 a| link:https://neo4j.com/docs/kafka/current/[Neo4j Connector for Kafka]
 | Stream data between Neo4j and platforms based on Apache Kafka using the Kafka Connect framework.
 | {check-mark}
 | {check-mark}
-| {cross-mark}
 | Language-independent columnar memory format for flat and nested data.
 
 a| link:https://neo4j.com/docs/kafka/current/[Neo4j Connector for Apache Spark]
 | Process and transfer data between Neo4j and other platforms such as Databricks and several data warehouses.
 | {check-mark}
 | {check-mark}
-| {cross-mark}
 | Language-independent columnar memory format for flat and nested data.
 
 | link:https://hop.apache.org/manual/latest/technology/neo4j/index.html[Apache Hop]
@@ -110,26 +99,22 @@ a| link:https://neo4j.com/docs/kafka/current/[Neo4j Connector for Apache Spark]
 Handles a variety of data sources and large data sets easily and organizes the data flow process.
 | {check-mark}
 | {check-mark}
-| {cross-mark}
 | hwf, hpl, JSON, CSV, TXT, XML, Markdown, SVG, Log, SAS 7 BDAT files
 
 a| link:https://neo4j.com/labs/etl-tool/[Neo4j ETL Tool]
 | Neo4j Labs' interactive tool for the initial import of data from relational database management systems into Neo4j.
 | {cross-mark}
 | {check-mark}
-| {cross-mark}
 | CSV
 
 a| link:https://neo4j.com/labs/neosemantics/[Neosemantics]
 | Neo4j Labs' plugin that enables the use of RDF and its associated vocabularies.
 | {cross-mark}
-| {check-mark}
-| {check-mark}
+| {check-mark} footnote:enterpriseonly[]
 | RDF, OWL, RDFS, SKOS
 
 a| link:https://neo4j.com/labs/neo4j-migrations/[Neo4j Migrations]
 | Neo4j Labs' set of tools that provides a uniform way for applications, the command line, and build tools alike to track, manage and apply changes to your database.
-| {check-mark}
 | {check-mark}
 | {check-mark}
 | link:https://neo4j.com/labs/neo4j-migrations/#_features[See compatibility and features].
