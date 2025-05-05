@@ -37,7 +37,7 @@ a| link:https://neo4j.com/docs/aura/import/introduction/[Import]
 | A service for importing data into your Aura instance.
 | {check-mark}
 | {cross-mark}
-| CSV, PostgreSQL, MySQL, SQL Server, Oracle
+| CSV, PostgreSQL, MySQL, SQL Server, Oracle, Snowflake
 
 a| link:{docs-home}/data-importer/current[Data Importer]
 | UI-based tool for importing flat files into Neo4j.
