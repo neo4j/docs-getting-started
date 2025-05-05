@@ -9,8 +9,8 @@
 [#graph-vis-types]
 == Types of graph visualization
 
-There are three architectural categories into which most of our graph visualization tools fall.
-We will discuss how each of these categories handles the exported data and provide some pros and cons of the different architectures.
+There are three architectural categories into which most of graph visualization tools fall.
+You will see how each of these categories handles the exported data and be provided with some pros and cons of the different architectures.
 Depending on the visualization needs, one of these categories may define the set of tools you can choose to implement as a solution to your business needs.
 
 [#neo4j-vis-vendors]
@@ -42,6 +42,7 @@ Neo4j Bloom is available in the following formats:
 * Included in link:/startup-program/[Neo4j Startup Program^]
 
 ==== Bloom Resources
+
 * Developer Guide: https://neo4j.com/blog/graphxr-graph-app-neo4j-desktop/[Neo4j Bloom User Interface Guide^]
 * Blog post: https://medium.com/neo4j/bloom-ing-marvellous-a2be0c3702bb[Bloom-ing marvellous! Introducing Bloom 1.3^]
 * Product information: https://neo4j.com/bloom/[Neo4j Bloom landing page^]
@@ -50,8 +51,8 @@ Neo4j Bloom is available in the following formats:
 
 image::https://neo4j.com/labs/neodash/_images/neodash.png[role="popup-link",float="right",width=350]
 
-NeoDash is an open-source, low-code Dashboard Builder for Neo4j. 
-As a part of https://neo4j.com/labs[Neo4j Labs], NeoDash is developed and supported via the online https://community.neo4j.com[Community]. 
+NeoDash is an open-source, low-code Dashboard Builder for Neo4j.
+As a part of https://neo4j.com/labs[Neo4j Labs], NeoDash is developed and supported via the online https://community.neo4j.com[Community].
 
 NeoDash lets you build an interactive dashboard with tables, graphs, bar charts, line charts, maps and more.
 Dashboards can be saved and shared directly from your Neo4j database.
@@ -86,6 +87,7 @@ Kineviz also has a graph app version of this tool that can be installed in Neo4j
 The blog post about the graph app is included in the resources below.
 
 ==== GraphXR Resources
+
 * Blog post: https://neo4j.com/blog/graphxr-graph-app-neo4j-desktop/[Adding GraphXR as a Graph App in Neo4j Desktop^]
 * Blog post: https://neo4j.com/blog/evaluating-investor-performance-using-neo4j-graphxr-and-ml/[Evaluating Investor Performance Using Neo4j, GraphXR and MLl^]
 * Product information: https://static1.squarespace.com/static/5c58b86e8dfc8c2d0d700050/t/5c6f46559140b7665401785b/1550796373803/GraphXR%2BDatasheet.pdf[GraphXR Datasheet^]
@@ -104,6 +106,7 @@ yWorks also provides a free graph explorer app that is based on the yFiles techn
 It can be installed in Neo4j Desktop.
 
 ==== yFiles Resources
+
 * Blog post: https://www.yworks.com/blog/neo4j-Custom-Visualization-Solutions[Custom Visualization Solutions with yFiles and Neo4j^]
 * Blog post: https://www.yworks.com/blog/neo4j-visualization-like-a-pro[Visualizing Neo4j Database Content Like a Pro^]
 * Webinar: https://www.youtube.com/watch?v=uDZD3tOTrFc[Technical intro to yFiles with Neo4j^]
@@ -139,6 +142,7 @@ Harness all of your data without worrying about scale, and pivot on the fly to f
 Ideal for everything from security, fraud, and IT investigations to 3600 views of customers and supply chains, Graphistry turns the potential of your data into human insight and value.
 
 ==== Graphistry Resources
+
 * Source code: https://github.com/graphistry[Graphistry on Github^]
 * Product information: https://www.graphistry.com/[Graphistry graph visualization^]
 
@@ -147,11 +151,12 @@ Ideal for everything from security, fraud, and IT investigations to 3600 views o
 
 // image::{neo4j-img-base-uri}graphlytic_vis.png[role="popup-link",float="right",width=400]
 
-Graphlytic is a highly customizable web application for graph visualization and analysis. Users can interactively explore the graph, look for patterns with the Cypher language, or use filters to find answers to any graph question. Graph rendering is done with the Cytoscape.js library which allows Graphlytic to render tens of thousands of nodes and hundreds of thousands of relationships. 
+Graphlytic is a highly customizable web application for graph visualization and analysis. Users can interactively explore the graph, look for patterns with the Cypher language, or use filters to find answers to any graph question. Graph rendering is done with the Cytoscape.js library which allows Graphlytic to render tens of thousands of nodes and hundreds of thousands of relationships.
 
 The application is provided in three ways: Desktop, Cloud, and Server. Graphlytic Desktop is a free Neo4j Desktop application installed in just a few clicks. Cloud instances are ideal for small teams that need them get up and running in very little time. Graphlytic Server is used by corporations and agencies with highly sensitive data typically in closed networks.
 
 ==== Graphlytic Resources
+
 * Product webpage: https://graphlytic.biz[https://graphlytic.biz^]
 * Online Demo: https://graphlytic.biz/demo[Graphlytic Demo^]
 * Free Desktop Installation: https://graphlytic.biz/blog/how-to-install-graphlytic-in-neo4j-desktop[How To Install And Use Graphlytic In Neo4j Desktop^]
@@ -167,6 +172,7 @@ The platform integrates enterprise data sources with the powerful graph visualiz
 Enterprises, system integrators, technology companies, and government agencies use Tom Sawyer Perspectives to build a wide range of applications.
 
 ==== Perspectives Resources
+
 * Product information: https://www.tomsawyer.com/perspectives/[Perspectives graph visualization^]
 
 === *Keylines*
@@ -179,6 +185,7 @@ It is also compatible with any IT environment, letting you deploy your network v
 You can build a custom application that is scalable and easy to use.
 
 ==== Keylines Resources
+
 * Product information: https://cambridge-intelligence.com/keylines/[Keylines graph visualization^]
 
 === *Semspect*
@@ -187,7 +194,7 @@ You can build a custom application that is scalable and easy to use.
 // image::https://dist.neo4j.com/wp-content/uploads/20220517003656/SemSpect-for-Neo4j-Viz.png[role="popup-link",float="right",width=400]
 
 SemSpect is a highly scalable knowledge graph exploration tool that uses visual aggregation to solve the hairball problem faced by standard graph visualization approaches.
-The data guided construction of the exploration tree empowers the users to build complex requests intuitively without query syntax. 
+The data guided construction of the exploration tree empowers the users to build complex requests intuitively without query syntax.
 Its meta level approach is very effective for grasping the overall structure of the graph data, while flexible access to node and relationship details ensures easy inspection and filtering.
 SemSpect furthermore allows to define query-based node labels during exploration to refine the graph data schema.
 
@@ -197,10 +204,12 @@ SemSpect is available as follows:
 *	SemSpect as Web App for Neo4j database servers
 
 ==== Semspect Resources
+
 * Product information: https://doc.semspect.de/docs/neo4j-graph-app[SemSpect for Neo4j^]
 * Blog post: https://neo4j.com/blog/semspect-different-approach-graph-visualization/[A Different Approach to Graph Visualization^]
 
 == Visualization Resources
+
 * Blog series: https://medium.com/neo4j/tagged/data-visualization[Neo4j Visualization^]
 * Blog: https://maxdemarzi.com/?s=visualization[Max de Marzi on Visualization with Neo4j^]
 * Neo4j Visualization: https://www.youtube.com/channel/UCvze3hU6OZBkB1vkhH2lH9Q/search?query=visualization[YouTube videos^]
@@ -227,8 +236,8 @@ Connection to Neo4j is simple and straightforward, and because it is built with 
 Customizing and coloring styles based on labels, properties, nodes, and relationships is defined in a single configuration object.
 Neovis.js can be used without writing Cypher and with minimal JavaScript for integrating into your project.
 
-====
 [TIP]
+====
 icon:flask[size=2x] The Neovis library is one of our Neo4j Labs projects.
 To learn more about Neo4j Labs, visit our https://neo4j.com/labs/[Labs page^].
 ====
@@ -241,10 +250,12 @@ Below, we see a graph visualization of Game Of Thrones character interactions re
 An advantage of enhancing graph visualization with these algorithms is that we can visually interpret the results of these algorithms.
 
 ==== Neovis.js Resources
+
 * Blog post: https://medium.com/neo4j/graph-visualization-with-neo4j-using-neovis-js-a2ecaaa7c379[Neovis.js^]
 * Download neovis.js: https://www.npmjs.com/package/neovis.js[npm package^]
 
 === Popoto.js
+
 Popoto.js is a JavaScript library that is built upon D3.js.
 Popoto.js will help users build queries in a visual way to execute against Neo4j.
 Users can also customize the results and the visual display.
@@ -254,6 +265,7 @@ To use Popoto.js in your application, you simply need to include each component 
 The rest of the content will be generated from that.
 
 ==== Popoto.js Resources
+
 * Documentation: https://github.com/Nhogs/popoto/wiki[Popoto.js^]
 * Website: http://www.popotojs.com/[popoto.js^]
 
@@ -261,10 +273,22 @@ The rest of the content will be generated from that.
 == 3. Embeddable libraries without direct Neo4j connection
 
 These libraries offer the ability to embed graph visualization in an application, but without connecting directly to Neo4j.
-An advantage here is that we can populate our visualization with data sent from an API application that connects to the database, ensuring the client application is not querying the database directly.
-The downside, however, is that we often must transform the results to export from Neo4j into the format expected by these libraries.
+An advantage here is that you can populate your visualization with data sent from an API application that connects to the database, ensuring the client application is not querying the database directly.
+The downside, however, is that you often must transform the results to export from Neo4j into the format expected by these libraries.
 
-We can get a closer look at these tools in the next paragraphs.
+You will get a closer look at these tools in the next paragraphs.
+
+=== Neo4j Visualization Library (NVL)
+
+NVL is a collection of libraries that can be used to build custom graph visualizations like those used in Neo4j Bloom and Explore in the Aura console.
+NVL is written in TypeScript and can be used in any JavaScript project.
+It is also available as a React component that can be used in React applications.
+
+==== NVL Resources
+
+* Documentation: link:https://neo4j.com/docs/nvl/current/[Neo4j Visualization Library]
+* NVL API documentation: link:https://neo4j.com/docs/api/nvl/current/[NVL API]
+* NVL code examples: link:https://neo4j.com/docs/api/nvl/current/examples.html[NVL Code examples]
 
 === D3.js
 As the first line on D3’s website states "D3.js is a JavaScript library for manipulating documents based on data."
@@ -280,11 +304,13 @@ Each of these maps includes arrays of properties for each node and relationship 
 Version 4 and 5 of d3.js also support force-directed graphs, where the visualization adjusts to the user’s view pane.
 
 ==== D3.js Resources
+
 * Website: https://d3js.org/[D3.js^]
 * D3 and graphs example: http://thinkingonthinking.com/Getting-Started-With-D3/[D3 Examples^]
 * Neo4j Github examples with d3: https://github.com/neo4j-examples?utf8=%E2%9C%93&q=movie&type=&language=[Examples with Neo4j^]
 
 === *Vis.js*
+
 This library offers a variety of visualizations designed to handle large, dynamic data sets.
 There are a variety of formats to style your data, including timeline, dataset, graph2d, graph3d, and network.
 The most common format seen with Neo4j is the network visualization.
@@ -293,11 +319,13 @@ Even with the network format, there are numerous customizations available for st
 For additional information and to see everything that is available, check out their docs and examples linked in the resources below.
 
 ==== Vis.js Resources
+
 * Vis.js website: http://visjs.org/[Vis.js^]
 * Network format examples: http://visjs.org/network_examples.html[Format Examples^]
 * Source code project: https://github.com/almende/vis[Vis.js Github^]
 
 === Sigma.js
+
 While some libraries are meant to include all the capabilities in one bundle, Sigma.js touts a highly-extensible environment where users can add extension libraries or plugins to provide additional capability.
 This library takes exported data in either https://github.com/jacomyal/sigma.js/tree/master/plugins/sigma.parsers.json[JSON^] or https://github.com/jacomyal/sigma.js/tree/master/plugins/sigma.parsers.gexf[GEXF^] formats.
 
@@ -308,6 +336,7 @@ Once the requirements surpass what is possible there, users can write and use th
 Be sure to check out the repository, though, for any existing extensions!
 
 ==== Sigma.js Resources
+
 * Website: http://sigmajs.org/[Sigma.js^]
 * Source code: https://github.com/jacomyal/sigma.js/[Sigma.js Github^]
 * Blog post: https://medium.com/neo4j/how-to-use-sigmajs-to-display-your-graph-3eedd75275bb[Sigma.js+Neo4j^]
@@ -319,15 +348,18 @@ Customizations and styling are available through CSS modifications and extension
 It also can track changes in the graph that update the visualization accordingly.
 
 ==== Vivagraph.js Resources
+
 * Source code: https://github.com/anvaka/VivaGraphJS[Vivagraph.js Github^]
 * Blog post: https://maxdemarzi.com/2013/05/29/visualizing-the-news-with-vivagraph-js/[Viavgraph.js+Neo4j^]
 
 === Cytoscape.js
+
 This library is also meant to visualize and render network node graphs and offers customization and extensibility for additional features.
 Cytoscape.js responds to user interaction and works on touch screen interfaces, allowing users to zoom, tap, and explore in the method that is relevant to them.
 You can customize styling and web page view with a variety of style components.
 
 ==== Cytoscape.js Resources
+
 * Website: http://js.cytoscape.org/[Cytoscape.js^]
 * Source code: https://github.com/cytoscape/cytoscape.js[Cytoscape.js Github^]
 
