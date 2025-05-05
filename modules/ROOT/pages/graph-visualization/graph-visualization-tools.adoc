@@ -291,6 +291,7 @@ It is also available as a React component that can be used in React applications
 * NVL code examples: link:https://neo4j.com/docs/api/nvl/current/examples.html[NVL Code examples]
 
 === D3.js
+
 As the first line on D3’s website states "D3.js is a JavaScript library for manipulating documents based on data."
 You can bind different kinds of data to a DOM and then execute different kinds of functions on it.
 One of those functions includes generating an SVG, canvas, or HTML visualization from the data in the DOM.
