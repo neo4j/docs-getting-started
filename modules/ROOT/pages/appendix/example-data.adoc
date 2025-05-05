@@ -10,7 +10,7 @@
 :cross-mark: icon:times[]
 
 Neo4j offers a variety of example datasets to get started with the products.
-Some of them are built-in, others can be retrieved from a GitHub repository or accessed from the link:https://demo.neo4jlabs.com:7473[demo server].
+Some of them are built-in, others can be retrieved from a GitHub repository or accessed from the link:https://demo.neo4jlabs.com:7473[demo server] (choose "No authentication" as the authentication type).
 This page shows how to access them.
 
 == Available datasets
