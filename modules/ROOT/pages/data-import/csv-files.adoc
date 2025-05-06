@@ -312,7 +312,7 @@ You can upload the file or provide an URL to load it.
 == File size
 
 Most Neo4j's xref:data-import/index.adoc#_methods_comparison[import methods] are recommended for importing small or medium-sized datasets (up to 10 million records).
-If you want to import larger datasets, see link:https://www.neo4j.com/docs/operations-manual/current/import/#import-tool-full[`neo4j-admin database import full`] and link:https://www.neo4j.com/docs/operations-manual/current/import/#import-tool-incremental[`neo4j-admin database import incremental`].
+If you want to import larger datasets, see the tutorial for link:https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/[Neo4j-admin import].
 
 == Optimization
 

@@ -9,7 +9,7 @@ This tutorial shows how to import CSV data into Neo4j using link:https://neo4j.c
 [TIP]
 ====
 For a more interactive experience, enroll to the GraphAcademy course link:https://graphacademy.neo4j.com/courses/importing-cypher/[Importing CSV data into Neo4j].
-To import larger CSV files into Neo4j, see link:https://www.neo4j.com/docs/operations-manual/current/import/#import-tool-full[`neo4j-admin database import full`] and link:https://www.neo4j.com/docs/operations-manual/current/import/#import-tool-incremental[`neo4j-admin database import incremental`].
+To import larger CSV files into Neo4j, see the tutorial for link:https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/[Neo4j-admin import].
 ====
 
 == Loading the file
