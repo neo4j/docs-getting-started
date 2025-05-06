@@ -10,70 +10,122 @@
 :page-ad-underline-role: button
 :page-ad-underline: Learn more
 
-[#about-import]
-The goal of the following articles and tutorials is to help you understand how to import various types of data into Neo4j.
-From JSON to APIs to another database, you can retrieve data from nearly any source and use it to populate your graph.
+//Check Mark
+:check-mark: icon:check[]
 
-////
-Look at the GraphAcademy course "Import CSV data". It's announced that you learn the following topics:
+//Cross Mark
+:cross-mark: icon:times[]
 
-* LOAD CSV
-* APOC
-* neo4j-admin tool
-* using an application for loading data / loading data via drivers
-* Neo4j ETL Tool to load data from RDBMS
+Neo4j provides different tools for importing data stored in various formats, e.g. .csv, .tsv, and .json.
+Depending on the kind of data you are working with, there are different options to choose from, as shown in the diagram:
 
-It makes sense, logic is clear. My idea is to redesign this section according to the aforementioned GraphAcademy course.
+image::import-data-charts.svg[Decision chart with options to import data to Neo4j,width=600,role=popup]
 
-Important! To make a section on Data Importer!
+== Methods comparison
 
-Import - Export. What if a customer needs not only to import data into Neo4j, but also export it from the Neo4j database. How to do it? Is it a frequently asked question?
-////
+The following table shows all supported methods for importing data into Neo4j:
 
-[#import-csv]
-== Importing CSV files
+[options=header,cols="^.^2,3,^.^,^.^,^.^2"]
+|===
+| Method
+^.^| Description
+| Available on Aura
+| Available on self-managed
+| Supported file formats and data sources
 
-One of the most common formats of data is in rows and columns on flat files.
-This spreadsheet format is used for a variety of imports and exports to/from relational databases, so it is easy to retrieve existing data this way.
+a| link:https://neo4j.com/docs/aura/import/introduction/[Import]
+| A service for importing data into your Aura instance.
+| {check-mark}
+| {cross-mark}
+| CSV, PostgreSQL, MySQL, SQL Server, Oracle, Snowflake
 
-You can also use this format of data for Neo4j.
-The `LOAD CSV` command in Cypher allows us to specify a filepath, headers or not, different value delimiters, and the Cypher statements for how we want to model that tabular data in a graph.
+a| link:{docs-home}/data-importer/current[Data Importer]
+| UI-based tool for importing flat files into Neo4j.
+| {check-mark}
+| {check-mark}
+| CSV, TSV
 
-We will walk through the details of how to take any CSV file and import the data into Neo4j.
+a| link:https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[`LOAD CSV`]
+| Cypher command to import small- to medium-sized datasets (up to 10 million records) from local and remote files, including from cloud URIs.
+| {check-mark}
+| {check-mark}
+| CSV
 
-xref:data-import/csv-import.adoc[Importing CSV data into Neo4j]
+a| link:https://neo4j.com/docs/apoc/current/import/[APOC import]
+| A library of user-defined procedures and functions that extends the use of Cypher.
+| {check-mark}
+| {check-mark}
+| CSV, JSON, XML, XLS
 
-[#import-api]
-== Importing API data
+a| link:{docs-home}/create-applications[Language libraries]
+| Use Python, Java, JavaScript, Go, .NET, and JCBD to import files.
+| {check-mark}
+| {check-mark}
+| Language-independent columnar memory format for flat and nested data.
 
-There are now many data sources that use an API to expose data via a URL - many of these in JSON format.
-You can also import this type of data into Neo4j using the APOC standard extension library and executing the commands in the Neo4j Browser command line or in a script.
+a| link:https://www.neo4j.com/docs/operations-manual/current/import/#import-tool-full[`neo4j-admin database import full`]
+| Initial import into a non-existent empty database.
+| {cross-mark}
+| {check-mark}
+| CSV, Parquet
 
-The `apoc.load.json` command allows us to specify a URL path and any necessary parameters, followed by Cypher statements to model that tree-like data in a graph.
+a| link:https://www.neo4j.com/docs/operations-manual/current/import/#import-tool-incremental[`neo4j-admin database import incremental`]
+| Used when import cannot be completed in a single full process.
+It allows the import to be performed as a series of smaller batches.
+| {cross-mark}
+| {check-mark} footnote:enterpriseonly[Enterprise only]
+| CSV, Parquet
 
-This guide shows how to retrieve data from a JSON-based REST API and import it into Neo4j.
+a| link:https://neo4j.com/docs/graph-data-science/current/management-ops/graph-creation/graph-project-apache-arrow/[Apache Arrow]
+| Projecting graphs via Apache Arrow allows importing graph data which is stored outside of Neo4j. Apache Arrow is a language-agnostic in-memory, columnar data structure specification.
+| {check-mark}
+| {check-mark} footnote:enterpriseonly[]
+| Language-independent columnar memory format for flat and nested data.
 
-xref:data-import/json-rest-api-import.adoc[Importing API data]
+a| link:https://neo4j.com/docs/kafka/current/[Neo4j Connector for Kafka]
+| Stream data between Neo4j and platforms based on Apache Kafka using the Kafka Connect framework.
+| {check-mark}
+| {check-mark}
+| Language-independent columnar memory format for flat and nested data.
 
-[#import-relational-graph]
-== Importing data from a relational database to Neo4j
+a| link:https://neo4j.com/docs/kafka/current/[Neo4j Connector for Apache Spark]
+| Process and transfer data between Neo4j and other platforms such as Databricks and several data warehouses.
+| {check-mark}
+| {check-mark}
+| Language-independent columnar memory format for flat and nested data.
 
-Many existing systems store data in relational or tabular types of formats.
-Knowing how to translate and migrate this data into graph data for analyzing the relationships can seem complex.
+| link:https://hop.apache.org/manual/latest/technology/neo4j/index.html[Apache Hop]
+| Open-source tool for enterprise-scale data export and import. 
+Handles a variety of data sources and large data sets easily and organizes the data flow process.
+| {check-mark}
+| {check-mark}
+| hwf, hpl, JSON, CSV, TXT, XML, Markdown, SVG, Log, SAS 7 BDAT files
 
-There are a variety of tools for migrating data from relational formats into graphs.
-In this article, we want to discuss all of the options and why you can or should choose some over others for your use case.
+a| link:https://neo4j.com/labs/etl-tool/[Neo4j ETL Tool]
+| Neo4j Labs' interactive tool for the initial import of data from relational database management systems into Neo4j.
+| {cross-mark}
+| {check-mark}
+| CSV
 
-xref:data-import/relational-to-graph-import.adoc[Import: RDBMS to graph]
+a| link:https://neo4j.com/labs/neosemantics/[Neosemantics]
+| Neo4j Labs' plugin that enables the use of RDF and its associated vocabularies.
+| {cross-mark}
+| {check-mark} footnote:enterpriseonly[]
+| RDF, OWL, RDFS, SKOS
 
-[#import-northwind]
-[#import-desktop-csv]
-== Tutorials
+a| link:https://neo4j.com/labs/neo4j-migrations/[Neo4j Migrations]
+| Neo4j Labs' set of tools that provides a uniform way for applications, the command line, and build tools alike to track, manage and apply changes to your database.
+| {check-mark}
+| {check-mark}
+| link:https://neo4j.com/labs/neo4j-migrations/#_features[See compatibility and features].
 
-In the Appendix, you can find two tutorials on how to import data from the relational database and how to import CSV data with Neo4j Desktop. +
-The first guide uses a common relational data set (Northwind) and walks you through how to transform and import data from a relational database to Neo4j graph database. You will learn what steps are needed to retrieve the data from the relational data store and import the same data as a graph in Neo4j, as well as how to take the relational data model and convert it to graph in the process.
+|===
 
-* xref:data-import/import-relational-and-etl.adoc[Tutorial: Import data from a relational database into Neo4j]
-* xref:appendix/tutorials/guide-import-desktop-csv.adoc[How-To: Import CSV data with Neo4j Desktop]
+== Keep learning
 
+See the link:https://neo4j.com/docs/import/[Import] page for more related links or keep learning using these resources:
 
+* link:https://graphacademy.neo4j.com/courses/importing-fundamentals/[Importing Data Fundamentals]: An interactive course on the fundamentals of data importing with Neo4j.
+* link:https://graphacademy.neo4j.com/courses/importing-cypher/[Importing CSV data into Neo4j]: An interactive course on how to import CSV data into Neo4j using Cypher.
+* xref:data-import/import-relational-and-etl.adoc[Tutorial: Import data from a relational database]: Import relational data into a Neo4j deployment.
+* xref:appendix/tutorials/guide-import-desktop-csv.adoc[How-To: Import CSV data with Neo4j Desktop]: Read how to import CSV data using Neo4j Desktop.

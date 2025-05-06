@@ -1,0 +1,383 @@
+= Working with CSV files
+:description: This page gives an overview of what is a dataset in CSV format and how to work with it when importing it into Neo4j.
+
+When working with CSV files as the format of your data to be imported into Neo4j, there are a few points to be considered so that you can better use the available tools.
+This page addresses the details of a CSV file and other recommendations when importing them.
+
+== Structure of a CSV file
+
+When analyzing the content of a CSV files, there are several elements that can help you understand the data that you are importing and xref:data-modeling/index.adoc[modeling] later on.
+
+=== Data format
+
+All data from the CSV file is read as a string, so you need to use `toInteger()`, `toFloat()`, `split()`, or similar functions to convert values, when needed.
+Remember also that labels, property names, relationship types, and variables are *case-sensitive*.
+
+See more information on how to manipulate data formats in the xref:#_converting_data_values[Converting data values] section.
+
+=== Field terminator
+
+Also known as delimiter, a field terminator is a character used to separate each field in a CSV file.
+In this example, a comma (`,`) is used, but other characters, such as a tab (`\`) or a pipe (`|`) also work and they can be blended:
+
+[source,csv]
+--
+personId,name,birthYear
+23945,"Gerard Pires"|1942
+553509,"Helen Reddy"|1941
+113934,"Susan Flannery"|1939
+--
+
+[TIP]
+====
+You can copy and paste the example into any text editor (e.g. Notepad or TextEdit) or a spreadsheet application (e.g. Excel or Google Sheets) and then save it as a CSV file.
+====
+
+=== Header
+
+The header is typically the first line in the CSV file.
+They are not mandatory, but adding them is a good practice.
+In the xref:#_field_terminator[previous example], the header was:
+
+[source,csv]
+--
+personId,name,birthYear
+--
+
+When working with CSV files with no header row, you will need to know the order of the columns and refer to them through link:https://neo4j.com/docs/cypher-manual/current/indexes/[indexes].
+This can make working with the data more complicated than it needs to be.
+
+=== Quotes
+
+Quotation marks (`"`) define what text should be stored as a single value.
+For example:
+
+[source,csv]
+--
+personId,name,birthYear
+23945,"Pires, Gerard",1942
+553509,"Reddy, Helen",1941
+113934,"Flannery, Susan",1939
+--
+
+This CSV file uses commas as the xref:#_field_terminator[field terminator character] and, in the second row `names`, entries such as `Pires, Gerard` also contain a comma.
+If the entry `Pires, Gerard` wasn't between quotation marks, it would count as two different entries (i.e. one for `Pires` and another for `Gerard`).
+
+=== Normalized data
+
+If the source data is normalized (e.g. when exported from a relational data model), there will typically be multiple CSV files.
+Each CSV file will represent a table in the relational data model, and the files will be related to each other by unique IDs.
+
+In this normalized data example, there are three files for people, movies, and roles:
+
+.`person.csv`
+[source,csv]
+--
+personId,name,birthYear
+23945,Gerard Pires,1942
+553509,Helen Reddy,1941
+113934,Susan Flannery,1939
+--
+
+.`movies.csv`
+[source,csv]
+--
+movieId,title,avgVote,releaseYear,genres
+189,Sin City,8.000000,2005,Crime|Thriller
+2300,The Fifth Element,7.700000,1997,Action|Adventure|Sci-Fi
+11969,Tombstone,7.800000,1993,Action|Romance|Western
+--
+
+.`roles.csv`
+[source,csv]
+--
+personId,movieId,character
+2295,189,Marv
+56731,189,Nancy
+16851,189,Dwight
+--
+
+Note that the `person.csv` file has a unique ID for every person, and the `movies.csv` file has a unique ID for every movie.
+The `roles.csv` file relates a person to a movie and provides the characters.
+
+=== De-normalized data
+
+De-normalized data typically represents data from multiple tables.
+If the source data is de-normalized, there will typically be a single CSV file which contains all the data, often duplicated where there are relationships between entities.
+For example:
+
+.`movies-n.csv`
+[source,csv]
+--
+movieId,title,avgVote,releaseYear,genres,personType,name,birthYear,character
+2300,The Fifth Element,7.700000,1997,Action|Adventure|Sci-Fi,ACTOR,Bruce Willis,1955,Korben Dallas
+2300,The Fifth Element,7.700000,1997,Action|Adventure|Sci-Fi,ACTOR,Gary Oldman,1958,Jean-Baptiste Emanuel Zorg
+2300,The Fifth Element,7.700000,1997,Action|Adventure|Sci-Fi,ACTOR,Ian Holm,1931,Father Vito Cornelius
+11969,Tombstone,7.800000,1993,Action|Romance|Western,ACTOR,Kurt Russell,1951,Wyatt Earp
+11969,Tombstone,7.800000,1993,Action|Romance|Western,ACTOR,Val Kilmer,1959,Doc Holliday
+11969,Tombstone,7.800000,1993,Action|Romance|Western,ACTOR,Sam Elliott,1944,Virgil Earp
+--
+
+Here, the movie and person data (including the IDs) is repeated in different rows every time new information about a particular actor's role is featured.
+This sort of duplication compromises the structure of the data, which means you need to xref:#_preparing_the_csv_file[prepare your file] before importing.
+
+== File location
+
+You can load a CSV file from a link:
+
+[source,cypher]
+--
+LOAD CSV WITH HEADERS 
+FROM 'https://data.neo4j.com/importing-cypher/people.csv' AS row
+RETURN row
+--
+
+Or from a local folder, if you use an on-premise deployment.
+In this case, you need to add a `file:///` prefix before the file name:
+
+[source,cypher]
+--
+LOAD CSV WITH HEADERS 
+FROM 'file:///people.csv' AS row
+RETURN row
+--
+
+Due to security reasons, local files, by default, can only be read from the Neo4j import directory, which is located differently based on your operating system. 
+See link:https://neo4j.com/docs/operations-manual/current/configuration/file-locations[Operations -> File locations] for more information.
+
+If you want to open your CSV file from another location, you need to change the link:https://neo4j.com/docs/operations-manual/2025.03/configuration/configuration-settings/#config_server.directories.import[`server.directories.import`] settings.
+
+== File preparation
+
+The first thing you need to consider when importing CSV data is the *source* of this file.
+It could be coming from:
+
+* Relational databases
+* Web APIs
+* Public data directories
+* BI tools
+* Speadsheets (e.g. Excel or Google Sheets)
+
+[IMPORTANT]
+====
+It is strongly recommended to permit resource loading only over secure protocols such as HTTPS instead of insecure protocols like HTTP.
+This can be done by limiting the link:{neo4j-docs-base-uri}/operations-manual/{page-version}/authentication-authorization/load-privileges/#access-control-load-cidr/[load privileges] to only trusted sources that use secure protocols.
+
+If allowing an insecure protocol is unavoidable, you need to add the JVM argument `-Dsun.net.http.allowRestrictedHeaders=true` to the configuration setting link:https://neo4j.com/docs/operations-manual/current/configuration/configuration-settings/#config_server.jvm.additional[`server.jvm.additional`] to avoid automatic blocking from Neo4j's built-in security checks.
+====
+
+Most data systems have an option for exporting data to CSV files as it is a common format for data exchange.
+However, real-world data is messy, which means some values need to be cleaned up or transformed before you import it to another system.
+
+Here are the most common issues you may encounter:
+
+. *The source files contains more data than you need*
++
+For example, you could be interested only in movies directed by a certain individual instead of the whole xref:appendix/example-data.adoc[Movies dataset].
+This means you would need to remove irrelevant information _before_ you import the CSV file into Neo4j, thus making the process easier and more efficient in the long run.
+
+. *Inconsistency between headers and data*
++
+Headers can become inconsistent with data as they could be missing, or be lost in too many columns, or different delimiters are used.
+When putting the data into a graph, there may not be a 1-1 mapping from the CSV file to a node or relationship.
++
+To avoid this sort of problem:
++
+* Check if headers match the data in the file.
+* Adjust formatting, delimiters, columns, etc at this stage, so you don't need to spend more time later.
+
+. *Extra or missing quotes*
++
+Standalone double (`""`) or single quotes (`'`) in the middle of non-quoted text or non-escaped quotes in quoted text can cause issues when reading the file for loading.
+It is best to either escape *or* remove stray quotes.
+Find documentation for proper escaping in the link:https://neo4j.com/docs/cypher-manual/current/styleguide/#cypher-styleguide-meta-characters[Cypher style guide].
+
+. *Special or newline characters*
++
+When dealing with any special characters in a file, ensure they are quoted or remove them.
+For newline characters in quoted or unquoted fields, either add quotes for these or remove them.
+
+. *Inconsistent line breaks*
++
+Computers do not handle well is inconsistent data.
+Ensure line breaks are consistent throughout the file.
+The recommendation is to use the Unix style for compatibility with Linux systems (common format for import tools).
+
+. *Binary zeros, BOM byte order mark (2 UTF-8 bytes) or other non-text characters*
++
+Any unusual characters or tool-specific formatting are sometimes hidden in application tools, but become easily apparent in basic editors.
+If you come across these types of characters in your file, it is best to remove them entirely.
+
+=== Converting data values
+
+==== Null values
+
+Neo4j does not store null values, but you can skip or replace them with default values using the `LOAD CSV` command.
+Suppose you have this CSV file:
+
+.companies.csv
+[source]
+----
+Id,Name,Location,Email,BusinessType
+1,Neo4j,San Mateo,contact@neo4j.com,P
+2,AAA,,info@aaa.com,
+3,BBB,Chicago,,G
+----
+
+The third and the fourth lines have no entry for some of the headers, which means that they have null values that need to be skipped:
+
+[source,cypher]
+--
+LOAD CSV WITH HEADERS FROM 'file:///companies.csv' AS row
+WITH row WHERE row.Id IS NOT NULL
+MERGE (c:Company {companyId: row.Id});
+--
+
+Or have a default value (e.g. "Unknown") set for them:
+
+[source,cypher]
+--
+LOAD CSV WITH HEADERS FROM 'file:///companies.csv' AS row
+MERGE (c:Company {companyId: row.Id, hqLocation: coalesce(row.Location, "Unknown")})
+--
+
+You can also change the empty strings to null values which will not be stored:
+
+[source,cypher]
+--
+LOAD CSV WITH HEADERS FROM 'file:///companies.csv' AS row
+MERGE (c:Company {companyId: row.Id})
+SET c.emailAddress = CASE trim(row.Email) WHEN "" THEN null ELSE row.Email END
+--
+
+*Lists as entries*
+
+If you have a field in the CSV that is a list of items that you want to split, you can use the Cypher `split()` function to separate arrays in a cell.
+For example:
+
+.employees.csv
+[source,cypher]
+--
+Id,Name,Skills,Email
+1,Joe Smith,Cypher:Java:JavaScript,joe@neo4j.com
+2,Mary Jones,Java,mary@neo4j.com
+3,Trevor Scott,Java:JavaScript,trevor@neo4j.com
+--
+
+Note that Joe Smith and Trevor Scott have multiple skills.
+You can split them like this:
+
+[source,cypher]
+--
+LOAD CSV WITH HEADERS FROM 'file:///employees.csv' AS row
+MERGE (e:Employee {employeeId: row.Id, email: row.Email})
+WITH e, row
+UNWIND split(row.Skills, ':') AS skill
+MERGE (s:Skill {name: skill})
+MERGE (e)-[r:HAS_EXPERIENCE]->(s)
+--
+
+*Conditional conversions*
+
+Conditional conversions can be achieved with `CASE`.
+The previous example checked for null values or empty strings, but you can also set a property in this cleaning stage based on a value in the CSV file.
+
+For example, you can set the `businessType` property based on shortened value in CSV:
+
+[source,cypher]
+--
+LOAD CSV WITH HEADERS FROM 'file:///companies.csv' AS row
+WITH row WHERE row.Id IS NOT NULL
+WITH row,
+(CASE row.BusinessType
+ WHEN 'P' THEN 'Public'
+ WHEN 'R' THEN 'Private'
+ WHEN 'G' THEN 'Government'
+ ELSE 'Other' END) AS type
+MERGE (c:Company {companyId: row.Id, hqLocation: coalesce(row.Location, "Unknown")})
+SET c.emailAddress = CASE trim(row.Email) WHEN "" THEN null ELSE row.Email END
+SET c.businessType = type
+RETURN *
+--
+
+=== Clean-up tools
+
+You can use the following third-party tools to make sure your CSV file is in good quality and that you can import data efficiently:
+
+* link:https://csvkit.readthedocs.io/en/latest/[CSVKit] a set of Python tools that provides statistics (csvstat), search (csvgrep), and more.
+* link:http://csvlint.io/[CSVLint] an online service to validate CSV files.
+You can upload the file or provide an URL to load it.
+* link:https://www.papaparse.com/[Papa Parse] a comprehensive Javascript library for CSV parsing that allows you to stream CSV data and provides good, human-readable error reporting on issues.
+
+== File size
+
+Most Neo4j's xref:data-import/index.adoc#_methods_comparison[import methods] are recommended for importing small or medium-sized datasets (up to 10 million records).
+If you want to import larger datasets, see link:https://www.neo4j.com/docs/operations-manual/current/import/#import-tool-full[`neo4j-admin database import full`] and link:https://www.neo4j.com/docs/operations-manual/current/import/#import-tool-incremental[`neo4j-admin database import incremental`].
+
+== Optimization
+
+Often, there are ways to improve performance during data load.
+This can be helpful when dealing with large amounts of data or complex loading.
+
+To improve inserting or updating unique entities into your graph (using `MERGE` or `MATCH` with updates), you can create indexes and constraints declared for each of the labels and properties you plan to merge or match on.
+
+[TIP]
+====
+For best performance, always `MATCH` and `MERGE` on a single label with the indexed primary-key property.
+====
+
+Suppose you use xref:#_converting_data_values[the preceding *companies.csv* file], and now you have a file that contains people and which companies they work for:
+
+.people.csv
+[source]
+----
+employeeId,Name,Company
+1,Bob Smith,1
+2,Joe Jones,3
+3,Susan Scott,2
+4,Karen White,1
+----
+
+You should also separate node and relationship creation on a separate processing.
+For instance, instead of the following:
+
+[source,cypher,role= nocopy noplay]
+----
+MERGE (e:Employee {employeeId: row.employeeId})
+MERGE (c:Company {companyId: row.companyId})
+MERGE (e)-[r:WORKS_FOR]->(c)
+----
+
+You can write it like this:
+
+[source,cypher,role=noplay]
+----
+// clear data
+MATCH (n)
+DETACH DELETE n;
+// load Employee nodes
+LOAD CSV WITH HEADERS FROM 'file:///people.csv' AS row
+MERGE (e:Employee {employeeId: row.employeeId, name: row.Name})
+RETURN count(e);
+// load Company nodes
+LOAD CSV WITH HEADERS FROM 'file:///companies.csv' AS row
+WITH row WHERE row.Id IS NOT NULL
+WITH row,
+(CASE row.BusinessType
+ WHEN 'P' THEN 'Public'
+ WHEN 'R' THEN 'Private'
+ WHEN 'G' THEN 'Government'
+ ELSE 'Other' END) AS type
+MERGE (c:Company {companyId: row.Id, hqLocation: coalesce(row.Location, "Unknown")})
+SET c.emailAddress = CASE trim(row.Email) WHEN "" THEN null ELSE row.Email END
+SET c.businessType = type
+RETURN count(c);
+// create relationships
+LOAD CSV WITH HEADERS FROM 'file:///people.csv' AS row
+MATCH (e:Employee {employeeId: row.employeeId})
+MATCH (c:Company {companyId: row.Company})
+MERGE (e)-[:WORKS_FOR]->(c)
+RETURN *;
+----
+
+This way, the load is only doing one piece of the import at a time and can move through large amounts of data quickly and efficiently, reducing heavy processing.
