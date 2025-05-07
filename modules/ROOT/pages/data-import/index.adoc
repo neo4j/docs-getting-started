@@ -128,4 +128,4 @@ See the link:https://neo4j.com/docs/import/[Import] page for more related links 
 * link:https://graphacademy.neo4j.com/courses/importing-fundamentals/[Importing Data Fundamentals]: An interactive course on the fundamentals of data importing with Neo4j.
 * link:https://graphacademy.neo4j.com/courses/importing-cypher/[Importing CSV data into Neo4j]: An interactive course on how to import CSV data into Neo4j using Cypher.
 * xref:data-import/import-relational-and-etl.adoc[Tutorial: Import data from a relational database]: Import relational data into a Neo4j deployment.
-* xref:appendix/tutorials/guide-import-desktop-csv.adoc[How-To: Import CSV data with Neo4j Desktop]: Read how to import CSV data using Neo4j Desktop.
+* xref:data-import/import-desktop-csv.adoc[Tutorial: Import CSV data with Neo4j Desktop]: Read how to import CSV data using Neo4j Desktop.
