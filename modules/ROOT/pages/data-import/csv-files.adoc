@@ -1,19 +1,18 @@
 = Working with CSV files
 :description: This page gives an overview of what is a dataset in CSV format and how to work with it when importing it into Neo4j.
 
-When working with CSV files as the format of your data to be imported into Neo4j, there are a few points to be considered so that you can better use the available tools.
-This page addresses the details of a CSV file and other recommendations when importing them.
+This page presents some points to consider to optimize your CSV files before importing them to Neo4j.
 
 == Structure of a CSV file
 
-When analyzing the content of a CSV files, there are several elements that can help you understand the data that you are importing and xref:data-modeling/index.adoc[modeling] later on.
+There are several elements in a CSV file that can help you understand the data that you are about to import and eventually xref:data-modeling/index.adoc[model].
 
 === Data format
 
 All data from the CSV file is read as a string, so you need to use `toInteger()`, `toFloat()`, `split()`, or similar functions to convert values, when needed.
 Remember also that labels, property names, relationship types, and variables are *case-sensitive*.
 
-See more information on how to manipulate data formats in the xref:#_converting_data_values[Converting data values] section.
+See xref:#_converting_data_values[Converting data values] for more information on how to manipulate data formats.
 
 === Field terminator
 
@@ -44,7 +43,7 @@ In the xref:#_field_terminator[previous example], the header was:
 personId,name,birthYear
 --
 
-When working with CSV files with no header row, you will need to know the order of the columns and refer to them through link:https://neo4j.com/docs/cypher-manual/current/indexes/[indexes].
+If your CSV files have no header row, you need to know the order of the columns and refer to them using link:https://neo4j.com/docs/cypher-manual/current/indexes/[indexes] instead.
 This can make working with the data more complicated than it needs to be.
 
 === Quotes
@@ -61,12 +60,12 @@ personId,name,birthYear
 --
 
 This CSV file uses commas as the xref:#_field_terminator[field terminator character] and, in the second row `names`, entries such as `Pires, Gerard` also contain a comma.
-If the entry `Pires, Gerard` wasn't between quotation marks, it would count as two different entries (i.e. one for `Pires` and another for `Gerard`).
+If the entry `Pires, Gerard` wasn't enclosed with quotation marks, it would count as two different entries (i.e. one for `Pires` and another for `Gerard`).
 
 === Normalized data
 
-If the source data is normalized (e.g. when exported from a relational data model), there will typically be multiple CSV files.
-Each CSV file will represent a table in the relational data model, and the files will be related to each other by unique IDs.
+If the source data is normalized (e.g. when exported from a relational data model), there are typically multiple CSV files.
+Each CSV file represents a table in the relational data model, and the files are related to each other by unique IDs.
 
 In this normalized data example, there are three files for people, movies, and roles:
 
@@ -103,7 +102,7 @@ The `roles.csv` file relates a person to a movie and provides the characters.
 === De-normalized data
 
 De-normalized data typically represents data from multiple tables.
-If the source data is de-normalized, there will typically be a single CSV file which contains all the data, often duplicated where there are relationships between entities.
+If the source data is de-normalized, there is typically a single CSV file which contains all the data, often duplicated where there are relationships between entities.
 For example:
 
 .`movies-n.csv`
@@ -149,7 +148,7 @@ If you want to open your CSV file from another location, you need to change the 
 
 == File preparation
 
-The first thing you need to consider when importing CSV data is the *source* of this file.
+The first thing you need to consider before you import CSV data is the *source* of the data.
 It could be coming from:
 
 * Relational databases
@@ -167,28 +166,29 @@ If allowing an insecure protocol is unavoidable, you need to add the JVM argumen
 ====
 
 Most data systems have an option for exporting data to CSV files as it is a common format for data exchange.
-However, real-world data is messy, which means some values need to be cleaned up or transformed before you import it to another system.
+However, real-world data is often messy, which means some values need to be cleaned up or transformed before imported to another system.
 
-Here are the most common issues you may encounter:
+These are some common issues you may encounter:
 
 . *The source files contains more data than you need*
 +
 For example, you could be interested only in movies directed by a certain individual instead of the whole xref:appendix/example-data.adoc[Movies dataset].
-This means you would need to remove irrelevant information _before_ you import the CSV file into Neo4j, thus making the process easier and more efficient in the long run.
+To make the import process more efficient, you need to remove the unnecessary data _before_ you import the CSV files.
 
 . *Inconsistency between headers and data*
 +
-Headers can become inconsistent with data as they could be missing, or be lost in too many columns, or different delimiters are used.
+Headers can be inconsistent with data.
+They could be missing, or be lost in too many columns, or maybe different delimiters are used.
 When putting the data into a graph, there may not be a 1-1 mapping from the CSV file to a node or relationship.
 +
 To avoid this sort of problem:
 +
 * Check if headers match the data in the file.
-* Adjust formatting, delimiters, columns, etc at this stage, so you don't need to spend more time later.
+* Adjust formatting, delimiters, columns, etc _before_ you import for a smooth process.
 
 . *Extra or missing quotes*
 +
-Standalone double (`""`) or single quotes (`'`) in the middle of non-quoted text or non-escaped quotes in quoted text can cause issues when reading the file for loading.
+Standalone double (`"`) or single quotes (`'`) in the middle of non-quoted text or non-escaped quotes in quoted text can cause issues when reading the file for loading.
 It is best to either escape *or* remove stray quotes.
 Find documentation for proper escaping in the link:https://neo4j.com/docs/cypher-manual/current/styleguide/#cypher-styleguide-meta-characters[Cypher style guide].
 
@@ -199,7 +199,6 @@ For newline characters in quoted or unquoted fields, either add quotes for these
 
 . *Inconsistent line breaks*
 +
-Computers do not handle well is inconsistent data.
 Ensure line breaks are consistent throughout the file.
 The recommendation is to use the Unix style for compatibility with Linux systems (common format for import tools).
 
@@ -252,7 +251,7 @@ SET c.emailAddress = CASE trim(row.Email) WHEN "" THEN null ELSE row.Email END
 
 *Lists as entries*
 
-If you have a field in the CSV that is a list of items that you want to split, you can use the Cypher `split()` function to separate arrays in a cell.
+If you have a field in the CSV file that is a list of items that you want to split into separate rows, you can use the Cypher `split()` function to separate arrays in a cell.
 For example:
 
 .employees.csv
@@ -264,7 +263,7 @@ Id,Name,Skills,Email
 3,Trevor Scott,Java:JavaScript,trevor@neo4j.com
 --
 
-Note that Joe Smith and Trevor Scott have multiple skills.
+Both Joe and Trevor have multiple skills listed in this file.
 You can split them like this:
 
 [source,cypher]
@@ -282,7 +281,7 @@ MERGE (e)-[r:HAS_EXPERIENCE]->(s)
 Conditional conversions can be achieved with `CASE`.
 The previous example checked for null values or empty strings, but you can also set a property in this cleaning stage based on a value in the CSV file.
 
-For example, you can set the `businessType` property based on shortened value in CSV:
+For example, you can set the `businessType` property based on an abbreviated value in the CSV file:
 
 [source,cypher]
 --
@@ -302,7 +301,7 @@ RETURN *
 
 === Clean-up tools
 
-You can use the following third-party tools to make sure your CSV file is in good quality and that you can import data efficiently:
+You can use the following third-party tools to make sure your CSV file is in good shape to allow you to import data efficiently:
 
 * link:https://csvkit.readthedocs.io/en/latest/[CSVKit] a set of Python tools that provides statistics (csvstat), search (csvgrep), and more.
 * link:http://csvlint.io/[CSVLint] an online service to validate CSV files.
@@ -311,15 +310,16 @@ You can upload the file or provide an URL to load it.
 
 == File size
 
-Most Neo4j's xref:data-import/index.adoc#_methods_comparison[import methods] are recommended for importing small or medium-sized datasets (up to 10 million records).
-If you want to import larger datasets, see the tutorial for link:https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/[Neo4j-admin import].
+You can use most Neo4j's xref:data-import/index.adoc#_methods_comparison[import methods] for importing small or medium-sized datasets (up to 10 million records).
+If you want to import larger datasets, it is recommended to use link:https://neo4j.com/docs/operations-manual/current/import/[`neo4j-admin database import`].
+See the tutorial for link:https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/[Neo4j-admin import] to learn more.
 
 == Optimization
 
 Often, there are ways to improve performance during data load.
 This can be helpful when dealing with large amounts of data or complex loading.
 
-To improve inserting or updating unique entities into your graph (using `MERGE` or `MATCH` with updates), you can create indexes and constraints declared for each of the labels and properties you plan to merge or match on.
+To make it easier and faster to insert or update unique entities with `MERGE` or `MATCH`, create indexes and constraints on the labels and properties you are going to use.
 
 [TIP]
 ====
