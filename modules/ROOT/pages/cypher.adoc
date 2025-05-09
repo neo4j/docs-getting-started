@@ -113,43 +113,18 @@ This can affect performance in very large graphs.
 
 ==== Node variables
 
-Though not mandatory, variables are particularly useful when querying a database, as they allow referencing specified nodes in subsequent clauses without writing their label in full.
+It is necessary to bind matched data entities to variables in order to reference them in subsequent clauses.
 
 Variables can be single letters or words, and should be written in lower-case.
 For example, if you want to bind all nodes labeled `Person` to the variable `p`, you write `(p:Person)`.
 Likewise, if you want to use a full word, then you can write `(person:Person)`.
 
-In a link:{docs-home}/cypher-manual/current/clauses/match/[`MATCH`] query to retrieve all nodes labeled `Person`, this is how it looks like:
-
-[cols="<,<",options="header"]
-|===
-| **Without variable**
-| **With variable** 
-
-a| [source,cypher]
-----
-MATCH (:Person)
-RETURN Person
-----
-a| [source,cypher]
+.Retrieve all Person nodes
+[source, cypher]
 ----
 MATCH (p:Person)
 RETURN p
 ----
-|===
-
-Note that in the example without a variable, the node `Person` is preceded by a colon (`:`).
-This is how you prevent a type or label of becoming a variable.
-
-In case you forget to add a colon and write the query like this:
-
-[source,cypher]
-----
-MATCH (Person)
-RETURN Person
-----
-
-Then `Person` would be a variable, not a type or label.
 
 [#cypher-relationships]
 === Relationships
