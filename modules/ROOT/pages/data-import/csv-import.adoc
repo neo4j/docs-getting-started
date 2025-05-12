@@ -3,12 +3,13 @@
 :description: This tutorial shows how to use the command LOAD CSV to import small to medium datasets in CSV format into Neo4j using Aura and on-premise deployments.
 :page-pagination:
 
-Neo4j supports xref:data-import/index.adoc#_methods_comparison[different methods] of importing CSV files, each catering for specific needs such as dataset size, link:{docs-home}/deployment-method[deployment method], and familiarity with Cypher.
+Neo4j supports xref:data-import/index.adoc#_methods_comparison[different methods] of importing data.
+Which method to use depends on factors like dataset size, link:{docs-home}/deployment-method[deployment method], and familiarity with Cypher.
 This tutorial shows how to import CSV data into Neo4j using link:https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[`LOAD CSV`] command.
 
 [TIP]
 ====
-For a more interactive experience, enroll to the GraphAcademy course link:https://graphacademy.neo4j.com/courses/importing-cypher/[Importing CSV data into Neo4j].
+For a more hands-on experience, enroll in the GraphAcademy course link:https://graphacademy.neo4j.com/courses/importing-cypher/[Importing CSV data into Neo4j].
 To import larger CSV files into Neo4j, see the tutorial for link:https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/[Neo4j-admin import].
 ====
 
