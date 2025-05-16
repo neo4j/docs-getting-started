@@ -63,7 +63,7 @@ Here is a to-do list that will help you check the imported data:
 --
 LOAD CSV WITH HEADERS
 FROM 'https://data.neo4j.com/importing-cypher/people.csv'
-as row
+AS row
 RETURN count(row)
 --
 +
@@ -72,12 +72,107 @@ RETURN count(row)
 
 . Search for typos in the data and in the queries.
 
+== Filtering loaded data
+
+After inspecting the data, you may only want to view or load a subset of the data in the CSV file. 
+You can filter what you view (or load), for example, by choosing to view only those who were born in 1942:
+
+[source,cypher]
+--
+LOAD CSV WITH HEADERS
+FROM 'https://data.neo4j.com/importing-cypher/people.csv' 
+AS row
+WITH row WHERE row.birthYear = '1942'
+RETURN row
+--
+
+The result will be:
+
+[options=header,cols=1]
+|===
+
+|row
+|{
+    +
+  "birthYear": "1942", 
+  +
+  "name": "Gerard Pires",
+  +
+  "personId": "23945"
+  +
+}
+|===
+
+Note that in the query, you needed to refer to the year of 1942 as a string (encased by a single quote `'`).
+This is because xref:data-import/csv-files.adoc#_data_types[`LOAD CSV` reads all values as a string].
+In the next step, you will learn how to convert the values to their respective types.
+
+== Convert data types
+
+In the *people.csv* file, you have data such as the birthyear and the ID number for each person.
+You can convert these values into temporal and numerical types for a better processing of the data, since `LOAD CSV` only reads values as tring.
+
+`personId` can be turned into an interger by using the `toInteger()` function, and `birthYear` *could* be turned into a date format by using the  the `datetime()` function:
+
+[source, cypher]
+----
+LOAD CSV WITH HEADERS
+FROM 'https://data.neo4j.com/importing-cypher/people.csv'
+AS row
+WITH toInteger(row.personId) AS personId, date(row.birthYear) AS birthYear
+RETURN personId, birthYear
+----
+
+.Result
+[options=header,cols="1,1"]
+|===
+
+| personId
+| birthYear
+
+|23945	
+|"1942-01-01"
+
+|553509	
+|"1941-01-01"
+
+|113934	
+|"1939-01-01"
+
+|===
+
+Note that despite of `birthYear` having information only about the year, when converted into a `date` type, Cypher automatically defaults to January 1st of the specified year.
+
 == Model your data
 
-Before you import data into Neo4j, there is no structure, only the dataset itself.
-As you import data, however, you create the graph data model.
+[TIP]
+====
+Follow the xref:data-modeling/tutorial-data-modeling.adoc[Tutorial: Create a graph data model] to learn more.
+====
 
-Refer to the xref:data-modeling/index.adoc[Data modeling section] or follow the xref:data-modeling/tutorial-data-modeling.adoc[Tutorial: Create a graph data model] to learn more.
+Before you import data into Neo4j, there is no structure, only the dataset itself.
+As you import data, however, you create the xref:data-modeling/index.adoc[graph data model].
+
+Now that you have imported the data, you need to organize it into a graph.
+You could use the `CREATE` clause to do so, but it would only be advisable where you are sure that you will not have duplicate rows in your CSV file.
+
+Since this is hard to avoid completly and since often data is not perfectly clean in the source file, the `MERGE` clause is the most advisable one.
+In this case, if the node or relationship already exists, Cypher will match and return them (without any writes), but if they don't exist, Cypher will then insert it.
+
+[source, cypher]
+--
+LOAD CSV WITH HEADERS
+FROM 'https://data.neo4j.com/importing-cypher/people.csv'
+AS row
+WITH toInteger(row.personId) AS personId, row.name AS Person, date(row.birthYear) AS birthYear
+MERGE (p:Person {personId: personId})
+  SET p.name = Person, p.birthYear = birthYear
+RETURN p
+--
+
+Your graph should look like this:
+
+image::import-peoplecsv.svg[The graph resulted from the importing of the people csv file,role=popup,width=600]
 
 == Keep learning
 

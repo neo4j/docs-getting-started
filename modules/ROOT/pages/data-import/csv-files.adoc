@@ -207,6 +207,20 @@ The recommendation is to use the Unix style for compatibility with Linux systems
 Unusual characters or tool-specific formatting are sometimes hidden in application tools.
 You can use a basic editor to detect and remove this type of characters from your files or link:https://neo4j.com/docs/cypher-manual/current/syntax/naming/#symbolic-names-escaping-rules[use backticks to escape them].
 
+=== Data types
+
+The `LOAD CSV` command reads all values as a string, which means that no matter how the value appears in a file, it will be loaded as a string.
+So, before you import, make sure you convert any values that are non-string.
+
+There are a variety of conversion functions in Cypher, for example:
+
+* `*toInteger()*`: converts a value to an integer.
+* `*toFloat()*`: converts a value to a float (e.g. for monetary amounts).
+* `*datetime()*`: converts a value to a `DateTime`.
+
+Depending on what sort of data you have in your CSV file, you need to choose different types.
+See link:https://neo4j.com/docs/cypher-manual/current/values-and-types/[Cypher -> Values and types] for more information on what values and types are available in Cypher..
+
 == Cleaning up
 
 You can clean up the file while loading it into Neo4j and so address the following scenarios.
