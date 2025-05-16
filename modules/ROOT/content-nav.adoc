@@ -32,7 +32,6 @@
 * xref:data-import/index.adoc[Import data into Neo4j]
 ** xref:data-import/csv-files.adoc[]
 ** xref:data-import/csv-import.adoc[Using `LOAD CSV`]
-** xref:appendix/tutorials/guide-import-desktop-csv.adoc[Using Neo4j Desktop]
 ** xref:data-import/json-rest-api-import.adoc[]
 ** xref:data-import/relational-to-graph-import.adoc[]
 

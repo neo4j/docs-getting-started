@@ -78,3 +78,12 @@ Before you import data into Neo4j, there is no structure, only the dataset itsel
 As you import data, however, you create the graph data model.
 
 Refer to the xref:data-modeling/index.adoc[Data modeling section] or follow the xref:data-modeling/tutorial-data-modeling.adoc[Tutorial: Create a graph data model] to learn more.
+
+== Keep learning
+
+Depending on where you are getting your CSV file from, you will likely need to work on it beforehand.
+Here is some complementary material you can refer to as you continue learning:
+
+* xref:data-import/csv-files.adoc[*Working with CSV files*]: read about the structure of a CSV file and understand how data is organized.
+* xref:data-import/csv-files.adoc#_cleaning_up[*Cleaning up CSV files*]: see how to use the `LOAD CSV` command to clean up the file while importing.
+* xref:data-import/csv-files.adoc#_optimization[*Optimization*]: improve performance when working with large amounts of data or complex loading.
