@@ -8,29 +8,28 @@ The purpose is to get an overview of the options available for building graph da
 
 == Intermediate nodes
 
-Intermediate nodes are often not identified in the initial data model, but added during refactoring to improve performance of your graph.
-They are nodes that contain data that needs to be in the graph, but don't seem to fit neatly anywhere in the beginning of the modeling process.
+Intermediary nodes are nodes that contain data that need to be in the graph but don't seem to fit neatly into the initial model.
 
-You could solve the problem by using a single relationship to connect *more* than two nodes.
-This type of relationship is called a *hyperedge* and these are used in mathematical graphs.
-However, hyperedges are *not* supported in Neo4j and can instead be refactored into *intermediate nodes*.
+Sometimes you need to convey a lot of information in a relationship.
+In a mathematical graph, this can be solved with a *hyperedge*, i.e. a relationship that connects more than two nodes.
+This is not supported in Neo4j but can be solved by using an intermediary node.
 
-One way to identify that you’re dealing with a potential hyperedge is when you want to contain information in a relationship rather than a node. 
+
 For example, consider a person who works at a company and you need to convey information about their role:
 
 image::hyperedge.svg[An example of a hyperedge in which a relationship is connected to two nodes, a feature not available in Neo4j,width=400,role=popup]
 
 In a mathematical graph, you could use the same relationship `WORKED_AT` to connect the `Person` node with both `Role` and `Company` nodes.
-However, in Neo4j, you can't do it.
+However this is not supported in Neo4j.
 
 Instead, you could either turn the `Role` node into a property of the `WORKED_AT` relationship or use an *intermediate node* between the `Person`, `Company`, and `Role` nodes:
 
 image::refactored-hyperedge.svg[Instead of using one single relationship to both Company and Role nodes, an intermediary Employment node can solve the problem of incompatibility of hyperedges in Neo4j,width=500,role=popup]
 
-In this new graph, instead of saying Patrick works at company Acme, it’s phrased as Patrick having an employment event, which becomes a new node.
+In this new graph, instead of saying Patrick works at company Acme, Patrick has an *employment event*, which becomes a new node.
 The employment event holds the employment start and end dates, and logically relates to the other three nodes. 
 
-Despite the idea of an employment event being an abstract idea, it provides a good way to link any amount of related additional information.
+Despite the fact that an employment event is an abstract idea, it is a good way to link related additional information.
 
 === Sharing context
 
@@ -38,11 +37,12 @@ In this expanded version of the previous example, a new `Person` node with the n
 
 image::intermediate-nodes-employement-sharing-context-example.svg[Graph showing shared context between employment and company nodes,width=600,role=popup]
 
-In this iteration, the `Person` nodes share context through `Role` and `Company` nodes.
+This expanded example highlights the ability to show shared context between multiple nodes using a common event (the intermediary node).
+Specifically in this example, the `Person` nodes share context through `Role` and `Company` nodes.
 The `Employment` nodes provide a way to trace details such as a person's career, or the overlap between different individuals at the same `Company`, or those who had the same `Role`.
 
-This modeling design can also answer the question "Who worked at the same company at the same time?" as it contains information about when each individual worked at a certain company.
-The question can be answered with a `MATCH` query that will show that Patrick and David both worked at Acme, being colleagues from 2004 to 2005.
+The use of intermediary nodes can also answer the question "Who worked at the same company at the same time?" as the added employment event contains information about when each individual worked at a certain company.
+A `MATCH` clause would show that Patrick and David both worked at Acme, being colleagues from 2004 to 2005 since their employment events overlap during that time.
 
 === Sharing data
 
@@ -81,10 +81,10 @@ In summary, you're likely to find many uses for intermediate nodes during refact
 == Linked list
 
 Linked lists are commonly used in computer science and they are particularly useful whenever the sequence of objects matters.
-It is good practice to use verbs as relationship types, however, it is very common with linked lists to connect sequential items using terms such as "next" and "previous" instead.
-
 In this data structure, a simple-linked list is where each node links to the next node only, whereas in a double-linked list, each node links both to the next and the previous node.
 Neo4j *does not* support double-linked lists.
+It is good and common practice to use verbs as relationship types, however, with linked lists, it is acceptable to connect sequential items using terms such as "next" and "previous" instead.
+
 For example:
 
 [cols="<,<",options="header"]
@@ -102,7 +102,7 @@ a| image::double-linked-list.svg[Episodes of Dr Who doubly linked with next and 
 A list of items is not always sequential.
 When nodes are connected in a nonlinear fashion, they are referred to as an interleaved linked list.
 
-Interleaved lists are used when you want to sequence a set of list based on context, not necessarily a sequence in time.
+Interleaved lists are used when you want to sequence a set of items based on context, not necessarily a sequence in time.
 This example combines a linked list with an interleaved linked list of Dr. Who episodes:
 
 image::interleaved-list.svg[Example of interleaved list connecting Dr Who episodes with next and next in production relationships,width=700,role=popup]
@@ -127,7 +127,7 @@ In this example, you can see a `FIRST` and a `LAST` relationship, referring to t
 image::head-tail-list.svg[List of five Dr Who episodes from season twelve, showing the first and the last through a relationship with the season node,width=700,role=popup]
 
 Some implementations also have a "progress" pointer that is used to keep track of the current node of interest.
-This can be done through a relationship, for example:
+This can be done through a relationship, as such:
 
 image::latest-aired.svg[The latest aired episode is pointed with the help of a latest aired relationship coming from the season node,width=700,role=popup]
 
@@ -148,13 +148,13 @@ This example features subdivisions for each branch in years, months, and days, a
 
 image::timeline-tree.svg[Graph with two different timeslines divided in years, months, and days and what purchases are connected to these dates,width=600,role=popup]
 
-This timeline tree structure shows how otherwise expensive queries can be answered more quickly.
+This timeline tree structure shows how you can quickly answer otherwise expensive questions.
 For instance, if you want to find all purchases that happened at a given time period, such as every purchase in the month of December 2012, you only need to:
 
 . Navigate from the 2012 `Year` node to December (`Month` node with the property value "12").
 . Fetch everything from the connected leaf nodes (that is, nodes with no descendants) under that branch.
 
-If you were, instead, working with a data model with no timeline tree, this same question could require a great deal of property lookups and a lot of inefficient gather-and-inspect.
+If you were, instead, working with a data model that uses time as the navigator instead of as the anchor, this same question would require a great deal of property lookups and a lot of inefficient gather-and-inspect.
 
 == Time-bound data
 
