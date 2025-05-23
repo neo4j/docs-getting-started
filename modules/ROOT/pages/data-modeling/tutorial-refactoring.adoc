@@ -1,329 +1,349 @@
-[[graph-model-refactoring]]
-= Graph model refactoring
-:tags: graph-modeling, data-model, schema, refactoring, apoc
-:description: This guide provides a working example of changing a graph model. Upon finishing this guide, you should be able to evolve your graph model based on changing requirements.
+= Tutorial: Refactor a graph data model
+:description: This tutorial teaches you how to refactor your graph data model.
 
-== Introduction
+Refactoring is the process of changing the data model and the graph.
+The main reasons why you would need to refactor a data model include:
 
-Building on the Cypher basic concepts, this guide provides a working example of changing a graph model.
-Upon finishing this guide, you should be able to evolve your graph model based on changing requirements.
+* The graph as modeled does not cover all of the use cases.
+* A new use case has come up.
+* The Cypher for the use cases does not perform optimally, especially when the graph scales.
 
+In order to address these demands, this tutorial guides you through the design, implementation, and testing of a refactored data model with updated Cypher.
 
-[#airports-dataset]
-== Airports dataset
+== Pre-requisites
 
-This guide uses an airports dataset that contains connections between US airports in January, 2008.
-The data is presented in a CSV file.
-Below you can see the graph model of the database:
+This tutorial is a follow-up to xref:data-modeling/tutorial-data-modeling.adoc[Tutorial: Create a graph data model].
+You need the data model created there before proceeding.
 
-image::initial_model-arr.svg[role="popup-link", width=600]
-
-Before importing any data, you should create a unique constraint on the `Airport` label and `code` property to ensure that you don't accidentally import duplicate airports.
-The following query creates the constraint:
+Optionally, you can also create it from scratch now.
+Choose your preferred link:{docs-home}/deployment-options[deployment method] and use this code to add the data:
 
 [source,cypher]
-----
-CREATE CONSTRAINT airport_id
-FOR (airport:Airport) REQUIRE airport.code IS UNIQUE
-----
+--
+CREATE (Apollo13:Movie {title: 'Apollo 13', tmdbID: 568, released: '1995-06-30', imdbRating: 7.6, genres: ['Drama', 'Adventure', 'IMAX']})
+CREATE (TomH:Person {name: 'Tom Hanks', tmdbID: 31, born: '1956-07-09'})
+CREATE (MegR:Person {name: 'Meg Ryan', tmdbID: 5344, born: '1961-11-19'})
+CREATE (DannyD:Person {name: 'Danny DeVito', tmdbID: 518, born: '1944-11-17'})
+CREATE (JackN:Person {name: 'Jack Nicholson', tmdbID: 514, born: '1937-04-22'})
+CREATE (SleeplessInSeattle:Movie {title: 'Sleepless in Seattle', tmdbID: 858, released: '1993-06-25', imdbRating: 6.8, genres: ['Comedy', 'Drama', 'Romance']})
+CREATE (Hoffa:Movie {title: 'Hoffa', tmdbID: 10410, released: '1992-12-25', imdbRating: 6.6, genres: ['Crime', 'Drama']})
 
-.Results
-|===
-| 0 rows available after 86 ms, consumed after another 0 ms. Added 1 constraints
-|===
+MERGE (TomH)-[:ACTED_IN {roles:'Jim Lovell'}]->(Apollo13)
+MERGE (TomH)-[:ACTED_IN {roles:'Sam Baldwin'}]->(SleeplessInSeattle)
+MERGE (MegR)-[:ACTED_IN {roles:'Annie Reed'}]->(SleeplessInSeattle)
+MERGE (DannyD)-[:DIRECTED]->(Hoffa)
+MERGE (DannyD)-[:ACTED_IN {roles:'Robert "Bobby" Ciaro'}]->(Hoffa)
+MERGE (JackN)-[:ACTED_IN {roles:'Hoffa'}]->(Hoffa)
 
-And the following query loads the data from a CSV file using the `LOAD CSV` tool:
+CREATE (Sandy:User {name: 'Sandy Jones', userID: 1})
+CREATE (Clinton:User {name: 'Clinton Spencer', userID: 2})
 
-[source,cypher]
-----
-LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/neo4j-contrib/training/master/modeling/data/flights_1k.csv" AS row
-MERGE (origin:Airport {code: row.Origin})
-MERGE (destination:Airport {code: row.Dest})
-MERGE (origin)-[connection:CONNECTED_TO {
-  airline: row.UniqueCarrier,
-  flightNumber: row.FlightNum,
-  date: date({year: toInteger(row.Year), month: toInteger(row.Month), day: toInteger(row.DayofMonth)}),
-  cancelled: row.Cancelled,
-  diverted: row.Diverted}]->(destination)
-ON CREATE SET connection.departure = localtime(apoc.text.lpad(row.CRSDepTime, 4, "0")),
-              connection.arrival = localtime(apoc.text.lpad(row.CRSArrTime, 4, "0"))
-----
+MERGE (Sandy)-[:RATED {rating:5}]->(Apollo13)
+MERGE (Sandy)-[:RATED {rating:4}]->(SleeplessInSeattle)
+MERGE (Clinton)-[:RATED {rating:3}]->(Apollo13)
+MERGE (Clinton)-[:RATED {rating:3}]->(SleeplessInSeattle)
+MERGE (Clinton)-[:RATED {rating:3}]->(Hoffa)
+--
 
-This query:
+== Remaining or new use cases
 
-* Creates a node with an `Airport` label with a `code` property that has a value from the `Origin` column in the CSV file.
-* Creates a node with an `Airport` label with a `code` property that has a value from the `Dest` column in the CSV file.
-* Creates a relationship of type `CONNECTED_TO` with several properties based on columns in the CSV file.
+Suppose that you want to know what movies are available in a particular language.
 
-If you run this query, you will see the following output:
+To answer that question, you need to first add this information to the graph the same way you did when adding information about users in the xref:data-modeling/tutorial-data-modeling.adoc[Tutorial: Create a graph data model].
+However, adding new data poses the risk of duplication, which, in turn, affects the xref:#check-the-graph-performance[performance of your graph].
 
-.Results
-|===
-| Added 62 labels, created 62 nodes, set 7062 properties, created 1000 relationships, completed after 376 ms.
-|===
-
-This is a starting model, but there are some improvements that you can make.
-
-[#property-to-boolean]
-== Convert property to boolean
-
-The `diverted` and `cancelled` properties on the `CONNECTED_TO` relationships contain string values of `1` and `0`.
-Since these values are representing booleans, you can use the link:https://neo4j.com/docs/apoc/current/overview/apoc.refactor/apoc.refactor.normalizeAsBoolean/[`apoc.refactor.normalizeAsBoolean`] procedure to convert the values from strings to booleans.
-
-image::boolean_refactoring-arr.svg[role="popup-link", width=600]
-
-The following query does the conversion for the `diverted` property:
+To illustrate this situation, add the new property `languages` to the 'Movie' nodes and its corresponding values:
 
 [source,cypher]
-----
-MATCH (:Airport)-[connectedTo:CONNECTED_TO]->(:Airport)
-CALL apoc.refactor.normalizeAsBoolean(connectedTo, "diverted", ["1"], ["0"])
-RETURN count(*)
-----
+--
+MATCH (Apollo13:Movie {title:'Apollo 13'})
+MATCH (SleeplessInSeattle:Movie {title:'Sleepless in Seattle'})
+MATCH (Hoffa:Movie {title:'Hoffa'})
+SET Apollo13.languages = ['English']
+SET SleeplessInSeattle.languages = ['English']
+SET Hoffa.languages = ['English', 'Italian', 'Latin']
+--
 
-.Results
-[opts="header"]
-|===
-| count(*)
-| 1000
-|===
+Your updated graph should look like this:
 
-And the following query does the conversion for the `cancelled` property:
+image::movie-languages.svg[Graph with person and movie nodes connected through acted in and directed relationships, now with added property for movie languages, 500, 500, role=popup]
 
-[source,cypher]
-----
-MATCH (origin:Airport)-[connectedTo:CONNECTED_TO]->(departure)
-CALL apoc.refactor.normalizeAsBoolean(connectedTo, "cancelled", ["1"], ["0"])
-RETURN count(*)
-----
-
-.Results
-[opts="header"]
-|===
-| count(*)
-| 1000
-|===
-
-If you have a lot of relationships to update, you may get an `OutOfMemory` exception when trying to refactor them all in one transaction.
-You can therefore process the relationships in batches using the link:https://neo4j.com/docs/apoc/current/graph-updates/periodic-execution/#periodic-execution-proc-overview[`apoc.periodic.iterate`] procedure.
-The following query does this for the `cancelled` and `reverted` properties in the same query:
+If you want to retrieve all movies in English, execute this query:
 
 [source,cypher]
-----
-UNWIND ["cancelled", "reverted"] AS propertyToDelete
-CALL apoc.periodic.iterate(
-  "MATCH (:Airport)-[connectedTo:CONNECTED_TO]->(:Airport) RETURN connectedTo",
-  "CALL apoc.refactor.normalizeAsBoolean(connectedTo, $propertyToDelete, ['1'], ['0'])
-   RETURN count(*)",
-  {params: {propertyToDelete: propertyToDelete}, batchSize: 100})
-YIELD batches
-RETURN propertyToDelete, batches
-----
+--
+MATCH (m:Movie)
+WHERE 'English' IN m.languages
+RETURN m.title
+--
 
-For more details about the `UNWIND` clause, see the link:https://neo4j.com/docs/cypher-manual/current/clauses/unwind/[Cypher manual -> UNWIND page].
+The result for this query answers the question and returns the movies "Apollo 13", "Sleepless in Seattle", and "Hoffa":
 
-The `apoc.periodic.iterate` procedure in the previous query takes in three parameters:
-
-* An outer Cypher query that finds and returns a stream of `CONNECTED_TO` relationships to be processed.
-* An inner Cypher query that processes those `CONNECTED_TO` relationships, converting to boolean any values for the specified property on those relationships.
-It does this by using the `apoc.refactor.normalizeAsBoolean` procedure, which itself takes in several parameters:
-  ** the entity on which the property exists
-  ** the name of the property to normalize
-  ** a list of values that should be considered `true`
-  ** a list of values that should be considered `false`
-* Configuration values for the procedure, including:
-  ** `params` - parameters passed into those Cypher queries.
-  ** `batchSize`- controls the number of inner statements that are run within a single transaction.
-
-After running the query, you will see the following output:
-
-.Results
-[opts="header"]
+.Result
+[role="queryresult",options="header",cols="1"]
 |===
-| propertyToDelete | batches
-| "cancelled"      | 10
-| "reverted"       | 10
+| m.title 
+
+| "Apollo 13"
+| "Sleepless in Seattle"
+| "Hoffa"
 |===
 
-Once you have done this, you can write the following query to return all cancelled connections:
+This query retrieves all `Movie` nodes and then test whether the `languages` property contains the value `English`.
+This isn't wrong, but as the graph scales, you may encounter two issues:
+
+* *In order to perform the query, all `Movie` nodes must be retrieved* -> As the graph scales, the performance of such queries is diminished by modelling your data this way.
+The alternative to avoid this would be to link:{docs-home}/cypher-manual/current/indexes/search-performance-indexes/managing-indexes/#create-indexes[create an index].
+* *The same property value of the `language` property is duplicated across many `Movie` nodes (in this case, all of them)* -> If many nodes share a same property value, it is a sign that this property value can be made into a new entity, like a node or a relationship, for example.
+
+The solution for these issues is to refactor the property `languages` into a node and connect it to the `Movie` nodes with a new relationship.
+
+[options=header,cols="1a,1a"]
+|===
+
+|Now
+|Refactored
+
+|image::language-before.svg[Movie node with a language property]
+|image::language-after.svg[Movie node connected to a language node via an in language property.]
+
+|===
+
+== Eliminating duplicated data
+
+In order to refactor the node property `languages` into a node, you can use the following query:
 
 [source,cypher]
-----
-MATCH (origin:Airport)-[connectedTo:CONNECTED_TO]->(destination)
-WHERE connectedTo.cancelled
-RETURN origin.code AS origin,
-       destination.code AS destination,
-       connectedTo.date AS date,
-       connectedTo.departure AS departure,
-       connectedTo.arrival AS arrival
-----
+--
+MATCH (m:Movie)
+WITH m, m.languages AS languages
+UNWIND languages AS language
+MERGE (l:Language {name: language})
+MERGE (m)-[:IN_LANGUAGE]->(l)
+REMOVE m.languages
+--
 
-.Results
-[opts="header"]
-|===
-| origin | destination | date | departure | arrival
-| "LAS"  | "OAK"       | 2008-01-03 | 07:00     | 08:30
-| "LAX"  | "SFO"       | 2008-01-03 | 09:05     | 10:25
-| "LAX"  | "OAK"       | 2008-01-03 | 11:00     | 12:15
-| "LAX"  | "SJC"       | 2008-01-03 | 19:30     | 20:35
-| "LAX"  | "SFO"       | 2008-01-03 | 16:20     | 17:40
-| "MDW"  | "STL"       | 2008-01-03 | 11:10     | 12:15
-| "MDW"  | "BDL"       | 2008-01-03 | 08:45     | 11:40
-| "MDW"  | "DTW"       | 2008-01-03 | 06:00     | 08:05
-| "MDW"  | "STL"       | 2008-01-03 | 14:45     | 15:50
-| "MDW"  | "BNA"       | 2008-01-03 | 19:25     | 20:45
-| "OAK"  | "BUR"       | 2008-01-03 | 13:10     | 14:15
-| "OAK"  | "BUR"       | 2008-01-03 | 17:05     | 18:10
-|===
+By breaking down the query, this is what you should be doing:
 
-[#create-node-from-relationship]
-== Create a node from a relationship
+. link:{docs-home}/cypher-manual/current/clauses/unwind/[`UNWIND`] the `languages` property from the `Movie` node and turn their entries into new `Language` nodes.
+. Create the `IN_LANGUAGE` relationship to connect the `Movie` nodes to their respective `Language` nodes:
+. Remove the languages property from the `Movie` node.
 
-With the existing data model, writing a query that finds a specific flight can become a complex task.
-That is because here the flights are represented as relationships.
-However, you can change the model by creating a `Flight` node from the properties stored on the `CONNECTED_TO` relationship:
+Your graph should now look like this:
 
-image::flight_node-arr.svg[role="popup-link", width=600]
+image::language-nodes.svg[Refactored graph with new language nodes for English, Italian, and Latin connected to their respective movie nodes through an in language relationship, role=popup]
 
-The following query does this refactoring:
+After this refactoring, you should have only one `Language` node with the value "English" and the equivalent movies connected to it.
+This eliminates a lot of duplication in the graph and improves performance when the graph scales.
+
+== Dealing with complex data
+
+Suppose a new use case has come up that requires information about the producers of each film.
+Part of the data about the producers include their physical address, which is what can be considered complex data.
+
+You can add this information to the graph by creating a `ProductionCompany` node and an `address` property:
 
 [source,cypher]
-----
-CALL apoc.periodic.iterate(
-  "MATCH (origin:Airport)-[connected:CONNECTED_TO]->(destination:Airport) RETURN origin, connected, destination",
-  "CREATE (flight:Flight {
-     date: connected.date,
-     airline: connected.airline,
-     number: connected.flightNumber,
-     departure: connected.departure,
-     arrival: connected.arrival,
-     cancelled: connected.cancelled,
-     diverted: connected.diverted
-   })
-   MERGE (origin)<-[:ORIGIN]-(flight)
-   MERGE (flight)-[:DESTINATION]->(destination)
-   DELETE connected",
-  {batchSize: 100})
-----
+--
+CREATE (p:ProductionCompany {name:'Imagine Entertainment', country:'US', postalCode:90212, state:'CA', city:'Beverly Hills', address1:'10351 Santa Monica Blvd'})
+MERGE (Apollo13:Movie {title:'Apollo 13'})
+CREATE (p)-[:PRODUCED]->(Apollo13)
+CREATE (jerseyFilms:ProductionCompany {name:'Jersey Films', country:'US', postalCode:90049, state:'CA', city:'Los Angeles', address1:'10351 Santa Monica Blvd'})
+MERGE (hoffa:Movie {title:'Hoffa'})
+CREATE (jerseyFilms)-[:PRODUCED]->(hoffa)
+--
 
-This query uses the `apoc.periodic.iterate` procedure so that you can do the refactoring in batches rather than within a single transaction.
-The procedure takes in three parameters:
+image::producers.svg[Graph connecting the movies Apollo 13 and Hoffa to new production company nodes,400,400,role=popup]
 
-* An outer Cypher query that finds and returns a stream of `CONNECTED_TO` relationships, and origin and destination airports that need to be processed.
-* An inner Cypher query that processes those entities, creating a node with the label `Flight` and creating relationships from that node to the origin and destination airports.
-*  `batchSize` configuration, which sets to `100` the number of inner statements that are run within a single transaction.
+However, storing complex data on nodes this way may not be beneficial for different reasons, including:
 
-If you execute the query, you will see the following output:
+* *Duplicate data*: There may exist several production companies in the same location, and the same information is then repeated on multiple nodes.
+** Example: In the xref:#_answering_remaining_or_new_use_cases[previous step], you refactored the property 'languages' to become a node to avoid having the entry "English" duplicated on all `Movie` nodes.
+* *Over-fetching*: Queries related to the information on the nodes require that more nodes in a category be retrieved unnecessarily.
+** Example: If you want to return production companies that are located in California, all the properties of the `ProductionCompany` nodes need to be scanned to retrieve the property value `California` from the `state` key.
+Instead, a node for `California` could be a shorter path to this information and you wouldn't need to retrieve more information than what you need.
+** Alternatively, you can also link:{docs-home}/cypher-manual/current/indexes/search-performance-indexes/managing-indexes/#create-indexes[create an index].
 
-.Results
-[opts="header"]
-|===
-| batches | total | timeTaken | committedOperations | failedOperations | failedBatches | retries | errorMessages | batch                                           | operations                                      | wasTerminated
-| 10      | 1000  | 0         | 1000                | 0                | 0             | 0       | {}            | {total: 10, committed: 10, failed: 0, errors: {}} | {total: 1000, committed: 1000, failed: 0, errors: {}} | FALSE
-|===
+*The goal in data modeling is to reduce the size of the graph that is touched by a query.*
+If the graph contains a large amount of duplicate data or if your queries still over-fetch data, you may need to refactor your model again.
 
+In the current model, you have added more information in the form of a new node label `ProductionCompany` with a number of address properties. 
+The property values contain a lot of duplicate data, which is not desirable.
+To make the model more efficient, check for duplicate key values and see if you can turn them into another entity, like a node or a relationship.
 
-You can also do this refactoring using the link:https://neo4j.com/docs/apoc/current/overview/apoc.refactor/apoc.refactor.extractNode/[`apoc.refactor.extractNode`] procedure.
+In this case, both production companies are based in California, so the state could be turned into a node for `State` and be connected to the producer companies via a new relationship `LOCATED_AT`:
 
-[source,cypher]
-----
-CALL apoc.periodic.iterate(
-  "MATCH (origin:Airport)-[connected:CONNECTED_TO]->(destination:Airport)
-   RETURN origin, connected, destination",
-  "CALL apoc.refactor.extractNode([connected], ['Flight'], 'DESTINATION', 'ORIGIN')
-   YIELD input, output, error
-   RETURN input, output, error",
-  {batchSize: 100});
-----
+image::california.svg[The producer company nodes now have one less property for state and connect to a state node for California, role=popup]
 
-This does the same as the previous query, but the outer Cypher query uses the `apoc.refactor.extractNode` procedure to create the `Flight` node and create relationships to origin and destination airports.
-If we run this query we'll see the following output:
+After this refactoring, queries that retrieve production companies by their state can now be filtered based on the `State.name` value, rather than evaluating all `ProductionCompany` nodes for the `ProductionCompany.state` property.
 
-.Results
-[opts="header"]
-|===
-| batches | total | timeTaken | committedOperations | failedOperations | failedBatches | retries | errorMessages | batch                                           | operations                                      | wasTerminated
-| 10      | 1000  | 0         | 1000                | 0                | 0             | 0       | {}            | {total: 10, committed: 10, failed: 0, errors: {}} | {total: 1000, committed: 1000, failed: 0, errors: {}} | FALSE
-|===
+How you refactor your graph to handle complex data depends on the questions you'd like to answer and the performance of the queries when your graph scales.
+The next step is xref:#_performance_check[to measure performance] in your graph by testing it.
 
+== Using specific relationships
 
-[#create-node-from-property]
-== Create a node from a property
+Specific relationships are a refactor strategy that you can use when your project has a recurrent use case that needs a certain piece of information to be constantly retrieved.
+The benefits of using them include:
 
-At the moment the airline names are stored in the `airline` property on the `Flight` nodes.
-This means that if you want to return a stream of all airlines, you have to scan through every flight and check the `airline` property on each of those flights.
+* Reducing the number of nodes that need to be retrieved.
+* Improving query performance.
 
-You can make this task simpler and more efficient by creating a node with an `Airline` label for each airline:
-
-image::airline-arr.svg[role="popup-link", width=600]
-
-First, create a constraint on the `Airline` label and a `name` property to avoid duplicated airline nodes:
+Suppose that you frequently need to retrieve information about actors in reference to the year 1995.
+The query for that could be:
 
 [source,cypher]
-----
-CREATE CONSTRAINT airline_id
-FOR (airline:Airline) REQUIRE airline.name IS UNIQUE
-----
+--
+MATCH (p:Person)-[:ACTED_IN]-(m:Movie)
+WHERE p.name = 'Tom Hanks' AND m.released STARTS WITH '1995'
+RETURN DISTINCT m.title AS Movie
+--
 
-.Results
-|===
-| 0 rows available after 107 ms, consumed after another 0 ms. Added 1 constraints
-|===
-
-Now you can run the following query to do the refactoring:
+But if you create a specific relationship, for example, `ACTED_IN_1995`, when you query for this same information, you will write the code like this instead:
 
 [source,cypher]
-----
-CALL apoc.periodic.iterate(
-   'MATCH (flight:Flight) RETURN flight',
-   'MERGE (airline:Airline {name:flight.airline})
-    MERGE (flight)-[:AIRLINE]->(airline)
-    REMOVE flight.airline',
-   {batchSize:10000, iterateList:true, parallel:false}
-)
-----
+--
+MATCH (p:Person)-[:ACTED_IN_1995]-(m:Movie)
+WHERE p.name = 'Tom Hanks'
+RETURN m.title AS Movie
+--
 
-Again you are using the `apoc.periodic.iterate` procedure with the following parameters:
+This way, the query won't need to retrieve all the `Movie` nodes connected to Tom Hanks and read all their `m.released` properties, but only retrieve the title of those that are connected with Tom Hanks by the specific relationship `ACTED_IN_1995`.
+You can therefore avoid overfetching and improve query performance.
 
-* An outer Cypher statement that returns a stream of `Flight` nodes to be processed.
-* An inner Cypher statement that processes the `Flight` nodes and creates `Airline` nodes based on the `airline` property.
-It also creates an `AIRLINE` relationship from the `Flight` to the `Airline` nodes.
-After that, you can remove the `airline` property from the `Flight` node.
+== Retest the graph
 
-If you run this query, the output will be the following:
+After you have refactored the graph, you should revisit all queries for your xref:data-modeling/tutorial-data-modeling.adoc#_define_the_use_case[use cases] and determine whether any of them can be rewritten to take advantage of the refactoring.
+Here is a list:
 
-.Results
-[opts="header"]
-|===
-| batches | total | timeTaken | committedOperations | failedOperations | failedBatches | retries | errorMessages | batch                                           | operations                                      | wasTerminated
-| 1       | 1000  | 0         | 1000                | 0                | 0             | 0       | {}            | {total: 1, committed: 1, failed: 0, errors: {}} | {total: 1000, committed: 1000, failed: 0, errors: {}} | FALSE
+[options=header,cols="1,1a"]
 |===
 
-You can then write the following query to find the airlines and number of flights involving each airline:
+| Use case
+| Query example
+
+| Which people acted in a movie?
+| [source,cypher]
+--
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie {title:'Hoffa'})
+RETURN p
+--
+
+| Which person directed a movie?
+| [source,cypher]
+--
+MATCH (p:Person)-[:DIRECTED]->(m:Movie {title:'Hoffa'})
+RETURN p
+--
+
+| Which movies did a person act in?
+| [source,cypher]
+--
+MATCH (p:Person {name:'Tom Hanks'})-[:ACTED_IN]->(m:Movie)
+RETURN m
+--
+
+| How many users rated a movie?
+| [source,cypher]
+--
+MATCH (m:Movie {title: 'Apollo 13'})
+RETURN COUNT {(:User)-[:RATED]->(m)} AS `Number of reviewers`
+--
+
+| Who was the youngest person to act in a movie?
+| [source,cypher]
+--
+MATCH (p:Person)-[:ACTED_IN]-(m:Movie)
+WHERE m.title = 'Hoffa'
+RETURN  p.name AS Actor, p.born as `Year Born` ORDER BY p.born DESC LIMIT 1
+--
+
+| Which role did a person play in a movie?
+| [source,cypher]
+--
+MATCH (p:Person {name:'Tom Hanks'})-[a:ACTED_IN]->(m:Movie {title: 'Apollo 13'})
+RETURN a.roles
+--
+
+| Which is the highest rated movie in a particular year according to imDB?
+| [source,cypher]
+--
+MATCH (m:Movie)
+WHERE m.released STARTS WITH '1995'
+RETURN  m.title as Movie, m.imdbRating as Rating ORDER BY m.imdbRating DESC LIMIT 1
+--
+
+| Which drama movies did an actor act in?
+| [source,cypher]
+--
+MATCH (p:Person)-[:ACTED_IN]-(m:Movie)
+WHERE p.name = 'Tom Hanks' AND
+'Drama' IN m.genres
+RETURN m.title AS Movie
+--
+
+| Which users gave a movie a rating of 5?
+| [source,cypher]
+--
+MATCH (u:User)-[r:RATED]-(m:Movie)
+WHERE m.title = 'Apollo 13' AND
+r.rating = 5
+RETURN u.name as Reviewer
+--
+
+| Which movies are in English?
+| [source,cypher]
+--
+MATCH (m:Movie)
+WHERE m.languages = 'English'
+RETURN m.title as Movie in English
+--
+
+|===
+
+With this considered, you should now determine if any of the queries need to be rewritten to take advantage of the refactoring and rewrite them when applicable.
+For example, for the use case "Which movies are in English?":
+
+[options=header,cols="1a,1a"]
+|===
+
+| Old query
+| Query after refactoring
+
+| [source,cypher]
+--
+MATCH (m:Movie)
+WHERE m.languages = 'English'
+RETURN m.title as Movie in English
+--
+| [source,cypher]
+--
+MATCH (m:Movie)-[:IN_LANGUAGE]->(l:Language)
+WHERE l.name = 'English'
+RETURN m.title as Movie in English
+--
+|===
+
+=== Performance check
+
+When testing on a real application and, especially with a fully-scaled graph, you can also profile the new queries to see if it improves performance. 
+On a small instance model such as the example in this tutorial, you will not see significant improvements, but you may see differences in the number of rows retrieved.
+
+As an example, if you want to see the number of database hits for a query to retrieve all `Person` nodes, you need to add the clause link:{docs-home}/cypher-manual/current/planning-and-tuning/#profile-and-explain[`PROFILE`] before it:
 
 [source,cypher]
-----
-MATCH (airline:Airline)<-[:AIRLINE]-(:Flight)
-RETURN airline.name AS airline, count(*) AS numberOfFlights
-----
+--
+PROFILE MATCH (n:Person)
+RETURN n
+--
 
-This does the same as the previous query, but the outer Cypher query uses the `apoc.refactor.extractNode` procedure to create the `Flight` node and create relationships to origin and destination airports.
-If you run this query, you will get the following output:
+This should be the result:
 
-.Results
-[opts="header"]
-|===
-| airline | numberOfFlights
-| "WN" | 1000
-|===
+image::query-plan.svg[Screenshot of Neo4j Aura featuring a query plan that shows the number of database hits when you retrieve all person nodes,400,400,role=popup]
 
+You can find more detailed information on query tuning and planning at link:{docs-home}/cypher-manual/current/planning-and-tuning/[Cypher manual -> Execution plans and query tuning].
 
+== Keep learning
 
-[#cypher-resources]
-== Resources
+Most of the refactoring that you can keep doing on your model is about repurposing or adding more information to your graph.
 
-This guide has shown how to refactor a graph model, with help from procedures in the APOC Library.
-Below are some resources for learning more about refactoring in Neo4j:
-
-* link:https://neo4j.com/docs/apoc/current/[APOC Library^]
-** https://neo4j.com/docs/apoc/current/graph-refactoring/[Graph Refactoring procedures^]
+You can see more examples on how to split the node `Person` into `Actor` and `Director` nodes, how to turn the `Movie` node property `genre` into nodes, and other refactoring strategies by following the interactive course link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/[Graph Data Modeling Fundamentals] on GraphAcademy.
