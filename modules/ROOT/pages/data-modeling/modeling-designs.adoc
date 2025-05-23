@@ -47,9 +47,13 @@ A `MATCH` clause would show that Patrick and David both worked at Acme, being co
 === Sharing data
 
 Intemediate nodes can also add value to a model by providing a way to share data and thus reduce duplicate information.
+In this example, Sarah sends an email to Lucy and copies David and Claire to it:
+
+image::sarah-email-before.svg[Example graph with a node for Sarah sending an email to David and Claire with the message testing,width=400,role=popup]
+
 By using a fan-out, duplication can be reduced as a property (`content`) is broken out and made into its own node (`Email` with the property `content`) instead of being repeated, in this case, on every relationship:
 
-image::intermediate-nodes-employement-sharing-example.svg[Example of how to not repeat a same property by turning it into an intermediate node,width=600,role=popup]
+image::sarah-email-after.svg[Example of how to not repeat a same property by turning it into an intermediate node,width=400,role=popup]
 
 Once the property value `content` is moved to a single node `Email`, it can be referenced via relationships with the `User` nodes that previously held that value.
 Now there are no copies or duplications.
@@ -81,21 +85,16 @@ In summary, you're likely to find many uses for intermediate nodes during refact
 == Linked list
 
 Linked lists are commonly used in computer science and they are particularly useful whenever the sequence of objects matters.
-In this data structure, a simple-linked list is where each node links to the next node only, whereas in a double-linked list, each node links both to the next and the previous node.
-Neo4j *does not* support double-linked lists.
-It is good and common practice to use verbs as relationship types, however, with linked lists, it is acceptable to connect sequential items using terms such as "next" and "previous" instead.
+In this data structure, a simple-linked list is where each node links to the next node only:
 
-For example:
+image::simple-linked-list.svg[Episodes of Dr Who linked in sequence with next relationships,width=500,role=popup]
 
-[cols="<,<",options="header"]
-|===
+In a double-linked list, each node links both to the next and the previous node:
 
-a| **Supported: simple-linked list**
-a| **Not supported: double-linked list**
+image::double-linked-list.svg[Episodes of Dr Who doubly linked with next and previous relationships, an incorrect modeling design in Neo4j,width=500,role=popup]
 
-a| image::simple-linked-list.svg[Episodes of Dr Who linked in sequence with next relationships,role=popup]
-a| image::double-linked-list.svg[Episodes of Dr Who doubly linked with next and previous relationships, an incorrect modeling design in Neo4j,role=popup]
-|===
+Double-linked lists are not recommended because relationships become redundant (if one is the next, then the other is the previous).
+Moreover, while it is common practice to use verbs as relationship types, with linked lists, it is acceptable to connect sequential items using terms such as "next" and "previous" instead.
 
 === Interleaved linked list
 
@@ -133,91 +132,3 @@ image::latest-aired.svg[The latest aired episode is pointed with the help of a l
 
 The progress pointer here is the `LATEST_AIRED` relationship and it shows which was the most recently aired episode (i.e. "The Ark in Space").
 When the `NEXT` episode ("The Sontaran Experiment") airs, the relationship is updated by deleting the current one and creating a new `LATEST_AIRED` pointer, so that it always points to the current item.
-
-== Timeline tree
-
-Timeline trees are useful when your queries are time-related.
-To create a timeline tree, you can use an anchor, which is a navigational aid that you add when querying or when there are periods of time that are of interest relative to a query.
-Anchors can be a starting/parent node or an entity that you can use as a reference point (e.g. a date).
-
-The division and length of the time periods are set based on the context of the question you need to answer.
-On the top of the timeline tree is the "all time node" that represents the entire timeline.
-The timeline is then divided into relevant time periods, represented by the nodes below the all time node.
-
-This example features subdivisions for each branch in years, months, and days, and how they connect to `Purchase` nodes:
-
-image::timeline-tree.svg[Graph with two different timeslines divided in years, months, and days and what purchases are connected to these dates,width=600,role=popup]
-
-This timeline tree structure shows how you can quickly answer otherwise expensive questions.
-For instance, if you want to find all purchases that happened at a given time period, such as every purchase in the month of December 2012, you only need to:
-
-. Navigate from the 2012 `Year` node to December (`Month` node with the property value "12").
-. Fetch everything from the connected leaf nodes (that is, nodes with no descendants) under that branch.
-
-If you were, instead, working with a data model that uses time as the navigator instead of as the anchor, this same question would require a great deal of property lookups and a lot of inefficient gather-and-inspect.
-
-== Time-bound data
-
-Another way to model time-specific data and relationships is by including data in the relationship type.
-Because Neo4j is optimized for traversing relationships between entities, you can often improve query performance by using a date as the relationship type and only traversing relationships with a particular date.
-
-A common example is modeling airline flights:
-
-image::airport.svg[Example graph connecting airport nodes through a flying to relationship,width=500,role=popup]
-
-This could be a first iteration showing what flights happen between airports.
-Now, suppose you want to know about a particular airline and how many flights it had on a specific date.
-The described model is not very efficient as you would need to scan all properties of the `FLYING_TO` relationship and, in reality, airports have multiple flights operated by many different airlines everyday.
-
-So instead of performing an expensive query, you could refactor the graph and add xref:#_intermediate_nodes[intermediate nodes].
-In this case, you can create an intermediate node `Flight` between the `Airport` nodes, and another one, `AirportDay`, between the `Airport` and `Flight` nodes:
-
-image::flight.svg[Refactored graph with intermediate nodes,width=600,role=popup]
-
-With this xref:data-modeling/tutorial-refactoring.adoc[refactored design], you can look only at the relationships for dates you care about and then scan for the relevant airline through the `airline` property in the `Flight` node.
-
-This is an improvement, but the model is still not optimal and should be iterated on.
-When changes are done to your model, it is important to keep track of them by versioning your model.
-
-// Content on versioning is WIP.
-
-
-== Multiple structures
-
-You can combine multiple graph structures to create a data model.
-Take this example:
-
-image::multiple-structures.svg[Example graph using multiple structures to create a data model with timeline tree and employment events,width=600,role=popup]
-
-This graph features:
-
-* A xref:#_timeline_tree[timeline tree] which is divided into years and months subsequently at the top.
-* Employment events are represented as `Employment` nodes, which are connected to the timeline and show the starting and the ending months.
-* The `Employment` nodes are xref:#_intermediate_nodes[intermediate nodes] that connect people, companies, and job roles. 
-In this case, the intermediate nodes are serving the dual purpose of reducing the density of `Person` nodes, and providing an attachment point for the timeline tree.
-* Employment events that are organized into xref:#_linked_list[linked lists] for each person and represent a sequence of events in an individual’s career.
-The graph shows overlaps in people's employment history.
-
-The example shows how different structures can be combined into one graph, and how different types of questions can be answered by one single graph if the modeling is done efficiently.
-It also shows the many ways nodes and structures can span out.
-
-=== Monopartite
-
-image::monopartite.svg[Example of monopartite graph structure,width=300,role=popup]
-
-A monopartite graph structure consists of a single set of nodes with a single label.
-Most algorithms rely on this type of graph and they are very common when using spanning trees, link:{docs-home}/graph-data-science/current/algorithms/page-rank/[PageRank], link:{docs-home}/graph-data-science/current/algorithms/eigenvector-centrality/[Eigenvector], and link:{docs-home}/graph-data-science/current/algorithms/community/[community detection].
-
-=== Bipartite
-
-Bipartite structures contain nodes that can be divided into two sets, such that relationships only exist between sets but not within each set.
-link:{docs-home}/graph-data-science/current/algorithms/node-similarity/[Node similarity algorithms] rely on this type of graph.
-
-image::bipartite.svg[Example of bipartite graph structure,width=300,role=popup]
-
-=== Multipartite
-
-Multipartite structures contain multiple independent sets of nodes with many labels.
-Real-world graph analysis often deals with multipartite networks.
-
-image::multipartite.svg[Example of a multipartite structure featuring multiple independent sets of nodes, labels, and different relationships,width=600,role=popup]
