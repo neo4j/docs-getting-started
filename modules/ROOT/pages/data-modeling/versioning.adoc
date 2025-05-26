@@ -155,7 +155,7 @@ With a linked list:
 
 === Query examples
 
-These are common queries you could make when using the linked list versioning strategy:
+These are examples of common queries that are useful with the linked-list versioning strategy:
 
 .Get the next name of the product named “Professional chair”
 [source,cypher]
