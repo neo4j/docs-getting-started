@@ -126,14 +126,14 @@ A linked list is another modeling strategy that can be useful when the sequence 
 Linked lists are useful when:
 
 * The order of events is of interest, e.g. getting the order of transactions executed on a bank account.
-* What are the previous and next elements of a list, based on the relationship between them (e.g. what song is the next on a playlist, or undo an action on a text document).
+* You need the previous and next elements in a list, based on the relationship between them (e.g. what song is the next on a playlist, or undo an action on a text document) are .
 
 image::linked-list-versioning.svg[Example graph showing a linked list model design being used for versioning,width=400,role=popup]
 
 With a linked list:
 
 * The entity `Product` is linked to the first element of the sequence, and can be linked to the last one.
-* Similarly to the the xref:#_versioning_of_entities[versioning of entities], the entity `Product` is also immutable here.
+* As with the the xref:#_versioning_of_entities[versioning of entities], the entity `Product` is also immutable here.
 * Each element of the sequence is linked to the next one through a `NEXT` relationship.
 
 === Pros and cons
