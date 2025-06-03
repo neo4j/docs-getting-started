@@ -18,7 +18,7 @@ See xref:#_converting_data_values[Converting data values] for more information o
 === Field terminator
 
 Also known as delimiter, a field terminator is a character used to separate each field in a CSV file.
-In this example, a comma (`,`) is used, but other characters, such as a tab (`\`) or a pipe (`|`) also work and they can be blended:
+In this example, a comma (`,`) is used, but other characters, such as a tab (`\t`) or a pipe (`|`) also work and they can be blended:
 
 [source,csv]
 --
@@ -239,7 +239,8 @@ Id,Name,Location,Email,BusinessType
 3,BBB,Chicago,,G
 ----
 
-The third and the fourth lines have no entry for some of the headers, which means that they have null values that need to be skipped:
+The third and the fourth lines have no entry for some of the headers, which means that they have null values that need to be skipped.
+You can use the link:https://neo4j.com/docs/cypher-manual/current/clauses/where/[`WHERE`] clause to specify it:
 
 [source,cypher]
 --
@@ -248,7 +249,7 @@ WITH row WHERE row.Id IS NOT NULL
 MERGE (c:Company {companyId: row.Id});
 --
 
-Or have a default value (e.g. "Unknown") set for them:
+Or have a default value (e.g. "Unknown") set for them and use the link:https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-coalesce[`coalesce`] function:
 
 [source,cypher]
 --
@@ -256,7 +257,7 @@ LOAD CSV WITH HEADERS FROM 'file:///companies.csv' AS row
 MERGE (c:Company {companyId: row.Id, hqLocation: coalesce(row.Location, "Unknown")})
 --
 
-You can also change the empty strings to null values which will not be stored:
+You can also change the empty strings to null values which will not be stored using the link:https://neo4j.com/docs/cypher-manual/current/clauses/set/[`SET`] clause:
 
 [source,cypher]
 --
@@ -303,7 +304,7 @@ Id,Name,Skills,Email
 --
 
 Both Joe and Trevor have multiple skills listed in this file.
-You can split them like this:
+You can split them using the `split()` function with the `UNWIND` clause like this:
 
 [source,cypher]
 --
@@ -340,7 +341,7 @@ For example, suppose you use xref:#_null_values[the preceding *companies.csv* fi
 .people.csv
 [source]
 ----
-employeeId,Name,Company
+employeeId,Name,companyId
 1,Bob Smith,1
 2,Joe Jones,3
 3,Susan Scott,2
@@ -352,6 +353,7 @@ For instance, instead of the following:
 
 [source,cypher]
 --
+LOAD CSV WITH HEADERS FROM 'file:///people.csv' AS row
 MERGE (e:Employee {employeeId: row.employeeId})
 MERGE (c:Company {companyId: row.companyId})
 MERGE (e)-[r:WORKS_FOR]->(c)
@@ -370,17 +372,8 @@ RETURN count(e);
 .Load the `Company` nodes
 [source,cypher]
 --
-LOAD CSV WITH HEADERS FROM 'file:///companies.csv' AS row
-WITH row WHERE row.Id IS NOT NULL
-WITH row,
-(CASE row.BusinessType
- WHEN 'P' THEN 'Public'
- WHEN 'R' THEN 'Private'
- WHEN 'G' THEN 'Government'
- ELSE 'Other' END) AS type
-MERGE (c:Company {companyId: row.Id, hqLocation: coalesce(row.Location, "Unknown")})
-SET c.emailAddress = CASE trim(row.Email) WHEN "" THEN null ELSE row.Email END
-SET c.businessType = type
+LOAD CSV WITH HEADERS FROM 'file:///people.csv' AS row
+MERGE (c:Company {companyId: row.companyId})
 RETURN count(c);
 --
 
@@ -388,10 +381,14 @@ RETURN count(c);
 [source,cypher]
 --
 LOAD CSV WITH HEADERS FROM 'file:///people.csv' AS row
-MATCH (e:Employee {employeeId: row.employeeId})
-MATCH (c:Company {companyId: row.Company})
+MATCH (e:Employee {employeeId: row.employeeId, name: row.Name})
+MATCH (c:Company {companyId: row.companyId})
 MERGE (e)-[:WORKS_FOR]->(c)
-RETURN *;
+RETURN *
 --
+
+The result is this graph:
+
+image::peoplecsv.svg[Graph connecting people with the companies they work for,width=500,role=popup]
 
 This way, the load is only doing one piece of the import at a time and can move through large amounts of data quickly and efficiently, reducing heavy processing.
