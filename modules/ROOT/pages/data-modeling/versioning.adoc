@@ -3,7 +3,7 @@
 
 Every time you xref:data-modeling/graph-model-refactoring.adoc[refactor] your data model, you create new versions of it.
 Tracking changes in the data structure or showing a current and past value can be valuable for auditing purposes, trend analysis, etc.
-This page gives an overview of the options available for data model versioning on top of Neo4j.
+This page gives an overview of the different ways you could model data in order to keep track of changes over time.
 
 == Versioning of entities
 
