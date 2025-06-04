@@ -37,7 +37,7 @@ You can copy and paste the example into any text editor (e.g. Notepad or TextEdi
 
 The header is typically the first line in the CSV file.
 They are not mandatory, but adding them is a good practice.
-In the xref:#_field_terminator[previous example], the header was:
+In the xref:#_field_terminator[previous example], the header is:
 
 [source,csv]
 --
@@ -157,8 +157,8 @@ If allowing an insecure protocol is unavoidable, you need to add the JVM argumen
 
 == File preparation
 
-The first thing you need to consider before you import CSV data is the *source* of the data.
-It could be coming from:
+Before you import CSV data you should consider the *source* of the data.
+It can come from:
 
 * Relational databases
 * Web APIs
@@ -166,7 +166,7 @@ It could be coming from:
 * BI tools
 * Speadsheets (e.g. Excel or Google Sheets)
 
-Most data systems have an option for exporting data to CSV files as it is a common format for data exchange.
+Most data systems have an option for exporting data as CSV files as it is a common format for data exchange.
 However, real-world data is often messy, which means some values need to be cleaned up or transformed before imported to another system.
 
 These are some common issues you may encounter:
@@ -181,7 +181,7 @@ To make the import process more efficient, you need to remove the unnecessary da
 Headers can be inconsistent with data.
 They could be missing, or be lost in too many columns, or maybe different delimiters are used.
 +
-To avoid this sort of problem:
+To avoid this problem:
 +
 * Check if headers match the data in the file.
 * Adjust formatting, delimiters, columns, etc _before_ you import for a smooth process.
@@ -227,7 +227,7 @@ You can clean up the file while loading it into Neo4j and so address the followi
 
 === Null values
 
-Neo4j does not store null values, but you can skip or replace them with default values using the `LOAD CSV` command.
+Neo4j does not store null values, but you can skip or replace them with default values by adding clauses or functions to the `LOAD CSV` command.
 Suppose you have this CSV file:
 
 .companies.csv
@@ -334,7 +334,7 @@ See the tutorial for link:https://neo4j.com/docs/operations-manual/current/tutor
 == Optimization
 
 Performance can be a problem when working with large amounts of data or complex loading.
-Some strategies can, however, improve the processing of information.
+Some strategies can, however, improve the processing of large amounts of information.
 
 For example, suppose you use xref:#_null_values[the preceding *companies.csv* file], and now you have a file that contains people and which companies they work for:
 

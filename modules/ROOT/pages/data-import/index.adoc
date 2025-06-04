@@ -23,7 +23,7 @@ image::import-data-charts.svg[Decision chart with options to import data to Neo4
 
 [TIP]
 ====
-For a more hands-on option, see the available link:https://graphacademy.neo4j.com/categories/?search=import[GraphAcademy courses] on data import.
+For a more hands-on guidance, see the available link:https://graphacademy.neo4j.com/categories/?search=import[GraphAcademy courses] on data import.
 ====
 
 == Methods comparison

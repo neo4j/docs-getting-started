@@ -55,7 +55,8 @@ RETURN row
 
 == Check the imported data
 
-Here is a to-do list that will help you check the imported data:
+You may want to verify that your data has been imported correctly.
+These are some things you can do to ensure that the imported data is accurate:
 
 . Count the number of rows in the CSV file and compare it to the number of rows returned by the `LOAD CSV` clause by using the link:https://neo4j.com/docs/cypher-manual/current/subqueries/count/[`COUNT`] function in a new query:
 +
@@ -86,7 +87,7 @@ WITH row WHERE row.birthYear = '1942'
 RETURN row
 --
 
-The result will be:
+The result is:
 
 [options=header,cols=1]
 |===
@@ -109,10 +110,11 @@ In the next step, you will learn how to convert the values to their respective t
 
 == Convert data types
 
-In the *people.csv* file, you have data such as the birthyear and the ID number for each person.
-You can convert these values into temporal and numerical types for a better processing of the data, since `LOAD CSV` only reads values as tring.
+In the *people.csv* file, you have data such as the birth year and the ID number for each person.
+`LOAD CSV` only reads values as string.
+For better processing of the data, you can convert these values into temporal and numerical types.
 
-`personId` can be turned into an interger by using the `toInteger()` function, and `birthYear` *could* be turned into a date format by using the  the `datetime()` function:
+`personId` can be turned into an interger by using the `toInteger()` function, and `birthYear` can be turned into a date format by using the  the `date()` function:
 
 [source, cypher]
 ----
@@ -154,10 +156,10 @@ Before you import data into Neo4j, there is no structure, only the dataset itsel
 As you import data, however, you create the xref:data-modeling/index.adoc[graph data model].
 
 Now that you have imported the data, you need to organize it into a graph.
-You could use the `CREATE` clause to do so, but it would only be advisable where you are sure that you will not have duplicate rows in your CSV file.
+You can use the `CREATE` clause to create your nodes and relationships, but then you may end up with duplicate entities in your graph.
 
-Since this is hard to avoid completly and since often data is not perfectly clean in the source file, the `MERGE` clause is the most advisable one.
-In this case, if the node or relationship already exists, Cypher will match and return them (without any writes), but if they don't exist, Cypher will then insert it.
+The `CREATE` clause pays no attention to whether an identical element already exists, so unless your data is perfectly clean of duplications, it is better to use `MERGE`.
+The `MERGE` clause tries to find a matching entity first, and only creates a new one if none is found.
 
 [source, cypher]
 --
@@ -170,13 +172,13 @@ MERGE (p:Person {personId: personId})
 RETURN p
 --
 
-Your graph should look like this:
+This results in the following graph:
 
 image::import-peoplecsv.svg[The graph resulted from the importing of the people csv file,role=popup,width=600]
 
 == Keep learning
 
-Depending on where you are getting your CSV file from, you will likely need to work on it beforehand.
+Regardless of where your data comes from, it is likely that it needs some preparation before it is ready to be imported.
 Here is some complementary material you can refer to as you continue learning:
 
 * xref:data-import/csv-files.adoc[*Working with CSV files*]: read about the structure of a CSV file and understand how data is organized.
