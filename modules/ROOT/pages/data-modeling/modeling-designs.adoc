@@ -14,7 +14,6 @@ Sometimes you need to convey a lot of information in a relationship.
 In a mathematical graph, this can be solved with a *hyperedge*, i.e. a relationship that connects more than two nodes.
 This is not supported in Neo4j but can be solved by using an intermediary node.
 
-
 For example, consider a person who works at a company and you need to convey information about their role:
 
 image::hyperedge.svg[An example of a hyperedge in which a relationship is connected to two nodes, a feature not available in Neo4j,width=400,role=popup]
@@ -42,35 +41,48 @@ Specifically in this example, the `Person` nodes share context through `Role` an
 The `Employment` nodes provide a way to trace details such as a person's career, or the overlap between different individuals at the same `Company`, or those who had the same `Role`.
 
 The use of intermediary nodes can also answer the question "Who worked at the same company at the same time?" as the added employment event contains information about when each individual worked at a certain company.
-A `MATCH` clause would show that Patrick and David both worked at Acme, being colleagues from 2004 to 2005 since their employment events overlap during that time.
+A `MATCH` clause would show that Patrick and David both worked at Acme, being colleagues from 2004 to 2005 since their employment events overlap during that time:
+
+[source,cypher]
+--
+MATCH (p1:Person)-[w1:WORKED_AT]->(c:Company {name: "Acme"}),
+      (p2:Person)-[w2:WORKED_AT]->(c)
+WHERE p1 <> p2
+  AND w1.startDate <= w2.endDate
+  AND w2.startDate <= w1.endDate
+RETURN p1.name AS Person1, p2.name AS Person2
+ORDER BY Person1, Person2
+--
 
 === Sharing data
 
 Intemediate nodes can also add value to a model by providing a way to share data and thus reduce duplicate information.
-In this example, Sarah sends an email to Lucy and copies David and Claire to it:
+In this example, Sarah sends an email to Lucy and copies David and Claire to it.
+The content of each email is a property on every relationship:
 
 image::sarah-email-before.svg[Example graph with a node for Sarah sending an email to David and Claire with the message testing,width=400,role=popup]
 
-By using a fan-out, duplication can be reduced as a property (`content`) is broken out and made into its own node (`Email` with the property `content`) instead of being repeated, in this case, on every relationship:
+If you instead fan out the the model, you reduce duplication by breaking out the property `content` from all relationships and turning it into the intermediary node `Email` instead:
 
 image::sarah-email-after.svg[Example of how to not repeat a same property by turning it into an intermediate node,width=400,role=popup]
 
 Once the property value `content` is moved to a single node `Email`, it can be referenced via relationships with the `User` nodes that previously held that value.
-Now there are no copies or duplications.
+Now there are no duplications.
 
 === Organizing data
 
 Intermediate nodes can also help organize structures.
-In this example, Sarah sent the same email message to several people:
+In the previous example, Sarah sent the same email message to several people.
+If Sarah sends more email messages to more people, without using intermediary nodes, the graph quickly grows to this:
 
 image::sarah-emailed.svg[Graph showing how a user named Sarah emailed several other users,width=300,role=popup]
 
-If every `EMAILED` relationship included a property with the content of the message, two problems can arise:
+When every `EMAILED` relationship includes a property with the content of the message, in addition to duplication, two other problems can arise:
 
-* *Sarah’s node is becoming very dense*: For every recipient of a message she adds, her node gains another relationship.
+* *Sarah’s node is becoming very dense*: For every email she sends, including CC's, her node gains another relationship.
 * *It's expensive to retrieve the content of the email*: With the data modeled like this, it's very expensive to determine who in Sarah’s recipient network has received a given message by searching for the content in multiple 'EMAILED' relationships.
 
-By adding intermediate nodes to represent each email message, Sarah's node has only one relationship per email message, regardless of the number of recipients:
+When you fan out and add intermediate nodes to represent each email message, Sarah's node has only one relationship per email message, regardless of the number of recipients:
 
 image::sarah-emailed-intermediate.svg[Updated graph with intemediate nodes for emails sent by Sarah to several other users,width=300,role=popup]
 
@@ -85,15 +97,15 @@ In summary, you're likely to find many uses for intermediate nodes during refact
 == Linked list
 
 Linked lists are commonly used in computer science and they are particularly useful whenever the sequence of objects matters.
-In this data structure, a simple-linked list is where each node links to the next node only:
+A *simple-linked list* is where each node links to the next node only:
 
 image::simple-linked-list.svg[Episodes of Dr Who linked in sequence with next relationships,width=500,role=popup]
 
-In a double-linked list, each node links both to the next and the previous node:
+In a *double-linked list*, each node links both to the next and the previous node:
 
 image::double-linked-list.svg[Episodes of Dr Who doubly linked with next and previous relationships, an incorrect modeling design in Neo4j,width=500,role=popup]
 
-Double-linked lists are not recommended because relationships become redundant (if one is the next, then the other is the previous).
+Double-linked lists are not recommended because one relationship becomes redundant (if one is the next, then the other is the previous) and Cypher also allows bi-directional matches.
 Moreover, while it is common practice to use verbs as relationship types, with linked lists, it is acceptable to connect sequential items using terms such as "next" and "previous" instead.
 
 === Interleaved linked list
