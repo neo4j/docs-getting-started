@@ -53,30 +53,10 @@ as row FIELDTERMINATOR '|'
 RETURN row
 --
 
-== Check the imported data
-
-You may want to verify that your data has been imported correctly.
-These are some things you can do to ensure that the imported data is accurate:
-
-. Count the number of rows in the CSV file and compare it to the number of rows returned by the `LOAD CSV` clause by using the link:https://neo4j.com/docs/cypher-manual/current/subqueries/count/[`COUNT`] function in a new query:
-+
-[source,cypher]
---
-LOAD CSV WITH HEADERS
-FROM 'https://data.neo4j.com/importing-cypher/people.csv'
-AS row
-RETURN count(row)
---
-+
-
-. Make sure header names match those in the CSV file.
-
-. Search for typos in the data and in the queries.
-
 == Filtering loaded data
 
-After inspecting the data, you may only want to view or load a subset of the data in the CSV file. 
-You can filter what you view (or load), for example, by choosing to view only those who were born in 1942:
+Alternatively, you can also use `LOAD CSV` to load only a subset of the data in the CSV file.
+For example, this is how you can import information only about those born in 1942:
 
 [source,cypher]
 --
@@ -143,7 +123,28 @@ RETURN personId, birthYear
 
 |===
 
-Note that despite of `birthYear` having information only about the year, when converted into a `date` type, Cypher automatically defaults to January 1st of the specified year.
+Note that the property value for the `birthYear` only contains the year, but when converted into a `date` type, Cypher automatically adds January 1st as the date of the specified year.
+This is to comply with the format of the `date` data type, `YYYY-MM-DD`.
+
+== Check the imported data
+
+You may want to verify that your data has been imported correctly.
+These are some things you can do to ensure that the imported data is accurate:
+
+. Count the number of rows in the CSV file and compare it to the number of rows returned by the `LOAD CSV` clause by using the link:https://neo4j.com/docs/cypher-manual/current/subqueries/count/[`COUNT`] function in a new query:
++
+[source,cypher]
+--
+LOAD CSV WITH HEADERS
+FROM 'https://data.neo4j.com/importing-cypher/people.csv'
+AS row
+RETURN count(row)
+--
++
+
+. Make sure header names match those in the CSV file.
+
+. Search for typos in the data and in the queries.
 
 == Model your data
 
@@ -152,14 +153,12 @@ Note that despite of `birthYear` having information only about the year, when co
 Follow the xref:data-modeling/tutorial-data-modeling.adoc[Tutorial: Create a graph data model] to learn more.
 ====
 
-Before you import data into Neo4j, there is no structure, only the dataset itself.
-As you import data, however, you create the xref:data-modeling/index.adoc[graph data model].
+Before you import data into Neo4j, it likely has no graph structure, and you may want to create a xref:data-modeling/index.adoc[graph data model].
 
-Now that you have imported the data, you need to organize it into a graph.
-You can use the `CREATE` clause to create your nodes and relationships, but then you may end up with duplicate entities in your graph.
+Considering the previous examples, you could design a graph model using the `CREATE` clause to create your nodes and relationships, but then you may end up with duplicate entities in your graph.
+This is because the `CREATE` clause pays no attention to whether an identical element already exists.
 
-The `CREATE` clause pays no attention to whether an identical element already exists, so unless your data is perfectly clean of duplications, it is better to use `MERGE`.
-The `MERGE` clause tries to find a matching entity first, and only creates a new one if none is found.
+Unless your data is perfectly clean of duplications, it is better to use `MERGE` as it tries to find a matching entity first, and only creates a new one if none is found:
 
 [source, cypher]
 --
@@ -179,8 +178,4 @@ image::import-peoplecsv.svg[The graph resulted from the importing of the people 
 == Keep learning
 
 Regardless of where your data comes from, it is likely that it needs some preparation before it is ready to be imported.
-Here is some complementary material you can refer to as you continue learning:
-
-* xref:data-import/csv-files.adoc[*Working with CSV files*]: read about the structure of a CSV file and understand how data is organized.
-* xref:data-import/csv-files.adoc#_cleaning_up[*Cleaning up CSV files*]: see how to use the `LOAD CSV` command to clean up the file while importing.
-* xref:data-import/csv-files.adoc#_optimization[*Optimization*]: improve performance when working with large amounts of data or complex loading.
+See xref:data-import/csv-files.adoc[Working with CSV files] to learn more about the structure of data, how to clean it up, and optimize it.

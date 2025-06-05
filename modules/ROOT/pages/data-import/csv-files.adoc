@@ -99,6 +99,7 @@ personId,movieId,character
 
 Note that the `person.csv` file has a unique ID for every person, and the `movies.csv` file has a unique ID for every movie.
 The `roles.csv` file relates a person to a movie and provides the characters.
+It corresponds to the relationships in the graph as it contains the links needed to bind nodes together.
 
 === De-normalized data
 
@@ -119,7 +120,8 @@ movieId,title,avgVote,releaseYear,genres,personType,name,birthYear,character
 --
 
 Here, the movie and person data (including the IDs) is repeated in different rows every time new information about a particular actor's role is featured.
-This sort of duplication compromises the structure of the data, which means you need to xref:#_preparing_the_csv_file[prepare your file] before importing.
+This sort of duplication compromises the structure of the data when in a graph.
+In this case, it is then advisable to xref:#_file_preparation[prepare your file] before importing.
 
 == File location
 
@@ -179,12 +181,12 @@ To make the import process more efficient, you need to remove the unnecessary da
 . *Inconsistency between headers and data*
 +
 Headers can be inconsistent with data.
-They could be missing, or be lost in too many columns, or maybe different delimiters are used.
+They could be missing or be lost in too many columns.
 +
 To avoid this problem:
 +
 * Check if headers match the data in the file.
-* Adjust formatting, delimiters, columns, etc _before_ you import for a smooth process.
+* Adjust formatting, columns, etc _before_ you import for a smooth process.
 
 . *Extra or missing quotes*
 +
@@ -200,7 +202,7 @@ For newline characters in quoted or unquoted fields, either add quotes for these
 . *Inconsistent line breaks*
 +
 Ensure line breaks are consistent throughout the file.
-The recommendation is to use the Unix style for compatibility with Linux systems (common format for import tools).
+The recommendation is to use the Unix style for compatibility, in case you are using Linux.
 
 . *Binary zeros, BOM byte order mark (2 UTF-8 bytes) or other non-text characters*
 +
@@ -209,21 +211,19 @@ You can use a basic editor to detect and remove this type of characters from you
 
 === Data types
 
-The `LOAD CSV` command reads all values as a string, which means that no matter how the value appears in a file, it will be loaded as a string.
-So, before you import, make sure you convert any values that are non-string.
-
-There are a variety of conversion functions in Cypher, for example:
+Since Neo4j reads all imported values as a string, you need to convert any values that are non-string.
+You can do it using functions in Cypher:
 
 * `*toInteger()*`: converts a value to an integer.
 * `*toFloat()*`: converts a value to a float (e.g. for monetary amounts).
 * `*datetime()*`: converts a value to a `DateTime`.
 
-Depending on what sort of data you have in your CSV file, you need to choose different types.
+Depending on what sort of data you have in your CSV file, you need to convert values according to their type.
 See link:https://neo4j.com/docs/cypher-manual/current/values-and-types/[Cypher -> Values and types] for more information on what values and types are available in Cypher..
 
 == Cleaning up
 
-You can clean up the file while loading it into Neo4j and so address the following scenarios.
+Some issues in the CSV files need to be addressed *before* you load them, but others can be addressed *while* you load them by adding additional clauses to the `LOAD CSV` command.
 
 === Null values
 
@@ -336,7 +336,7 @@ See the tutorial for link:https://neo4j.com/docs/operations-manual/current/tutor
 Performance can be a problem when working with large amounts of data or complex loading.
 Some strategies can, however, improve the processing of large amounts of information.
 
-For example, suppose you use xref:#_null_values[the preceding *companies.csv* file], and now you have a file that contains people and which companies they work for:
+For example, if you want to create a graph using xref:#_null_values[the preceding *companies.csv* file] and the following one:
 
 .people.csv
 [source]
@@ -387,8 +387,8 @@ MERGE (e)-[:WORKS_FOR]->(c)
 RETURN *
 --
 
+This way, the load is only doing one piece of the import at a time and can move through large amounts of data quickly and efficiently, reducing heavy processing.
+
 The result is this graph:
 
 image::peoplecsv.svg[Graph connecting people with the companies they work for,width=500,role=popup]
-
-This way, the load is only doing one piece of the import at a time and can move through large amounts of data quickly and efficiently, reducing heavy processing.
