@@ -12,44 +12,7 @@
 Data modeling is a practice that defines the logic of queries and the structure of the data in storage.
 A well-designed model is the key to leveraging the strengths of a graph database as it improves query performance, supports flexible queries, and optimizes storage.
 
-== How to create a graph data model
-
-To organize data into a <<data model>>, the first thing to do is to think about what questions you want to answer.
-
-For example, assume that you work for a retail company and want to learn what products customers are buying.
-To answer that, you need to:
-
-* Have data on the products sold and the customers who bought them.
-This process is known as "entity extraction".
-* Understand how these entities relate to each other.
-* Think about what other details that need to be provided, i.e. what properties should be added to these entities (e.g. customer name).
-* Optionally, visualize the model before you create it using xref:data-modeling/data-modeling-tools.adoc[no-code data modeling tools].
-* If satisfied, you can start writing the data into an database.
-
-In this fictional scenario, you can start by adding this information to the graph:
-
-[source,cypher]
---
-CREATE (c:Customer {name: "John"})
-CREATE (p:Product {name: “Camera”})
-CREATE (c)-[:BUYS]->(p)
---
-
-Then, you can test this model with a query (e.g. what did John buy):
-
-[source,cypher]
---
-MATCH (c:Customer {name: "John"})-[b:BUYS]->(p)
-RETURN p
---
-
-Keep in mind that graph data modeling is an iterative process.
-Your initial graph data model is only a starting point. 
-As you learn more about your use cases or if they change, the model needs to adapt.
-
-Additionally, you may find that, especially when the graph scales, you need to xref:data-modeling/tutorial-refactoring.adoc[refactor] your model to ensure it is aligned with your business needs as they evolve.
-
-In summary, the process of creating a data model includes the following:
+In summary, the process of creating a <<data model>> includes the following:
 
 . Understand the domain and define specific use cases (questions) for the application.
 . Develop an initial graph data model by extracting entities and decide how they relate to each other.
@@ -58,11 +21,12 @@ In summary, the process of creating a data model includes the following:
 . Test the use cases, including performance against the graph.
 . Refactor the graph data model due to changes in the key use cases or for performance reasons.
 
+For a full tutorial, refer to xref:data-modeling/tutorial-data-modeling.adoc[Create a data model].
+
 == Keep learning
 
 For a more hands-on approach to data modeling, try the following resources:
 
-// * xref:tutorials/tutorial-data-modeling.adoc[Tutorial: Create a graph data model]: a more in-depth tutorial that follows up to the example used here.
 * link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/?ref=docs[GraphAcademy: Data Modeling Fundamentals]: enroll to an interactive course.
 * xref:data-modeling/relational-to-graph-modeling.adoc[From relational to graph]: learn how to adapt data from a relational to a graph data model.
 * xref:data-modeling/data-modeling-tools.adoc[Data modeling tools]: see a list of tools you can use to create your data model.
