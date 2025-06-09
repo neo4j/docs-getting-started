@@ -113,7 +113,7 @@ Moreover, while it is common practice to use verbs as relationship types, with l
 A list of items is not always sequential.
 When nodes are connected in a nonlinear fashion, they are referred to as an interleaved linked list.
 
-Interleaved lists are used when you want to sequence a set of items based on context, not necessarily a sequence in time.
+Interleaved lists are used when you want to sequence a set of items based on context, not on chronology. 
 This example combines a linked list with an interleaved linked list of Dr. Who episodes:
 
 image::interleaved-list.svg[Example of interleaved list connecting Dr Who episodes with next and next in production relationships,width=700,role=popup]
@@ -125,7 +125,7 @@ This example contains five episodes of Dr. Who from season 12 and it shows:
 * The order in which the episodes were produced using the `NEXT_IN_PRODUCTION` relationship, which creates an interleaved linked list.
 It is not a linear list, as it goes 1, 3, 2, 5, 4.
 
-Note that this example is *not* a double-linked list because it doesn't involve symmetry between the existing relationships connecting the items.
+Note that this example is *not* a double-linked list because the relationships are not mutually exclusive.
 
 === Head and tail of a linked list
 
@@ -140,7 +140,7 @@ image::head-tail-list.svg[List of five Dr Who episodes from season twelve, showi
 Some implementations also have a "progress" pointer that is used to keep track of the current node of interest.
 This can be done through a relationship, as such:
 
-image::latest-aired.svg[The latest aired episode is pointed with the help of a latest aired relationship coming from the season node,width=700,role=popup]
+image::latest-aired.svg[The latest aired episode is pointed out with the help of a latest aired relationship coming from the season node,width=700,role=popup]
 
 The progress pointer here is the `LATEST_AIRED` relationship and it shows which was the most recently aired episode (i.e. "The Ark in Space").
 When the `NEXT` episode ("The Sontaran Experiment") airs, the relationship is updated by deleting the current one and creating a new `LATEST_AIRED` pointer, so that it always points to the current item.
