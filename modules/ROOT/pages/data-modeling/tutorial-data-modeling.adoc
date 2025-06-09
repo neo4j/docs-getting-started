@@ -114,7 +114,7 @@ For example:
 * How many [.underline]#users# rated a [.underline]#movie#?
 
 The nodes in your initial model are thus *Person*, *Movie*, and *User*.
-Note that creating a model is an iterative process and, after xref:data-modeling/graph-model-refactoring.adoc[refactoring], your model may look different.
+Note that creating a model is an iterative process and, after xref:data-modeling/tutorial-refactoring.adoc[refactoring], your model may look different.
 
 [NOTE]
 ====
@@ -390,4 +390,4 @@ At this point, you can also start considering the scalability of your graph and 
 == Refactoring
 
 The next step, refactoring, is about making adjustments after you are finished testing your graph.
-Refer to xref:data-modeling/graph-model-refactoring.adoc[Tutorial: Refactoring] for instructions.
+Refer to xref:data-modeling/tutorial-refactoring.adoc[Tutorial: Refactor a graph data model] for instructions.
