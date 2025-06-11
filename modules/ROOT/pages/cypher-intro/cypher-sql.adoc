@@ -328,15 +328,15 @@ You can use aggregation functions like `sum`, `count`, `avg`, and `max` in both 
 | SQL
 | Cypher
 
-a|  If you want to see **who** (e.g. the company Drachenblut Delikatessen) bought **what** and what they **paid in total**, in SQL, you have to use `INNER JOINS` to make sure that results are returned even if there are no matching rows in other tables:
+a| If you want to see **what** a company (e.g. Drachenblut Delikatessen) paid in total per product, including where they had no orders for products, you have to use `OUTER JOINS` to make sure that results are returned even if there are no matching rows in other tables:
 
 [source, plsql]
 --
 SELECT p.Product_Name, sum(od.Unit_Price * od.Quantity) AS TotalPrice
 FROM customers AS c
-INNER JOIN orders AS o ON (c.Customer_ID = o.Customer_ID)
-INNER JOIN order_details AS od ON (o.Order_ID = od.Order_ID)
-INNER JOIN products AS p ON (od.Product_ID = p.Product_ID)
+LEFT OUTER JOIN orders AS o ON (c.Customer_ID = o.Customer_ID)
+LEFT OUTER JOIN order_details AS od ON (o.Order_ID = od.Order_ID)
+LEFT OUTER JOIN products AS p ON (od.Product_ID = p.Product_ID)
 WHERE c.Company_Name = 'Drachenblut Delikatessen'
 GROUP BY p.Product_Name;
 --
