@@ -2,7 +2,7 @@
 :table-caption!:
 :description: Learn how to write equivalent SQL statements using Cypher.
 
-// image::relational-vs-graph.svg[A comparison between tabular data and graph using the Northwind dataset,width=800,role=popup]
+image::relational-vs-graph.svg[A comparison between tabular data and graph using the Northwind dataset,width=800,role=popup]
 
 While there are link:https://neo4j.com/docs/cypher-manual/current/introduction/cypher-overview/#_cypher_and_sql_key_differences[key differences between Cypher and SQL], it is still possible to compare both languages and write equivalent SQL statements using Cypher.
 The xref:appendix/example-data.adoc[Northwind dataset] is used here to better illustrate the comparison.
@@ -20,7 +20,7 @@ They make searching for a specific node label and attribute combination more eff
 link:https://neo4j.com/docs/cypher-manual/current/indexes/[Indexes in Cypher] are only used for finding the starting points of a query; all subsequent pattern matching is done through the graph structure.
 Cypher link:https://neo4j.com/docs/cypher-manual/current/indexes/syntax/[supports] range, text, point, lookup, full-text, and vector indexes.
 
-In the Northwind dataset, adding indexes on the node label `productName` and `unitPrice` makes searching for a product and its price quicker:
+In the Northwind dataset, adding indexes on `productName` and `unitPrice` makes searching for a product and its price quicker:
 
 [options=header,cols='1,1']
 |===
@@ -396,7 +396,7 @@ RETURN p.productName, toInteger(sum(o.unitPrice * o.quantity)) AS totalPrice
 === Amount of products supplied
 
 The previous example mentioned aggregation and used the `SUM` function to find out how much a company has spent when purchasing specific products.
-You can use the `COUNT` function in Cypher to also count how many products are offered by a supplier, for instance.
+You can use the `COUNT` function in Cypher to also count how many products are offered by a supplier, for example.
 
 [options=header,cols='1,1']
 |===
