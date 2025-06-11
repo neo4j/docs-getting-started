@@ -354,7 +354,8 @@ Then you `MATCH` the company you want to gather information from, their purchase
 
 [source,cypher]
 --
-MATCH (c:Customer {companyName:'Drachenblut Delikatessen'})-[:PURCHASED]->(:Order)-[o:ORDERS]->(p:Product)
+MATCH (c:Customer {companyName:'Drachenblut Delikatessen'})
+OPTIONAL MATCH (c)-[:PURCHASED]->(:Order)-[o:ORDERS]->(p:Product)
 RETURN p.productName, toInteger(sum(o.unitPrice * o.quantity)) AS totalPrice
 --
 |===
