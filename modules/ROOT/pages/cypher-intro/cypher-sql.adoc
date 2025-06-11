@@ -350,7 +350,7 @@ SET o.unitPrice = toInteger(o.unitPrice)
 RETURN o
 --
 
-Then you `MATCH` the company you want to gather information from, their purchases, and products acquired, and `RETURN` the sum:
+Then you `MATCH` the company you want to gather information from, and use `OPTIONAL MATCH` to find their purchases, and products acquired, and `RETURN` the sum:
 
 [source,cypher]
 --
