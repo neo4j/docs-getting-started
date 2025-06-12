@@ -1,28 +1,46 @@
 = Comparing Cypher with SQL
-:tags: cypher, queries, graph-queries, sql-cypher, northwind-graph
-:aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guide
-:description: This guide teaches anyone familiar with SQL how to write the equivalent, efficient Cypher statements. We'll use the well-known Northwind database to explain the concepts and work through the queries from simple to advanced.
-:page-ad-overline-link: https://graphacademy.neo4j.com/?ref=guides
-:page-ad-overline: Neo4j GraphAcademy
-:page-ad-title: Cypher Fundamentals
-:page-ad-description: Learn Cypher in this free, hands-on course
-:page-ad-link: https://graphacademy.neo4j.com/?ref=guides
-:page-ad-underline-role: button
-:page-ad-underline: Learn more
+:table-caption!:
+:description: Learn how to write equivalent SQL statements using Cypher.
 
-.The relational and graph models of the Northwind dataset.
-image::relational-vs-graph.svg[]
+image::relational-vs-graph.svg[A comparison between tabular data and graph using the Northwind dataset,width=800,role=popup]
 
-The following query examples use the Northwind dataset.
-They are designed to help anyone familiar with SQL to understand Cypher and write Cypher queries equivalent to SQL.
-See Figure 1 for a visual representation of the difference between relational and graph models of the dataset used in the following queries.
-
-Refer to xref:appendix/example-data.adoc[Example datasets] to learn how to load Northwind to your Neo4j instance and try the examples out.
+While there are link:https://neo4j.com/docs/cypher-manual/current/introduction/cypher-overview/#_cypher_and_sql_key_differences[key differences between Cypher and SQL], it is still possible to compare both languages and write equivalent SQL statements using Cypher.
+The xref:appendix/example-data.adoc[Northwind dataset] is used here to better illustrate the comparison.
 
 [TIP]
 ====
 For a more in-depth explanation on the differences and similarities between graph and relational databases, see xref:appendix/graphdb-concepts/graphdb-vs-rdbms.adoc[Transition from relational to graph database].
 ====
+
+== Indexing
+
+Indexes are available both in SQL and Cypher.
+They make searching for a specific node label and attribute combination more efficient.
+
+link:https://neo4j.com/docs/cypher-manual/current/indexes/[Indexes in Cypher] are only used for finding the starting points of a query; all subsequent pattern matching is done through the graph structure.
+Cypher link:https://neo4j.com/docs/cypher-manual/current/indexes/syntax/[supports] range, text, point, lookup, full-text, and vector indexes.
+
+In the Northwind dataset, adding indexes on `productName` and `unitPrice` makes searching for a product and its price quicker:
+
+[options=header,cols='1,1']
+|===
+
+| SQL
+| Cypher
+
+a|[source, plsql]
+--
+CREATE INDEX Product_productName ON products (product_name);
+CREATE INDEX Product_unitPrice ON products (unit_price);
+--
+
+a|[source, cypher]
+--
+CREATE INDEX Product_productName IF NOT EXISTS FOR (p:Product) ON p.productName;
+CREATE INDEX Product_unitPrice IF NOT EXISTS FOR (p:Product) ON p.unitPrice;
+--
+
+|===
 
 == Query examples
 
@@ -36,10 +54,10 @@ For a more in-depth explanation on the differences and similarities between grap
 
 a| To select and return records in SQL, select everything from the `products` table:
 [source, plsql]
-----
+--
 SELECT p.*
 FROM products as p;
-----
+--
 
 a| In Cypher, you `MATCH` a simple pattern: all nodes with the *label* `:Product`, and `RETURN` them:
 [source, cypher]
@@ -78,6 +96,43 @@ LIMIT 10;
 ----
 |===
 
+.Result
+[options="header",cols="1,1"]
+|===
+| p.productName 
+| p.unitPrice
+
+| "Côte de Blaye"	
+| 263.5
+
+| "Thüringer Rostbratwurst"
+| 123.79
+
+| "Mishi Kobe Niku"
+| 97.0
+
+| "Sir Rodney's Marmalade"
+| 81.0
+
+| "Carnarvon Tigers"
+| 62.5
+
+| "Raclette Courdavault"
+| 55.0
+
+| "Manjimup Dried Apples"
+| 53.0
+
+| "Tarte au sucre"
+| 49.3
+
+| "Ipoh Coffee"
+| 46.0
+
+| "Rössle Sauerkraut"
+| 45.6
+|===
+
 [IMPORTANT]
 ====
 Remember that labels, relationship types, and property names are *case sensitive* in Neo4j.
@@ -87,8 +142,7 @@ For more details on naming rules, see the link:https://neo4j.com/docs/cypher-man
 === Find a single product by name
 
 There are different ways to query the database and retrieve a single item, for example, a product named `Chocolade`.
-
-==== Filtering by equality
+You can do that, for example, by filtering by equality:
 
 [options=header,cols='1,1']
 |===
@@ -123,32 +177,17 @@ RETURN p.productName, p.unitPrice;
 ----
 |===
 
-==== Indexing
+.Result
+[options="header",cols="1,1"]
+|===
+| p.productName 
+| p.unitPrice
 
-Indexes are available both in SQL and Cypher and make searching for a specific node label and attribute combination more efficient.
-
-Indexes in Cypher are only used for finding the starting points of a query; all subsequent pattern matching is done through the graph structure.
-Cypher supports range, text, point, lookup, full-text, and vector indexes.
-
-In the Northwind dataset, adding indexes on the node labels `productName` and `unitPrice` makes searching for a product and its price quicker:
-
-[source, cypher]
-----
-CREATE INDEX Product_productName IF NOT EXISTS FOR (p:Product) ON p.productName;
-CREATE INDEX Product_unitPrice IF NOT EXISTS FOR (p:Product) ON p.unitPrice;
-----
-
-[NOTE]
-====
-Indexes in Cypher are only used for finding the starting points of a query.
-All subsequent pattern matching is done through the graph structure.
-Cypher supports range, text, point, lookup, full-text, and vector indexes.
-Read more about how to use indexes in link:{docs-home}/cypher-manual/current/indexes/search-performance-indexes/using-indexes/[Cypher Manual -> Using indexes].
-====
+| "Chocolade"	
+| 12.75
+|===
 
 === Filter products
-
-There are several ways to filter results in Cypher that are similar to SQL.
 
 ==== Filter by list/range
 
@@ -178,6 +217,18 @@ RETURN p.productName, p.unitPrice;
 
 |===
 
+.Result
+[options="header",cols="1,1"]
+|===
+| p.productName 
+| p.unitPrice
+
+| "Chocolade"	
+| 12.75 
+| "Chai"
+| 18.0
+|===
+
 ==== Filter by multiple numeric and textual predicates
 
 [options=header,cols='1,1']
@@ -203,7 +254,7 @@ MATCH (p:Product)
 WHERE p.productName STARTS WITH 'C' AND p.unitPrice > 100
 RETURN p.productName, p.unitPrice;
 ----
-You can also use a regular expression:
+You can also use a regular expression to get all products with name starting with "C" and their prices:
 
 [source, cypher]
 ----
@@ -211,6 +262,16 @@ MATCH (p:Product)
 WHERE p.productName =~ '^C.*'
 RETURN p.productName, p.unitPrice
 ----
+|===
+
+.Result
+[options="header",cols="1,1"]
+|===
+| p.productName 
+| p.unitPrice
+
+| "Côte de Blaye"
+| 263.5
 |===
 
 === Joining products with customers
@@ -243,48 +304,22 @@ RETURN DISTINCT c.companyName;
 ----
 |===
 
-=== Return customers without existing orders
+.Result
+[options="header",cols="1"]
+|===
+| c.companyName
 
-If you instead want to see **who** bought **what** and what they **paid in total**, the `JOIN` in the previous SQL query stays the same, only the filter expression changes.
-However, if you have customers without any orders and still want to return them, you will need to make some adjustments.
-
-[options=header,cols='1,1']
+| "Victuailles en stock"
+| "Ernst Handel"
+| "Antonio Moreno Taquería"
+| "Furia Bacalhau e Frutos do Mar"
+| "Around the Horn"
+| "Queen Cozinha"
 |===
 
-| SQL
-| Cypher
+=== Total spent in each product
 
-a| In SQL, you have to use `OUTER JOINS` to make sure that results are returned even if there are no matching rows in other tables:
-
-[source, plsql]
-----
-SELECT p.ProductName, sum(od.UnitPrice * od.Quantity) AS Volume
-FROM customers AS c
-LEFT OUTER JOIN orders AS o ON (c.CustomerID = o.CustomerID)
-LEFT OUTER JOIN order_details AS od ON (o.OrderID = od.OrderID)
-LEFT OUTER JOIN products AS p ON (od.ProductID = p.ProductID)
-WHERE c.CompanyName = 'Drachenblut Delikatessen'
-GROUP BY p.ProductName
-ORDER BY Volume DESC;
-----
-
-a| In Cypher, the `MATCH` between customer and order becomes an `OPTIONAL MATCH`, which is the equivalent of an `OUTER JOIN`:
-[source, cypher]
-----
-MATCH (c:Customer {companyName:'Drachenblut Delikatessen'})
-OPTIONAL MATCH (p:Product)<-[o:ORDERS]-(:Order)<-[:PURCHASED]-(c)
-RETURN p.productName, toInteger(sum(o.unitPrice * o.quantity)) AS volume
-ORDER BY volume DESC;
-----
-
-Non-existing nodes and relationships will then have a `null` value, which will result in attributes being `null` and not being aggregated by `sum`.
-|===
-
-=== Top-selling employees
-
-The previous example mentioned aggregation.
-By summing up product prices and ordered quantities, an aggregated view per product for the customer was provided.
-
+By summing up product prices and ordered quantities, an aggregated view per product for the customer is provided.
 You can use aggregation functions like `sum`, `count`, `avg`, and `max` in both SQL and Cypher.
 
 [options=header,cols='1,1']
@@ -293,17 +328,93 @@ You can use aggregation functions like `sum`, `count`, `avg`, and `max` in both 
 | SQL
 | Cypher
 
+a| If you want to see **what** a company (e.g. Drachenblut Delikatessen) paid in total per product, including where they had no orders for products, you have to use `OUTER JOINS` to make sure that results are returned even if there are no matching rows in other tables:
+
+[source, plsql]
+--
+SELECT p.Product_Name, sum(od.Unit_Price * od.Quantity) AS TotalPrice
+FROM customers AS c
+LEFT OUTER JOIN orders AS o ON (c.Customer_ID = o.Customer_ID)
+LEFT OUTER JOIN order_details AS od ON (o.Order_ID = od.Order_ID)
+LEFT OUTER JOIN products AS p ON (od.Product_ID = p.Product_ID)
+WHERE c.Company_Name = 'Drachenblut Delikatessen'
+GROUP BY p.Product_Name;
+--
+
+a| In Cypher, you need to turn the `unitPrice` property of the `ORDERS` relationship into an interger in order to do the calculation between quantity ordered and amount spent:
+
+[source,cypher]
+--
+MATCH (p:Product)<-[o:ORDERS]-(order:Order)
+SET o.unitPrice = toInteger(o.unitPrice)
+RETURN o
+--
+
+Then you `MATCH` the company you want to gather information from, and use `OPTIONAL MATCH` to find their purchases, and products acquired, and `RETURN` the sum:
+
+[source,cypher]
+--
+MATCH (c:Customer {companyName:'Drachenblut Delikatessen'})
+OPTIONAL MATCH (c)-[:PURCHASED]->(:Order)-[o:ORDERS]->(p:Product)
+RETURN p.productName, toInteger(sum(o.unitPrice * o.quantity)) AS totalPrice
+--
+|===
+
+.Result
+[options="header",cols="1,1"]
+|===
+| p.productName
+| totalPrice
+
+| "Gumbär Gummibärchen"	
+| 372
+
+| "Perth Pasties"
+| 640
+
+| "Konbu"
+| 114
+
+| "Jack's New England Clam Chowder"
+| 81
+
+| "Queso Cabrales"
+| 420
+
+| "Raclette Courdavault"
+| 1650
+
+| "Lakkalikööri"
+| 168
+
+| "Rhönbräu Klosterbier"
+| 72
+
+| "Gorgonzola Telino"
+| 200
+|===
+
+=== Amount of products supplied
+
+The previous example mentioned aggregation and used the `SUM` function to find out how much a company has spent when purchasing specific products.
+You can use the `COUNT` function in Cypher to also count how many products are offered by a supplier, for example.
+
+[options=header,cols='1,1']
+|===
+
+| SQL
+| Cypher
+
 a| In SQL, aggregation is explicit, so you have to provide all grouping keys again in the `GROUP BY` clause.
-To see the top-selling employees, run the following query:
 
 [source, plsql]
 ----
-SELECT e.EmployeeID, e.FirstName, e.LastName, COUNT(*) AS Count
-FROM Employee AS e
-JOIN Orders AS o ON (o.EmployeeID = e.EmployeeID)
-GROUP BY e.EmployeeID, e.FirstName, e.LastName
-ORDER BY Count DESC
-LIMIT 10;
+SELECT s.CompanyName AS Supplier, COUNT(p.ProductID) AS NumberOfProducts
+FROM Suppliers s
+JOIN Products p ON s.SupplierID = p.SupplierID
+GROUP BY s.CompanyName
+ORDER BY NumberOfProducts DESC
+LIMIT 5;
 ----
 
 a| In Cypher, grouping for aggregation is implicit.
@@ -311,10 +422,10 @@ As soon as you use the first aggregation function, all non-aggregated columns au
 
 [source, cypher]
 ----
-MATCH (:Order)<-[:SOLD]-(e:Employee)
-WITH e, count(*) as cnt
-ORDER BY cnt DESC LIMIT 10
-RETURN e.employeeID, e.firstName, e.lastName, cnt
+MATCH (s:Supplier)<-[:SUPPLIED_BY]-(p:Product)
+RETURN s.companyName AS Supplier, COUNT(p) AS NumberOfProducts
+ORDER BY NumberOfProducts DESC
+LIMIT 5
 ----
 
 [NOTE]
@@ -323,12 +434,31 @@ Additional aggregation functions like `collect`, `percentileCont`, `stdDev` are 
 ====
 |===
 
-=== Employee territories
+.Result
+[options="header",cols="1,1"]
+|===
+| Supplier
+| NumberOfProducts
 
-In SQL, dealing with master-detail information can be challenging.
-One example is when you have one main entity (master, head, parent) and many dependent ones (detail, position, child).
+| "Pavlova"	
+| 5
 
-You can either write a query that joins both and returns the master data multiple times (once for each detail) or you fetch only the primary key of the master and then pull all detail rows via that foreign key.
+| "Plutzer Lebensmittelgroßmärkte AG"
+| 5
+
+| "Specialty Biscuits"
+| 4
+
+| "New Orleans Cajun Delights"
+| 4
+
+| "Grandma Kelly's Homestead"
+| 3
+|===
+
+=== List of products supplied
+
+In Cypher you can use the `COLLECT` function to gather all nodes connected to others, but SQL doesn't have a direct equivalent to it.
 
 [options=header,cols='1,1']
 |===
@@ -336,14 +466,16 @@ You can either write a query that joins both and returns the master data multipl
 | SQL
 | Cypher
 
-a| In SQL, if you look at the employees per territory, then the territory information is returned for each employee:
+a| In SQL, if you want a lit of what products the suppliers offer, you use `STRING_AGG`:
 
 [source, plsql]
 ----
-SELECT e.LastName, et.Description
-FROM Employee AS e
-JOIN EmployeeTerritory AS et ON (et.EmployeeID = e.EmployeeID)
-JOIN Territory AS t ON (et.TerritoryID = t.TerritoryID);
+SELECT s.CompanyName AS Supplier, STRING_AGG(p.ProductName, ', ' ORDER BY p.ProductName) AS ProductsSupplied
+FROM Suppliers s
+JOIN Products p ON s.SupplierID = p.SupplierID
+GROUP BY s.CompanyName
+ORDER BY s.CompanyName
+LIMIT 5;
 ----
 
 a| In Cypher, you can either return the structure like in SQL or use the `collect()` aggregation function, which aggregates values into a collection (list, array).
@@ -351,8 +483,10 @@ This way, only one row per parent, containing an inlined collection of child val
 
 [source, cypher]
 ----
-MATCH (t:Territory)<-[:IN_TERRITORY]-(e:Employee)
-RETURN t.territoryDescription, collect(e.lastName);
+MATCH (s:Supplier)-[:SUPPLIES]->(p:Product)
+RETURN s.companyName AS Supplier, COLLECT(p.productName) AS ProductsSupplied
+ORDER BY Supplier
+LIMIT 5
 ----
 
 [NOTE]
@@ -361,40 +495,24 @@ This also works for nested values.
 ====
 |===
 
-=== Product categories
-
-If you have to express category, territory or organizational hierarchies in SQL, it is usually modeled with a self-join via a foreign key from child to parent.
-In the example of the product categories, you have to decide upfront how many levels of categories you want to query.
-
-[options=header,cols='1,1']
+.Result
+[options="header",cols="1,1"]
 |===
+| Supplier
+| ProductsSupplied
 
-| SQL
-| Cypher
+| "Aux joyeux ecclésiastiques"	
+| ["Côte de Blaye", "Chartreuse verte"]
 
-a| Only three potential levels are shown here (which means 1+2+3 = 6 self-joins of the `ProductCategory` table):
+| "Bigfoot Breweries"
+| ["Sasquatch Ale", "Laughing Lumberjack Lager", "Steeleye Stout"]
 
-[source, plsql]
-----
-SELECT p.ProductName
-FROM Product AS p
-JOIN ProductCategory pc ON (p.CategoryID = pc.CategoryID AND pc.CategoryName = "Dairy Products")
+| "Cooperativa de Quesos 'Las Cabras'"
+| ["Queso Manchego La Pastora", "Queso Cabrales"]
 
-JOIN ProductCategory pc1 ON (p.CategoryID = pc1.CategoryID)
-JOIN ProductCategory pc2 ON (pc2.ParentID = pc2.CategoryID AND pc2.CategoryName = "Dairy Products")
+| "Escargots Nouveaux"
+| ["Escargots de Bourgogne"]
 
-JOIN ProductCategory pc3 ON (p.CategoryID = pc3.CategoryID)
-JOIN ProductCategory pc4 ON (pc3.ParentID = pc4.CategoryID)
-JOIN ProductCategory pc5 ON (pc4.ParentID = pc5.CategoryID AND pc5.CategoryName = "Dairy Products")
-;
-----
-
-a| Cypher is able to express hierarchies of any depth using only the appropriate relationships.
-Variable levels are represented by variable length paths, which are denoted by a star `*` after the relationship type and optional limits (`min..max`):
-
-[source, cypher]
-----
-MATCH (p:Product)-[:PART_OF]->(l:Category)-[:PARENT*0..]-(:Category {name:'Dairy Products'})
-RETURN p.name;
-----
+| "Exotic Liquids"
+| ["Aniseed Syrup", "Chang", "Chai"]
 |===
