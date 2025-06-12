@@ -129,6 +129,25 @@ Organizations such as the French Ministry of Economy and Finance, Zurich Insuran
 * Solution: https://linkurio.us/solution/neo4j/[Linkurious Enterprise + Neo4j^]
 * Product datasheet https://linkurio.us/wp-content/uploads/2019/04/Linkurious_Enterprise_Technical_Datasheet.pdf[Linkurious Enterprise^]
 
+=== *GraphAware Hume**
+
+GraphAware Hume is a government-grade data analytics platform for fast, intuitive  intelligence analysis. From the user interface to the database, GraphAware Hume is uniquely graph-based, showcasing the full power of Neo4j through code-free UIs.
+
+GraphAware Hume ingests and connects structured and unstructured data sources via configurable data workflows. It supports both streaming and batch processing to establish a unified and up-to-date `single source of truth`.
+
+As more intelligence sources are integrated, specialized graphs can be created to support different types of analysis. Analysts can leverage graph data science to understand node importance within networks, predict links, and set up automated graph-based alerts. 
+
+GraphAware Hume comes with robust deployment options (including containerized and air-gapped setups), strong security features (such as SSO, RBAC, and audit logging), high availability, backup capabilities, and open standards and API, ensuring no vendor lock-in and full ownership of your graph-enabled solutions.
+
+==== GraphAware Hume Resources
+* Product: https://graphaware.com/hume/[GraphAware Hume]
+* Features:
+** https://graphaware.com/hume/streamlined-intelligence-analysis/[Intelligence Analysis]
+** https://graphaware.com/hume/a-single-view-of-truth/[Data Ingestion]
+** https://graphaware.com/hume/advanced-analysis-capabilities/[Advanced Intelligence Analysis]
+** https://graphaware.com/hume/collaborative-decision-making/[Intelligence Sharing]
+
+
 === *Graphistry*
 // image:{neo4j-img-base-uri}graphistry-logo-rough.png[width=200]
 
