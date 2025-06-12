@@ -129,7 +129,7 @@ Organizations such as the French Ministry of Economy and Finance, Zurich Insuran
 * Solution: https://linkurio.us/solution/neo4j/[Linkurious Enterprise + Neo4j^]
 * Product datasheet https://linkurio.us/wp-content/uploads/2019/04/Linkurious_Enterprise_Technical_Datasheet.pdf[Linkurious Enterprise^]
 
-=== *GraphAware Hume**
+=== *GraphAware Hume*
 
 GraphAware Hume is a government-grade data analytics platform for fast, intuitive  intelligence analysis. From the user interface to the database, GraphAware Hume is uniquely graph-based, showcasing the full power of Neo4j through code-free UIs.
 
