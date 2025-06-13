@@ -56,7 +56,7 @@ RETURN row
 == Filtering loaded data
 
 Alternatively, you can also use `LOAD CSV` to load only a subset of the data in the CSV file.
-For example, this is how you can import information only about those born in 1942:
+For example, you can import information only about people born in 1942:
 
 [source,cypher]
 --
@@ -84,14 +84,14 @@ The result is:
 }
 |===
 
-Note that in the query, you needed to refer to the year of 1942 as a string (encased by a single quote `'`).
-This is because xref:data-import/csv-files.adoc#_data_types[`LOAD CSV` reads all values as a string].
+Note that in the query, you need to refer to the year of 1942 as the `string` datatype  (encased by single quotes `'`).
+This is because xref:data-import/csv-files.adoc#_data_types[`LOAD CSV` reads all values as a `string`].
 In the next step, you will learn how to convert the values to their respective types.
 
 == Convert data types
 
 In the *people.csv* file, you have data such as the birth year and the ID number for each person.
-`LOAD CSV` only reads values as string.
+`LOAD CSV` only reads *all* values as `string`.
 For better processing of the data, you can convert these values into temporal and numerical types.
 
 `personId` can be turned into an interger by using the `toInteger()` function, and `birthYear` can be turned into a date format by using the  the `date()` function:
