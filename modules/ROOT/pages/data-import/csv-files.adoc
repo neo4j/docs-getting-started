@@ -120,12 +120,12 @@ movieId,title,avgVote,releaseYear,genres,personType,name,birthYear,character
 --
 
 Here, the movie and person data (including the IDs) is repeated in different rows every time new information about a particular actor's role is featured.
-This sort of duplication compromises the structure of the data when in a graph.
+This sort of duplication compromises the graph data structure.
 In this case, it is then advisable to xref:#_file_preparation[prepare your file] before importing.
 
 == File location
 
-When working with a CSV file in Neo4j, you can access it from a link:
+When using the `LOAD CSV` command to load your CSV data, the CSV file is accessed via URL, either over the internet:
 
 [source,cypher]
 --
@@ -202,7 +202,7 @@ For newline characters in quoted or unquoted fields, either add quotes for these
 . *Inconsistent line breaks*
 +
 Ensure line breaks are consistent throughout the file.
-The recommendation is to use the Unix style for compatibility, in case you are using Linux.
+For Linux users, the recommendation is to use the Unix style for compatibility.
 
 . *Binary zeros, BOM byte order mark (2 UTF-8 bytes) or other non-text characters*
 +
@@ -349,7 +349,7 @@ employeeId,Name,companyId
 ----
 
 In this case, you should separate node and relationship creation on a separate part of the processing.
-For instance, instead of the following:
+For example, instead of the following:
 
 [source,cypher]
 --
