@@ -50,6 +50,12 @@ a| link:{docs-home}/data-importer/current[Data Importer]
 | {check-mark}
 | CSV, TSV
 
+a| link:https://neo4j.com/docs/desktop/current/visual-tour/#import[Neo4j Desktop]
+| Import service for local files.
+| {cross-mark}
+| {check-mark}
+| CSV
+
 a| link:https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[`LOAD CSV`]
 | Cypher command to import small- to medium-sized datasets (up to 10 million records) from local and remote files, including from cloud URIs.
 | {check-mark}
