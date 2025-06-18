@@ -9,10 +9,15 @@
 //Cross Mark
 :cross-mark: icon:times[]
 
-Neo4j provides different tools for importing data stored in various formats, e.g. .csv, .tsv, and .json.
+Neo4j provides different tools for link:https://www.neo4j.com/docs/import[importing] data stored in various formats, e.g. .csv, .tsv, and .json.
 Depending on the kind of data you are working with, there are different options to choose from, as shown in the diagram:
 
 image::import-data-charts.svg[Decision chart with options to import data to Neo4j,width=600,role=popup]
+
+[TIP]
+====
+For a more hands-on guidance, see the available link:https://graphacademy.neo4j.com/categories/?search=import[GraphAcademy courses] on data import.
+====
 
 == Methods comparison
 
@@ -37,6 +42,12 @@ a| link:{docs-home}/data-importer/current[Data Importer]
 | {check-mark}
 | {check-mark}
 | CSV, TSV
+
+a| link:https://neo4j.com/docs/desktop/current/visual-tour/#import[Neo4j Desktop]
+| Import service for local files.
+| {cross-mark}
+| {check-mark}
+| CSV
 
 a| link:https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[`LOAD CSV`]
 | Cypher command to import small- to medium-sized datasets (up to 10 million records) from local and remote files, including from cloud URIs.
@@ -113,12 +124,3 @@ a| link:https://neo4j.com/labs/neo4j-migrations/[Neo4j Migrations]
 | link:https://neo4j.com/labs/neo4j-migrations/#_features[See compatibility and features].
 
 |===
-
-== Keep learning
-
-See the link:https://neo4j.com/docs/import/[Import] page for more related links or keep learning using these resources:
-
-* link:https://graphacademy.neo4j.com/courses/importing-fundamentals/[Importing Data Fundamentals]: An interactive course on the fundamentals of data importing with Neo4j.
-* link:https://graphacademy.neo4j.com/courses/importing-cypher/[Importing CSV data into Neo4j]: An interactive course on how to import CSV data into Neo4j using Cypher.
-* xref:appendix/tutorials/guide-import-relational-and-etl.adoc[Tutorial: Import data from a relational database]: Import relational data into a Neo4j deployment.
-* xref:appendix/tutorials/guide-import-desktop-csv.adoc[How-To: Import CSV data with Neo4j Desktop]: Read how to import CSV data using Neo4j Desktop.

@@ -30,7 +30,8 @@
 ** xref:data-modeling/data-modeling-tools.adoc[]
 
 * xref:data-import/index.adoc[Import data into Neo4j]
-** xref:data-import/csv-import.adoc[]
+** xref:data-import/csv-files.adoc[]
+** xref:data-import/csv-import.adoc[Using `LOAD CSV`]
 ** xref:data-import/json-rest-api-import.adoc[]
 ** xref:data-import/relational-to-graph-import.adoc[]
 
@@ -60,6 +61,5 @@
 * xref:appendix/tutorials/tutorials-overview.adoc[Tutorials]
 ** xref:appendix/tutorials/guide-cypher-basics.adoc[Get started with Cypher]
 ** xref:appendix/tutorials/guide-build-a-recommendation-engine.adoc[Cypher recommendation engine]
-** xref:appendix/tutorials/guide-import-desktop-csv.adoc[Import CSV data with Neo4j Desktop]
-** xref:appendix/tutorials/guide-import-relational-and-etl.adoc[Import data from a relational database into Neo4j]
+** xref:data-import/import-relational-and-etl.adoc[Import data from a relational database into Neo4j]
 * xref:appendix/getting-started-resources.adoc[Resources]
