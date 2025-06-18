@@ -9,7 +9,7 @@ There are several elements in a CSV file that can help you understand the data t
 
 === Data format
 
-Neo4j reads all data from the CSV file as a string.
+Neo4j reads all data from the CSV file as a `string`.
 For other data types, you need to use `toInteger()`, `toFloat()`, `toBoolean()`, or similar functions to convert data to the appropriate type.
 Remember also that labels, property names, relationship types, and variables are *case-sensitive*.
 
@@ -149,13 +149,13 @@ See link:https://neo4j.com/docs/operations-manual/current/configuration/file-loc
 
 If you want to open your CSV file from another location, you need to change the link:https://neo4j.com/docs/operations-manual/2025.03/configuration/configuration-settings/#config_server.directories.import[`server.directories.import`] settings.
 
-[IMPORTANT]
-====
-It is strongly recommended to permit resource loading only over secure protocols such as HTTPS instead of insecure protocols like HTTP.
+[discrete]
+=== Security
+
+It is *strongly recommended* to permit resource loading only over secure protocols such as HTTPS instead of insecure protocols like HTTP.
 This can be done by limiting the link:{neo4j-docs-base-uri}/operations-manual/{page-version}/authentication-authorization/load-privileges/#access-control-load-cidr/[load privileges] to only trusted sources that use secure protocols.
 
 If allowing an insecure protocol is unavoidable, you need to add the JVM argument `-Dsun.net.http.allowRestrictedHeaders=true` to the configuration setting link:https://neo4j.com/docs/operations-manual/current/configuration/configuration-settings/#config_server.jvm.additional[`server.jvm.additional`] to avoid automatic blocking from Neo4j's built-in security checks.
-====
 
 == File preparation
 
@@ -211,15 +211,15 @@ You can use a basic editor to detect and remove this type of characters from you
 
 === Data types
 
-Since Neo4j reads all imported values as a string, you need to convert any values that are non-string.
+Since Neo4j reads all imported values as a `string`, you need to convert any values that are not `string`.
 You can do it using functions in Cypher:
 
-* `*toInteger()*`: converts a value to an integer.
-* `*toFloat()*`: converts a value to a float (e.g. for monetary amounts).
+* `*toInteger()*`: converts a value to an `integer`.
+* `*toFloat()*`: converts a value to a `float` (e.g. for monetary amounts).
 * `*datetime()*`: converts a value to a `DateTime`.
 
 Depending on what sort of data you have in your CSV file, you need to convert values according to their type.
-See link:https://neo4j.com/docs/cypher-manual/current/values-and-types/[Cypher -> Values and types] for more information on what values and types are available in Cypher..
+See link:https://neo4j.com/docs/cypher-manual/current/values-and-types/[Cypher -> Values and types] for more information on what values and types are available in Cypher.
 
 == Cleaning up
 
@@ -257,7 +257,7 @@ LOAD CSV WITH HEADERS FROM 'file:///companies.csv' AS row
 MERGE (c:Company {companyId: row.Id, hqLocation: coalesce(row.Location, "Unknown")})
 --
 
-You can also change the empty strings to null values which will not be stored using the link:https://neo4j.com/docs/cypher-manual/current/clauses/set/[`SET`] clause:
+You can also change the empty `strings` to null values which will not be stored using the link:https://neo4j.com/docs/cypher-manual/current/clauses/set/[`SET`] clause:
 
 [source,cypher]
 --
@@ -269,7 +269,7 @@ SET c.emailAddress = CASE trim(row.Email) WHEN "" THEN null ELSE row.Email END
 === Conditional conversions
 
 Conditional conversions can be achieved with `CASE`.
-The previous example checked for null values or empty strings, but you can also set a property in this cleaning stage based on a value in the CSV file.
+The previous example checked for null values or empty `strings`, but you can also set a property in this cleaning stage based on a value in the CSV file.
 
 For example, you can set the `businessType` property based on an abbreviated value in the CSV file:
 

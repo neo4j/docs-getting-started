@@ -15,13 +15,21 @@ To import larger CSV files into Neo4j, see the tutorial for link:https://neo4j.c
 
 == Loading the file
 
-Before loading the file, you need to first create an link:https://neo4j.com/product/auradb/[Aura instance] or choose a link:{docs-home}/deployment-options[deployment of your choice].
-Then, you can load the file using `LOAD CSV` using the following command:
+The `LOAD CSV` command can be used to load data into any deployment of Neo4j, whether it is an link:https://neo4j.com/product/auradb/[Aura instance] or a local installation.
+See link:{docs-home}/deployment-options[deployment options] for information.
+The command looks like this:
 
 [source,cypher]
 --
 LOAD CSV [WITH HEADERS] FROM url [AS alias] [FIELDTERMINATOR char]
 --
+
+What the command does is:
+
+* *`WITH HEADERS` (optional)* -> the first line of the CSV file is treated as a header and each row is treated as a map of key-value pairs rather than a list of values.
+* *`FROM` (mandatory)* -> specifies the location whether it is local or over the internet.
+* *`AS alias` (optional)* -> names each row for reference.
+* *`FIELDTERMINATOR` (optional)* -> the default field terminator in CSV files is the comma, but others are supported and can be specified here.
 
 In this tutorial, you will use a link to load the CSV file:
 
@@ -32,26 +40,33 @@ FROM 'https://data.neo4j.com/importing-cypher/people.csv' AS row
 RETURN row
 --
 
-This is the content of the example `people.csv` file:
+The result is:
 
-[source,csv]
---
-personId,name,birthYear
-23945,Gerard Pires,1942
-553509,Helen Reddy,1941
-113934,Susan Flannery,1939
---
+[options=header,cols=1]
+|===
 
-Note that the `FIELDTERMINATOR` wasn’t specified in the `LOAD CSV` clause because the default value is a comma. 
-If the field terminator was a pipe character, then you would need to include the field terminator, for example:
+|row
+|{
+  +
+  "birthYear": "1942", +
+  "name": "Gerard Pires", +
+  "personId": "23945" +
+}
 
-[source,cypher]
---
-LOAD CSV WITH HEADERS
-FROM 'https://data.neo4j.com/importing-cypher/people.csv'
-as row FIELDTERMINATOR '|'
-RETURN row
---
+|{
+  +
+  "birthYear": "1941", +
+  "name": "Helen Reddy", +
+  "personId": "553509" +
+}
+
+|{
+  +
+  "birthYear": "1939", +
+  "name": "Susan Flannery", +
+  "personId": "113934" +
+}
+|===
 
 == Filtering loaded data
 
@@ -84,7 +99,7 @@ The result is:
 }
 |===
 
-Note that in the query, you need to refer to the year of 1942 as the `string` datatype  (encased by single quotes `'`).
+Note that in the query, you need to refer to the year of 1942 as the `string` datatype (encased by single quotes `'`).
 This is because xref:data-import/csv-files.adoc#_data_types[`LOAD CSV` reads all values as a `string`].
 In the next step, you will learn how to convert the values to their respective types.
 
@@ -94,7 +109,7 @@ In the *people.csv* file, you have data such as the birth year and the ID number
 `LOAD CSV` only reads *all* values as `string`.
 For better processing of the data, you can convert these values into temporal and numerical types.
 
-`personId` can be turned into an interger by using the `toInteger()` function, and `birthYear` can be turned into a date format by using the  the `date()` function:
+`personId` can be turned into an interger by using the `toInteger()` function, and `birthYear` can be turned into a date format by using the `date()` function:
 
 [source, cypher]
 ----
@@ -144,38 +159,9 @@ RETURN count(row)
 
 . Make sure header names match those in the CSV file.
 
-. Search for typos in the data and in the queries.
-
-== Model your data
-
-[TIP]
-====
-Follow the xref:data-modeling/tutorial-data-modeling.adoc[Tutorial: Create a graph data model] to learn more.
-====
-
-Before you import data into Neo4j, it likely has no graph structure, and you may want to create a xref:data-modeling/index.adoc[graph data model].
-
-Considering the previous examples, you could design a graph model using the `CREATE` clause to create your nodes and relationships, but then you may end up with duplicate entities in your graph.
-This is because the `CREATE` clause pays no attention to whether an identical element already exists.
-
-Unless your data is perfectly clean of duplications, it is better to use `MERGE` as it tries to find a matching entity first, and only creates a new one if none is found:
-
-[source, cypher]
---
-LOAD CSV WITH HEADERS
-FROM 'https://data.neo4j.com/importing-cypher/people.csv'
-AS row
-WITH toInteger(row.personId) AS personId, row.name AS Person, date(row.birthYear) AS birthYear
-MERGE (p:Person {personId: personId})
-  SET p.name = Person, p.birthYear = birthYear
-RETURN p
---
-
-This results in the following graph:
-
-image::import-peoplecsv.svg[The graph resulted from the importing of the people csv file,role=popup,width=600]
-
 == Keep learning
 
 Regardless of where your data comes from, it is likely that it needs some preparation before it is ready to be imported.
 See xref:data-import/csv-files.adoc[Working with CSV files] to learn more about the structure of data, how to clean it up, and optimize it.
+
+Alternatively, you can follow the the xref:data-modeling/tutorial-data-modeling.adoc[Tutorial: Create a graph data model] to learn what to do next after importing data into Neo4j.
