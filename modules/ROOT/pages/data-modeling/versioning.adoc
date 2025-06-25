@@ -1,0 +1,203 @@
+= Versioning
+:description: See what options of graph data model versioning are commonly used in combination with Neo4j.
+
+Every time you xref:data-modeling/graph-model-refactoring.adoc[refactor] your data model, you create new versions of it.
+Tracking changes in the data structure or showing a current and past value can be valuable for auditing purposes, trend analysis, etc.
+This page gives an overview of the different ways you could model data in order to keep track of changes over time.
+
+== Versioning of entities
+
+You can keep track of changes in data by versioning relevant entities.
+This strategy is useful when you need to:
+
+* Access the many versions of specific entities (nodes, for instance) in a graph (e.g. the different names a product has had throughout time).
+* Retrieve the latest version only (e.g. the current name of a product).
+
+image::versioned-entities.svg[Example of a graph showing different versions of an entity which had its property value changed over time,width=300,role=popup]
+
+With entities versioning:
+
+* The entity `Product` is linked to its different versions by an explicit relationship.
+* The entity `Product` is immutable.
+Only the properties that are stored in the different versions (`State` nodes) change.
+* The `LATEST` relationship links the entity `Product` to its most recent version (`State`), which also happens to be version 2 (`V2`).
+
+=== Pros and cons
+
+[cols="<,<",options="header"]
+|===
+| **Pros**
+| **Cons** 
+
+| Simple in terms of modeling, querying, and maintenance.
+| Updating nodes requires the deletion of the `LATEST` relationship, and the creation of a new relationship between the entity and its latest version.
+
+| Explicit for end users without any transformation.
+| Can be limited if not using other versioning patterns, as it can be hard to know which version you want to retrieve if it’s not the latest.
+|===
+
+=== Query examples
+
+These are examples of common queries that are useful with the entity versioning strategy:
+
+.Get the name of the version 2 of a `Product` with the id '1'
+[source,cypher]
+--
+MATCH (:Product {id:1})-[:V2]->(s:State)
+RETURN s.name
+--
+
+.Get the name of the latest version of a `Product` with the id '1'
+[source,cypher]
+--
+MATCH (:Product {id:1})-[:LATEST]->(s:State)
+RETURN s.name
+--
+
+== Time-based versioning of entities
+
+A variation of the entity versioning is a time-based approach.
+It is useful when you are interested in:
+
+* *Graph snapshot* by retrieving all valid elements (nodes and relationships) of the graph to a specific point in time (e.g. which products are available on Monday the 12.06.23).
+* *Graph difference* by comparing two graph snashots of different time stamps (e.g. which nodes are added, which are deleted, and which remain the same).
+* *Temporal traversal* by traversing only valid elements (node or relationships) of the graph to a specific point in time in order to find the chronological sequence of relationships which connect time-based events (e.g. bike sharing graph with trip relationships between stations as nodes).
+* *Graph history* by modeling the history of data changes.
+
+image::time-based-entities.svg[Example graph of time-based versioning of entities,width=400,role=popup]
+
+With time-based versioning of entities:
+
+* Each element has dedicated `validFrom`/`validTo` time properties.
+* Nodes can only share a relationship if their validity timespan overlap.
+* Duplication of information is possible.
+* Complete history of the graph is usable.
+
+=== Pros and cons
+
+[cols="<,<",options="header"]
+|===
+| **Pros**
+| **Cons** 
+
+| Every element has a well defined time interval in which the element is valid.
+| If the state of a node changes, the node has to be duplicated and a new valid time interval should be assigned.
+
+| States are bound to the specific element (no additional relationship required).
+| Updating nodes requires the creation of a new relationship connecting to the new node/state and the assigning of A new valid interval to the relationship.
+
+| Aggregation of all elements (or only valid ones at a certain time) is possible.
+| Duplications of data cannot be avoided.
+|===
+
+=== Query examples
+
+These are examples of common queries that are useful with the time-based entity versioning strategy:
+
+.Get the current price of the `Product` Rice Cooker
+[source,cypher]
+--
+MATCH (p:Product)
+WHERE p.name = “Rice Cooker” AND p.validTo = ∞
+RETURN p.price
+--
+
+.Get the price of the `Product` Rice Cooker in November
+[source,cypher]
+--
+MATCH (p:Product)
+WHERE p.name = “Rice Cooker”
+AND datetime(p.validFrom) <= datetime(“November”) <= datetime(p.validTo)
+RETURN p.price
+--
+
+.Get the current product catalogue and the prices
+[source,cypher]
+--
+MATCH ()-[r:HAS_PRODUCT]->(p)
+WHERE r.validTo = ∞
+RETURN p.name, p.price
+--
+
+== Linked list
+
+A linked list is another modeling strategy that can be useful when the sequence of objects matters.
+
+Linked lists are useful when:
+
+* The order of events is of interest, e.g. getting the order of transactions executed on a bank account.
+* You need the previous and next elements in a list, based on the relationship between them (e.g. what song is the next on a playlist, or undo an action on a text document) are .
+
+image::linked-list-versioning.svg[Example graph showing a linked list model design being used for versioning,width=400,role=popup]
+
+With a linked list:
+
+* The entity `Product` is linked to the first element of the sequence, and can be linked to the last one.
+* As with the the xref:#_versioning_of_entities[versioning of entities], the entity `Product` is also immutable here.
+* Each element of the sequence is linked to the next one through a `NEXT` relationship.
+
+=== Pros and cons
+
+[cols="<,<",options="header"]
+|===
+| **Pros**
+| **Cons** 
+
+| Efficient by using relationships to get the next/previous element.
+| Limited to very specific use cases without using other versioning patterns.
+
+| Simple modeling and maintenance.
+| Difficult to find a specific version which is not the first or the last.
+
+| Explicit for end users.
+|
+|===
+
+=== Query examples
+
+These are examples of common queries that are useful with the linked-list versioning strategy:
+
+.Get the next name of the product named “Professional chair”
+[source,cypher]
+--
+MATCH (:State{name: “Professional chair”})-[:NEXT]->(s:State)
+RETURN s.name
+--
+
+.Get the previous name of the product with the id '1'
+[source,cypher]
+--
+MATCH (:Product {id:1})-[:LAST]->(:State)<-[:NEXT]-(s:State)
+RETURN s.name
+--
+
+== Timeline tree
+
+As mentioned in xref:data-modeling/modeling-designs.adoc[Modeling designs], the timeline tree is a common modeling design.
+It can be a useful strategy when you want to track change.
+In this example, the timeline structure spans from years to days, and the rest of the non-time data nodes are the nodes that contain the important pieces of data in the graph:
+
+image::timeline-tree.svg[Graph with two different timeslines divided in years, months, and days and what purchases are connected to these dates,width=600,role=popup]
+
+=== Query examples
+
+If you want to find all purchases that happened in a given time period, such as every purchase in the month of December 2012, the timeline tree can be navigated from 2012, to December, and then fetch everything from the connected leaf nodes (nodes with no descendants) under that branch:
+
+[source,cypher]
+--
+MATCH (root:Timeline)-[:IN_YEAR]->(year:Year {value:2012})-[:IN_MONTH]->(month:Month {value:12})
+WITH month
+MATCH (month)-[:ON_DAY]->(day)
+MATCH (purchase:Purchase)-[:OCCURRED]->(day)
+RETURN purchase
+--
+
+== Combined approach
+
+Some complex use-cases require the combination of one or more of the previously mentioned modeling techniques since each has advantages and disadvantages.
+
+The right combination depends on the specific use-case. 
+Factors such as query times and the frequency of transactions should be considered as well.
+
+image::combined-approach.svg[Example graph of a more complex approach to versioning combining timeline tree, versioned entities, and more,width=600,role=popup]
+
