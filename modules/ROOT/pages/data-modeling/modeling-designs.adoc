@@ -110,9 +110,6 @@ Moreover, while it is common practice to use verbs as relationship types, with l
 
 === Interleaved linked list
 
-A list of items is not always sequential.
-When nodes are connected in a nonlinear fashion, they are referred to as an interleaved linked list.
-
 Interleaved lists are used when you want to sequence a set of items based on context, not on chronology. 
 This example combines a linked list with an interleaved linked list of Dr. Who episodes:
 
