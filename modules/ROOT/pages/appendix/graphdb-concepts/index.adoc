@@ -227,7 +227,7 @@ CREATE (:Example {f: [1, 2, 3], g: [2.71, 3.14], h: ['abc', 'example'], i: [true
 
 [TIP]
 ====
-For a thorough description of the available data types, refer to the link:{neo4j-docs-base-uri}/cypher-manual/{page-version}/syntax/values#cypher-values[Cypher manual -> Values and types].
+For a thorough description of the available data types, refer to the link:https://neo4j.com/docs/cypher-manual/current/values-and-types/[Cypher manual -> Values and types].
 ====
 
 
