@@ -1,42 +1,48 @@
+
 [[graphdb-vs-rdbms]]
 = Transition from relational to graph database
-:description: This page explores the conceptual differences between relational and graph database structures and data models.
+:description: This page explores the concepts of graph databases from a relational developer's point of view.
 
 This page explores the conceptual differences between relational and graph database structures and data models.
-For a comparison between programming languages, see xref:cypher-intro/cypher-sql.adoc[Comparing Cypher with SQL].
+It also gives a high-level overview of how working with each database type is similar or different - from the relational and graph query languages to interacting with the database from applications.
 
 [#relational-vs-graph]
 == Relational database overview
 
-Relational databases store highly-structured data in tables with predetermined columns and rows of specific types of information.
+Relational databases store highly-structured data in tables with predetermined columns of specific types and rows of those defined types of information.
 Due to the rigidity of their organization, relational databases require developers and applications to strictly structure the data used in their applications.
 
 In relational databases, references to other rows and tables are indicated by referring to primary key attributes via foreign key columns.
 Joins are computed at query time by matching primary and foreign keys of all rows in the connected tables.
 These operations are compute-heavy and memory-intensive, and have an exponential cost.
 
-When many-to-many relationships occur in the model, you must introduce a `JOIN` table (or associative entity table) that holds foreign keys of both the participating tables, further increasing join operation costs, as shown in the image:
+When many-to-many relationships occur in the model, you must introduce a _JOIN_ table (or associative entity table) that holds foreign keys of both the participating tables, further increasing join operation costs, as shown in the diagram:
 
+.Relational model
 image::relational_model.svg[Depiction of a relational database with connecting points in each table,role=popup,width=600]
 
-The diagram shows the concept of connecting an `Employee` (from the `Employee` table) to a `Department` (in the `Departments` table) by creating a `Dpt_Members` join table that contains the ID of the employee in one column and the ID of the associated department in another column.
+The diagram shows the concept of connecting a `Person` (from the `Person` table) to a `Department` (in `Department` table) by creating a `Person-Department` join table that contains the ID of the person in one column and the ID of the associated department in the next column.
 
-This structure makes understanding the connections cumbersome, because you must know the employee and the department's ID values (performing additional lookups to find them) in order to know which employee connects to which department.
-
+This structure makes understanding the connections cumbersome, because you must know the person ID and department ID values (performing additional lookups to find them) in order to know which person connects to which departments.
 These types of costly join operations are often addressed by denormalizing the data to reduce the number of joins necessary, therefore breaking the data integrity of a relational database.
-Graph databases stand where relational databases don't cover the needs of developers, and offer other ways to connect data.
+
+Graph databases cater for use cases that weren't a good fit for relational data models and offer new possibilities to connect data.
 
 [#relational-to-graph]
 == Translating relational knowledge to graphs
 
-Unlike other database management systems, relationships are of equal importance to the data itself in a graph.
-This means you are not required to infer connections between entities using special properties such as foreign keys or out-of-band processing like map-reduce.
+Unlike other database management systems, relationships are of equal importance in the graph data model to the data itself.
+This means we are not required to infer connections between entities using special properties such as foreign keys or out-of-band processing like map-reduce.
 
-By assembling nodes and relationships into connected structures, graph databases enable building simple and sophisticated models that map closely to a problem domain.
-Each node (entity or attribute) contains relationships to other nodes, and these relationship are organized by type and direction, holding or not additional attributes.
+By assembling nodes and relationships into connected structures, graph databases enable us to build simple and sophisticated models that map closely to our problem domain.
+The data stays remarkably similar to its form in the real world - small, normalized, yet richly connected entities.
+This allows you to query and view your data from any imaginable point of interest, supporting many different use cases.
 
-Whenever you would run xref:cypher-intro/cypher-sql.adoc[the equivalent of a `JOIN` operation], the graph database uses these relationships to directly access the connected nodes.
-This eliminates the need for expensive search-and-match computations, and performance is altogether improved.
+Each node (entity or attribute) in the graph database model directly and physically contains a list of relationship records that represent the relationships to other nodes.
+These relationship records are organized by type and direction and may hold additional attributes.
+Whenever you run the equivalent of a _JOIN_ operation, the graph database uses this list, directly accessing the connected nodes and eliminating the need for expensive search-and-match computations.
+
+This ability to pre-materialize relationships into the database structure allows Neo4j to provide performance of several orders of magnitude above others, especially for join-heavy queries, allowing users to leverage a _minutes to milliseconds_ advantage.
 
 ifndef::backend-pdf[]
 ++++
@@ -53,28 +59,35 @@ endif::[]
 [#rdbms-graph-model]
 == Data model differences
 
-Graph data models have simpler and more expressive data models than those produced using relational or other NoSQL databases.
-Take this example of a relational data model:
+As you can probably imagine from the structural differences discussed above, the data models for relational versus graph are very different.
+The straightforward graph structure results in much simpler and more expressive data models than those produced using traditional relational or other NoSQL databases.
 
-image::relational_as_graph.jpg[Relational data model connecting person and department tables,width=600,role=popup]
+If you are used to modeling with relational databases, remember the ease and beauty of a well-designed, normalized entity-relationship diagram - a simple, easy-to-understand model you can quickly whiteboard with your colleagues and domain experts.
+A graph is exactly that - a clear model of the domain, focused on the use cases you want to efficiently support.
 
-Here, the `Person` table has potentially millions of rows, one which has the entry "Alice", which is connected to the ID 815.
-To know how she connects to the `Department` table, you need to locate all the rows that reference Alice's ID (815) and see in the `Department` table what are the actual values of the department IDs connected to Alice's ID (111, 119, 181).
-Only then you know that Alice is part of the 4FUTURE, P0815, and A42 departments.
+Let's compare the two data models to show how the structure differs between relational and graph.
 
-In a graph data model, however, there is one single node for Alice with the label `Person`.
-Since she belongs to 3 different departments, each one of them is represented with a different node with the label `Department`:
+.Relational - Person and Department tables
+image::relational_as_graph.jpg[role="popup-link"]
 
-image::relational-graph-model-arr.svg[Graph connecting the person node Alice to three different departments,role=popup,width=400]
+In the above relational example, we search the Person table on the left (potentially millions of rows) to find the user Alice and her person ID of 815. Then, we search the Person-Department table (orange middle table) to locate all the rows that reference Alice's person ID (815). Once we retrieve the 3 relevant rows, we go to the Department table on the right to search for the actual values of the department IDs (111, 119, 181).
+Now we know that Alice is part of the 4Future, P0815, and A42 departments.
 
-To find which departments Alice belongs to, you would search the graph for Alice's node, then traverse all of the `BELONGS_TO` relationships from Alice to find the `Department` nodes she is connected to.
-All this information is found on a single hop with no lookups involved.
+.Graph - Alice and three departments as nodes
+image::relational_graph_model-arr.svg[role="popup-link",width=350]
+
+In the above graph version, we have a single node for Alice with a label of Person.
+Alice belongs to 3 different departments, so we create a node for each one and with a label of Department.
+To find out which departments Alice belongs to, we would search the graph for Alice's node, then traverse all of the BELONGS_TO relationships from Alice to find the Department nodes she is connected to.
+That's all we need - a single hop with no lookups involved.
 
 [TIP]
 ====
-To learn more about graph data modeling, refer to the xref:data-modeling/index.adoc[Model data section].
+More information on this topic can be found in the https://neo4j.com/docs/getting-started/current/data-modeling/[Data Modeling section].
 ====
 
+
+[#rdbms-graph-query]
 == Data storage and retrieval
 
 Querying relational databases is easy with SQL - a declarative query language that allows both easy ad-hoc querying in a database tool, as well as use-case-specific querying from application code.
