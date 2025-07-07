@@ -74,7 +74,7 @@ In the above relational example, we search the Person table on the left (potenti
 Now we know that Alice is part of the 4Future, P0815, and A42 departments.
 
 .Graph - Alice and three departments as nodes
-image::relational_graph_model-arr.svg[role="popup-link",width=350]
+image::relational-graph-model-arr.svg[role="popup-link",width=350]
 
 In the above graph version, we have a single node for Alice with a label of Person.
 Alice belongs to 3 different departments, so we create a node for each one and with a label of Department.
