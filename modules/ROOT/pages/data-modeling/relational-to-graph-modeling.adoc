@@ -58,7 +58,7 @@ The steps to help you with the transformation of a relational diagram are listed
 If you apply the items in the list above to our example finding Alice's departments, we can come to a graph like the one shown below.
 
 .Graph - Alice and three departments as nodes
-image::relational_graph_model-arr.svg[role="popup-link",width=350]
+image::relational-graph-model-arr.svg[role="popup-link",width=350]
 
 Though the two models have similarities such as categorizing data by using either a table structure or a label, the graph model does not confine data to a pre-defined and strict table/column layout.
 We will look at another example in the next section.
