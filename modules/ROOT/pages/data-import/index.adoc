@@ -19,7 +19,7 @@
 Neo4j provides different tools for link:https://www.neo4j.com/docs/import[importing] data stored in various formats, e.g. .csv, .tsv, and .json.
 Depending on the kind of data you are working with, there are different options to choose from, as shown in the diagram:
 
-image::import-data-charts.svg[Decision chart with options to import data to Neo4j,width=600,role=popup]
+image:import-data-chart.svg[Decision chart with options to import data to Neo4j,opts=interactive]
 
 [TIP]
 ====
