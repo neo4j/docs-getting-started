@@ -8,14 +8,14 @@
 //Cross Mark
 :cross-mark: icon:times[]
 
-Neo4j offers a range of no-code tools to get you started with data modeling.
-Available options are here listed.
+There is a range of no-code tools to get you started with data modeling. 
+Some available tools are listed here.
 
 == Neo4j Data Importer
 
 image::data-importer-1.png[600,600,role="popup-link"]
 
-Besides being a tool for xref:data-import/index.adoc[importing data], you can use Neo4j Data Importer to sketch a graph model and map your data to it.
+Neo4j Data Importer integrates data modeling into the xref:data-import/index.adoc[import process] and lets you sketch a graph model and map your data to it.
 You can access it:
 
 * Via *Import* in link:https://neo4j.com/product/auradb/?ref=docs-nav-get-started[Neo4j Aura].
