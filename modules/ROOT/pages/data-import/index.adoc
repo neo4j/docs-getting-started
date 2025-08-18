@@ -92,7 +92,7 @@ a| link:https://neo4j.com/docs/kafka/current/[Neo4j Connector for Kafka]
 | {check-mark}
 | Language-independent columnar memory format for flat and nested data.
 
-a| link:https://neo4j.com/docs/kafka/current/[Neo4j Connector for Apache Spark]
+a| link:https://neo4j.com/docs/spark/current/[Neo4j Connector for Apache Spark]
 | Process and transfer data between Neo4j and other platforms such as Databricks and several data warehouses.
 | {check-mark}
 | {check-mark}
