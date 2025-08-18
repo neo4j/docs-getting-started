@@ -47,7 +47,7 @@ a| link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://northwind@demo.neo
 | link:https://github.com/neo4j-graph-examples/stackoverflow[StackOverflow]
 | {check-mark}
 m| :guide stackoverflow
-a| link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://stackoverflow@demo.neo4jlabs.com&db=stackoverflow[`movies`]
+a| link:https://demo.neo4jlabs.com:7473/browser/?dbms=neo4j://stackoverflow@demo.neo4jlabs.com&db=stackoverflow[`stackoverflow`]
 | A graph including users, tags, and Q&A data retrieved from the website StackOverflow.
 
 | link:https://github.com/neo4j-graph-examples/recommendations[Movie recommendations]
