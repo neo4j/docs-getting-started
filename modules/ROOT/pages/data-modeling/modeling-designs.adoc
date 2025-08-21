@@ -62,7 +62,7 @@ The content of each email is a property on every relationship:
 
 image::sarah-email-before.svg[Example graph with a node for Sarah sending an email to David and Claire with the message testing,width=400,role=popup]
 
-If you instead fan out the the model, you reduce duplication by breaking out the property `content` from all relationships and turning it into the intermediary node `Email` instead:
+If you instead fan out the model, you reduce duplication by breaking out the property `content` from all relationships and turning it into the intermediary node `Email` instead:
 
 image::sarah-email-after.svg[Example of how to not repeat a same property by turning it into an intermediate node,width=400,role=popup]
 
