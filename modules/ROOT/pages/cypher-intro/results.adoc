@@ -350,7 +350,7 @@ The following Cypher code shows how this is done.
 ----
 //Query1: find which people are friends of someone who works for Neo4j
 MATCH (p:Person)-[r:IS_FRIENDS_WITH]->(friend:Person)
-WHERE exists((p)-[:WORKS_FOR]->(:Company {name: 'Neo4j'}))
+WHERE exists((friend)-[:WORKS_FOR]->(:Company {name: 'Neo4j'}))
 RETURN p, r, friend;
 
 //Query2: find Jennifer's friends who do not work for a company
