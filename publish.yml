@@ -58,10 +58,22 @@ asciidoc:
     neo4j-base-uri: '' # this attribute is empty for publish playbooks
     neo4j-docs-base-uri: /docs
     # User research promo
-    page-ad-overline-link: https://p.consentkit.com/baf41f1b-7816-4e04-82a7-b4c6d93ddf19/?ref=gsg-docs
-    page-ad-title: Join the User Research panel
-    page-ad-icon: chat-bubble-left-right
-    page-ad-description:  Influence the future of Neo4j products by sharing your experiences with a researcher.
-    page-ad-link: https://p.consentkit.com/baf41f1b-7816-4e04-82a7-b4c6d93ddf19/?ref=bloom-docs
+    # page-ad-overline-link: https://p.consentkit.com/baf41f1b-7816-4e04-82a7-b4c6d93ddf19/?ref=gsg-docs
+    # page-ad-title: Join the User Research panel
+    # page-ad-icon: chat-bubble-left-right
+    # page-ad-description:  Influence the future of Neo4j products by sharing your experiences with a researcher.
+    # page-ad-link: https://p.consentkit.com/baf41f1b-7816-4e04-82a7-b4c6d93ddf19/?ref=bloom-docs
+    # page-ad-underline-role: button
+    # page-ad-underline: Learn more
+    # 
+    # NODES 2025 (Remove after November 6)
+    # 
+    page-ad-overline-link: https://www.neo4j.com/nodes-2025?utm_source=docs&utm_medium=banner
+    page-ad-overline: ''
+    page-ad-image: "{neo4j-docs-base-uri}/assets/img/nodes-25.png"
+    page-ad-icon: ''
+    page-ad-title: Neo4j Online Developer Conference
+    page-ad-description: Join us on November 6 for 24hrs of live and unique tech talks on graphs and AI
+    page-ad-link: https://www.neo4j.com/nodes-2025?utm_source=docs&utm_medium=banner
     page-ad-underline-role: button
-    page-ad-underline: Learn more
+    page-ad-underline: Register
