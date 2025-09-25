@@ -1,211 +1,143 @@
 [[modeling-designs]]
 = Modeling designs
 :tags: graph-modeling, data-model, schema, model-design, modeling-decisions
-:description: In this section, you learn how to represent graph data using a variety of modeling decisions. The way you construct your data model can impact your queries and performance.
+:description: This page features examples of graph data modeling patterns and designs that are commonly used with Neo4j.
 
-[abstract]
-{description}
-Our goal is to show you how to evaluate your model and make appropriate changes, so you can define the best solution for your use case and maximize the performance of your queries.
+This page features examples of graph data modeling patterns and designs that are commonly used with Neo4j.
+The purpose is to get an overview of the options available for building graph data models and how known strategies can be adapted to your project.
 
-// here we can add info on data accessibility. Hierarchy of data accessibility. Defining the data model you should remember about different levels of info accessibility in Neo4j graph database:
-// . Anchor labels/types/properties
-// . Non-anchor relationship types
-// . Non-anchor node labels
-// . Non-anchor properties
-// Also we need to mention the start point in the traversal path: for ex., the start node. It helps to understand why indexes are important, and on what query performance depends.  
-// Knowledge about that helps to improve query performance.
+== Intermediate nodes
 
-[#model-impact]
-== Why the data model makes a difference
+Intermediary nodes are nodes that contain data that need to be in the graph but don't seem to fit neatly into the initial model.
 
-As with any database, the data model that you design is important in determining the logic your queries and the structure of data in storage.
-This practice extends to graph databases, with one exception.
-Neo4j is schema-free, which means that your data model can adapt and change easily with your business.
+Sometimes you need to convey a lot of information in a relationship.
+In a mathematical graph, this can be solved with a *hyperedge*, i.e. a relationship that connects more than two nodes.
+This is not supported in Neo4j but can be solved by using an intermediary node.
 
-Need to start collecting a new field and capture new analysis?
-Or need to change the way you interpret a customer or other entity and modify its definition?
-Or regulation requires systems to capture less information or restrict readability (change data format/types)?
+For example, consider a person who works at a company and you need to convey information about their role:
 
-You may have worked for a company where each area or department defines a domain differently.
-Take, for instance, a generic customer domain.
-To different areas within the business, a customer can be defined as different types of individuals.
-These definitions may also change over time or the company may decide to unify the meaning of a customer across departments.
+image::hyperedge.svg[An example of a hyperedge in which a relationship is connected to two nodes, a feature not available in Neo4j,width=400,role=popup]
 
-If you have worked with other types of databases, you will already be familiar with the development and administrative work that any of these scenarios entail.
-However, Neo4j allows you to effortlessly adjust detailed and broad changes across pieces or the entirety of the graph.
-Whether it is small changes over time or a broad definition that includes a variety of needed information about your entities, the database is able to handle it.
-It is simply up to the developers and architects to determine the structure of the data model and how to define entities for queries.
+In a mathematical graph, you could use the same relationship `WORKED_AT` to connect the `Person` node with both `Role` and `Company` nodes.
+However this is not supported in Neo4j.
 
-In the next few paragraphs, we will introduce a few different ways to look at different data sets and show how each impacts queries and performance for traversing graph data.
+Instead, you could either turn the `Role` node into a property of the `WORKED_AT` relationship or use an *intermediate node* between the `Person`, `Company`, and `Role` nodes:
 
-[#property-vs-relationship]
-== Property vs relationship
+image::refactored-hyperedge.svg[Instead of using one single relationship to both Company and Role nodes, an intermediary Employment node can solve the problem of incompatibility of hyperedges in Neo4j,width=500,role=popup]
 
-One of the earliest decisions you may encounter is whether to model something as a property on a node or as a relationship to a separate node.
-Take, for example, the data below modeling a movie genre as a property on the `Movie` node.
+In this new graph, instead of saying Patrick works at company Acme, Patrick has an *employment event*, which becomes a new node.
+The employment event holds the employment start and end dates, and logically relates to the other three nodes. 
 
-.The `Movie` node and its property -- `genre`
-image::modeling_genre_property-arr.svg[role="popup-link", width=400]
+Despite the fact that an employment event is an abstract idea, it is a good way to link related additional information.
 
-To write a query finding the genre(s) of a particular movie is very simple.
-It would find the `Movie` node it wants to know about, then return the values listed in the genre property.
-However, to find out which movies share genres, you would need a much more complex query to find each `Movie` node, loop through each of the genres in the property array, and compare with each value in the second movie's property array of genres.
-This would take a toll on performance (nested looping and comparison of node properties), and the query would be much more complicated, as well.
+=== Sharing context
 
-The code block below is what the syntax would look like for each query.
-You can see the shift in logic and complexity of the loop in the second query.
+In this expanded version of the previous example, a new `Person` node with the name David is added:
 
-[source, cypher]
-----
-//find the genres for a particular movie
-MATCH (m:Movie {title:"The Matrix"})
-RETURN m.genre;
+image::intermediate-nodes-employement-sharing-context-example.svg[Graph showing shared context between employment and company nodes,width=600,role=popup]
 
-//find which movies share genres
-MATCH (m1:Movie), (m2:Movie)
-WHERE any(x IN m1.genre WHERE x IN m2.genre)
-AND m1 <> m2
-RETURN m1, m2;
-----
+This expanded example highlights the ability to show shared context between multiple nodes using a common event (the intermediary node).
+Specifically in this example, the `Person` nodes share context through `Role` and `Company` nodes.
+The `Employment` nodes provide a way to trace details such as a person's career, or the overlap between different individuals at the same `Company`, or those who had the same `Role`.
 
-Now, instead, if you were to model movies and their genres as separate nodes and create a relationship between them, you would come up with a model like the _Figure 2_.
+The use of intermediary nodes can also answer the question "Who worked at the same company at the same time?" as the added employment event contains information about when each individual worked at a certain company.
+A `MATCH` clause would show that Patrick and David both worked at Acme, being colleagues from 2004 to 2005 since their employment events overlap during that time:
 
-.Graph model of movies and their genres
-image::modeling_genre_node-arr.svg[role="popup-link",400,400]
+[source,cypher]
+--
+MATCH (p1:Person)-[w1:WORKED_AT]->(c:Company {name: "Acme"}),
+      (p2:Person)-[w2:WORKED_AT]->(c)
+WHERE p1 <> p2
+  AND w1.startDate <= w2.endDate
+  AND w2.startDate <= w1.endDate
+RETURN p1.name AS Person1, p2.name AS Person2
+ORDER BY Person1, Person2
+--
 
-This creates a completely separate entity (node) for the genre, allowing you to connect all the movies with a shared genre to that `Genre` node.
-Let us see how this changes our queries.
-To find the genres of a particular movie, it first needs to find the `Movie` node it is looking for (in this case, 'The Matrix'), then find the node that is connected to that movie through the `IN_GENRE` relationship.
+=== Sharing data
 
-The biggest difference is in the syntax for the second query to find which movies share genres.
-It is much simpler than our earlier version because it uses a natural, graph pattern (entity-relationship-entity) to find the information needed.
-First, Cypher finds a movie and the genre it is related to, then looks for a second movie that is in that same genre.
+Intemediate nodes can also add value to a model by providing a way to share data and thus reduce duplicate information.
+In this example, Sarah sends an email to Lucy and copies David and Claire to it.
+The content of each email is a property on every relationship:
 
-[source, cypher]
-----
-//find the genres for a particular movie
-MATCH (m:Movie {title:"The Matrix"}),
-      (m)-[:IN_GENRE]->(g:Genre)
-RETURN g.name;
+image::sarah-email-before.svg[Example graph with a node for Sarah sending an email to David and Claire with the message testing,width=400,role=popup]
 
-//find which movies share genres
-MATCH (m1:Movie)-[:IN_GENRE]->(g:Genre),
-      (m2:Movie)-[:IN_GENRE]->(g)
-RETURN m1, m2, g
-----
+If you instead fan out the model, you reduce duplication by breaking out the property `content` from all relationships and turning it into the intermediary node `Email` instead:
 
-Neither version of the data model is worse or better, but the 'best' option highly depends on the types of queries you intend to run against your data.
+image::sarah-email-after.svg[Example of how to not repeat a same property by turning it into an intermediate node,width=400,role=popup]
 
-If you plan to do analysis on individual items and return only details about that entity (like genres on a particular movie), then the first data model would serve perfectly well for your needs.
-However, if you need to run analysis to find common ground between entities or look at a group of nodes, then the second data model would definitely improve performance of those types of queries.
+Once the property value `content` is moved to a single node `Email`, it can be referenced via relationships with the `User` nodes that previously held that value.
+Now there are no duplications.
 
-[#complex-models]
-== Complex data structures
+=== Organizing data
 
-As many of us can probably agree, not all data models are simple and straightforward.
-Data is messy, and the model must attempt to better-organize it to help us see patterns and make decisions.
+Intermediate nodes can also help organize structures.
+In the previous example, Sarah sent the same email message to several people.
+If Sarah sends more email messages to more people, without using intermediary nodes, the graph quickly grows to this:
 
-One excellent example of a complex data structure that is difficult to model is Marvel comic data.
-In the Marvel universe, there are comics that have characters who make appearances or play lead roles.
-Comics can be organized into a series of particular storylines or narratives for a certain time, and major events can take place in a comic that define a character path or series.
-Creators (including writers, illustrators, etc) are the authors of comics, defining storyline, character adaptations, and events that happen.
-Multiple creators can also participate interchangeably to create a comic or series.
+image::sarah-emailed.svg[Graph showing how a user named Sarah emailed several other users,width=300,role=popup]
 
-This dataset already seems complicated, with several entities and relationships at work.
-It adds a new layer of complexity when trying to model the hierarchies and intermediate entities that exist here.
+When every `EMAILED` relationship includes a property with the content of the message, in addition to duplication, two other problems can arise:
 
-If you have some time, you can view the full video link to https://player.vimeo.com/video/79399404[Peter's presentation^] on Vimeo, but we want to highlight two key challenges that Peter discusses in the data set.
+* *Sarah’s node is becoming very dense*: For every email she sends, including CC's, her node gains another relationship.
+* *It's expensive to retrieve the content of the email*: With the data modeled like this, it's very expensive to determine who in Sarah’s recipient network has received a given message by searching for the content in multiple 'EMAILED' relationships.
 
-First, he found that comic characters tend to be extremely dynamic.
-Many characters cannot be identified by name or costume or any particular property, as all of those change often.
+When you fan out and add intermediate nodes to represent each email message, Sarah's node has only one relationship per email message, regardless of the number of recipients:
 
-Second, Peter identified the issue of chronology.
-For those new to the comic universe, some might want to determine where to start or what comic(s) come next.
-However, comic issues are not always sequentially numbered, and there are even some storylines that appear across multiple series and back again.
-This makes it incredibly difficult to separate certain blocks of stories or events, along with renditions of characters.
+image::sarah-emailed-intermediate.svg[Updated graph with intemediate nodes for emails sent by Sarah to several other users,width=300,role=popup]
 
-=== Example: intermediate nodes
+With this model, you can find the recepients by locating the specific `Email` node that now contains the content of the message in the `content` property, and then see which users are connected to it via `TO` relationships.
 
-One modeling technique that is useful in this model is the concept of a hyperedge.
-Hyperedges are often created to model relationships that exist between more than two entities.
-Neo4j doesn't support relationships between more than two nodes and instead uses intermediate nodes to model this kind of relationship.
-They are often created to represent the connection of multiple entities at a point in time.
+While both models use a gather-and-inspect approach, the scope of the problem is reduced significantly after the refactoring.
+In the first iteration, if you want to see who received a certain email, you need to find all users connected to Sarah via the `EMAILED` relationship.
+In the second iteration, you only need to locate the correct `Email` node, then traverse from it to all of the connected recipients.
 
-A common example of this is a university course.
-There may be multiple offerings of the same course with the same instructor in the same building, etc.
-Each section of the class (or offering) would then become an instance of the course.
+In summary, you're likely to find many uses for intermediate nodes during refactoring since you rarely recognize the need for them at the outset of the data modeling.
 
-The way Peter at Marvel handled intermediate nodes in their data is by creating an `Appearance` node that represents the intersection of a `Person` and an `Alias` at a particular time.
-This `Appearance` can be related to multiple `Moment` nodes where the person and alias appear as a unit.
-This is represented in the model shown below (also in the https://player.vimeo.com/video/79399404[video^]).
+== Linked list
 
-.Graph model of a Marvel character
-image::modeling_marvel_hyperedge_appearance-arr.svg[role="popup-link",550,550]
+Linked lists are commonly used in computer science and they are particularly useful whenever the sequence of objects matters.
+A *simple-linked list* is where each node links to the next node only:
 
-In a relational store, attempting to categorize and relate all of these complicated aspects would be extremely difficult and further complicate analysis and review of the data as a whole.
-The graph model allowed them to model this heavily dynamic universe and track all of the changing connections throughout their data.
-For this use case, graph was the perfect fit.
+image::simple-linked-list.svg[Episodes of Dr Who linked in sequence with next relationships,width=500,role=popup]
 
-[#model-time-versions]
-== Time-bound data and versioning
+In a *double-linked list*, each node links both to the next and the previous node:
 
-One way to model time-specific data and relationships is by including data in the relationship type.
-Because Neo4j is optimized specifically for traversing relationships between entities, you can often improve query performance by specifying a date as the relationship type and only traversing particular dated relationships.
+image::double-linked-list.svg[Episodes of Dr Who doubly linked with next and previous relationships, an incorrect modeling design in Neo4j,width=500,role=popup]
 
-A common example is for modeling airline flights.
-An airline has a particular flight on a certain day from and to a specific location.
-We might start with a model like the _Figure 4_ below to show how flights travel from airport to airport.
+Double-linked lists are not recommended because one relationship becomes redundant (if one is the next, then the other is the previous) and Cypher also allows bi-directional matches.
+Moreover, while it is common practice to use verbs as relationship types, with linked lists, it is acceptable to connect sequential items using terms such as "next" and "previous" instead.
 
-.Graph model for airline flights
-image::modeling_airport_flights-arr.svg[role="popup-link",450,450]
+=== Interleaved linked list
 
-We would soon realize that we need to model a `Flight` entity that exists between two destinations because multiple planes can travel between two destinations several times in one day.
+Interleaved lists are used when you want to sequence a set of items based on context, not on chronology. 
+This example combines a linked list with an interleaved linked list of Dr. Who episodes:
 
-However, your queries probably still show the model's weakness in filtering through all of the flights at a specific airport - especially for London and other major cities that have hundreds of flights connected to an `Airport` node over any span of time.
-Inspecting the several properties of each `Flight` node could be expensive on resources.
+image::interleaved-list.svg[Example of interleaved list connecting Dr Who episodes with next and next in production relationships,width=700,role=popup]
 
-If we were to create a node for a particular airport day and a relationship with a date in the type, then we could write queries to find flights from an airport on any specified date (or date range).
-This way, you wouldn't need to check each flight relationship to an airport.
-Instead, you would only look at the relationships for the dates you cared about.
-This model turns out like the one below.
+The order in which TV episodes are aired is often different than the order in which they are produced.
+This example contains five episodes of Dr. Who from season 12 and it shows:
 
-.Graph model for airline flights after review
-image::modeling_airport_flight_dates-arr.svg[role="popup-link",600,600]
+* The order in which the episodes were aired using the `NEXT` relationship and through a simple-linked list.
+* The order in which the episodes were produced using the `NEXT_IN_PRODUCTION` relationship, which creates an interleaved linked list.
+It is not a linear list, as it goes 1, 3, 2, 5, 4.
 
-For the full walkthrough of the modeling process for airline flights, see link:https://maxdemarzi.com/2015/08/26/modeling-airline-flights-in-neo4j/[Blog post: Modeling Airline Flights in Neo4j^].
+Note that this example is *not* a double-linked list because the relationships are not mutually exclusive.
 
-=== Versioning
+=== Head and tail of a linked list
 
-Similar to the model above where we create a dated relationship type, we can also use this to track versions of our data.
-Tracking changes in the data structure or showing a current and past value can be incredibly important for auditing purposes, trend analysis, etc.
+When working with linked lists, there is often a “parent” node that is used as the entry point. 
+The parent almost always points to the first item in the sequence, using an appropriately named relationship. 
+Sometimes, another relationship points to the last item in a list.
 
-For instance, if you wanted to create a new effective-dated relationship between a person and their current address, but also retain past addresses, you could use the same principle of including a date in the relationship type.
-To find the current address of the person, the query would look for the most recently dated relationship.
+In this example, you can see a `FIRST` and a `LAST` relationship, referring to their places in the sequence:
 
-[#multiple-models]
-== Taking the best of both worlds
+image::head-tail-list.svg[List of five Dr Who episodes from season twelve, showing the first and the last through a relationship with the season node,width=700,role=popup]
 
-Sometimes, you might find that one model works really well for one scenario you need, but another model is better for something else.
-For instance, some models will perform better with write queries and other models handle read queries better.
-Both capabilities are important to your use case, so what do you do?
+Some implementations also have a "progress" pointer that is used to keep track of the current node of interest.
+This can be done through a relationship, as such:
 
-In these cases, you can combine both models and use the benefits of each.
-Yes, you can use more than one data model in your graph!
+image::latest-aired.svg[The latest aired episode is pointed out with the help of a latest aired relationship coming from the season node,width=700,role=popup]
 
-The tradeoff is that now you will need to maintain two models.
-Each time you create a new node or relationship or update pieces of the graph, you will need to make changes to accommodate both models.
-This can also impact query performance, as you might have double the syntax needed to update each model.
-
-While this is definitely a possible option, you should know the maintenance costs and evaluate whether those costs are overcome by the performance improvements you will see for each needed query.
-If so, being able to use more than one data model is a great solution!
-
-[#modeling-resources]
-== Resources
-* https://medium.com/neo4j/graph-data-modeling-all-about-relationships-5060e46820ce[Blog post: Modeling relationships^]
-* https://maxdemarzi.com/2015/08/26/modeling-airline-flights-in-neo4j/[Max's blog post: Modeling airline flights^]
-* https://maxdemarzi.com/2017/05/24/flight-search-with-neo4j/[Follow-up blog post: Flight search^]
-* https://medium.com/neo4j/graph-data-modeling-categorical-variables-dd8a2845d5e0[Blog post: Modeling data categories^]
-* https://maxdemarzi.com/2017/11/21/mutual-fund-benchmarks-with-neo4j/[Blog post: Modeling mutual funds^]
-* https://maxdemarzi.com/2018/07/11/building-a-dating-site-with-neo4j-part-one/[Blog post series: Building a Dating Site^]
-* https://maxdemarzi.com/2017/03/30/building-a-twitter-clone-with-neo4j-part-one/[Blog series: Building a Twitter Clone^]
-* https://community.neo4j.com/[Ask Questions on the Neo4j Community Site!^]
+The progress pointer here is the `LATEST_AIRED` relationship and it shows which was the most recently aired episode (i.e. "The Ark in Space").
+When the `NEXT` episode ("The Sontaran Experiment") airs, the relationship is updated by deleting the current one and creating a new `LATEST_AIRED` pointer, so that it always points to the current item.

@@ -19,7 +19,7 @@
 Neo4j provides different tools for link:https://www.neo4j.com/docs/import[importing] data stored in various formats, e.g. .csv, .tsv, and .json.
 Depending on the kind of data you are working with, there are different options to choose from, as shown in the diagram:
 
-image::import-data-charts.svg[Decision chart with options to import data to Neo4j,width=600,role=popup]
+image:import-data-chart.svg[Decision chart with options to import data to Neo4j,opts=interactive]
 
 [TIP]
 ====
@@ -99,7 +99,7 @@ a| link:https://neo4j.com/docs/kafka/current/[Neo4j Connector for Kafka]
 | {check-mark}
 | Language-independent columnar memory format for flat and nested data.
 
-a| link:https://neo4j.com/docs/kafka/current/[Neo4j Connector for Apache Spark]
+a| link:https://neo4j.com/docs/spark/current/[Neo4j Connector for Apache Spark]
 | Process and transfer data between Neo4j and other platforms such as Databricks and several data warehouses.
 | {check-mark}
 | {check-mark}
