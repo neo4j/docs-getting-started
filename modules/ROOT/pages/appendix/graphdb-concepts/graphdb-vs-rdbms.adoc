@@ -52,7 +52,6 @@ endif::[]
 == Data model differences
 
 Despite similarities, the design of a xref:data-modeling/index.adoc[graph data model] still needs to be based upon requirements for access, queries, performance expectation, and business logic.
-This ends up creating a considerable structural difference.
 
 For example, if you want to know which departments Alice belongs too, this is how a relational and a graph databases structure the same data:
 
@@ -75,7 +74,7 @@ If you want to learn how to create a data model, follow the xref:data-modeling/t
 [#rdbms-graph-query]
 == Data storage and retrieval
 
-SQL is the query language used to query relational databases.
+SQL is a query language used to query relational databases.
 xref:cypher.adoc[Cypher] is Neo4j’s declarative query language built on the basic concepts and clauses of SQL, but with additional functionalities that make working with graph databases more efficient.
 
 For example, when writing an SQL statement with a large number of `JOIN`s, you can quickly lose sight of what the query actually does, since there is a lot of technical noise in SQL syntax.
