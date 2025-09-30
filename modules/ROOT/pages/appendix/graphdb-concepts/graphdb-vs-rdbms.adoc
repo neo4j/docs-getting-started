@@ -12,7 +12,7 @@ Relational databases store highly-structured data in tables with predetermined c
 Due to the rigidity of their organization, relational databases require developers and applications to strictly structure the data used in their applications.
 
 In relational databases, references to other rows and tables are indicated by referring to primary key attributes via foreign key columns.
-`JOIN`s are computed at query time by matching primary and foreign keys of all rows in the connected tables.
+`JOIN` s are computed at query time by matching primary and foreign keys of all rows in the connected tables.
 These operations are compute-heavy and memory-intensive, and have an exponential cost.
 
 When many-to-many relationships occur in the model, you must introduce a `JOIN` table (or associative entity table) that holds foreign keys of both the participating tables, further increasing join operation costs:
@@ -21,9 +21,9 @@ image::relational-model.svg[Depiction of a relational database with connecting p
 
 The diagram shows the concept of connecting an `Employee` (from the `Employee` table) to a `Department` (in the `Departments` table) by creating a `Dpt_Members` join table that contains the ID of the employee in one column and the ID of the associated department in another column.
 
-This structure makes understanding the connections cumbersome, because you must know the employee and the department's ID values (performing additional lookups to find them) in order to know which employee connects to which department.
+This structure makes understanding the connections cumbersome, because you must know the `Employee` and the `Department` ID values (performing additional lookups to find them) in order to know which employee connects to which department.
 
-Additionally, these types of costly join operations are often addressed by denormalizing the data to reduce the number of joins necessary, therefore breaking the data integrity of a relational database.
+Additionally, these types of costly `JOIN` operations are often addressed by denormalizing the data to reduce the number of `JOIN` s necessary, therefore breaking the data integrity of a relational database.
 Graph databases offer other ways to connect data.
 
 == Translating relational knowledge to graphs
@@ -34,7 +34,7 @@ This means you are not required to infer connections between entities using spec
 By assembling nodes and relationships into connected structures, graph databases enable building models that map closely to a problem domain.
 Whenever you run xref:cypher-intro/cypher-sql.adoc[the equivalent of a `JOIN` operation], the graph database uses this list, directly accessing the connected nodes and eliminating the need for expensive search-and-match computations.
 
-This ability to pre-materialize relationships into the database structure allows Neo4j to provide performance of several orders of magnitude above others, especially for join-heavy queries, allowing users to leverage a _minutes to milliseconds_ advantage.
+This ability to pre-materialize relationships into the database structure allows Neo4j to provide improved performance compared to others, especially for join-heavy queries.
 
 ifndef::backend-pdf[]
 ++++
@@ -53,7 +53,7 @@ endif::[]
 
 Despite similarities, the design of a xref:data-modeling/index.adoc[graph data model] still needs to be based upon requirements for access, queries, performance expectation, and business logic.
 
-For example, if you want to know which departments Alice belongs too, this is how a relational and a graph databases structure the same data:
+For example, if you want to know which departments Alice belongs to, this is how a relational and a graph databases structure the same data:
 
 image::relational-as-graph.svg[Representation of tabular data in a relational database and the comparison with the same data structured in a graph,role=popup]
 
@@ -77,7 +77,7 @@ If you want to learn how to create a data model, follow the xref:data-modeling/t
 SQL is a query language used to query relational databases.
 xref:cypher.adoc[Cypher] is Neo4j’s declarative query language built on the basic concepts and clauses of SQL, but with additional functionalities that make working with graph databases more efficient.
 
-For example, when writing an SQL statement with a large number of `JOIN`s, you can quickly lose sight of what the query actually does, since there is a lot of technical noise in SQL syntax.
+For example, when writing an SQL statement with a large number of `JOIN` s, you can quickly lose sight of what the query actually does, since there is a lot of technical noise in SQL syntax.
 In Cypher, the syntax remains concise and focused on domain components and their connections, thus expressing the pattern to find or create data more visually and clearly.
 
 Other clauses outside of the basic pattern matching still look very similar to SQL, as Cypher was built on the predecessor language’s foundation. 
