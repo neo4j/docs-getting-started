@@ -251,8 +251,8 @@ image::cypherintro-properties.svg[]
 
 [source,cypher]
 ----
-CREATE (p:Person {name:'Sally'})-[r:IS_FRIENDS_WITH]->(p:Person {name:'John'})
-RETURN p, r
+CREATE (sally:Person {name:'Sally'})-[r:IS_FRIENDS_WITH]->(john:Person {name:'John'})
+RETURN sally, r, john
 ----
 
 Properties are enclosed by curly brackets (`{}`), the key is followed by a colon, and the value is enclosed by single or double quotation marks.
@@ -270,7 +270,7 @@ Consider this example:
 
 [source, cypher]
 ----
-(p:Person {name: "Sally"})-[r:LIKES]->(g:Technology {type: "Graphs"})
+(sally:Person {name:'Sally'})-[l:LIKES]->(g:Technology {type: "Graphs"})
 ----
 
 This bit of Cypher represents a pattern, but it is not a query.
@@ -282,14 +282,14 @@ For example, you can add this information to the database using the link:{docs-h
 
 [source, cypher]
 ----
-CREATE (p:Person {name: "Sally"})-[r:LIKES]->(t:Technology {type: "Graphs"})
+CREATE (sally:Person {name: "Sally"})-[r:LIKES]->(t:Technology {type: "Graphs"})
 ----
 
 And once this data is written to the database, you can retrieve it with this pattern:
 
 [source, cypher]
 ----
-MATCH (p:Person {name: "Sally"})-[r:LIKES]->(t:Technology {type: "Graphs"})
+MATCH (sally:Person {name: "Sally"})-[r:LIKES]->(t:Technology {type: "Graphs"})
 RETURN p,r,t
 ----
 
