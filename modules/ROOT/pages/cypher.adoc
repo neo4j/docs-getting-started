@@ -64,7 +64,7 @@ Cypher's constructs are based on English prose and iconography.
 This makes queries easy both to write and to read.
 
 .A graph example involving four nodes and three relationships.
-image::cypherintro-graph.svg[role="popup-link",width=600]
+image::cypherintro-graph1.svg[role="popup-link",width=600]
 
 If you were to represent the data in this graph in English, it might read as something like: _"Sally likes Graphs. Sally is friends with John. Sally works for Neo4j."_
 
@@ -136,7 +136,7 @@ In Cypher, relationships are represented as square brackets and an arrow connect
 In the example, the lines containing `:LIKES`, `:IS_FRIENDS_WITH`, and `:WORKS_FOR` represent the relationship between the nodes:
 
 .Graph featuring nodes and relationships.
-image::cypherintro-graph.svg[]
+image::cypherintro-graph1.svg[]
 
 [NOTE]
 ====
@@ -251,8 +251,8 @@ image::cypherintro-properties.svg[]
 
 [source,cypher]
 ----
-CREATE (p:Person {name:'Sally'})-[r:IS_FRIENDS_WITH]->(p:Person {name:'John'})
-RETURN p, r
+CREATE (sally:Person {name:'Sally'})-[r:IS_FRIENDS_WITH]->(john:Person {name:'John'})
+RETURN sally, r, john
 ----
 
 Properties are enclosed by curly brackets (`{}`), the key is followed by a colon, and the value is enclosed by single or double quotation marks.
@@ -270,7 +270,7 @@ Consider this example:
 
 [source, cypher]
 ----
-(p:Person {name: "Sally"})-[r:LIKES]->(g:Technology {type: "Graphs"})
+(sally:Person {name:'Sally'})-[l:LIKES]->(g:Technology {type: "Graphs"})
 ----
 
 This bit of Cypher represents a pattern, but it is not a query.
@@ -282,14 +282,14 @@ For example, you can add this information to the database using the link:{docs-h
 
 [source, cypher]
 ----
-CREATE (p:Person {name: "Sally"})-[r:LIKES]->(t:Technology {type: "Graphs"})
+CREATE (sally:Person {name: "Sally"})-[r:LIKES]->(t:Technology {type: "Graphs"})
 ----
 
 And once this data is written to the database, you can retrieve it with this pattern:
 
 [source, cypher]
 ----
-MATCH (p:Person {name: "Sally"})-[r:LIKES]->(t:Technology {type: "Graphs"})
+MATCH (sally:Person {name: "Sally"})-[r:LIKES]->(t:Technology {type: "Graphs"})
 RETURN p,r,t
 ----
 
@@ -312,11 +312,11 @@ In the link:{docs-home}/cypher-manual[Cypher manual], you can find more informat
 In case you have a background in SQL and are new to graph databases, these are some resources for more information on the key differences and the transition to graphs:
 
 * link:{docs-home}/cypher-manual/current/introduction/cypher-overview/#_cypher_and_sql_key_differences[Key differences between Cypher and SQL]
-* xref:appendix/graphdb-concepts/graphdb-vs-rdbms.adoc[Transition from relational to graph database]
+* xref:reference/graphdb-vs-rdbms[Transition from relational to graph database]
 * xref:cypher-intro/cypher-sql.adoc[Reference: Comparing Cypher with SQL]
 * xref:data-import/relational-to-graph-import.adoc[How-to: Import from RDBMS into graph]
-* xref:appendix/tutorials/guide-import-relational-and-etl.adoc[Tutorial: Import data from a relational database into Neo4j]
-* xref:data-modeling/relational-to-graph-modeling.adoc[How-to: Model data from relational to graph]
+* xref:data-import/import-relational-and-etl.adoc[Tutorial: Import data from a relational database into Neo4j]
+* link:data-modeling/relational-to-graph-modeling.adoc[How-to: Model data from relational to graph]
 
 === From NoSQL to Graphs
 
