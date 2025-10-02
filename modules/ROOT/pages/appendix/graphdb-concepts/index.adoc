@@ -302,10 +302,9 @@ The following naming conventions are recommended:
 [options="header"]
 |===
 | Graph entity      | Recommended style                                       | Example
-| Node label        | Camel case, beginning with an upper-case character      | `:VehicleOwner` rather than `:vehicle_owner`
-| Relationship type | Upper case, using underscore to separate words          | `:OWNS_VEHICLE` rather than `:ownsVehicle`
-| Property          | Lower camel case, beginning with a lower-case character | `firstName` rather than `first_name`
+| Node label        | PascalCase                                              | `:VehicleOwner` rather than `:vehicle_owner`
+| Relationship type | Screaming snake case                                    | `:OWNS_VEHICLE` rather than `:ownsVehicle`
+| Property          | camelCase                                               | `firstName` rather than `first_name`
 |===
-
 
 For the precise naming rules, refer to the link:https://neo4j.com/docs/cypher-manual/current/syntax/naming/[Cypher manual -> Naming rules and recommendations].
