@@ -242,7 +242,7 @@ In this case, since no relationship type is declared, Cypher will search for all
 === Properties
 
 Property values can be added both to nodes and relationships and be of a variety of data types.
-For a full list of values and types, see link:{docs-home}cypher-manual/current/values-and-types/[Cypher manual -> Values and types].
+For a full list of values and types, see link:{docs-home}/cypher-manual/current/values-and-types/[Cypher manual -> Values and types].
 
 Another way to organize the data in the previous example would be to add a *property*, `name`, and `Sally` and `John` as *property values* on `Person`-labeled nodes:
 
