@@ -31,7 +31,8 @@ What the command does is:
 * *`AS alias` (optional)* -> names each row for reference.
 * *`FIELDTERMINATOR` (optional)* -> the default field terminator in CSV files is the comma, but others are supported and can be specified here.
 
-In this tutorial, you will use a link to load the CSV file:
+You can import link:https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/#_import_local_files[your local files].
+However, in this tutorial, you will use a link to load the CSV file:
 
 [source,cypher]
 --
