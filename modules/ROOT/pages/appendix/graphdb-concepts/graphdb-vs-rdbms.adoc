@@ -51,7 +51,8 @@ endif::[]
 [#rdbms-graph-model]
 == Data model differences
 
-Despite similarities, the design of a xref:data-modeling/index.adoc[graph data model] still needs to be based upon requirements for access, queries, performance expectation, and business logic.
+The data models for relational and graph databases are vastly different, as a result of the structural differences previously described.
+The graph model needs to consider access requirements, expected queries and performance, as well as business logic.
 
 For example, if you want to know which departments Alice belongs to, this is how a relational and a graph databases structure the same data:
 
@@ -81,7 +82,7 @@ For example, when writing an SQL statement with a large number of `JOIN` s, you 
 In Cypher, the syntax remains concise and focused on domain components and their connections, thus expressing the pattern to find or create data more visually and clearly.
 
 Other clauses outside of the basic pattern matching still look very similar to SQL, as Cypher was built on the predecessor language’s foundation. 
-You can see the similarities and differences in ref:/cypher-intro/cypher-sql.adoc[Comparing Cypher with SQL].
+You can see the similarities and differences xref:/cypher-intro/cypher-sql.adoc[Comparing Cypher with SQL].
 
 == Keep learning
 
