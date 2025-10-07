@@ -33,7 +33,7 @@ Finally, the query would check the `Department` table to find the actual values 
 The image below reviews this example we just described.
 
 .Relational - Person and Department tables
-image::relational_model.svg[role="popup-link",width=600]
+image::relational-model.svg[Depiction of a relational database with connecting points in each table,role=popup,width=400]
 
 In a graph, you do not need to worry about table joins and index lookups because graph data is structured by each, individual entity and its relationships with other individual entities.
 
@@ -59,7 +59,7 @@ The steps to help you with the transformation of a relational diagram are listed
 If you apply the items in the list above to our example finding Alice's departments, we can come to a graph like the one shown below.
 
 .Graph - Alice and three departments as nodes
-image::relational-graph-model-arr.svg[role="popup-link",width=350]
+image::relational-graph-model-arr.svg[Equivalent representation of the previous tabular data into graph,role=popup,width=300]
 
 Though the two models have similarities such as categorizing data by using either a table structure or a label, the graph model does not confine data to a pre-defined and strict table/column layout.
 We will look at another example in the next section.
