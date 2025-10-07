@@ -64,7 +64,7 @@ Cypher's constructs are based on English prose and iconography.
 This makes queries easy both to write and to read.
 
 .A graph example involving four nodes and three relationships.
-image::cypherintro-graph1.svg[role="popup-link",width=600]
+image::cypherintro-graph.svg[role="popup-link",width=600]
 
 If you were to represent the data in this graph in English, it might read as something like: _"Sally likes Graphs. Sally is friends with John. Sally works for Neo4j."_
 
@@ -136,7 +136,7 @@ In Cypher, relationships are represented as square brackets and an arrow connect
 In the example, the lines containing `:LIKES`, `:IS_FRIENDS_WITH`, and `:WORKS_FOR` represent the relationship between the nodes:
 
 .Graph featuring nodes and relationships.
-image::cypherintro-graph1.svg[]
+image::cypherintro-graph.svg[]
 
 [NOTE]
 ====
@@ -315,7 +315,7 @@ In case you have a background in SQL and are new to graph databases, these are s
 * xref:reference/graphdb-vs-rdbms[Transition from relational to graph database]
 * xref:cypher-intro/cypher-sql.adoc[Reference: Comparing Cypher with SQL]
 * xref:data-import/relational-to-graph-import.adoc[How-to: Import from RDBMS into graph]
-* xref:data-import/import-relational-and-etl.adoc[Tutorial: Import data from a relational database into Neo4j]
+* xref:appendix/tutorials/guide-import-relational-and-etl.adoc[Tutorial: Import data from a relational database into Neo4j]
 * link:data-modeling/relational-to-graph-modeling.adoc[How-to: Model data from relational to graph]
 
 === From NoSQL to Graphs
