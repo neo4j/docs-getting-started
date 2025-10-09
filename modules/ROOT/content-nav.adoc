@@ -1,11 +1,11 @@
 * *Get started* 
 * xref:index.adoc[Introduction]
-* xref:whats-neo4j.adoc[What is Neo4j]
+* xref:whats-neo4j.adoc[]
 * xref:graph-database.adoc[What is a graph database]
 ** xref:appendix/graphdb-concepts/index.adoc[Graph database concepts]
 *** xref:appendix/graphdb-concepts/graphdb-vs-rdbms.adoc[]
 *** xref:appendix/graphdb-concepts/graphdb-vs-nosql.adoc[]
-* xref:cypher.adoc[What is Cypher]
+* xref:cypher.adoc[]
 ** xref:cypher-intro/cypher-sql.adoc[]
 ** xref:cypher-intro/patterns.adoc[]
 ** xref:cypher-intro/patterns-in-practice.adoc[]
