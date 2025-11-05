@@ -155,8 +155,8 @@ With them, you can create or import a dataset and learn how to explore it.
 
 === Aura Learning Center
 
-You can access the example datasets through the Learning Center in the link:{docs-home}/aura[Aura dashboard].
-Select the cap icon image:icon-guides.svg[width=3%] in the left vertical menu to see a list of datasets available as learning guides.
+You can access the example datasets through the Learning Center in the link:{docs-home}/aura[Aura console].
+Select the cap icon image:icon-guides.svg[width=3%] in the left-hand navigation to see a list of datasets available as learning guides.
 
 image:workspace-guides.jpg[]
 
