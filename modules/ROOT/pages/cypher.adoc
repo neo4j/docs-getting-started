@@ -1,5 +1,5 @@
 [[cypher-intro]]
-= What is Cypher
+= What is Cypher?
 :description: A high-level overview of the graph query language Cypher.
 :page-ad-overline-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
 :page-ad-overline: Neo4j GraphAcademy
@@ -12,7 +12,7 @@
 [IMPORTANT]
 ====
 This page covers the basics of Cypher.
-For the complete documentation, refer to link:{docs-home}/cypher/[Cypher].
+For the complete documentation, refer to the link:{docs-home}/cypher/[Cypher Manual].
 ====
 
 .A visual representation of a Cypher query
