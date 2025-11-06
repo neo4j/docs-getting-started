@@ -34,7 +34,7 @@ This is the resulting graph:
 image::cypher-intro-results01-arr.svg[role="middle", width=500]
 
 The second dataset is a small network of people, companies they work for, and technologies they like.
-You can find its image in the xref:cypher-intro/results.adoc#filter-ranges[following chapter].
+You can find its image in the xref:cypher/results.adoc#filter-ranges[following chapter].
 
 
 [[cypher-intro-results-filtering]]
@@ -918,7 +918,7 @@ Our list of potential hiring candidates from the preceding examples might be mor
 Or perhaps you want to rank all of our people by age.
 
 The `ORDER BY` keyword sorts the results based on the value you specify in ascending or descending order (ascending is default).
-Let's use the same queries from our xref:cypher-intro/results.adoc#cypher-intro-results-unwind[examples with `UNWIND`] and see how you can order the candidates.
+Let's use the same queries from our xref:cypher/results.adoc#cypher-intro-results-unwind[examples with `UNWIND`] and see how you can order the candidates.
 
 [source, cypher]
 ----

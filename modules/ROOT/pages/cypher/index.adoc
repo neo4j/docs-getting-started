@@ -335,7 +335,7 @@ ifndef::backend-pdf[]
 endif::[]
 == Glossary
 
-include::glossary.adoc[]
+include::ROOT:glossary.adoc[]
 
 ifdef::backend-pdf[]
 <<<
