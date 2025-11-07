@@ -7,8 +7,8 @@ You will create a graph, find nodes, query patterns, and solve questions about t
 
 == Create the Movie Graph
 
-After you create a link:https://neo4j.com/product/auradb/?ref=docs-nav-get-started[free Aura instance], select the "Connect" button and go to "Query".
-In the query pane, write the following code:
+After you create a link:https://neo4j.com/product/auradb/?ref=docs-nav-get-started[free Aura instance], use the "Connect" button and select "Query".
+In the Cypher editor, copy and paste the following Cypher and execute the query:
 
 [source,cypher]
 --
@@ -700,21 +700,23 @@ WHERE cloudAtlas.title = "Cloud Atlas"
 RETURN cloudAtlas
 --
 
-=== An amount of people
+=== Limit returned results
 
-If you want to find the names of 10 people in the graph, no matter in what order, you need to `LIMIT` the `RETURN` answers to your `MATCH` query: This code finds all _Person_ nodes in the graph but just returns the _name_ property value for 10 of them.
+If you want to limit the number of returned results without any specific order, you can add `LIMIT` to the `RETURN` clause.
+This query finds all the `Person` nodes in the graph and returns 10 of them using the `name` property. 
 
 [source, cypher]
 --
-MATCH (people:Person)
-RETURN people.name LIMIT 10
+MATCH (p:Person)
+RETURN p.name LIMIT 10
 --
 
 For this query, property values are returned and you can only view the results as a table.
 
-=== Movies after release year
+=== The `WHERE` subclause
 
-You can specify a range of values for selecting the `Movie` nodes to retrieve, either by specifically pointing the year:
+If you want to return nodes by a specific property, you can use the `WHERE` subclause.
+You can either return a specific value, in this case movies released in one specific year:
 
 [source, cypher]
 --
@@ -723,7 +725,7 @@ WHERE nineties.released = 1990
 RETURN nineties.title
 --
 
-Or with a range:
+Or within a range:
 
 [source, cypher]
 --
@@ -749,8 +751,8 @@ For the first query, the result is "Joe Versus the Volcano", and for the second:
 
 == Find patterns
 
-On the previous step, you have queried the graph for nodes.
-Now you will retrieve related nodes by finding the xref:cypher/patterns.adoc[patterns] within the graph, that is, how these nodes interact with each other through relationships.
+In the previous step, you queried the graph for nodes.
+Now you are going to retrieve related nodes by finding the xref:cypher/patterns.adoc[patterns] within the graph, that is, how these nodes are related to each other.
 
 === All Tom Hanks movies
 
@@ -766,12 +768,12 @@ This is the result:
 
 image::tomhanksmovies.svg[Result to the query searching for all movies that Tom Hanks has acted in, width=500, role="popup-link"]
 
-Note that Tom Hanks' node is connected to `Movie` nodes through two different relationships: `ACTED_IN` and `DIRECTED`, which means some people listed in the `Person` nodes can be both actors and directors.
+Note that Tom Hanks' node is connected to `Movie` nodes through two different relationships: `ACTED_IN` and `DIRECTED`, which means a `Person` node can be both an actor and a director.
 
 === Directors of "Cloud Atlas"
 
 As mentioned previously, you can find information about directors through the relationship `DIRECTED`.
-To learn who directed "Cloud Atlas", you can write the following query:
+To learn who directed "Cloud Atlas", execute the following query:
 
 [source, cypher]
 --
@@ -792,7 +794,7 @@ Here is the result:
 
 === Tom Hanks' co-actors
 
-This is the query you would write to get the answer:
+If you want to expand the pattern and find actors who worked on the same movie, you can use the following query:
 
 [source, cypher]
 --
@@ -814,13 +816,13 @@ Then, combine with people who acted in those same movies:
 MATCH (m)<-[b:ACTED_IN]-(coActors:Person)
 --
 
-This is how your graph should look like:
+This is what your graph should look like:
 
 image::tomhankscoactors.svg[Actors who played in the same movies as Tom Hanks, link="{imagesdir}/tomhankscoactors.svg",role="popup-link"]
 
 === People related to "Cloud Atlas"
 
-Supposing that you don't know what relationships connect the `Person` and `Movie` nodes, you can query the graph to discover that:
+If you don't know what relationships connect the `Person` and `Movie` nodes, you can query the graph to discover that:
 
 [source, cypher]
 --
@@ -834,7 +836,7 @@ Then, in the `RETURN` line, you can specify what property you want to retrieve i
 In Cypher, you can define what specific propety you want to retrieve by combining the variable and the name of the property.
 So, in this case, `people` is the variable for `Person` nodes and `name` is the property that stores the name of the people, thus `people.name`.
 
-Then, since the relationships are not specified, you can use the link:https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-type[`type()` function] to retrieve the string associated to the relationship, and then `relatedTo` to also retrieve the properties associated to the relationship (e.g. `roles` in the case of `:ACTED_IN`).
+Then, since the relationships are not specified, you can use the link:https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-type[`type()` function] to retrieve the relationship type, and then `relatedTo` to also retrieve all the properties associated to the relationship (e.g. `roles` in the case of `:ACTED_IN`).
 
 Here is the result:
 
@@ -859,15 +861,16 @@ Here is the result:
 
 === Movies and actors up to three hops away from Kevin Bacon
 
-The premise of the game "Six Degrees of Kevin Bacon" is that players need to link any actor to Kevin Bacon through their film co-stars in six or fewer steps.
-You can do the same with this graph using a shortest path query that will be here referred as the "Bacon Path".
+The premise of the game "Six Degrees of Kevin Bacon" is to link any actor to Kevin Bacon through their film co-stars in six or fewer steps.
+This game can be played in the Movie graph using different strategies.
 
-To perform this type of query, you need to specify:
+Two possible strategies:
 
 * link:https://neo4j.com/docs/cypher-manual/current/patterns/variable-length-patterns/[Variable length patterns]
 * link:https://neo4j.com/docs/cypher-manual/current/patterns/shortest-paths/[Built-in shortestPath() algorithm]
 
-This first query aims to find all movies and/or people who are up to 3 hops away from Kevin Bacon in the graph:
+The first strategy is to use a variable length pattern.
+This query finds all `Person` and `Movie` nodes one to three hops away from Kevin Bacon:
 
 [source, cypher]
 --
@@ -886,7 +889,7 @@ Here is the result of this query:
 image::kevinthreehops.svg[Result to query for what movies and actors are related to Kevin Bacon, link="{imagesdir}/kevinthreehops.svg",role="popup-link"]
 
 The downside of this query is that you don't know _how_ Kevin Bacon is related to these people and movies.
-If you want to retrieve the relationships connecting these nodes, you need to write the following code:
+If you want to retrieve the path that connects these nodes, `MATCH` the *path* and return it along with the `Person` or `Movie` nodes involved:
 
 [source, cypher]
 --
@@ -896,7 +899,7 @@ RETURN DISTINCT bacon, hollywood, p
 
 Here you turn a whole line into a single variable (`p`), so that you can quote it back in `RETURN DISTINCT`, and also retrieve the relationships that connect all of these nodes.
 
-Here is how the graph should look like now:
+Here is what the graph should look like now:
 
 image::kevinthreehopsrel.svg[Three hops from Kevin Bacon and other actors and movies, now connected through acted in, directed and produced relationships, link="{imagesdir}/kevinthreehopsrel.svg",role="popup-link"]
 

@@ -12,7 +12,7 @@
 [IMPORTANT]
 ====
 This page covers the basics of Cypher.
-For the complete documentation, refer to link:{docs-home}/cypher/[Cypher].
+For the complete documentation, refer to the link:{docs-home}/cypher/[Cypher Manual].
 ====
 
 .A visual representation of a Cypher query
@@ -28,12 +28,12 @@ Intuitive and close to natural language, Cypher provides a visual way of matchin
 (:nodes)-[:ARE_CONNECTED_TO]->(:otherNodes)
 ----
 
-Round brackets are used to represent `(:Nodes)`, and `-[:ARROWS]->` to represent a relationship between the `(:Nodes)`.
+Round brackets are used to represent `(:Nodes)`, and square brackets `-[]->` to represent a relationship between the `(:Nodes)`.
 With this query syntax, you can perform create, read, update, or delete (CRUD) operations on your graph.
 
 [TIP]
 ====
-For a quick look with no installation required, get a free link:https://neo4j.com/cloud/platform/aura-graph-database/[Aura instance].
+To try querying with Cypher, get a free link:https://neo4j.com/cloud/platform/aura-graph-database/[Aura instance], no installation required.
 Use the graduation cap icon on the top right section to access the interactive guides.
 The "Query fundamentals" gives you a hands-on introduction to Cypher.
 ====
@@ -41,7 +41,7 @@ The "Query fundamentals" gives you a hands-on introduction to Cypher.
 == How does Cypher work?
 
 Neo4j's graph model is composed of <<nodes>> and <<relationships>>, which may also have assigned <<properties>>.
-With nodes and relationships, you can build powerful patterns that can express simple or complex patterns.
+With nodes and relationships, you can build a graph that can express both simple and complex patterns.
 
 Pattern recognition is a key fundamental cognitive process, making Cypher, which utilizes pattern matching, intuitive and easy to learn.
 
@@ -66,7 +66,7 @@ This makes queries easy both to write and to read.
 .A graph example involving four nodes and three relationships.
 image::cypherintro-graph1.svg[role="popup-link",width=600]
 
-If you were to represent the data in this graph in English, it might read as something like: _"Sally likes Graphs. Sally is friends with John. Sally works for Neo4j."_
+If you want to represent the data in this graph in English, it would read as something like: _"Sally likes Graphs. Sally is friends with John. Sally works for Neo4j."_
 
 Now, if you were to write this same information in Cypher, then it would look like this:
 
@@ -88,7 +88,7 @@ In the previous example, `Sally`, `John`, `Graphs`, and `Neo4j` are the nodes:
 .A visual representation of nodes.
 image::cypherintro-nodes.svg[role="popup-link",width=450]
 
-In Cypher, you can depict a node by surrounding it with parentheses, e.g. `(node)`.
+As mentioned previously, nodes are represented as round brackets `(node)` in Cypher.
 The parentheses are a representation of the circles that compose the nodes in the visualization.
 
 ==== Node labels
@@ -97,9 +97,9 @@ Nodes can be grouped together through a <<label>>.
 They work like tags and allow you to specify certain types of entities to look for or to create.
 Labels also help Cypher distinguish between entities and optimize execution for your queries.
 
-In the example, both `Sally` and `John` can be grouped under a `Person` label, `Graphs` can receive a `Technology` label, and `Neo4j` can be labeled as `Company`:
+In the example, both `Sally` and `John` are persons, so they get a `Person` label, `Graphs` gets a `Technology` label, and `Neo4j` is a `Company`:
 
-.Nodes grouped in labels. Note that `Sally`, `John`, `Graphs`, and `Neo4j` are now xref:cypher/index.adoc#cypher-properties[properties] instead.
+.Nodes grouped by labels. Note that `Sally`, `John`, `Graphs`, and `Neo4j` are now xref:cypher/index.adoc#cypher-properties[properties] instead.
 image::cypher-graph-nodes-arr.svg[role="popup-link",width=450]
 
 In a relational database context, this would be the same as telling SQL which table to look for the particular row.
