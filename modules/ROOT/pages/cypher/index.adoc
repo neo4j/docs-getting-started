@@ -241,7 +241,7 @@ In this case, since no relationship type is declared, Cypher will search for all
 [#cypher-properties]
 === Properties
 
-Property values can be added both to nodes and relationships and be of a variety of data types.
+Properties can be added both to nodes and relationships and be of a variety of data types.
 For a full list of values and types, see link:{docs-home}/cypher-manual/current/values-and-types/[Cypher manual -> Values and types].
 
 Another way to organize the data in the previous example would be to add a *property*, `name`, and `Sally` and `John` as *property values* on `Person`-labeled nodes:
@@ -300,7 +300,7 @@ For more information, refer to link:{docs-home}/cypher-manual/current/patterns/r
 
 == Keep learning
 
-Now that the basic Cypher concepts have been introduced, you can take the tutorial on how to xref:cypher/intro-tutorial.adoc[Get started with Cypher] to learn how to write your own queries.
+If you want to learn more about writing Cypher queries, you can take the tutorial on how to xref:cypher/intro-tutorial.adoc[Get started with Cypher].
 In the link:{docs-home}/cypher-manual[Cypher manual], you can find more information on:
 
 * How to write link:{docs-home}/cypher-manual/current/queries/basic/[basic queries] and what link:{docs-home}/cypher-manual/current/clauses/[clauses] you can use to read data from the database.
