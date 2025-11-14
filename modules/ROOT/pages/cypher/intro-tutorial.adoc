@@ -671,18 +671,18 @@ MERGE (JessicaThompson)-[:REVIEWED {summary:'You had me at Jerry', rating:92}]->
 --
 
 You should now have a graph with 171 nodes and 253 relationships.
-Also note that when you run Cypher code in the query pane, it always creates a new pane with the results below it.
+
+Also note that when you run Cypher queries in the Cypher editor, a reusable result frame is created.
+You can edit the query directly in the result frame or use a fresh one by using the main Cypher editor.
 
 == Find actors and movies
 
 === A specific actor
 
-If you want to find a specific actor in the graph, you can `MATCH` the `Person` node and refer to the actor using the `name` property with the `WHERE` clause:
-
+If you want to find a specific actor in the graph, you can `MATCH` the `Person` node and refer to the actor using the `name` property:
 [source,cypher]
 --
-MATCH (tom:Person)
-WHERE tom.name = "Tom Hanks"
+MATCH (tom:Person {name:"Tom Hanks"})
 RETURN tom
 --
 
@@ -756,7 +756,7 @@ Now you are going to retrieve related nodes by finding the xref:cypher/patterns.
 
 === All Tom Hanks movies
 
-To list the movies Tom Hanks took part of, you need to query his `Person` node and how it is connected to the `Movie` nodes through a relationship.
+To list the movies Tom Hanks have been part of, you need to query his `Person` node and how it is connected to the `Movie` nodes through a relationship.
 
 [source, cypher]
 --
@@ -802,14 +802,15 @@ MATCH (tom:Person {name:"Tom Hanks"})-[a:ACTED_IN]->(m:Movie)<-[b:ACTED_IN]-(coA
 RETURN tom, m, a, b, coActors
 --
 
-But, to understand better how it is built, it can be split first with the part of the query that aims to find what movies Tom Hanks has acted in:
+To better understand the query above, break it up.
+First, the query finds which movies Tom Hanks acted in:
 
 [source,cypher]
 --
 MATCH (tom:Person {name: "Tom Hanks"})-[a:ACTED_IN]->(m:Movie)
 --
 
-Then, combine with people who acted in those same movies:
+Then, find other `Person` nodes who acted in the same movie:
 
 [source,cypher]
 --
@@ -830,7 +831,7 @@ MATCH (people:Person)-[relatedTo]-(:Movie {title: "Cloud Atlas"})
 RETURN people.name, type(relatedTo), relatedTo
 --
 
-In this query, the relationship is undirected, because you want to retrieve all relationships between these two nodes, no matter the direction.
+In this query, the relationship is undirected and unspecified, because you want to retrieve all relationships between these two nodes, no matter the direction and what relationships exist in the graph.
 Then, in the `RETURN` line, you can specify what property you want to retrieve instead of getting all available ones, as seen in the previous steps.
 
 In Cypher, you can define what specific propety you want to retrieve by combining the variable and the name of the property.
@@ -859,7 +860,7 @@ Here is the result:
 3+d|Rows: 10
 |===
 
-=== Movies and actors up to three hops away from Kevin Bacon
+=== Movies and actors connected to Kevin Bacon
 
 The premise of the game "Six Degrees of Kevin Bacon" is to link any actor to Kevin Bacon through their film co-stars in six or fewer steps.
 This game can be played in the Movie graph using different strategies.
@@ -869,43 +870,47 @@ Two possible strategies:
 * link:https://neo4j.com/docs/cypher-manual/current/patterns/variable-length-patterns/[Variable length patterns]
 * link:https://neo4j.com/docs/cypher-manual/current/patterns/shortest-paths/[Built-in shortestPath() algorithm]
 
-The first strategy is to use a variable length pattern.
+[NOTE]
+====
+For the purpose of simplicity, the example goes through only three hops from Kevin Bacon instead of six.
+====
+
+==== Variable length pattern
+
 This query finds all `Person` and `Movie` nodes one to three hops away from Kevin Bacon:
 
 [source, cypher]
 --
-MATCH (bacon:Person {name:"Kevin Bacon"})-[*1..3]-(hollywood:Person|Movie)
-RETURN DISTINCT bacon, hollywood
+MATCH (bacon:Person {name:"Kevin Bacon"})-[*1..3]-(a:Person)
+RETURN DISTINCT bacon, a
 --
 
-Note that the variable `hollywood` includes two different types of nodes: `Person` and `Movie`.
-This is something you can do with Cypher, in case you want to retrieve information from different node types, but use only one variable.
+The `RETURN` clause includes a `DISTINCT` operator to ensure that results are not duplicated.
+In this query, it is possible that Kevin Bacon worked with the same actor in different movies, but you only want unique results.
 
-The reason why `RETURN` includes `DISTINCT` now is so that nodes don't get duplicated in the results.
-This could happen because Kevin Bacon could have worked with a same actor in different movies, thus causing the duplication.
+Here is the result:
 
-Here is the result of this query:
-
-image::kevinthreehops.svg[Result to query for what movies and actors are related to Kevin Bacon, link="{imagesdir}/kevinthreehops.svg",role="popup-link"]
+image::kevinthreehops.svg[Result to query for what actors are related to Kevin Bacon, link="{imagesdir}/kevinthreehops.svg",role="popup-link"]
 
 The downside of this query is that you don't know _how_ Kevin Bacon is related to these people and movies.
 If you want to retrieve the path that connects these nodes, `MATCH` the *path* and return it along with the `Person` or `Movie` nodes involved:
 
 [source, cypher]
 --
-MATCH p = (bacon:Person {name:"Kevin Bacon"})-[*1..3]-(hollywood:Person|Movie)
-RETURN DISTINCT bacon, hollywood, p
+MATCH p = (bacon:Person {name:"Kevin Bacon"})-[*1..3]-(a:Person)
+RETURN DISTINCT bacon, a, p
 --
 
-Here you turn a whole line into a single variable (`p`), so that you can quote it back in `RETURN DISTINCT`, and also retrieve the relationships that connect all of these nodes.
+The `p` variable refers to the entire path between Kevin Bacon and the `Person` nodes he is related to in one to three hops.
+The `p` variable is then referred to in the `RETURN` clause.
 
-Here is what the graph should look like now:
+Now the result includes `Movie` nodes too, because this is how Kevin Bacon is connected to other `Person` nodes:
 
-image::kevinthreehopsrel.svg[Three hops from Kevin Bacon and other actors and movies, now connected through acted in, directed and produced relationships, link="{imagesdir}/kevinthreehopsrel.svg",role="popup-link"]
+image::kevinthreehopsrel.svg[Three hops from Kevin Bacon and other actors and movies, now connected through acted in, directed and wrote relationships, link="{imagesdir}/kevinthreehopsrel.svg",role="popup-link"]
 
-=== The Bacon Path to Meg Ryan
+=== `shortestPath` algorithm
 
-If you want to find what is the shortest path between Kevin Bacon and Meg Ryan, you can write a query like this:
+To find the shortest path between two actors, use the algorithm as follows and return the path:
 
 [source, cypher]
 --
@@ -922,9 +927,7 @@ image::kevintomeg.svg[Shortest path between Kevin Bacon and Meg Ryan, width=350]
 == Clean up
 
 When you're done experimenting, you can remove the movie data set and clean up your Aura instance.
-However, for this to work, you need to delete all relationships, since nodes can't be removed if relationships to them still exist.
-
-You can delete both relationships and nodes in one single query:
+You can delete everything with one single query:
 
 [source, cypher]
 --
@@ -933,10 +936,6 @@ DETACH DELETE n
 --
 
 The result is the following message: "Deleted 171 nodes, deleted 253 relationships".
-
-Note that, although the database information in the left-hand panel shows no nodes or relationships in the graph, the property key names remain.
-This means that the previous query delete only nodes and relationships, but not properties.
-To learn how to remove all properties, see link:https://neo4j.com/docs/cypher-manual/current/clauses/remove/#remove-remove-all-properties[Cypher -> `REMOVE`].
 
 === Verify if the graph is gone
 
