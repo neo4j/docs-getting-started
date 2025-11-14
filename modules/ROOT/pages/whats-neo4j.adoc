@@ -22,7 +22,7 @@ You can check the source code on https://github.com/neo4j/neo4j[GitHub^].
 
 == How to interact with Neo4j
 
-Neo4j uses xref:cypher.adoc[Cypher], a declarative query language similar to SQL, but optimized for graphs.
+Neo4j uses xref:cypher/index.adoc[Cypher], a declarative query language similar to SQL, but optimized for graphs.
 The same language is also used by other databases such as SAP HANA Graph via the http://www.opencypher.org/[openCypher project].
 
 Another option is to use link:https://neo4j.com/docs/create-applications[libraries].

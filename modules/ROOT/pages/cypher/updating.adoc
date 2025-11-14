@@ -261,7 +261,7 @@ SET n.birthdate = null
 [[cypher-merge]]
 == Avoiding duplicate data using _MERGE_
 
-It was briefly mentioned xref::cypher-intro/patterns-in-practice.adoc#cypher-intro-patterns-in-practice-completing-patterns/[earlier] that there are some ways in Cypher to avoid creating duplicate data.
+It was briefly mentioned xref::cypher/patterns-in-practice.adoc#cypher-intro-patterns-in-practice-completing-patterns/[earlier] that there are some ways in Cypher to avoid creating duplicate data.
 One of those ways is using the `MERGE` keyword.
 `MERGE` does a "select-or-insert" operation that first checks if the data exists in the database.
 If it exists, then Cypher returns it as is or makes any updates you specify on the existing node or relationship.
