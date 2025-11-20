@@ -40,7 +40,7 @@ The "Query fundamentals" gives you a hands-on introduction to Cypher.
 
 == How does Cypher work?
 
-Neo4j's graph model is composed of <<nodes>> and <<relationships>>, which may also have assigned <<properties>>.
+The graph is composed of <<nodes>> and <<relationships>>, which may also have assigned <<properties>>.
 With nodes and relationships, you can build a graph that can express both simple and complex patterns.
 
 Pattern recognition is a key fundamental cognitive process, making Cypher, which utilizes pattern matching, more intuitive to learn.
@@ -81,7 +81,7 @@ With this query, you turn the information into nodes and relationships, which ar
 
 === Nodes
 
-In a property graph model, the main components are nodes and relationships.
+The main components in a graph are nodes and relationships.
 Nodes are often used to represent nouns or objects in your data model.
 In the previous example, `Sally`, `John`, `Graphs`, and `Neo4j` are the nodes:
 
@@ -93,16 +93,16 @@ The parentheses are a representation of the circles that compose the nodes in th
 
 ==== Node labels
 
-Nodes can be grouped together through a <<label>>, which is an component that works like tags and allows you to specify certain types of entities in your queries.
-Labels also help Cypher distinguish between nodes and optimize execution.
+Nodes can be grouped together through a <<label>>, which works like a tag and allows you to specify certain types of entities in your queries.
+Labels help Cypher distinguish between nodes and optimize execution.
 
 In the example, both `Sally` and `John` are persons, so they get a `Person` label, `Graphs` gets a `Technology` label, and `Neo4j` is a `Company`:
 
 .Nodes grouped by labels. Note that `Sally`, `John`, `Graphs`, and `Neo4j` are now xref:cypher/index.adoc#cypher-properties[properties] instead.
 image::cypher-graph-nodes-arr.svg[role="popup-link",width=450]
 
-In a relational database context, this would be the same as using SQL to refer to a table that should be looked for a particular row.
-The same way you can use SQL to query a person's information from a `Person` table, you can also use Cypher to only check the `Person` label for that information.
+In a relational database context, this would be the same as using SQL to refer to a particular row in a table.
+The same way you can use SQL to query a person's information from a `Person` table, you can also use the `Person` label for that information in Cypher.
 
 [CAUTION]
 ====
@@ -112,12 +112,12 @@ This can affect performance in very large graphs.
 
 ==== Node variables
 
-It is necessary to bind matched data entities to variables in order to reference them in subsequent clauses.
+If part of your query matches nodes that you need to reference in a later part of your query (i.e. in a *subclause*), you can use *node variables*.
 If part of your query matches nodes that you need to reference in a later part of your query (i.e. in a link:https://neo4j.com/docs/cypher-manual/current/clauses/#reading-sub-clauses[subclause]), you can use *node variables*.
 
 Variables can be single letters or words, and should be written in lower-case.
 For example, if you want to bind all nodes labeled `Person` to the variable `p`, you write `(p:Person)`.
-Likewise, if you want to use a full word, then you can write `(person:Person)`.
+If you want to use a full word as a variable, `(person:Person)` works exactly the same.
 
 .Retrieve all Person nodes
 [source, cypher]
@@ -129,11 +129,12 @@ RETURN p
 [#cypher-relationships]
 === Relationships
 
-Similarly to relational databases, graphs can also store information about how elements (nodes) are related to each other in the form of relationships.
+In a graph database, both nodes and relationships are first-class citizens and they have equal value. 
+In a relational database, relationships are only implied via foreign keys and join tables.
 
 In Cypher, relationships are represented as square brackets with an optional arrow to indicate the direction (e.g. `(Node1)-[]->(Node2)`).
 
-In the example, the lines containing `:LIKES`, `:IS_FRIENDS_WITH`, and `:WORKS_FOR` represent the relationship between the nodes:
+In the example, the arrows connecting the nodes represent the relationship between the nodes:
 
 .Graph featuring nodes and relationships.
 image::cypherintro-graph1.svg[]
@@ -183,7 +184,7 @@ This may impact the performance of the query.
 Relationship types categorize and add meaning to a relationship, similar to how labels group nodes together.
 It is considered best practice to use verbs or derivatives for the relationship type.
 The type describes how the nodes relate to each other.
-This way, Cypher is almost like natural language, where nodes are the subjects and objects (nouns), and the relationships (verbs) are the action words that relate them.
+This way, Cypher is almost like natural language, where nodes are the subjects and objects (nouns), and the relationships (verbs) are the predicates that relate them.
 
 In the previous example, the relationship types are:
 
@@ -232,7 +233,7 @@ image::cypherintro-variables.svg[]
 [#cypher-properties]
 === Properties
 
-Properties can be added both to nodes and relationships and be of a variety of data types.
+Properties are used to store additional information and can be added both to nodes and relationships and be of a variety of data types.
 For a full list of values and types, see link:{docs-home}/cypher-manual/current/values-and-types/[Cypher manual -> Values and types].
 
 In the following example, `sally` and `john` are xref:cypher/index.adoc##_node_variables[variables] for `Person` nodes which contain a `name` property with the *property values* "Sally" and "John":
@@ -266,12 +267,12 @@ Consider this example:
 (sally:Person {name:'Sally'})-[l:LIKES]->(g:Technology {type: "Graphs"})
 ----
 
-This bit of Cypher represents a pattern, but it is not a query.
-It only expresses that a `Person` node with _Sally_ as its `name` property has a `LIKES` relationship to the `Technology` node with _Graphs_ as its `type` property.
+This bit of Cypher represents a pattern.
+It expresses that a `Person` node with _Sally_ as its `name` property has a `LIKES` relationship to the `Technology` node with _Graphs_ as its `type` property.
 
-In order to *do* something with this pattern, such as adding it to or retrieving it from the graph, you need to *query* the database.
+You can use this pattern in different queries to the database by adding a keyword to make it a *clause*.
 
-For example, you can add this information to the database using the link:{docs-home}/cypher-manual/current/clauses/create/[`CREATE`] clause:
+For example, you can add this information to the database with the link:{docs-home}/cypher-manual/current/clauses/create/[`CREATE`] clause:
 
 [source, cypher]
 --
