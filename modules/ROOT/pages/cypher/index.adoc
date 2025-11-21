@@ -43,7 +43,8 @@ The "Query fundamentals" gives you a hands-on introduction to Cypher.
 The graph is composed of <<nodes>> and <<relationships>>, which may also have assigned <<properties>>.
 With nodes and relationships, you can build a graph that can express both simple and complex patterns.
 
-Pattern recognition is a key fundamental cognitive process, making Cypher, which utilizes pattern matching, more intuitive to learn.
+Pattern recognition is a key fundamental cognitive process.
+With Cypher, you can use pattern matching, which in turn makes the learning process more intuitive.
 
 [#cypher-syntax]
 == Cypher syntax
@@ -60,8 +61,7 @@ ifdef::backend-pdf[]
 link:https://www.youtube.com/watch?v=_dup3YOZSm8[What is Cypher?]
 endif::[]
 
-Cypher's constructs are based on English prose and iconography.
-It allows the user to get a natural language understanding while programming.
+Cypher's constructs are close to natural language and the syntax is designed to visually look like a graph.
 
 .A graph example involving four nodes and three relationships.
 image::cypherintro-graph1.svg[role="popup-link",width=600]
@@ -170,8 +170,8 @@ MATCH (p:Person)-[:LIKES]-(t:Technology)
 An undirected relationship does not mean that it doesn't have a direction, but that it can be traversed in *either* direction.
 While you can't *create* relationships without a direction, you can *query* them undirected (in the example, using the link:{docs-home}/cypher-manual/current/clauses/match/[`MATCH`] clause).
 
-Using undirected relationships in queries is particularly useful when you don't know the direction, since Cypher won't return anything if you write a query with the wrong direction.
-Cypher will therefore retrieve *all* nodes connected by the specified relationship type, regardless of direction.
+Since Cypher won't return anything if you write a query with the wrong direction, you can use undirected relationships in queries when you don't know the direction.
+This way, Cypher will retrieve *all* nodes connected by the specified relationship type, regardless of direction.
 
 [NOTE]
 ====
@@ -290,7 +290,7 @@ RETURN sally,r,t
 ==== Pattern variables
 
 In the same way as nodes and relationships, you can also use variables for patterns.
-Considering the previous example, you can turn contain the whole pattern (`(Sally)-[:LIKES]->(Technology)`) inside a pattern by creating a variable (`p`) for it all:
+Considering the previous example, you can turn the whole pattern (`(Sally)-[:LIKES]->(Technology)`) into a variable (`p`):
 
 [source,cypher]
 --
