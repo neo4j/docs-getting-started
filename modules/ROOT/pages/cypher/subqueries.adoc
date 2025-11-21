@@ -67,8 +67,8 @@ The `EXISTS`, `COUNT`, and `CALL {...}` subqueries are covered in this section.
 
 To learn more about using `CALL {...} IN TRANSACTIONS`, see the code examples in the following tutorials on how to import CSV data into a Neo4j database:
 
-* xref:cypher-intro/load-csv.adoc#call-in-transactions[_Tutorial: Import data_]
-* xref:data-import/csv-import.adoc#optimizing-load-csv[_Importing CSV data into Neo4j_]
+* xref:data-import/csv-files.adoc[Working with CSV files]
+* xref:data-import/csv-import.adoc#optimizing-load-csv[Tutorial: Import CSV data using `LOAD CSV`]
 
 The `COLLECT` subqueries were introduced in Neo4j 5.6.
 It is a new kind of subquery for collecting results of a subquery into a list so that further operations like `DISTINCT`, `ORDER BY`, `LIMIT`, and `SKIP` can be performed.
@@ -92,7 +92,7 @@ Here are some important things to know about a subquery:
 
 Subqueries are demarcated by braces (`{ }`).
 
-In the xref:cypher-intro/results.adoc#filter-patterns[_Filtering on patterns_] section of the *_Getting the correct results_* chapter, you learnt how to filter based on patterns.
+In the xref:cypher/results.adoc#filter-patterns[_Filtering on patterns_] section of the *_Getting the correct results_* chapter, you learnt how to filter based on patterns.
 For example, you can write the following query to find the friends of someone who works for Neo4j:
 
 [source,cypher]

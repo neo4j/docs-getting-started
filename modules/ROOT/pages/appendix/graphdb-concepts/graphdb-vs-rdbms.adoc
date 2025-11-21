@@ -3,7 +3,7 @@
 :description: This page explores the conceptual differences between relational and graph database structures and data models.
 
 This page explores the conceptual differences between relational and graph database structures and data models.
-For a comparison between query languages, see xref:cypher-intro/cypher-sql.adoc[Comparing Cypher with SQL].
+For a comparison between query languages, see xref:cypher/cypher-sql.adoc[Comparing Cypher with SQL].
 
 [#relational-vs-graph]
 == Relational database overview
@@ -32,7 +32,7 @@ Unlike other database management systems, relationships are of equal importance 
 This means you are not required to infer connections between entities using special properties such as foreign keys or out-of-band processing like map-reduce.
 
 By assembling nodes and relationships into connected structures, graph databases enable building models that map closely to a problem domain.
-With Cypher's xref:cypher-intro/cypher-sql.adoc[equivalent of a `JOIN` operation], the graph database can directly access the connected nodes and eliminate the need for expensive search-and-match computations.
+With Cypher's xref:cypher/cypher-sql.adoc[equivalent of a `JOIN` operation], the graph database can directly access the connected nodes and eliminate the need for expensive search-and-match computations.
 
 This ability to pre-materialize relationships into the database structure allows Neo4j to provide improved performance compared to others, especially for join-heavy queries.
 
@@ -76,13 +76,13 @@ If you want to learn how to create a data model, follow the xref:data-modeling/t
 == Data storage and retrieval
 
 SQL is a query language used to query relational databases.
-xref:cypher.adoc[Cypher] is Neo4j’s declarative query language built on the basic concepts and clauses of SQL, but with additional functionalities that make working with graph databases more efficient.
+xref:cypher/index.adoc[Cypher] is Neo4j’s declarative query language built on the basic concepts and clauses of SQL, but with additional functionalities that make working with graph databases more efficient.
 
 For example, when writing an SQL statement with a large number of `JOIN` s, you can quickly lose sight of what the query actually does, since there is a lot of technical noise in SQL syntax.
 In Cypher, the syntax remains concise and focused on domain components and their connections, thus expressing the pattern to find or create data more visually and clearly.
 
 Other clauses outside of the basic pattern matching still look very similar to SQL, as Cypher was built on the predecessor language’s foundation. 
-You can see the similarities and differences xref:/cypher-intro/cypher-sql.adoc[Comparing Cypher with SQL].
+You can see the similarities and differences xref:/cypher/cypher-sql.adoc[Comparing Cypher with SQL].
 
 == Keep learning
 
