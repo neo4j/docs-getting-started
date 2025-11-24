@@ -315,7 +315,7 @@ In case you have a background in SQL and are new to graph databases, these are s
 * xref:reference/graphdb-vs-rdbms[Transition from relational to graph database]
 * xref:cypher/cypher-sql.adoc[Reference: Comparing Cypher with SQL]
 * xref:data-import/relational-to-graph-import.adoc[How-to: Import from RDBMS into graph]
-* xref:appendix/tutorials/guide-import-relational-and-etl.adoc[Tutorial: Import data from a relational database into Neo4j]
+* xref:data-import/import-relational-and-etl.adoc[Tutorial: Import data from a relational database into Neo4j]
 * xref:data-modeling/relational-to-graph-modeling.adoc[How-to: Model data from relational to graph]
 
 === From NoSQL to Graphs

@@ -64,7 +64,7 @@ endif::[]
 Cypher's constructs are close to natural language and the syntax is designed to visually look like a graph.
 
 .A graph example involving four nodes and three relationships.
-image::cypherintro-graph1.svg[role="popup-link",width=600]
+image::cypherintro-graph.svg[role="popup-link",width=600]
 
 If you want to represent the data in this graph in English, it would read as something like: _"Sally likes Graphs. Sally is friends with John. Sally works for Neo4j."_
 
@@ -137,7 +137,7 @@ In Cypher, relationships are represented as square brackets with an optional arr
 In the example, the arrows connecting the nodes represent the relationship between the nodes:
 
 .Graph featuring nodes and relationships.
-image::cypherintro-graph1.svg[]
+image::cypherintro-graph.svg[]
 
 
 ==== Relationship directions
