@@ -61,7 +61,6 @@ For those cases, you might need to add an `APOC` procedure to the `LOAD CSV` sta
 === LOAD CSV resources
 * Cypher Manual: link:https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[LOAD CSV^]
 * Guide: xref:data-import/csv-import.adoc[Importing CSV data into Neo4j]
-* Docs Tutorial: link:https://neo4j.com/docs/getting-started/current/cypher-intro/load-csv/[LOAD CSV for import^]
 
 [#relational-apoc]
 == APOC

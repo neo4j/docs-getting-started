@@ -48,7 +48,7 @@ If you also want to return the created data, you can add a `RETURN` clause, whic
 The `RETURN` keyword in Cypher specifies what values or results you might want to return from a Cypher query. +
 You can tell Cypher to return nodes, relationships, node and relationship properties, or patterns in your query results. +
 `RETURN` is not required when doing write procedures, but is needed for reads. +
-The node and relationship variables, which are discussed xref:cypher-intro/patterns.adoc#cypher-intro-patterns-node-syntax[earlier], become important when using `RETURN`.
+The node and relationship variables, which are discussed xref:cypher/patterns.adoc#cypher-intro-patterns-node-syntax[earlier], become important when using `RETURN`.
 
 [source, cypher, role="noplay"]
 ----
