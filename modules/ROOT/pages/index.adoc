@@ -44,7 +44,7 @@ image:ROOT:icon-developer.svg[]
 Learn Cypher, Neo4j's graph query language, and start thinking about graphs and patterns.
 
 [.link]
-xref:cypher.adoc[]
+xref:cypher/index.adoc[]
 
 [.display.cards.selectable]
 
