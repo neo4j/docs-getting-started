@@ -1,6 +1,6 @@
-= Updating the data
+= Updating the graph
 :tags: cypher, queries, graph-queries, insert-create, update, delete, merge
-:description: Building on the Cypher Basics I guide, this guide covers more introductory concepts of Cypher, Neo4j's graph query language. Upon finishing this guide, you should be able to read and write Cypher queries for standard CRUD operations.
+:description: This guide explains how to update data that already exists in a graph, using Cypher.
 :page-newsletter: true
 :page-ad-overline-link: https://graphacademy.neo4j.com/?ref=guides
 :page-ad-overline: Neo4j GraphAcademy
@@ -10,27 +10,16 @@
 :page-ad-underline-role: button
 :page-ad-underline: Learn more
 
-Earlier you learned how to represent nodes, relationships, labels, properties, and patterns in Cypher.
-This section adds another level to your knowledge by introducing how to update and delete data with Cypher.
+This tutorial shows how to update information in the graph by changing, removing, and adding nodes, relationships, and properties.
+It also addresses how to avoid duplication and how to keep track of changes by adding new properties to the graph.
 
-While these are the standard CRUD (create, update, and delete) operations, some things function a bit differently in a graph than in other types of databases.
-You will probably recognize some of the similarities and differences as we go along.
+== Create the dataset
 
-[[cypher-update]]
-== Updating data with Cypher
-
-You may already have a node or relationship in the data, but you want to modify its properties.
-You can do this by matching the pattern you want to find and using the `SET` keyword to add, remove, or update properties.
-
-We continue to use the following dataset: 
-
-.Graph: people, companies they work at, and technologies they like
-image::people-technologies-graph-arr.svg[role="popup-link"]
-
-To create the aforementioned graph, run the Cypher query:
+After you link:https://neo4j.com/product/auradb/?ref=docs-nav-get-started[create a free Aura instance], use the "Connect" button and select "Query". 
+In the Cypher editor, copy and paste the following Cypher and execute the query:
 
 [source, cypher]
-----
+--
 CREATE (diana:Person {name: "Diana"})
 CREATE (melissa:Person {name: "Melissa", twitter: "@melissa"})
 CREATE (dan:Person {name: "Dan", twitter: "@dan", yearsExperience: 6})
@@ -65,48 +54,85 @@ CREATE (ann)<-[:IS_FRIENDS_WITH]-(jennifer)-[:IS_FRIENDS_WITH]->(mark)
 CREATE (john)-[:LIKES]->(dev)<-[:LIKES]-(ann)-[:IS_FRIENDS_WITH]->(dan)-[:WORKS_FOR]->(abc)
 CREATE (ann)-[:WORKS_FOR]->(abc)
 CREATE (a)<-[:WORKS_FOR]-(melissa)-[:LIKES]->(graphs)<-[:LIKES]-(diana)
-----
+--
 
+You should now have a graph with 20 nodes, 31 relationships, 28 properties, and 20 labels.
 
-Using the above example dataset thus far, you could update Jennifer's node to add her birthdate.
-The next Cypher statement shows how to do this.
+== Update a node
 
-. First, you need to find the existing node for Jennifer.
-. Next, use `SET` to create the new property (with syntax `variable.property`) and set its value.
-. Finally, you can return Jennifer's node to ensure that the information was updated correctly.
+This is the query you need to update Jennifer's node with information about her birthday:
 
 [source, cypher]
-----
+--
 MATCH (p:Person {name: 'Jennifer'})
 SET p.birthdate = date('1980-01-01')
 RETURN p
-----
+--
 
-*Query result:*
+What this query does is:
 
-[queryresult]
+. Find Jennifer's already existing node with the `MATCH` clause.
+. Use `SET` to create the new property `birthday` (with syntax `variable.property`) and set its value.
+. Use `RETURN` to retrieve Jennifer's node and ensure that the information was updated correctly.
 
-----
-Set Properties: 1
-Rows: 1
+This is the result:
 
-+------------------------------------------------------+
-| p                                                    |
-+------------------------------------------------------+
-|(Person: {birthdate: '1980-01-01', name: 'Jennifer'}) |
-+------------------------------------------------------+
-----
+[role="queryresult",options="header,footer",cols="1*<m"]
+|===
+| p
 
+| (:Person {twitter: "@jennifer", birthdate: 1980-01-01, name: "Jennifer", yearsExperience: 5})
 
-[TIP]
-====
-For more information on using `date()` and other temporal functions, visit the link:https://neo4j.com/docs/cypher-manual/current/functions/temporal/[Cypher manual -> Temporal functions^].
-====
+1+d|Rows: 1
+|===
 
-If you want to change Jennifer's birthdate, you can use the same query above to find Jennifer's node again and put a different date in the `SET` clause.
+== Update a property
 
-You are able also update Jennifer's `WORKS_FOR` relationship with the `Company` node to include the year that she started working there.
-To do this, you can use similar syntax as above for updating nodes.
+To change Jennifer's birthdate, you can use the same query from the previous section to find Jennifer's node again, and then put a different date in the `SET` clause:
+
+[source, cypher]
+--
+MATCH (p:Person {name: 'Jennifer'})
+SET p.birthdate = date('1980-01-02')
+RETURN p
+--
+
+This is the result:
+
+[role="queryresult",options="header,footer",cols="1*<m"]
+|===
+| p
+
+| (:Person {twitter: "@jennifer", birthdate: 1980-01-02, name: "Jennifer", yearsExperience: 5})
+
+1+d|Rows: 1
+|===
+
+== Delete properties
+
+Neo4j doesn't store null values, which means that if you set a property value as `null`, it will be automatically removed from your graph.
+You can do this through two methods:
+
+.Using the `REMOVE` clause
+[source,cypher]
+--
+MATCH (n:Person {name: 'Jennifer'})
+REMOVE n.birthdate
+--
+
+.Using the `SET` clause
+[source,cypher]
+--
+MATCH (n:Person {name: 'Jennifer'})
+SET n.birthdate = null
+--
+
+In both options, the result will be "Set 1 property", and when you `MATCH` it, you will see that the result shows the value `null`.
+This means that the property doesn't hold any value and doesn't exist in the graph anymore.
+
+== Update a relationship
+
+To update Jennifer's `WORKS_FOR` relationship with a `Company` node to include the year that she started working there, you can use a similar syntax as the previous steps:
 
 [source, cypher]
 ----
@@ -115,163 +141,69 @@ SET rel.startYear = date({year: 2018})
 RETURN rel
 ----
 
+This is the result:
 
-*Query result:*
+[role="queryresult",options="header,footer",cols="1*<m"]
+|===
+| rel
 
-[queryresult]
-----
-Set Properties: 1
-Rows: 1
+| [:WORKS_FOR {startYear: 2018-01-01}]
 
-+-----------------------------------------+
-| rel                                     |
-+-----------------------------------------+
-| [:WORKS_FOR {startYear: '2018-01-01'}]  |
-+-----------------------------------------+
-----
+1+d|Rows: 1
+|===
 
+== Delete a relationship
 
-[NOTE]
-====
-If you want to return a graph view on the above query, you can add variables to the nodes for `p:Person` and `c:Company` and write the return line as `RETURN p, rel, c`.
-====
+You can use the `DELETE` clause for deleting both relationships and nodes.
+However, because Neo4j is ACID-compliant, you cannot delete a node if it still has relationships.
 
-[[cypher-delete]]
-== Deleting data with Cypher
+Therefore, if you want to xref:cypher/updating.adoc#_delete_a_node[delete a node], for example, Jennifer's node, you need to first delete the relationships appended to it:
 
-Another operation to cover is how to delete data in Cypher.
-For this operation, Cypher uses the `DELETE` keyword for deleting nodes and relationships.
-It is very similar to deleting data in other languages like SQL, with one exception.
-
-Because Neo4j is ACID-compliant, you cannot delete a node if it still has relationships.
-If you could do that, then you might end up with a relationship pointing to nothing and an incomplete graph.
-
-=== Delete a relationship
-
-To delete a relationship, you need to find the start and end nodes for the relationship you want to delete and then use the `DELETE` keyword, as shown in the code block below.
-Let us go ahead and delete the `IS_FRIENDS_WITH` relationship between Jennifer and Mark for now.
-We will add this relationship back in a later exercise.
-
-[source, cypher]
-----
-MATCH (j:Person {name: 'Jennifer'})-[r:IS_FRIENDS_WITH]->(m:Person {name: 'Mark'})
+[source,cypher]
+--
+MATCH (j:Person {name:"Jennifer"})-[r]-(n)
 DELETE r
-----
+--
 
-*Query result:*
+Note that the arrow is undirected because you want to delete *all* relationships connected to Jennifer, no matter what direction.
 
-[queryresult]
-----
-+-----------------------------------------+
-| Deleted Relationships: 1                |
-| Rows: 0                                 |
-+-----------------------------------------+
-----
+The result is the following message: "Deleted 8 relationships".
 
+== Delete a node
 
-=== Delete a node
+Now that you have deleted all relationships in xref:cypher/updating.adoc#_delete_a_relationship[the previous step], you can delete Jennifer's node in itself by using the following query:
 
-To delete a node that does not have any relationships, you need to find the node you want to delete and then use the `DELETE` keyword, just as you did for the relationship above.
-You can delete Mark's node for now and bring him back later.
+[source,cypher]
+--
+MATCH (j:Person {name:"Jennifer"})
+DELETE j
+--
 
-[source, cypher]
-----
-MATCH (m:Person {name: 'Mark'})
-DELETE m
-----
+== Delete a node and its relationships
 
-*Query result:*
+To repeat the same two previous steps with another node, you don't need to write two statements.
+You can do this in one single query, but with some modifications that follow Neo4j's ACID compliance.
 
-[queryresult]
-----
-+-----------------------------------------+
-| Deleted Nodes: 1                        |
-| Rows: 0                                 |
-+-----------------------------------------+
-----
-
-[TIP]
-====
-If you have created an empty node by mistake and you need to delete it, you can use the following Cypher statement to do it:
+This time, you need to use `DETACH DELETE` to remove any existing relationships Mark's node *and* delete the node itself:
 
 [source, cypher]
-----
-MATCH (n)
-WHERE id(n) = 5
-DETACH DELETE n
-----
-
-This statement deletes not only a node but also all relationships it has.
-To run the statement, you should know a node's internal ID.
-==== 
-
-
-=== Delete a node and its relationship
-
-Instead of running the last two queries to delete the `IS_FRIENDS_WITH` relationship and the `Person` node for Mark, you can actually run a single statement to delete the node and its relationship at the same time.
-As it was mentioned above, Neo4j is ACID-compliant so it doesn't allow to delete a node if it still has relationships.
-Using the `DETACH DELETE` syntax tells Cypher to delete any relationships the node has, as well as remove the node itself.
-
-The statement would look like the code below.
-First, you find Mark's node in the database.
-Then, the `DETACH DELETE` line removes any existing relationships `Mark` node has before also deleting the node.
-
-[source, cypher]
-----
+--
 MATCH (m:Person {name: 'Mark'})
 DETACH DELETE m
-----
+--
 
-=== Delete properties
+The result is the following message: "Deleted 1 node, deleted 2 relationships".
 
-You can also remove properties, but instead of using the `DELETE` keyword, you can use a couple of other approaches.
+== Add new data
 
-The first option is to use `REMOVE` on the property.
-This tells Neo4j that you want to remove the property from the node entirely and no longer store it.
+In order to avoid duplication, instead of using the `CREATE` clause from the first step, use `MERGE`.
 
-The second option is to use the `SET` keyword from earlier to set the property value to `null`.
-Unlike other database models, Neo4j does not store null values.
-Instead, it only stores properties and values that are meaningful to your data.
-This means that you can have different types and amounts of properties on various nodes and relationships in your graph.
-
-To show you both options, let us look at the code for each.
-
-[source, cypher]
-----
-//delete property using REMOVE keyword
-MATCH (n:Person {name: 'Jennifer'})
-REMOVE n.birthdate
-
-//delete property with SET to null value
-MATCH (n:Person {name: 'Jennifer'})
-SET n.birthdate = null
-----
-
-*Query result:*
-
-[queryresult]
-----
-+-----------------------------------------+
-| Set Properties: 1                       |
-| Rows: 0                                 |
-+-----------------------------------------+
-----
-
-
-[[cypher-merge]]
-== Avoiding duplicate data using _MERGE_
-
-It was briefly mentioned xref::cypher/patterns-in-practice.adoc#cypher-intro-patterns-in-practice-completing-patterns/[earlier] that there are some ways in Cypher to avoid creating duplicate data.
-One of those ways is using the `MERGE` keyword.
 `MERGE` does a "select-or-insert" operation that first checks if the data exists in the database.
-If it exists, then Cypher returns it as is or makes any updates you specify on the existing node or relationship.
-If the data does not exist, then Cypher will create it with the information you specify.
+If it exists, then Cypher returns it as it is or makes any specified updates to the existing node or relationship.
+If the data don't exist, then Cypher creates it with the information you specify.
 
-=== Using _MERGE_ on a node
-
-To start, let us look at an example of this by adding Mark back to our database using the query below.
-You can use `MERGE` to ensure that Cypher checks the database for an existing node for Mark.
-Since you removed Mark's node in the previous examples, Cypher will not find an existing match and will create the node new with the `name` property set to 'Mark'.
+Since you removed Mark's node in xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[the previous step], Cypher will not find an existing match.
+It will create a new node with the `name` property set to 'Mark' as value:
 
 [source, cypher]
 ----
@@ -279,17 +211,37 @@ MERGE (mark:Person {name: 'Mark'})
 RETURN mark
 ----
 
-*Query result:*
+This is the result:
 
-image::cypher_graph_mergeFriend-arr.svg[role="popup-link", width=200]
+[role="queryresult",options="header,footer",cols="1*<m"]
+|===
+| mark
 
-If you run the same statement again, Cypher will find an existing node this time that has the `name` property set to `Mark`, so it will return the matched node without any changes.
+| (:Person {twitter: "@mark", name: "Mark"})
 
+1+d|Rows: 1
+|===
 
-=== Using _MERGE_ on a relationship
+If you run the same statement again, Cypher will find an existing node and make no changes.
 
-Just like you use `MERGE` to find or create a node in Cypher, you can do the same thing to find or create a relationship.
-Let's re-create the `IS_FRIENDS_WITH` relationship between Mark and Jennifer that we had in a previous example.
+Now, if you want to create a new relationship, you should first use `MATCH` and then `MERGE` in order to avoid duplication.
+For example, if you write the query like this:
+
+[source, cypher]
+--
+MERGE (j:Person {name: 'Jennifer'})-[r:IS_FRIENDS_WITH]->(m:Person {name: 'Mark'})
+RETURN j, r, m
+--
+
+Cypher won't find this specific pattern, so it will create it from scratch, which means both nodes and the relationship between them will be created.
+Since the relationship didn't exist previously, it is Jennifer and Mark's nodes that will be duplicated.
+
+[TIP]
+====
+If you ran this statement and created the duplication, you can go back to the previous steps where you saw xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[how to delete a node and its relationships].
+====
+
+To avoid this scenario, you should write the statement like this instead:
 
 [source, cypher]
 ----
@@ -299,37 +251,15 @@ MERGE (j)-[r:IS_FRIENDS_WITH]->(m)
 RETURN j, r, m
 ----
 
-Notice that here `MATCH` is used to find both Mark's node and Jennifer's node before we use `MERGE` to find or create the relationship between them.
+`MATCH` is used here to find both Mark and Jennifer's node before using `MERGE` to find or create the relationship between them.
+Since this relationship didn't exist anymore after you xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[deleted Mark's node and appended relationships], the result will be a newly created relationship:
 
-Why do we not use a single statement?
+image::jennifer-friends-mark.svg[Jennifer and Mark's nodes are connected through a is friends with relationship,width=400,role=popup]
 
-`MERGE` looks for an entire pattern that you specify to see whether to return an existing one or create it new.
-If the entire pattern (nodes, relationships, and any specified properties) does not exist, Cypher creates it.
+== Track changes
 
-Cypher never produces a partial mix of matching and creating within a pattern.
-To avoid a mix of match and create, you need to match any existing elements of your pattern first before doing a merge on any elements you might want to create, just as we did in the statement above.
-
-image::cypher_graph_mergeFriendRel-arr.svg[role="popup-link", width=600]
-
-[NOTE]
-====
-Just for reference, the Cypher statement that causes duplicates is below.
-Since this pattern (`Jennifer IS_FRIENDS_WITH Mark`) does not exist in the database, Cypher creates the entire pattern new -- both nodes, as well as the relationship between them.
-
-[source, cypher]
-----
-//this statement will create duplicate nodes for Mark and Jennifer
-MERGE (j:Person {name: 'Jennifer'})-[r:IS_FRIENDS_WITH]->(m:Person {name: 'Mark'})
-RETURN j, r, m
-----
-====
-
-=== Handling _MERGE_ criteria
-
-Perhaps you want to use `MERGE` to ensure you do not create duplicates, but you want to initialize certain properties if the pattern is created and update other properties if it is only matched.
-In this case, you can use `ON CREATE` or `ON MATCH` with the `SET` keyword to handle these situations.
-
-Let us look at an example.
+You can use the `MERGE` clause both for avoiding duplicates and also for keeping track of changes done to the graph.
+For example, you can combine it with link:https://neo4j.com/docs/cypher-manual/current/clauses/merge/#query-merge-on-create-on-match[`ON CREATE` or `ON MATCH`] with the `SET` keyword to handle these situations:
 
 [source, cypher]
 ----
@@ -339,12 +269,29 @@ MERGE (m:Person {name: 'Mark'})-[r:IS_FRIENDS_WITH]-(j:Person {name:'Jennifer'})
 RETURN m, r, j
 ----
 
-[[cypher-resources]]
-== Resources
+Now you have the new properties `since` and `updated` added to the `IS_FRIENDS_WITH` relationship.
+They give information about how long Jennifer and Mark have been friends and when this information was updated to the graph.
 
-* link:https://neo4j.com/docs/cypher-manual/current/clauses/create/[Neo4j Cypher Manual: CREATE^]
-* link:https://neo4j.com/docs/cypher-manual/current/clauses/set/[Neo4j Cypher Manual: SET^]
-* link:https://neo4j.com/docs/cypher-manual/current/clauses/remove/[Neo4j Cypher Manual: REMOVE^]
-* link:https://neo4j.com/docs/cypher-manual/current/clauses/delete/[Neo4j Cypher Manual: DELETE^]
-* link:https://neo4j.com/docs/cypher-manual/current/clauses/merge/[Neo4j Cypher Manual: MERGE^]
-* link:https://neo4j.com/docs/cypher-manual/current/clauses/merge/#query-merge-on-create-on-match[Neo4j Cypher Manual: ON CREATE/ON MATCH^]
+Supposing you made this change to the graph on November 24th, 2025, you will get the following result:
+
+[role="queryresult",options="header,footer",cols="3*<m"]
+|===
+| m | r | j
+
+| (:Person {twitter: "@mark", name: "Mark"})
+| [:IS_FRIENDS_WITH {updated: 2025-11-24}]
+| (:Person {twitter: "@jennifer", name: "Jennifer", yearsExperience: 5})
+
+3+d|Rows: 3
+|===
+
+== Conclusion
+
+In this tutorial, you have seen how to update the information in your graph and avoid issues such as duplication or lack of information about when the changes were made.
+You have used different Cypher clauses including `MATCH`, `MERGE`, `DELETE`, and more.
+
+== Keep learning
+
+If you want to learn more about how to update your graph and find the best way to model your data, refer to:
+
+* xref:data-modeling/index.adoc[*Data modeling*] -> A complete section on how to get started with data modeling through tutorials and reference material.
