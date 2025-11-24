@@ -213,7 +213,7 @@ RETURN p,r,t
 ----
 
 This query specifies variables for both the node labels (`p` for `Person` and `t` for `Technology`) and the relationship type (`r` for `:LIKES`).
-In the return clause, you can then use the variables (i.e.`p`, `r`, and `t`) to return the bound entities.
+In the return clause, you can then use the variables (i.e. `p`, `r`, and `t`) to return the bound entities.
 
 This would be your result:
 
