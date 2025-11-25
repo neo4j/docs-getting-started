@@ -58,9 +58,9 @@ CREATE (a)<-[:WORKS_FOR]-(melissa)-[:LIKES]->(graphs)<-[:LIKES]-(diana)
 
 You should now have a graph with 20 nodes, 31 relationships, 28 properties, and 20 labels.
 
-== Update a node
+== Add a property to a node
 
-This is the query you need to update Jennifer's node with information about her birthday:
+If you want to add a birthday for the person named Jennifer, you can use this query:
 
 [source, cypher]
 --
@@ -71,11 +71,11 @@ RETURN p
 
 What this query does is:
 
-. Find Jennifer's already existing node with the `MATCH` clause.
+. Find Jennifer's node with the `MATCH` clause.
 . Use `SET` to create the new property `birthday` (with syntax `variable.property`) and set its value.
-. Use `RETURN` to retrieve Jennifer's node and ensure that the information was updated correctly.
+. Use `RETURN` to return Jennifer's node and ensure that the information was updated correctly.
 
-This is the result:
+This is the tabular result:
 
 [role="queryresult",options="header,footer",cols="1*<m"]
 |===
@@ -88,7 +88,7 @@ This is the result:
 
 == Update a property
 
-To change Jennifer's birthdate, you can use the same query from the previous section to find Jennifer's node again, and then put a different date in the `SET` clause:
+To change Jennifer's birthdate, you can use the same query from the previous example to find Jennifer's node again, and then add a different date with the `SET` clause:
 
 [source, cypher]
 --
@@ -111,7 +111,6 @@ This is the result:
 == Delete properties
 
 Neo4j doesn't store null values, which means that if you set a property value as `null`, it will be automatically removed from your graph.
-You can do this through two methods:
 
 .Using the `REMOVE` clause
 [source,cypher]
@@ -127,12 +126,13 @@ MATCH (n:Person {name: 'Jennifer'})
 SET n.birthdate = null
 --
 
-In both options, the result will be "Set 1 property", and when you `MATCH` it, you will see that the result shows the value `null`.
+With both options, the result will be "Set 1 property", and when you `MATCH` it, you will see that the result shows the value `null`.
 This means that the property doesn't hold any value and doesn't exist in the graph anymore.
 
-== Update a relationship
+== Add a property to a relationship
 
-To update Jennifer's `WORKS_FOR` relationship with a `Company` node to include the year that she started working there, you can use a similar syntax as the previous steps:
+If you want to add information about Jennifer's employment, you can add a property to the `[:WORKS_FOR]` relationship.
+The statement is similar to the one used to add a property to a node: 
 
 [source, cypher]
 ----
@@ -171,7 +171,7 @@ The result is the following message: "Deleted 8 relationships".
 
 == Delete a node
 
-Now that you have deleted all relationships in xref:cypher/updating.adoc#_delete_a_relationship[the previous step], you can delete Jennifer's node in itself by using the following query:
+If you have deleted all relationships in xref:cypher/updating.adoc#_delete_a_relationship[the previous step], you can delete Jennifer's node in itself by using the following query:
 
 [source,cypher]
 --
@@ -196,14 +196,15 @@ The result is the following message: "Deleted 1 node, deleted 2 relationships".
 
 == Add new data
 
-In order to avoid duplication, instead of using the `CREATE` clause from the first step, use `MERGE`.
+If you want to add new data to your graph, it's important to avoid duplication.
+Instead of using `CREATE`, you can use `MERGE` to add new elements.
 
 `MERGE` does a "select-or-insert" operation that first checks if the data exists in the database.
 If it exists, then Cypher returns it as it is or makes any specified updates to the existing node or relationship.
 If the data don't exist, then Cypher creates it with the information you specify.
 
-Since you removed Mark's node in xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[the previous step], Cypher will not find an existing match.
-It will create a new node with the `name` property set to 'Mark' as value:
+Since you removed Mark's node in xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[the previous step], Cypher does not find an existing match.
+It creates a new node with the `name` property set to 'Mark':
 
 [source, cypher]
 ----
@@ -222,9 +223,9 @@ This is the result:
 1+d|Rows: 1
 |===
 
-If you run the same statement again, Cypher will find an existing node and make no changes.
+If you run the same statement again, Cypher finds an existing node and makes no changes.
 
-Now, if you want to create a new relationship, you should first use `MATCH` and then `MERGE` in order to avoid duplication.
+To avoid duplication when you create a new relationship, use `MATCH` to find the nodes and `MERGE` to create the relationship.
 For example, if you write the query like this:
 
 [source, cypher]
@@ -234,14 +235,13 @@ RETURN j, r, m
 --
 
 Cypher won't find this specific pattern, so it will create it from scratch, which means both nodes and the relationship between them will be created.
-Since the relationship didn't exist previously, it is Jennifer and Mark's nodes that will be duplicated.
 
 [TIP]
 ====
 If you ran this statement and created the duplication, you can go back to the previous steps where you saw xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[how to delete a node and its relationships].
 ====
 
-To avoid this scenario, you should write the statement like this instead:
+To avoid this, use `MATCH` to find the nodes first, and then `MERGE` to create the relationship:
 
 [source, cypher]
 ----
@@ -251,8 +251,8 @@ MERGE (j)-[r:IS_FRIENDS_WITH]->(m)
 RETURN j, r, m
 ----
 
-`MATCH` is used here to find both Mark and Jennifer's node before using `MERGE` to find or create the relationship between them.
-Since this relationship didn't exist anymore after you xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[deleted Mark's node and appended relationships], the result will be a newly created relationship:
+`MATCH` finds both Mark and Jennifer's node before `MERGE` (finds or) creates the relationship between them.
+Since this relationship didn't exist after xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[Mark's node and appended relationships] were deleted, the result is a newly created relationship:
 
 image::jennifer-friends-mark.svg[Jennifer and Mark's nodes are connected through a is friends with relationship,width=400,role=popup]
 
