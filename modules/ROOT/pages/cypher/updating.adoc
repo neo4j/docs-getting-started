@@ -11,7 +11,7 @@
 :page-ad-underline: Learn more
 
 This tutorial shows how to update information in the graph by changing, removing, and adding nodes, relationships, and properties.
-It also addresses how to avoid duplication and how to keep track of changes by adding new properties to the graph.
+It also addresses how to avoid duplication.
 
 == Create the dataset
 
@@ -57,6 +57,8 @@ CREATE (a)<-[:WORKS_FOR]-(melissa)-[:LIKES]->(graphs)<-[:LIKES]-(diana)
 --
 
 You should now have a graph with 20 nodes, 31 relationships, 28 properties, and 20 labels.
+
+image::update-graph.svg[All nodes added to the graph,width=500]
 
 == Add a property to a node
 
@@ -110,7 +112,8 @@ This is the result:
 
 == Delete properties
 
-Neo4j doesn't store null values, which means that if you set a property value as `null`, it will be automatically removed from your graph.
+To remove a property, either use the `REMOVE` clause, or set its value to `null`.
+Neo4j doesn't store properties without values, so doing this removes the property from a node.
 
 .Using the `REMOVE` clause
 [source,cypher]
@@ -179,12 +182,9 @@ MATCH (j:Person {name:"Jennifer"})
 DELETE j
 --
 
-== Delete a node and its relationships
+The result is the following message: "Deleted 1 node".
 
-To repeat the same two previous steps with another node, you don't need to write two statements.
-You can do this in one single query, but with some modifications that follow Neo4j's ACID compliance.
-
-This time, you need to use `DETACH DELETE` to remove any existing relationships Mark's node *and* delete the node itself:
+However, if you want to delete another node, for example, Mark's, you can do the same thing but in one single query using `DETACH DELETE` instead:
 
 [source, cypher]
 --
@@ -192,6 +192,7 @@ MATCH (m:Person {name: 'Mark'})
 DETACH DELETE m
 --
 
+This removes all relationships attached to Mark's node and the node in itself.
 The result is the following message: "Deleted 1 node, deleted 2 relationships".
 
 == Add new data
@@ -218,7 +219,7 @@ This is the result:
 |===
 | mark
 
-| (:Person {twitter: "@mark", name: "Mark"})
+| (:Person {name: "Mark"})
 
 1+d|Rows: 1
 |===
@@ -234,7 +235,8 @@ MERGE (j:Person {name: 'Jennifer'})-[r:IS_FRIENDS_WITH]->(m:Person {name: 'Mark'
 RETURN j, r, m
 --
 
-Cypher won't find this specific pattern, so it will create it from scratch, which means both nodes and the relationship between them will be created.
+Cypher can't find this pattern since Mark's node and all its relationships were deleted, and only their node was recreated.
+Consequently, if you use `CREATE` instead of `MERGE`, the whole pattern is created (with both nodes and the relationship), which results in duplicate nodes for `Jennifer` and `Mark`, but a new relationship.
 
 [TIP]
 ====
@@ -256,39 +258,10 @@ Since this relationship didn't exist after xref:cypher/updating.adoc#_delete_a_n
 
 image::jennifer-friends-mark.svg[Jennifer and Mark's nodes are connected through a is friends with relationship,width=400,role=popup]
 
-== Track changes
-
-You can use the `MERGE` clause both for avoiding duplicates and also for keeping track of changes done to the graph.
-For example, you can combine it with link:https://neo4j.com/docs/cypher-manual/current/clauses/merge/#query-merge-on-create-on-match[`ON CREATE` or `ON MATCH`] with the `SET` keyword to handle these situations:
-
-[source, cypher]
-----
-MERGE (m:Person {name: 'Mark'})-[r:IS_FRIENDS_WITH]-(j:Person {name:'Jennifer'})
-  ON CREATE SET r.since = date('2018-03-01')
-  ON MATCH SET r.updated = date()
-RETURN m, r, j
-----
-
-Now you have the new properties `since` and `updated` added to the `IS_FRIENDS_WITH` relationship.
-They give information about how long Jennifer and Mark have been friends and when this information was updated to the graph.
-
-Supposing you made this change to the graph on November 24th, 2025, you will get the following result:
-
-[role="queryresult",options="header,footer",cols="3*<m"]
-|===
-| m | r | j
-
-| (:Person {twitter: "@mark", name: "Mark"})
-| [:IS_FRIENDS_WITH {updated: 2025-11-24}]
-| (:Person {twitter: "@jennifer", name: "Jennifer", yearsExperience: 5})
-
-3+d|Rows: 3
-|===
-
 == Conclusion
 
-In this tutorial, you have seen how to update the information in your graph and avoid issues such as duplication or lack of information about when the changes were made.
-You have used different Cypher clauses including `MATCH`, `MERGE`, `DELETE`, and more.
+In this tutorial, you have seen how to update nodes, relationships, and properties. 
+You have also seen how to delete data from the graph as well as how to avoid duplication when adding new data.
 
 == Keep learning
 
