@@ -75,7 +75,7 @@ What this query does is:
 
 . Find Jennifer's node with the `MATCH` clause.
 . Use `SET` to create the new property `birthday` (with syntax `variable.property`) and set its value.
-. Use `RETURN` to return Jennifer's node and ensure that the information was updated correctly.
+. Use `RETURN` to return Jennifer's node and so you can ensure that the information was updated correctly.
 
 This is the tabular result:
 
@@ -99,7 +99,7 @@ SET p.birthdate = date('1980-01-02')
 RETURN p
 --
 
-This is the result:
+This is the tabular result:
 
 [role="queryresult",options="header,footer",cols="1*<m"]
 |===
@@ -129,7 +129,7 @@ MATCH (n:Person {name: 'Jennifer'})
 SET n.birthdate = null
 --
 
-With both options, the result will be "Set 1 property", and when you `MATCH` it, you will see that the result shows the value `null`.
+With both options, the result is "Set 1 property", and when you `MATCH` it, you see that the result shows the value `null`.
 This means that the property doesn't hold any value and doesn't exist in the graph anymore.
 
 == Add a property to a relationship
@@ -174,7 +174,7 @@ The result is the following message: "Deleted 8 relationships".
 
 == Delete a node
 
-If you have deleted all relationships in xref:cypher/updating.adoc#_delete_a_relationship[the previous step], you can delete Jennifer's node in itself by using the following query:
+If you have deleted all relationships in xref:cypher/updating.adoc#_delete_a_relationship[the previous step], you can delete Jennifer's node with the following query:
 
 [source,cypher]
 --
@@ -184,7 +184,8 @@ DELETE j
 
 The result is the following message: "Deleted 1 node".
 
-However, if you want to delete another node, for example, Mark's, you can do the same thing but in one single query using `DETACH DELETE` instead:
+You can also delete a node with a single query using `DETACH DELETE`.
+If you want to delete Mark's node, for example:
 
 [source, cypher]
 --
@@ -192,7 +193,7 @@ MATCH (m:Person {name: 'Mark'})
 DETACH DELETE m
 --
 
-This removes all relationships attached to Mark's node and the node in itself.
+This removes all relationships attached to Mark's node and the node itself.
 The result is the following message: "Deleted 1 node, deleted 2 relationships".
 
 == Add new data
@@ -202,7 +203,7 @@ Instead of using `CREATE`, you can use `MERGE` to add new elements.
 
 `MERGE` does a "select-or-insert" operation that first checks if the data exists in the database.
 If it exists, then Cypher returns it as it is or makes any specified updates to the existing node or relationship.
-If the data don't exist, then Cypher creates it with the information you specify.
+If the data doesn't exist, then Cypher creates it with the information you specify.
 
 Since you removed Mark's node in xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[the previous step], Cypher does not find an existing match.
 It creates a new node with the `name` property set to 'Mark':
@@ -213,7 +214,7 @@ MERGE (mark:Person {name: 'Mark'})
 RETURN mark
 ----
 
-This is the result:
+This is the tabular result:
 
 [role="queryresult",options="header,footer",cols="1*<m"]
 |===
