@@ -8,8 +8,6 @@
 * xref:cypher/index.adoc[What is Cypher]
 ** xref:cypher/intro-tutorial.adoc[Get started with Cypher]
 ** xref:cypher/cypher-sql.adoc[]
-** xref:cypher/patterns.adoc[]
-** xref:cypher/patterns-in-practice.adoc[]
 ** xref:cypher/results.adoc[]
 ** xref:cypher/updating.adoc[]
 ** xref:cypher/large-statements.adoc[]
