@@ -752,7 +752,7 @@ For the first query, the result is "Joe Versus the Volcano", and for the second:
 == Find patterns
 
 In the previous step, you queried the graph for nodes.
-Now you are going to retrieve related nodes by finding the xref:cypher/patterns.adoc[patterns] within the graph, that is, how these nodes are related to each other.
+Now you are going to retrieve related nodes by finding the link:https://neo4j.com/docs/cypher-manual/current/patterns/[patterns] within the graph, that is, how these nodes are related to each other.
 
 === All Tom Hanks movies
 
