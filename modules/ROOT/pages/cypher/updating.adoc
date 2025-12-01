@@ -62,7 +62,7 @@ image::update-graph.svg[All nodes added to the graph,width=500]
 
 == Add a property to a node
 
-If you want to add a birthday for the person named Jennifer, you can use this query:
+If you want to add a birthday for the person named Jennifer, you can add this information as a _property_ with this query:
 
 [source, cypher]
 --
@@ -71,7 +71,7 @@ SET p.birthdate = date('1980-01-01')
 RETURN p
 --
 
-What this query does is:
+This query does the following:
 
 . Find Jennifer's node with the `MATCH` clause.
 . Use `SET` to create the new property `birthday` (with syntax `variable.property`) and set its value.
@@ -90,7 +90,7 @@ This is the tabular result:
 
 == Update a property
 
-To change Jennifer's birthdate, you can use the same query from the previous example to find Jennifer's node again, and then add a different date with the `SET` clause:
+To change Jennifer's birthdate, you can use the same query from the previous example to find Jennifer's node again, and change the property value by adding a different date with the `SET` clause:
 
 [source, cypher]
 --
@@ -157,10 +157,10 @@ This is the result:
 
 == Delete a relationship
 
-You can use the `DELETE` clause for deleting both relationships and nodes.
+You can use the `DELETE` clause to delete both relationships and nodes.
 However, because Neo4j is ACID-compliant, you cannot delete a node if it still has relationships.
 
-Therefore, if you want to xref:cypher/updating.adoc#_delete_a_node[delete a node], for example, Jennifer's node, you need to first delete the relationships appended to it:
+Therefore, if you want to xref:cypher/updating.adoc#_delete_a_node[delete a node], for example Jennifer's node, you need to first delete the relationships appended to it:
 
 [source,cypher]
 --
@@ -199,7 +199,7 @@ The result is the following message: "Deleted 1 node, deleted 2 relationships".
 == Add new data
 
 If you want to add new data to your graph, it's important to avoid duplication.
-For example, if you want to create a node that already exists in the graph using `CREATE`:
+For example, if you try to create a node that already exists in the graph using `CREATE`:
 
 [source, cypher]
 --
@@ -291,8 +291,7 @@ RETURN j, r, m
 ----
 
 `MATCH` finds both Mark and Jennifer's node before `MERGE` (finds or) creates the relationship between them.
-This time, it's better not to use `CREATE` optionally because, if you run the statement again, it will duplicate the `IS_FRIENDS_WITH` relationship, but not the nodes.
-Therefore, it is recommended to use `MERGE` to avoid such scenarios.
+You can use `CREATE` for the relationship, but you would then risk creating a duplicate relationship (if it already exists).
 
 Since this relationship didn't exist after xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[Mark's node and appended relationships] were deleted, the result is a newly created relationship:
 
