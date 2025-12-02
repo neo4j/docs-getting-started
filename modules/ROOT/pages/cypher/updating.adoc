@@ -257,6 +257,8 @@ RETURN a, r, m
 --
 
 The result is that you duplicate Ann's node and create a new Mark node (since it was removed in xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[the previous step]) and add a new `IS_FRIENDS_WITH` relationship between them.
+You get the following message confirming it: "Created 2 nodes, created 1 relationship, set 2 properties, added 2 labels".
+
 If you use `MERGE` instead:
 
 [source,cypher]
@@ -272,37 +274,14 @@ This happens because `MERGE` tries to find the information queried and, if it do
 Even though the graph already has Ann and Mark's nodes, the pattern `(Ann)-[:IS_FRIENDS_WITH]->(Mark)` doesn't exist, so all elements are created anew.
 To avoid the duplication, you need to first `MATCH` the nodes and then create the relationship.
 
-Since Mark's node was removed in xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[the previous step], you need to create it again either by using `CREATE`:
+[IMPORTANT]
+====
+If you created the previous duplication, you don't need to fix it before proceeding with the tutorial.
+However, if you didn't do it, you need to create a new node for Mark, as it was removed in xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[the previous step].
+You can do it using either `CREATE` or `MERGE`.
+====
 
-[source, cypher]
---
-CREATE (mark:Person {name: 'Mark'})
-RETURN mark
---
-
-Or `MERGE`:
-
-[source, cypher]
---
-MERGE (mark:Person {name: 'Mark'})
-RETURN mark
---
-
-This is the tabular result:
-
-[role="queryresult",options="header,footer",cols="1*<m"]
-|===
-| mark
-
-| (:Person {name: "Mark"})
-
-1+d|Rows: 1
-|===
-
-If you run the same statement again, using `CREATE`, you will create another duplication.
-But if you use `MERGE`, Cypher only finds the now existing node.
-
-In order to create the new relationship, you need to first `MATCH` Ann and Mark's nodes:
+In order to create the new relationship, without duplications, you need to first `MATCH` Ann and Mark's nodes:
 
 [source, cypher]
 ----
