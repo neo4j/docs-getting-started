@@ -216,7 +216,7 @@ MATCH (ann:Person {name: 'Ann'})
 RETURN ann
 --
 
-You see there are two Nodes containing the same information:
+You see there are two nodes containing the same information:
 
 [role="queryresult",options="header,footer",cols="1*<m"]
 |===
@@ -236,7 +236,7 @@ MERGE (ann:Person {name: 'Ann'})
 RETURN ann
 --
 
-Cypher returns the existing node normally:
+Cypher returns the existing node without creating a new one:
 
 [role="queryresult",options="header,footer",cols="1*<m"]
 |===
@@ -247,16 +247,16 @@ Cypher returns the existing node normally:
 1+d|Rows: 1
 |===
 
-Now, if you want to add a relationship between two existing nodes, you need to first `MATCH` them or you will create the same duplication.
-For example, if you write:
+If you want to add a relationship between two existing nodes, you need to first `MATCH` them or you will create the same duplication.
+If you use `CREATE` to link Ann and Mark:
 
 [source,cypher]
 --
-CREATE (j:Person {name: 'Ann'})-[r:IS_FRIENDS_WITH]->(m:Person {name: 'Mark'})
-RETURN j, r, m
+CREATE (a:Person {name: 'Ann'})-[r:IS_FRIENDS_WITH]->(m:Person {name: 'Mark'})
+RETURN a, r, m
 --
 
-You duplicate Ann's node and create a new Mark node that was removed in xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[the previous step] and a new `IS_FRIENDS_WITH` relationship between them.
+The result is that you duplicate Ann's node and create a new Mark node (since it was removed in xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[the previous step]) and add a new `IS_FRIENDS_WITH` relationship between them.
 If you use `MERGE` instead:
 
 [source,cypher]
@@ -265,11 +265,12 @@ MERGE (j:Person {name: 'Ann'})-[r:IS_FRIENDS_WITH]->(m:Person {name: 'Mark'})
 RETURN j, r, m
 --
 
-You see in the result that you "Created 2 nodes, created 1 relationship, set 2 properties, added 2 labels", so another duplication.
+The result is more duplication.
+`MERGE` tries to match the *entire* pattern, and if it doesn't exist, it is created.
 This happens because `MERGE` tries to find the information queried and, if it doesn't exist, it is then created.
 
-Even though the graph already has Ann and Mark's nodes, the pattern `(Ann)-[:IS_FRIENDS_WITH]->(Mark)` doesn't exist, so all elements of it are created anew.
-Instead, you need to first `MATCH` the nodes and then create the relationship.
+Even though the graph already has Ann and Mark's nodes, the pattern `(Ann)-[:IS_FRIENDS_WITH]->(Mark)` doesn't exist, so all elements are created anew.
+To avoid the duplication, you need to first `MATCH` the nodes and then create the relationship.
 
 Since Mark's node was removed in xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[the previous step], you need to create it again either by using `CREATE`:
 
@@ -307,7 +308,7 @@ In order to create the new relationship, you need to first `MATCH` Ann and Mark'
 ----
 MATCH (a:Person {name: 'Ann'})
 MATCH (m:Person {name: 'Mark'})
-MERGE (j)-[r:IS_FRIENDS_WITH]->(m)
+MERGE (a)-[r:IS_FRIENDS_WITH]->(m)
 RETURN a, r, m
 ----
 
