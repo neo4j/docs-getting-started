@@ -292,7 +292,6 @@ The result is more duplication.
 `MERGE` tries to match the *entire* pattern, and if it doesn't exist, it is created.
 
 Even though the graph already has Ann and Mark's nodes, the pattern `(Ann)-[:IS_FRIENDS_WITH]->(Mark)` doesn't exist, so all elements are created anew.
-To avoid the duplication, you need to first `MATCH` the nodes and then create the relationship.
 
 [NOTE]
 ====
