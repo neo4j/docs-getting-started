@@ -269,19 +269,18 @@ RETURN j, r, m
 
 The result is more duplication.
 `MERGE` tries to match the *entire* pattern, and if it doesn't exist, it is created.
-This happens because `MERGE` tries to find the information queried and, if it doesn't exist, it is then created.
 
 Even though the graph already has Ann and Mark's nodes, the pattern `(Ann)-[:IS_FRIENDS_WITH]->(Mark)` doesn't exist, so all elements are created anew.
 To avoid the duplication, you need to first `MATCH` the nodes and then create the relationship.
 
-[IMPORTANT]
+[NOTE]
 ====
 If you created the previous duplication, you don't need to fix it before proceeding with the tutorial.
 However, if you didn't do it, you need to create a new node for Mark, as it was removed in xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[the previous step].
 You can do it using either `CREATE` or `MERGE`.
 ====
 
-In order to create the new relationship, without duplications, you need to first `MATCH` Ann and Mark's nodes:
+In order to create the new relationship, without duplications, you need to first `MATCH` Ann and Mark's nodes and then `MERGE` (or `CREATE`) the relationship:
 
 [source, cypher]
 ----
@@ -291,7 +290,6 @@ MERGE (a)-[r:IS_FRIENDS_WITH]->(m)
 RETURN a, r, m
 ----
 
-`MATCH` finds both Mark and Ann's node before `MERGE` (finds or) creates the relationship between them.
 
 image::ann-friends-mark.svg[Ann and Mark's nodes are connected through a is friends with relationship,width=400,role=popup]
 
