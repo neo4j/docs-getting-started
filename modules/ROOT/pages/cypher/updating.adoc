@@ -240,12 +240,33 @@ Cypher returns the existing node without creating a new one:
 
 [role="queryresult",options="header,footer",cols="1*<m"]
 |===
-| j
+| ann
 
 | (:Person {name: "Ann"})
 
 1+d|Rows: 1
 |===
+
+You can try using `MERGE` to see how it works when you don't have the data in the graph:
+
+[source, cypher]
+--
+MERGE (j:Person {name: 'Jack'})
+RETURN j
+--
+
+You get the message "Created 1 node, set 1 property, added 1 label" and the following result:
+
+[role="queryresult",options="header,footer",cols="1*<m"]
+|===
+| j
+
+| (:Person {name: "Jack"})
+
+1+d|Rows: 1
+|===
+
+This means Jack wasn't found in the graph, thus `MERGE` adds it.
 
 If you want to add a relationship between two existing nodes, you need to first `MATCH` them or you will create the same duplication.
 If you use `CREATE` to link Ann and Mark:
@@ -289,7 +310,6 @@ MATCH (m:Person {name: 'Mark'})
 MERGE (a)-[r:IS_FRIENDS_WITH]->(m)
 RETURN a, r, m
 ----
-
 
 image::ann-friends-mark.svg[Ann and Mark's nodes are connected through a is friends with relationship,width=400,role=popup]
 
