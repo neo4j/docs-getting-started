@@ -490,49 +490,27 @@ MATCH (p:Person)
 RETURN p.name AS name
 --
 
+Optionally, you can also use the `WITH` clause for that:
+
+[source, cypher]
+--
+MATCH (p:Person)
+WITH p.name AS name
+RETURN name
+--
+
 If you have both the "Movie" and the "Workplaces" datasets in your graph, the tabular result is:
 
-[role="queryresult",options="header,footer",cols="2*<m"]
+[role="queryresult",options="header,footer",cols="1*<m"]
 |===
-| p | name
+| name
 
-| (:Person {born: 1964, name: "Keanu Reeves"})
-| "Keanu Reeves"
+| "Keanu Reeves" | "Robert Zemeckis" | "Tom Hanks"
+| "Diana" | "Melissa" | "Dan"
+| "Sally" | "John" | "Jennifer"
+| "Joe" | "Mark" | "Ann"
 
-| (:Person {born: 1951, name: "Robert Zemeckis"})
-| "Robert Zemeckis"
-
-| (:Person {born: 1956, name: "Tom Hanks"})
-| "Tom Hanks"
-
-| (:Person {name: "Diana"})
-| "Diana"
-
-| (:Person {twitter: "@melissa", name: "Melissa"})
-| "Melissa"
-
-| (:Person {twitter: "@dan", name: "Dan", yearsExperience: 6})
-| "Dan"
-
-| (:Person {name: "Sally", yearsExperience: 4})
-| "Sally"
-
-| (:Person {name: "John", yearsExperience: 5})
-| "John"
-
-| (:Person {twitter: "@jennifer", name: "Jennifer", yearsExperience: 5})
-| "Jennifer"
-
-| (:Person {name: "Joe"})
-| "Joe"
-
-| (:Person {twitter: "@mark", name: "Mark"})
-| "Mark"
-
-| (:Person {name: "Ann"})
-| "Ann"
-
-2+d|Rows: 12
+1+d|Rows: 12
 |===
 
 == Avoiding duplication
@@ -566,12 +544,21 @@ And the result is:
 
 Note that "Sally" appears twice.
 This is because she is connected with other people through two `IS_FRIENDS_WITH` relationships.
-To avoid this duplication, you can add `DETACH` after `RETURN`:
+To avoid this duplication, you can add `DISTINCT` after `RETURN`:
 
 [source, cypher]
 --
 MATCH (p:Person)-[:IS_FRIENDS_WITH]->(friend:Person)
 RETURN DISTINCT friend.name;
+--
+
+Optionally, you can also write the same query using `WITH`:
+
+[source,cypher]
+--
+MATCH (p:Person)-[:IS_FRIENDS_WITH]->(friend:Person)
+WITH DISTINCT friend.name as friendName
+RETURN friendName
 --
 
 The result is now:
@@ -602,6 +589,16 @@ For example, to list how many years of experience each person has in decrescent 
 MATCH (p:Person)
 RETURN p.yearsExperience AS yearsExperience
 ORDER BY yearsExperience DESC
+--
+
+Optionally, you can also use `WITH` together with `ORDER BY`:
+
+[source, cypher]
+--
+MATCH (p:Person)
+WITH p
+ORDER BY p.yearsExperience DESC
+RETURN p.yearsExperience AS yearsExperience
 --
 
 This is the result:
@@ -660,7 +657,7 @@ The result is:
 == Aggregate
 
 Cypher provides several link:https://neo4j.com/docs/cypher-manual/current/functions/aggregating/[aggregating functions].
-You can use them with the `RETURN` clause to aggregate results.
+You can use them with the `RETURN` or the `WITH` clauses to aggregate results.
 
 [options=header,cols="1,4"]
 |===
@@ -815,6 +812,26 @@ You would get a different result:
 
 This is because not all `Person` nodes are connected through this direction of the `IS_FRIENDS_WITH` relationship.
 Therefore, if you want an accurate answer to the question on how many friends each person has, you should not add a direction to the relationship in your query.
+
+== Composed queries
+
+There are different ways tocombine separate query branches within a single query:
+
+[options=header,cols="1,4"]
+|===
+
+| Function | Description
+
+| link:https://neo4j.com/docs/cypher-manual/current/queries/composed-queries/combined-queries/[`UNION`]
+| Combines the results of two or more queries into a single result set that includes all the rows that belong to any queries in the union.
+
+| link:https://neo4j.com/docs/cypher-manual/current/queries/composed-queries/conditional-queries/[`WHEN`] label:cypher[Cypher 25 only] label:new[Introduced in Neo4j 2025.06]
+| Together with `THEN` and `ELSE`, it enables different branches of a query to execute based on certain conditions. 
+
+| link:https://neo4j.com/docs/cypher-manual/current/queries/composed-queries/sequential-queries/[`NEXT`] label:cypher[Cypher 25 only] label:new[Introduced in Neo4j 2025.06]
+| Allows for linear composition of queries into a sequence of smaller, self-contained segments, passing the whole table of intermediate results from one segment to the next.
+
+|===
 
 == Keep learning
 

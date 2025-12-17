@@ -10,7 +10,6 @@
 ** xref:cypher/cypher-sql.adoc[]
 ** xref:cypher/results.adoc[]
 ** xref:cypher/updating.adoc[]
-** xref:cypher/large-statements.adoc[]
 ** xref:cypher/subqueries.adoc[]
 ** xref:cypher/schema.adoc[]
 ** xref:cypher/dates-datetimes-durations.adoc[]
