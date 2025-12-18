@@ -8,11 +8,11 @@
 * xref:cypher/index.adoc[What is Cypher]
 ** xref:cypher/intro-tutorial.adoc[Get started with Cypher]
 ** xref:cypher/cypher-sql.adoc[]
-** xref:cypher/results.adoc[]
+** xref:cypher/schema.adoc[]
 ** xref:cypher/updating.adoc[]
 ** xref:cypher/subqueries.adoc[]
-** xref:cypher/schema.adoc[]
 ** xref:cypher/dates-datetimes-durations.adoc[]
+** xref:cypher/results.adoc[]
 ** xref:cypher/procedures-functions.adoc[]
 ** xref:cypher/resources.adoc[]
 
