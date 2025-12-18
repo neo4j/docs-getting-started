@@ -1,4 +1,5 @@
-:description: This topic explains how to define and use indexes and constraints.
+= Defining a schema
+:description: This guide explains how to define a schema by using indexes and constraints.
 :page-ad-overline-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
 :page-ad-overline: Neo4j GraphAcademy
 :page-ad-title: Cypher Fundamentals
@@ -7,169 +8,193 @@
 :page-ad-underline-role: button
 :page-ad-underline: Learn more
 
-[[cypher-intro-schema]]
-= Defining a schema
+This guide explains how to define a schema by using indexes and constraints.
+While Neo4j is often described as _schema optional_, indexes and constraints can be introduced when desired, in order to gain performance or xref:data-modeling/index.adoc[modeling] benefits.
 
-
-[[cypher-intro-schema-example-graph]]
 == Example graph
 
-First create some data to use for our examples:
+After you create a link:https://neo4j.com/product/auradb/?ref=docs-nav-get-started[free Aura instance], use the "Connect" button and select "Query". 
+In the Cypher editor, copy and paste the following Cypher and execute the query:
 
-[source, cypher, indent=0]
-----
+[source, cypher]
+--
 CREATE (forrestGump:Movie {title: 'Forrest Gump', released: 1994})
 CREATE (robert:Person:Director {name: 'Robert Zemeckis', born: 1951})
 CREATE (tom:Person:Actor {name: 'Tom Hanks', born: 1956})
 CREATE (tom)-[:ACTED_IN {roles: ['Forrest']}]->(forrestGump)
 CREATE (robert)-[:DIRECTED]->(forrestGump)
-----
+--
 
 This is the resulting graph:
 
-image::cypher-intro-schema-data-arr.svg[role="middle", width=600]
+image::tomrobert-gump.svg[Person nodes for Tom Hanks and Robert Zemeckis connected to the Movie node for Forest Gump,role=popup,width=500]
 
-
-[[cypher-intro-indexes]]
 == Using indexes
 
-The main reason for using indexes in a graph database is to find the starting point of a graph traversal.
+The main reason for using link:https://neo4j.com/docs/cypher-manual/current/indexes/[indexes] in a graph database is to find the starting point of a graph traversal.
 Once that starting point is found, the traversal relies on in-graph structures to achieve high performance.
-
-Indexes can be added at any time.
-
-[NOTE]
-====
-If there is existing data in the database, it will take some time for an index to come online.
-====
+Moreover, indexes can be added at any point.
 
 The following query creates an index to speed up finding actors by name in the database:
 
-[source, cypher, role="noplay"]
-----
+[source, cypher]
+--
 CREATE INDEX example_index_1 FOR (a:Actor) ON (a.name)
-----
+--
 
-In most cases it is not necessary to specify indexes when querying for data, as the appropriate indexes will be used automatically.
+In most cases, it is not necessary to specify indexes when querying for data, as the appropriate indexes will be used automatically.
+However, you can still use index hints to specify which index to use in a particular query.
 
-[NOTE]
-====
-It is possible to specify which index to use in a particular query, using _index hints_.
-This is one of several options for query tuning, described in detail in link:{neo4j-docs-base-uri}/cypher-manual/current/query-tuning[Cypher manual -> Query tuning].
-====
+For example, the following query automatically uses the `example_index_1` previously created:
 
-For example, the following query will automatically use the `example_index_1`:
-
-[source, cypher, role="noplay"]
+[source, cypher]
 ----
 MATCH (actor:Actor {name: 'Tom Hanks'})
 RETURN actor
 ----
 
-A _composite index_ is an index on multiple properties for all nodes that have a particular label.
-For example, the following statement will create a composite index on all nodes labeled with `Actor` and which have both a `name` and a `born` property.
-Note that since the node with the `Actor` label that has a `name` of "Keanu Reeves" does not have the `born` property.
-Therefore that node will not be added to the index.
+The result is:
+
+[role="queryresult",options="header,footer",cols="1*<m"]
+|===
+| actor
+
+| (:Person:Actor {born: 1956, name: "Tom Hanks"})
+
+1+d|Rows: 1
+|===
+
+=== Composite index
+
+A composite index is an index on multiple properties for all nodes that have a particular label.
+For example, the following statement creates a composite index on all nodes labeled with `Actor` and which have both a `name` and a `born` property:
 
 [source, cypher, role="noplay"]
-----
+--
 CREATE INDEX example_index_2 FOR (a:Actor) ON (a.name, a.born)
-----
+--
 
-You can query a database with `SHOW INDEXES` to find out what indexes are defined.
+Note that, for example, if you had a node with the `Actor` label that did not contain the `born` property, it wouldn't be added to the index.
 
-[source, cypher, role="noplay"]
-----
+What this index stablishes is the same thing written in this query:
+
+[source,cypher]
+--
+MATCH (a:Actor {name:"Tom Hanks", born:1956})
+RETURN a
+--
+
+Which has the following result:
+
+[role="queryresult",options="header,footer",cols="1*<m"]
+|===
+| actor
+
+| (:Person:Actor {born: 1956, name: "Tom Hanks"})
+
+1+d|Rows: 1
+|===
+
+=== Find indexes
+
+You can query a database with `SHOW INDEXES` to find out what indexes are defined:
+
+[source, cypher]
+--
 SHOW INDEXES YIELD name, labelsOrTypes, properties, type
-----
+--
 
-[source, output, role="noheader"]
-----
-Rows: 2
+The result is:
 
-+----------------------------------------------------------------+
-| name              | labelsOrTypes | properties       | type    |
-+----------------------------------------------------------------+
-| 'example_index_1' | ['Actor']     | ['name']         | 'BTREE' |
-| 'example_index_2' | ['Actor']     | ['name', 'born'] | 'BTREE' |
-+----------------------------------------------------------------+
-----
+[role="queryresult",options="header,footer",cols="4*<m"]
+|===
 
-[TIP]
-====
-Learn more about indexes in link:{neo4j-docs-base-uri}/cypher-manual/current/indexes-for-search-performance#indexes-types-and-limitations[Cypher Manual -> Indexes].
-====
+| name | labelsOrTypes | properties | type
 
+| "example_index_1"
+| ["Actor"]
+| ["name"]
+| "RANGE"
 
-[[cypher-intro-constraints]]
+| "example_index_2"
+| ["Actor"]
+| ["name", "born"]
+| "RANGE"
+
+4+d|Rows: 2
+|===
+
+Note that the two indexes created have the "RANGE" type.
+Cypher has several types of indexes, all of them listed on link:https://neo4j.com/docs/cypher-manual/current/indexes/search-performance-indexes/[Cypher -> Search-performance indexes].
+
 == Using constraints
 
-Constraints are used to make sure that the data adheres to the rules of the domain.
+link:https://neo4j.com/docs/cypher-manual/current/constraints/[Constraints] are used to make sure that the data adheres to the rules of the domain.
+They can be property uniqueness contraints, property existence, property type, or key constraints.
+
+[options=header,cols="1,4"]
+|===
+
+| Constraint type
+| Description
+
+| link:https://neo4j.com/docs/cypher-manual/current/constraints/managing-constraints/#create-property-uniqueness-constraints[Property uniqueness]
+| Ensure that the combined property values are unique for all nodes with a specific label or all relationships with a specific type.
+
+| link:https://neo4j.com/docs/cypher-manual/current/constraints/managing-constraints/#create-property-existence-constraints[Property existence]
+| Ensure that a property exists either for all nodes with a specific label or for all relationships with a specific type. label:enterprise[Enterprise Edition]
+
+| link:https://neo4j.com/docs/cypher-manual/current/constraints/managing-constraints/#create-property-type-constraints[Property type]
+| Ensure that a property has the required property type for all nodes with a specific label or for all relationships with a specific type. label:enterprise[Enterprise Edition]
+
+| link:https://neo4j.com/docs/cypher-manual/current/constraints/managing-constraints/#create-key-constraints[Key]
+| Ensure that all properties exist and that the combined property values are unique for all nodes with a specific label or all relationships with a specific type. label:enterprise[Enterprise Edition]
+
+|===
+
+Constraints can be added to databases that already have data in them.
+However, this requires that the existing data complies with the constraint that is being added.
+
+=== Find constraints
+
+First, you need to create a constraint.
 For example:
 
-[quote]
-_____
-"If a node has a label of `Actor` and a property of `name`, then the value of `name` must be unique among all nodes that have the `Actor` label".
-_____
-
-.Uniqueness constraint
-======
-This example shows how to create a constraint for nodes that have the label `Movie` and the property `title`.
-The constraint specifies that the `title` property must be unique.
-
-Adding the unique constraint will implicitly add an index on that property.
-If the constraint is dropped, but the index is still needed, the index will have to be created explicitly.
-
-[source, cypher, role="norun"]
-----
+[source,cypher]
+--
 CREATE CONSTRAINT constraint_example_1 FOR (movie:Movie) REQUIRE movie.title IS UNIQUE
-----
+--
 
-[NOTE]
-====
-The syntax was changed in Neo4j 4.4, the old syntax is:
-[source, cypher, role="noheader", subs="macros"]
-----
-+CREATE CONSTRAINT constraint_example_1 ON (movie:Movie) ASSERT movie.title IS UNIQUE+ label:deprecated[]
-----
-====
-======
+Then you can use `SHOW CONSTRAINTS` to find all existing constraints in a graph:
 
+[source, cypher]
+--
+SHOW CONSTRAINTS
+--
 
-Constraints can be added to database that already has data in it.
-This requires that the existing data complies with the constraint that is being added.
+With the current example, this is the result you get:
 
-You can query a database to find out what constraints are defined with the `SHOW CONSTRAINTS` Cypher syntax.
+[role="queryresult",options="header,footer",cols="8*<m"]
+|===
+| id | name | type | entityType | labelsOrTypes | properties | ownedIndex | propertyType
 
+| 5
+| "constraint_example_1"
+| "UNIQUENESS"
+| "NODE"
+| ["Movie"]
+| ["title"]
+| "constraint_example_1"
+| null
 
-.Constraints query
-======
-This example shows a Cypher query that returns the constraints that has been defined for the database.
+8+d|Rows: 1
+|===
 
-[source, cypher, role="noplay"]
-----
-SHOW CONSTRAINTS YIELD id, name, type, entityType, labelsOrTypes, properties, ownedIndexId
-----
+== Keep learning
 
-[source, output, role="noheader"]
-----
-Rows: 1
+Refer to the Cypher documentation for more information on indexes and constraints:
 
-+-----------------------------------------------------------------------------------------------------+
-| id | name                   | type         | entityType | labelsOrTypes | properties | ownedIndexId |
-+-----------------------------------------------------------------------------------------------------+
-| 4  | 'constraint_example_1' | 'UNIQUENESS' | 'NODE'     | ['Movie']     | ['title']  | 3            |
-+-----------------------------------------------------------------------------------------------------+
-----
-======
-
-[NOTE]
-====
-The constraint described above is available for all editions of Neo4j.
-Additional constraints are available for Neo4j Enterprise Edition.
-====
-
-[TIP]
-====
-Learn more about constraints in link:{neo4j-docs-base-uri}/cypher-manual/current/constraints[Cypher manual -> Constraints].
-====
+* link:https://neo4j.com/docs/cypher-manual/current/indexes/search-performance-indexes/[Search-performance indexes] -> See how to get quicker retrievals of exact matches between an index and the primary data storage.
+* link:https://neo4j.com/docs/cypher-manual/current/indexes/semantic-indexes/[Semantic indexes] -> Read more on how semantic indexes capture the semantic meaning or context of the data in a database.
+* link:https://neo4j.com/docs/cypher-manual/current/indexes/search-performance-indexes/managing-indexes/[Create, show, and drop indexes] -> Discover how to create, show, and drop indexes.
+* link:https://neo4j.com/docs/cypher-manual/current/constraints/managing-constraints/[Create, show, and drop constraints] -> Learn how to create, show, and drop constraints.
