@@ -1,5 +1,5 @@
 = Refining results
-:description: This guide describes how to manipulate the output of Cypher queries in order to get the refined results.
+:description: This guide describes how to refine the results from Cypher queries.
 :page-ad-overline-link: https://graphacademy.neo4j.com/courses/cypher-fundamentals
 :page-ad-overline: Neo4j GraphAcademy
 :page-ad-title: Cypher Fundamentals
@@ -87,7 +87,7 @@ In Neo4j, properties only exist (are stored) if they have a value.
 A `null` property value is not stored.
 This ensures that only valuable, necessary information is retained for your nodes and relationships.
 
-To return only results that contain a value, you can instead use the `WHERE` subclause and specify that it returns only results that are not `null`:
+To return only results that contain a value, you can use the `WHERE` subclause and specify that it returns only results that are not `null`:
 
 [source, cypher]
 --
@@ -96,7 +96,7 @@ WHERE p.twitter IS NOT NULL
 RETURN p.name;
 --
 
-Or, alternatively, use `FILTER`:
+Or, alternatively, use `FILTER` with Cypher 25:
 
 [source, cypher]
 --
@@ -108,7 +108,8 @@ RETURN p.name;
 
 [IMPORTANT]
 ====
-You need to include `CYPHER 25` in the beginning of your query in case you are using a previous Neo4j version.
+You need to include `CYPHER 25` in the beginning of your query if you are using an earlier version of Cypher.
+This does *not* change the default language version, it only ensures that this query runs in Cypher 25.
 Otherwise, the clause `FILTER`, which is exclusive to this Cypher version, won't work.
 
 To see a comparison between `FILTER` and `WHERE`, refer to link:https://neo4j.com/docs/cypher-manual/current/clauses/filter/#filter-where-differeces[Cypher -> `FILTER`].
@@ -134,7 +135,7 @@ You can filter results based on parts of the value stored in a node or relations
 
 ==== `STARTS WITH`
 
-The `STARTS WITH` operator searches for property values that begin with a string you specify, for examplle, the letter "M":
+The `STARTS WITH` operator searches for property values that begin with a string you specify, for example, the letter "M":
 
 [source,cypher]
 --
@@ -157,7 +158,7 @@ In this case, the result is:
 
 ==== `CONTAINS`
 
-The `CONTAINS` operator searches for a specified string which is part of a property value, for example, if it contains the letter "A":
+The `CONTAINS` operator checks if a specified string is part of a property value, for example, if it contains the letter "a":
 
 [source,cypher]
 --
@@ -188,7 +189,7 @@ If you still have the xref:cypher/results.adoc#_filter_results[Movies example da
 
 ==== `ENDS_WITH`
 
-The `ENDS_WITH` operator searches for a specified value at the end of a property value, for example, a value that ends with "N": the end of the property string for the value you specify.
+The `ENDS_WITH` operator searches for a specified value at the end of a property value, for example, a value that ends with "n": 
 
 [source, cypher]
 --
@@ -232,7 +233,8 @@ RETURN p.name
 
 ==== `IN`
 
-With the `IN` operator, you can specify an array of values and validate a property, for example, if any `Person` node in the graph has "1", "5" or "6" values for `yearsExperience`:
+With the `IN` operator, you can specify an array of values and validate a property.
+For example, if any `Person` node in the graph has "1", "5" or "6" values for `yearsExperience`:
 
 [source, cypher]
 --
@@ -278,7 +280,7 @@ Which gives you the result:
 image::cypher-filter-exists-ptrn-arr.svg[Graph showing how Jennifer is connected to Ann, Mark, Sally, Melissa and John through a is friends with relationship, role=popup, width=400]
 
 You can also query for patterns that *don't exist*.
-For example, if you want to find which of Jennifer's friends do not work for any company, you can do it like this:
+For example, if you want to find which of Jennifer's friends do not work for any company, use the following query:
 
 [source, cypher]
 --
@@ -288,11 +290,11 @@ AND NOT exists((friend)-[:WORKS_FOR]->(:Company))
 RETURN friend.name;
 --
 
-And you get only "Mark" as the result.
+You get only "Mark" as the result.
 
 ==== `OPTIONAL` patterns
 
-There are cases in which you might want to retrieve results from patterns, even if they do not match the entire pattern or all criteria.
+There are cases when you want to retrieve results from patterns, even if they do not match the entire pattern or all criteria.
 For that, you can first use an `OPTIONAL MATCH` and, if there are no results, the query returns `null` as values.
 
 For example, if you search for people whose name starts with a "J" and who may work for a company:
@@ -325,16 +327,16 @@ You get the following result:
 
 Notice that Joe is returned because his name starts with the letter 'J', but his company's name is `null`.
 This is because he does not have a `WORKS_FOR` relationship to a `COMPANY` node.
-Since you used `OPTIONAL MATCH`, his `Person` node is still returned from the first match, but the second match is not found, so it returns `null`.
+Since you used `OPTIONAL MATCH`, his `Person` node is still returned from the first match, but the optional match is not found, so it returns `null`.
 
 To see the difference, try running the query without the `OPTIONAL` in front of the second match.
-Joe's row no longer returns in the result.
+Joe's row is no longer returned in the result.
 This is because Cypher reads the statement with an `AND` match, so the person must match the first criterium (name starts with "J") and the second criterium (person works for a company).
 
 ==== More complex patterns
 
-You can use queries with patterns that have more than one single relationship.
-For example, if you want to know who else likes graphs besides Jennifer, you can write the query like this:
+You can use queries with patterns that have more than one relationship.
+For example, if you want to know who else likes graphs besides Jennifer, you can use this query:
 
 [source, cypher]
 --
@@ -355,7 +357,7 @@ The result is:
 1+d|Rows: 3
 |===
 
-Another possibility is trying who of these people who like graphs is also friends with Jennifer:
+Another possibility is finding which people who like graphs is also friends with Jennifer:
 
 [source, cypher]
 --
@@ -387,7 +389,7 @@ For more advanced information on how to query patterns, see link:https://neo4j.c
 
 === Equality
 
-You can use comparisons to retrieve results, starting with equality: 
+You can use comparisons to filter values, starting with equality: 
 
 [source, cypher]
 --
@@ -425,14 +427,14 @@ Based on the given logical operator `OR` and the graph pattern `(p:Person)-[r:AC
 * The movie was released after the year `2000`.
 * The role is `'Neo'`.
 
-In this case, only the second condition matches the graph pattern `(p:Person)-[r:ACTED_IN]->(m:Movie)`, therefore the output is the following:
+In the example dataset, only one match of the pattern `(p:Person)-[r:ACTED_IN]->(m:Movie)` meets _any_ of the conditions, therefore the output is the following:
 
 image::tomhanks-cloudatlas.svg[Tom Hanks' node is connected to Cloud Atlas' node through the acted in relationship, width=400, role=popup]
 
-You can also use patterns as predicates for more advanced customization of results.
+You can also use patterns as predicates to further filter or refine results.
 While the `MATCH` clause *expands* the number and shape of patterns matched, a pattern predicate *restricts* the result.
 
-This can be achieved by appending `NOT` to the `WHERE` clause, so that it only allows paths that do *not* satisfy the specific pattern to pass:
+If you append `NOT` to the `WHERE` clause, it only returns paths that do *not* satisfy the specified pattern:
 
 [source, cypher]
 --
@@ -445,8 +447,8 @@ The result is:
 
 image::robert-forrest.svg[Nodes for Robert Zemeckis and Forrest Gump, width=200, role=popup]
 
-This is the case because the query focuses on `Person` nodes that are connected to `Movies` nodes only through the `DIRECTED` relationship, but not `ACTED_IN`.
-If the `ACTED_IN` relationship wasn't a restriction anymore:
+This is because the query looks for `Person` nodes that are connected to `Movie` nodes through the `DIRECTED` relationship *only* and *not* `ACTED_IN`.
+If the `ACTED_IN` relationship isn't a restriction anymore:
 
 [source, cypher]
 --
@@ -460,11 +462,11 @@ image::tomrobert-movies.svg[Tom Hanks and Robert Zemeckis's nodes and the Forres
 
 == Range of values
 
-You can query data within a certain range in number or date, for example, if you want to check for events within a certain timeline, age values, etc.
+You can query data within a certain range in number or date, for example, if you want to find events within a certain timeline, age values, etc.
 
 image::workplace-graph.svg[Graph including people connected with each other through is friends with relationships, connected to company nodes through works at relationships, and connected to technology nodes with likes relationships, width=800, role=popup]
 
-This is the query you can use when you want to know who has a range of three to seven years of experience:
+If you want to know who has experience within the range of three to seven years:
 
 [source, cypher]
 --
@@ -480,9 +482,9 @@ image::cypher-filter-ranges-arr.svg[width=400, role="popup-link"]
 == Aliasing results
 
 By default, Cypher returns a label as the name of the column in the tabular results.
-However, in many in cases, you may want to use an alias to make the results more understandable by using `AS`.
+However, you can use an alias to make the results more understandable by using `AS`.
 
-For example, if you want to have the tabular result with a column titled `name` instead of the label `p.name`, you can write the query like this:
+For example, if you want to have the tabular result with a column titled `name` instead of the label `p.name`:
 
 [source, cypher]
 --
@@ -543,7 +545,7 @@ And the result is:
 |===
 
 Note that "Sally" appears twice.
-This is because she is connected with other people through two `IS_FRIENDS_WITH` relationships.
+This is because she is connected to two different people through two `IS_FRIENDS_WITH` relationships.
 To avoid this duplication, you can add `DISTINCT` after `RETURN`:
 
 [source, cypher]
@@ -552,7 +554,7 @@ MATCH (p:Person)-[:IS_FRIENDS_WITH]->(friend:Person)
 RETURN DISTINCT friend.name;
 --
 
-Optionally, you can also write the same query using `WITH`:
+Optionally, you can use `WITH`:
 
 [source,cypher]
 --
@@ -582,7 +584,7 @@ The result is now:
 == Order
 
 If you want to get results ordered, you can use the clause link:https://neo4j.com/docs/cypher-manual/current/clauses/order-by/[`ORDER BY`] after `RETURN`.
-For example, to list how many years of experience each person has in decrescent order, you can write the query like this:
+For example, to list how many years of experience each person has in descending order:
 
 [source, cypher]
 --
@@ -615,9 +617,9 @@ This is the result:
 |===
 
 Note that the first 8 rows contain `null` as result.
-This means the property `yearsExperience` doesn't exist to all `Person` nodes, but existing entries are ordered in decrescent order, as stated in the query.
+This means the property `yearsExperience` doesn't exist to all `Person` nodes, but existing entries are ordered in descending order, as stated in the query.
 
-Optionally, you could avoid returning `null` values by using `WHERE` and `IS NOT NULL`:
+Optionally, you can avoid returning `null` values by using `WHERE` and `IS NOT NULL`:
 
 [source, cypher]
 --
@@ -629,7 +631,7 @@ ORDER BY yearsExperience DESC
 
 == Limit
 
-When you don't want to retrieve every entry, but limit the result by a number, you can use `LIMIT` after `RETURN`.
+You can use `LIMIT` when you want to restrict the number of results returned:
 For example, the current example graph has 12 `Person` nodes.
 If you want to retrieve only 3, you can write the following query:
 
@@ -703,7 +705,7 @@ Refer to link:https://neo4j.com/docs/cypher-manual/current/functions/aggregating
 If you have a list that you want to inspect or separate the values, Cypher offers the link:https://neo4j.com/docs/cypher-manual/current/clauses/unwind/[`UNWIND`] clause for that.
 It does the opposite of link:https://neo4j.com/docs/cypher-manual/current/functions/aggregating/#functions-collect[`collect()`] and separates a list into individual values on separate rows.
 
-For example, if you want to see which people in the example graph like "Graphs" and/or "Query Languages", you can write the following query:
+For example, if you want to see which people in the example graph like "Graphs" and/or "Query Languages":
 
 [source, cypher]
 --
@@ -715,7 +717,7 @@ RETURN t.type, collect(p.name) AS people;
 
 Note that `UNWIND` is combined with link:https://neo4j.com/docs/cypher-manual/current/clauses/with/[`WITH`] and used *before* the `MATCH` clause.
 
-The result to this query is:
+The result of this query is:
 
 [role="queryresult",options="header,footer",cols="2*<m"]
 |===
@@ -733,9 +735,9 @@ The result to this query is:
 
 == Number of items
 
-If you have a list of values, you can also find the number of items in that list or calculate the size of an expression using the link:https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-size[`size()`] function.
+If you have a list of elements, you can also return the number of elements in that list using the link:https://neo4j.com/docs/cypher-manual/current/functions/scalar/#functions-size[`size()`] function.
 
-For example, if you want to know how many friends each person in the graph has, you can write the following query:
+For example, if you want to know how many friends each person in the graph has:
 
 [source, cypher]
 --
@@ -780,7 +782,7 @@ The result is:
 2+d|Rows: 9
 |===
 
-Note that if you put a direction to the relationship in the first line of the query:
+Note that if you add a direction to the relationship:
 
 [source, cypher]
 --
@@ -788,7 +790,7 @@ MATCH (p:Person)-[:IS_FRIENDS_WITH]->(friend:Person)
 RETURN p.name, size(collect(friend.name)) AS numberOfFriends;
 --
 
-You would get a different result:
+You get a different result:
 
 [role="queryresult",options="header,footer",cols="2*<m"]
 |===
@@ -815,7 +817,7 @@ Therefore, if you want an accurate answer to the question on how many friends ea
 
 == Composed queries
 
-There are different ways tocombine separate query branches within a single query:
+There are different ways to combine separate query branches within a single query:
 
 [options=header,cols="1,4"]
 |===
