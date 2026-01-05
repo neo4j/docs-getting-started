@@ -8,7 +8,7 @@
 :page-ad-underline-role: button
 :page-ad-underline: Learn more
 
-This guide describes how to manipulate the output of Cypher queries in order to get the refined results.
+This guide describes how to refine the results from Cypher queries by filtering, ordering, comparing, aliasing, and more.
 
 == Example dataset
 
@@ -72,8 +72,8 @@ You can filter results and return only a subset of data by using the link:https:
 
 === Property
 
-You can check which people have Twitter handles by filtering results via a property.
-You could do this by writing the following query:
+You can filter results by *property*.
+For example, to find which people in the example dataset have Twitter handles, you can use the following query:
 
 [source,cypher]
 --
@@ -81,7 +81,8 @@ MATCH (p:Person)
 RETURN p.name, p.twitter
 --
 
-Since only four `Person` nodes out of 12 contain a value for the property `twitter`, you also retrieve another 8 `null` results.
+Since you `MATCH` *all* `Person` nodes, they are all returned, regardless of whether they have a `twitter` property or not.
+In this case, out of the 12 `Person` nodes in the graph, only four (Melissa, Dan, Jennifer, Mark) contain a value for the `twitter` property, so besides them, you also retrieve another 8 `null` results.
 
 In Neo4j, properties only exist (are stored) if they have a value.
 A `null` property value is not stored.
@@ -173,19 +174,16 @@ The result is:
 |===
 | p.name
 
+| "Keanu Reeves"
+| "Tom Hanks"
 | "Diana"
 | "Melissa"
 | "Dan"
 | "Sally"
 | "Mark"
 
-1+d|Rows: 5
+1+d|Rows: 7
 |===
-
-[NOTE]
-====
-If you still have the xref:cypher/results.adoc#_filter_results[Movies example dataset] added to your graph, you will see the names "Keanu Reeves" and "Tom Hanks" in the list too, thus 7 rows.
-====
 
 ==== `ENDS_WITH`
 
@@ -212,7 +210,7 @@ The result is:
 |===
 
 Alternatively, you can use regular expressions, without string operators, to find a property value.
-For example, if you want to find any names that include "Jo" and be case sensitive:
+For example, if you want to find any names that include "Jo" and be case sensitive (which is the default):
 
 [source, cypher]
 ----
@@ -230,6 +228,26 @@ RETURN p.name
 
 1+d|Rows: 2
 |===
+
+If you don't want your query to be case sensitive, you can use `toLower()` + `CONTAINS` and a value in lowercase:
+
+[source, cypher]
+--
+MATCH (p:Person)
+WHERE toLower(n.name) CONTAINS "jo"
+RETURN p.name
+--
+
+Or `toUpper()` if you want to query a value in uppercase:
+
+[source, cypher]
+--
+MATCH (p:Person)
+WHERE toUpper(n.name) CONTAINS "JO"
+RETURN p.name
+--
+
+Both options return all `name` property values that contain "jo" no matter the letter case.
 
 ==== `IN`
 
@@ -253,7 +271,7 @@ The result shows that no one has 1 year of experience, but three people have 5 a
 | 5
 
 | "John"
-|6
+| 6
 
 | "Jennifer"
 | 5
@@ -263,10 +281,10 @@ The result shows that no one has 1 year of experience, but three people have 5 a
 
 === Patterns
 
-Besides filtering queries through node labels and properties, you can also filter results based on relationships or patterns.
+Besides filtering results on node labels and properties, you can also filter results based on relationships or patterns.
 This allows you to test if a pattern also has a certain relationship and/or if another pattern exists.
 
-For example, if you query which people are friends with someone who works for Neo4j, you can write it like this:
+For example, to find people who are friends with someone who works for Neo4j, you can filter on whether there exists a `[:WORKS_FOR]->(:Company {name:'Neo4j'})` relationship from the `p:Person` in the friendship:
 
 [source, cypher]
 --
@@ -379,64 +397,75 @@ The result is:
 |===
 
 Notice that the second query has a comma at the end of the first line, and another pattern is added to `MATCH` on the next line.
-This allows you to query different patterns together, similarly to when you used link:http://localhost:8000/getting-started/cypher/results/#_patterns[`WHERE exists(<pattern>)`] previously.
+This allows you to chain different patterns together, similary to when you used xref:cypher/results.adoc#_patterns[`WHERE exists(<pattern>)`] previously.
 
 With this structure, you can add multiple different patterns and link them together, allowing you to traverse various pieces of the graph with certain patterns.
 
 For more advanced information on how to query patterns, see link:https://neo4j.com/docs/cypher-manual/current/patterns/[Cypher -> Patterns].
 
-== Compare results
+== Compare values
 
 === Equality
 
-You can use comparisons to filter values, starting with equality: 
+You can use comparisons to filter values, starting with equality:
 
-[source, cypher]
+[source,cypher]
 --
 MATCH (m:Movie)
 WHERE m.title = 'The Matrix'
 RETURN m
 --
 
+The result is:
+
 [role="queryresult",options="header,footer",cols="1*<m"]
 |===
 | m
 
-| (:Movie {title: 'The Matrix', released: 1997})
+| (:Movie {title: "The Matrix", released: 1997})
 
 1+d|Rows: 1
 |===
 
-=== Numeric
+=== Numerical
 
-Another option is the numeric comparison.
-Here you match regular expressions, and confirm the existence of values within a list. 
+Another option is the numerical comparison. 
+Here you match regular expressions, and confirm the existence of values within a list.
 
-The `WHERE` clause in the following example includes a regular expression match, a greater-than comparison, and a test to see if a value exists in a list:
+The `WHERE` clause in the following example includes a greater-than comparison to find which movies were released after the year "2000":
 
 [source, cypher]
 --
-MATCH (p:Person)-[r:ACTED_IN]->(m:Movie)
-WHERE p.name =~ 'K.+' OR m.released > 2000 OR 'Neo' IN r.roles
-RETURN p, r, m
+MATCH (m:Movie)
+WHERE m.released > 2000
+RETURN m.title, m.released
 --
 
-Based on the given logical operator `OR` and the graph pattern `(p:Person)-[r:ACTED_IN]->(m:Movie)`, the query result has to meet *one* of the following requirements:
+The result is:
 
-* The person's `name` starts with the letter `'K'`.
-* The movie was released after the year `2000`.
-* The role is `'Neo'`.
+[role="queryresult",options="header,footer",cols="2*<m"]
+|===
+| m | m.release
 
-In the example dataset, only one match of the pattern `(p:Person)-[r:ACTED_IN]->(m:Movie)` meets _any_ of the conditions, therefore the output is the following:
+| "Cloud Atlas"
+| 2012
 
-image::tomhanks-cloudatlas.svg[Tom Hanks' node is connected to Cloud Atlas' node through the acted in relationship, width=400, role=popup]
+| "Larry Crowne"
+| 2011
 
-You can also use patterns as predicates to further filter or refine results.
-While the `MATCH` clause *expands* the number and shape of patterns matched, a pattern predicate *restricts* the result.
+2+d|Rows: 2
+|===
 
-If you append `NOT` to the `WHERE` clause, it only returns paths that do *not* satisfy the specified pattern:
+Cypher has other mathematical operators that allow for other types of numerical comparison.
+See link:https://neo4j.com/docs/cypher-manual/current/expressions/mathematical-operators/[Cypher -> Mathematical operators] for the complete list of operators and examples.
 
-[source, cypher]
+=== Boolean
+
+Cypher's boolean operators allow you to combine or evaluate logical conditions.
+
+For example, to find who in the graph has directed a movie but didn't act in it:
+
+[source,cypher]
 --
 MATCH (p:Person)-[:DIRECTED]->(m)
 WHERE NOT (p)-[:ACTED_IN]->()
@@ -445,10 +474,10 @@ RETURN p, m
 
 The result is:
 
-image::robert-forrest.svg[Nodes for Robert Zemeckis and Forrest Gump, width=200, role=popup]
+image::robert-forrest.svg[Nodes for Robert Zemeckis and Forrest Gump, width=250, role=popup]
 
 This is because the query looks for `Person` nodes that are connected to `Movie` nodes through the `DIRECTED` relationship *only* and *not* `ACTED_IN`.
-If the `ACTED_IN` relationship isn't a restriction anymore:
+If the `ACTED_IN` relationship wasn't a restriction anymore:
 
 [source, cypher]
 --
@@ -456,9 +485,11 @@ MATCH (p:Person)-[:DIRECTED]->(m)
 RETURN p, m
 --
 
-Then the result would now include Tom Hanks and the movie "Larry Crowne" because he has directed *and* acted the movie:
+Then the result includes Tom Hanks and the movie "Larry Crowne" because Tom Hanks *both* directed *and* acted in the movie:
 
-image::tomrobert-movies.svg[Tom Hanks and Robert Zemeckis's nodes and the Forrest Gump and Larry Crowne movie nodes, width=400, role=popup]
+image::tomrobert-movies.svg[Tom Hanks and Robert Zemeckis's nodes and the Forrest Gump and Larry Crowne movie nodes, width=450, role=popup]
+
+See link:https://neo4j.com/docs/cypher-manual/current/expressions/predicates/boolean-operators/[Cypher -> Boolean operators] for the complete list of operators and examples.
 
 == Range of values
 
@@ -492,16 +523,7 @@ MATCH (p:Person)
 RETURN p.name AS name
 --
 
-Optionally, you can also use the `WITH` clause for that:
-
-[source, cypher]
---
-MATCH (p:Person)
-WITH p.name AS name
-RETURN name
---
-
-If you have both the "Movie" and the "Workplaces" datasets in your graph, the tabular result is:
+The result is:
 
 [role="queryresult",options="header,footer",cols="1*<m"]
 |===
@@ -517,21 +539,27 @@ If you have both the "Movie" and the "Workplaces" datasets in your graph, the ta
 
 == Avoiding duplication
 
-For example, if you want to know which people are connected through a `IS_FRIENDS_WITH` with each other, you could write the query like this:
+For example, to know which people are connected through a `IS_FRIENDS_WITH` relationship with each other:
 
 [source, cypher]
 --
-MATCH (p:Person)-[:IS_FRIENDS_WITH]->(friend:Person)
+MATCH (p:Person)-[:IS_FRIENDS_WITH]-(friend:Person)
 RETURN friend.name;
 --
 
-And the result is:
+The result is:
 
 [role="queryresult",options="header,footer",cols="1*<m"]
 |===
 | friend.name
 
+| "Joe"
+| "Jennifer"
+| "Ann"
+| "John"
+| "Jennifer"
 | "Sally"
+| "Jennifer"
 | "Melissa"
 | "Sally"
 | "John"
@@ -539,28 +567,22 @@ And the result is:
 | "Ann"
 | "Diana"
 | "Mark"
+| "Jennifer"
+| "Joe"
 | "Dan"
+| "Jennifer"
 
-1+d|Rows: 9
+1+d|Rows: 18
 |===
 
-Note that "Sally" appears twice.
-This is because she is connected to two different people through two `IS_FRIENDS_WITH` relationships.
+Note that all names appear more than one time.
+For example, "Sally" appears twice because she is connected to two people through two `IS_FRIENDS_WITH` relationships.
 To avoid this duplication, you can add `DISTINCT` after `RETURN`:
 
 [source, cypher]
 --
 MATCH (p:Person)-[:IS_FRIENDS_WITH]->(friend:Person)
 RETURN DISTINCT friend.name;
---
-
-Optionally, you can use `WITH`:
-
-[source,cypher]
---
-MATCH (p:Person)-[:IS_FRIENDS_WITH]->(friend:Person)
-WITH DISTINCT friend.name as friendName
-RETURN friendName
 --
 
 The result is now:
@@ -575,15 +597,14 @@ The result is now:
 | "Mark"
 | "Ann"
 | "Diana"
-| "Mark"
 | "Dan"
 
-1+d|Rows: 8
+1+d|Rows: 7
 |===
 
 == Order
 
-If you want to get results ordered, you can use the clause link:https://neo4j.com/docs/cypher-manual/current/clauses/order-by/[`ORDER BY`] after `RETURN`.
+If you want to have the results ordered, you can use the clause link:https://neo4j.com/docs/cypher-manual/current/clauses/order-by/[`ORDER BY`] after the `RETURN` clause.
 For example, to list how many years of experience each person has in descending order:
 
 [source, cypher]
@@ -632,8 +653,7 @@ ORDER BY yearsExperience DESC
 == Limit
 
 You can use `LIMIT` when you want to restrict the number of results returned:
-For example, the current example graph has 12 `Person` nodes.
-If you want to retrieve only 3, you can write the following query:
+For example, the current example graph has twelve `Person` nodes and if you want to retrieve only three:
 
 [source, cypher]
 --
@@ -655,6 +675,19 @@ The result is:
 
 1+d|Rows: 3
 |===
+
+Since you didn't use xref:cypher/results.adoc#_order[`ORDER BY`] to specify an order to the results, the query retrieves the first three `Person` nodes to be added to the graph.
+To get random results, you can add `ORDER BY rand()` to the query:
+
+[source, cypher]
+--
+MATCH (p:Person)
+RETURN p
+ORDER BY rand()
+LIMIT 3
+--
+
+Now every time you run this query, you get three different `Person` nodes.
 
 == Aggregate
 
@@ -716,6 +749,20 @@ RETURN t.type, collect(p.name) AS people;
 --
 
 Note that `UNWIND` is combined with link:https://neo4j.com/docs/cypher-manual/current/clauses/with/[`WITH`] and used *before* the `MATCH` clause.
+This is because Cypher executes queries from top to bottom, row by row.
+
+If you add `UNWIND` before `MATCH`, it controls what gets matched.
+After `MATCH`, it becomes a filter and the query would need to be written differently too.
+
+[source,cypher]
+--
+MATCH (p:Person)-[:LIKES]-(t:Technology)
+WITH p, t, ['Graphs','Query Languages'] AS likedTech
+UNWIND likedTech AS technology
+WITH p, t
+WHERE t.type = technology
+RETURN t.type, collect(DISTINCT p.name) AS people
+--
 
 The result of this query is:
 
@@ -812,8 +859,16 @@ You get a different result:
 2+d|Rows:4
 |===
 
-This is because not all `Person` nodes are connected through this direction of the `IS_FRIENDS_WITH` relationship.
-Therefore, if you want an accurate answer to the question on how many friends each person has, you should not add a direction to the relationship in your query.
+This is because some `Person` nodes are only connected to other `Person` nodes through a specific direction of the `IS_FRIENDS_WITH` relationship.
+
+For example, Jennifer is connected to Mark through a `IS_FRIENDS_WITH` relationship that comes from Jennifer to Mark (i.e. `(jennifer)-[:IS_FRIENDS_WITH]->(mark)`), not `(mark)-[:IS_FRIENDS_WITH]->(jennifer)`.
+
+In practice, the fact that Jennifer and Mark are friends is what matters, so the relationship's direction is irrelevant.
+However, when adding this information to the graph, the relationship xref:cypher/index.adoc#_relationship_directions[must have a direction].
+On the other hand, querying for it doesn't require direction.
+
+Creating a new pattern with the opposite direction (i.e. `(mark)-[:IS_FRIENDS_WITH]->(jennifer)`) wouldn't be incorrect from a syntax perspective, but it's duplicate information when the direction is irrelevant to answer the question "who is friends with whom?".
+This is why a more accurate result is achieved by using a query with an undirected relationship.
 
 == Composed queries
 
@@ -827,13 +882,15 @@ There are different ways to combine separate query branches within a single quer
 | link:https://neo4j.com/docs/cypher-manual/current/queries/composed-queries/combined-queries/[`UNION`]
 | Combines the results of two or more queries into a single result set that includes all the rows that belong to any queries in the union.
 
-| link:https://neo4j.com/docs/cypher-manual/current/queries/composed-queries/conditional-queries/[`WHEN`] label:cypher[Cypher 25 only] label:new[Introduced in Neo4j 2025.06]
-| Together with `THEN` and `ELSE`, it enables different branches of a query to execute based on certain conditions. 
+| link:https://neo4j.com/docs/cypher-manual/current/queries/composed-queries/conditional-queries/[`WHEN`] 
+| Together with `THEN` and `ELSE`, it enables different branches of a query to execute based on certain conditions. label:cypher[Cypher 25 only]
 
-| link:https://neo4j.com/docs/cypher-manual/current/queries/composed-queries/sequential-queries/[`NEXT`] label:cypher[Cypher 25 only] label:new[Introduced in Neo4j 2025.06]
-| Allows for linear composition of queries into a sequence of smaller, self-contained segments, passing the whole table of intermediate results from one segment to the next.
+| link:https://neo4j.com/docs/cypher-manual/current/queries/composed-queries/sequential-queries/[`NEXT`]
+| Allows for linear composition of queries into a sequence of smaller, self-contained segments, passing the whole table of intermediate results from one segment to the next. label:cypher[Cypher 25 only]
 
 |===
+
+For examples on how to use these clauses, refer to link:https://neo4j.com/docs/cypher-manual/current/queries/composed-queries/[Cypher -> Composed queries].
 
 == Keep learning
 
