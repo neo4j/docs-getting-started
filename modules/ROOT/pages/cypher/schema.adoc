@@ -9,12 +9,11 @@
 :page-ad-underline: Learn more
 
 This guide explains how to define a schema by using indexes and constraints.
-While Neo4j is often described as _schema optional_, indexes and constraints can be introduced when desired, in order to gain performance or xref:data-modeling/index.adoc[modeling] benefits.
+While Neo4j is often described as _schema optional_, indexes and constraints can be added when needed, either for performance optimization or xref:data-modeling/index.adoc[modeling] benefits.
 
 == Example graph
 
-After you create a link:https://neo4j.com/product/auradb/?ref=docs-nav-get-started[free Aura instance], use the "Connect" button and select "Query". 
-In the Cypher editor, copy and paste the following Cypher and execute the query:
+Use the following example graph to follow the guide.
 
 [source, cypher]
 --
@@ -31,7 +30,7 @@ image::tomrobert-gump.svg[Person nodes for Tom Hanks and Robert Zemeckis connect
 
 == Using indexes
 
-The main reason for using link:https://neo4j.com/docs/cypher-manual/current/indexes/[indexes] in a graph database is to find the starting point of a graph traversal.
+The main reason for using link:https://neo4j.com/docs/cypher-manual/current/indexes/[indexes] in a graph database is to find the starting point of a graph traversal and thus achieve high performance.
 Once that starting point is found, the traversal relies on in-graph structures to achieve high performance.
 Moreover, indexes can be added at any point.
 
@@ -48,10 +47,20 @@ However, you can still use index hints to specify which index to use in a partic
 For example, the following query automatically uses the `example_index_1` previously created:
 
 [source, cypher]
-----
+--
 MATCH (actor:Actor {name: 'Tom Hanks'})
 RETURN actor
-----
+--
+
+And if you want to add an index hint:
+
+[source, cypher]
+--
+MATCH (actor:Actor)
+USING INDEX actor:Actor(name)
+WHERE actor.name = 'Tom Hanks'
+RETURN actor;
+--
 
 The result is:
 
@@ -74,26 +83,7 @@ For example, the following statement creates a composite index on all nodes labe
 CREATE INDEX example_index_2 FOR (a:Actor) ON (a.name, a.born)
 --
 
-Note that, for example, if you had a node with the `Actor` label that did not contain the `born` property, it wouldn't be added to the index.
-
-What this index stablishes is the same thing written in this query:
-
-[source,cypher]
---
-MATCH (a:Actor {name:"Tom Hanks", born:1956})
-RETURN a
---
-
-Which has the following result:
-
-[role="queryresult",options="header,footer",cols="1*<m"]
-|===
-| actor
-
-| (:Person:Actor {born: 1956, name: "Tom Hanks"})
-
-1+d|Rows: 1
-|===
+Note that, for example, if you had a node with the `Actor` label that did not contain the `born` property, it wouldn't be indexed.
 
 === Show indexes
 
@@ -155,17 +145,16 @@ They can be property uniqueness contraints, property existence, property type, o
 Constraints can be added to databases that already have data in them.
 However, this requires that the existing data complies with the constraint that is being added.
 
-=== Show constraints
-
-First, you need to create a constraint.
-For example:
+This is an example of how to create a constraint:
 
 [source,cypher]
 --
 CREATE CONSTRAINT constraint_example_1 FOR (movie:Movie) REQUIRE movie.title IS UNIQUE
 --
 
-Then you can use `SHOW CONSTRAINTS` to find all existing constraints in a graph:
+=== Show constraints
+
+You can use `SHOW CONSTRAINTS` to find all existing constraints in a graph:
 
 [source, cypher]
 --
