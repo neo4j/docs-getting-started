@@ -112,7 +112,6 @@ This can affect performance in very large graphs.
 
 ==== Node variables
 
-If part of your query matches nodes that you need to reference in a later part of your query (i.e. in a *subclause*), you can use *node variables*.
 If part of your query matches nodes that you need to reference in a later part of your query (i.e. in a link:https://neo4j.com/docs/cypher-manual/current/clauses/#reading-sub-clauses[subclause]), you can use *node variables*.
 
 Variables can be single letters or words, and should be written in lower-case.
