@@ -191,7 +191,7 @@ RETURN m.title
 --
 MATCH (m:Movie {title:'Sleepless in Seattle'})<-[r:ACTED_IN]-(p:Person)
 RETURN p.name, p.born
-ORDER BY p.born ASC
+ORDER BY p.born DESC
 LIMIT 1
 --
 
@@ -273,6 +273,14 @@ To add all `ACTED_IN` and `DIRECTED` relationships, you can use this statement:
 
 [source,cypher]
 --
+MERGE (TomH:Person {name:'Tom Hanks'})
+MERGE (MegR:Person {name:'Meg Ryan'})
+MERGE (DannyD:Person {name:'Danny DeVitto'})
+MERGE (JackN:Person {name:'Jack Nicholson'})
+MERGE (Apollo13:Movie {title:'Apollo 13'})
+MERGE (SleeplessInSeattle:Movie {title:'Sleepless in Seattle'})
+MERGE (Hoffa:Movie {title:'Hoffa'})
+
 MERGE (TomH)-[:ACTED_IN]->(Apollo13)
 MERGE (TomH)-[:ACTED_IN]->(SleeplessInSeattle)
 MERGE (MegR)-[:ACTED_IN]->(SleeplessInSeattle)
