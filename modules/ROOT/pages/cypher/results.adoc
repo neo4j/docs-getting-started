@@ -68,7 +68,7 @@ CREATE (a)<-[:WORKS_FOR]-(melissa)-[:LIKES]->(graphs)<-[:LIKES]-(diana)
 
 == Filter
 
-You can filter results and return only a subset of data by using the link:https://neo4j.com/docs/cypher-manual/current/clauses/where/[`WHERE`] subclause or the link:https://neo4j.com/docs/cypher-manual/current/clauses/filter/[`FILTER`] (available only in Cypher 25) clause, in some cases.
+You can filter results and return only a subset of data by using the link:https://neo4j.com/docs/cypher-manual/current/clauses/where/[`WHERE`] subclause or the link:https://neo4j.com/docs/cypher-manual/current/clauses/filter/[`FILTER`] (available only in Cypher 25) clause.
 
 === Property
 
@@ -82,7 +82,8 @@ RETURN p.name, p.twitter
 --
 
 Since you `MATCH` *all* `Person` nodes, they are all returned, regardless of whether they have a `twitter` property or not.
-In this case, out of the 12 `Person` nodes in the graph, only four (Melissa, Dan, Jennifer, Mark) contain a value for the `twitter` property, so besides them, you also retrieve another 8 `null` results.
+Out of the 12 `Person` nodes in the graph, only four (Melissa, Dan, Jennifer, Mark) contain a value for the `twitter` property.
+Since the query matches and returns *all* `Person` nodes, you get another eight `null` results.
 
 In Neo4j, properties only exist (are stored) if they have a value.
 A `null` property value is not stored.
@@ -132,7 +133,7 @@ The result is:
 
 === Strings and partial values
 
-You can filter results based on parts of the value stored in a node or relationship using specific link:https://neo4j.com/docs/cypher-manual/current/expressions/[expressions] together with `WHERE`:
+You can filter results based on parts of the value stored in a node or relationship using specific link:https://neo4j.com/docs/cypher-manual/current/expressions/predicates[predicates] together with `WHERE`:
 
 ==== `STARTS WITH`
 
@@ -145,7 +146,7 @@ WHERE p.name STARTS WITH 'M'
 RETURN p.name;
 --
 
-In this case, the result is: 
+The result is: 
 
 [role="queryresult",options="header,footer",cols="1*<m"]
 |===
@@ -187,7 +188,7 @@ The result is:
 
 ==== `ENDS_WITH`
 
-The `ENDS_WITH` operator searches for a specified value at the end of a property value, for example, a value that ends with "n": 
+The `ENDS_WITH` operator searches for a specified string at the end of a property value, for example, a `name`  that ends with "n": 
 
 [source, cypher]
 --
@@ -210,7 +211,7 @@ The result is:
 |===
 
 Alternatively, you can use regular expressions, without string operators, to find a property value.
-For example, if you want to find any names that include "Jo" and be case sensitive (which is the default):
+For example, if you want to find any names that include "Jo" while respecting case-sensitivity (queries are case sensitive by default):
 
 [source, cypher]
 ----
@@ -234,16 +235,16 @@ If you don't want your query to be case sensitive, you can use `toLower()` + `CO
 [source, cypher]
 --
 MATCH (p:Person)
-WHERE toLower(n.name) CONTAINS "jo"
+WHERE toLower(p.name) CONTAINS "jo"
 RETURN p.name
 --
 
-Or `toUpper()` if you want to query a value in uppercase:
+Alternatively, using `toUpper()`:
 
 [source, cypher]
 --
 MATCH (p:Person)
-WHERE toUpper(n.name) CONTAINS "JO"
+WHERE toUpper(p.name) CONTAINS "JO"
 RETURN p.name
 --
 
@@ -312,10 +313,10 @@ You get only "Mark" as the result.
 
 ==== `OPTIONAL` patterns
 
-There are cases when you want to retrieve results from patterns, even if they do not match the entire pattern or all criteria.
-For that, you can first use an `OPTIONAL MATCH` and, if there are no results, the query returns `null` as values.
+Sometimes you want to return results from queries even if they don't meet all the criteria.
+For that, you can use an `OPTIONAL MATCH` which returns null values where there is no match for the optional clause.
 
-For example, if you search for people whose name starts with a "J" and who may work for a company:
+For example, if you search for people whose name starts with a "J" and who optionally work for a company:
 
 [source, cypher]
 --
@@ -345,7 +346,7 @@ You get the following result:
 
 Notice that Joe is returned because his name starts with the letter 'J', but his company's name is `null`.
 This is because he does not have a `WORKS_FOR` relationship to a `COMPANY` node.
-Since you used `OPTIONAL MATCH`, his `Person` node is still returned from the first match, but the optional match is not found, so it returns `null`.
+Since you used `OPTIONAL MATCH`, his `Person` node is still returned from the first match, but the optional match is not found, so a `null` result is returned for `other.name`.
 
 To see the difference, try running the query without the `OPTIONAL` in front of the second match.
 Joe's row is no longer returned in the result.
@@ -353,7 +354,7 @@ This is because Cypher reads the statement with an `AND` match, so the person mu
 
 ==== More complex patterns
 
-You can use queries with patterns that have more than one relationship.
+You can query for patterns that have more than one relationship.
 For example, if you want to know who else likes graphs besides Jennifer, you can use this query:
 
 [source, cypher]
@@ -397,7 +398,7 @@ The result is:
 |===
 
 Notice that the second query has a comma at the end of the first line, and another pattern is added to `MATCH` on the next line.
-This allows you to chain different patterns together, similary to when you used xref:cypher/results.adoc#_patterns[`WHERE exists(<pattern>)`] previously.
+This allows you to chain different patterns together, similar to when you used xref:cypher/results.adoc#_patterns[`WHERE exists(<pattern>)`] previously.
 
 With this structure, you can add multiple different patterns and link them together, allowing you to traverse various pieces of the graph with certain patterns.
 
@@ -577,7 +578,7 @@ The result is:
 
 Note that all names appear more than one time.
 For example, "Sally" appears twice because she is connected to two people through two `IS_FRIENDS_WITH` relationships.
-To avoid this duplication, you can add `DISTINCT` after `RETURN`:
+To avoid this, add `DISTINCT` after `RETURN`:
 
 [source, cypher]
 --
@@ -652,7 +653,7 @@ ORDER BY yearsExperience DESC
 
 == Limit
 
-You can use `LIMIT` when you want to restrict the number of results returned:
+You can use `LIMIT` when you want to restrict the number of results returned.
 For example, the current example graph has twelve `Person` nodes and if you want to retrieve only three:
 
 [source, cypher]
@@ -676,7 +677,7 @@ The result is:
 1+d|Rows: 3
 |===
 
-Since you didn't use xref:cypher/results.adoc#_order[`ORDER BY`] to specify an order to the results, the query retrieves the first three `Person` nodes to be added to the graph.
+Since you didn't use xref:cypher/results.adoc#_order[`ORDER BY`] to specify an order to the results, the query retrieves the first three `Person` nodes that were added to the graph.
 To get random results, you can add `ORDER BY rand()` to the query:
 
 [source, cypher]
@@ -861,7 +862,7 @@ You get a different result:
 
 This is because some `Person` nodes are only connected to other `Person` nodes through a specific direction of the `IS_FRIENDS_WITH` relationship.
 
-For example, Jennifer is connected to Mark through a `IS_FRIENDS_WITH` relationship that comes from Jennifer to Mark (i.e. `(jennifer)-[:IS_FRIENDS_WITH]->(mark)`), not `(mark)-[:IS_FRIENDS_WITH]->(jennifer)`.
+For example, Jennifer is connected to Mark through an outgoing `IS_FRIENDS_WITH` relationship from Jennifer to Mark (i.e. `(jennifer)-[:IS_FRIENDS_WITH]->(mark)`), not `(mark)-[:IS_FRIENDS_WITH]->(jennifer)`.
 
 In practice, the fact that Jennifer and Mark are friends is what matters, so the relationship's direction is irrelevant.
 However, when adding this information to the graph, the relationship xref:cypher/index.adoc#_relationship_directions[must have a direction].
