@@ -75,7 +75,13 @@ Note that, for example, if you had a node with the `Actor` label that did not co
 
 === Show indexes
 
-You can use `SHOW INDEXES` to list indexes in a database.
+You can use `SHOW INDEXES` to list indexes in a database:
+
+[source,cypher]
+--
+SHOW INDEXES
+--
+
 With the current example dataset, the result is:
 
 [role="queryresult",options="header,footer",cols="12*<m"]
