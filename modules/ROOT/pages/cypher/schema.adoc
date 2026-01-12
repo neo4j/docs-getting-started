@@ -30,9 +30,8 @@ image::tomrobert-gump.svg[Person nodes for Tom Hanks and Robert Zemeckis connect
 
 == Using indexes
 
-The main reason for using link:https://neo4j.com/docs/cypher-manual/current/indexes/[indexes] in a graph database is to find the starting point of a graph traversal and thus achieve high performance.
-Once that starting point is found, the traversal relies on in-graph structures to achieve high performance.
-Moreover, indexes can be added at any point.
+link:https://neo4j.com/docs/cypher-manual/current/indexes/[Indexes] are used for speeding up data retrieval and thus improve performance.
+They can be added at any point.
 
 The following query creates an index to facilitate finding actors by name in the database:
 
@@ -42,7 +41,6 @@ CREATE INDEX example_index_1 FOR (a:Actor) ON (a.name)
 --
 
 In most cases, it is not necessary to specify which index to use when querying for data, as the appropriate indexes are used automatically.
-However, you can still use index hints to specify which index to use in a particular query.
 
 For example, the following query automatically uses the `example_index_1` previously created:
 
@@ -50,16 +48,6 @@ For example, the following query automatically uses the `example_index_1` previo
 --
 MATCH (actor:Actor {name: 'Tom Hanks'})
 RETURN actor
---
-
-And if you want to add an index hint:
-
-[source, cypher]
---
-MATCH (actor:Actor)
-USING INDEX actor:Actor(name)
-WHERE actor.name = 'Tom Hanks'
-RETURN actor;
 --
 
 The result is:
@@ -87,40 +75,47 @@ Note that, for example, if you had a node with the `Actor` label that did not co
 
 === Show indexes
 
-You can use `SHOW INDEXES` to list indexes in a database:
+You can use `SHOW INDEXES` to list indexes in a database.
+With the current example dataset, the result is:
 
-[source, cypher]
---
-SHOW INDEXES YIELD name, labelsOrTypes, properties, type
---
-
-The result is:
-
-[role="queryresult",options="header,footer",cols="4*<m"]
+[role="queryresult",options="header,footer",cols="12*<m"]
 |===
 
-| name | labelsOrTypes | properties | type
+| id | name | state | populationPercent | type | entityType | labelsOrTypes | properties | indexProvider | owningConstraint | lastRead | readCount
 
-| "example_index_1"
-| ["Actor"]
-| ["name"]
-| "RANGE"
+| 1
+| "index_1b9dcc97"
+| "ONLINE"
+| 100.0
+| "LOOKUP"
+| "RELATIONSHIP"
+| null
+| null
+| "token-lookup-1.0"
+| null
+| null
+| 0
 
-| "example_index_2"
-| ["Actor"]
-| ["name", "born"]
-| "RANGE"
+| 0
+| "index_460996c0"
+| "ONLINE"
+| 100.0
+| "LOOKUP"
+| "RELATIONSHIP"
+| null
+| null
+| "token-lookup-1.0"
+| null
+| null
+| 0
 
-4+d|Rows: 2
+12+d|Rows: 2
 |===
-
-Note that the two indexes created are of the "RANGE" type.
-Cypher has several types of indexes, all of them listed on link:https://neo4j.com/docs/cypher-manual/current/indexes/search-performance-indexes/[Cypher -> Search-performance indexes].
 
 == Using constraints
 
 link:https://neo4j.com/docs/cypher-manual/current/constraints/[Constraints] are used to make sure that the data adheres to the rules of the domain.
-They can be property uniqueness contraints, property existence, property type, or key constraints.
+They can be property uniqueness, property existence, property type, or key constraints.
 
 [options=header,cols="1,4"]
 |===
@@ -142,8 +137,8 @@ They can be property uniqueness contraints, property existence, property type, o
 
 |===
 
-Constraints can be added to databases that already have data in them.
-However, this requires that the existing data complies with the constraint that is being added.
+Constraints can be added to the database at any time.
+It's recommended to do it early (or even when the database is still empty), since adding constraints requires that the existing data complies with the constraint that is being added.
 
 This is an example of how to create a constraint:
 
