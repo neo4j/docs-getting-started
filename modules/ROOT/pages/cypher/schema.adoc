@@ -31,7 +31,7 @@ image::tomrobert-gump.svg[Person nodes for Tom Hanks and Robert Zemeckis connect
 == Using indexes
 
 link:https://neo4j.com/docs/cypher-manual/current/indexes/[Indexes] are used for speeding up data retrieval and thus improve performance.
-They can be added at any point.
+They can be added at any time.
 
 The following query creates an index to facilitate finding actors by name in the database:
 
@@ -40,7 +40,9 @@ The following query creates an index to facilitate finding actors by name in the
 CREATE INDEX example_index_1 FOR (a:Actor) ON (a.name)
 --
 
-In most cases, it is not necessary to specify which index to use when querying for data, as the appropriate indexes are used automatically.
+Cypher's query planner automatically selects the appropriate index to use for your query.
+Only in exceptional cases do you need to specify which index to use.
+See link:https://www.neo4j.com/docs/cypher-manual/current/indexes/search-performance-indexes/index-hints/[Cypher -> Index hints for the Cypher planner] for more information.
 
 For example, the following query automatically uses the `example_index_1` previously created:
 
