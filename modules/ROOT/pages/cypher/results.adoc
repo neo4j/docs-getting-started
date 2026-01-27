@@ -269,7 +269,7 @@ WHERE p.yearsExperience IN [1, 5, 6]
 RETURN p.name, p.yearsExperience
 --
 
-The result shows that no one has 1 year of experience, but three people have 5 and 6:
+The result shows that no one has 1 year of experience, but three people have 5 or 6:
 
 [role="queryresult",options="header,footer",cols="2*<m"]
 |===
@@ -302,7 +302,7 @@ Which gives you the result:
 
 image::cypher-filter-exists-ptrn-arr.svg[Graph showing how Jennifer is connected to Ann, Mark, Sally, Melissa and John through a is friends with relationship, role=popup, width=400]
 
-Alternatively, you can also filter the result by finding what is not included to a given pattern.
+Alternatively, you can also filter the result by excluding certain patterns from the results:
 For example, if you want to find which of Jennifer's friends do not work for any company, use the following query:
 
 [source, cypher]
@@ -385,12 +385,12 @@ The result is:
 3+d|Rows: 2
 |===
 
-Notice that the query has a comma at the end of the first line, and another pattern is added to `MATCH` on the next line.
+Note that the query has a comma at the end of the first line, and another pattern is added to `MATCH` on the next line.
 This allows you to chain different patterns together, similar to when you used xref:cypher/results.adoc#_patterns[`WHERE exists(<pattern>)`] previously.
 
 With this structure, you can add multiple different patterns and link them together, allowing you to traverse various pieces of the graph with certain patterns.
 
-For more advanced information on how to query patterns, see link:https://neo4j.com/docs/cypher-manual/current/patterns/[Cypher -> Patterns].
+For more information on how to query for patterns, see link:https://neo4j.com/docs/cypher-manual/current/patterns/[Cypher -> Patterns].
 
 == Compare values
 
@@ -525,7 +525,7 @@ The result is:
 
 == Avoiding duplication
 
-For example, to know which people are connected through a `IS_FRIENDS_WITH` relationship:
+For example, to find which people are connected through a `IS_FRIENDS_WITH` relationship:
 
 [source, cypher]
 --
@@ -561,7 +561,7 @@ The result is:
 1+d|Rows: 18
 |===
 
-Note that all names appear more than once.
+Note that some names appear more than once.
 For example, "Sally" appears twice because she is connected to two people through two `IS_FRIENDS_WITH` relationships.
 To avoid this, add `DISTINCT` after `RETURN`:
 
@@ -666,11 +666,11 @@ ORDER BY rand()
 LIMIT 3
 --
 
-Now every time you run this query, you get three different `Person` nodes.
+Now every time you run this query, you get three random `Person` nodes.
 
 == Aggregate
 
-Cypher provides several link:https://neo4j.com/docs/cypher-manual/current/functions/aggregating/[aggregating functions] that allow calculations over a set of values to return a single value.
+Cypher provides several link:https://neo4j.com/docs/cypher-manual/current/functions/aggregating/[aggregating functions] that let you calculate a single value from a set of values.
 
 You can use them with the `RETURN` or the `WITH` clauses to aggregate results.
 
@@ -758,7 +758,7 @@ The result is:
 2+d|Rows: 7
 |===
 
-Note that the results include repetitions that can be avoided if you use the link:https://neo4j.com/docs/cypher-manual/current/functions/aggregating/#functions-collect[`collect()`] function.
+You can use the link:https://neo4j.com/docs/cypher-manual/current/functions/aggregating/#functions-collect[`collect()`] function to group results together.
 If you rewrite the query like this:
 
 [source, cypher]
