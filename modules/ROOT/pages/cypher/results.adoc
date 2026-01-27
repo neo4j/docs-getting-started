@@ -797,6 +797,10 @@ MATCH (p:Person)-[:IS_FRIENDS_WITH]-(friend:Person)
 RETURN p.name, size(collect(friend.name)) AS numberOfFriends;
 --
 
+Note that the `collect()` function is used *inside* the `size()` function.
+If you didn't have it, that is, only `size(friend.name)`, what the function would do is to count how many characters the string values of the `friend.name` properties have.
+Since you want to know how many friends each person has, then `collect()` works as an aggregating function that aggregates all `friend.name` values and `size()` returns the amount in number.
+
 The result is:
 
 [role="queryresult",options="header,footer",cols="2*<m"]
@@ -834,7 +838,7 @@ The result is:
 2+d|Rows: 9
 |===
 
-Note that if you add a direction to the relationship:
+Another point to note is that if you add a direction to the relationship:
 
 [source, cypher]
 --
@@ -864,7 +868,7 @@ You get a different result:
 2+d|Rows:4
 |===
 
-This is because some `Person` nodes are only connected to other `Person` nodes through a specific direction of the `IS_FRIENDS_WITH` relationship.
+This is because the `IS_FRIENDS_WITH` relationship is directed.
 
 For example, Jennifer is connected to Mark through an outgoing `IS_FRIENDS_WITH` relationship from Jennifer to Mark (i.e. `(jennifer)-[:IS_FRIENDS_WITH]->(mark)`), not `(mark)-[:IS_FRIENDS_WITH]->(jennifer)`.
 
@@ -875,33 +879,12 @@ On the other hand, querying for it doesn't require direction.
 Creating a new pattern with the opposite direction (i.e. `(mark)-[:IS_FRIENDS_WITH]->(jennifer)`) wouldn't be incorrect from a syntax perspective, but it's duplicate information when the direction is irrelevant to answer the question "who is friends with whom?".
 This is why a more accurate result is achieved by using a query with an undirected relationship.
 
-== Composed queries
-
-There are different ways to combine separate query branches within a single query:
-
-[options=header,cols="1,4"]
-|===
-
-| Function | Description
-
-| link:https://neo4j.com/docs/cypher-manual/current/queries/composed-queries/combined-queries/[`UNION`]
-| Combines the results of two or more queries into a single result set that includes all the rows that belong to any queries in the union.
-
-| link:https://neo4j.com/docs/cypher-manual/current/queries/composed-queries/conditional-queries/[`WHEN`] 
-| Together with `THEN` and `ELSE`, it enables different branches of a query to execute based on certain conditions. label:cypher[Cypher 25 only]
-
-| link:https://neo4j.com/docs/cypher-manual/current/queries/composed-queries/sequential-queries/[`NEXT`]
-| Allows for linear composition of queries into a sequence of smaller, self-contained segments, passing the whole table of intermediate results from one segment to the next. label:cypher[Cypher 25 only]
-
-|===
-
-For examples on how to use these clauses, refer to link:https://neo4j.com/docs/cypher-manual/current/queries/composed-queries/[Cypher -> Composed queries].
-
 == Keep learning
 
 Cypher has many other resources for refining query results.
 If you want to keep learning, see the following pages:
 
+. link:https://neo4j.com/docs/cypher-manual/current/queries/composed-queries/[Composed queries] -> See how to use `UNION`, `WHEN`, and `NEXT` to combine queries, create linear compositions and different query branches.
 . link:https://neo4j.com/docs/cypher-manual/current/clauses/skip/[`SKIP`] -> Defines from which row to start including the rows in the output.
 . link:https://neo4j.com/docs/cypher-manual/current/expressions//[Expressions] -> Operators and expressions that can be used to evaluate values.
 . link:https://neo4j.com/docs/cypher-manual/current/functions/[Functions] -> Full list of existing Cypher functions.
