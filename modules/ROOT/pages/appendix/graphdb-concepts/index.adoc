@@ -266,7 +266,7 @@ image::graphdb-path-example-loop-arr.svg[role="middle", width=300]
 [[graphdb-schema]]
 == Schema
 
-A _schema_ in Neo4j refers to indexes and constraints.
+A xref:cypher/schema.adoc[schema] in Neo4j refers to indexes and constraints.
 
 Neo4j is often described as _schema optional_, meaning that it is not necessary to create indexes and constraints.
 You can create data -- nodes, relationships and properties -- without defining a schema up front.
