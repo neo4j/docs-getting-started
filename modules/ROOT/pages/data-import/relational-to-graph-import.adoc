@@ -21,26 +21,29 @@ In this guide, we want to discuss all of the options and why you can or should c
 There are three main approaches to moving relational data to a graph.
 We will briefly cover how each operates on this page, but more detailed walkthroughs are in the linked pages.
 
-*1)* xref:data-import/csv-import.adoc[LOAD CSV]: possibly the simplest way to import data from your relational database.
+* xref:data-import/csv-import.adoc[*LOAD CSV*]: possibly the simplest way to import data from your relational database.
 Requires a dump of individual entity-tables and join-tables formatted as CSV files.
 
-*2)* link:https://neo4j.com/docs/apoc/current/[APOC^]: Awesome Procedures on Cypher.
+* link:https://neo4j.com/docs/data-importer/current/[*Data Importer*]: UI-based tool for importing data into Neo4j.
+Available both as a standalone tool and as a service in Aura for importing CSV and TSV files.
+
+* link:https://neo4j.com/docs/apoc/current/[*APOC*]: Awesome Procedures on Cypher.
 Created as an extension library to provide common procedures and functions to developers.
 This library is especially helpful for complex transformations and data manipulations.
 Useful procedures include apoc.load.jdbc, apoc.load.json, and others.
 
-*3)* link:https://neo4j.com/labs/etl-tool/[ETL Tool^]: Neo4j Labs UI tool that translates relational to graph from a JDBC connection.
+* link:https://neo4j.com/labs/etl-tool/[*ETL Tool*]: Neo4j Labs UI tool that translates relational to graph from a JDBC connection.
 Allows bulk data import for large data sets with a fast performance and simple user experience.
 
-*4)* link:https://medium.com/@samuel.second/apache-hop-connecting-to-neo4j-using-environments-e6839c279de0[Apache Hop^]: open-source tool for enterprise-scale data export and import.
+* link:https://medium.com/@samuel.second/apache-hop-connecting-to-neo4j-using-environments-e6839c279de0[*Apache Hop*]: open-source tool for enterprise-scale data export and import.
 Handles a variety of data sources and large data sets easily and organizes the data flow process.
 
 Note that this import option is not supported officially.
 
-*5)* Other ETL tools: there are also a few vendor and community tools available for similar etl processes and GUI interaction for getting data in various formats into and out of Neo4j.
+* Other ETL tools: there are also a few vendor and community tools available for similar etl processes and GUI interaction for getting data in various formats into and out of Neo4j.
 Some of these tools also can map out the flow and transformation of data through the system.
 
-*6)* xref:languages-guides/index.adoc[Programmatic via drivers]: ability to retrieve data from a relational database (or other tabular structure) and use the bolt protocol to write it to Neo4j through one of the drivers with your programming language of choice.
+* xref:languages-guides/index.adoc[Programmatic via drivers]: ability to retrieve data from a relational database (or other tabular structure) and use the bolt protocol to write it to Neo4j through one of the drivers with your programming language of choice.
 
 [NOTE]
 ====
@@ -61,6 +64,10 @@ For those cases, you might need to add an `APOC` procedure to the `LOAD CSV` sta
 === LOAD CSV resources
 * Cypher Manual: link:https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[LOAD CSV^]
 * Guide: xref:data-import/csv-import.adoc[Importing CSV data into Neo4j]
+
+== Neo4j Data Importer
+
+Refer to link:https://neo4j.com/docs/data-importer/current/[Neo4j Data Importer] documentation for a complete guide on how ot import CSV and TSV files into Aura or using the tool as a stand-alone service.
 
 [#relational-apoc]
 == APOC
