@@ -25,7 +25,7 @@ We will briefly cover how each operates on this page, but more detailed walkthro
 Requires a dump of individual entity-tables and join-tables formatted as CSV files.
 
 * link:https://neo4j.com/docs/data-importer/current/[*Data Importer*]: UI-based tool for importing data into Neo4j.
-Available both as a standalone tool and as a service in Aura for importing CSV and TSV files.
+Available both as a standalone tool and as a service in Aura.
 
 * link:https://neo4j.com/docs/apoc/current/[*APOC*]: Awesome Procedures on Cypher.
 Created as an extension library to provide common procedures and functions to developers.
@@ -67,7 +67,7 @@ For those cases, you might need to add an `APOC` procedure to the `LOAD CSV` sta
 
 == Neo4j Data Importer
 
-Refer to link:https://neo4j.com/docs/data-importer/current/[Neo4j Data Importer] documentation for a complete guide on how ot import CSV and TSV files into Aura or using the tool as a stand-alone service.
+Refer to link:https://neo4j.com/docs/data-importer/current/[Neo4j Data Importer] documentation for a complete guide.
 
 [#relational-apoc]
 == APOC
