@@ -886,6 +886,6 @@ If you want to keep learning, see the following pages:
 
 . link:https://neo4j.com/docs/cypher-manual/current/queries/composed-queries/[Composed queries] -> See how to use `UNION`, `WHEN`, and `NEXT` to combine queries, create linear compositions and different query branches.
 . link:https://neo4j.com/docs/cypher-manual/current/clauses/skip/[`SKIP`] -> Defines from which row to start including the rows in the output.
-. link:https://neo4j.com/docs/cypher-manual/current/expressions//[Expressions] -> Operators and expressions that can be used to evaluate values.
+. link:https://neo4j.com/docs/cypher-manual/current/expressions/[Expressions] -> Operators and expressions that can be used to evaluate values.
 . link:https://neo4j.com/docs/cypher-manual/current/functions/[Functions] -> Full list of existing Cypher functions.
 . link:https://neo4j.com/docs/cypher-manual/current/indexes/[Indexes] -> Strategies for speeding up data retrieval.
