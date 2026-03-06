@@ -1,10 +1,8 @@
 [[java]]
 = Using Neo4j from Java
 :aura_signup: https://neo4j.com/cloud/aura/?ref=developer-guides
-:maven-artifact-info: https://search.maven.org/artifact/org.neo4j.driver/neo4j-java-driver/{java-driver-version}/jar
-:examples: https://github.com/neo4j-examples
 :programming-language: java
 :tags: java, project, official-driver, app-development, applications
 :description: If you are a Java developer, this guide provides an overview of options for connecting to Neo4j.
 
-If you are a Java developer, refer to the link:{docs-home}/java-manual[Java documentation] for more details on how to install and start using the language library.
+To connect to Neo4j from a Java application, you can use either the link:https://neo4j.com/docs/java-manual/current/[Java driver] or the link:https://neo4j.com/docs/jdbc-manual/current/[JDBC driver]. Both are officialy supported.
