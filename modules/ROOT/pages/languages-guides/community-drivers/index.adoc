@@ -130,18 +130,6 @@ It's implemented as a Perl wrapper around the libneo4j-client C library, which i
 [[java-community-drivers]]
 == Java Community drivers
 
-[#neo4j-jdbc]
-=== Neo4j JDBC Driver
-
-[cols="1,4"]
-|===
-| icon:user[] Authors | Developers from http://www.larus-ba.it/neo4j/en/[Larus BA Italy^] and Neo4j
-| icon:gift[] Package | https://github.com/neo4j-contrib/neo4j-jdbc/releases/latest
-| icon:github[] Source | https://github.com/neo4j-contrib/neo4j-jdbc
-| icon:book[] Docs | https://github.com/neo4j-contrib/neo4j-jdbc/blob/master/README.adoc
-| icon:book[] Blog Post | https://neo4j.com/blog/couchbase-jdbc-integrations-neo4j-3-0/
-|===
-
 
 [#neo4j-scala]
 === Scala: neotypes
