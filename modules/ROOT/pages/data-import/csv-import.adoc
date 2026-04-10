@@ -1,5 +1,5 @@
 [[csv-import]]
-= TImport CSV data using `LOAD CSV`
+= Import CSV data using `LOAD CSV`
 :description: This guide shows how to use the command LOAD CSV to import small to medium datasets in CSV format into Neo4j using Aura and on-premise deployments.
 :page-pagination:
 
