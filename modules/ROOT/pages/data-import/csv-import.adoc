@@ -1,11 +1,11 @@
 [[csv-import]]
-= Tutorial: Import CSV data using `LOAD CSV`
-:description: This tutorial shows how to use the command LOAD CSV to import small to medium datasets in CSV format into Neo4j using Aura and on-premise deployments.
+= TImport CSV data using `LOAD CSV`
+:description: This guide shows how to use the command LOAD CSV to import small to medium datasets in CSV format into Neo4j using Aura and on-premise deployments.
 :page-pagination:
 
 Neo4j supports xref:data-import/index.adoc#_methods_comparison[different methods] of importing data.
 Which method to use depends on factors like dataset size, link:{docs-home}/deployment-method[deployment method], and familiarity with Cypher.
-This tutorial shows how to import CSV data into Neo4j using link:https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[`LOAD CSV`] command.
+This guide shows how to import CSV data into Neo4j using link:https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/[`LOAD CSV`] command.
 
 [TIP]
 ====
@@ -32,7 +32,7 @@ What the command does is:
 * *`FIELDTERMINATOR` (optional)* -> the default field terminator in CSV files is the comma, but others are supported and can be specified here.
 
 You can import link:https://neo4j.com/docs/cypher-manual/current/clauses/load-csv/#_import_local_files[local files].
-However, in this tutorial, you will use a link to load the CSV file:
+However, in this guide, you will use a link to load the CSV file:
 
 [source,cypher]
 --
