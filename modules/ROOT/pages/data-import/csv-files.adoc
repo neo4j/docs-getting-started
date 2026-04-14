@@ -13,7 +13,7 @@ Neo4j reads all data from the CSV file as a `string`.
 For other data types, you need to use `toInteger()`, `toFloat()`, `toBoolean()`, or similar functions to convert data to the appropriate type.
 Remember also that labels, property names, relationship types, and variables are *case-sensitive*.
 
-See xref:#_converting_data_values[Converting data values] for more information on how to manipulate data formats.
+See xref:data-import/csv-files.adoc#_converting_data_values[Converting data values] for more information on how to manipulate data formats.
 
 === Field terminator
 
