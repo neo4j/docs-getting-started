@@ -287,6 +287,8 @@ The result shows that no one has 1 year of experience, but three people have 5 o
 2+d|Rows: 3
 |===
 
+
+[#filter-patterns]
 === Patterns
 
 For example, to find people who are friends with someone who works for Neo4j, you can filter on whether there exists a `[:WORKS_FOR]->(:Company {name:'Neo4j'})` relationship from the `p:Person` in the friendship:
@@ -386,7 +388,7 @@ The result is:
 |===
 
 Note that the query has a comma at the end of the first line, and another pattern is added to `MATCH` on the next line.
-This allows you to chain different patterns together, similar to when you used xref:cypher/results.adoc#_patterns[`WHERE exists(<pattern>)`] previously.
+This allows you to chain different patterns together, similar to when you used xref:cypher/results.adoc#filter-patterns[`WHERE exists(<pattern>)`] previously.
 
 With this structure, you can add multiple different patterns and link them together, allowing you to traverse various pieces of the graph with certain patterns.
 

@@ -92,7 +92,7 @@ Here are some important things to know about a subquery:
 
 Subqueries are demarcated by braces (`{ }`).
 
-In the xref:cypher/results.adoc#_filter[_Filtering on patterns_] section of the *_Getting the correct results_* chapter, you learnt how to filter based on patterns.
+In the xref:cypher/results.adoc#filter-patterns[_Filtering on patterns_] section of the *_Getting the correct results_* chapter, you learnt how to filter based on patterns.
 For example, you can write the following query to find the friends of someone who works for Neo4j:
 
 [source,cypher]
