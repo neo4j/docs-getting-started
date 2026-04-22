@@ -277,7 +277,7 @@ CREATE (a:Person {name: 'Ann'})-[r:IS_FRIENDS_WITH]->(m:Person {name: 'Mark'})
 RETURN a, r, m
 --
 
-The result is that you duplicate Ann's node and create a new Mark node (since it was removed in xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[the previous step]) and add a new `IS_FRIENDS_WITH` relationship between them.
+The result is that you duplicate Ann's node and create a new Mark node (since it was removed in xref:cypher/updating.adoc#_delete_a_node[the previous step]) and add a new `IS_FRIENDS_WITH` relationship between them.
 You get the following message confirming it: "Created 2 nodes, created 1 relationship, set 2 properties, added 2 labels".
 
 If you use `MERGE` instead:
@@ -296,7 +296,7 @@ Even though the graph already has Ann and Mark's nodes, the pattern `(Ann)-[:IS_
 [NOTE]
 ====
 If you created the previous duplication, you don't need to fix it before proceeding with the tutorial.
-However, if you didn't do it, you need to create a new node for Mark, as it was removed in xref:cypher/updating.adoc#_delete_a_node_and_its_relationships[the previous step].
+However, if you didn't do it, you need to create a new node for Mark, as it was removed in xref:cypher/updating.adoc#_delete_a_node[the previous step].
 You can do it using either `CREATE` or `MERGE`.
 ====
 
