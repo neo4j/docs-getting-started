@@ -5,11 +5,16 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon -e adoc --exec \"npm run build && npm run serve\"",
+    "prestart": "npm update",
+    "start": "nodemon --exec \"npm run build\"",
     "serve": "node server.js",
-    "build": "antora --stacktrace preview.yml",
-    "build-verify": "antora --stacktrace --fetch preview.yml --log-format=json --log-level=info --log-file ./build/log/log.json",
-    "publish-verify": "antora --stacktrace --fetch publish.yml --log-format=json --log-file ./build/log/log.json"
+    "clean": "rm -rf build",
+    "build": "npm run build:preview",
+    "postbuild": "node server.js",
+    "build:preview": "antora preview.yml --stacktrace --log-format=pretty",
+    "build:publish": "npm run clean && antora publish.yml --stacktrace --log-format=pretty",
+    "verify:preview": "antora --stacktrace --fetch preview.yml --log-format=json --log-level=info --log-file ./build/log/log.json",
+    "verify:publish": "antora --stacktrace --fetch publish.yml --log-format=json --log-level=info --log-file ./build/log/log.json"
   },
   "repository": {
     "type": "git",
@@ -23,19 +28,36 @@
   },
   "homepage": "https://github.com/neo4j/docs-getting-started#readme",
   "dependencies": {
-    "@antora/cli": "^3.1.4",
-    "@antora/site-generator-default": "^3.1.4",
-    "@neo4j-antora/antora-add-notes": "^0.3.1",
+    "@neo4j-antora/aliases-redirects": "^0.2.7",
+    "@neo4j-antora/antora-add-notes": "^0.3.2",
     "@neo4j-antora/antora-listing-roles": "^0.1.0",
-    "@neo4j-antora/antora-modify-sitemaps": "^0.4.4",
-    "@neo4j-antora/antora-table-footnotes": "^0.3.2",
-    "@neo4j-antora/mark-terms": "^1.1.0",
-    "@neo4j-documentation/macros": "^1.0.2",
-    "@neo4j-documentation/remote-include": "^1.0.0"
+    "@neo4j-antora/antora-table-footnotes": "^0.3.3",
+    "@neo4j-antora/mark-terms": "^1.1.4",
+    "@neo4j-antora/roles-labels": "^0.1.8",
+    "@neo4j-antora/selector-labels": "^0.1.1",
+    "@neo4j-antora/table-footnotes": "^1.0.1",
+    "@neo4j-antora/xref-hash-validator": "^0.1.4",
+    "@neo4j-documentation/macros": "^1.0.4",
+    "@neo4j-documentation/remote-include": "^1.0.0",
+    "antora": "3.1.14"
   },
   "devDependencies": {
-    "express": "^4.18.2",
-    "nodemon": "^3.0.1"
+    "express": "5.2.1",
+    "nodemon": "3.1.14"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "**/modules/**",
+      "**/antora.yml",
+      "**/preview.yml",
+      "**/publish.yml"
+    ],
+    "ext": "yml,yaml,adoc,svg,png,jpg",
+    "ignore": [
+      "build/**",
+      "node_modules/**"
+    ],
+    "delay": 1000
   },
   "overrides": {
     "@antora/site-generator-default": {

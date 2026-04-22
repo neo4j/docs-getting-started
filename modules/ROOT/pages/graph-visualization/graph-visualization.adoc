@@ -75,7 +75,7 @@ Neo4j Browser is bundled with Neo4j and is available in all editions and version
 
 Its visualization functionality is designed to display a node-graph representation of the underlying data stored in the database in response to a given Cypher query, showing circles for nodes and lines for relationships.
 Neo4j Browser also provides some functionality for styling with color and size based on node labels and relationship types, or you can customize your own styles by importing a GRASS (graph-stylesheet) file for Neo4j Browser to reference.
-You can also use the built-in drop-down buttons on query result panes to easily export the data to link:/developer/neo4j-browser#browser-tips[PNG, SVG, or CSV formats].
+You can also use the built-in drop-down buttons on query result panes to easily export the data to link:https://neo4j.com/docs/browser/[PNG, SVG, or CSV formats].
 
 === Neo4j Visualization Library
 

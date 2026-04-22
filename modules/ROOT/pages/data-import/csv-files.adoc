@@ -13,8 +13,6 @@ Neo4j reads all data from the CSV file as a `string`.
 For other data types, you need to use `toInteger()`, `toFloat()`, `toBoolean()`, or similar functions to convert data to the appropriate type.
 Remember also that labels, property names, relationship types, and variables are *case-sensitive*.
 
-See xref:#_converting_data_values[Converting data values] for more information on how to manipulate data formats.
-
 === Field terminator
 
 Also known as delimiter, a field terminator is a character used to separate each field in a CSV file.
@@ -135,7 +133,7 @@ RETURN row
 --
 
 Or from a local folder, if you use an on-premise deployment.
-In this case, you need to add a `file:///` prefix before the file name:
+In this case, you need to add a `+file:///+` prefix before the file name:
 
 [source,cypher]
 --

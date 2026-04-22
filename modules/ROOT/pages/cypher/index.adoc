@@ -235,7 +235,7 @@ image::cypherintro-variables.svg[]
 Properties are used to store additional information and can be added both to nodes and relationships and be of a variety of data types.
 For a full list of values and types, see link:{docs-home}/cypher-manual/current/values-and-types/[Cypher manual -> Values and types].
 
-In the following example, `sally` and `john` are xref:cypher/index.adoc##_node_variables[variables] for `Person` nodes which contain a `name` property with the *property values* "Sally" and "John":
+In the following example, `sally` and `john` are xref:cypher/index.adoc#_node_variables[variables] for `Person` nodes which contain a `name` property with the *property values* "Sally" and "John":
 
 .Graph example with node and relationship properties.
 image::cypherintro-properties.svg[]
@@ -313,7 +313,7 @@ In the link:{docs-home}/cypher-manual[Cypher manual], you can find more informat
 In case you have a background in SQL and are new to graph databases, these are some resources for more information on the key differences and the transition to graphs:
 
 * link:{docs-home}/cypher-manual/current/introduction/cypher-overview/#_cypher_and_sql_key_differences[Key differences between Cypher and SQL]
-* xref:appendix/graphdb-concepts/graphdb-vs-rdbms[Transition from relational to graph database]
+* xref:appendix/graphdb-concepts/graphdb-vs-rdbms.adoc[Transition from relational to graph database]
 * xref:cypher/cypher-sql.adoc[Reference: Comparing Cypher with SQL]
 * xref:data-import/relational-to-graph-import.adoc[How-to: Import from RDBMS into graph]
 * xref:data-import/import-relational-and-etl.adoc[Tutorial: Import data from a relational database into Neo4j]

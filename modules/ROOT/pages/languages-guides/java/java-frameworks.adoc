@@ -11,7 +11,7 @@
 [#qhm-summary]
 == Driver integration
 The goal with both integrations is to provide support for getting a managed instances of the Neo4j driver.
-Like in the link:/developer/spring-data-neo4j/#adding-config[Spring Framework], you can provide the driver properties to an _application.properties_ file (or yaml) to configure your application.
+Like in the link:https://www.neo4j.com/developer/spring-data-neo4j/#adding-config[Spring Framework], you can provide the driver properties to an _application.properties_ file (or yaml) to configure your application.
 In the end you will have an injectable driver instance that can be used with 
 
 [source,java]
