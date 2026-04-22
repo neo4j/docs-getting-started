@@ -112,16 +112,18 @@ link:{docs-home}/visualize/[]
 image:ga-home.svg[]
 
 --
+
 [.caption]
 GraphAcademy courses
 
 [.list]
-* link:https://graphacademy.neo4j.com/courses/neo4j-fundamentals/[Introduction to Neo4j and graph databases]
-* link:https://graphacademy.neo4j.com/courses/cypher-fundamentals/[Cypher query language fundamentals]
-* link:https://graphacademy.neo4j.com/courses/importing-fundamentals/[How to import data to Neo4j]
-* link:https://graphacademy.neo4j.com/courses/llm-fundamentals/[Neo4j and LLM fundamentals]
-* link:https://graphacademy.neo4j.com/courses/modeling-fundamentals/[Graph data modeling fundamentals]
-* link:https://graphacademy.neo4j.com/courses/gds-product-introduction/[Introduction to Graph Data Science]
+* link:{docs-home}/genai/tutorials/embeddings-vector-indexes/[Embedding & Vector Indexes Tutorial]
+* xref:data-import/import-relational-and-etl.adoc[Import data from a relational database into Neo4j]
+* xref:appendix/tutorials/guide-build-a-recommendation-engine.adoc[Build a Cypher recommendation engine]
+* link:{docs-home}/operations-manual/current/tutorial/tutorial-composite-database/[Set up and use a composite database]
+* link:{docs-home}/cdc/current/procedures/query-examples/[Capture and track changes in real-time]
+* link:{docs-home}/graph-data-science-client/current/tutorials/centrality-algorithms/[Apply centrality algorithms to your graph]
+
 --
 
 [.next-steps]
