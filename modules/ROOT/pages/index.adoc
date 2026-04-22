@@ -112,6 +112,7 @@ link:{docs-home}/visualize/[]
 image:ga-home.svg[]
 
 --
+
 [.caption]
 GraphAcademy courses
 
@@ -122,6 +123,8 @@ GraphAcademy courses
 * link:{docs-home}/operations-manual/current/tutorial/tutorial-composite-database/[Set up and use a composite database]
 * link:{docs-home}/cdc/current/procedures/query-examples/[Capture and track changes in real-time]
 * link:{docs-home}/graph-data-science-client/current/tutorials/centrality-algorithms/[Apply centrality algorithms to your graph]
+
+--
 
 [.next-steps]
 == Licenses and disclaimers
