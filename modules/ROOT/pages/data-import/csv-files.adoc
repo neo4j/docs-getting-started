@@ -133,7 +133,7 @@ RETURN row
 --
 
 Or from a local folder, if you use an on-premise deployment.
-In this case, you need to add a `file:///` prefix before the file name:
+In this case, you need to add a `+file:///+` prefix before the file name:
 
 [source,cypher]
 --
