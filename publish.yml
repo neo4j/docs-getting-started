@@ -6,8 +6,7 @@ site:
 content:
   sources:
   - url: ./
-    branches: ['dev']
-    edit_url: https://github.com/neo4j/docs-getting-started/tree/{refname}/{path}
+    branches: ['HEAD']
     exclude:
     - '!**/_includes/*'
     - '!**/readme.adoc'
@@ -23,17 +22,15 @@ urls:
 
 antora:
   extensions:
-  - require: "@neo4j-antora/antora-modify-sitemaps"
-    sitemap_version: '~'
-    move_sitemaps_to_components: true
+  - "@neo4j-antora/aliases-redirects"
+  - "@neo4j-antora/roles-labels"
+  - "@neo4j-antora/table-footnotes"
+  - "@neo4j-antora/xref-hash-validator"
 
 asciidoc:
   extensions:
   - "@neo4j-documentation/remote-include"
   - "@neo4j-documentation/macros"
-  - "@neo4j-antora/antora-add-notes"
-  - "@neo4j-antora/antora-listing-roles"
-  - "@neo4j-antora/antora-table-footnotes"
   - "@neo4j-antora/mark-terms"
   attributes:
     page-theme: docs
