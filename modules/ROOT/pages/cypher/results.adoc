@@ -458,7 +458,7 @@ For example, to find who in the graph has directed a movie but didn't act in it:
 [source,cypher]
 --
 MATCH (p:Person)-[:DIRECTED]->(m)
-WHERE NOT (p)-[:ACTED_IN]->()
+WHERE NOT (p)-[:ACTED_IN]->(m)
 RETURN p, m
 --
 
