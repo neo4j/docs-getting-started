@@ -76,7 +76,7 @@ For more details, refer to a README file on the https://github.com/laudis-techno
 | icon:github[] Source | https://github.com/neo4j-php/neo4j-php-client
 | icon:gift[] Package | https://packagist.org/packages/laudis/neo4j-php-client
 | icon:code-fork[] PHP    | 7.4 / 8.0+
-| icon:code-fork[] Neo4j    | 3.5 / 4.0+
+| icon:code-fork[] Neo4j    | 3.5 / 4.0+ / 5.0+
 | Protocols | Bolt, HTTP
 | Example App | https://github.com/neo4j-examples/movies-neo4j-php-client
 |===
@@ -90,8 +90,8 @@ A low level driver for the Bolt protocol in PHP.
 [cols="1,4"]
 |===
 | icon:user[] Author | https://www.linkedin.com/in/michalstefanak/[Michal Stefanak^]
-| icon:github[] Source | https://github.com/neo4j-php/Bolt
-| icon:code-fork[] PHP    | 7.4+ / 8.0+
+| icon:github[] Source | https://github.com/stefanak-michal/php-bolt-driver
+| icon:code-fork[] PHP    | 8.1+
 | icon:code-fork[] Neo4j    | 3.0+ / 4.0+ / 5.0+
 | Protocols | Bolt
 |===
