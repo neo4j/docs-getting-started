@@ -275,7 +275,7 @@ To add all `ACTED_IN` and `DIRECTED` relationships, you can use this statement:
 --
 MATCH (TomH:Person {name:'Tom Hanks'})
 MATCH (MegR:Person {name:'Meg Ryan'})
-MATCH (DannyD:Person {name:'Danny DeVitto'})
+MATCH (DannyD:Person {name:'Danny DeVito'})
 MATCH (JackN:Person {name:'Jack Nicholson'})
 MATCH (Apollo13:Movie {title:'Apollo 13'})
 MATCH (SleeplessInSeattle:Movie {title:'Sleepless in Seattle'})
