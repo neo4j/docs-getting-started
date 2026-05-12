@@ -20,7 +20,7 @@ To preview the docs, run:
 [source,sh]
 npm run start
 
-This will build a set of HTML files in `build/site` and then serve them through an express server at http://localhost:8000.
+This command builds a set of HTML files in `build/site` and then serve them through an express server at http://localhost:8000.
 The start script will also listen for changes and automatically rebuild the files automatically.
 You'll still need to refresh the page to view the changes.
 
