@@ -129,7 +129,7 @@ If you want to use the CSV files for the Neo4j instance you manage, you can copy
 link:https://github.com/neo4j-graph-examples/northwind/tree/main/import[Northwind files on GitHub] and place them in the *import* folder for your Neo4j DBMS.
 
 
-You use use Cypher's `LOAD CSV` statement to read each file and add Cypher clauses after it to take the row/column data and transform it to the graph.
+You can use Cypher's `LOAD CSV` statement to read each file and add Cypher clauses after it to take the row/column data and transform it to the graph.
 
 Next you will run Cypher code to:
 
