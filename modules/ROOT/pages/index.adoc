@@ -116,7 +116,7 @@ GraphAcademy courses
 
 [.list]
 * link:{docs-home}/genai/tutorials/embeddings-vector-indexes/[Embedding & Vector Indexes Tutorial]
-* xref:data-import/import-relational-and-etl.adoc[Import data from a relational database into Neo4j]
+* xref:data-import/relational-to-graph-import.adoc[Import from a relational database into Neo4j]
 * xref:appendix/tutorials/guide-build-a-recommendation-engine.adoc[Build a Cypher recommendation engine]
 * link:{docs-home}/operations-manual/current/tutorial/tutorial-composite-database/[Set up and use a composite database]
 * link:{docs-home}/cdc/current/procedures/query-examples/[Capture and track changes in real-time]
