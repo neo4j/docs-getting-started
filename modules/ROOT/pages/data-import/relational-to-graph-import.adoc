@@ -37,9 +37,8 @@ Through the link:https://neo4j.com/docs/aura/import/data-sources/[Data sources] 
 * Azure Blobs & Data Lake Storage
 * Google Cloud Storage
 
-Refer to link:https://neo4j.com/docs/aura/import/introduction/[Aura -> Import] for a full guide on the tool.
-
 Additionally, the Import tool also allows you to stream local _CSV_ files.
+Refer to link:https://neo4j.com/docs/aura/import/introduction/[Aura -> Import] for a full guide.
 
 == `LOAD CSV`
 
@@ -69,12 +68,6 @@ There are also procedures for batching data, adding wait/sleep commands, and han
 APOC's transformation procedures allow you to process dynamic labels or relationships, correct/skip null or empty values, format dates or other values, generate hashes, and handle other tricky data scenarios.
 
 While APOC is a flexible and custom data handling library, it is not always the recommended method for more complex scenarios that could result in an excess of lines of code to handle multiple data transformations.
-
-== ETL Tool
-
-Neo4j's link:https://neo4j.com/labs/etl-tool/[ETL Tool] allows you to set up a JDBC connection to a relational database and then auto-map the data into a graph data model rendered as a visualization that you can edit according to your use case.
-
-Read the blog article link:https://medium.com/neo4j/tap-into-hidden-connections-translating-your-relational-data-to-graph-d3a2591d4026[Translating Relational Data to Graph^] for more information on how to do it with the ETL Tool.
 
 == Apache Hop
 
