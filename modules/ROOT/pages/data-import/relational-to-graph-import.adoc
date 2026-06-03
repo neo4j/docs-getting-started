@@ -5,7 +5,7 @@
 
 [TIP]
 ====
-It is recommended that you create and understand your xref:data-modeling/index.adoc[graph data model] before transferring the data from an existing relational structure to a graph.
+You need to have a clear understanding of your xref:data-modeling/index.adoc[graph data model] before transferring the data from an existing relational structure to a graph.
 ====
 
 Depending on the environment you are working in, the format of the exported dataset, and the link:https://neo4j.com/docs/deployment-options/[Neo4j deployment method] of your choice, there are different ways you can import data from a relational database into a graph.
@@ -13,7 +13,7 @@ Depending on the environment you are working in, the format of the exported data
 This page lists some of the recommended methods.
 For a full list, refer to xref:data-import/index.adoc[].
 
-== Aura Import
+== Import tool
 
 link:https://neo4j.com/docs/aura/import/introduction/[Import] is a tool for importing data into an Aura instance.
 Ideal to get started quickly with testing and prototyping, it is also available as the stand-alone tool link:https://neo4j.com/docs/data-importer/current/[Data Importer].
@@ -37,7 +37,9 @@ Through the link:https://neo4j.com/docs/aura/import/data-sources/[Data sources] 
 * Azure Blobs & Data Lake Storage
 * Google Cloud Storage
 
-Refer to link:https://neo4j.com/docs/aura/import/file-provision/[Aura -> File provision] for a full guide on the tool.
+Refer to link:https://neo4j.com/docs/aura/import/introduction/[Aura -> Import] for a full guide on the tool.
+
+Additionally, the Import tool also allows you to stream local _CSV_ files.
 
 == `LOAD CSV`
 
@@ -47,9 +49,10 @@ After exporting your relational data into a CSV file, you can load it into a Neo
 This built-in Cypher function allows users to take existing or exported CSV files and load them into Neo4j with Cypher statements to read, transform, and import the data to the graph database.
 It allows the user to run statements individually or run them batched in a Cypher script.
 
-See xref:data-import/csv-import.adoc[] for a tutorial on how to use `LOAD CSV` or refer to xref:data-modeling/relational-to-graph-modeling.adoc[] for specific guidance on how to model data from relational to graph.
+See xref:data-import/csv-import.adoc[] for a tutorial on how to use `LOAD CSV`.
+Refer to xref:data-modeling/relational-to-graph-modeling.adoc[] for specific guidance on how to model data from relational to graph.
 
-In case you are dealing with bigger data sets, you may prefer to use the `neo4j-admin database import` command instead.
+When you are dealing with bigger data sets (>10 million rows) and if you can afford downtime, you can use the `neo4j-admin database import` command instead.
 See link:https://neo4j.com/docs/operations-manual/current/import/[Operations -> Import] for more details.
 
 == APOC
@@ -65,7 +68,7 @@ There are also procedures for batching data, adding wait/sleep commands, and han
 
 APOC's transformation procedures allow you to process dynamic labels or relationships, correct/skip null or empty values, format dates or other values, generate hashes, and handle other tricky data scenarios.
 
-While APOC is a flexible and custom data handling library, it may not be the most recommended method for more complex scenarios that could result in an excess of lines of code to handle multiple data transformations.
+While APOC is a flexible and custom data handling library, it is not always the recommended method for more complex scenarios that could result in an excess of lines of code to handle multiple data transformations.
 
 == ETL Tool
 
@@ -79,11 +82,11 @@ With Apache Hop's link:https://hop.apache.org/manual/latest/technology/neo4j/ind
 
 == Drivers
 
-For importing data using a programming language, you can use the xref:languages-guides/index.adoc[Neo4j driver] for your preferred language and execute Cypher statements to/from the database.
-This process is also helpful if you do not have access to the Cypher shell or if the data is not available as an accessible file.
+You can also import data programmatically using the xref:languages-guides/index.adoc[Neo4j driver] for your preferred language, executing Cypher statements directly against the database.
+This approach is particularly useful when your data comes from an external API, a live application, or any source that isn't available as a flat file.
 
 You can set up the driver connection to Neo4j, and then execute Cypher statements that pass from the application-level through the driver and to the database for various operations, such as including large amounts of inserts and updates.
 
 Read the blog post https://medium.com/neo4j/5-tips-tricks-for-fast-batched-updates-of-graph-structures-with-neo4j-and-cypher-73c7f693c8cc[Tips and Tricks for Fast-Batched Import with Neo4j^] for more information on how to get started.
 
-You can retrieve data from a relational database (or other tabular structure) using xref:languages-guides/index.adoc[drivers] and the link:https://neo4j.com/docs/bolt/current/[Bolt Protocol].
+When you migrate data from a relational database (or other tabular structure) into Neo4j using the xref:languages-guides/index.adoc[Neo4j drivers], the driver communicates with the database over the link:https://neo4j.com/docs/bolt/current/[Bolt Protocol].
