@@ -14,6 +14,7 @@
 ** xref:cypher/dates-datetimes-durations.adoc[]
 ** xref:cypher/results.adoc[]
 ** xref:cypher/procedures-functions.adoc[]
+** xref:cypher/recommendation-engine.adoc[Build a recommendation engine]
 ** xref:cypher/resources.adoc[]
 
 * *Work with data*
@@ -56,6 +57,4 @@
 * *Reference*
 
 * xref:appendix/example-data.adoc[Example datasets]
-* xref:appendix/tutorials/tutorials-overview.adoc[Tutorials]
-** xref:appendix/tutorials/guide-build-a-recommendation-engine.adoc[Cypher recommendation engine]
 * xref:appendix/getting-started-resources.adoc[Resources]
