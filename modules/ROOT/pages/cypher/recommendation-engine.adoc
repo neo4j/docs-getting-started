@@ -13,7 +13,7 @@ If you are completely new to Cypher, see the tutorial xref:cypher/intro-tutorial
 == Pre-requisites
 
 After you create a link:https://neo4j.com/product/auradb/?ref=docs-nav-get-started[free Aura instance], use the "Connect" button and select "Query".
-In the Cypher editor, copy and paste the following Cypher and execute the query:
+Copy and paste the following Cypher to the Cypher editor and execute the query:
 
 [source,cypher]
 --
@@ -675,20 +675,20 @@ MERGE (JamesThompson)-[:REVIEWED {summary:'Fun, but a little far fetched', ratin
 MERGE (JessicaThompson)-[:REVIEWED {summary:'You had me at Jerry', rating:92}]->(JerryMaguire);
 --
 
-You should now have a graph with 171 nodes and 253 relationships.
+You now have a graph with 171 nodes and 253 relationships.
 
 == Recommendations
 
 The Movie dataset includes information about actors, directors, and movies they have directed and/or acted in.
 
-The type of recommendation you can retrieve is based not only on the information that exists in the graph (e.g., what year someone was born), but also how each datapoint interact with each other (e.g., what movies have actors that were only born after 1900).
+The type of recommendation you can retrieve is based not only on the information that exists in the graph (e.g., what year someone was born), but also how each data point interacts with the others (e.g., what movies have actors that were only born after 1900).
 
 Each degree of complexity of a recommendation requires the query to be modified accordingly.
 Before building the two recommendation engines, you can try simple filtering queries to explore the graph.
 
 === Simple filtering
 
-If you want to watch only movies in which Keanu Reeves has acted in, you can find the information with this query:
+If you want to watch only movies which Keanu Reeves has acted in, you can find them with this query:
 
 [source,cypher]
 --
@@ -722,13 +722,13 @@ MATCH (p:Person {name:"Keanu Reeves"})-[:ACTED_IN {roles:['Julian Mercer']}]->(m
 RETURN m as Movies
 --
 
-And you get the movie "Something's Gotta Give" as the result.
+You get the movie "Something's Gotta Give" as the result.
 
 However, you can get deeper recommendations from the same dataset by applying more complex filters that address multiple connections between the datapoints.
 
 === Finding second-degree co-actors
 
-One way to take the previous recommendation query to the next level is by trying to find out what actors have worked with co-actors that worked with Keanu Reeves in his movies (i.e., second-degree actors in Keanu's network).
+One way to take the previous recommendation query to the next level is by trying to find out what actors have worked with co-actors that worked with Keanu Reeves in his movies (i.e., second-degree co-actors in Keanu's network).
 
 This query shows all actors Keanu may not have worked with yet and it makes sure not to return anyone who hasn't directly acted with him:
 
@@ -811,11 +811,11 @@ The result is:
 2+d|Rows: 5
 |===
 
-One of those "co-co-actors" is Tom Hanks.
 
 === Exploring the paths between actors and movies
 
-After the last query, you can now fine-tune it to see which movies and actors are between Keanu and Tom and find out who can introduce them:
+One of Keanu Reeves' "co-co-actors" is Tom Hanks.
+You can fine-tune the last query to see which movies and actors are between Keanu and Tom and find out who can introduce them:
 
 [source,cypher]
 --
@@ -830,7 +830,7 @@ image::cocoactors.svg[Graph results of querying showing which movies and actors 
 
 Now you know that the actors Hugo Weaving and Charlize Theron could be the ones to connect Keanu Reeves and Tom Hanks, as they have worked with both of them in different movies.
 
-A similar query was shown in the tutorial xref:cypher/intro-tutorial.adoc#_movies_and_actors_connected_to_kevin_bacon[Get started with Cypher], featuring the "Six degrees of Kevin Bacon" game.
+A similar query is shown in the tutorial xref:cypher/intro-tutorial.adoc#_movies_and_actors_connected_to_kevin_bacon[Get started with Cypher], featuring the "Six degrees of Kevin Bacon" game.
 In both cases, you can see in the graph how many hops exist between people.
 
 == Conclusion
