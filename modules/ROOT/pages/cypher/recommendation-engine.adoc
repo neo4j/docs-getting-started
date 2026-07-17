@@ -724,13 +724,13 @@ RETURN m as Movies
 
 You get the movie "Something's Gotta Give" as the result.
 
-However, you can get deeper recommendations from the same dataset by applying more complex filters that address multiple connections between the datapoints.
+However, you can get more in-depth recommendations from the same dataset by applying more complex filters that capture multiple connections between the datapoints.
 
 === Finding second-degree co-actors
 
 One way to take the previous recommendation query to the next level is by trying to find out what actors have worked with co-actors that worked with Keanu Reeves in his movies (i.e., second-degree co-actors in Keanu's network).
 
-This query shows all actors Keanu may not have worked with yet and it makes sure not to return anyone who hasn't directly acted with him:
+This query shows all actors Keanu hasn't worked with yet, and it makes sure not to return anyone who hasn't directly acted with him:
 
 [source,cypher]
 --
@@ -837,7 +837,7 @@ In both cases, you can see in the graph how many hops exist between people.
 
 With these Cypher statements, you were able to query actors and movies from the database, and build recommendation engines that show:
 
-* Who an actor hasn't worked with yet and should do next
+* Who an actor hasn't worked with yet and could do next
 * Who can introduce the actors to each other
 
 == Keep learning
