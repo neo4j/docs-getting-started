@@ -734,17 +734,17 @@ This query shows all actors Keanu hasn't worked with yet, and it makes sure not 
 
 [source,cypher]
 --
-MATCH (keanu:Person {name:"Keanu Reeves"})-[:ACTED_IN]->(movie1:Movie)<-[:ACTED_IN]-(coActor:Person)-[:ACTED_IN]->(movie2:Movie)<-[:ACTED_IN]-(coCoActor:Person)
-WHERE keanu <> coCoActor
-AND NOT (keanu)-[:ACTED_IN]->(:Movie)<-[:ACTED_IN]-(coCoActor)
-RETURN coCoActor.name
+MATCH (keanu:Person {name:"Keanu Reeves"})-[:ACTED_IN]->(movie1:Movie)<-[:ACTED_IN]-(coActor:Person)-[:ACTED_IN]->(movie2:Movie)<-[:ACTED_IN]-(2dCoActor:Person)
+WHERE keanu <> 2dCoActor
+AND NOT (keanu)-[:ACTED_IN]->(:Movie)<-[:ACTED_IN]-(2dCoActor)
+RETURN 2dCoActor.name
 --
 
 The result is:
 
 [role="queryresult",options="header,footer",cols="1*<m"]
 |===
-| coCoActor.name
+| 2dCoActor.name
 
 | "Tom Hanks"
 | "Halle Berry"
@@ -774,14 +774,14 @@ The result is:
 Note that a few names appear multiple times.
 This is because there are multiple paths to follow from Keanu Reeves to these actors.
 
-To see which co-co-actors appear most often in Keanu's network, you can take the frequency of occurrences into account by counting the number of paths between Tom Hanks and each `coCoActor` and ordering them by highest to lowest value:
+To see which second-degree co-actors appear most often in Keanu's network, you can take the frequency of occurrences into account by counting the number of paths between Tom Hanks and each `2dCoActor` and ordering them by highest to lowest value:
 
 [source,cypher]
 ----
-MATCH (keanu:Person {name:"Keanu Reeves"})-[:ACTED_IN]->(movie1:Movie)<-[:ACTED_IN]-(coActor:Person)-[:ACTED_IN]->(movie2:Movie)<-[:ACTED_IN]-(coCoActor:Person)
-WHERE keanu <> coCoActor
-AND NOT (keanu)-[:ACTED_IN]->(:Movie)<-[:ACTED_IN]-(coCoActor)
-RETURN coCoActor.name, count(coCoActor) as frequency
+MATCH (keanu:Person {name:"Keanu Reeves"})-[:ACTED_IN]->(movie1:Movie)<-[:ACTED_IN]-(coActor:Person)-[:ACTED_IN]->(movie2:Movie)<-[:ACTED_IN]-(2dCoActor:Person)
+WHERE keanu <> 2dCoActor
+AND NOT (keanu)-[:ACTED_IN]->(:Movie)<-[:ACTED_IN]-(2dCoActor)
+RETURN 2dCoActor.name, count(2dCoActor) as frequency
 ORDER BY frequency DESC
 LIMIT 5
 ----
@@ -790,7 +790,7 @@ The result is:
 
 [role="queryresult",options="header,footer",cols="2*<m"]
 |===
-| coCoActor.name
+| 2dCoActor.name
 | frequency
 
 | "Tom Hanks"
@@ -814,7 +814,7 @@ The result is:
 
 === Exploring the paths between actors and movies
 
-One of Keanu Reeves' "co-co-actors" is Tom Hanks.
+One of Keanu Reeves' second degree co-actor is Tom Hanks.
 You can fine-tune the last query to see which movies and actors are between Keanu and Tom and find out who can introduce them:
 
 [source,cypher]
