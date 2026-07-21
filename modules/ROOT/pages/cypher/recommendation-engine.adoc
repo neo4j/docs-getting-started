@@ -774,7 +774,7 @@ The result is:
 Note that a few names appear multiple times.
 This is because there are multiple paths to follow from Keanu Reeves to these actors.
 
-To see which second-degree co-actors appear most often in Keanu's network, you can take the frequency of occurrences into account by counting the number of paths between Tom Hanks and each `2dCoActor` and ordering them by highest to lowest value:
+To see which second-degree co-actors appear most often in Keanu's network, you can take the frequency of occurrences into account by counting the number of paths between Keanu Reeves and each `2dCoActor` and ordering them by highest to lowest value:
 
 [source,cypher]
 ----
