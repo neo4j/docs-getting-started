@@ -7,7 +7,8 @@ nav:
 asciidoc:
   attributes:
     page-tabs: get-started@
-    page-tabs-index: 10
+    page-tabs-index: 200@
+    page-tabs-promote-all: true
     page-origin-private: false
     neo4j-version: '5'
     neo4j-version-minor: '5.20'

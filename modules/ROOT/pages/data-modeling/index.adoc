@@ -1,5 +1,6 @@
 [[data-modeling]]
 = What is graph data modeling?
+:page-nav-promote:
 :description: graph-modeling, data-model, schema, create-model, translate-model, model-performance, model-example
 :page-ad-overline-link: https://graphacademy.neo4j.com/courses/modeling-fundamentals/?ref=docs
 :page-ad-overline: Neo4j GraphAcademy

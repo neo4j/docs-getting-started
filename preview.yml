@@ -7,14 +7,10 @@ content:
   sources:
   - url: ./
     branches: ['HEAD']
-    edit_url: https://github.com/neo4j/docs-getting-started/tree/{refname}/{path}
-    exclude:
-    - '!**/_includes/*'
-    - '!**/readme.adoc'
-    - '!**/README.adoc'
+    
 ui:
   bundle:
-    url: https://static-content.neo4j.com/build/ui-bundle-latest.zip
+    url: https://static-content.neo4j.com/build/ui-bundle-docs-restructure.zip
     snapshot: true
   output_dir: /assets
 
@@ -24,6 +20,7 @@ urls:
 antora:
   extensions:
   - "@neo4j-antora/roles-labels"
+  - "@neo4j-antora/tabbed-nav"
   - "@neo4j-antora/table-footnotes"
   - "@neo4j-antora/xref-hash-validator"
 

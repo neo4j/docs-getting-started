@@ -1,5 +1,5 @@
 = Get started with Neo4j
-:page-layout: docs-ndl
+:page-nav-promote:
 :page-theme: docs
 :page-role: hub
 :page-show-home-link: true

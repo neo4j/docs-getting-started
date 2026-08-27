@@ -1,4 +1,6 @@
 = What is Neo4j?
+:page-tabs-index: 10
+:page-nav-promote:
 :description: An introduction on how to get started with Neo4j.
 :!page-layout:
 include::https://raw.githubusercontent.com/neo4j-graphacademy/courses/main/asciidoc/ads/generic.adoc[]

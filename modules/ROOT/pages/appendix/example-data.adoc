@@ -1,5 +1,6 @@
 [[example-data]]
 = Example datasets
+:page-tabs: reference
 :description: See a list of available example datasets for Neo4j and learn how to import and explore them.
 :page-pagination: previous
 

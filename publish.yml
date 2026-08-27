@@ -7,13 +7,10 @@ content:
   sources:
   - url: ./
     branches: ['HEAD']
-    exclude:
-    - '!**/_includes/*'
-    - '!**/readme.adoc'
-    - '!**/README.adoc'
+
 ui:
   bundle:
-    url: https://static-content.neo4j.com/build/ui-bundle-latest.zip
+    url: https://static-content.neo4j.com/build/ui-bundle-docs-restructure.zip
     snapshot: true
   output_dir: /assets
 
@@ -24,6 +21,7 @@ antora:
   extensions:
   - "@neo4j-antora/aliases-redirects"
   - "@neo4j-antora/roles-labels"
+  - "@neo4j-antora/tabbed-nav"
   - "@neo4j-antora/table-footnotes"
   - "@neo4j-antora/xref-hash-validator"
 
