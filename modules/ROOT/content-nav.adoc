@@ -1,5 +1,6 @@
 // * xref:index.adoc[Introduction]
 * xref:whats-neo4j.adoc[]
+* xref:versioning.adoc[]
 
 // * xref:graph-database.adoc[What is a graph database]
 // ** xref:appendix/graphdb-concepts/index.adoc[Graph database concepts]
