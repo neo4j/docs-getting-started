@@ -90,7 +90,7 @@ Neo4j supports several of the most the popular link:{docs-home}/create-applicati
 * The link:{docs-home}/gds/[Neo4j Graph Data Science (GDS)] library provides implementations of common graph algorithms and machine learning pipelines to train predictive supervised models.
 You can use them to solve graph problems, such as predicting missing relationships, for example.
 
-* The link:{docs-home}/ogm-manual[Object Graph Mapping (OGM)] library, maps nodes and relationships in the graph to objects and references in a domain model.
+* The link:{docs-home}/ogm-manual/current/[Object Graph Mapping (OGM)] library, maps nodes and relationships in the graph to objects and references in a domain model.
 You can use this resource to start tracking changes and minimize necessary updates and transitive persistence (reading and updating neighborhoods of an object).
 
 === APIs
