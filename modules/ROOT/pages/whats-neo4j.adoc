@@ -99,7 +99,7 @@ Neo4j currently offers three proprietary link:{docs-home}/create-applications/#_
 
 * The link:{docs-home}/http-api[Neo4j HTTP API] allows you to execute a series of Cypher statements against a Neo4j instance through HTTP requests.
 * The link:{docs-home}/cdc[Change Data Capture (CDC) API] allows you to capture and track changes to your database in real-time, as well as keep data sources up to date.
-* The link:{docs-home}/query-apip[Neo4j Query API] allows you to develop client applications in languages not currently supported by Neo4j.
+* The link:{docs-home}/query-api/current/[Neo4j Query API] allows you to develop client applications in languages not currently supported by Neo4j.
 
 [NOTE]
 ====
