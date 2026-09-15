@@ -91,5 +91,6 @@ jobs:
               "org": "${{ github.repository_owner }}",
               "repo": "${{ github.event.repository.name }}",
               "run_id": "${{ github.run_id }}",
-              "publish_env": "${{ matrix.environments }}"
+              "publish_env": "${{ matrix.environments }}",
+              "versionless: "true"
             }
