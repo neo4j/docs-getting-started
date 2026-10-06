@@ -227,6 +227,24 @@ SemSpect is available as follows:
 * Product information: https://doc.semspect.de/docs/neo4j-graph-app[SemSpect for Neo4j^]
 * Blog post: https://neo4j.com/blog/semspect-different-approach-graph-visualization/[A Different Approach to Graph Visualization^]
 
+=== *LibreDB Studio*
+
+LibreDB Studio is an open source (MIT), self-hosted, web-based database IDE.
+It connects to Neo4j over Bolt and keeps the connection read-only: a Cypher statement that would write is refused before it runs, and every statement runs in a READ session.
+The object tree lists the node labels, relationship types, indexes and constraints of the connected database.
+
+When a Cypher result holds nodes, relationships or paths, a Graph tab beside the result grid draws them, with a legend by label and relationship type and an inspector that shows the properties of a selected node or relationship.
+The drawn graph can be exported as PNG or JSON.
+
+LibreDB Studio is tested against Neo4j 5.26 LTS.
+It runs as a container image, through `npx`, or with a Helm chart.
+
+==== LibreDB Studio Resources
+
+* Source code: https://github.com/libredb/libredb-studio[LibreDB Studio on GitHub^]
+* Neo4j support details: https://github.com/libredb/libredb-studio/blob/main/docs/providers/neo4j.md[Neo4j provider documentation^]
+* Product webpage: https://libredb.org[libredb.org^]
+
 == Visualization Resources
 
 * Blog series: https://medium.com/neo4j/tagged/data-visualization[Neo4j Visualization^]
