@@ -53,10 +53,12 @@ jobs:
 
   docs-build-pdf:
     name: Generate PDF
+    needs: resolve-env
     uses: neo4j/docs-tools/.github/workflows/reusable-docs-pdf-build.yml@v2
     with:
       build-ref: ${{ inputs.build-ref }}
       fetch-depth: 0
+      publish-env: ${{ needs.resolve-env.outputs.publish-env }}
       # This docset has no version (antora.yml's version: ~) - preserved from this
       # repo's own docs-generate-html.yml, which self-reports the same thing in its
       # publish-html step's client-payload.
