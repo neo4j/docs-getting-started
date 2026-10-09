@@ -1,28 +1,30 @@
 name: "Generate PDF"
-run-name: "Generate ${{ inputs.publish-env != '' && inputs.publish-env || (inputs.build-ref == vars.DOCS_PROD_BRANCH && 'prod' || 'dev') }} PDF from ${{ inputs.build-ref }}"
+run-name: "Generate ${{ inputs.publish-env != '' && inputs.publish-env || (github.ref_name == vars.DOCS_PROD_BRANCH && 'prod' || 'dev') }} PDF from ${{ github.ref_name }}"
 
 permissions:
   contents: read
 
-# Mirrors docs-generate-html.yml's shape (workflow_dispatch with build-ref and
-# publish-env inputs, resolve-env -> build -> publish) and its own reusable-workflow
-# reference convention (a pinned neo4j/docs-tools/...@v2 tag, not a relative path -
-# this repo doesn't contain reusable-docs-pdf-build.yml itself). Still simpler than
-# docs-generate-html.yml in one way: there's no docs-verify step (no equivalent check
-# exists yet for a PDF), and build/publish are two plain jobs rather than a
-# reusable-workflow call plus a verify call.
+# Mirrors docs-generate-html.yml's shape (workflow_dispatch with a publish-env input,
+# resolve-env -> build -> publish) and its own reusable-workflow reference convention (a
+# pinned neo4j/docs-tools/...@v2 tag, not a relative path - this repo doesn't contain
+# reusable-docs-pdf-build.yml itself). Still simpler than docs-generate-html.yml in one
+# way: there's no docs-verify step (no equivalent check exists yet for a PDF), and
+# build/publish are two plain jobs rather than a reusable-workflow call plus a verify call.
+#
+# No build-ref input - see docs-generate-html.yml's own comment on why: the git ref to
+# build from is always whatever ref this run was itself dispatched against.
 on:
   workflow_dispatch:
     inputs:
-      build-ref:
-        description: 'The git ref to build from'
-        type: string
-        required: true
       publish-env:
-        description: 'Override for dev/prod. Leave blank to derive it from build-ref against vars.DOCS_PROD_BRANCH - only needs setting explicitly when DOCS_DEV_BRANCH == DOCS_PROD_BRANCH, where build-ref alone cannot tell the two builds apart.'
-        type: string
+        description: "The environment to publish to. Provide a value when the same branch publishes to both 'dev' and 'prod' environments. Otherwise, leave blank."
+        type: choice
         required: false
         default: ''
+        options:
+        - ''
+        - 'dev'
+        - 'prod'
 
 jobs:
 
@@ -38,12 +40,11 @@ jobs:
         id: resolve
         env:
           PUBLISH_ENV_OVERRIDE: ${{ inputs.publish-env }}
-          BUILD_REF: ${{ inputs.build-ref }}
           PROD_BRANCH: ${{ vars.DOCS_PROD_BRANCH }}
         run: |
           if [[ -n "${PUBLISH_ENV_OVERRIDE}" ]]; then
             publish_env="${PUBLISH_ENV_OVERRIDE}"
-          elif [[ "${BUILD_REF}" == "${PROD_BRANCH}" ]]; then
+          elif [[ "${GITHUB_REF_NAME}" == "${PROD_BRANCH}" ]]; then
             publish_env="prod"
           else
             publish_env="dev"
@@ -56,7 +57,7 @@ jobs:
     needs: resolve-env
     uses: neo4j/docs-tools/.github/workflows/reusable-docs-pdf-build.yml@v2
     with:
-      build-ref: ${{ inputs.build-ref }}
+      build-ref: ${{ github.ref_name }}
       fetch-depth: 0
       publish-env: ${{ needs.resolve-env.outputs.publish-env }}
       # This docset has no version (antora.yml's version: ~) - preserved from this
