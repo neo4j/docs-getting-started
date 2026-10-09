@@ -1,5 +1,5 @@
 name: "Generate HTML"
-run-name: "Generate ${{ inputs.publish-env != '' && inputs.publish-env || (inputs.build-ref == vars.DOCS_PROD_BRANCH && 'prod' || 'dev') }} HTML from ${{ inputs.build-ref }}"
+run-name: "Generate ${{ inputs.publish-env != '' && inputs.publish-env || (github.ref_name == vars.DOCS_PROD_BRANCH && 'prod' || 'dev') }} HTML from ${{ github.ref_name }}"
 
 permissions:
   contents: read
@@ -8,18 +8,26 @@ permissions:
 # of any other environment's run. Triggered (via the API, not a workflow_call) by
 # docs-trigger-builds.yml, once per environment that applies to a given push (dev, prod, or both) -
 # so if dev's run fails, prod's run is completely unaffected, and vice versa.
+#
+# No build-ref input: the git ref to build from is always whatever ref this run was
+# itself dispatched against (the "Use workflow from" branch when triggered manually, or
+# docs-trigger-builds.yml's own `ref:` when triggered automatically - which it always sets
+# to the same value it also used to pass as a build-ref input here, so that separate input
+# never actually carried any information github.ref_name didn't already have). Reading
+# github.ref_name directly instead removes a second, redundant "which branch" box from
+# manual dispatch.
 on:
   workflow_dispatch:
     inputs:
-      build-ref:
-        description: 'The git ref to build from'
-        type: string
-        required: true
       publish-env:
-        description: 'Override for dev/prod. Leave blank to derive it from build-ref against vars.DOCS_PROD_BRANCH - only needs setting explicitly when DOCS_DEV_BRANCH == DOCS_PROD_BRANCH, where build-ref alone cannot tell the two builds apart.'
-        type: string
+        description: 'dev or prod. Leave blank to infer from the branch - only needed if your dev and prod branches are the same (branch name alone cannot tell the two builds apart then).'
+        type: choice
         required: false
         default: ''
+        options:
+        - ''
+        - 'dev'
+        - 'prod'
 
 jobs:
 
@@ -35,12 +43,11 @@ jobs:
         id: resolve
         env:
           PUBLISH_ENV_OVERRIDE: ${{ inputs.publish-env }}
-          BUILD_REF: ${{ inputs.build-ref }}
           PROD_BRANCH: ${{ vars.DOCS_PROD_BRANCH }}
         run: |
           if [[ -n "${PUBLISH_ENV_OVERRIDE}" ]]; then
             publish_env="${PUBLISH_ENV_OVERRIDE}"
-          elif [[ "${BUILD_REF}" == "${PROD_BRANCH}" ]]; then
+          elif [[ "${GITHUB_REF_NAME}" == "${PROD_BRANCH}" ]]; then
             publish_env="prod"
           else
             publish_env="dev"
@@ -54,7 +61,7 @@ jobs:
     uses: neo4j/docs-tools/.github/workflows/reusable-docs-build.yml@v2
     with:
       package-script: 'verify:publish'
-      build-ref: ${{ inputs.build-ref }}
+      build-ref: ${{ github.ref_name }}
       fetch-depth: 0
       publish-env: ${{ needs.resolve-env.outputs.publish-env }}
 
