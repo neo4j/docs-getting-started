@@ -20,7 +20,7 @@ on:
   workflow_dispatch:
     inputs:
       publish-env:
-        description: 'dev or prod. Leave blank to infer from the branch - only needed if your dev and prod branches are the same (branch name alone cannot tell the two builds apart then).'
+        description: "The environment to publish to. Provide a value when the same branch publishes to both 'dev' and 'prod' environments. Otherwise, leave blank."
         type: choice
         required: false
         default: ''
