@@ -1,7 +1,6 @@
 = Updating the graph
 :tags: cypher, queries, graph-queries, insert-create, update, delete, merge
 :description: This guide explains how to update data that already exists in a graph, using Cypher.
-:page-newsletter: true
 :page-ad-overline-link: https://graphacademy.neo4j.com/?ref=guides
 :page-ad-overline: Neo4j GraphAcademy
 :page-ad-title: Cypher Fundamentals
