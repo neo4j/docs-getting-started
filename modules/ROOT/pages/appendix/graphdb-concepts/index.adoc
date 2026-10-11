@@ -11,7 +11,7 @@ A graph data structure consists of *nodes* (discrete objects) that can be connec
 Below is the image of a graph with three nodes (the circles) and three relationships (the arrows).
 
 .Concept of a graph structure
-image::graph_concept_three_nodes-arr.svg[width=300]
+image::graph_concept_three_nodes-arr.svg["Three blank nodes connected in a triangle by three directed relationships, illustrating the basic structure of a graph",width=300]
 
 The Neo4j property graph database model consists of:
 
@@ -39,7 +39,7 @@ In graph theory:
 The example graph shown below introduces the basic concepts of the property graph:
 
 .Example graph
-image::graph_simple-arr.svg[width=600]
+image::graph_simple-arr.svg["Example property graph: a Person and Actor node (Tom Hanks) connected by an ACTED_IN relationship to a Movie node (Forrest Gump), which a Person node (Robert Zemeckis) points to with a DIRECTED relationship",width=600]
 
 To create the example graph, use the Cypher clause `CREATE`.
 
@@ -73,7 +73,7 @@ The simplest possible graph is a single node with no relationships.
 Consider the following graph, consisting of a single node.
 
 .Node
-image::graph_single_node-arr.svg[width=150]
+image::graph_single_node-arr.svg["A single node with the labels Person and Actor and the properties name 'Tom Hanks' and born 1956, the simplest possible graph",width=150]
 
 The node labels are:
 
@@ -112,7 +112,7 @@ More labels can be added to express different dimensions of the data.
 The following graph shows the use of multiple labels.
 
 .Multiple labels
-image::graphdb-simple-labels-multi-arr.svg[role="middle", width=500]
+image::graphdb-simple-labels-multi-arr.svg["Three unconnected nodes showing multiple labels: a Person and Actor node (Tom Hanks), a Movie node (Forrest Gump), and a Person and Director node (Robert Zemeckis)",role="middle", width=500]
 
 [[graphdb-relationship]]
 == Relationship
@@ -130,7 +130,7 @@ A relationship:
 Relationships organize nodes into structures, allowing a graph to resemble a list, a tree, a map, or a compound entity -- any of which may be combined into yet more complex, richly inter-connected structures.
 
 .Relationship
-image::graph_example_relationship-arr.svg[width=400]
+image::graph_example_relationship-arr.svg["Two nodes connected by a directed ACTED_IN relationship carrying the properties roles ['Forrest'] and performance 5",width=400]
 
 The relationship type: `ACTED_IN`
 
@@ -161,7 +161,7 @@ A node can have relationships to itself.
 To express that `Tom Hanks` `KNOWS` himself would be expressed as:
 
 .Relationship to a single node
-image::graphdb-nodes-and-rel-self-arr.svg[role="middle", width=300]
+image::graphdb-nodes-and-rel-self-arr.svg["A single Person and Actor node (Tom Hanks) with a KNOWS relationship pointing back to itself",role="middle", width=300]
 
 
 [[graphdb-relationship-type]]
@@ -172,7 +172,7 @@ A relationship must have exactly one relationship type.
 Below is an `ACTED_IN` relationship, with the `Tom Hanks` node as the _source node_ and `Forrest Gump` as the _target node_.
 
 .Relationship type
-image::graphdb-nodes-and-rel-arr.svg[role="middle", width=450]
+image::graphdb-nodes-and-rel-arr.svg["A Person and Actor node (Tom Hanks) with an outgoing ACTED_IN relationship to a Movie node (Forrest Gump)",role="middle", width=450]
 
 Observe that the `Tom Hanks` node has an _outgoing_ relationship, while the `Forrest Gump` node has an _incoming_ relationship.
 
@@ -241,11 +241,11 @@ In most cases only a subset of the graph is visited.
 =====
 To find out which movies Tom Hanks acted in according to the tiny example database, the traversal would start from the `Tom Hanks` node, follow any `ACTED_IN` relationships connected to the node, and end up with the `Movie` node `Forrest Gump` as the result (see the black lines):
 
-image::graphdb-traversal-arr.svg[role="middle", width=400]
+image::graphdb-traversal-arr.svg["Traversal of the example graph: from the Tom Hanks node the ACTED_IN relationship to the Forrest Gump Movie node is highlighted, while the DIRECTED relationship from Robert Zemeckis is not visited",role="middle", width=400]
 
 The traversal result could be returned as a path with the length `1`:
 
-image::graphdb-path-arr.svg[role="middle", width=400]
+image::graphdb-path-arr.svg["The traversal result as a path of length one: the Tom Hanks node connected by an ACTED_IN relationship to the Forrest Gump Movie node",role="middle", width=400]
 =====
 
 The shortest possible path has length zero.
@@ -254,13 +254,13 @@ It contains a single node and no relationships.
 A path containing only a single node has the length of `0`.
 
 .Path of length zero
-image::graphdb-path-zero-arr.svg[role="middle", width=150]
+image::graphdb-path-zero-arr.svg["A path of length zero: a single Person node (Tom Hanks) with no relationships",role="middle", width=150]
 
 
 A path containing one relationship has the length of `1`.
 
 .Path of length one
-image::graphdb-path-example-loop-arr.svg[role="middle", width=300]
+image::graphdb-path-example-loop-arr.svg["A path of length one: a single Person and Actor node (Tom Hanks) with one KNOWS relationship connecting the node to itself",role="middle", width=300]
 
 
 [[graphdb-schema]]
