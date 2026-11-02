@@ -129,7 +129,7 @@ You can apply the graph data science in all industries to make recommendations, 
 
 The documentation provides instructions on how to apply graph algorithms from GDS to real-life use cases.
 
-* In the https://neo4j.com/docs/graph-data-science-client/current/tutorials/tutorials/[GDS Client Manual -> Tutorials], Jupyter ready-to-run notebooks showcase features of the GDS Python client.
+* In the https://neo4j.com/docs/graph-data-science-client/current/tutorials/[GDS Client Manual -> Tutorials], Jupyter ready-to-run notebooks showcase features of the GDS Python client.
 
 * Usage examples in the link:https://neo4j.com/docs/aura/aurads/[AuraDS docs] show the GDS workflow components and answer the frequently asked questions on how to estimate memory usage, monitor the progress of a running algorithm, or how to share ML models.
 
