@@ -65,6 +65,7 @@ Ideal for documenting modeling strategies.
 This is more for version control than model design.
 * link:https://hackolade.com/[Hackolade]: a tool to design, document, and communicate data models and schemas.
 Built to support the kind of data modeling specific to Neo4j with node labels and relationship types.
+* link:https://toro4n.com/[toro4n]: a browser-based tool for drawing Neo4j graph data models with labels, relationship types, typed properties, uniqueness and existence constraints, layers, notes, automatic layout, schema import from Neo4j query results, Cypher export, and AI assistant integration via MCP.
 
 == Tools comparison
 
@@ -104,4 +105,9 @@ Built to support the kind of data modeling specific to Neo4j with node labels an
 | {cross-mark}
 | Hackolade JSON, YAML, DDL, XSD, Excel Template, Cloud Storage, Collibra Data Dictionary
 | Cypher, HTML
+
+| toro4n
+| {check-mark}
+| JSON, Neo4j schema query results, plain text
+| Cypher (with constraints), JSON, SVG, PNG
 |===
